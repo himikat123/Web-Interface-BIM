@@ -1,12 +1,26 @@
-import React, { useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import MenuUserItem from "../../atoms/menuUserItem/menuUserItem";
 import "./menuUserDropdown.scss";
 
 export default () => {
+    function useOutsideAlerter(ref: any) {
+        useEffect(() => {
+            function handleClickOutside(event: any) {
+                if(ref.current && !ref.current.contains(event.target)) setMenuUserOpen(false);
+            }
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref, menuUserOpen]);
+    }
+
     const [menuUserOpen, setMenuUserOpen] = useState<boolean>(false);
+    const wrapperRef = useRef(null);
+    useOutsideAlerter(wrapperRef);
     
     return (
-        <div className="relative ml-3">
+        <div ref={wrapperRef} className="relative ml-3">
             <div onClick={() => setMenuUserOpen(!menuUserOpen)}>
                 <button type="button" className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                     <span className="absolute -inset-1.5"></span>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Logo from "../../atoms/icons/logo";
 import MobileMenuButton from "../../molecules/menuButton/mobileMenuButton";
 import MenuItems from "../../molecules/menuItems/menuItems";
@@ -7,7 +7,21 @@ import MenuUserDropdown from "../../molecules/menuUserDropdown/menuUserDropdown"
 import "./navbar.scss";
 
 export default () => {
+    function useOutsideAlerter(ref: any) {
+        useEffect(() => {
+            function handleClickOutside(event: any) {
+                if(ref.current && !ref.current.contains(event.target)) setMobileMenuOpen(false);
+            }
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref, mobileMenuOpen]);
+    }
+    
     const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+    const wrapperRef = useRef(null);
+    useOutsideAlerter(wrapperRef);
 
     return <nav className="bg-gray-800">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -30,7 +44,7 @@ export default () => {
             </div>
         </div>
 
-        <div className={"mobile-menu sm:hidden" + (mobileMenuOpen ? "" : " hide")} id="mobile-menu">
+        <div ref={wrapperRef} className={"mobile-menu sm:hidden" + (mobileMenuOpen ? "" : " hide")} id="mobile-menu">
             <div className="space-y-1 px-2 pb-3 pt-2">
                 <MenuItems current="team" mobile={true} />
             </div>
