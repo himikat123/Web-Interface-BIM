@@ -13,3 +13,10 @@ export interface iMenuItems {
     current: string,
     mobile: boolean
 }
+
+export interface iMenuUserItem {
+    link: string,
+    current: string,
+    title: string,
+    num: number
+}
