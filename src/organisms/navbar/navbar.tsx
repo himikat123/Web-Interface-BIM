@@ -23,7 +23,7 @@ export default () => {
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef);
 
-    return <nav className="bg-gray-800">
+    return <nav ref={wrapperRef} className="bg-gray-800">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
                 <div onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
@@ -44,7 +44,7 @@ export default () => {
             </div>
         </div>
 
-        <div ref={wrapperRef} className={"mobile-menu sm:hidden" + (mobileMenuOpen ? "" : " hide")} id="mobile-menu">
+        <div className={"mobile-menu sm:hidden" + (mobileMenuOpen ? "" : " hide")} id="mobile-menu">
             <div className="space-y-1 px-2 pb-3 pt-2">
                 <MenuItems current="team" mobile={true} />
             </div>
