@@ -1,13 +1,35 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { DarkModeSwitch } from "react-toggle-dark-mode";
 
 export default () => {
-    return (
-        <button type="button" className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-            <span className="absolute -inset-1.5"></span>
-            <span className="sr-only">View notifications</span>
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-            </svg>
-        </button>
+    const [darkSide, setDarkSide] = useState<boolean>(false);
+
+    const applyDarkMode = (checked: boolean) => {
+        const root = window.document.documentElement;
+        if(checked) root.classList.add('dark');
+        else root.classList.remove('dark');
+    }
+
+    const toggleDarkMode = (checked: boolean) => {
+        localStorage.setItem('theme', checked ? 'dark' : 'light');
+        setDarkSide(checked);
+        applyDarkMode(checked);
+    };
+
+    useEffect(() => {
+        const theme = (localStorage.hasOwnProperty('theme')) ?
+            (localStorage.theme == 'dark' ? true : false) : 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? true : false);
+        applyDarkMode(theme);
+    }, [darkSide]);
+
+    return ( 
+        <div className="bg-white dark:bg-gray-800">
+            <DarkModeSwitch
+                checked={darkSide ? true : false }
+                onChange={toggleDarkMode}
+                size={32}
+            />
+        </div>
     )
 }
