@@ -5,7 +5,7 @@ import Navbar from './organisms/navbar/navbar';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App overflow-x-hidden">
       <Navbar />
 
       <h1 className="text-3xl font-bold underline">
