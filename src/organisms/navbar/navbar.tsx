@@ -22,7 +22,7 @@ export default () => {
     const wrapperRef = useRef<HTMLDivElement>(null);
     useOutsideAlerter(wrapperRef);
 
-    const currentPath = window.location.pathname.slice(1);
+    const currentPath = window.location.pathname;
 
     return <nav ref={wrapperRef} className="bg-gray-300 dark:bg-gray-800">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

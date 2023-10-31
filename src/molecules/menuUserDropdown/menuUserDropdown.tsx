@@ -36,9 +36,9 @@ export default (props: iMenuUserDropdown) => {
               aria-labelledby="user-menu-button" 
               tabIndex={-1}
             >
-                <MenuUserItem link="profile" current={props.current} title="Your Profile" num={0} />
-                <MenuUserItem link="settings" current={props.current} title="Settings" num={1} />
-                <MenuUserItem link="signout" current={props.current} title="Sign out" num={2} />
+                <MenuUserItem link="/profile" current={props.current} title="Your Profile" num={0} />
+                <MenuUserItem link="/settings" current={props.current} title="Settings" num={1} />
+                <MenuUserItem link="/signout" current={props.current} title="Sign out" num={2} />
             </div>
         </div>
     )
