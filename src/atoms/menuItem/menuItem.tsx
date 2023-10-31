@@ -1,6 +1,5 @@
 import React from "react";
 import DropdownBox from "../dropdownBox/dropdownBox";
-import MenuUserItem from "../menuUserItem/menuUserItem";
 import { iMenuItem } from "../../interfaces";
 
 export default (props: iMenuItem) => {

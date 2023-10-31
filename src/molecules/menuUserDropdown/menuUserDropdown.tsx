@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import MenuUserItem from "../../atoms/menuUserItem/menuUserItem";
+import MenuSubItem from "../../atoms/menuSubItem/menuSubItem";
 import DropdownBox from "../../atoms/dropdownBox/dropdownBox";
 import "./menuUserDropdown.scss";
 import { iMenuUserDropdown } from "../../interfaces";
@@ -31,10 +31,10 @@ export default (props: iMenuUserDropdown) => {
             </div>
 
             <DropdownBox className="right-0 mt-2" open={menuUserOpen}>
-                <MenuUserItem link="/profile" current={props.current} title="Your Profile" num={0} />
-                <MenuUserItem link="/settings" current={props.current} title="Settings" num={1} />
+                <MenuSubItem link="/profile" current={props.current} title="Your Profile" num={0} />
+                <MenuSubItem link="/settings" current={props.current} title="Settings" num={1} />
                 <hr className="m-2" />
-                <MenuUserItem link="/signout" current={props.current} title="Sign out" num={2} />
+                <MenuSubItem link="/signout" current={props.current} title="Sign out" num={2} />
             </DropdownBox>
         </div>
     )
