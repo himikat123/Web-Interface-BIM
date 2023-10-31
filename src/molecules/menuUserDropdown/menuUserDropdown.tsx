@@ -24,9 +24,8 @@ export default (props: iMenuUserDropdown) => {
     return (
         <div ref={wrapperRef} className="relative ml-3">
             <div onClick={() => setMenuUserOpen(!menuUserOpen)}>
-                <button type="button" className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded={menuUserOpen} aria-haspopup="true">
+                <button type="button" className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                     <span className="absolute -inset-1.5"></span>
-                    <span className="sr-only">Open user menu</span>
                     <img className="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
                 </button>
             </div>
@@ -36,7 +35,6 @@ export default (props: iMenuUserDropdown) => {
                 <MenuUserItem link="/settings" current={props.current} title="Settings" num={1} />
                 <hr className="m-2" />
                 <MenuUserItem link="/signout" current={props.current} title="Sign out" num={2} />
-
             </DropdownBox>
         </div>
     )
