@@ -8,6 +8,7 @@ export default () => {
         const root = window.document.documentElement;
         if(checked) root.classList.add('dark');
         else root.classList.remove('dark');
+        setDarkSide(checked);
     }
 
     const toggleDarkMode = (checked: boolean) => {
@@ -24,7 +25,7 @@ export default () => {
     }, [darkSide]);
 
     return ( 
-        <div className="bg-white dark:bg-gray-800">
+        <div className="bg-gray-300 dark:bg-gray-800">
             <DarkModeSwitch
                 checked={darkSide ? true : false }
                 onChange={toggleDarkMode}
