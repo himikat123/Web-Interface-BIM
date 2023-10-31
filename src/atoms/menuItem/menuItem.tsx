@@ -1,4 +1,6 @@
 import React from "react";
+import DropdownBox from "../dropdownBox/dropdownBox";
+import MenuUserItem from "../menuUserItem/menuUserItem";
 import { iMenuItem } from "../../interfaces";
 
 export default (props: iMenuItem) => {
@@ -7,11 +9,15 @@ export default (props: iMenuItem) => {
     const desktop = " text-sm";
     const mobile = " text-base block";
 
-    return (
+    return (<div className="relative">
         <a href={props.link} className={(props.current == props.link ? active : passive) + (props.mobile ? mobile : desktop)} 
           aria-current={props.current == props.link ? "page" : "false"}
         >
             {props.title}
         </a>
-    )
+
+        {props.children && <DropdownBox className="mt-2" open={true}>
+            {props.children}
+        </DropdownBox>}
+    </div>)
 }

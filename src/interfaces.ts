@@ -6,7 +6,8 @@ export interface iMenuItem {
     link: string,
     current: string,
     title: string,
-    mobile: boolean
+    mobile: boolean,
+    children?: React.ReactNode | undefined
 }
 
 export interface iMenuItems {

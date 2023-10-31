@@ -30,7 +30,7 @@ export default (props: iMenuUserDropdown) => {
                 </button>
             </div>
 
-            <DropdownBox open={menuUserOpen}>
+            <DropdownBox className="right-0 mt-2" open={menuUserOpen}>
                 <MenuUserItem link="/profile" current={props.current} title="Your Profile" num={0} />
                 <MenuUserItem link="/settings" current={props.current} title="Settings" num={1} />
                 <hr className="m-2" />
