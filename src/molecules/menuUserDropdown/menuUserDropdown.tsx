@@ -30,7 +30,7 @@ export default (props: iMenuUserDropdown) => {
                 </button>
             </div>
 
-            <div className={"absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white dark:bg-gray-700 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none menu-user-dropdown" + (menuUserOpen ? "" : " hide")}
+            <div className={"shadow-xl absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white dark:bg-gray-700 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none menu-user-dropdown" + (menuUserOpen ? "" : " hide")}
               role="menu" 
               aria-orientation="vertical" 
               aria-labelledby="user-menu-button" 
@@ -38,6 +38,7 @@ export default (props: iMenuUserDropdown) => {
             >
                 <MenuUserItem link="/profile" current={props.current} title="Your Profile" num={0} />
                 <MenuUserItem link="/settings" current={props.current} title="Settings" num={1} />
+                <hr className="m-2" />
                 <MenuUserItem link="/signout" current={props.current} title="Sign out" num={2} />
             </div>
         </div>
