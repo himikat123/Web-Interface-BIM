@@ -1,5 +1,4 @@
-export interface iMenuButton {
-    open: boolean;
+export interface iMenuMobileButton {
     children: React.ReactNode
 }
 

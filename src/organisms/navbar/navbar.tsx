@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import MenuButton from "../../molecules/menuButton/menuButton";
+import MenuMobileButton from "../../molecules/menuMobileButton/menuMobileButton";
 import MenuItems from "../../molecules/menuItems/menuItems";
 import MenuThemaSwitch from "../../molecules/menuThemaSwitch/menuThemaSwitch";
 import MenuUserDropdown from "../../molecules/menuUserDropdown/menuUserDropdown";
@@ -30,9 +30,9 @@ export default () => {
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
                 <div onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-                    <MenuButton open={mobileMenuOpen}>
+                    <MenuMobileButton>
                         {mobileMenuOpen ? <CloseSVG /> : <HamburgerSVG />}
-                    </MenuButton>
+                    </MenuMobileButton>
                 </div>
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                     <div className="hidden sm:ml-6 sm:block">
