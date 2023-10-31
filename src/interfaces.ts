@@ -20,3 +20,7 @@ export interface iMenuUserItem {
     title: string,
     num: number
 }
+
+export interface iMenuUserDropdown {
+    current: string
+}
