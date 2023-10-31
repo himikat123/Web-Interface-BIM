@@ -7,11 +7,14 @@ export default (props: iMenuItem) => {
     const active = "bg-gray-900 dark:bg-gray-300 text-white dark:text-gray-900 rounded-md px-3 py-2 font-medium";
     const desktop = " text-sm";
     const mobile = " text-base block";
+    
+    let highlight = (props.current == props.link) ? active : passive;
+    React.Children.toArray(props.children).map((child: any) => {
+        if(props.current == child.props.link) highlight = active;
+    });
 
     return (<div className="relative">
-        <a href={props.link} className={(props.current == props.link ? active : passive) + (props.mobile ? mobile : desktop)} 
-          aria-current={props.current == props.link ? "page" : "false"}
-        >
+        <a href={props.link} className={highlight + (props.mobile ? mobile : desktop)}>
             {props.title}
         </a>
 
