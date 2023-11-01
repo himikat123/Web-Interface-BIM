@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.App * {
+  transition: color 0.3s, background-color 1.2s, fill 0.3s;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
