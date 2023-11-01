@@ -48,7 +48,10 @@ export default () => {
             </div>
         </div>
 
-        <div className={"mobile-menu sm:hidden" + (mobileMenuOpen ? "" : " hide")} id="mobile-menu">
+        <div className={"mobile-menu sm:hidden" + (mobileMenuOpen ? "" : " hide")} 
+          id="mobile-menu"
+          style={{overflow: mobileMenuOpen ? "visible" : "hidden"}}  
+        >
             <div className="space-y-1 px-2 pb-3 pt-2">
                 <MenuItems current={currentPath} mobile={true} />
             </div>
