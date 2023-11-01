@@ -26,7 +26,7 @@ export default () => {
 
     const currentPath = window.location.pathname;
 
-    return <nav ref={wrapperRef} className="bg-gray-300 dark:bg-gray-800 navbar">
+    return <nav ref={wrapperRef} className="bg-menu_light dark:bg-menu_dark navbar">
         <div className="mx-auto max-w-7xl px-2 md:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
                 <div onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>

@@ -19,11 +19,11 @@ export default (props: iMenuItem) => {
     const wrapperRef = useRef<HTMLDivElement>(null);
     useOutsideAlerter(wrapperRef);
 
-    const passive = "text-gray-900 dark:text-gray-200 hover:bg-gray-700 hover:text-white";
-    const active = "text-white dark:text-gray-900 bg-gray-900 dark:bg-gray-300 ring-2 ring-gray-500 ring-offset-2 ring-offset-gray-800";
+    const passive = "text-text_light dark:text-text_dark hover:bg-menu_dark hover:text-text_dark";
+    const active = "text-text_dark dark:text-text_light bg-menu_dark dark:bg-menu_light ring-2 ring-gray-500 ring-offset-2 ring-offset-gray-800";
     const desktop = " text-sm";
     const mobile = " text-base block";
-    const btn = "rounded-full font-medium focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:ring-offset-gray-800 ";
+    const btn = "flex rounded-full font-medium focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:ring-offset-gray-800 ";
     let highlight = btn + (props.current == props.link ? active : passive);
     React.Children.toArray(props.children).map((child: any) => {
         if(props.current == child.props.link) highlight = btn + active;
@@ -36,7 +36,7 @@ export default (props: iMenuItem) => {
                   onClick={e => props.children ? null : window.location.href=props.link}
                 >
                     <span>{props.icon}</span>
-                    <span className="md:hidden">{props.title}</span>
+                    <span className="md:hidden mx-4 my-auto">{props.title}</span>
                 </button>
             </div>
 

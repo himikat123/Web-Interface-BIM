@@ -24,7 +24,7 @@ export default (props: iMenuUserDropdown) => {
     return (
         <div ref={wrapperRef} className="relative ml-3">
             <div onClick={() => setMenuUserOpen(!menuUserOpen)}>
-                <button type="button" className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                <button type="button" className="relative flex rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                     <span className="absolute -inset-1.5"></span>
                     <span><AccountSVG /></span>
                 </button>
