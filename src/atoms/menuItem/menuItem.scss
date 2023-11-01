@@ -1,0 +1,23 @@
+.menu-svg-bg {
+    fill: #005C9A;
+}
+
+:is(.dark .dark\:menu-svg-bg-dark) {
+    fill: #FFF;
+}
+
+.menu-svg-col1 {
+    fill: #FFF;
+}
+
+:is(.dark .dark\:menu-svg-col1-dark) {
+    fill: #005C9A;
+}
+
+.menu-svg-col2 {
+    fill: #0C9;
+}
+
+.menu-svg-col3 {
+    fill: #0BD;
+}

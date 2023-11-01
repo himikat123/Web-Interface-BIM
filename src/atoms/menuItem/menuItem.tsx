@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import DropdownBox from "../dropdownBox/dropdownBox";
 import { iMenuItem } from "../../interfaces";
+import "./menuItem.scss";
 
 export default (props: iMenuItem) => {
     function useOutsideAlerter(ref: React.RefObject<HTMLDivElement>) {
