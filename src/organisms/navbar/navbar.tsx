@@ -35,7 +35,7 @@ export default () => {
                     </MenuMobileButton>
                 </div>
                 <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
-                    <div className="hidden md:ml-6 md:block">
+                    <div className="hidden md:block">
                         <div className="flex space-x-4">
                             <MenuItems current={currentPath} mobile={false} />
                         </div>
