@@ -25,3 +25,9 @@ export interface iMenuUserItem {
 export interface iMenuUserDropdown {
     current: string
 }
+
+export interface iDropdownBox {
+    className: string,
+    open: boolean,
+    children?: React.ReactNode | undefined
+}
