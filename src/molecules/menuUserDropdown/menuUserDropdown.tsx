@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import MenuSubItem from "../../atoms/menuSubItem/menuSubItem";
 import DropdownBox from "../../atoms/dropdownBox/dropdownBox";
-import "./menuUserDropdown.scss";
 import { iMenuUserDropdown } from "../../interfaces";
 
 export default (props: iMenuUserDropdown) => {
