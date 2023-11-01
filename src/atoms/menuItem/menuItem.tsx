@@ -30,12 +30,13 @@ export default (props: iMenuItem) => {
 
     return (
         <div ref={wrapperRef} className="relative">
-            <div onClick={() => setSubMenuOpen(!subMenuOpen)}>
+            <div onClick={() => setSubMenuOpen(!subMenuOpen)} title={props.title}>
                 <a className={highlight + (props.mobile ? mobile : desktop)} 
                   href={props.link}
                   onClick={e => (props.children ? e.preventDefault() : null)}
                 >
-                    {props.title}
+                    <span>{props.icon}</span>
+                    <span className="md:hidden">{props.title}</span>
                 </a>
             </div>
 

@@ -7,6 +7,7 @@ export interface iMenuItem {
     current: string,
     title: string,
     mobile: boolean,
+    icon: React.ReactNode,
     children?: React.ReactNode | undefined
 }
 
