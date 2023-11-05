@@ -31,10 +31,11 @@ export default (props: iMenuUserDropdown) => {
             </div>
 
             <DropdownBox className="right-0 mt-2" open={menuUserOpen}>
-                <MenuSubItem link="/profile" current={props.current} title="Your Profile" num={0} />
-                <MenuSubItem link="/settings" current={props.current} title="Settings" num={1} />
+                <MenuSubItem link="/username" current={props.current} title="Username" num={0} />
+                <MenuSubItem link="/userpass" current={props.current} title="Password" num={1} />
+                <MenuSubItem link="/lang" current={props.current} title="Language" num={2} />
                 <hr className="m-2" />
-                <MenuSubItem link="/signout" current={props.current} title="Sign out" num={2} />
+                <MenuSubItem link="/login" current={props.current} title="Sign out" num={3} />
             </DropdownBox>
         </div>
     )
