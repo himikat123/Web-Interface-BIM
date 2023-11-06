@@ -25,7 +25,7 @@ export default () => {
     }, [darkSide]);
 
     return ( 
-        <div className="bg-gray-300 dark:bg-gray-800">
+        <div className="bg-menu_light dark:bg-menu_dark">
             <DarkModeSwitch
                 checked={darkSide ? true : false }
                 onChange={toggleDarkMode}

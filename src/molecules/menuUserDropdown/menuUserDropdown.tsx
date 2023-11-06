@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import MenuSubItem from "../../atoms/menuSubItem/menuSubItem";
 import DropdownBox from "../../atoms/dropdownBox/dropdownBox";
-import "./menuUserDropdown.scss";
+import { ReactComponent as AccountSVG } from '../../atoms/icons/account.svg';
 import { iMenuUserDropdown } from "../../interfaces";
 
 export default (props: iMenuUserDropdown) => {
@@ -24,17 +24,18 @@ export default (props: iMenuUserDropdown) => {
     return (
         <div ref={wrapperRef} className="relative ml-3">
             <div onClick={() => setMenuUserOpen(!menuUserOpen)}>
-                <button type="button" className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                <button type="button" className="relative flex rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                     <span className="absolute -inset-1.5"></span>
-                    <img className="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                    <span><AccountSVG /></span>
                 </button>
             </div>
 
             <DropdownBox className="right-0 mt-2" open={menuUserOpen}>
-                <MenuSubItem link="/profile" current={props.current} title="Your Profile" num={0} />
-                <MenuSubItem link="/settings" current={props.current} title="Settings" num={1} />
+                <MenuSubItem link="/username" current={props.current} title="Username" num={0} />
+                <MenuSubItem link="/userpass" current={props.current} title="Password" num={1} />
+                <MenuSubItem link="/lang" current={props.current} title="Language" num={2} />
                 <hr className="m-2" />
-                <MenuSubItem link="/signout" current={props.current} title="Sign out" num={2} />
+                <MenuSubItem link="/login" current={props.current} title="Sign out" num={3} />
             </DropdownBox>
         </div>
     )

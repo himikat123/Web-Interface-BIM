@@ -1,0 +1,5 @@
+<svg className='menu-svg-col1 dark:menu-svg-col1-dark' viewBox="0 0 64 64">
+    <circle className='menu-svg-bg dark:menu-svg-bg-dark' cx="32" cy="32" r="32"/>
+    <rect x="30.1996" y="36.1453" width="18.8227" height="5.42436" transform="rotate(-135 30.1996 36.1453)"/>
+    <rect x="28" y="34" width="31.1127" height="5.04962" transform="rotate(-45 28 34)"/>
+</svg>

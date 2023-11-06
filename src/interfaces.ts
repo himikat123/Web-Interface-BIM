@@ -7,6 +7,7 @@ export interface iMenuItem {
     current: string,
     title: string,
     mobile: boolean,
+    icon: React.ReactNode,
     children?: React.ReactNode | undefined
 }
 
@@ -24,4 +25,10 @@ export interface iMenuUserItem {
 
 export interface iMenuUserDropdown {
     current: string
+}
+
+export interface iDropdownBox {
+    className: string,
+    open: boolean,
+    children?: React.ReactNode | undefined
 }
