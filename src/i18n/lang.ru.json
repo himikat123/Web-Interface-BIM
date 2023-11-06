@@ -209,6 +209,7 @@
     "FileAlreadyExists": "Файл XXX уже существует, придумайте другое название",
     "confirmDeletionOfTheFile": "Подтвердите удаление файла XXX",
     "requireUsernameToLogin": "Требовать имя пользователя и пароль для входа",
+    "weatherMonitor": "Монитор погоды",
     "login": "Вход",
     "wrongLoginOrPassword": "Неверное имя пользователя или пароль",
     "sensorMetric": "Метрика датчика",

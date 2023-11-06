@@ -209,6 +209,7 @@
     "FileAlreadyExists": "Datei XXX existiert bereits, wählen Sie einen anderen Namen",
     "confirmDeletionOfTheFile": "Löschen der Datei XXX bestätigen",
     "requireUsernameToLogin": "Benutzername und Passwort für die Anmeldung erforderlich",
+    "weatherMonitor": "Wettermonitor",
     "login": "Anmelden",
     "wrongLoginOrPassword": "Falscher Benutzername oder falsches Passwort",
     "sensorMetric": "Sensormetrik",

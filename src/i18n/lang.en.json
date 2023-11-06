@@ -4,7 +4,6 @@
     "restart": "Restart",
     "confirmation": "Confirmation",
     "restartConfirmation": "Are you sure you want to restart your device?",
-
     "network": "Network",
     "connections": "Connections",
     "accessPoint": "Access point",
@@ -210,7 +209,7 @@
     "FileAlreadyExists": "XXX file already exists, please choose another name",
     "confirmDeletionOfTheFile": "Confirm deletion of the XXX file",
     "requireUsernameToLogin": "Require username and password to login",
-    "weatherMonitorBIM32": "BIM32 Weather monitor",
+    "weatherMonitor": "Weather monitor",
     "login": "Login",
     "wrongLoginOrPassword": "Wrong username or password",
     "sensorMetric": "Sensor metric",
