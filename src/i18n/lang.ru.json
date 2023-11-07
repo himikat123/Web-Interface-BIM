@@ -4,6 +4,7 @@
     "restart": "Перезагрузить",
     "confirmation": "Подтверждение",
     "restartConfirmation": "Вы действительно хотите перезагрузить устройство?",
+    "theme": "Тема",
     "network": "Сеть",
     "connections": "Подключения",
     "accessPoint": "Точка доступа",

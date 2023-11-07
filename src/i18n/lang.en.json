@@ -4,6 +4,7 @@
     "restart": "Restart",
     "confirmation": "Confirmation",
     "restartConfirmation": "Are you sure you want to restart your device?",
+    "theme": "Theme",
     "network": "Network",
     "connections": "Connections",
     "accessPoint": "Access point",
