@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
+import i18n from '../../i18n/main';
 
 export default () => {
     const [darkSide, setDarkSide] = useState<boolean>(false);
@@ -25,7 +26,7 @@ export default () => {
     }, [darkSide]);
 
     return ( 
-        <div className="bg-menu_light dark:bg-menu_dark">
+        <div className="bg-menu_light dark:bg-menu_dark" title={i18n.t('theme')}>
             <DarkModeSwitch
                 checked={darkSide ? true : false }
                 onChange={toggleDarkMode}
