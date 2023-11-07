@@ -3,7 +3,7 @@ import DropdownBox from "../dropdownBox/dropdownBox";
 import { iMenuItem } from "../../interfaces";
 import "./menuItem.scss";
 
-export default (props: iMenuItem) => {
+const MenuItem = (props: iMenuItem) => {
     function useOutsideAlerter(ref: React.RefObject<HTMLDivElement>) {
         useEffect(() => {
             function handleClickOutside(event: any) {
@@ -13,7 +13,7 @@ export default (props: iMenuItem) => {
             return () => {
                 document.removeEventListener("mousedown", handleClickOutside);
             };
-        }, [ref, subMenuOpen]);
+        }, [ref]);
     }
     const [subMenuOpen, setSubMenuOpen] = useState<boolean>(false);
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -24,9 +24,9 @@ export default (props: iMenuItem) => {
     const desktop = " text-sm";
     const mobile = " text-base block";
     const btn = "flex rounded-full font-medium focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:ring-offset-gray-800 ";
-    let highlight = btn + (props.current == props.link ? active : passive);
+    let highlight = btn + (props.current === props.link ? active : passive);
     React.Children.toArray(props.children).map((child: any) => {
-        if(props.current == child.props.link) return highlight = btn + active;
+        if(props.current === child.props.link) return highlight = btn + active;
         return null;
     });
 
@@ -47,3 +47,5 @@ export default (props: iMenuItem) => {
         </div>
     )
 }
+
+export default MenuItem;

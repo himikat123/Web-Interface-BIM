@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import i18n from '../../i18n/main';
 
-export default () => {
+const MenuThemeSwitch = () => {
     const [darkSide, setDarkSide] = useState<boolean>(false);
 
     const applyDarkMode = (checked: boolean) => {
@@ -20,7 +20,7 @@ export default () => {
 
     useEffect(() => {
         const theme = (localStorage.hasOwnProperty('theme')) ?
-            (localStorage.theme == 'dark' ? true : false) : 
+            (localStorage.theme === 'dark' ? true : false) : 
             (window.matchMedia('(prefers-color-scheme: dark)').matches ? true : false);
         applyDarkMode(theme);
     }, [darkSide]);
@@ -35,3 +35,5 @@ export default () => {
         </div>
     )
 }
+
+export default MenuThemeSwitch;

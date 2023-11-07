@@ -5,7 +5,7 @@ import i18n from '../../i18n/main';
 import { ReactComponent as AccountSVG } from '../../atoms/icons/account.svg';
 import { iMenuUserDropdown } from "../../interfaces";
 
-export default (props: iMenuUserDropdown) => {
+const MenuUserDropdown = (props: iMenuUserDropdown) => {
     function useOutsideAlerter(ref: React.RefObject<HTMLDivElement>) {
         useEffect(() => {
             function handleClickOutside(event: any) {
@@ -15,7 +15,7 @@ export default (props: iMenuUserDropdown) => {
             return () => {
                 document.removeEventListener("mousedown", handleClickOutside);
             };
-        }, [ref, menuUserOpen]);
+        }, [ref]);
     }
 
     const [menuUserOpen, setMenuUserOpen] = useState<boolean>(false);
@@ -41,3 +41,5 @@ export default (props: iMenuUserDropdown) => {
         </div>
     )
 }
+
+export default MenuUserDropdown;

@@ -1,13 +1,13 @@
 import React, { useRef, useEffect, useState } from "react";
 import MenuMobileButton from "../../molecules/menuMobileButton/menuMobileButton";
 import MenuItems from "../../molecules/menuItems/menuItems";
-import MenuThemaSwitch from "../../molecules/menuThemaSwitch/menuThemaSwitch";
+import MenuThemaSwitch from "../../molecules/menuThemeSwitch/menuThemeSwitch";
 import MenuUserDropdown from "../../molecules/menuUserDropdown/menuUserDropdown";
 import { ReactComponent as HamburgerSVG } from '../../atoms/icons/hamburger.svg';
 import { ReactComponent as CloseSVG } from '../../atoms/icons/close.svg';
 import "./navbar.scss";
 
-export default () => {
+const Navbar = () => {
     function useOutsideAlerter(ref: React.RefObject<HTMLDivElement>) {
         useEffect(() => {
             function handleClickOutside(event: any) {
@@ -17,7 +17,7 @@ export default () => {
             return () => {
                 document.removeEventListener("mousedown", handleClickOutside);
             };
-        }, [ref, mobileMenuOpen]);
+        }, [ref]);
     }
     
     const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
@@ -58,3 +58,5 @@ export default () => {
         </div>
     </nav>
 }
+
+export default Navbar;

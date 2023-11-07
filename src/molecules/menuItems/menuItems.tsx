@@ -19,7 +19,7 @@ import { ReactComponent as SoundSVG } from '../../atoms/icons/sound.svg';
 import { ReactComponent as SourceSVG } from '../../atoms/icons/source.svg';
 import { ReactComponent as SystemSVG } from '../../atoms/icons/system.svg';
 
-const menuItems = (props: iMenuItems) => {
+const MenuItems = (props: iMenuItems) => {
     return <>
         <MenuItem link="/" current={props.current} title={i18n.t('status')} mobile={props.mobile} icon={<InfoSVG />} />
 
@@ -78,4 +78,4 @@ const menuItems = (props: iMenuItems) => {
     </>
 }
 
-export default menuItems;
+export default MenuItems;
