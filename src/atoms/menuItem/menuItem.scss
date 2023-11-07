@@ -1,23 +1,25 @@
+@import '../../variables';
+
 .menu-svg-bg {
-    fill: #005C9A;
+    fill: $MENU_ICON_BG_LIGHT;
 }
 
 :is(.dark .dark\:menu-svg-bg-dark) {
-    fill: #FFF;
+    fill: $MENU_ICON_BG_DARK;
 }
 
 .menu-svg-col1 {
-    fill: #FFF;
+    fill: $MENU_ICON_IMAGE_LIGHT;
 }
 
 :is(.dark .dark\:menu-svg-col1-dark) {
-    fill: #005C9A;
+    fill: $MENU_ICON_IMAGE_DARK;
 }
 
 .menu-svg-col2 {
-    fill: #0C9;
+    fill: $MENU_ICON_ARROW_UP;
 }
 
 .menu-svg-col3 {
-    fill: #0BD;
+    fill: $MENU_ICON_ARROW_DOWN;
 }
