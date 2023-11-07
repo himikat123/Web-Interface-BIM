@@ -26,7 +26,8 @@ export default (props: iMenuItem) => {
     const btn = "flex rounded-full font-medium focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:ring-offset-gray-800 ";
     let highlight = btn + (props.current == props.link ? active : passive);
     React.Children.toArray(props.children).map((child: any) => {
-        if(props.current == child.props.link) highlight = btn + active;
+        if(props.current == child.props.link) return highlight = btn + active;
+        return null;
     });
 
     return (
