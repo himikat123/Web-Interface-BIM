@@ -27,9 +27,9 @@ export default (props: iMenuItems) => {
             <MenuSubItem link="/accesspoint" current={props.current} title={i18n.t('accessPoint')} num={1} />
         </MenuItem>
         
-        <MenuItem link="#" current={props.current} title={i18n.t('dataSources')} mobile={props.mobile} icon={<SourceSVG />}>
-            <MenuSubItem link="/sensors" current={props.current} title={i18n.t('sensors')} num={0} />
-            <MenuSubItem link="/wsensors" current={props.current} title={i18n.t('wirelessSensors')} num={1} />
+        <MenuItem link="#" current={props.current} title={i18n.t('dataSource.more')} mobile={props.mobile} icon={<SourceSVG />}>
+            <MenuSubItem link="/sensors" current={props.current} title={i18n.t('sensor.many')} num={0} />
+            <MenuSubItem link="/wsensors" current={props.current} title={i18n.t('wirelessSensor.many')} num={1} />
             <MenuSubItem link="/weather" current={props.current} title={i18n.t('weatherForecast')} num={2} />
         </MenuItem>
 
@@ -37,9 +37,9 @@ export default (props: iMenuItems) => {
 
         <MenuItem link="/alarm" current={props.current} title={i18n.t('alarm')} mobile={props.mobile} icon={<AlarmSVG />} />
 
-        <MenuItem link="#" current={props.current} title={i18n.t('displays')} mobile={props.mobile} icon={<DisplaySVG />}>
-            <MenuSubItem link="/display1" current={props.current} title={i18n.t('display') + " 1"} num={0} />
-            <MenuSubItem link="/display2" current={props.current} title={i18n.t('display') + " 2"} num={1} />
+        <MenuItem link="#" current={props.current} title={i18n.t('display.many')} mobile={props.mobile} icon={<DisplaySVG />}>
+            <MenuSubItem link="/display1" current={props.current} title={i18n.t('display.one') + " 1"} num={0} />
+            <MenuSubItem link="/display2" current={props.current} title={i18n.t('display.one') + " 2"} num={1} />
         </MenuItem>
 
         <MenuItem link="/sound" current={props.current} title={i18n.t('sound')} mobile={props.mobile} icon={<SoundSVG />} />
