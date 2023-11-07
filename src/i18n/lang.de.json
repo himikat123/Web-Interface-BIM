@@ -13,8 +13,8 @@
         "many": "Datenquellen"
     },
     "sensor": {
-        "one": "Sensoren",
-        "many": "Sensor"
+        "one": "Sensor",
+        "many": "Sensoren"
     },
     "wirelessSensor": {
         "one": "Kabelloser Sensor",

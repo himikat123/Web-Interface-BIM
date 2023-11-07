@@ -27,7 +27,7 @@ export default (props: iMenuItems) => {
             <MenuSubItem link="/accesspoint" current={props.current} title={i18n.t('accessPoint')} num={1} />
         </MenuItem>
         
-        <MenuItem link="#" current={props.current} title={i18n.t('dataSource.more')} mobile={props.mobile} icon={<SourceSVG />}>
+        <MenuItem link="#" current={props.current} title={i18n.t('dataSource.many')} mobile={props.mobile} icon={<SourceSVG />}>
             <MenuSubItem link="/sensors" current={props.current} title={i18n.t('sensor.many')} num={0} />
             <MenuSubItem link="/wsensors" current={props.current} title={i18n.t('wirelessSensor.many')} num={1} />
             <MenuSubItem link="/weather" current={props.current} title={i18n.t('weatherForecast')} num={2} />
