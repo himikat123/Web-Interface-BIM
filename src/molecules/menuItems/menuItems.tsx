@@ -4,6 +4,7 @@ import { iMenuItems } from "../../interfaces";
 import MenuItem from "../../atoms/menuItem/menuItem";
 import MenuSubItem from "../../atoms/menuSubItem/menuSubItem";
 import i18n from '../../i18n/main';
+import device from '../../device';
 
 import { ReactComponent as AlarmSVG } from '../../atoms/icons/alarm.svg';
 import { ReactComponent as ClockSVG } from '../../atoms/icons/clock.svg';
@@ -18,7 +19,7 @@ import { ReactComponent as SoundSVG } from '../../atoms/icons/sound.svg';
 import { ReactComponent as SourceSVG } from '../../atoms/icons/source.svg';
 import { ReactComponent as SystemSVG } from '../../atoms/icons/system.svg';
 
-export default (props: iMenuItems) => {
+const menuItems = (props: iMenuItems) => {
     return <>
         <MenuItem link="/" current={props.current} title={i18n.t('status')} mobile={props.mobile} icon={<InfoSVG />} />
 
@@ -29,24 +30,40 @@ export default (props: iMenuItems) => {
         
         <MenuItem link="#" current={props.current} title={i18n.t('dataSource.many')} mobile={props.mobile} icon={<SourceSVG />}>
             <MenuSubItem link="/sensors" current={props.current} title={i18n.t('sensor.many')} num={0} />
-            <MenuSubItem link="/wsensors" current={props.current} title={i18n.t('wirelessSensor.many')} num={1} />
+            {device() === 'WeatherMonitorBIM32' && 
+                <MenuSubItem link="/wsensors" current={props.current} title={i18n.t('wirelessSensor.many')} num={1} />
+            }
             <MenuSubItem link="/weather" current={props.current} title={i18n.t('weatherForecast')} num={2} />
         </MenuItem>
 
         <MenuItem link="/clock" current={props.current} title={i18n.t('clock')} mobile={props.mobile} icon={<ClockSVG />} />
 
-        <MenuItem link="/alarm" current={props.current} title={i18n.t('alarm')} mobile={props.mobile} icon={<AlarmSVG />} />
+        {device() === 'WeatherMonitorBIM32' &&
+            <MenuItem link="/alarm" current={props.current} title={i18n.t('alarm')} mobile={props.mobile} icon={<AlarmSVG />} />
+        }
 
-        <MenuItem link="#" current={props.current} title={i18n.t('display.many')} mobile={props.mobile} icon={<DisplaySVG />}>
-            <MenuSubItem link="/display1" current={props.current} title={i18n.t('display.one') + " 1"} num={0} />
-            <MenuSubItem link="/display2" current={props.current} title={i18n.t('display.one') + " 2"} num={1} />
-        </MenuItem>
+        {device() === 'WeatherMonitorBIM' &&
+            <MenuItem link="display" current={props.current} title={i18n.t('display.one')} mobile={props.mobile} icon={<DisplaySVG />} />
+        }
 
-        <MenuItem link="/sound" current={props.current} title={i18n.t('sound')} mobile={props.mobile} icon={<SoundSVG />} />
+        {device() === 'WeatherMonitorBIM32' &&
+            <MenuItem link="#" current={props.current} title={i18n.t('display.many')} mobile={props.mobile} icon={<DisplaySVG />}>
+                <MenuSubItem link="/display1" current={props.current} title={i18n.t('display.one') + " 1"} num={0} />
+                <MenuSubItem link="/display2" current={props.current} title={i18n.t('display.one') + " 2"} num={1} />
+            </MenuItem>
+        }
 
-        <MenuItem link="/comfort" current={props.current} title={i18n.t('comfort')} mobile={props.mobile} icon={<ComfortSVG />} />
+        {device() === 'WeatherMonitorBIM32' &&
+            <MenuItem link="/sound" current={props.current} title={i18n.t('sound')} mobile={props.mobile} icon={<SoundSVG />} />
+        }
 
-        <MenuItem link="/history" current={props.current} title={i18n.t('weatherHistory')} mobile={props.mobile} icon={<HistorySVG />} />
+        {device() === 'WeatherMonitorBIM32' &&
+            <MenuItem link="/comfort" current={props.current} title={i18n.t('comfort')} mobile={props.mobile} icon={<ComfortSVG />} />
+        }
+
+        {device() === 'WeatherMonitorBIM32' &&
+            <MenuItem link="/history" current={props.current} title={i18n.t('weatherHistory')} mobile={props.mobile} icon={<HistorySVG />} />
+        }
 
         <MenuItem link="/send" current={props.current} title={i18n.t('dataSend')} mobile={props.mobile} icon={<SendSVG />} />
 
@@ -60,3 +77,5 @@ export default (props: iMenuItems) => {
         </MenuItem>
     </>
 }
+
+export default menuItems;
