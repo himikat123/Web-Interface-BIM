@@ -2,11 +2,13 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Navbar from './organisms/navbar/navbar';
+import LangSwitcher from './organisms/langSwitcher/langSwitcher';
 
 function App() {
   return (
     <div className="App overflow-x-hidden">
       <Navbar />
+      <LangSwitcher />
 
       <h1 className="text-3xl font-bold underline">
       Hello world!

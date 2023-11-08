@@ -12,4 +12,8 @@ i18n.locale = 'de';
 i18n.enableFallback = true;
 i18n.translations = { en, de, ru, pl, ua };
 
+export function changeLanguage(lang: string) {
+    i18n.locale = lang;
+}
+
 export default i18n;
