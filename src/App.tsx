@@ -1,23 +1,20 @@
 import React from 'react';
-import { Route, Routes , useLocation } from "react-router-dom";
-import logo from './logo.svg';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import './App.css';
 import Navbar from './organisms/navbar/navbar';
 import LangSwitcher from './organisms/langSwitcher/langSwitcher';
 
 function App() {
-    const { pathname } = useLocation();
+    const router = createBrowserRouter([
+        { path: "/", element: <div>Homepage</div> },
+        { path: "/lang", element: <LangSwitcher /> },
+    ]);
 
-    return (
-        <div className="App overflow-x-hidden">
+    return (<>
             <Navbar />
       
-            <Routes key={pathname}>
-                <Route path="/lang" element={<LangSwitcher />}/>
-                <Route path="*" element={<div>404 Page not found</div>}/>
-            </Routes>
-        </div>
-    );
+            <RouterProvider router={router} />
+    </>);
 }
 
 export default App;
