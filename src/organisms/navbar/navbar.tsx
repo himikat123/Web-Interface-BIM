@@ -29,7 +29,7 @@ const Navbar = () => {
 
     const currentPath = window.location.pathname;
 
-    return <nav ref={wrapperRef} className="bg-menu_light dark:bg-menu_dark navbar">
+    return <nav ref={wrapperRef} className="bg-menu_light dark:bg-menu_dark navbar fixed w-full">
         <div className="mx-auto max-w-7xl px-2 md:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
                 <div onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
@@ -53,7 +53,7 @@ const Navbar = () => {
 
         <div className={"mobile-menu md:hidden" + (mobileMenuOpen ? "" : " hide")} 
           id="mobile-menu"
-          style={{overflow: mobileMenuOpen ? "visible" : "hidden"}}  
+          style={{overflow: mobileMenuOpen ? "scroll" : "hidden"}}  
         >
             <div className="space-y-1 px-2 pb-3 pt-2">
                 <MenuItems current={currentPath} mobile={true} />

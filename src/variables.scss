@@ -1,15 +1,19 @@
-$MENU_ICON_BG_LIGHT: #005C9A;
-$MENU_ICON_BG_DARK: #FFF;
-$MENU_ICON_IMAGE_LIGHT: #FFF;
-$MENU_ICON_IMAGE_DARK: #005C9A;
+$MENU_ICON_BG_LIGHT: #FFF;
+$MENU_ICON_BG_DARK: #F3F4F6;
+$MENU_ICON_IMAGE_LIGHT: #005C9A;
+$MENU_ICON_IMAGE_DARK: #1E3A8A;
 $MENU_ICON_ARROW_UP: #0C9;
 $MENU_ICON_ARROW_DOWN: #0BD;
 
 :root {
-    --menu_light: #C1C5CB;
-    --menu_dark: #1F2937;
+    --menu_light: #005C9A;
+    --menu_dark: #1E3A8A;
+    --menu_active_light: #075985;
+    --menu_active_dark: #172554;
     --text_light: #000;
-    --text_dark: #FFF;
+    --text_dark: #F3F4F6;
     --dropdown_light: #FFF;
     --dropdown_dark: #374151;
+    --page_light: #F3F4F6;
+    --page_dark: #111837;
 }
