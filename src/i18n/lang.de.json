@@ -25,6 +25,8 @@
         "many": "Displays"
     },
     "weatherForecast": "Wettervorhersage",
+    "clock": "Uhr",
+    "alarm": "Wecker",
     "sound": "Ton",
     "comfort": "Komfort",
     "weatherHistory": "Wetterhistorie",
