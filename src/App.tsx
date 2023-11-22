@@ -1,34 +1,23 @@
 import React from 'react';
+import { Route, Routes , useLocation } from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
 import Navbar from './organisms/navbar/navbar';
 import LangSwitcher from './organisms/langSwitcher/langSwitcher';
 
 function App() {
-  return (
-    <div className="App overflow-x-hidden">
-      <Navbar />
-      <LangSwitcher />
+    const { pathname } = useLocation();
 
-      <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="App overflow-x-hidden">
+            <Navbar />
+      
+            <Routes key={pathname}>
+                <Route path="/lang" element={<LangSwitcher />}/>
+                <Route path="*" element={<div>404 Page not found</div>}/>
+            </Routes>
+        </div>
+    );
 }
 
 export default App;
