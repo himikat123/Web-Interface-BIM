@@ -6,14 +6,14 @@ import LangSwitcher from './organisms/langSwitcher/langSwitcher';
 
 function App() {
     const router = createBrowserRouter([
-        { path: "/", element: <div>Homepage</div> },
+        { path: "/",     element: <div>Homepage</div>, errorElement: <div>404 Page nui</div> },
         { path: "/lang", element: <LangSwitcher /> },
     ]);
 
     return (<>
-            <Navbar />
-      
-            <RouterProvider router={router} />
+        <Navbar />
+
+        <RouterProvider router={router} />
     </>);
 }
 
