@@ -32,3 +32,13 @@ export interface iDropdownBox {
     open: boolean,
     children?: React.ReactNode | undefined
 }
+
+export interface iCard {
+    content: React.ReactNode
+}
+
+export interface iColumnsTemplate {
+    navbar?: boolean | false,
+    header: string,
+    content: React.ReactNode
+}
