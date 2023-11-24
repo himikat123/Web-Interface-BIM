@@ -40,7 +40,8 @@ export interface iCard {
 export interface iColumnsTemplate {
     navbar?: boolean | false,
     header: string,
-    content: React.ReactNode
+    content: React.ReactNode,
+    buttons?: Array<string>
 }
 
 export interface iRadioSwitch {
