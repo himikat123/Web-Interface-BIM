@@ -7,14 +7,15 @@ import MenuUserDropdown from "../molecules/menuUserDropdown";
 import { ReactComponent as HamburgerSVG } from '../atoms/icons/hamburger.svg';
 import { ReactComponent as CloseSVG } from '../atoms/icons/close.svg';
 import "./navbar.scss";
+import { iState } from "../interfaces";
 
 const Navbar = () => {
-    useSelector((state: any) => state.language.lang);
+    useSelector((state: iState) => state.language.lang);
 
     function useOutsideAlerter(ref: React.RefObject<HTMLDivElement>) {
         useEffect(() => {
-            function handleClickOutside(event: any) {
-                if(ref.current && !ref.current.contains(event.target)) setMobileMenuOpen(false);
+            function handleClickOutside(event: TouchEvent | MouseEvent) {
+                if(ref.current && !ref.current.contains(event.target as Node)) setMobileMenuOpen(false);
             }
             document.addEventListener("mousedown", handleClickOutside);
             return () => {

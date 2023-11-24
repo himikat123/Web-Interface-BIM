@@ -1,7 +1,8 @@
 import React from "react";
 import i18n from '../i18n/main';
+import { iFooterButtons } from "../interfaces";
 
-const FooterButtons = (props: any) => {
+const FooterButtons = (props: iFooterButtons) => {
     return (<div className="flex justify-center w-full p-8">
         {props.buttons.includes('save') && <button 
             className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 mx-4 rounded"

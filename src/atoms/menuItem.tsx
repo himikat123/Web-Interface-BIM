@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 const MenuItem = (props: iMenuItem) => {
     function useOutsideAlerter(ref: React.RefObject<HTMLDivElement>) {
         useEffect(() => {
-            function handleClickOutside(event: any) {
-                if(ref.current && !ref.current.contains(event.target)) setSubMenuOpen(false);
+            function handleClickOutside(event: TouchEvent | MouseEvent) {
+                if(ref.current && !ref.current.contains(event.target as Node)) setSubMenuOpen(false);
             }
             document.addEventListener("mousedown", handleClickOutside);
             return () => {

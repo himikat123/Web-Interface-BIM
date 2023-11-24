@@ -10,9 +10,10 @@ import { ReactComponent as DeSVG } from '../atoms/icons/de.svg';
 import { ReactComponent as RuSVG } from '../atoms/icons/ru.svg';
 import { ReactComponent as PlSVG } from '../atoms/icons/pl.svg';
 import { ReactComponent as UaSVG } from '../atoms/icons/ua.svg';
+import { iState } from "../interfaces";
 
 const Language = () => {
-    const language = useSelector((state: any) => state.language.lang);
+    const language = useSelector((state: iState) => state.language.lang);
     const dispatch = useDispatch();
 
     const content = <Card content={<>

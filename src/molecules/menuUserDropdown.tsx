@@ -8,8 +8,8 @@ import { iMenuUserDropdown } from "../interfaces";
 const MenuUserDropdown = (props: iMenuUserDropdown) => {
     function useOutsideAlerter(ref: React.RefObject<HTMLDivElement>) {
         useEffect(() => {
-            function handleClickOutside(event: any) {
-                if(ref.current && !ref.current.contains(event.target)) setMenuUserOpen(false);
+            function handleClickOutside(event: TouchEvent | MouseEvent) {
+                if(ref.current && !ref.current.contains(event.target as Node)) setMenuUserOpen(false);
             }
             document.addEventListener("mousedown", handleClickOutside);
             return () => {

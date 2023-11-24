@@ -1,3 +1,9 @@
+export interface iState {
+    language: {
+        lang: string
+    }
+}
+
 export interface iMenuMobileButton {
     children: React.ReactNode
 }
@@ -37,6 +43,10 @@ export interface iCard {
     content: React.ReactNode
 }
 
+export interface iFooterButtons {
+    buttons: Array<string>
+}
+
 export interface iColumnsTemplate {
     navbar?: boolean | false,
     header: string,
@@ -48,7 +58,7 @@ export interface iRadioSwitch {
     id: string,
     name: string,
     checked: boolean,
-    onChange: any,
+    onChange(): void,
     label: string,
     icon?: React.ReactNode | null
 }
