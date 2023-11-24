@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import MenuMobileButton from "../../molecules/menuMobileButton/menuMobileButton";
 import MenuItems from "../../molecules/menuItems/menuItems";
 import MenuThemaSwitch from "../../molecules/menuThemeSwitch/menuThemeSwitch";
@@ -9,7 +9,7 @@ import { ReactComponent as CloseSVG } from '../../atoms/icons/close.svg';
 import "./navbar.scss";
 
 const Navbar = () => {
-    const language = useSelector((state: any) => state.language.lang);
+    useSelector((state: any) => state.language.lang);
 
     function useOutsideAlerter(ref: React.RefObject<HTMLDivElement>) {
         useEffect(() => {

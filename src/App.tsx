@@ -6,7 +6,7 @@ import LangSwitcher from './organisms/langSwitcher/langSwitcher';
 
 function App() {
     const location = useLocation();
-    const nav = location.pathname == '/login' ? false : true;
+    const nav = location.pathname === '/login' ? false : true;
 
     return (<>
         {nav && <Navbar />}
