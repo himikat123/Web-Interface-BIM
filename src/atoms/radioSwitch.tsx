@@ -3,7 +3,7 @@ import { iRadioSwitch } from "../interfaces";
 
 const RadioSwitch = (props: iRadioSwitch) => {
     return (
-        <div className="flex items-center my-2">
+        <div className="flex items-center my-3">
             <input 
               id={props.id}
               name={props.name}
