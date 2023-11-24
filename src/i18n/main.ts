@@ -8,7 +8,7 @@ import ua from './lang.ua.json'
 const i18n = new I18n();
 
 i18n.defaultLocale = 'en';
-i18n.locale = 'de';
+i18n.locale = 'en';
 i18n.enableFallback = true;
 i18n.translations = { en, de, ru, pl, ua };
 
