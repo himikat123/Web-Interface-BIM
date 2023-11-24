@@ -1,5 +1,5 @@
 import React from "react";
-import { iDropdownBox } from "../../interfaces";
+import { iDropdownBox } from "../interfaces";
 import "./dropdownBox.scss";
 
 const DropdownBox = (props: iDropdownBox) => {

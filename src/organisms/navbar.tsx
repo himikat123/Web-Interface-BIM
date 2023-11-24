@@ -1,11 +1,11 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
-import MenuMobileButton from "../../molecules/menuMobileButton/menuMobileButton";
-import MenuItems from "../../molecules/menuItems/menuItems";
-import MenuThemaSwitch from "../../molecules/menuThemeSwitch/menuThemeSwitch";
-import MenuUserDropdown from "../../molecules/menuUserDropdown/menuUserDropdown";
-import { ReactComponent as HamburgerSVG } from '../../atoms/icons/hamburger.svg';
-import { ReactComponent as CloseSVG } from '../../atoms/icons/close.svg';
+import MenuMobileButton from "../molecules/menuMobileButton";
+import MenuItems from "../molecules/menuItems";
+import MenuThemaSwitch from "../molecules/menuThemeSwitch";
+import MenuUserDropdown from "../molecules/menuUserDropdown";
+import { ReactComponent as HamburgerSVG } from '../atoms/icons/hamburger.svg';
+import { ReactComponent as CloseSVG } from '../atoms/icons/close.svg';
 import "./navbar.scss";
 
 const Navbar = () => {

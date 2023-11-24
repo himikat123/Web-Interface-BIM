@@ -1,23 +1,23 @@
 import React from "react";
 
-import { iMenuItems } from "../../interfaces";
-import MenuItem from "../../atoms/menuItem/menuItem";
-import MenuSubItem from "../../atoms/menuSubItem/menuSubItem";
-import i18n from '../../i18n/main';
-import device from '../../device';
+import { iMenuItems } from "../interfaces";
+import MenuItem from "../atoms/menuItem";
+import MenuSubItem from "../atoms/menuSubItem";
+import i18n from '../i18n/main';
+import device from '../device';
 
-import { ReactComponent as AlarmSVG } from '../../atoms/icons/alarm.svg';
-import { ReactComponent as ClockSVG } from '../../atoms/icons/clock.svg';
-import { ReactComponent as ComfortSVG } from '../../atoms/icons/comfort.svg';
-import { ReactComponent as DisplaySVG } from '../../atoms/icons/display.svg';
-import { ReactComponent as HistorySVG } from '../../atoms/icons/history.svg';
-import { ReactComponent as InfoSVG } from '../../atoms/icons/info.svg';
-import { ReactComponent as NetworkSVG } from '../../atoms/icons/network.svg';
-import { ReactComponent as ReceiveSVG } from '../../atoms/icons/receive.svg';
-import { ReactComponent as SendSVG } from '../../atoms/icons/send.svg';
-import { ReactComponent as SoundSVG } from '../../atoms/icons/sound.svg';
-import { ReactComponent as SourceSVG } from '../../atoms/icons/source.svg';
-import { ReactComponent as SystemSVG } from '../../atoms/icons/system.svg';
+import { ReactComponent as AlarmSVG } from '../atoms/icons/alarm.svg';
+import { ReactComponent as ClockSVG } from '../atoms/icons/clock.svg';
+import { ReactComponent as ComfortSVG } from '../atoms/icons/comfort.svg';
+import { ReactComponent as DisplaySVG } from '../atoms/icons/display.svg';
+import { ReactComponent as HistorySVG } from '../atoms/icons/history.svg';
+import { ReactComponent as InfoSVG } from '../atoms/icons/info.svg';
+import { ReactComponent as NetworkSVG } from '../atoms/icons/network.svg';
+import { ReactComponent as ReceiveSVG } from '../atoms/icons/receive.svg';
+import { ReactComponent as SendSVG } from '../atoms/icons/send.svg';
+import { ReactComponent as SoundSVG } from '../atoms/icons/sound.svg';
+import { ReactComponent as SourceSVG } from '../atoms/icons/source.svg';
+import { ReactComponent as SystemSVG } from '../atoms/icons/system.svg';
 
 const MenuItems = (props: iMenuItems) => {
     return <>

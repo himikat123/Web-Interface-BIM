@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import DropdownBox from "../dropdownBox/dropdownBox";
-import { iMenuItem } from "../../interfaces";
+import DropdownBox from "./dropdownBox";
+import { iMenuItem } from "../interfaces";
 import "./menuItem.scss";
 
 const MenuItem = (props: iMenuItem) => {

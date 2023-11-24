@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState } from "react";
-import MenuSubItem from "../../atoms/menuSubItem/menuSubItem";
-import DropdownBox from "../../atoms/dropdownBox/dropdownBox";
-import i18n from '../../i18n/main';
-import { ReactComponent as AccountSVG } from '../../atoms/icons/account.svg';
-import { iMenuUserDropdown } from "../../interfaces";
+import MenuSubItem from "../atoms/menuSubItem";
+import DropdownBox from "../atoms/dropdownBox";
+import i18n from '../i18n/main';
+import { ReactComponent as AccountSVG } from '../atoms/icons/account.svg';
+import { iMenuUserDropdown } from "../interfaces";
 
 const MenuUserDropdown = (props: iMenuUserDropdown) => {
     function useOutsideAlerter(ref: React.RefObject<HTMLDivElement>) {
@@ -34,7 +34,7 @@ const MenuUserDropdown = (props: iMenuUserDropdown) => {
             <DropdownBox className="right-0 mt-2" open={menuUserOpen}>
                 <MenuSubItem link="/username" current={props.current} title={i18n.t('username')} num={0} />
                 <MenuSubItem link="/userpass" current={props.current} title={i18n.t('password')} num={1} />
-                <MenuSubItem link="/lang" current={props.current} title={i18n.t('language')} num={2} />
+                <MenuSubItem link="/language" current={props.current} title={i18n.t('language')} num={2} />
                 <hr className="m-2" />
                 <MenuSubItem link="/login" current={props.current} title={i18n.t('logout')} num={3} />
             </DropdownBox>

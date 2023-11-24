@@ -1,5 +1,5 @@
 import React from "react";
-import { iMenuMobileButton } from "../../interfaces";
+import { iMenuMobileButton } from "../interfaces";
 
 const MenuMobileButton = (props: iMenuMobileButton) => {
     return (

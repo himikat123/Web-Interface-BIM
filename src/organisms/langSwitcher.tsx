@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { languageSwitch } from '../../redux/slices/language';
-import i18n, { changeLanguage } from '../../i18n/main';
+import { languageSwitch } from '../redux/slices/language';
+import i18n, { changeLanguage } from '../i18n/main';
 
 const LangSwitcher = () => {
     const language = useSelector((state: any) => state.language.lang);

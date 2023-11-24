@@ -1,5 +1,5 @@
 import React from "react";
-import { iMenuUserItem } from "../../interfaces";
+import { iMenuUserItem } from "../interfaces";
 
 const MenuSubItem = (props: iMenuUserItem) => {
     return (

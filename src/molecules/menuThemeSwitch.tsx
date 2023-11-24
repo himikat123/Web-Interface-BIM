@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
-import i18n from '../../i18n/main';
+import i18n from '../i18n/main';
 
 const MenuThemeSwitch = () => {
     const [darkSide, setDarkSide] = useState<boolean>(false);
