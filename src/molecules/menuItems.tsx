@@ -28,10 +28,10 @@ const MenuItems = (props: iMenuItems) => {
             <MenuSubItem link="/accesspoint" current={props.current} title={i18n.t('accessPoint')} num={1} />
         </MenuItem>
         
-        <MenuItem link="#" current={props.current} title={i18n.t('dataSource.many')} mobile={props.mobile} icon={<SourceSVG />}>
-            <MenuSubItem link="/sensors" current={props.current} title={i18n.t('sensor.many')} num={0} />
+        <MenuItem link="#" current={props.current} title={i18n.t('dataSource.plural')} mobile={props.mobile} icon={<SourceSVG />}>
+            <MenuSubItem link="/sensors" current={props.current} title={i18n.t('sensor.plural')} num={0} />
             {device() === 'WeatherMonitorBIM32' && 
-                <MenuSubItem link="/wsensors" current={props.current} title={i18n.t('wirelessSensor.many')} num={1} />
+                <MenuSubItem link="/wsensors" current={props.current} title={i18n.t('wirelessSensor.plural')} num={1} />
             }
             <MenuSubItem link="/weather" current={props.current} title={i18n.t('weatherForecast')} num={2} />
         </MenuItem>
@@ -47,7 +47,7 @@ const MenuItems = (props: iMenuItems) => {
         }
 
         {device() === 'WeatherMonitorBIM32' &&
-            <MenuItem link="#" current={props.current} title={i18n.t('display.many')} mobile={props.mobile} icon={<DisplaySVG />}>
+            <MenuItem link="#" current={props.current} title={i18n.t('display.plural')} mobile={props.mobile} icon={<DisplaySVG />}>
                 <MenuSubItem link="/display1" current={props.current} title={i18n.t('display.one') + " 1"} num={0} />
                 <MenuSubItem link="/display2" current={props.current} title={i18n.t('display.one') + " 2"} num={1} />
             </MenuItem>

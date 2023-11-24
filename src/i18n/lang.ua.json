@@ -9,20 +9,20 @@
     "connections": "З'єднання",
     "accessPoint": "Точка доступу",
     "dataSource": {
-        "one": "Джерело даних",
-        "many": "Джерела даних"
+        "singular": "Джерело даних",
+        "plural": "Джерела даних"
     },
     "sensor": {
-        "one": "Датчик",
-        "many": "Датчики"
+        "singular": "Датчик",
+        "plural": "Датчики"
     },
     "wirelessSensor": {
-        "one": "Бездротовий датчик",
-        "many": "Бездротові датчики"
+        "singular": "Бездротовий датчик",
+        "plural": "Бездротові датчики"
     },
     "display": {
-        "one": "Дисплей",
-        "many": "Дисплеї"
+        "singular": "Дисплей",
+        "plural": "Дисплеї"
     },
     "weatherForecast": "Прогноз погоди",
     "clock": "Годинник",

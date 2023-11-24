@@ -9,20 +9,20 @@
     "connections": "Połączenia",
     "accessPoint": "Punkt dostępowy",
     "dataSource": {
-        "one": "Źródło danych",
-        "many": "Źródła danych"
+        "singular": "Źródło danych",
+        "plural": "Źródła danych"
     },
     "sensor": {
-        "one": "Sensor",
-        "many": "Sensory"
+        "singular": "Sensor",
+        "plural": "Sensory"
     },
     "wirelessSensor": {
-        "one": "Czujnik bezprzewodowy",
-        "many": "Czujniki bezprzewodowe"
+        "singular": "Czujnik bezprzewodowy",
+        "plural": "Czujniki bezprzewodowe"
     },
     "display": {
-        "one": "Wyświetlacz",
-        "many": "Wyświetlacze"
+        "singular": "Wyświetlacz",
+        "plural": "Wyświetlacze"
     },
     "weatherForecast": "Prognoza pogody",
     "clock": "Zegar",

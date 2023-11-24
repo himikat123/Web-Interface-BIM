@@ -9,20 +9,20 @@
     "connections": "Connections",
     "accessPoint": "Access point",
     "dataSource": {
-        "one": "Data source",
-        "many": "Data sources"
+        "singular": "Data source",
+        "plural": "Data sources"
     },
     "sensor": {
-        "one": "Sensor",
-        "many": "Sensors"
+        "singular": "Sensor",
+        "plural": "Sensors"
     },
     "wirelessSensor": {
-        "one": "Wireless sensor",
-        "many": "Wireless sensors"
+        "singular": "Wireless sensor",
+        "plural": "Wireless sensors"
     },
     "display": {
-        "one": "Display",
-        "many": "Displays"
+        "singular": "Display",
+        "plural": "Displays"
     },
     "weatherForecast": "Weather forecast",
     "clock": "Clock",
