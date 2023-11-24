@@ -42,3 +42,12 @@ export interface iColumnsTemplate {
     header: string,
     content: React.ReactNode
 }
+
+export interface iRadioSwitch {
+    id: string,
+    name: string,
+    checked: boolean,
+    onChange: any,
+    label: string,
+    icon?: React.ReactNode | null
+}
