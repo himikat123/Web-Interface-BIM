@@ -15,7 +15,9 @@ module.exports = {
                 "dropdown_light": "var(--dropdown_light)",
                 "dropdown_dark": "var(--dropdown_dark)",
                 "page_light": "var(--page_light)",
-                "page_dark": "var(--page_dark)"
+                "page_dark": "var(--page_dark)",
+                "card_light": "var(--card_light)",
+                "card_dark": "var(--card_dark)"
             }
         }
     },
