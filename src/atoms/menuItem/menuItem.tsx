@@ -20,7 +20,6 @@ const MenuItem = (props: iMenuItem) => {
     const wrapperRef = useRef<HTMLDivElement>(null);
     useOutsideAlerter(wrapperRef);
 
-    //const passive = "text-text_light dark:text-text_dark";
     const active = "bg-menu_active_light dark:bg-menu_active_dark ring-2 ring-gray-500 ring-offset-2 ring-offset-gray-800";
     const desktop = " text-sm";
     const mobile = " text-base block";
