@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import DropdownBox from "./dropdownBox";
 import { iMenuItem } from "../interfaces";
 import "./menuItem.scss";
+import { Link } from "react-router-dom";
 
 const MenuItem = (props: iMenuItem) => {
     function useOutsideAlerter(ref: React.RefObject<HTMLDivElement>) {
@@ -33,12 +34,12 @@ const MenuItem = (props: iMenuItem) => {
     return (
         <div ref={wrapperRef} className="relative">
             <div onClick={() => setSubMenuOpen(!subMenuOpen)} title={props.title}>
-                <button className={"text-text_dark " + highlight + (props.mobile ? mobile : desktop)} 
-                  onClick={e => props.children ? null : window.location.href=props.link}
+                <Link className={"text-text_dark " + highlight + (props.mobile ? mobile : desktop)} 
+                  to={props.children ? '#' : props.link}
                 >
                     <span>{props.icon}</span>
                     <span className="md:hidden mx-4 my-auto">{props.title}</span>
-                </button>
+                </Link>
             </div>
 
             {props.children && <DropdownBox className="submenu-dropbox animate-vertical" open={subMenuOpen}>
