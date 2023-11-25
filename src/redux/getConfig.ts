@@ -1,26 +1,24 @@
+import { changeLanguage } from '../i18n/main';
+import { useSelector, useDispatch } from 'react-redux';
+import { iState } from "../interfaces";
+import { stateChange, setState } from '../redux/slices/config';
 
+const GetConfig = () => {
+    const dispatch = useDispatch();
+    useSelector((state: iState) => state.config.state);
 
-const getConfig = () => {
     fetch("./config.json")
     .then(res => res.json())
-    .then(
-        (result) => {
-            console.log(result);
-            //config: result
-        },
+    .then((result) => {
+        dispatch(stateChange('ok'));
+        dispatch(setState(result));
+        changeLanguage(result.lang);
+    },
         (error) => {
+            dispatch(stateChange('error'));
             console.error(error);
-            //this.setState({ configState: { isLoaded: true, error }, config: { lang: 'en' } });
         }
     )
-    .then(() => {
-        console.log('done');
-        //if(!this.state.configState.isLoaded || this.state.configState.error) {
-        //    setTimeout(() => {
-        //    this.getConfig();
-        //    }, 5000);
-        //}
-    })
 }
 
-export { getConfig };
+export { GetConfig };

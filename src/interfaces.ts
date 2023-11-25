@@ -1,6 +1,11 @@
 export interface iState {
-    language: {
-        lang: string
+    config: {
+        state: string,
+        lang: string,
+        account: {
+            name: string,
+            required: number
+        }
     }
 }
 

@@ -1,7 +1,7 @@
 import React from "react";
 import OneColumn from "../templates/oneColumn";
 import { useSelector, useDispatch } from 'react-redux';
-import { languageSwitch } from '../redux/slices/language';
+import { languageSwitch } from '../redux/slices/config';
 import i18n, { changeLanguage } from '../i18n/main';
 import Card from "../atoms/card";
 import RadioSwitch from "../atoms/radioSwitch";
@@ -13,7 +13,7 @@ import { ReactComponent as UaSVG } from '../atoms/icons/ua.svg';
 import { iState } from "../interfaces";
 
 const Language = () => {
-    const language = useSelector((state: iState) => state.language.lang);
+    const language = useSelector((state: iState) => state.config.lang);
     const dispatch = useDispatch();
 
     const content = <Card content={<>
