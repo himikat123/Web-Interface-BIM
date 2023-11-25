@@ -43,7 +43,7 @@
 		"citysearch":0,
 		"parsingServer":""
 	},
-	"lang":"en",
+	"lang":"ru",
 	"clock":{
 		"format":0,
 		"ntp":"time.nist.gov",
@@ -259,7 +259,7 @@
 		"tFields":[0,0,0,0,0]
 	},
 	"account":{
-		"name":"admin",
+		"name":"administrator",
 		"required":0
 	}
 }
