@@ -1,6 +1,6 @@
 import { changeLanguage } from '../i18n/main';
 import { useSelector, useDispatch } from 'react-redux';
-import { iState } from "../interfaces";
+import { iState } from './configTypes';
 import { stateChange, setState } from '../redux/slices/config';
 
 const GetConfig = () => {

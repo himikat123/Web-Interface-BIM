@@ -1,14 +1,3 @@
-export interface iState {
-    config: {
-        state: string,
-        lang: string,
-        account: {
-            name: string,
-            required: number
-        }
-    }
-}
-
 export interface iMenuMobileButton {
     children: React.ReactNode
 }
