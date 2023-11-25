@@ -1,7 +1,7 @@
 export interface iState {
     config: {
         state: string,
-        comfort?: {
+        comfort: {
             temp: {
                 source: number,
                 wsensNum: number,
@@ -18,7 +18,7 @@ export interface iState {
                 max: number
             }
         },
-        network?: {
+        network: {
             ssid: string[],
             pass: string[],
             ip: string,
@@ -28,14 +28,14 @@ export interface iState {
             dns2: string,
             type: number
         },
-        accessPoint?: {
+        accessPoint: {
             ssid: string,
             pass: string,
             chnl: number,
             ip: string,
             mask: string
         },
-        weather?: {
+        weather: {
             appid: string[],
             city: string,
             cityid: number,
@@ -46,14 +46,14 @@ export interface iState {
             parsingServer: string
         },
         lang: string,
-        clock?: {
+        clock: {
             format: number,
             ntp: string,
             utc: number,
             dlst: number,
             ntp_period: number
         },
-        display?: {
+        display: {
             type: number[],
             sled: number,
             dayTime: string[],
@@ -141,7 +141,7 @@ export interface iState {
                     color: string[]
             }
         },
-        sound?: {
+        sound: {
             vol: number,
             eq: number,
             hourly: number,
@@ -150,7 +150,7 @@ export interface iState {
                 to: number
             }
         },
-        sensors?: {
+        sensors: {
             bme280: {
                 t: number,
                 h: number,
@@ -184,7 +184,7 @@ export interface iState {
                 v: number
             }
         },
-        wsensor?: {
+        wsensor: {
             temp: {
                 corr: number[][]
             },
@@ -219,7 +219,7 @@ export interface iState {
             expire: number[],
             channel: number
         },
-        thingspeakSend?: {
+        thingspeakSend: {
             turnOn: number,
             period: number,
             channelID: string,
@@ -230,14 +230,14 @@ export interface iState {
             wsensors: number[],
             wtypes: number[]
         },
-        thingspeakReceive?: {
+        thingspeakReceive: {
             turnOn: number,
             period: number,
             channelID: string,
             rdkey: string,
             expire: number
         },
-        narodmonSend?: {
+        narodmonSend: {
             turnOn: number,
             period: number,
             lat: string,
@@ -250,7 +250,7 @@ export interface iState {
             thing: number[],
             metrics: string[]
         },
-        history?: {
+        history: {
             period: number,
             channelID: string,
             wrkey: string,
@@ -260,7 +260,7 @@ export interface iState {
             wTypes: number[],
             tFields: number[]
         },
-        account?: {
+        account: {
             name: string,
             required: number
         }
