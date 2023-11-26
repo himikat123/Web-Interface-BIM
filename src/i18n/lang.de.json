@@ -258,5 +258,9 @@
     "tempSource": "Temperaturquelle",
     "humSource": "Luftfeuchtigkeitsquelle",
     "historyRepository": "Historienspeicher",
-    "firmwareUpdateAppeared": "Firmware-Update erkannt, Version XXX verfügbar"
+    "firmwareUpdateAppeared": "Firmware-Update erkannt, Version XXX verfügbar",
+    "tips": {
+        "tip0": "Dieses Feld darf nicht leer sein",
+        "tip1": "Nur englische Buchstaben, Zahlen und Symbole *)_.@$%("
+    }
 }

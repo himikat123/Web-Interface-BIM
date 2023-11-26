@@ -258,5 +258,9 @@
     "tempSource": "Źródło temperatury",
     "humSource": "Źródło wilgoci",
     "historyRepository": "Repozytorium historii",
-    "firmwareUpdateAppeared": "Wykryto aktualizację oprogramowania układowego, dostępna wersja XXX:"
+    "firmwareUpdateAppeared": "Wykryto aktualizację oprogramowania układowego, dostępna wersja XXX:",
+    "tips": {
+        "tip0": "To pole nie może być puste",
+        "tip1": "Tylko angielskie litery, cyfry i symbole *)_.@$%("
+    }
 }
