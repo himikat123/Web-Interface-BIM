@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import i18n from '../i18n/main';
 import cn, { Argument } from 'classnames';
 import { twMerge } from 'tailwind-merge';
+import './textInput.scss';
 
 const TextInput = (props: any) => {
     const validate = (val: string) => {
@@ -13,14 +14,17 @@ const TextInput = (props: any) => {
     }
 
     const [valid, setValid] = useState<boolean>(true);
-    const [isNotEmpty, setIsNotEmpty] = useState<boolean>(true);
+    const [notEmpty, setNotEmpty] = useState<boolean>(true);
+    const [tip, setTip] = useState<string>('');
 
     useEffect(() => {
         const isValid = validate(props.value);
         const isNotEmpty = filled(props.value);
         props.isValid(isValid && isNotEmpty);
         setValid(isValid);
-        setIsNotEmpty(isNotEmpty);
+        setNotEmpty(isNotEmpty);
+        if(!isNotEmpty) setTip(i18n.t('tips.tip0'));
+        if(!isValid) setTip(props.title);
     }, [props.value]);
 
     const inputClasses = {
@@ -44,11 +48,11 @@ const TextInput = (props: any) => {
         props.onChange(value);
         props.isValid(isValid && isNotEmpty);
         setValid(isValid);
-        setIsNotEmpty(isNotEmpty);
+        setNotEmpty(isNotEmpty);
     }
 
     return <> 
-        <div className={cnMerge([inputClasses.root.base, (valid && isNotEmpty) ? inputClasses.root.normal : inputClasses.root.error])}>
+        <div className={cnMerge([inputClasses.root.base, (valid && notEmpty) ? inputClasses.root.normal : inputClasses.root.error])}>
             <label className={cnMerge([inputClasses.label, props.value && 'top-0 text-xs'])} htmlFor={props.id}>
                 {props.label} {props.required ? '*' : ''}
             </label>
@@ -59,10 +63,10 @@ const TextInput = (props: any) => {
                 onChange={onChange} 
             />
         </div>
-        {(!valid || !isNotEmpty) && <div className="mt-4 text-red-500 text_input-tip">
-            {!valid && <div>{props.title}</div>}
-            {!isNotEmpty && <div>{i18n.t('tips.tip0')}</div>}
-        </div>}
+        
+        <div className={"text_input-tip text-red-500" + (!valid || !notEmpty ? " open" : "")}>
+            {tip}
+        </div>
     </>;
 }
 
