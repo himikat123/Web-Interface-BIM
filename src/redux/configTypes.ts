@@ -1,4 +1,4 @@
-export interface iState {
+export interface iConfig {
     config: {
         state: string,
         comfort: {

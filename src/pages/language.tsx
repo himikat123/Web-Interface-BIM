@@ -10,10 +10,10 @@ import { ReactComponent as DeSVG } from '../atoms/icons/de.svg';
 import { ReactComponent as RuSVG } from '../atoms/icons/ru.svg';
 import { ReactComponent as PlSVG } from '../atoms/icons/pl.svg';
 import { ReactComponent as UaSVG } from '../atoms/icons/ua.svg';
-import { iState } from "../redux/configTypes";
+import { iConfig } from "../redux/configTypes";
 
 const Language = () => {
-    const language = useSelector((state: iState) => state.config.lang);
+    const language = useSelector((state: iConfig) => state.config.lang);
     const dispatch = useDispatch();
 
     const content = <Card content={<>
