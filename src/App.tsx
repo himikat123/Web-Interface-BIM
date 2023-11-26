@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes/*, useLocation*/ } from "react-router-dom"
-import './App.css';
 import Status from './pages/status';
 import Language from './pages/language';
 import Username from './pages/username';
