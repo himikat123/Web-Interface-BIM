@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import i18n from '../i18n/main';
 import cn, { Argument } from 'classnames';
 import { twMerge } from 'tailwind-merge';
@@ -12,8 +12,16 @@ const TextInput = (props: any) => {
         return props.required ? val ? true : false : true;
     }
 
-    const [valid, setValid] = useState<boolean>(validate(props.value));
-    const [isNotEmpty, setIsNotEmpty] = useState<boolean>(filled(props.value));
+    const [valid, setValid] = useState<boolean>(true);
+    const [isNotEmpty, setIsNotEmpty] = useState<boolean>(true);
+
+    useEffect(() => {
+        const isValid = validate(props.value);
+        const isNotEmpty = filled(props.value);
+        props.isValid(isValid && isNotEmpty);
+        setValid(isValid);
+        setIsNotEmpty(isNotEmpty);
+    }, [props.value]);
 
     const inputClasses = {
         root: {
@@ -31,9 +39,12 @@ const TextInput = (props: any) => {
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value.trim();
+        const isValid = validate(value);
+        const isNotEmpty = filled(value);
         props.onChange(value);
-        setValid(validate(value));
-        setIsNotEmpty(filled(value));
+        props.isValid(isValid && isNotEmpty);
+        setValid(isValid);
+        setIsNotEmpty(isNotEmpty);
     }
 
     return <> 
