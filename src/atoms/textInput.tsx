@@ -5,18 +5,21 @@ import { twMerge } from 'tailwind-merge';
 import './textInput.scss';
 
 const TextInput = (props: any) => {
-    const validate = (val: string) => {
-        return props.pattern ? !val.match(props.pattern) ? true : false : true;
-    }
-
-    const filled = (val: string) => {
-        return props.required ? val ? true : false : true;
-    }
-
     const [valid, setValid] = useState<boolean>(true);
     const [notEmpty, setNotEmpty] = useState<boolean>(true);
     const [tip, setTip] = useState<string>('');
 
+    /* Validate if value mathes pattern */
+    const validate = (val: string) => {
+        return props.pattern ? !val.match(props.pattern) ? true : false : true;
+    }
+
+    /* Validate if the field is required and is not empty */
+    const filled = (val: string) => {
+        return props.required ? val ? true : false : true;
+    }
+
+    /* Validate changed value */
     useEffect(() => {
         const isValid = validate(props.value);
         const isNotEmpty = filled(props.value);
@@ -27,6 +30,7 @@ const TextInput = (props: any) => {
         if(!isValid) setTip(props.title);
     }, [props.value]);
 
+    /* tailwind classes */
     const inputClasses = {
         root: {
             base: 'group relative h-14 w-full rounded-md border focus-within:border-primary focus-within:ring-2 focus-within:ring-primary',
@@ -37,18 +41,9 @@ const TextInput = (props: any) => {
         input: 'z-10 h-full w-full rounded-md px-3.5 py-4 outline-none bg-card_light dark:bg-card_dark'
     };
 
+    /* merge classes */
     const cnMerge = (...classNames: Argument[]) => {
         return twMerge(cn(classNames));
-    }
-
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value.trim();
-        const isValid = validate(value);
-        const isNotEmpty = filled(value);
-        props.onChange(value);
-        props.isValid(isValid && isNotEmpty);
-        setValid(isValid);
-        setNotEmpty(isNotEmpty);
     }
 
     return <> 
@@ -60,10 +55,11 @@ const TextInput = (props: any) => {
                 type="text" 
                 id={props.id} 
                 value={props.value} 
-                onChange={onChange} 
+                onChange={props.onChange} 
             />
         </div>
         
+        {/* error tips */}
         <div className={"text_input-tip text-red-500" + (!valid || !notEmpty ? " open" : "")}>
             {tip}
         </div>

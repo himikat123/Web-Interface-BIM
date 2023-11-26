@@ -19,9 +19,9 @@ const Username = () => {
                 id="username" 
                 value={username}
                 required
-                pattern={/[^a-zA-Z0-9*()_.@$%]+/g}
+                pattern={/[^a-zA-Z0-9*()_.@$%]/g}
                 title={i18n.t('tips.tip1')}
-                onChange={(value: string) => dispatch(usernameChange(value)) }
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(usernameChange(e.target.value.trim())) }
                 isValid={(valid: boolean) => setUsernameValid(valid) }
             />
         } />
