@@ -1,8 +1,10 @@
 import React from "react";
-import TwoColumns from "../templates/twoColumns";
+import OneColumn from "../templates/oneColumn";
 import { useSelector, useDispatch } from 'react-redux';
+import { usernameChange } from '../redux/slices/config';
 import i18n from '../i18n/main';
 import Card from "../atoms/card";
+import TextInput from "../atoms/textInput";
 import { iConfig } from '../redux/configTypes';
 
 const Username = () => {
@@ -11,12 +13,21 @@ const Username = () => {
     const dispatch = useDispatch();
 
     const content = <>
-        <Card content={<>{username}</>} />
+        <Card content={
+            <TextInput label={i18n.t('username')} 
+                id="username" 
+                value={username}
+                required
+                pattern={/[^a-zA-Z0-9*()_.@$%]+/g}
+                title={i18n.t('tips.tip1')}
+                onChange={(value: string) => dispatch(usernameChange(value)) } 
+            />
+        } />
         <Card content={<>{required}</>} />
     </>;
 
     return (<>
-        <TwoColumns header={i18n.t('username')} content={content} navbar={true} buttons={['save', 'reset']} />
+        <OneColumn header={i18n.t('username')} content={content} navbar={true} buttons={['save', 'reset']} />
     </>);
 }
 
