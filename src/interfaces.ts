@@ -56,3 +56,14 @@ export interface iRadioSwitch {
     label: string,
     icon?: React.ReactNode | null
 }
+
+export interface iTextInput {
+    pattern: RegExp,
+    required?: boolean,
+    value: string,
+    title: string,
+    id: string,
+    label: string,
+    onChange(e: React.ChangeEvent<HTMLInputElement>): void,
+    isValid(v: boolean): void
+}

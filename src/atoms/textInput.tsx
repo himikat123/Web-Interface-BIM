@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import i18n from '../i18n/main';
 import cn, { Argument } from 'classnames';
 import { twMerge } from 'tailwind-merge';
+import { iTextInput } from '../interfaces';
 import './textInput.scss';
 
-const TextInput = (props: any) => {
+const TextInput = (props: iTextInput) => {
     const [valid, setValid] = useState<boolean>(true);
     const [notEmpty, setNotEmpty] = useState<boolean>(true);
     const [tip, setTip] = useState<string>('');
