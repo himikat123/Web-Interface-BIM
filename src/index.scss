@@ -11,3 +11,17 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+input:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px var(--card_light) inset !important;
+    -webkit-text-fill-color: var(--text-light) !important;
+}
+
+:is(.dark) {
+    input:-webkit-autofill,
+    select:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 1000px var(--card_dark) inset !important;
+        -webkit-text-fill-color: var(--text_dark) !important;
+    }
+}
