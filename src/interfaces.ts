@@ -73,3 +73,10 @@ export interface iToggle {
     onChange(): void,
     label: string
 }
+
+export interface iButton {
+    className?: string | null,
+    onClick(): void,
+    disabled?: boolean | false,
+    label: string
+}
