@@ -19,7 +19,7 @@ const Language = () => {
     const content = <Card content={<>
         <RadioSwitch id="en" 
             name="language" 
-            checked={language == 'en'} 
+            checked={language === 'en'} 
             onChange={() => {
                 changeLanguage('en');
                 dispatch(languageSwitch('en'));
@@ -30,7 +30,7 @@ const Language = () => {
 
         <RadioSwitch id="de" 
             name="language" 
-            checked={language == 'de'} 
+            checked={language === 'de'} 
             onChange={() => {
                 changeLanguage('de');
                 dispatch(languageSwitch('de')); 
@@ -41,7 +41,7 @@ const Language = () => {
 
         <RadioSwitch id="ru" 
             name="language" 
-            checked={language == 'ru'} 
+            checked={language === 'ru'} 
             onChange={() => {
                 changeLanguage('ru');
                 dispatch(languageSwitch('ru')); 
@@ -52,7 +52,7 @@ const Language = () => {
 
         <RadioSwitch id="pl" 
             name="language" 
-            checked={language == 'pl'} 
+            checked={language === 'pl'} 
             onChange={() => {
                 changeLanguage('pl');
                 dispatch(languageSwitch('pl')); 
@@ -63,7 +63,7 @@ const Language = () => {
 
         <RadioSwitch id="ua" 
             name="language" 
-            checked={language == 'ua'} 
+            checked={language === 'ua'} 
             onChange={() => {
                 changeLanguage('ua');
                 dispatch(languageSwitch('ua')); 

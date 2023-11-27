@@ -10,26 +10,16 @@ const TextInput = (props: iTextInput) => {
     const [notEmpty, setNotEmpty] = useState<boolean>(true);
     const [tip, setTip] = useState<string>('');
 
-    /* Validate if value mathes pattern */
-    const validate = (val: string) => {
-        return props.pattern ? !val.match(props.pattern) ? true : false : true;
-    }
-
-    /* Validate if the field is required and is not empty */
-    const filled = (val: string) => {
-        return props.required ? val ? true : false : true;
-    }
-
     /* Validate changed value */
     useEffect(() => {
-        const isValid = validate(props.value);
-        const isNotEmpty = filled(props.value);
+        const isValid = props.pattern ? !props.value.match(props.pattern) ? true : false : true;
+        const isNotEmpty = props.required ? props.value ? true : false : true;
         props.isValid(isValid && isNotEmpty);
         setValid(isValid);
         setNotEmpty(isNotEmpty);
         if(!isNotEmpty) setTip(i18n.t('tips.tip0'));
         if(!isValid) setTip(props.title);
-    }, [props.value]);
+    }, [props, setValid, setNotEmpty, setTip]);
 
     /* tailwind classes */
     const inputClasses = {
