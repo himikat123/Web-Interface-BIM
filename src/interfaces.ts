@@ -67,3 +67,9 @@ export interface iTextInput {
     onChange(e: React.ChangeEvent<HTMLInputElement>): void,
     isValid(v: boolean): void
 }
+
+export interface iToggle {
+    checked: number,
+    onChange(): void,
+    label: string
+}
