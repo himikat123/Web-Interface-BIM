@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import OneColumn from "../templates/oneColumn";
 import { useSelector, useDispatch } from 'react-redux';
-import { usernameChange } from '../redux/slices/config';
+import { usernameChange, passwordRequiredSwitch } from '../redux/slices/config';
 import i18n from '../i18n/main';
 import Card from "../atoms/card";
 import TextInput from "../atoms/textInput";
+import Toggle from "../atoms/toggle";
 import { iConfig } from '../redux/configTypes';
 
 const Username = () => {
     const [usernameValid, setUsernameValid] = useState<boolean>(false);
     const username = useSelector((state: iConfig) => state.config.account.name);
-    const required = useSelector((state: iConfig) => state.config.account.required);
+    const loginRequired = useSelector((state: iConfig) => state.config.account.required);
     const dispatch = useDispatch();
 
     const content = <>
@@ -25,7 +26,12 @@ const Username = () => {
                 isValid={(valid: boolean) => setUsernameValid(valid) }
             />
         } />
-        <Card content={<>{required}</>} />
+        <Card content={
+            <Toggle label={i18n.t('requireUsernameToLogin')} 
+                checked={loginRequired}
+                onChange={() => dispatch(passwordRequiredSwitch(!loginRequired))} 
+            />
+        } />
     </>;
 
     return (<>

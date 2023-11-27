@@ -456,6 +456,12 @@ export const configSlice = createSlice({
     }
 });
 
-export const { stateChange, languageSwitch, setState, usernameChange } = configSlice.actions;
+export const { 
+    stateChange, 
+    languageSwitch, 
+    setState, 
+    usernameChange, 
+    passwordRequiredSwitch
+} = configSlice.actions;
   
 export default configSlice.reducer;
