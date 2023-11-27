@@ -25,3 +25,30 @@ select:-webkit-autofill {
         -webkit-text-fill-color: var(--text_dark) !important;
     }
 }
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+  
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-track_light);
+}
+
+:is(.dark) {
+    ::-webkit-scrollbar-track {
+        background: var(--scrollbar-track_dark);
+    }
+}
+  
+::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb_light);
+    border-radius: 20px;
+    border: 3px solid var(--scrollbar-border_light);
+}
+
+:is(.dark) {
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--scrollbar-thumb_dark);
+        border: 3px solid var(--scrollbar-birder_dark);
+    }
+}
