@@ -223,7 +223,7 @@
     "size": "Rozmiar",
     "FileAlreadyExists": "Plik XXX już istnieje, wybierz inną nazwę",
     "confirmDeletionOfTheFile": "Potwierdź usunięcie pliku XXX",
-    "requireUsernameToLogin": "Wymagaj nazwy użytkownika i hasła do logowania",
+    "requireUsernameToLogin": "Zaloguj się hasłem",
     "weatherMonitor": "Monitor pogody",
     "login": "Zaloguj",
     "wrongLoginOrPassword": "Nieprawidłowa nazwa użytkownika lub hasło",

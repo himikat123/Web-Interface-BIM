@@ -223,7 +223,7 @@
     "size": "Розмір",
     "FileAlreadyExists": "Файл XXX вже існує, придумайте іншу назву",
     "confirmDeletionOfTheFile": "Підтвердьте видалення файлу XXX",
-    "requireUsernameToLogin": "Вимагати ім'я користувача та пароль для входу",
+    "requireUsernameToLogin": "Увійти з паролем",
     "weatherMonitor": "Монітор погоди",
     "login": "Вхід",
     "wrongLoginOrPassword": "Неправильне ім'я користувача або пароль",

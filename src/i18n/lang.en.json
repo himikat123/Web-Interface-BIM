@@ -223,7 +223,7 @@
     "size": "Size",
     "FileAlreadyExists": "XXX file already exists, please choose another name",
     "confirmDeletionOfTheFile": "Confirm deletion of the XXX file",
-    "requireUsernameToLogin": "Require username and password to login",
+    "requireUsernameToLogin": "Login with password",
     "weatherMonitor": "Weather monitor",
     "login": "Login",
     "wrongLoginOrPassword": "Wrong username or password",
