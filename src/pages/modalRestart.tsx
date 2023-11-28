@@ -4,8 +4,12 @@ import i18n from "../i18n/main";
 import { iModalRestart } from "../interfaces";
 
 const ModalRestart = (props: iModalRestart) => {
+    const handleRestart = () => {
+        fetch("./esp/restart");
+    }
+
     return <Modal header={i18n.t('confirmation')}
-        confirmBtn={() => {}}
+        confirmBtn={() => handleRestart()}
         modalClose={() => props.modalClose()}
         content={i18n.t('restartConfirmation')}
         labelConfirm={i18n.t('restart')}
