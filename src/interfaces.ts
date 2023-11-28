@@ -80,3 +80,16 @@ export interface iButton {
     disabled?: boolean | false,
     label: string
 }
+
+export interface iModal {
+    header?: string,
+    content: React.ReactNode,
+    labelConfirm: string,
+    labelCancel: string,
+    modalClose(): void,
+    confirmBtn(): void
+}
+
+export interface iModalRestart {
+    modalClose(): void
+}

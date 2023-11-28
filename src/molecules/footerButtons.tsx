@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import i18n from '../i18n/main';
 import Button from "../atoms/button";
-import ModalRestart from "../modals/restart";
+import ModalRestart from "../pages/modalRestart";
 import { iFooterButtons } from "../interfaces";
 
 const FooterButtons = (props: iFooterButtons) => {
