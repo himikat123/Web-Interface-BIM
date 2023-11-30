@@ -1,22 +1,38 @@
 import React from "react";
-import OneColumn from "../templates/oneColumn";
+import ThreeColumns from "../templates/threeColumns";
 import { useSelector, useDispatch } from 'react-redux';
 import i18n from '../i18n/main';
 import Card from "../atoms/card";
+import NetworkInput from "../atoms/networkInput";
 import PasswordInput from "../atoms/passwordInput";
-import RadioSwitch from "../atoms/radioSwitch";
+import { iConfig } from "../redux/configTypes";
 
 const Connect = () => {
     const dispatch = useDispatch();
+    const ssid = useSelector((state: iConfig) => state.config.network.ssid);
+    const pass = useSelector((state: iConfig) => state.config.network.pass);
 
     const content = <>
-        <Card content={<>
-        
-        </>} />
+        {[...Array(3)].map((x, i: number) => {return <Card content={<>
+            <NetworkInput 
+                label={i18n.t('networkName')}
+                value={ssid[i]}
+                required={i == 0 ? true : false}
+                onChange={ () => {} }
+                isValid={ () => {} }
+            />
+            <div className="my-8" />
+            <PasswordInput 
+                label={i18n.t('password')}
+                value={pass[i]}
+                onChange={ () => {} }
+                isValid={ () => {} }
+            />
+        </>} />})}
     </>;
 
     return (<>
-        <OneColumn header={i18n.t('connections')} content={content} navbar={true} buttons={['save', 'reset']} />
+        <ThreeColumns header={i18n.t('connections')} content={content} navbar={true} buttons={['save', 'reset']} />
     </>);
 }
 
