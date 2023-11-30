@@ -17,8 +17,8 @@
 		}
 	},
 	"network":{
-		"ssid":["","",""],
-		"pass":["","",""],
+		"ssid":["netA","netB","netC"],
+		"pass":["passA","passB","passC"],
 		"ip":"",
 		"mask":"",
 		"gw":"",
