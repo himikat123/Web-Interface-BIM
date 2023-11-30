@@ -5,7 +5,7 @@ import { iModal } from "../interfaces";
 
 const Modal = (props: iModal) => {
     return <div className="fixed top-0 bottom-0 right-0 left-0 z-50 bg-gray-500 bg-opacity-50 backdrop-blur-sm flex justify-center items-center">
-        <div className="w-full max-w-2xl bg-page_light dark:bg-page_dark text-text_light dark:text-text_dark border-2 rounded border-menu_light dark:border-menu_dark">
+        <div className="mx-4 w-full max-w-2xl bg-page_light dark:bg-page_dark text-text_light dark:text-text_dark border-2 rounded border-menu_light dark:border-menu_dark">
             
             {/* header */}
             <div className="p-8 border-b border-gray-500 flex justify-between">

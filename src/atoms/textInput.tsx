@@ -18,7 +18,7 @@ const TextInput = (props: iTextInput) => {
         setValid(isValid);
         setNotEmpty(isNotEmpty);
         if(!isNotEmpty) setTip(i18n.t('tips.tip0'));
-        if(!isValid) setTip(props.tip);
+        if(!isValid && props.tip) setTip(props.tip);
     }, [props, setValid, setNotEmpty, setTip]);
 
     /* tailwind classes */
