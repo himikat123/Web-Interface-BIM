@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TextInput from './textInput';
-import { ReactComponent as HideSVG } from '../atoms/icons/en.svg';
-import { ReactComponent as ShowSVG } from '../atoms/icons/de.svg';
+import { ReactComponent as ShowSVG } from '../atoms/icons/show.svg';
+import { ReactComponent as HideSVG } from '../atoms/icons/hide.svg';
 import { iPasswordInput } from '../interfaces';
 
 const PasswordInput = (props: iPasswordInput) => {
@@ -16,7 +16,7 @@ const PasswordInput = (props: iPasswordInput) => {
         onChange={ props.onChange }
         isValid={ props.isValid }
     >
-        <div className="w-8 absolute top-4 right-2 cursor-pointer" 
+        <div className="w-8 absolute top-3 right-3 cursor-pointer" 
             onClick={() => setType(type == 'password' ? 'text' : 'password')}
         >
             {type === 'password' ? <HideSVG /> : <ShowSVG />}

@@ -1,6 +1,6 @@
 import React from 'react';
 import TextInput from './textInput';
-import { ReactComponent as NetsSVG } from '../atoms/icons/en.svg';
+import { ReactComponent as ListSVG } from '../atoms/icons/list.svg';
 
 const NetworkInput = (props: any) => {
     return <TextInput label={ props.label } 
@@ -11,8 +11,8 @@ const NetworkInput = (props: any) => {
         onChange={ props.onChange }
         isValid={ props.isValid }
     >
-        <div className="w-8 absolute top-4 right-2 cursor-pointer">
-            <NetsSVG />
+        <div className="w-8 absolute top-3 right-3 cursor-pointer">
+            <ListSVG />
         </div>
     </TextInput>
 }
