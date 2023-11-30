@@ -59,10 +59,10 @@ export interface iRadioSwitch {
 
 export interface iTextInput {
     type?: string,
-    pattern: RegExp,
+    pattern?: RegExp,
     required?: boolean,
     value: string,
-    tip: string,
+    tip?: string,
     label: string,
     onChange(e: React.ChangeEvent<HTMLInputElement>): void,
     isValid(v: boolean): void,
@@ -73,8 +73,8 @@ export interface iPasswordInput {
     label: string,
     value: string,
     required?: boolean,
-    pattern: RegExp,
-    tip: string,
+    pattern?: RegExp,
+    tip?: string,
     onChange(e: React.ChangeEvent<HTMLInputElement>): void,
     isValid(v: boolean): void
 }
