@@ -28,6 +28,8 @@ const MenuThemeSwitch = () => {
     return ( 
         <div className="bg-menu_light dark:bg-menu_dark" title={i18n.t('theme')}>
             <DarkModeSwitch
+                sunColor="white"
+                moonColor="white"
                 checked={darkSide ? true : false }
                 onChange={toggleDarkMode}
                 size={32}

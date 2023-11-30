@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import MenuMobileButton from "../molecules/menuMobileButton";
 import MenuItems from "../molecules/menuItems";
-import MenuThemaSwitch from "../molecules/menuThemeSwitch";
+import MenuThemaSwitch from "../atoms/menuThemeSwitch";
 import MenuUserDropdown from "../molecules/menuUserDropdown";
 import { ReactComponent as HamburgerSVG } from '../atoms/icons/hamburger.svg';
 import { ReactComponent as CloseSVG } from '../atoms/icons/close.svg';

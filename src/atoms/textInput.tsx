@@ -28,8 +28,12 @@ const TextInput = (props: iTextInput) => {
             normal: 'border-menu_light dark:border-menu_dark',
             error: 'border-red-500 text-red-500'
         },
-        label: 'absolute left-2 top-1/2 z-0 -translate-y-1/2 bg-card_light dark:bg-card_dark px-1 text-base pointer-events-none duration-200 group-focus-within:top-0 group-focus-within:text-xs',
-        input: 'z-10 h-full w-full rounded-md px-3.5 py-4 outline-none bg-card_light dark:bg-card_dark'
+        input: {
+            base: 'z-10 h-full w-full rounded-md px-3.5 py-4 outline-none bg-card_light dark:bg-card_dark',
+            normal: 'text-text_light dark:text-text_dark',
+            error: 'text-red-500'
+        },
+        label: 'absolute left-2 top-1/2 z-0 -translate-y-1/2 bg-card_light dark:bg-card_dark px-1 text-base pointer-events-none duration-200 group-focus-within:top-0 group-focus-within:text-xs'
     };
 
     /* merge classes */
@@ -42,8 +46,9 @@ const TextInput = (props: iTextInput) => {
             <label className={cnMerge([inputClasses.label, props.value && 'top-0 text-xs'])}>
                 {props.label} {props.required ? '*' : ''}
             </label>
-            <input className={inputClasses.input} 
-                type={props.type ?? 'text'} 
+            <input className={cnMerge([inputClasses.input.base, (valid && notEmpty) ? inputClasses.input.normal : inputClasses.input.error])} 
+                type={props.type ?? 'text'}
+                id={props.id} 
                 value={props.value} 
                 onChange={props.onChange} 
             />
