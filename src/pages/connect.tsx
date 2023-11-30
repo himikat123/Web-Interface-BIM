@@ -14,22 +14,24 @@ const Connect = () => {
     const pass = useSelector((state: iConfig) => state.config.network.pass);
 
     const content = <>
-        {[...Array(3)].map((x, i: number) => {return <Card key={'n' + i} content={<>
-            <NetworkInput 
-                label={i18n.t('networkName')}
-                value={ssid[i]}
-                required={i == 0 ? true : false}
-                onChange={ (e: React.ChangeEvent<HTMLInputElement>) => dispatch(ssidChange(e.target.value)) }
-                isValid={ () => {} }
-            />
-            <div className="my-8" />
-            <PasswordInput 
-                label={i18n.t('password')}
-                value={pass[i]}
-                onChange={ () => {} }
-                isValid={ () => {} }
-            />
-        </>} />})}
+        {[...Array(3)].map((x, i: number) => {
+            return <Card key={'n' + i} header={i18n.t('network') + ' ' + String(i + 1)} content={<>
+                <NetworkInput 
+                    label={i18n.t('networkName')}
+                    value={ssid[i]}
+                    required={i == 0 ? true : false}
+                    onChange={ (e: React.ChangeEvent<HTMLInputElement>) => dispatch(ssidChange(e.target.value)) }
+                    isValid={ () => {} }
+                />
+                <div className="my-8" />
+                <PasswordInput 
+                    label={i18n.t('password')}
+                    value={pass[i]}
+                    onChange={ () => {} }
+                    isValid={ () => {} }
+                />
+            </>} />
+        })}
     </>;
 
     return (<>
