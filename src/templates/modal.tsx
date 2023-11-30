@@ -4,7 +4,7 @@ import { ReactComponent as CloseSVG } from '../atoms/icons/close.svg';
 import { iModal } from "../interfaces";
 
 const Modal = (props: iModal) => {
-    return <div className="fixed top-0 bottom-0 right-0 left-0 z-50 bg-gray-500 bg-opacity-70 flex justify-center items-center">
+    return <div className="fixed top-0 bottom-0 right-0 left-0 z-50 bg-gray-500 bg-opacity-50 backdrop-blur-sm flex justify-center items-center">
         <div className="w-full max-w-2xl bg-page_light dark:bg-page_dark text-text_light dark:text-text_dark border-2 rounded border-menu_light dark:border-menu_dark">
             
             {/* header */}
