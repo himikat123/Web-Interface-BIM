@@ -17,11 +17,10 @@ const Username = () => {
     const content = <>
         <Card content={
             <TextInput label={i18n.t('username')} 
-                id="username" 
                 value={username}
                 required
                 pattern={/[^a-zA-Z0-9*()_.@$%]/g}
-                title={i18n.t('tips.tip1')}
+                tip={i18n.t('tips.tip1')}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(usernameChange(e.target.value.trim())) }
                 isValid={(valid: boolean) => setUsernameValid(valid) }
             />
@@ -35,7 +34,11 @@ const Username = () => {
     </>;
 
     return (<>
-        <OneColumn header={i18n.t('username')} content={content} navbar={true} buttons={[usernameValid ? 'save' : 'nsave', 'reset']} />
+        <OneColumn header={i18n.t('username')} 
+            content={content} 
+            navbar={true} 
+            buttons={[usernameValid ? 'save' : 'nsave', 'reset']} 
+        />
     </>);
 }
 

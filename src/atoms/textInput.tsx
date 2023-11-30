@@ -18,7 +18,7 @@ const TextInput = (props: iTextInput) => {
         setValid(isValid);
         setNotEmpty(isNotEmpty);
         if(!isNotEmpty) setTip(i18n.t('tips.tip0'));
-        if(!isValid) setTip(props.title);
+        if(!isValid) setTip(props.tip);
     }, [props, setValid, setNotEmpty, setTip]);
 
     /* tailwind classes */
@@ -39,15 +39,15 @@ const TextInput = (props: iTextInput) => {
 
     return <> 
         <div className={cnMerge([inputClasses.root.base, (valid && notEmpty) ? inputClasses.root.normal : inputClasses.root.error])}>
-            <label className={cnMerge([inputClasses.label, props.value && 'top-0 text-xs'])} htmlFor={props.id}>
+            <label className={cnMerge([inputClasses.label, props.value && 'top-0 text-xs'])}>
                 {props.label} {props.required ? '*' : ''}
             </label>
             <input className={inputClasses.input} 
-                type="text" 
-                id={props.id} 
+                type={props.type ?? 'text'} 
                 value={props.value} 
                 onChange={props.onChange} 
             />
+            {props.children}
         </div>
         
         {/* error tips */}
