@@ -13,7 +13,7 @@ const Connect = () => {
     const pass = useSelector((state: iConfig) => state.config.network.pass);
 
     const content = <>
-        {[...Array(3)].map((x, i: number) => {return <Card content={<>
+        {[...Array(3)].map((x, i: number) => {return <Card key={'n' + i} content={<>
             <NetworkInput 
                 label={i18n.t('networkName')}
                 value={ssid[i]}
