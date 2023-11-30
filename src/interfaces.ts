@@ -58,12 +58,23 @@ export interface iRadioSwitch {
 }
 
 export interface iTextInput {
+    type?: string,
     pattern: RegExp,
     required?: boolean,
     value: string,
-    title: string,
-    id: string,
+    tip: string,
     label: string,
+    onChange(e: React.ChangeEvent<HTMLInputElement>): void,
+    isValid(v: boolean): void,
+    children?: React.ReactNode | undefined
+}
+
+export interface iPasswordInput {
+    label: string,
+    value: string,
+    required?: boolean,
+    pattern: RegExp,
+    tip: string,
     onChange(e: React.ChangeEvent<HTMLInputElement>): void,
     isValid(v: boolean): void
 }
