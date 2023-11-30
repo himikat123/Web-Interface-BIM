@@ -288,7 +288,7 @@ export const configSlice = createSlice({
         // ?Change: (state, action) => { state.comfort.hum.min = action.payload },
         // ?Change: (state, action) => { state.comfort.hum.max = action.payload },
         // 
-        // ?Change: (state, action) => { state.network.ssid: ["", "", ""], = action.payload },
+        ssidChange: (state, action) => { state.network.ssid = action.payload },
         // ?Change: (state, action) => { state.network.pass: ["", "", ""], = action.payload },
         // ?Change: (state, action) => { state.network.ip: "", = action.payload },
         // ?Change: (state, action) => { state.network.mask: "", = action.payload },
@@ -461,7 +461,8 @@ export const {
     languageSwitch, 
     setState, 
     usernameChange, 
-    passwordRequiredSwitch
+    passwordRequiredSwitch,
+    ssidChange
 } = configSlice.actions;
   
 export default configSlice.reducer;
