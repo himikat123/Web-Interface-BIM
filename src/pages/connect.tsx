@@ -7,6 +7,7 @@ import NetworkInput from "../atoms/networkInput";
 import PasswordInput from "../atoms/passwordInput";
 import { iConfig } from "../redux/configTypes";
 import { netSsidChange } from "../redux/slices/config";
+import { netPassChange } from "../redux/slices/config";
 
 const Connect = () => {
     const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const Connect = () => {
                 <PasswordInput 
                     label={i18n.t('password')}
                     value={pass[i]}
-                    onChange={ () => {} }
+                    onChange={ (e: React.ChangeEvent<HTMLInputElement>) => dispatch(netPassChange({val: e.target.value, num: i})) }
                     isValid={ () => {} }
                 />
             </>} />
