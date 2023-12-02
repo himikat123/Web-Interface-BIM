@@ -8,6 +8,9 @@ import { ReactComponent as CloseSVG } from '../atoms/icons/close.svg';
 import "./navbar.scss";
 
 const Navbar = () => {
+    /**
+     * Tracking a click outside the mobile menu to close it
+     */
     function useOutsideAlerter(ref: React.RefObject<HTMLDivElement>) {
         useEffect(() => {
             function handleClickOutside(event: TouchEvent | MouseEvent) {
@@ -19,13 +22,16 @@ const Navbar = () => {
             };
         }, [ref]);
     }
-    
+
+    /* mobile menu state open/closed */
     const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
     const wrapperRef = useRef<HTMLDivElement>(null);
     useOutsideAlerter(wrapperRef);
 
+    /* url pathname */
     const currentPath = window.location.pathname;
 
+    
     return <nav ref={wrapperRef} className="bg-menu_light dark:bg-menu_dark navbar fixed z-40 w-full">
         <div className="mx-auto px-2 md:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
