@@ -26,7 +26,7 @@ const Connect = () => {
             return <Card key={'n' + i} header={i18n.t('network') + ' ' + String(i + 1)} content={<>
                 <NetworkInput 
                     label={i18n.t('networkName')}
-                    value={ssid[i]}
+                    value={ssid ? ssid[i] : ''}
                     required={i == 0 ? true : false}
                     onChange={ (e: React.ChangeEvent<HTMLInputElement>) => dispatch(netSsidChange({val: e.target.value, num: i})) }
                     isValid={ (valid: boolean) => {
@@ -38,7 +38,7 @@ const Connect = () => {
                 <div className="my-8" />
                 <PasswordInput 
                     label={i18n.t('password')}
-                    value={pass[i]}
+                    value={pass ? pass[i] : ''}
                     onChange={ (e: React.ChangeEvent<HTMLInputElement>) => dispatch(netPassChange({val: e.target.value, num: i})) }
                 />
             </>} />

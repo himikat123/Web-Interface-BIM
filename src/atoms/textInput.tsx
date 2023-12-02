@@ -12,7 +12,7 @@ const TextInput = (props: iTextInput) => {
 
     /* Validate changed value */
     useEffect(() => {
-        const isValid = props.pattern ? !props.value.match(props.pattern) ? true : false : true;
+        const isValid = props.pattern ? !props.value?.match(props.pattern) ? true : false : true;
         const isNotEmpty = props.required ? props.value ? true : false : true;
         if(props.isValid) props.isValid(isValid && isNotEmpty);
         setValid(isValid);
@@ -48,7 +48,7 @@ const TextInput = (props: iTextInput) => {
             </label>
             <input className={cnMerge([inputClasses.input.base, (valid && notEmpty) ? inputClasses.input.normal : inputClasses.input.error])} 
                 type={props.type ?? 'text'}
-                value={props.value} 
+                value={props.value ?? ''} 
                 onChange={props.onChange} 
             />
             {props.children}
