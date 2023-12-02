@@ -8,7 +8,7 @@ const Modal = (props: iModal) => {
         <div className="mx-4 w-full max-w-2xl bg-page_light dark:bg-page_dark text-text_light dark:text-text_dark border-2 rounded border-menu_light dark:border-menu_dark">
             
             {/* header */}
-            <div className="p-8 border-b border-gray-500 flex justify-between">
+            <div className="p-8 border-b border-gray-500 flex justify-between items-center">
                 <div>{props.header}</div>
                 <div onClick={props.modalClose} className="p-1 bg-gray-500 hover:bg-gray-700 cursor-pointer border-2 rounded border-menu_light dark:border-menu_dark">
                     <CloseSVG />
