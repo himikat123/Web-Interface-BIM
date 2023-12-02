@@ -6,7 +6,7 @@ import Card from "../atoms/card";
 import NetworkInput from "../atoms/networkInput";
 import PasswordInput from "../atoms/passwordInput";
 import { iConfig } from "../redux/configTypes";
-import { ssidChange } from "../redux/slices/config";
+import { netSsidChange } from "../redux/slices/config";
 
 const Connect = () => {
     const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const Connect = () => {
                     label={i18n.t('networkName')}
                     value={ssid[i]}
                     required={i == 0 ? true : false}
-                    onChange={ (e: React.ChangeEvent<HTMLInputElement>) => dispatch(ssidChange(e.target.value)) }
+                    onChange={ (e: React.ChangeEvent<HTMLInputElement>) => dispatch(netSsidChange({val: e.target.value, num: i})) }
                     isValid={ () => {} }
                 />
                 <div className="my-8" />
