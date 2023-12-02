@@ -1,8 +1,9 @@
 import React from 'react';
 import TextInput from './textInput';
 import { ReactComponent as ListSVG } from '../atoms/icons/list.svg';
+import { iNetworkInput } from '../interfaces';
 
-const NetworkInput = (props: any) => {
+const NetworkInput = (props: iNetworkInput) => {
     return <TextInput label={ props.label } 
         value={ props.value }
         pattern={ props.pattern }

@@ -29,7 +29,6 @@ const Connect = () => {
                     label={i18n.t('password')}
                     value={pass[i]}
                     onChange={ (e: React.ChangeEvent<HTMLInputElement>) => dispatch(netPassChange({val: e.target.value, num: i})) }
-                    isValid={ () => {} }
                 />
             </>} />
         })}

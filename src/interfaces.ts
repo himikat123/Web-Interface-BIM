@@ -66,7 +66,7 @@ export interface iTextInput {
     tip?: string,
     label: string,
     onChange(e: React.ChangeEvent<HTMLInputElement>): void,
-    isValid(v: boolean): void,
+    isValid?(v: boolean): void,
     children?: React.ReactNode | undefined
 }
 
@@ -77,7 +77,17 @@ export interface iPasswordInput {
     pattern?: RegExp,
     tip?: string,
     onChange(e: React.ChangeEvent<HTMLInputElement>): void,
-    isValid(v: boolean): void
+    isValid?(v: boolean): void
+}
+
+export interface iNetworkInput {
+    label: string,
+    value: string,
+    required?: boolean,
+    pattern?: RegExp,
+    tip?: string,
+    onChange(e: React.ChangeEvent<HTMLInputElement>): void,
+    isValid?(v: boolean): void
 }
 
 export interface iToggle {

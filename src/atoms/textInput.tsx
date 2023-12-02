@@ -14,7 +14,7 @@ const TextInput = (props: iTextInput) => {
     useEffect(() => {
         const isValid = props.pattern ? !props.value.match(props.pattern) ? true : false : true;
         const isNotEmpty = props.required ? props.value ? true : false : true;
-        props.isValid(isValid && isNotEmpty);
+        if(props.isValid) props.isValid(isValid && isNotEmpty);
         setValid(isValid);
         setNotEmpty(isNotEmpty);
         if(!isNotEmpty) setTip(i18n.t('tips.tip0'));
