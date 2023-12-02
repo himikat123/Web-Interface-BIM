@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import OneColumn from "../templates/oneColumn";
 import { accountValidChange } from "../redux/slices/valid";
 import { useSelector, useDispatch } from 'react-redux';

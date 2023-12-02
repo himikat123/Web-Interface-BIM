@@ -27,7 +27,7 @@ const Connect = () => {
                 <NetworkInput 
                     label={i18n.t('networkName')}
                     value={ssid ? ssid[i] : ''}
-                    required={i == 0 ? true : false}
+                    required={i === 0 ? true : false}
                     onChange={ (e: React.ChangeEvent<HTMLInputElement>) => dispatch(netSsidChange({val: e.target.value, num: i})) }
                     isValid={ (valid: boolean) => {
                         let nv = isValid;
