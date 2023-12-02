@@ -32,11 +32,11 @@ const MenuUserDropdown = (props: iMenuUserDropdown) => {
             </div>
 
             <DropdownBox className="right-0 mt-2" open={menuUserOpen}>
-                <MenuSubItem link="/username" current={props.current} title={i18n.t('username')} num={0} />
-                <MenuSubItem link="/userpass" current={props.current} title={i18n.t('password')} num={1} />
-                <MenuSubItem link="/language" current={props.current} title={i18n.t('language')} num={2} />
+                <MenuSubItem link="/username" current={props.current} title={i18n.t('username')} valid={true} />
+                <MenuSubItem link="/userpass" current={props.current} title={i18n.t('password')} valid={true} />
+                <MenuSubItem link="/language" current={props.current} title={i18n.t('language')} valid={true} />
                 <hr className="m-2" />
-                <MenuSubItem link="/login" current={props.current} title={i18n.t('logout')} num={3} />
+                <MenuSubItem link="/login" current={props.current} title={i18n.t('logout')} valid={true} />
             </DropdownBox>
         </div>
     )

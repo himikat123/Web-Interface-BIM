@@ -4,6 +4,7 @@ export interface iMenuMobileButton {
 
 export interface iMenuItem {
     link: string,
+    valid: boolean,
     current: string,
     title: string,
     mobile: boolean,
@@ -20,7 +21,7 @@ export interface iMenuUserItem {
     link: string,
     current: string,
     title: string,
-    num: number
+    valid: boolean
 }
 
 export interface iMenuUserDropdown {

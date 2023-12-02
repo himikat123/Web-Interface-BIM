@@ -23,3 +23,29 @@
 .menu-svg-col3 {
     fill: $MENU_ICON_ARROW_DOWN;
 }
+
+.error {
+    .menu-svg-bg {
+        fill: $MENU_ICON_BG_ERROR_LIGHT;
+    }
+    
+    :is(.dark .dark\:menu-svg-bg-dark) {
+        fill: $MENU_ICON_BG_ERROR_DARK;
+    }
+    
+    .menu-svg-col1 {
+        fill: $MENU_ICON_IMAGE_ERROR_LIGHT;
+    }
+    
+    :is(.dark .dark\:menu-svg-col1-dark) {
+        fill: $MENU_ICON_IMAGE_ERROR_DARK;
+    }
+
+    .menu-svg-col2 {
+        fill: $MENU_ICON_IMAGE_ERROR_LIGHT;
+    }
+    
+    .menu-svg-col3 {
+        fill: $MENU_ICON_IMAGE_ERROR_LIGHT;
+    }
+}

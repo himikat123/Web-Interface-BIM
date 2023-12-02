@@ -37,7 +37,7 @@ const MenuItem = (props: iMenuItem) => {
                 <Link className={"text-text_dark " + highlight + (props.mobile ? mobile : desktop)} 
                   to={props.children ? '#' : props.link}
                 >
-                    <span>{props.icon}</span>
+                    <span className={props.valid ? "" : "error"}>{props.icon}</span>
                     <span className="md:hidden mx-4 my-auto">{props.title}</span>
                 </Link>
             </div>
