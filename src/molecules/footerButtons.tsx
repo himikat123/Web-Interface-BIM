@@ -4,10 +4,11 @@ import i18n from '../i18n/main';
 import Button from "../atoms/button";
 import ModalRestart from "../pages/modalRestart";
 import { iFooterButtons } from "../interfaces";
+import { iValid } from "../redux/validTypes";
 
 const FooterButtons = (props: iFooterButtons) => {
     const [modalOpen, setModalOpen] = useState<boolean>(false);
-    const valid = useSelector((state: any) => state.valid);
+    const valid = useSelector((state: iValid) => state.valid);
     const areAllPagesValid = !Object.values(valid).includes(false);
 
     return (<>

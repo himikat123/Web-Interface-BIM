@@ -1,9 +1,10 @@
 import React from "react";
 import { useSelector } from 'react-redux';
 import { iMenuMobileButton } from "../interfaces";
+import { iValid } from "../redux/validTypes";
 
 const MenuMobileButton = (props: iMenuMobileButton) => {
-    const valid = useSelector((state: any) => state.valid);
+    const valid = useSelector((state: iValid) => state.valid);
     let validArray = Object.values(valid);
     validArray.pop();
     const areAllPagesValid = !validArray.includes(false);

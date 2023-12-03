@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from 'react-redux';
 import { iMenuItems } from "../interfaces";
+import { iValid } from "../redux/validTypes";
 import MenuItem from "../atoms/menuItem";
 import MenuSubItem from "../atoms/menuSubItem";
 import i18n from '../i18n/main';
@@ -20,8 +21,8 @@ import { ReactComponent as SourceSVG } from '../atoms/icons/source.svg';
 import { ReactComponent as SystemSVG } from '../atoms/icons/system.svg';
 
 const MenuItems = (props: iMenuItems) => {
-    const validConnect = useSelector((state: any) => state.valid.connect);
-    const validAccesspoint = useSelector((state: any) => state.valid.accesspoint);
+    const validConnect = useSelector((state: iValid) => state.valid.connect);
+    const validAccesspoint = useSelector((state: iValid) => state.valid.accesspoint);
 
     return <>
         <MenuItem link="/" 

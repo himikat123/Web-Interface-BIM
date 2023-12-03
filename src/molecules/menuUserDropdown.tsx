@@ -5,6 +5,7 @@ import DropdownBox from "../atoms/dropdownBox";
 import i18n from '../i18n/main';
 import { ReactComponent as AccountSVG } from '../atoms/icons/account.svg';
 import { iMenuUserDropdown } from "../interfaces";
+import { iValid } from "../redux/validTypes";
 
 const MenuUserDropdown = (props: iMenuUserDropdown) => {
     function useOutsideAlerter(ref: React.RefObject<HTMLDivElement>) {
@@ -23,7 +24,7 @@ const MenuUserDropdown = (props: iMenuUserDropdown) => {
     const wrapperRef = useRef<HTMLDivElement>(null);
     useOutsideAlerter(wrapperRef);
 
-    const validAccount = useSelector((state: any) => state.valid.account);
+    const validAccount = useSelector((state: iValid) => state.valid.account);
     
     return (
         <div ref={wrapperRef} className="relative ml-3">
