@@ -35,8 +35,8 @@ const Username = () => {
     </>;
 
     return (<>
-        <OneColumn header={i18n.t('username')} 
-            content={content} 
+        <OneColumn header={[i18n.t('username')]} 
+            content={[content]} 
             navbar={true} 
             buttons={['save', 'reset']} 
         />

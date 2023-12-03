@@ -74,7 +74,11 @@ const Language = () => {
     </>} />;
 
     return (<>
-        <OneColumn header={i18n.t('language')} content={content} navbar={true} buttons={['save', 'reset']} />
+        <OneColumn header={[i18n.t('language')]} 
+            content={[content]} 
+            navbar={true} 
+            buttons={['save', 'reset']} 
+        />
     </>);
 }
 

@@ -12,7 +12,10 @@ const Status = () => {
     </>;
 
     return (<>
-        <TwoColumns header={i18n.t('status')} content={content} navbar={true} />
+        <TwoColumns header={[i18n.t('status')]} 
+            content={[content]} 
+            navbar={true} 
+        />
     </>);
 }
 

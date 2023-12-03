@@ -45,8 +45,8 @@ export interface iFooterButtons {
 
 export interface iColumnsTemplate {
     navbar?: boolean | false,
-    header: string,
-    content: React.ReactNode,
+    header: Array<string>,
+    content: Array<React.ReactNode>,
     buttons?: Array<string>
 }
 
