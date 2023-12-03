@@ -20,6 +20,7 @@ const Username = () => {
             <TextInput label={i18n.t('username')} 
                 value={username}
                 required
+                maxLength={32}
                 pattern={[/[^a-zA-Z0-9*()_.@$%]/g, false]}
                 tip={i18n.t('tips.tip1')}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(usernameChange(e.target.value.trim())) }

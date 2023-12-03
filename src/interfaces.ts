@@ -66,6 +66,7 @@ export interface iTextInput {
     value: string,
     tip?: string,
     label: string,
+    maxLength: number,
     className?: string,
     onChange(e: React.ChangeEvent<HTMLInputElement>): void,
     isValid?(v: boolean): void,
@@ -75,6 +76,7 @@ export interface iTextInput {
 export interface iPasswordInput {
     label: string,
     value: string,
+    maxLength: number,
     required?: boolean,
     pattern?: [RegExp, boolean/* true: pattern must match / false: pattern must NOT match */],
     tip?: string,
@@ -85,6 +87,7 @@ export interface iPasswordInput {
 export interface iNetworkInput {
     label: string,
     value: string,
+    maxLength: number,
     required?: boolean,
     pattern?: [RegExp, boolean/* true: pattern must match / false: pattern must NOT match */],
     tip?: string,

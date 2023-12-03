@@ -4,9 +4,10 @@ import { ReactComponent as ListSVG } from '../atoms/icons/list.svg';
 import { iNetworkInput } from '../interfaces';
 
 const NetworkInput = (props: iNetworkInput) => {
-    return <TextInput label={ props.label } 
+    return <TextInput label={props.label} 
         className="pe-9"
-        value={ props.value }
+        value={props.value}
+        maxLength={props.maxLength}
         pattern={ props.pattern }
         required={ props.required }
         tip={ props.tip }

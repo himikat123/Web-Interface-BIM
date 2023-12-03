@@ -56,7 +56,8 @@ const TextInput = (props: iTextInput) => {
             </label>
             <input className={cnMerge([inputClasses.input.base, (valid && notEmpty) ? inputClasses.input.normal : inputClasses.input.error])} 
                 type={props.type ?? 'text'}
-                value={props.value ?? ''} 
+                value={props.value ?? ''}
+                maxLength={props.maxLength} 
                 onChange={props.onChange} 
             />
             {props.children}

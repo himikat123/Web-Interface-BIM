@@ -7,15 +7,16 @@ import { iPasswordInput } from '../interfaces';
 const PasswordInput = (props: iPasswordInput) => {
     const [type, setType] = useState<string>('password');
 
-    return <TextInput label={ props.label }
+    return <TextInput label={props.label}
         className="pe-9" 
-        type={ type }
-        value={ props.value }
-        required={ props.required }
-        pattern={ props.pattern }
-        tip={ props.tip }
-        onChange={ props.onChange }
-        isValid={ props.isValid }
+        type={type}
+        maxLength={props.maxLength}
+        value={props.value}
+        required={props.required}
+        pattern={props.pattern}
+        tip={props.tip}
+        onChange={props.onChange}
+        isValid={props.isValid}
     >
         <div className="w-8 absolute top-3 right-3 cursor-pointer input-icon" 
             onClick={() => setType(type == 'password' ? 'text' : 'password')}

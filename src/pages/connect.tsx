@@ -42,6 +42,7 @@ const Connect = () => {
         return <TextInput label={label}
             pattern={[ipPattern, true]}
             value={value}
+            maxLength={15}
             tip={i18n.t('wrongFormat')}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => change(e.target.value)}
             isValid={(valid: boolean) => {
@@ -73,6 +74,7 @@ const Connect = () => {
             return <Card key={'n' + i} header={i18n.t('network') + ' ' + String(i + 1)} content={<>
                 <NetworkInput label={i18n.t('networkName')}
                     value={ssid ? ssid[i] : ''}
+                    maxLength={32}
                     required={i === 0 ? true : false}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(netSsidChange({val: e.target.value, num: i}))}
                     isValid={(valid: boolean) => {
@@ -86,6 +88,7 @@ const Connect = () => {
 
                 <PasswordInput label={i18n.t('password')}
                     value={pass ? pass[i] : ''}
+                    maxLength={32}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(netPassChange({val: e.target.value, num: i}))}
                 />
             </>} />
