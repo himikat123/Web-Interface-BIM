@@ -54,11 +54,16 @@ const TextInput = (props: iTextInput) => {
             <label className={cnMerge([inputClasses.label, props.value && 'top-0 text-xs'])}>
                 {props.label} {props.required ? '*' : ''}
             </label>
-            <input className={cnMerge([inputClasses.input.base, (valid && notEmpty) ? inputClasses.input.normal : inputClasses.input.error])} 
+            <input className={cnMerge([
+                inputClasses.input.base, 
+                (valid && notEmpty) ? inputClasses.input.normal : inputClasses.input.error,
+                props.readonly ? "text-input_disabled_light dark:text-input_disabled_dark cursor-not-allowed" : ""
+            ])} 
                 type={props.type ?? 'text'}
                 value={props.value ?? ''}
                 maxLength={props.maxLength} 
                 onChange={props.onChange} 
+                readOnly={props.readonly}
             />
             {props.children}
         </div>

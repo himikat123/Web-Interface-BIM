@@ -66,6 +66,7 @@ export interface iTextInput {
     value: string,
     tip?: string,
     label: string,
+    readonly?: boolean,
     maxLength: number,
     className?: string,
     onChange(e: React.ChangeEvent<HTMLInputElement>): void,

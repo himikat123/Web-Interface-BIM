@@ -17,7 +17,9 @@ module.exports = {
                 "page_light": "var(--page_light)",
                 "page_dark": "var(--page_dark)",
                 "card_light": "var(--card_light)",
-                "card_dark": "var(--card_dark)"
+                "card_dark": "var(--card_dark)",
+                "input_disabled_light": "var(--input_disabled_light)",
+                "input_disabled_dark": "var(--input_disabled_dark)"
             }
         }
     },
