@@ -19,12 +19,12 @@
 	"network":{
 		"ssid":["netA","netB","netC"],
 		"pass":["passA","passB","passC"],
-		"ip":"",
-		"mask":"",
-		"gw":"",
-		"dns1":"",
-		"dns2":"",
-		"type":0
+		"ip":"192.168.192.168",
+		"mask":"255.255.255.0",
+		"gw":"1.1.1.1",
+		"dns1":"77.77.77.77",
+		"dns2":"8.8.8.8",
+		"type":1
 	},
 	"accessPoint":{
 		"ssid":"Weather monitor BIM32",
