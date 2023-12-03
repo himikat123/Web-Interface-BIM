@@ -9,3 +9,15 @@
         margin-top: 0.5rem;
     }
 }
+
+.input-icon svg path{
+    stroke: var(--text_light);
+    fill: var(--text_light);
+}
+
+:is(.dark) {
+    .input-icon svg path {
+        stroke: var(--text_dark);
+        fill: var(--text_dark);
+    }
+}

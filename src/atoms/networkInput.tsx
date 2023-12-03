@@ -13,7 +13,7 @@ const NetworkInput = (props: iNetworkInput) => {
         onChange={ props.onChange }
         isValid={ props.isValid }
     >
-        <div className="w-8 absolute top-3 right-3 cursor-pointer">
+        <div className="w-8 absolute top-3 right-3 cursor-pointer input-icon">
             <ListSVG />
         </div>
     </TextInput>
