@@ -286,12 +286,12 @@ export const configSlice = createSlice({
         // 
         netSsidChange: (state, action) => { state.network.ssid[action.payload.num] = action.payload.val },
         netPassChange: (state, action) => { state.network.pass[action.payload.num] = action.payload.val },
-        // ?Change: (state, action) => { state.network.ip: "", = action.payload },
-        // ?Change: (state, action) => { state.network.mask: "", = action.payload },
-        // ?Change: (state, action) => { state.network.gw: "", = action.payload },
-        // ?Change: (state, action) => { state.network.dns1: "", = action.payload },
-        // ?Change: (state, action) => { state.network.dns2: "", = action.payload },
-        // ?Change: (state, action) => { state.network.type: 0 = action.payload },
+        netIpChange: (state, action) => { state.network.ip = action.payload },
+        netMaskChange: (state, action) => { state.network.mask = action.payload },
+        netGwChange: (state, action) => { state.network.gw = action.payload },
+        netDns1Change: (state, action) => { state.network.dns1 = action.payload },
+        netDns2Change: (state, action) => { state.network.dns2 = action.payload },
+        netTypeSwitch: (state, action) => { state.network.type = action.payload },
         // 
         // ?Change: (state, action) => { state.accessPoint.ssid: "", = action.payload },
         // ?Change: (state, action) => { state.accessPoint.pass: "", = action.payload },
@@ -459,7 +459,13 @@ export const {
     usernameChange, 
     passwordRequiredSwitch,
     netSsidChange,
-    netPassChange
+    netPassChange,
+    netTypeSwitch,
+    netIpChange,
+    netMaskChange,
+    netGwChange,
+    netDns1Change,
+    netDns2Change
 } = configSlice.actions;
   
 export default configSlice.reducer;
