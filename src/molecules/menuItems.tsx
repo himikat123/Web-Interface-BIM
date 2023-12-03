@@ -20,8 +20,8 @@ import { ReactComponent as SourceSVG } from '../atoms/icons/source.svg';
 import { ReactComponent as SystemSVG } from '../atoms/icons/system.svg';
 
 const MenuItems = (props: iMenuItems) => {
-    const validConnect = useSelector((state: any) => state.valid.network.connect);
-    const validAccesspoint = useSelector((state: any) => state.valid.network.accesspoint);
+    const validConnect = useSelector((state: any) => state.valid.connect);
+    const validAccesspoint = useSelector((state: any) => state.valid.accesspoint);
 
     return <>
         <MenuItem link="/" 

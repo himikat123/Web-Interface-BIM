@@ -269,12 +269,8 @@ export const configSlice = createSlice({
         }
     },
     reducers: {
-        stateChange: (state, action) => {
-            state.state = action.payload;
-        },
-        setState: (state, action) => {
-            Object.assign(state, action.payload);
-        },
+        stateChange: (state, action) => { state.state = action.payload },
+        setState: (state, action) => { Object.assign(state, action.payload) },
         // ?Change: (state, action) => { state.comfort.temp.source = action.payload },
         // ?Change: (state, action) => { state.comfort.temp.wsensNum = action.payload },
         // ?Change: (state, action) => { state.comfort.temp.sens = action.payload },
