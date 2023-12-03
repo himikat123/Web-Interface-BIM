@@ -107,7 +107,7 @@ const Connect = () => {
             />
         } />
 
-        <Card content={<>{console.log(type, typeof type)}
+        <Card content={<>
             {type 
                 ? ipField(i18n.t('ipAddress'), ip, 3, changeIp)
                 : <TextInput label={i18n.t('ipAddress')} value={'192.192.192.192'} maxLength={32} readonly onChange={() => {}} />
