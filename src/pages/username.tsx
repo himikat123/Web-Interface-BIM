@@ -30,7 +30,7 @@ const Username = () => {
         <Card content={
             <Toggle label={i18n.t('requireUsernameToLogin')} 
                 checked={loginRequired}
-                onChange={() => dispatch(passwordRequiredSwitch(!loginRequired))} 
+                onChange={() => dispatch(passwordRequiredSwitch(loginRequired ? 0 : 1))} 
             />
         } />
     </>;
