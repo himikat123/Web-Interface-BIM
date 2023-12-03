@@ -66,6 +66,7 @@ export interface iTextInput {
     value: string,
     tip?: string,
     label: string,
+    className?: string,
     onChange(e: React.ChangeEvent<HTMLInputElement>): void,
     isValid?(v: boolean): void,
     children?: React.ReactNode | undefined

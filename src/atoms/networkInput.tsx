@@ -5,6 +5,7 @@ import { iNetworkInput } from '../interfaces';
 
 const NetworkInput = (props: iNetworkInput) => {
     return <TextInput label={ props.label } 
+        className="pe-9"
         value={ props.value }
         pattern={ props.pattern }
         required={ props.required }

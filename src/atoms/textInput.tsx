@@ -42,7 +42,7 @@ const TextInput = (props: iTextInput) => {
     }
 
     return <> 
-        <div className={cnMerge([inputClasses.root.base, (valid && notEmpty) ? inputClasses.root.normal : inputClasses.root.error])}>
+        <div className={cnMerge([inputClasses.root.base, (valid && notEmpty) ? inputClasses.root.normal : inputClasses.root.error, props.className])}>
             <label className={cnMerge([inputClasses.label, props.value && 'top-0 text-xs'])}>
                 {props.label} {props.required ? '*' : ''}
             </label>
