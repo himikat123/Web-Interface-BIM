@@ -20,7 +20,7 @@ const Username = () => {
             <TextInput label={i18n.t('username')} 
                 value={username}
                 required
-                pattern={/[^a-zA-Z0-9*()_.@$%]/g}
+                pattern={[/[^a-zA-Z0-9*()_.@$%]/g, false]}
                 tip={i18n.t('tips.tip1')}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(usernameChange(e.target.value.trim())) }
                 isValid={(valid: boolean) => dispatch(accountValidChange(valid)) }

@@ -61,7 +61,7 @@ export interface iRadioSwitch {
 
 export interface iTextInput {
     type?: string,
-    pattern?: RegExp,
+    pattern?: [RegExp, boolean/* true: pattern must match / false: pattern must NOT match */],
     required?: boolean,
     value: string,
     tip?: string,
@@ -76,7 +76,7 @@ export interface iPasswordInput {
     label: string,
     value: string,
     required?: boolean,
-    pattern?: RegExp,
+    pattern?: [RegExp, boolean/* true: pattern must match / false: pattern must NOT match */],
     tip?: string,
     onChange(e: React.ChangeEvent<HTMLInputElement>): void,
     isValid?(v: boolean): void
@@ -86,7 +86,7 @@ export interface iNetworkInput {
     label: string,
     value: string,
     required?: boolean,
-    pattern?: RegExp,
+    pattern?: [RegExp, boolean/* true: pattern must match / false: pattern must NOT match */],
     tip?: string,
     onChange(e: React.ChangeEvent<HTMLInputElement>): void,
     isValid?(v: boolean): void

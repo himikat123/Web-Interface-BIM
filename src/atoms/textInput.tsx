@@ -12,8 +12,16 @@ const TextInput = (props: iTextInput) => {
 
     /* Validate changed value */
     useEffect(() => {
-        const isValid = props.pattern ? !props.value?.match(props.pattern) ? true : false : true;
-        const isNotEmpty = props.required ? props.value ? true : false : true;
+        const isValid = props.pattern 
+            ? props.pattern[1] 
+                ? props.value?.match(props.pattern[0]) ? true : false
+                : !props.value?.match(props.pattern[0]) ? true : false
+            : true;
+        const isNotEmpty = props.required 
+            ? props.value 
+                ? true 
+                : false 
+            : true;
         if(props.isValid) props.isValid(isValid && isNotEmpty);
         setValid(isValid);
         setNotEmpty(isNotEmpty);
