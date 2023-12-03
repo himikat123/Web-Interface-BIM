@@ -103,22 +103,37 @@ const Connect = () => {
                     i18n.t('staticIp')
                 ]}
                 value={type}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(netTypeSwitch(e.target.value))}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(netTypeSwitch(Number(e.target.value)))}
             />
         } />
 
-        <Card content={<>
-            {ipField(i18n.t('ipAddress'), ip, 3, changeIp)}
+        <Card content={<>{console.log(type, typeof type)}
+            {type 
+                ? ipField(i18n.t('ipAddress'), ip, 3, changeIp)
+                : <TextInput label={i18n.t('ipAddress')} value={'192.192.192.192'} maxLength={32} readonly onChange={() => {}} />
+            }
             <div className="my-8" />
-            {ipField(i18n.t('subnetMask'), mask, 4, changeMask)}
+            {type
+                ? ipField(i18n.t('subnetMask'), mask, 4, changeMask)
+                : <TextInput label={i18n.t('subnetMask')} value={'128.255.127.192'} maxLength={32} readonly onChange={() => {}} />
+            }
             <div className="my-8" />
-            {ipField(i18n.t('defaultGateway'), gw, 5, changeGw)}
+            {type
+                ? ipField(i18n.t('defaultGateway'), gw, 5, changeGw)
+                : <TextInput label={i18n.t('defaultGateway')} value={'100.100.10.1'} maxLength={32} readonly onChange={() => {}} />
+            }
         </>} />
 
         <Card content={<>
-            {ipField(i18n.t('preferredDns'), dns1, 6, changeDns1)}
+            {type
+                ? ipField(i18n.t('preferredDns'), dns1, 6, changeDns1)
+                : <TextInput label={i18n.t('preferredDns')} value={'9.9.9.9'} maxLength={32} readonly onChange={() => {}} />
+            }
             <div className="my-8" />
-            {ipField(i18n.t('alternativeDns'), dns2, 7, changeDns2)}
+            {type
+                ? ipField(i18n.t('alternativeDns'), dns2, 7, changeDns2)
+                : <TextInput label={i18n.t('alternativeDns')} value={'2.2.2.2'} maxLength={32} readonly onChange={() => {}} />
+            }
         </>} />
     </>;
 
