@@ -103,7 +103,7 @@ const Connect = () => {
                     i18n.t('staticIp')
                 ]}
                 value={type}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(netTypeSwitch(Number(e.target.value)))}
+                onChange={(o: number) => dispatch(netTypeSwitch(o))}
             />
         } />
 
