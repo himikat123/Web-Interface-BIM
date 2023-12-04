@@ -10,7 +10,7 @@ const Modal = (props: iModal) => {
             {/* header */}
             <div className="p-8 border-b border-gray-500 flex justify-between items-center">
                 <div>{props.header}</div>
-                <div onClick={props.modalClose} className="p-1 bg-gray-500 hover:bg-gray-700 cursor-pointer border-2 rounded border-menu_light dark:border-menu_dark">
+                <div onClick={props.modalClose} className="p-1 bg-gray-500 hover:bg-gray-700 cursor-pointer border-2 rounded border-menu_light dark:border-menu_dark text-text_dark">
                     <CloseSVG />
                 </div>
             </div>
@@ -30,7 +30,7 @@ const Modal = (props: iModal) => {
                     }}
                 />
 
-                <Button className="bg-gray-500 hover:bg-gray-700 text-text_dark "
+                <Button className="bg-gray-500 hover:bg-gray-700 text-text_dark"
                     label={props.labelCancel}
                     onClick={() => props.modalClose()}
                 />
