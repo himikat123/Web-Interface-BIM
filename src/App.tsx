@@ -4,7 +4,7 @@ import Status from './pages/status';
 import Connect from './pages/connect';
 import Language from './pages/language';
 import Username from './pages/username';
-import { GetConfig } from './redux/getConfig';
+import GetConfig from './redux/getConfig';
 
 function App() {
     GetConfig();

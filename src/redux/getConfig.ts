@@ -21,4 +21,4 @@ const GetConfig = () => {
     )
 }
 
-export { GetConfig };
+export default GetConfig;
