@@ -1,11 +1,9 @@
 import { changeLanguage } from '../i18n/main';
-import { useSelector, useDispatch } from 'react-redux';
-import { iConfig } from './configTypes';
+import { useDispatch } from 'react-redux';
 import { stateChange, setState } from '../redux/slices/config';
 
 const GetConfig = () => {
     const dispatch = useDispatch();
-    useSelector((state: iConfig) => state.config.state);
 
     fetch("./config.json")
     .then(res => res.json())
