@@ -1,6 +1,6 @@
 export interface iData {
     data: {
-        state: string,
+        dataState: string,
         logged: string,
         fw: string,
         esp32: {
