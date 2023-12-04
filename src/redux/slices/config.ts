@@ -3,22 +3,22 @@ import { createSlice } from '@reduxjs/toolkit';
 export const configSlice = createSlice({
     name: 'config',
     initialState: {
-        state: 'default',
+        configState: 'default',
         comfort: {
             temp: {
                 source: 0,
                 wsensNum: 0,
                 sens: 0,
                 thing: 0,
-                min: 21,
-                max: 25
+                min: 0,
+                max: 0
             },
             hum: {
                 source: 0,
                 wsensNum: 0,
                 thing: 0,
-                min: 30,
-                max: 60
+                min: 0,
+                max: 0
             }
         },
         network: {
@@ -34,9 +34,9 @@ export const configSlice = createSlice({
         accessPoint:{
             ssid: "",
             pass: "",
-            chnl: 1,
-            ip: "192.168.1.4",
-            mask: "255.255.255.0"
+            chnl: 0,
+            ip: "",
+            mask: ""
         },
         weather: {
             appid: ["", ""],
@@ -51,34 +51,34 @@ export const configSlice = createSlice({
         lang: "en",
         clock: {
             format: 0,
-            ntp: "time.nist.gov",
+            ntp: "",
             utc: 0,
             dlst: 0,
-            ntp_period: 15
+            ntp_period: 0
         },
         display: {
-            type: [0, 2],
+            type: [0, 0],
             sled: 0,
-            dayTime: ["07:00", "07:00"],
-            nightTime: ["21:00", "21:00"],
-            brightMethod: [3, 3],
+            dayTime: ["", ""],
+            nightTime: ["", ""],
+            brightMethod: [0, 0],
             autoOff: [0, 0],
             nightOff: {
                 need: [0, 0],
-                from: [22, 22],
-                to: [7, 7]
+                from: [0, 0],
+                to: [0, 0]
             },
             brightness: {
-                day: [100, 100],
-                night: [50, 50],
-                min: [1, 1],
-                max: [255, 50]
+                day: [0, 0],
+                night: [0, 0],
+                min: [0, 0],
+                max: [0, 0]
             },
             lightSensor: [0, 0],
-            sensitivity: [50, 50],
+            sensitivity: [0, 0],
             animation: {
                 type: 0,
-                speed: 10,
+                speed: 0,
                 points: 0
             },
             source: {
@@ -133,24 +133,24 @@ export const configSlice = createSlice({
                 }
             },
             timeSlot: {
-                period: [6, 2, 2, 0, 0, 0, 0, 0],
-                sensor: [0, 9, 9, 0, 0, 0, 0, 0],
-                data: [0, 0, 1, 0, 0, 0, 0, 0],
+                period: [0, 0, 0, 0, 0, 0, 0, 0],
+                sensor: [0, 0, 0, 0, 0, 0, 0, 0],
+                data: [0, 0, 0, 0, 0, 0, 0, 0],
                 thing: [0, 0, 0, 0, 0, 0, 0, 0],
                 wsensor: {
                     num: [0, 0, 0, 0, 0, 0, 0, 0],
                     type: [0, 0, 0, 0, 0, 0, 0, 0]
                 },
-                color: ["#FFFFFF", "#FFFF00", "#00FFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF"]
+                color: ["", "", "", "", "", "", "", ""]
             }
         },
         sound: {
-            vol: 15,
+            vol: 0,
             eq: 0,
             hourly: 0,
             hour: {
-                from: 7,
-                to: 21
+                from: 0,
+                to: 0
             }
         },
         sensors: {
@@ -216,15 +216,15 @@ export const configSlice = createSlice({
                 corr: [0, 0]
             },
             bat: {
-                k: [125, 125],
+                k: [0, 0],
                 type: [0, 0]
             },
-            expire: [10, 10],
-            channel: 1
+            expire: [0, 0],
+            channel: 0
         },
         thingspeakSend: {
             turnOn: 0,
-            period: 5,
+            period: 0,
             channelID: "",
             wrkey: "",
             rdkey: "",
@@ -235,14 +235,14 @@ export const configSlice = createSlice({
         },
         thingspeakReceive: {
             turnOn: 0,
-            period: 5,
+            period: 0,
             channelID: "",
             rdkey: "",
-            expire: 20
+            expire: 0
         },
         narodmonSend: {
             turnOn: 0,
-            period: 5,
+            period: 0,
             lat: "",
             lon: "",
             name: "",
@@ -251,10 +251,10 @@ export const configSlice = createSlice({
             wsensors: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             wtypes: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             thing: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            metrics: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"]
+            metrics: ["", "", "", "", "", "", "", "", "", "", "", ""]
         },
         history: {
-            period: 60,
+            period: 0,
             channelID: "",
             wrkey: "",
             rdkey: "",
@@ -264,12 +264,12 @@ export const configSlice = createSlice({
             tFields: [0, 0, 0, 0, 0]
         },
         account: {
-            name: "admin",
+            name: "",
             required: 0
         }
     },
     reducers: {
-        stateChange: (state, action) => { state.state = action.payload },
+        stateChange: (state, action) => { state.configState = action.payload },
         setState: (state, action) => { Object.assign(state, action.payload) },
         // ?Change: (state, action) => { state.comfort.temp.source = action.payload },
         // ?Change: (state, action) => { state.comfort.temp.wsensNum = action.payload },
