@@ -49,12 +49,14 @@ function App() {
         fetchConfig();
     }, []);
     
-    if(configState === 'ok') {
-        fetchData();
-        setInterval(() => {
+    useEffect(() => {
+        if(configState === 'ok') {
             fetchData();
-        }, 10000);
-    }
+            setInterval(() => {
+                fetchData();
+            }, 10000);
+        }
+    }, [configState]);
 
     return (
         <div className={"bg-page_light dark:bg-page_dark text-text_light dark:text-text_dark min-h-screen"}>
