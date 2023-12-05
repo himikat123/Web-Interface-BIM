@@ -269,8 +269,8 @@ export const configSlice = createSlice({
         }
     },
     reducers: {
-        stateChange: (state, action) => { state.configState = action.payload },
-        setState: (state, action) => { Object.assign(state, action.payload) },
+        configStateChange: (state, action) => { state.configState = action.payload },
+        setConfigState: (state, action) => { Object.assign(state, action.payload) },
         // ?Change: (state, action) => { state.comfort.temp.source = action.payload },
         // ?Change: (state, action) => { state.comfort.temp.wsensNum = action.payload },
         // ?Change: (state, action) => { state.comfort.temp.sens = action.payload },
@@ -453,9 +453,9 @@ export const configSlice = createSlice({
 });
 
 export const { 
-    stateChange, 
+    configStateChange, 
     languageSwitch, 
-    setState, 
+    setConfigState, 
     usernameChange, 
     passwordRequiredSwitch,
     netSsidChange,

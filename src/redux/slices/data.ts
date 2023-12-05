@@ -114,8 +114,8 @@ export const dataSlice = createSlice({
         }
     },
     reducers: {
-        stateChange: (state, action) => { state.dataState = action.payload },
-        setState: (state, action) => { Object.assign(state, action.payload) },
+        dataStateChange: (state, action) => { state.dataState = action.payload },
+        setDataState: (state, action) => { Object.assign(state, action.payload) },
         // ?Change: (state, action) => { state.state: 'default', = action.payload },
         // ?Change: (state, action) => { state.logged: "", = action.payload },
         // ?Change: (state, action) => { state.fw: "", = action.payload },
@@ -183,8 +183,8 @@ export const dataSlice = createSlice({
 });
 
 export const { 
-    stateChange,
-    setState
+    dataStateChange,
+    setDataState
 } = dataSlice.actions;
   
 export default dataSlice.reducer;

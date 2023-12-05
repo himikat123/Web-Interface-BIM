@@ -1,23 +1,74 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from "react-router-dom"
+import { useSelector, useDispatch } from 'react-redux';
 import Status from './pages/status';
 import Connect from './pages/connect';
 import Language from './pages/language';
 import Username from './pages/username';
-import GetConfig from './redux/getConfig';
+import { changeLanguage } from './i18n/main';
+import { iConfig } from './redux/configTypes';
+import { iData } from './redux/dataTypes';
+import { configStateChange, setConfigState } from './redux/slices/config';
+import { dataStateChange, setDataState } from './redux/slices/data';
 
 function App() {
-    GetConfig();
+    const dispatch = useDispatch();
+    const configState = useSelector((stateConfig: iConfig) => stateConfig.config.configState);
+    const dataState = useSelector((stateData: iData) => stateData.data.dataState);
+
+    const fetchConfig = () => {
+        fetch("./config.json")
+        .then(res => res.json())
+        .then((result) => {
+            dispatch(configStateChange('ok'));
+            dispatch(setConfigState(result));
+            changeLanguage(result.lang);
+        },
+            (error) => {
+                dispatch(configStateChange('error'));
+                console.error(error);
+            }
+        )
+    }
+
+    const fetchData = () => {
+        fetch("./data.json")
+        .then(res => res.json())
+        .then((result) => {
+            dispatch(dataStateChange('ok'));
+            dispatch(setDataState(result));
+        },
+            (error) => {
+                dispatch(dataStateChange('error'));
+                console.error(error);
+            }
+        )
+    }
+
+    useEffect(() => {
+        fetchConfig();
+    }, []);
+    
+    if(configState === 'ok') {
+        fetchData();
+        setInterval(() => {
+            fetchData();
+        }, 10000);
+    }
 
     return (
         <div className={"bg-page_light dark:bg-page_dark text-text_light dark:text-text_dark min-h-screen"}>
-            <Routes>
+            {(configState === 'default' || dataState === 'default') && <div>config loading</div>}
+            {configState === 'error' && <div>no config</div>}
+            {dataState === 'error' && <div>no data</div>}
+            
+            {configState === 'ok' && dataState === 'ok' && <Routes>
                 <Route path="/"         element={ <Status /> }>  </Route>
                 <Route path="/connect"  element={ <Connect /> }></Route>
                 <Route path="/language" element={ <Language /> }></Route>
                 <Route path="/username" element={ <Username /> }></Route>
                 <Route path="/*"        element={ <div>404 Page nui</div> }></Route>
-            </Routes>
+            </Routes>}
         </div>
     );
 }
