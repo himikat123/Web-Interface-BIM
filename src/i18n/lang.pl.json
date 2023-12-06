@@ -3,6 +3,7 @@
     "loading": "Ładowanie konfiguracji i danych",
     "configError": "Nie można załadować pliku konfiguracyjnego",
     "tryAgain": "Spróbuj ponownie",
+    "tryToReconnect": "próbuję ponownie się połączyć",
     "save": "Zapisz",
     "restart": "Restart",
     "confirmation": "Potwierdzenie",

@@ -3,6 +3,7 @@
     "loading": "Loading configuration and data",
     "configError": "Could not load configuration file",
     "tryAgain": "Try again",
+    "tryToReconnect": "I'm trying to reconnect",
     "save": "Save",
     "restart": "Restart",
     "confirmation": "Confirmation",

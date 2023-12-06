@@ -3,6 +3,7 @@
     "loading": "Konfiguration und Daten werden geladen",
     "configError": "Konfigurationsdatei konnte nicht geladen werden",
     "tryAgain": "Nochmal versuchen",
+    "tryToReconnect": "ich versuche, die Verbindung wiederherzustellen",
     "save": "Speichern",
     "restart": "Neustart",
     "confirmation": "Bestätigung",

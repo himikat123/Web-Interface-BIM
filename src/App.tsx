@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux';
 import Loading from './pages/loading';
 import NoConfig from './pages/noConfig';
+import NoData from './pages/noData';
 import Status from './pages/status';
 import Connect from './pages/connect';
 import Language from './pages/language';
@@ -62,9 +63,9 @@ function App() {
 
     return (
         <div className={"bg-page_light dark:bg-page_dark text-text_light dark:text-text_dark min-h-screen"}>
-            {(configState === 'default' || dataState === 'default') && <Loading />}
-            {configState === 'error' && <NoConfig />}
-            {dataState === 'error' && <div>no data</div>}
+            {configState === 'error' ? <NoConfig /> :
+                dataState === 'error' ? <NoData /> :
+            (configState === 'default' || dataState === 'default') && <Loading />}
             
             {configState === 'ok' && dataState === 'ok' && <Routes>
                 <Route path="/"         element={ <Status /> }>  </Route>
