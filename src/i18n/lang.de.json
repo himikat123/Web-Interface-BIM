@@ -1,6 +1,8 @@
 {
     "status": "Status",
     "loading": "Konfiguration und Daten werden geladen",
+    "configError": "Konfigurationsdatei konnte nicht geladen werden",
+    "tryAgain": "Nochmal versuchen",
     "save": "Speichern",
     "restart": "Neustart",
     "confirmation": "Bestätigung",

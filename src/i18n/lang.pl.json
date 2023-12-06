@@ -1,6 +1,8 @@
 {
     "status": "Status",
     "loading": "Ładowanie konfiguracji i danych",
+    "configError": "Nie można załadować pliku konfiguracyjnego",
+    "tryAgain": "Spróbuj ponownie",
     "save": "Zapisz",
     "restart": "Restart",
     "confirmation": "Potwierdzenie",
