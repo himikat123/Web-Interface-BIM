@@ -26,6 +26,7 @@ function App() {
             dispatch(configStateChange('ok'));
             dispatch(setConfigState(result));
             changeLanguage(result.lang);
+            localStorage.setItem('lang', result.lang);
         },
             (error) => {
                 dispatch(configStateChange('error'));
