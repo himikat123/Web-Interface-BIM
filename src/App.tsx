@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Route, Routes } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux';
+import Loading from './pages/loading';
 import Status from './pages/status';
 import Connect from './pages/connect';
 import Language from './pages/language';
@@ -60,7 +61,7 @@ function App() {
 
     return (
         <div className={"bg-page_light dark:bg-page_dark text-text_light dark:text-text_dark min-h-screen"}>
-            {(configState === 'default' || dataState === 'default') && <div>config loading</div>}
+            {(configState === 'default' || dataState === 'default') && <Loading />}
             {configState === 'error' && <div>no config</div>}
             {dataState === 'error' && <div>no data</div>}
             

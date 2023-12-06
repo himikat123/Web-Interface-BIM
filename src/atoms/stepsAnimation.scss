@@ -1,0 +1,30 @@
+.steps-animation {
+    .loading-item {
+        width: 10px;
+        height: 20px;
+        margin: 0 2px;
+        animation-duration: 1s;
+        animation-name: steps;
+        animation-iteration-count: infinite;
+    }
+
+    @for $i from 1 to 5 {
+        .loading-item:nth-child(#{$i}) {
+            animation-delay: #{$i * 0.2} + 's';
+        }
+    }
+    
+    @keyframes steps {
+        0% {
+          transform: scaleY(1);
+        }
+      
+        50% {
+          transform: scaleY(1.4);
+        }
+
+        100% {
+            transform: scaleY(1);
+          }
+      }
+}

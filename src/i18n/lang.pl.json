@@ -1,5 +1,6 @@
 {
     "status": "Status",
+    "loading": "Ładowanie konfiguracji i danych",
     "save": "Zapisz",
     "restart": "Restart",
     "confirmation": "Potwierdzenie",
