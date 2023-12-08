@@ -43,6 +43,8 @@
     "fileSystem": "Файловая система",
     "account": "Аккаунт",
     "logout": "Выход",
+    "error404": "Ошибка 404",
+    "pageNotFound": "Запрашиваемая страница не найдена",
     "networkName": "Имя сети",
     "password": "Пароль",
     "oldPassword": "Старый пароль",

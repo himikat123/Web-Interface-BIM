@@ -43,6 +43,8 @@
     "fileSystem": "Filesystem",
     "account": "Account",
     "logout": "Logout",
+    "error404": "Error 404",
+    "pageNotFound": "The requested page was not found",
     "networkName": "Network name",
     "password": "Password",
     "oldPassword": "Old password",

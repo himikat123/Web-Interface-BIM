@@ -43,6 +43,8 @@
     "fileSystem": "Dateisystem",
     "account": "Konto",
     "logout": "Abmelden",
+    "error404": "Fehler 404",
+    "pageNotFound": "Die angeforderte Seite wurde nicht gefunden",
     "networkName": "Netzwerkname",
     "password": "Passwort",
     "oldPassword": "Altes Passwort",

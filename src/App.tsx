@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Loading from './pages/loading';
 import NoConfig from './pages/noConfig';
 import NoData from './pages/noData';
+import PageNotFound from './pages/pageNotFound';
 import Status from './pages/status';
 import Connect from './pages/connect';
 import Language from './pages/language';
@@ -69,11 +70,11 @@ function App() {
             (configState === 'default' || dataState === 'default') && <Loading />}
             
             {configState === 'ok' && dataState === 'ok' && <Routes>
-                <Route path="/"         element={ <Status /> }>  </Route>
-                <Route path="/connect"  element={ <Connect /> }></Route>
-                <Route path="/language" element={ <Language /> }></Route>
-                <Route path="/username" element={ <Username /> }></Route>
-                <Route path="/*"        element={ <div>404 Page nui</div> }></Route>
+                <Route path="/"         element={ <Status /> }>      </Route>
+                <Route path="/connect"  element={ <Connect /> }>     </Route>
+                <Route path="/language" element={ <Language /> }>    </Route>
+                <Route path="/username" element={ <Username /> }>    </Route>
+                <Route path="/*"        element={ <PageNotFound /> }></Route>
             </Routes>}
         </div>
     );
