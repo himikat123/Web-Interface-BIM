@@ -267,6 +267,7 @@
     "firmwareUpdateAppeared": "A firmware update has appeared, version XXX is available",
     "tips": {
         "tip0": "This field must not be empty",
-        "tip1": "Only english letters, numbers and symbols *)_.@$%("
+        "tip1": "Only english letters, numbers and symbols *)_.@$%(",
+        "tip2": "Only English letters, numbers, spaces and symbols *)_.@$%("
     }
 }

@@ -7,6 +7,7 @@ import NoData from './pages/noData';
 import PageNotFound from './pages/pageNotFound';
 import Status from './pages/status';
 import Connect from './pages/connect';
+import AccessPoint from './pages/accessPoint';
 import Language from './pages/language';
 import Username from './pages/username';
 import { changeLanguage } from './i18n/main';
@@ -70,11 +71,12 @@ function App() {
             (configState === 'default' || dataState === 'default') && <Loading />}
             
             {configState === 'ok' && dataState === 'ok' && <Routes>
-                <Route path="/"         element={ <Status /> }>      </Route>
-                <Route path="/connect"  element={ <Connect /> }>     </Route>
-                <Route path="/language" element={ <Language /> }>    </Route>
-                <Route path="/username" element={ <Username /> }>    </Route>
-                <Route path="/*"        element={ <PageNotFound /> }></Route>
+                <Route path="/"            element={ <Status /> }>      </Route>
+                <Route path="/connect"     element={ <Connect /> }>     </Route>
+                <Route path="/accesspoint" element={ <AccessPoint /> }> </Route>
+                <Route path="/language"    element={ <Language /> }>    </Route>
+                <Route path="/username"    element={ <Username /> }>    </Route>
+                <Route path="/*"           element={ <PageNotFound /> }></Route>
             </Routes>}
         </div>
     );

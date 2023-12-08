@@ -284,17 +284,17 @@ export const configSlice = createSlice({
         // ?Change: (state, action) => { state.comfort.hum.min = action.payload },
         // ?Change: (state, action) => { state.comfort.hum.max = action.payload },
         // 
-        netSsidChange: (state, action) => { state.network.ssid[action.payload.num] = action.payload.val },
-        netPassChange: (state, action) => { state.network.pass[action.payload.num] = action.payload.val },
-        netIpChange: (state, action) => { state.network.ip = action.payload },
-        netMaskChange: (state, action) => { state.network.mask = action.payload },
-        netGwChange: (state, action) => { state.network.gw = action.payload },
-        netDns1Change: (state, action) => { state.network.dns1 = action.payload },
-        netDns2Change: (state, action) => { state.network.dns2 = action.payload },
-        netTypeSwitch: (state, action) => { state.network.type = action.payload },
-        // 
-        // ?Change: (state, action) => { state.accessPoint.ssid: "", = action.payload },
-        // ?Change: (state, action) => { state.accessPoint.pass: "", = action.payload },
+        netSsidChange:     (state, action) => { state.network.ssid[action.payload.num] = action.payload.val },
+        netPassChange:     (state, action) => { state.network.pass[action.payload.num] = action.payload.val },
+        netIpChange:       (state, action) => { state.network.ip = action.payload },
+        netMaskChange:     (state, action) => { state.network.mask = action.payload },
+        netGwChange:       (state, action) => { state.network.gw = action.payload },
+        netDns1Change:     (state, action) => { state.network.dns1 = action.payload },
+        netDns2Change:     (state, action) => { state.network.dns2 = action.payload },
+        netTypeSwitch:     (state, action) => { state.network.type = action.payload },
+
+        acPointSsidChange: (state, action) => { state.accessPoint.ssid = action.payload },
+        acPointPassChange: (state, action) => { state.accessPoint.pass = action.payload },
         // ?Change: (state, action) => { state.accessPoint.chnl: 1, = action.payload },
         // ?Change: (state, action) => { state.accessPoint.ip: "192.168.1.4", = action.payload },
         // ?Change: (state, action) => { state.accessPoint.mask: "255.255.255.0" = action.payload },
@@ -465,7 +465,9 @@ export const {
     netMaskChange,
     netGwChange,
     netDns1Change,
-    netDns2Change
+    netDns2Change,
+    acPointSsidChange,
+    acPointPassChange
 } = configSlice.actions;
   
 export default configSlice.reducer;

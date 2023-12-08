@@ -267,6 +267,7 @@
     "firmwareUpdateAppeared": "Firmware-Update erkannt, Version XXX verfügbar",
     "tips": {
         "tip0": "Dieses Feld darf nicht leer sein",
-        "tip1": "Nur englische Buchstaben, Zahlen und Symbole *)_.@$%("
+        "tip1": "Nur englische Buchstaben, Zahlen und Symbole *)_.@$%(",
+        "tip2": "Nur englische Buchstaben, Zahlen, Leerzeichen und Symbole *)_.@$%("
     }
 }
