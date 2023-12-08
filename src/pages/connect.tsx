@@ -61,21 +61,11 @@ const Connect = () => {
         />
     }
 
-    const changeIp = (value: string) => {
-        dispatch(netIpChange(value));
-    }
-    const changeMask = (value: string) => {
-        dispatch(netMaskChange(value));
-    }
-    const changeGw = (value: string) => {
-        dispatch(netGwChange(value));
-    }
-    const changeDns1 = (value: string) => {
-        dispatch(netDns1Change(value));
-    }
-    const changeDns2 = (value: string) => {
-        dispatch(netDns2Change(value));
-    }
+    const changeIp = (value: string) => dispatch(netIpChange(value));
+    const changeMask = (value: string) => dispatch(netMaskChange(value));
+    const changeGw = (value: string) => dispatch(netGwChange(value));
+    const changeDns1 = (value: string) => dispatch(netDns1Change(value));
+    const changeDns2 = (value: string) => dispatch(netDns2Change(value));
 
     const content1 = <>
         {[...Array(3)].map((x, i: number) => {
@@ -151,7 +141,7 @@ const Connect = () => {
         <Card content={<>
             {type
                 ? ipField(i18n.t('preferredDns'), staticDns1, 6, changeDns1)
-                : <TextInput label={i18n.t('preferredDns')} value={dynamicDns2} readonly />
+                : <TextInput label={i18n.t('preferredDns')} value={dynamicDns1} readonly />
             }
             <div className="my-8" />
             {type
