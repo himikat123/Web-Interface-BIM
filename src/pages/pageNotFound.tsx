@@ -1,7 +1,6 @@
 import React from 'react';
 import { changeLanguage } from '../i18n/main';
 import i18n from '../i18n/main';
-import Button from '../atoms/button';
 import { ReactComponent as SmileSadSVG } from '../atoms/icons/smileSad.svg';
 
 const PageNotFound = () => {
