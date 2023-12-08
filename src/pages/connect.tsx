@@ -9,6 +9,7 @@ import PasswordInput from "../atoms/passwordInput";
 import SelectSwitch from "../atoms/selectSwitch";
 import ModalNetList from "./modalNetList";
 import { iConfig } from "../redux/configTypes";
+import { iData } from "../redux/dataTypes";
 import { connectValidChange } from "../redux/slices/valid";
 import { 
     netSsidChange, 
@@ -34,11 +35,16 @@ const Connect = () => {
     const ssid = useSelector((state: iConfig) => state.config.network.ssid);
     const pass = useSelector((state: iConfig) => state.config.network.pass);
     const type = useSelector((state: iConfig) => state.config.network.type);
-    const ip = useSelector((state: iConfig) => state.config.network.ip);
-    const mask = useSelector((state: iConfig) => state.config.network.mask);
-    const gw = useSelector((state: iConfig) => state.config.network.gw);
-    const dns1 = useSelector((state: iConfig) => state.config.network.dns1);
-    const dns2 = useSelector((state: iConfig) => state.config.network.dns2);
+    const staticIp = useSelector((state: iConfig) => state.config.network.ip);
+    const staticMask = useSelector((state: iConfig) => state.config.network.mask);
+    const staticGw = useSelector((state: iConfig) => state.config.network.gw);
+    const staticDns1 = useSelector((state: iConfig) => state.config.network.dns1);
+    const staticDns2 = useSelector((state: iConfig) => state.config.network.dns2);
+    const dynamicIp = useSelector((state: iData) => state.data.network.ip);
+    const dynamicMask = useSelector((state: iData) => state.data.network.mask);
+    const dynamicGw = useSelector((state: iData) => state.data.network.gw);
+    const dynamicDns1 = useSelector((state: iData) => state.data.network.dns1);
+    const dynamicDns2 = useSelector((state: iData) => state.data.network.dns2);
 
     const ipField = (label: string, value: string, validNum: number, change: (e: string) => void) => {
         return <TextInput label={label}
@@ -127,30 +133,30 @@ const Connect = () => {
 
         <Card content={<>
             {type 
-                ? ipField(i18n.t('ipAddress'), ip, 3, changeIp)
-                : <TextInput label={i18n.t('ipAddress')} value={'192.192.192.192'} readonly />
+                ? ipField(i18n.t('ipAddress'), staticIp, 3, changeIp)
+                : <TextInput label={i18n.t('ipAddress')} value={dynamicIp} readonly />
             }
             <div className="my-8" />
             {type
-                ? ipField(i18n.t('subnetMask'), mask, 4, changeMask)
-                : <TextInput label={i18n.t('subnetMask')} value={'128.255.127.192'} readonly />
+                ? ipField(i18n.t('subnetMask'), staticMask, 4, changeMask)
+                : <TextInput label={i18n.t('subnetMask')} value={dynamicMask} readonly />
             }
             <div className="my-8" />
             {type
-                ? ipField(i18n.t('defaultGateway'), gw, 5, changeGw)
-                : <TextInput label={i18n.t('defaultGateway')} value={'100.100.10.1'} readonly />
+                ? ipField(i18n.t('defaultGateway'), staticGw, 5, changeGw)
+                : <TextInput label={i18n.t('defaultGateway')} value={dynamicGw} readonly />
             }
         </>} />
 
         <Card content={<>
             {type
-                ? ipField(i18n.t('preferredDns'), dns1, 6, changeDns1)
-                : <TextInput label={i18n.t('preferredDns')} value={'9.9.9.9'} readonly />
+                ? ipField(i18n.t('preferredDns'), staticDns1, 6, changeDns1)
+                : <TextInput label={i18n.t('preferredDns')} value={dynamicDns2} readonly />
             }
             <div className="my-8" />
             {type
-                ? ipField(i18n.t('alternativeDns'), dns2, 7, changeDns2)
-                : <TextInput label={i18n.t('alternativeDns')} value={'2.2.2.2'} readonly />
+                ? ipField(i18n.t('alternativeDns'), staticDns2, 7, changeDns2)
+                : <TextInput label={i18n.t('alternativeDns')} value={dynamicDns2} readonly />
             }
         </>} />
     </>;
