@@ -52,3 +52,11 @@ select:-webkit-autofill {
         border: 3px solid var(--scrollbar-birder_dark);
     }
 }
+
+.icon-svg {
+    fill: var(--text_light);
+}
+
+:is(.dark .dark\:icon-svg_dark) {
+    fill: var(--text_dark);
+}
