@@ -7,6 +7,7 @@ import TextInput from "../atoms/textInput";
 import NetworkInput from "../atoms/networkInput";
 import PasswordInput from "../atoms/passwordInput";
 import SelectSwitch from "../atoms/selectSwitch";
+import ModalNetList from "./modalNetList";
 import { iConfig } from "../redux/configTypes";
 import { connectValidChange } from "../redux/slices/valid";
 import { 
@@ -22,6 +23,7 @@ import {
 
 const Connect = () => {
     const [isValid, setIsValid] = useState<boolean[]>([]);
+    const [netListOpen, setNetListOpen] = useState<boolean[]>([false, false, false]);
     
     useEffect(() => {
         dispatch(connectValidChange(!isValid.includes(false)));
@@ -82,6 +84,11 @@ const Connect = () => {
                         nv[i] = valid;
                         setIsValid(nv);
                     }}
+                    openList={() => {
+                        let nl = netListOpen;
+                        nl[i] = true;
+                        setNetListOpen(() => [...nl]);
+                    }}
                 />
 
                 <div className="my-8" />
@@ -91,6 +98,17 @@ const Connect = () => {
                     maxLength={32}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(netPassChange({val: e.target.value, num: i}))}
                 />
+
+                {netListOpen[i] && <ModalNetList 
+                    ssidSelect={(ssid: string) => {
+                        dispatch(netSsidChange({val: ssid, num: i}))
+                    }} 
+                    modalClose={() => {
+                        let nl = netListOpen;
+                        nl[i] = false;
+                        setNetListOpen(() => [...nl]);
+                    }} 
+                />}
             </>} />
         })}
     </>;
@@ -110,29 +128,29 @@ const Connect = () => {
         <Card content={<>
             {type 
                 ? ipField(i18n.t('ipAddress'), ip, 3, changeIp)
-                : <TextInput label={i18n.t('ipAddress')} value={'192.192.192.192'} maxLength={32} readonly onChange={() => {}} />
+                : <TextInput label={i18n.t('ipAddress')} value={'192.192.192.192'} readonly />
             }
             <div className="my-8" />
             {type
                 ? ipField(i18n.t('subnetMask'), mask, 4, changeMask)
-                : <TextInput label={i18n.t('subnetMask')} value={'128.255.127.192'} maxLength={32} readonly onChange={() => {}} />
+                : <TextInput label={i18n.t('subnetMask')} value={'128.255.127.192'} readonly />
             }
             <div className="my-8" />
             {type
                 ? ipField(i18n.t('defaultGateway'), gw, 5, changeGw)
-                : <TextInput label={i18n.t('defaultGateway')} value={'100.100.10.1'} maxLength={32} readonly onChange={() => {}} />
+                : <TextInput label={i18n.t('defaultGateway')} value={'100.100.10.1'} readonly />
             }
         </>} />
 
         <Card content={<>
             {type
                 ? ipField(i18n.t('preferredDns'), dns1, 6, changeDns1)
-                : <TextInput label={i18n.t('preferredDns')} value={'9.9.9.9'} maxLength={32} readonly onChange={() => {}} />
+                : <TextInput label={i18n.t('preferredDns')} value={'9.9.9.9'} readonly />
             }
             <div className="my-8" />
             {type
                 ? ipField(i18n.t('alternativeDns'), dns2, 7, changeDns2)
-                : <TextInput label={i18n.t('alternativeDns')} value={'2.2.2.2'} maxLength={32} readonly onChange={() => {}} />
+                : <TextInput label={i18n.t('alternativeDns')} value={'2.2.2.2'} readonly />
             }
         </>} />
     </>;

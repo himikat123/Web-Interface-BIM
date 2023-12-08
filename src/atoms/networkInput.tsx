@@ -14,7 +14,7 @@ const NetworkInput = (props: iNetworkInput) => {
         onChange={props.onChange}
         isValid={props.isValid}
     >
-        <div className="w-8 absolute top-3 right-3 cursor-pointer input-icon">
+        <div className="w-8 absolute top-3 right-3 cursor-pointer input-icon" onClick={props.openList}>
             <ListSVG />
         </div>
     </TextInput>

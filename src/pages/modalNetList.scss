@@ -1,0 +1,7 @@
+.net-svg {
+    fill: var(--text_light);
+}
+
+:is(.dark .dark\:net-svg_dark) {
+    fill: var(--text_dark);
+}
