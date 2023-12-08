@@ -67,9 +67,9 @@ export interface iTextInput {
     tip?: string,
     label: string,
     readonly?: boolean,
-    maxLength: number,
+    maxLength?: number,
     className?: string,
-    onChange(e: React.ChangeEvent<HTMLInputElement>): void,
+    onChange?(e: React.ChangeEvent<HTMLInputElement>): void,
     isValid?(v: boolean): void,
     children?: React.ReactNode | undefined
 }
@@ -94,6 +94,7 @@ export interface iNetworkInput {
     tip?: string,
     onChange(e: React.ChangeEvent<HTMLInputElement>): void,
     isValid?(v: boolean): void
+    openList(): void
 }
 
 export interface iToggle {
