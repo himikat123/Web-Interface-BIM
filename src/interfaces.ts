@@ -20,7 +20,7 @@ export interface iMenuItems {
 export interface iMenuUserItem {
     link: string,
     current: string,
-    title: string,
+    title: string | React.ReactNode,
     valid: boolean
 }
 

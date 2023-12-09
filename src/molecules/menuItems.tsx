@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from 'react-redux';
 import { iMenuItems } from "../interfaces";
 import { iValid } from "../redux/validTypes";
+import { iConfig } from "../redux/configTypes";
 import MenuItem from "../atoms/menuItem";
 import MenuSubItem from "../atoms/menuSubItem";
 import i18n from '../i18n/main';
@@ -19,8 +20,14 @@ import { ReactComponent as SendSVG } from '../atoms/icons/send.svg';
 import { ReactComponent as SoundSVG } from '../atoms/icons/sound.svg';
 import { ReactComponent as SourceSVG } from '../atoms/icons/source.svg';
 import { ReactComponent as SystemSVG } from '../atoms/icons/system.svg';
+import { ReactComponent as EnSVG } from '../atoms/icons/en.svg';
+import { ReactComponent as DeSVG } from '../atoms/icons/de.svg';
+import { ReactComponent as RuSVG } from '../atoms/icons/ru.svg';
+import { ReactComponent as PlSVG } from '../atoms/icons/pl.svg';
+import { ReactComponent as UaSVG } from '../atoms/icons/ua.svg';
 
 const MenuItems = (props: iMenuItems) => {
+    const config = useSelector((state: iConfig) => state.config);
     const validConnect = useSelector((state: iValid) => state.valid.connect);
     const validAccesspoint = useSelector((state: iValid) => state.valid.accesspoint);
 
@@ -182,7 +189,17 @@ const MenuItems = (props: iMenuItems) => {
         >
             <MenuSubItem link="/language" 
                 current={props.current} 
-                title={i18n.t('language')} 
+                title={
+                    <div className="flex items-center">
+                        {i18n.t('language')}
+                        <div className="w-[31px] h-[24px] border ms-4 lang">
+                            {config.lang === 'en' && <EnSVG />}
+                            {config.lang === 'de' && <DeSVG />}
+                            {config.lang === 'ru' && <RuSVG />}
+                            {config.lang === 'pl' && <PlSVG />}
+                            {config.lang === 'ua' && <UaSVG />}
+                        </div>
+                    </div>} 
                 valid={true} 
             />
             <hr className="m-2" />
