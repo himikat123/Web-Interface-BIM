@@ -17,12 +17,11 @@ const AccessPoint = () => {
     });
 
     const dispatch = useDispatch();
-    const ssid = useSelector((state: iConfig) => state.config.accessPoint.ssid);
-    const pass = useSelector((state: iConfig) => state.config.accessPoint.pass);
+    const config = useSelector((state: iConfig) => state.config);
     
     const content = <Card content={<>
         <TextInput label={i18n.t('accessPointName')} 
-            value={ssid}
+            value={config.accessPoint.ssid}
             required
             maxLength={32}
             pattern={[/[^a-zA-Z0-9*() _.@$%]/g, false]}
@@ -38,7 +37,7 @@ const AccessPoint = () => {
         <div className="my-8" />
 
         <PasswordInput label={i18n.t('password')}
-            value={pass}
+            value={config.accessPoint.pass}
             pattern={[/[^a-zA-Z0-9*()_.@$%]/g, false]}
             maxLength={32}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(acPointPassChange(e.target.value))}
