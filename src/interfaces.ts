@@ -93,8 +93,20 @@ export interface iNetworkInput {
     pattern?: [RegExp, boolean/* true: pattern must match / false: pattern must NOT match */],
     tip?: string,
     onChange(e: React.ChangeEvent<HTMLInputElement>): void,
-    isValid?(v: boolean): void
+    isValid?(v: boolean): void,
     openList(): void
+}
+
+export interface iRangeInput {
+    label: string,
+    value: number,
+    units: string,
+    min: number,
+    max: number,
+    step: number,
+    limitMin: number,
+    limitMax: number,
+    onChange(val: number): any
 }
 
 export interface iToggle {
