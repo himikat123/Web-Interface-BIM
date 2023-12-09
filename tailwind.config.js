@@ -8,6 +8,8 @@ module.exports = {
           pattern: /bg-(red|green|blue|yellow)-(100|200|300|400|500|600|700|800|900)/,
           variants: ['hover', 'focus'],
         },
+        'fill-gray-500',
+        'animate-spin'
     ],
     theme: {
         extend: {
