@@ -15,41 +15,45 @@ const FooterButtons = (props: iFooterButtons) => {
     const valid = useSelector((state: iValid) => state.valid);
     const areAllPagesValid = !Object.values(valid).includes(false);
     const config = useSelector((state: iConfig) => state.config);
+    let timeout: NodeJS.Timeout; 
 
     const Save_config = () => {
-        setSaveColor('yellow');
-        setSaveButton('saving');
-        
-        let origin = window.location.origin;
-        let href = [origin.split(':')[0], origin.split(':')[1]].join(':');
-        fetch(`${href}/esp/saveConfig`, { 
-            method: 'post', 
-            mode: 'cors',
-            body: 'config:' + JSON.stringify(config) 
-        })
-        .then(res => res.text())
-        .then((result) => {
-            if(result === 'OK') {
-                setSaveColor('green');
-                setSaveButton('saved');
-            }
-            else {
-                setSaveColor('red');
-                setSaveButton('notSaved');
-                console.error(result);
-            }
-        },
-            (error) => {
-                setSaveColor('red');
-                setSaveButton('notSaved');
-                console.error(error);
-            }
-        )
+        if(saveButton === 'save') {
+            clearTimeout(timeout);
+            setSaveColor('yellow');
+            setSaveButton('saving');
+            
+            let origin = window.location.origin;
+            let href = [origin.split(':')[0], origin.split(':')[1]].join(':');
+            fetch(`${href}/esp/saveConfig`, { 
+                method: 'post', 
+                mode: 'cors',
+                body: 'config:' + JSON.stringify(config) 
+            })
+            .then(res => res.text())
+            .then((result) => {
+                if(result === 'OK') {
+                    setSaveColor('green');
+                    setSaveButton('saved');
+                }
+                else {
+                    setSaveColor('red');
+                    setSaveButton('notSaved');
+                    console.error(result);
+                }
+            },
+                (error) => {
+                    setSaveColor('red');
+                    setSaveButton('notSaved');
+                    console.error(error);
+                }
+            )
+        }
     }
 
     useEffect(() => {
         if(saveButton === 'notSaved') {
-            setTimeout(() => {
+            timeout = setTimeout(() => {
                 setSaveColor('blue');
                 setSaveButton('save');
             }, 5000);
@@ -66,7 +70,7 @@ const FooterButtons = (props: iFooterButtons) => {
                     )
                 }
                 disabled={!areAllPagesValid}
-                label={<div className="flex">
+                label={<div className="flex justify-center">
                     {i18n.t(saveButton)}
                     {saveButton === "saving" && <div className="ms-4 w-6 h-6"><SpinnerSVG /></div>}
                 </div>}
