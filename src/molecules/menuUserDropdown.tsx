@@ -46,11 +46,6 @@ const MenuUserDropdown = (props: iMenuUserDropdown) => {
                     title={i18n.t('password')} 
                     valid={true}
                 />
-                <MenuSubItem link="/language" 
-                    current={props.current} 
-                    title={i18n.t('language')} 
-                    valid={true} 
-                />
                 <hr className="m-2" />
                 <MenuSubItem link="/login" 
                     current={props.current} 

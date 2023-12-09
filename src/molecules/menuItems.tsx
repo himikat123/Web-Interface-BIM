@@ -180,6 +180,12 @@ const MenuItems = (props: iMenuItems) => {
             icon={<SystemSVG />} 
             valid={true}
         >
+            <MenuSubItem link="/language" 
+                current={props.current} 
+                title={i18n.t('language')} 
+                valid={true} 
+            />
+            <hr className="m-2" />
             <MenuSubItem link="/backup" 
                 current={props.current} 
                 title={i18n.t('backup')} 
