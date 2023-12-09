@@ -92,6 +92,7 @@ const Connect = () => {
                         let nl = netListOpen;
                         nl[i] = false;
                         setNetListOpen(() => [...nl]);
+                        document.querySelector('body')?.classList.remove('modal-open');
                     }} 
                 />}
             </>} />

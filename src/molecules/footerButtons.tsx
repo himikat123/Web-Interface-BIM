@@ -80,7 +80,10 @@ const FooterButtons = (props: iFooterButtons) => {
             />}
         </div>
 
-        {modalOpen && <ModalRestart modalClose={() => setModalOpen(false)} />}
+        {modalOpen && <ModalRestart modalClose={() => {
+            document.querySelector('body')?.classList.remove('modal-open');
+            setModalOpen(false);
+        }} />}
     </>);
 }
 
