@@ -3,6 +3,12 @@ module.exports = {
     content: [
         "./src/**/*.{js,jsx,ts,tsx}",
     ],
+    safelist: [
+        {
+          pattern: /bg-(red|green|blue|yellow)-(100|200|300|400|500|600|700|800|900)/,
+          variants: ['hover', 'focus'],
+        },
+    ],
     theme: {
         extend: {
             colors: {
