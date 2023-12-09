@@ -107,7 +107,7 @@ export interface iButton {
     className?: string | null,
     onClick(): void,
     disabled?: boolean | false,
-    label: string
+    label: string | React.ReactNode
 }
 
 export interface iModal {
