@@ -36,26 +36,26 @@ const Sensors = () => {
         switch(type) {
             case 't': {
                 units = "°C";
-                label = (validateTemp(lblData) ? Math.round((lblData + val) * 10) / 10 : "--") + units;
+                label = (validateTemp(lblData) ? (Math.round((lblData + val) * 10) / 10).toFixed(1) : "--") + units;
             }; break;
             case 'h': {
                 units = "%";
-                label = (validateHum(lblData) ? Math.round((lblData + val) * 10) / 10 : "--") + units;
+                label = (validateHum(lblData) ? (Math.round((lblData + val) * 10) / 10).toFixed(1) : "--") + units;
             }; break;
             case 'p': {
-                const hpa = Math.round((lblData + val) * 10) / 10;
-                const mm = Math.round(hpa * 7.5) / 10;
+                const hpa = (Math.round((lblData + val) * 10) / 10).toFixed(1);
+                const mm = (Math.round((lblData + val) * 7.5) / 10).toFixed(1);
                 units = i18n.t('units.hpa');
                 label = (validatePres(lblData) ? hpa : "--") + units + (validatePres(lblData) ? ` (~${mm}${i18n.t('units.mm')})` : '');
             }; break;
             case 'l': {
                 units = i18n.t('units.lux');
-                label = (validateLight(lblData) ? Math.round((lblData + val) * 10) / 10 : "--") + units;
+                label = (validateLight(lblData) ? (Math.round((lblData + val) * 10) / 10).toFixed(1) : "--") + units;
             }; break;
 
             case 'v': {
                 units = i18n.t('units.v');
-                label = (validateLowVoltage(lblData) ? Math.round((lblData + val) * 10) / 10 : "--") + units;
+                label = (validateLowVoltage(lblData) ? (Math.round((lblData + val) * 10) / 10).toFixed(1) : "--") + units;
             }; break;
         }
 
