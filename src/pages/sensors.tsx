@@ -34,26 +34,26 @@ const Sensors = () => {
         let units: string = "";
         let label: string = "";
         switch(type) {
-            case 't': {
+            case 't': { // Temperature
                 units = "°C";
                 label = (validateTemp(lblData) ? (Math.round((lblData + val) * 10) / 10).toFixed(1) : "--") + units;
             }; break;
-            case 'h': {
+            case 'h': { // Humidity
                 units = "%";
                 label = (validateHum(lblData) ? (Math.round((lblData + val) * 10) / 10).toFixed(1) : "--") + units;
             }; break;
-            case 'p': {
+            case 'p': { // Pressure
                 const hpa = (Math.round((lblData + val) * 10) / 10).toFixed(1);
                 const mm = (Math.round((lblData + val) * 7.5) / 10).toFixed(1);
                 units = i18n.t('units.hpa');
                 label = (validatePres(lblData) ? hpa : "--") + units + (validatePres(lblData) ? ` (~${mm}${i18n.t('units.mm')})` : '');
             }; break;
-            case 'l': {
+            case 'l': { // Ambient light
                 units = i18n.t('units.lux');
                 label = (validateLight(lblData) ? (Math.round((lblData + val) * 10) / 10).toFixed(1) : "--") + units;
             }; break;
 
-            case 'v': {
+            case 'v': { // Voltage
                 units = i18n.t('units.v');
                 label = (validateLowVoltage(lblData) ? (Math.round((lblData + val) * 10) / 10).toFixed(1) : "--") + units;
             }; break;
