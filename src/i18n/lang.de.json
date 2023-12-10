@@ -98,6 +98,7 @@
     "longitude": "Längengrad",
     "detectCoordinatesAutomatically": "Koordinaten automatisch erkennen",
     "units": {
+        "hpa": "hPa",
         "mm": "mm",
         "wind": "Wind",
         "mps": "m/s",

@@ -98,10 +98,11 @@
     "longitude": "Długość geograficzna",
     "detectCoordinatesAutomatically": "Automatyczne wykrywanie współrzędnych",
     "units": {
+        "hpa": "hPa",
         "mm": "mm",
         "wind": "Wiatr",
         "mps": "m/s",
-        "lux": "Lx",
+        "lux": "Lux",
         "v": "V",
         "a": "A",
         "ma": "mA",

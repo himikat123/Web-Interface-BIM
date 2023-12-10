@@ -97,11 +97,12 @@
     "latitude": "Latitude",
     "longitude": "Longitude",
     "detectCoordinatesAutomatically": "Detect coordinates automatically",
-    "units": {    
+    "units": {
+        "hpa": "hPa",
         "mm": "mm",
         "wind": "Wind",
         "mps": "m/s",
-        "lux": "lux",
+        "lux": "Lux",
         "v": "V",
         "a": "A",
         "ma": "mA",
