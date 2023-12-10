@@ -23,11 +23,11 @@ const RangeInput = (props: iRangeInput) => {
     const max = (props.max - props.limitMax) * 100 / (props.max - props.min);
 
     return (<>
-        {props.label && <div className="text-center">
-            <label className="form-label mt-3">{props.label}</label>
+        {props.label && <div className="text-center mt-3 select-none">
+            <label className="form-label">{props.label}</label>
         </div>}
 
-        <div className="flex items-center mt-2 cursor-pointer">
+        <div className="flex items-center mt-2 cursor-pointer input-icon">
             <div className="me-2 w-4" onClick={() => minus()}>
                 <ArrowLeft />
             </div>
@@ -48,8 +48,8 @@ const RangeInput = (props: iRangeInput) => {
                 <ArrowLeft />
             </div>
             
-            <div className="ms-2 w-16 select-none">
-                {(Math.round(props.value * 1000) / 1000) + props.units}
+            <div className="ms-2 w-20 select-none text-right">
+                {props.indication}
             </div>
         </div>
     </>);

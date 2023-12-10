@@ -98,9 +98,9 @@ export interface iNetworkInput {
 }
 
 export interface iRangeInput {
-    label: string,
+    label: string | React.ReactNode,
     value: number,
-    units: string,
+    indication: string,
     min: number,
     max: number,
     step: number,
