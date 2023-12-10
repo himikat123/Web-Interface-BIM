@@ -20,12 +20,14 @@
     "ssids": [
         ["SosediSnizu", 51],
         ["virus.trojan", 70],
-        ["OchenDlinnoeNazvanieWiFiSetiTut", 45],
+        ["Vodafno-777", 45],
         ["veryLongWirelessNetworkNameHere", 21],
         ["Tp-Link_6732", 94],
-        ["Vadafone-987", 27],
+        ["Vodafone-987", 27],
         ["Megafon5", 77],
-        ["Emgafno6", 82]
+        ["Emgafno6", 82],
+        ["My-WiFi", 99],
+        ["Hotel za uglom", 55]
     ],
     "bme280": {
         "temp": -45,
