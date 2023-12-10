@@ -8,6 +8,7 @@ import PageNotFound from './pages/pageNotFound';
 import Status from './pages/status';
 import Connect from './pages/connect';
 import AccessPoint from './pages/accessPoint';
+import Sensors from './pages/sensors';
 import Language from './pages/language';
 import Username from './pages/username';
 import { changeLanguage } from './i18n/main';
@@ -74,6 +75,7 @@ function App() {
                 <Route path="/"            element={ <Status /> }>      </Route>
                 <Route path="/connect"     element={ <Connect /> }>     </Route>
                 <Route path="/accesspoint" element={ <AccessPoint /> }> </Route>
+                <Route path="/sensors"     element={ <Sensors /> }>     </Route>
                 <Route path="/language"    element={ <Language /> }>    </Route>
                 <Route path="/username"    element={ <Username /> }>    </Route>
                 <Route path="/*"           element={ <PageNotFound /> }></Route>
