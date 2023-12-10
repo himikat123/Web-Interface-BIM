@@ -2,7 +2,7 @@
     max-height: 0;
     overflow: hidden;
     margin-top: 0;
-    transition: max-height 0.6s ease, margin-top 0.6s ease;
+    transition: max-height 0.3s ease, margin-top 0.3s ease;
 
     &.open {
         max-height: 100px;
