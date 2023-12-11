@@ -3,7 +3,7 @@ import RangeInput from "./rangeInput";
 import i18n from "../i18n/main";
 import * as vl from "./validateValues";
 
-const sensorCorrection = (type: string, val: number, lblType: string, lblData: number, onChange: any) => {
+const sensorCorrection = (type: string, val: number, lblType: string, lblData: number, onChange: any, lblName?: string) => {
     let units: string = "";
     let label: string = "";
     switch(type) {
@@ -36,7 +36,7 @@ const sensorCorrection = (type: string, val: number, lblType: string, lblData: n
             label={<>
                 {lblType}:
                 <span className="ms-1 text-blue-700 dark:text-blue-400">
-                    {label}
+                    {label}{lblName ? (', ' + lblName) : ''}
                 </span>
             </>} 
             min={-10}

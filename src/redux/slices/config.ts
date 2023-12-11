@@ -395,9 +395,9 @@ export const configSlice = createSlice({
         MAX44009LightCorrChange: (state, action) => { state.sensors.max44009.l = action.payload },
         BH1750LightCorrChange: (state, action) => { state.sensors.bh1750.l = action.payload },
         AnalogCorrChange: (state, action) => { state.sensors.analog.v = action.payload },
-        // 
-        // ?Change: (state, action) => { state.wsensor.temp.corr: [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0]] = action.payload },
-        // ?Change: (state, action) => { state.wsensor.hum.corr: [0, 0] = action.payload },
+
+        WSensTempChange: (state, action) => { state.wsensor.temp.corr[action.payload.sens][action.payload.num] = action.payload.val },
+        WSensHumChange: (state, action) => { state.wsensor.hum.corr[action.payload.num] = action.payload.val },
         // ?Change: (state, action) => { state.wsensor.pres.corr: [0, 0] = action.payload },
         // ?Change: (state, action) => { state.wsensor.light.corr: [0, 0] = action.payload },
         // ?Change: (state, action) => { state.wsensor.volt.corr: [0, 0] = action.payload },
@@ -461,7 +461,8 @@ export const {
     acPointSsidChange, acPointPassChange,
     BME280TempCorrChange, BME280HumCorrChange, BME280PresCorrChange, BMP180TempCorrChange, BMP180PresCorrChange,
     SHT21TempCorrChange, SHT21HumCorrChange, DHT22TempCorrChange, DHT22HumCorrChange, DS18B20TempCorrChange,
-    ESP32TempCorrChange, MAX44009LightCorrChange, BH1750LightCorrChange, AnalogCorrChange
+    ESP32TempCorrChange, MAX44009LightCorrChange, BH1750LightCorrChange, AnalogCorrChange,
+    WSensTempChange, WSensHumChange
 } = configSlice.actions;
   
 export default configSlice.reducer;
