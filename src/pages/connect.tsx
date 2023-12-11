@@ -11,16 +11,7 @@ import ModalNetList from "./modalNetList";
 import { iConfig } from "../redux/configTypes";
 import { iData } from "../redux/dataTypes";
 import { connectValidChange } from "../redux/slices/valid";
-import { 
-    netSsidChange, 
-    netPassChange, 
-    netTypeSwitch, 
-    netIpChange, 
-    netMaskChange, 
-    netGwChange, 
-    netDns1Change, 
-    netDns2Change 
-} from "../redux/slices/config";
+import * as cf from "../redux/slices/config";
 
 const Connect = () => {
     const [isValid, setIsValid] = useState<boolean[]>([]);
@@ -50,11 +41,11 @@ const Connect = () => {
         />
     }
 
-    const changeIp = (value: string) => dispatch(netIpChange(value));
-    const changeMask = (value: string) => dispatch(netMaskChange(value));
-    const changeGw = (value: string) => dispatch(netGwChange(value));
-    const changeDns1 = (value: string) => dispatch(netDns1Change(value));
-    const changeDns2 = (value: string) => dispatch(netDns2Change(value));
+    const changeIp = (value: string) => dispatch(cf.netIpChange(value));
+    const changeMask = (value: string) => dispatch(cf.netMaskChange(value));
+    const changeGw = (value: string) => dispatch(cf.netGwChange(value));
+    const changeDns1 = (value: string) => dispatch(cf.netDns1Change(value));
+    const changeDns2 = (value: string) => dispatch(cf.netDns2Change(value));
 
     const content1 = <>
         {[...Array(3)].map((x, i: number) => {
@@ -63,7 +54,7 @@ const Connect = () => {
                     value={config.network.ssid ? config.network.ssid[i] : ''}
                     maxLength={32}
                     required={i === 0 ? true : false}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(netSsidChange({val: e.target.value, num: i}))}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(cf.netSsidChange({val: e.target.value, num: i}))}
                     isValid={(valid: boolean) => {
                         let nv = isValid;
                         nv[i] = valid;
@@ -81,12 +72,12 @@ const Connect = () => {
                 <PasswordInput label={i18n.t('password')}
                     value={config.network.pass ? config.network.pass[i] : ''}
                     maxLength={32}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(netPassChange({val: e.target.value, num: i}))}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(cf.netPassChange({val: e.target.value, num: i}))}
                 />
 
                 {netListOpen[i] && <ModalNetList 
                     ssidSelect={(ssid: string) => {
-                        dispatch(netSsidChange({val: ssid, num: i}))
+                        dispatch(cf.netSsidChange({val: ssid, num: i}))
                     }} 
                     modalClose={() => {
                         let nl = netListOpen;
@@ -107,7 +98,7 @@ const Connect = () => {
                     i18n.t('staticIp')
                 ]}
                 value={config.network.type}
-                onChange={(o: number) => dispatch(netTypeSwitch(o))}
+                onChange={(o: number) => dispatch(cf.netTypeSwitch(o))}
             />
         } />
 
