@@ -404,16 +404,16 @@ export const configSlice = createSlice({
         WSensPresChange: (state, action) => { state.wsensor.pres.corr[action.payload.num] = action.payload.val },
         WSensLightChange: (state, action) => { state.wsensor.light.corr[action.payload.num] = action.payload.val },
         WSensCO2Change: (state, action) => { state.wsensor.co2.corr[action.payload.num] = action.payload.val },
-        // ?Change: (state, action) => { state.wsensor.volt.corr: [0, 0] = action.payload },
-        // ?Change: (state, action) => { state.wsensor.curr.corr: [0, 0] = action.payload },
-        // ?Change: (state, action) => { state.wsensor.pow.corr: [0, 0] = action.payload },
-        // ?Change: (state, action) => { state.wsensor.enrg.corr: [0, 0] = action.payload },
-        // ?Change: (state, action) => { state.wsensor.freq.corr: [0, 0] = action.payload },
-        // ?Change: (state, action) => { state.wsensor.bat.k: [125, 125], = action.payload },
-        // ?Change: (state, action) => { state.wsensor.bat.type: [0, 0] = action.payload },
-        // ?Change: (state, action) => { state.wsensor.expire: [10, 10], = action.payload },
-        // ?Change: (state, action) => { state.wsensor.channel: 1 = action.payload },
-        // 
+        WSensHighVoltChange: (state, action) => { state.wsensor.volt.corr[action.payload.num] = action.payload.val },
+        WSensCurrentChange: (state, action) => { state.wsensor.curr.corr[action.payload.num] = action.payload.val },
+        WSensPowerChange: (state, action) => { state.wsensor.pow.corr[action.payload.num] = action.payload.val },
+        WSensEnergyChange: (state, action) => { state.wsensor.enrg.corr[action.payload.num] = action.payload.val },
+        WSensFreqChange: (state, action) => { state.wsensor.freq.corr[action.payload.num] = action.payload.val },
+        WSensBatKChange: (state, action) => { state.wsensor.bat.k[action.payload.num] = action.payload.val },
+        WSensBatTypeChange: (state, action) => { state.wsensor.bat.type[action.payload.num] = action.payload.val },
+        WSensExpireChange: (state, action) => { state.wsensor.expire[action.payload.num] = action.payload.val },
+        WSensChannelChange: (state, action) => { state.wsensor.channel = action.payload },
+
         // ?Change: (state, action) => { state.thingspeakSend.turnOn: 0, = action.payload },
         // ?Change: (state, action) => { state.thingspeakSend.period: 5, = action.payload },
         // ?Change: (state, action) => { state.thingspeakSend.channelID: "", = action.payload },
@@ -466,7 +466,9 @@ export const {
     BME280TempCorrChange, BME280HumCorrChange, BME280PresCorrChange, BMP180TempCorrChange, BMP180PresCorrChange,
     SHT21TempCorrChange, SHT21HumCorrChange, DHT22TempCorrChange, DHT22HumCorrChange, DS18B20TempCorrChange,
     ESP32TempCorrChange, MAX44009LightCorrChange, BH1750LightCorrChange, AnalogCorrChange,
-    WSensTempChange, WSensHumChange, WSensPresChange, WSensLightChange, WSensCO2Change
+    WSensTempChange, WSensHumChange, WSensPresChange, WSensLightChange, WSensCO2Change,
+    WSensHighVoltChange, WSensCurrentChange, WSensPowerChange, WSensEnergyChange, WSensFreqChange,
+    WSensBatKChange, WSensBatTypeChange, WSensExpireChange, WSensChannelChange
 } = configSlice.actions;
   
 export default configSlice.reducer;

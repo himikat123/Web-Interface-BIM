@@ -34,7 +34,7 @@ export const validatePower = (powr: number): boolean => {
     return (powr >= 0 && powr <= 23000); 
 }
 
-export const validateEnergie = (enrg: number): boolean => {
+export const validateEnergy = (enrg: number): boolean => {
     return (enrg >= 0 && enrg <= 10000); 
 }
 
