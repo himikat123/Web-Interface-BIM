@@ -72,6 +72,8 @@
     "cancel": "Cancel",
     "close": "Close",
     "showHide": "show/hide",
+    "showAll": "Show all sensors",
+    "hideUnused": "Hide unused sensors",
     "loadingListOfAvailableNetworks": "Loading list of available networks...",
     "analogInput": "Analog input",
     "correction": "Correction",

@@ -3,6 +3,7 @@ import TwoColumns from "../templates/twoColumns";
 import { useSelector, useDispatch } from 'react-redux';
 import i18n from '../i18n/main';
 import Card from "../atoms/card";
+import Button from "../atoms/button";
 import sensorCorrection from "../atoms/sensorCorrection";
 import { iConfig } from "../redux/configTypes";
 import { iData } from "../redux/dataTypes";
@@ -12,8 +13,7 @@ const WSensors = () => {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
-
-    
+    const [hideUnnecessary, setHideUnnecessary] = useState<boolean>(true);
 
     const content = <>{[...Array(2)].map((c, wsensorNum: number) =>
         <Card key={'ws' + wsensorNum} header={`${i18n.t('wirelessSensor.singular')} ${wsensorNum}`}
@@ -29,6 +29,7 @@ const WSensors = () => {
                         data.wsensor.temp.data[tempSensorNum][wsensorNum], 
                         (val: number) => dispatch(cf.WSensTempChange({val: val, sens: wsensorNum, num: tempSensorNum})), 
                         -10, 10, 0.1,
+                        hideUnnecessary,
                         data.wsensor.temp.name[tempSensorNum][wsensorNum]
                     )}
                 </div>)}
@@ -39,6 +40,7 @@ const WSensors = () => {
                     data.wsensor.hum.data[wsensorNum], 
                     (val: number) => dispatch(cf.WSensHumChange({val: val, num: wsensorNum})),
                     -10, 10, 0.1, 
+                    hideUnnecessary,
                     data.wsensor.hum.name[wsensorNum]
                 )}
 
@@ -48,6 +50,7 @@ const WSensors = () => {
                     data.wsensor.pres.data[wsensorNum], 
                     (val: number) => dispatch(cf.WSensPresChange({val: val, num: wsensorNum})),
                     -10, 10, 0.1, 
+                    hideUnnecessary,
                     data.wsensor.pres.name[wsensorNum]
                 )}
 
@@ -57,6 +60,7 @@ const WSensors = () => {
                     data.wsensor.light.data[wsensorNum], 
                     (val: number) => dispatch(cf.WSensLightChange({val: val, num: wsensorNum})),
                     -10, 10, 0.1, 
+                    hideUnnecessary,
                     data.wsensor.light.name[wsensorNum]
                 )}
 
@@ -66,6 +70,7 @@ const WSensors = () => {
                     data.wsensor.co2.data[wsensorNum], 
                     (val: number) => dispatch(cf.WSensCO2Change({val: val, num: wsensorNum})),
                     -10, 10, 0.1, 
+                    hideUnnecessary,
                     data.wsensor.co2.name[wsensorNum]
                 )}
 
@@ -75,6 +80,7 @@ const WSensors = () => {
                     data.wsensor.voltage.data[wsensorNum], 
                     (val: number) => dispatch(cf.WSensHighVoltChange({val: val, num: wsensorNum})),
                     -10, 10, 0.1, 
+                    hideUnnecessary,
                     data.wsensor.voltage.name[wsensorNum]
                 )}
 
@@ -84,6 +90,7 @@ const WSensors = () => {
                     data.wsensor.current.data[wsensorNum], 
                     (val: number) => dispatch(cf.WSensCurrentChange({val: val, num: wsensorNum})),
                     -1, 1, 0.001,
+                    hideUnnecessary,
                     data.wsensor.current.name[wsensorNum]
                 )}
 
@@ -93,6 +100,7 @@ const WSensors = () => {
                     data.wsensor.power.data[wsensorNum], 
                     (val: number) => dispatch(cf.WSensPowerChange({val: val, num: wsensorNum})),
                     -10, 10, 0.1,
+                    hideUnnecessary,
                     data.wsensor.power.name[wsensorNum]
                 )}
 
@@ -102,17 +110,28 @@ const WSensors = () => {
                     data.wsensor.freq.data[wsensorNum], 
                     (val: number) => dispatch(cf.WSensFreqChange({val: val, num: wsensorNum})),
                     -10, 10, 0.1,
+                    hideUnnecessary,
                     data.wsensor.power.name[wsensorNum]
                 )}
+
+                <hr className="my-8" />
             </>}
         />)}
     </>;
 
-    return <TwoColumns navbar={true}
-        header={[i18n.t('wirelessSensor.plural')]} 
-        content={[content]} 
-        buttons={['save', 'reset']} 
-    />
+    return <>
+        <TwoColumns navbar={true}
+            header={[i18n.t('wirelessSensor.plural')]} 
+            content={[content]} 
+            buttons={['save', 'reset']} 
+            footer={<div className="text-center">
+                <Button className="bg-green-600 hover:bg-green-700 text-text_dark"
+                    label={i18n.t(hideUnnecessary ? 'showAll' : 'hideUnused')}
+                    onClick={() => {setHideUnnecessary(!hideUnnecessary)}}
+                />
+            </div>}
+        />
+    </>
 }
 
 export default WSensors;

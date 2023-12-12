@@ -1,0 +1,9 @@
+.range-input {
+    max-height: 120px;
+    overflow-y: hidden;
+    transition: max-height 0.3s ease;
+
+    &.hide {
+        max-height: 0;
+    }
+}

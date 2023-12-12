@@ -17,6 +17,8 @@ const ThreeColumns = (props: iColumnsTemplate) => {
             </div>
         })}</>
 
+        {props.footer}
+
         {props.buttons && <FooterButtons buttons={props.buttons} />}
     </div>);
 }

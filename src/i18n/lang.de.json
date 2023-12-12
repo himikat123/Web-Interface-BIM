@@ -72,6 +72,8 @@
     "cancel": "Abbrechen",
     "close": "Schließen",
     "showHide": "Einblenden/Ausblenden",
+    "showAll": "Alle Sensoren anzeigen",
+    "hideUnused": "Nicht verwendete Sensoren ausblenden",
     "loadingListOfAvailableNetworks": "Laden der Liste der verfügbaren Netzwerke...",
     "analogInput": "Analogeingang",
     "correction": "Korrektur",

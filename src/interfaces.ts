@@ -36,7 +36,8 @@ export interface iDropdownBox {
 
 export interface iCard {
     header?: string,
-    content: React.ReactNode
+    content: React.ReactNode,
+    className?: string
 }
 
 export interface iFooterButtons {
@@ -47,7 +48,8 @@ export interface iColumnsTemplate {
     navbar?: boolean | false,
     header: Array<string>,
     content: Array<React.ReactNode>,
-    buttons?: Array<string>
+    buttons?: Array<string>,
+    footer?: React.ReactNode
 }
 
 export interface iRadioSwitch {
@@ -106,7 +108,8 @@ export interface iRangeInput {
     step: number,
     limitMin: number,
     limitMax: number,
-    onChange(val: number): any
+    onChange(val: number): any,
+    className?: string
 }
 
 export interface iToggle {

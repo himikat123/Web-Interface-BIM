@@ -72,6 +72,8 @@
     "cancel": "Отмена",
     "close": "Закрыть",
     "showHide": "скрыть/показать",
+    "showAll": "Показать все датчики",
+    "hideUnused": "Скрыть незадействованные датчики",
     "loadingListOfAvailableNetworks": "Загрузка списка доступных сетей...",
     "analogInput": "Аналоговый вход",
     "correction": "Коррекция",

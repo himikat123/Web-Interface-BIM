@@ -72,6 +72,8 @@
     "cancel": "Скасувати",
     "close": "Закрити",
     "showHide": "Показати/приховати",
+    "showAll": "Показати всі датчики",
+    "hideUnused": "Приховати незадіяні датчики",
     "loadingListOfAvailableNetworks": "Завантаження списку доступних мереж...",
     "analogInput": "Аналоговий вхід",
     "correction": "Корекція",

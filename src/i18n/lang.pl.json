@@ -72,6 +72,8 @@
     "cancel": "Anuluj",
     "close": "Zamknij",
     "showHide": "Pokaż/Ukryj",
+    "showAll": "Pokaż wszystkie czujniki",
+    "hideUnused": "Ukryj nieużywane czujniki",
     "loadingListOfAvailableNetworks": "Ładowanie listy dostępnych sieci...",
     "analogInput": "Wejście analogowe",
     "correction": "Korekta",
