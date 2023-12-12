@@ -67,6 +67,10 @@ export interface iData {
                 data: number[],
                 name: string[]
             },
+            co2: {
+                data: number[],
+                name: string[]
+            },
             voltage: {
                 data: number[],
                 name: string[]

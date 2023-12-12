@@ -197,6 +197,9 @@ export interface iConfig {
             light: {
                 corr: number[]
             },
+            co2: {
+                corr: number[]
+            },
             volt: {
                 corr: number[]
             },

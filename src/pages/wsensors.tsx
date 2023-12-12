@@ -18,7 +18,7 @@ const WSensors = () => {
     const content = <>{[...Array(2)].map((c, wsensorNum: number) =>
         <Card key={'ws' + wsensorNum} header={`${i18n.t('wirelessSensor.singular')} ${wsensorNum}`}
             content={<>
-                <div className="text-center mb-6">
+                <div className="text-center mb-4">
                     {i18n.t('dataFrom')}: 
                     <span className="ms-1 text-blue-700 dark:text-blue-400">{data.wsensor.time[wsensorNum]}</span>
                 </div>
@@ -31,12 +31,36 @@ const WSensors = () => {
                         data.wsensor.temp.name[tempSensorNum][wsensorNum]
                     )}
                 </div>)}
+
                 {sensorCorrection("h", 
                     config.wsensor.hum.corr[wsensorNum], 
                     i18n.t('humidity'), 
                     data.wsensor.hum.data[wsensorNum], 
                     (val: number) => dispatch(cf.WSensHumChange({val: val, num: wsensorNum})), 
                     data.wsensor.hum.name[wsensorNum]
+                )}
+
+                {sensorCorrection("p", 
+                    config.wsensor.pres.corr[wsensorNum], 
+                    i18n.t('pressure'), 
+                    data.wsensor.pres.data[wsensorNum], 
+                    (val: number) => dispatch(cf.WSensPresChange({val: val, num: wsensorNum})), 
+                    data.wsensor.pres.name[wsensorNum]
+                )}
+
+                {sensorCorrection("l", 
+                    config.wsensor.light.corr[wsensorNum], 
+                    i18n.t('ambientLight'), 
+                    data.wsensor.light.data[wsensorNum], 
+                    (val: number) => dispatch(cf.WSensLightChange({val: val, num: wsensorNum})), 
+                    data.wsensor.light.name[wsensorNum]
+                )}
+                {sensorCorrection("co2", 
+                    config.wsensor.co2.corr[wsensorNum], 
+                    i18n.t('CO2Level'), 
+                    data.wsensor.co2.data[wsensorNum], 
+                    (val: number) => dispatch(cf.WSensCO2Change({val: val, num: wsensorNum})), 
+                    data.wsensor.co2.name[wsensorNum]
                 )}
             </>}
         />)}

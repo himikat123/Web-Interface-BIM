@@ -70,6 +70,10 @@ export const dataSlice = createSlice({
                 data: [],
                 name: []
             },
+            co2: {
+                data: [],
+                name: []
+            },
             voltage: {
                 data: [],
                 name: []

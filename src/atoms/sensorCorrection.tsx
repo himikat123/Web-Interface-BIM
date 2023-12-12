@@ -30,15 +30,20 @@ const sensorCorrection = (type: string, val: number, lblType: string, lblData: n
             units = i18n.t('units.v');
             label = (vl.validateAnalogVoltage(lblData) ? (Math.round((lblData + val) * 10) / 10).toFixed(1) : "--") + units;
         }; break;
+
+        case 'co2': { // CO2
+            units = 'ppm';
+            label = (vl.validateCO2(lblData) ? (Math.round((lblData + val) * 10) / 10).toFixed(1) : "--") + units;
+        }; break;
     }
 
     return <RangeInput value={val}
-            label={<>
+            label={<div className="mt-8">
                 {lblType}:
                 <span className="ms-1 text-blue-700 dark:text-blue-400">
                     {label}{lblName ? (', ' + lblName) : ''}
                 </span>
-            </>} 
+            </div>} 
             min={-10}
             max={10}
             limitMin={-10}

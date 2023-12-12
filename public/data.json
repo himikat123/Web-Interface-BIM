@@ -81,12 +81,16 @@
             "name": ["BME280", "SHT21"]
         },
         "pres": {
-            "data": [654, 40400],
+            "data": [654, 799],
             "name": ["BME280", "BMP180"]
         },
         "light": {
-            "data": [-1.2, 12345.6],
+            "data": [1.2, 12345.6],
             "name": ["MAX44009", "BH1750"]
+        },
+        "co2": {
+            "data": [444, 456.7],
+            "name": ["Senseair S8", "Senseair S8"]
         },
         "voltage": {
             "data": [231.5, 222.2],

@@ -79,6 +79,7 @@
     "humidity": "Humidity",
     "pressure": "Atmosphere pressure",
     "ambientLight": "Ambient light",
+    "CO2Level": "CO2 level",
     "voltage": "Voltage",
     "current": "Current",
     "power": "Power",

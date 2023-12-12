@@ -79,6 +79,7 @@
     "humidity": "Влажность",
     "pressure": "Атмосферное давление",
     "ambientLight": "Освещенность",
+    "CO2Level": "Уровень CO2",
     "voltage": "Напряжение",
     "current": "Ток",
     "power": "Мощность",
