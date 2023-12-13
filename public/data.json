@@ -30,30 +30,30 @@
         ["Hotel za uglom", 55]
     ],
     "bme280": {
-        "temp": -45,
-        "hum": 100,
-        "pres": 800
+        "temp": 4500,
+        "hum": -100,
+        "pres": -800
     },
     "bmp180": {
-        "temp": 70,
-        "pres": 900
+        "temp": 700,
+        "pres": -900
     },
     "sht21": {
-        "temp": 7,
-        "hum": 10
+        "temp": 700,
+        "hum": -10
     },
     "dht22": {
         "temp": 22,
         "hum": 50
     },
     "ds18b20": {
-        "temp": -17
+        "temp": -170
     },
     "max44009": {
-        "light": 1200.2
+        "light": -1200.2
     },
     "bh1750": {
-        "light": 127.6
+        "light": -127.6
     },
     "analog": {
         "volt": 0.8
@@ -77,7 +77,7 @@
             ]
         },
         "hum": {
-            "data": [95, 53],
+            "data": [-95, 53],
             "name": ["BME280", "SHT21"]
         },
         "pres": {
