@@ -43,9 +43,8 @@ const Sensors = () => {
                 -10, 10, 0.1
             )}
         </>}
-        className={hideUnnecessary && 
-            !vl.validateTemperature(data.bme280.temp) && !vl.validateHumidity(data.bme280.hum) && !vl.validatePressure(data.bme280.pres)
-            ? 'hide'
+        className={!vl.validateTemperature(data.bme280.temp) && !vl.validateHumidity(data.bme280.hum) && !vl.validatePressure(data.bme280.pres)
+            ? 'invalid' + (hideUnnecessary ? ' hide' : '')
             : ''
         }
     />);
@@ -67,9 +66,8 @@ const Sensors = () => {
                 -10, 10, 0.1
             )}
         </>}
-        className={hideUnnecessary && 
-            !vl.validateTemperature(data.bmp180.temp) && !vl.validatePressure(data.bmp180.pres)
-            ? 'hide'
+        className={!vl.validateTemperature(data.bmp180.temp) && !vl.validatePressure(data.bmp180.pres)
+            ? 'invalid' + (hideUnnecessary ? ' hide' : '')
             : ''
         }
     />);
@@ -91,9 +89,8 @@ const Sensors = () => {
                 -10, 10, 0.1
             )}
         </>}
-        className={hideUnnecessary && 
-            !vl.validateTemperature(data.sht21.temp) && !vl.validateHumidity(data.sht21.hum)
-            ? 'hide'
+        className={!vl.validateTemperature(data.sht21.temp) && !vl.validateHumidity(data.sht21.hum)
+            ? 'invalid' + (hideUnnecessary ? ' hide' : '')
             : ''
         }
     />);
@@ -115,9 +112,8 @@ const Sensors = () => {
                 -10, 10, 0.1
             )}
         </>}
-        className={hideUnnecessary && 
-            !vl.validateTemperature(data.dht22.temp) && !vl.validateHumidity(data.dht22.hum)
-            ? 'hide'
+        className={!vl.validateTemperature(data.dht22.temp) && !vl.validateHumidity(data.dht22.hum)
+            ? 'invalid' + (hideUnnecessary ? ' hide' : '')
             : ''
         }
     />);
@@ -132,9 +128,8 @@ const Sensors = () => {
                 -10, 10, 0.1
             )}
         </>}
-        className={hideUnnecessary && 
-            !vl.validateLight(data.max44009.light)
-            ? 'hide' 
+        className={!vl.validateLight(data.max44009.light)
+            ? 'invalid' + (hideUnnecessary ? ' hide' : '') 
             : ''
         }
     />);
@@ -149,9 +144,8 @@ const Sensors = () => {
                 -10, 10, 0.1
             )}
         </>}
-        className={hideUnnecessary && 
-            !vl.validateLight(data.bh1750.light)
-            ? 'hide'
+        className={!vl.validateLight(data.bh1750.light)
+            ? 'invalid' + (hideUnnecessary ? ' hide' : '')
             : ''
         }
     />);
@@ -166,9 +160,8 @@ const Sensors = () => {
                 -10, 10, 0.1
             )}
         </>}
-        className={hideUnnecessary && 
-            !vl.validateTemperature(data.ds18b20.temp)
-            ? 'hide'
+        className={!vl.validateTemperature(data.ds18b20.temp)
+            ? 'invalid' + (hideUnnecessary ? ' hide' : '')
             : ''
         }
     />);
@@ -183,9 +176,8 @@ const Sensors = () => {
                 -10, 10, 0.1
             )}
         </>}
-        className={hideUnnecessary && 
-            !vl.validateAnalogVoltage(data.analog.volt)
-            ? 'hide'
+        className={!vl.validateAnalogVoltage(data.analog.volt)
+            ? 'invalid' + (hideUnnecessary ? ' hide' : '')
             : ''
         }
     />);
@@ -200,15 +192,14 @@ const Sensors = () => {
                 -10, 10, 0.1
             )}
         </>}
-        className={hideUnnecessary && 
-            !vl.validateTemperature(data.esp32.temp)
-            ? 'hide'
+        className={!vl.validateTemperature(data.esp32.temp)
+            ? 'invalid' + (hideUnnecessary ? ' hide' : '')
             : ''
         }
     />);
 
     content = content.sort((a: any) => {
-        return a.props.className === 'hide' ? 1 : -1;
+        return a.props.className.includes('invalid') ? 1 : -1;
     });
 
     return <ThreeColumns navbar={true}
@@ -218,7 +209,7 @@ const Sensors = () => {
         footer={<div className="text-center">
             <Button className="bg-green-600 hover:bg-green-700 text-text_dark"
                 label={i18n.t(hideUnnecessary ? 'showAll' : 'hideUnused')}
-                onClick={() => {setHideUnnecessary(!hideUnnecessary)}}
+                onClick={() => setHideUnnecessary(!hideUnnecessary)}
             />
         </div>}
     />
