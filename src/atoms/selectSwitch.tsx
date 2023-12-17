@@ -37,21 +37,24 @@ const SelectSwitch = (props: iSelectSwitch) => {
             <div className={"w-4 absolute top-5 right-3 select-icon cursor-pointer " + (dropdownOpen ? "dropdownOpen" : "")}>
                 <ArrowDownSVG />
             </div>
-        </div>
 
-        <div className={"select-options overflow-hidden " + (dropdownOpen ? "dropdownOpen" : "")}>
-            <div className="rounded-md border border-menu_light dark:border-menu_dark cursor-pointer">
-                {props.options.map((option: string, i: number) => {
-                    return <div key={option} 
-                        className={"p-4 " + (props.value === i ? "bg-menu_active_light dark:bg-menu_active_dark text-text_dark" : "")}
-                        onClick={() => {
-                            props.onChange(i);
-                            setDropdownOpen(false);
-                        }}
-                    >
-                        {option}
-                    </div>
-                })}
+            <div className={"absolute w-full top-14 left-0 z-10 select-options overflow-hidden " + (dropdownOpen ? "dropdownOpen" : "")}>
+                <div className="rounded-md border border-menu_light dark:border-menu_dark cursor-pointer">
+                    {props.options.map((option: string, i: number) => {
+                        return <div key={option} 
+                            className={"p-4 first:rounded-t-md last:rounded-b-md " + (props.value === i 
+                                ? "bg-menu_active_light dark:bg-menu_active_dark text-text_dark" 
+                                : "bg-card_light dark:bg-card_dark"
+                            )}
+                            onClick={() => {
+                                props.onChange(i);
+                                setDropdownOpen(false);
+                            }}
+                        >
+                            {option}
+                        </div>
+                    })}
+                </div>
             </div>
         </div>
     </>
