@@ -83,6 +83,19 @@ export interface iTextInput {
     children?: React.ReactNode | undefined
 }
 
+export interface iNumberInput {
+    value: number,
+    tip?: string,
+    min: number,
+    max: number,
+    readonly?: boolean,
+    className?: string,
+    label: string,
+    onChange?(e: React.ChangeEvent<HTMLInputElement>): void,
+    isValid?(v: boolean): void,
+    children?: React.ReactNode | undefined
+}
+
 export interface iPasswordInput {
     label: string,
     value: string,
