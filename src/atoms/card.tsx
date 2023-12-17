@@ -1,5 +1,6 @@
 import React from "react";
 import { iCard } from "../interfaces";
+import "./card.scss";
 
 const Card = (props: iCard) => {
     return (

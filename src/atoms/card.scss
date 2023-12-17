@@ -1,0 +1,10 @@
+.card.invalid {
+    max-height: 600px;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s;
+
+    &.hide {
+        max-height: 30px;
+        padding: 0;
+    }
+}
