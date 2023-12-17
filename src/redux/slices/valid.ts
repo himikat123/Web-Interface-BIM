@@ -5,12 +5,14 @@ export const validSlice = createSlice({
     initialState: {
         connect: true,
         accesspoint: true,
+        wsensors: true,
         
         account: true
     },
     reducers: {
         connectValidChange: (state, action) => { state.connect = action.payload },
         accesspointValidChange: (state, action) => { state.accesspoint = action.payload },
+        wsensorsValidChange: (state, action) => { state.wsensors = action.payload },
         accountValidChange: (state, action) => { state.account = action.payload },
     }
 });
@@ -18,6 +20,7 @@ export const validSlice = createSlice({
 export const { 
     connectValidChange,
     accesspointValidChange,
+    wsensorsValidChange,
     accountValidChange
 } = validSlice.actions;
   

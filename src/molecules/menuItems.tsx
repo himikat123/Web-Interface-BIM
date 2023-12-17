@@ -30,6 +30,7 @@ const MenuItems = (props: iMenuItems) => {
     const config = useSelector((state: iConfig) => state.config);
     const validConnect = useSelector((state: iValid) => state.valid.connect);
     const validAccesspoint = useSelector((state: iValid) => state.valid.accesspoint);
+    const validWsensors = useSelector((state: iValid) => state.valid.wsensors);
 
     return <>
         <MenuItem link="/" 
@@ -58,13 +59,13 @@ const MenuItems = (props: iMenuItems) => {
                 valid={validAccesspoint} 
             />
         </MenuItem>
-        
+
         <MenuItem link="#" 
             current={props.current} 
             title={i18n.t('dataSource.plural')} 
             mobile={props.mobile} 
             icon={<SourceSVG />} 
-            valid={true}
+            valid={validWsensors}
         >
             <MenuSubItem link="/sensors" 
                 current={props.current} 
@@ -75,7 +76,7 @@ const MenuItems = (props: iMenuItems) => {
                 <MenuSubItem link="/wsensors" 
                     current={props.current} 
                     title={i18n.t('wirelessSensor.plural')} 
-                    valid={true} 
+                    valid={validWsensors}
                 />
             }
             <MenuSubItem link="/weather" 
