@@ -85,7 +85,6 @@ export interface iTextInput {
 
 export interface iNumberInput {
     value: number,
-    tip?: string,
     min: number,
     max: number,
     readonly?: boolean,

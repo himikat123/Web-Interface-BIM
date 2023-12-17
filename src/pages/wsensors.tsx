@@ -169,7 +169,6 @@ const WSensors = () => {
 
                 <div className="my-8">
                     <NumberInput value={config.wsensor.channel}
-                        tip={i18n.t('tips.tip3').replace('{min}', '1').replace('{max}', '100')}
                         min={1}
                         max={100}
                         label={i18n.t('channelNumber')}
@@ -184,7 +183,6 @@ const WSensors = () => {
 
                 <div className="my-8">
                     <NumberInput value={config.wsensor.expire[wsensorNum]}
-                        tip={i18n.t('tips.tip3').replace('{min}', '1').replace('{max}', '100')}
                         min={1}
                         max={100}
                         label={i18n.t('dataExpirationTime')}
