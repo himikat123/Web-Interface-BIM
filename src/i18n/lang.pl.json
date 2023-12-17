@@ -275,6 +275,7 @@
     "tips": {
         "tip0": "To pole nie może być puste",
         "tip1": "Tylko angielskie litery, cyfry i symbole *)_.@$%(",
-        "tip2": "Tylko angielskie litery, cyfry, spacje i symbole *)_.@$%("
+        "tip2": "Tylko angielskie litery, cyfry, spacje i symbole *)_.@$%(",
+        "tip3": "Wpisz liczbę od {min} do {max}"
     }
 }

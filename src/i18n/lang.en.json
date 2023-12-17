@@ -275,6 +275,7 @@
     "tips": {
         "tip0": "This field must not be empty",
         "tip1": "Only english letters, numbers and symbols *)_.@$%(",
-        "tip2": "Only English letters, numbers, spaces and symbols *)_.@$%("
+        "tip2": "Only English letters, numbers, spaces and symbols *)_.@$%(",
+        "tip3": "Enter a number from {min} to {max}"
     }
 }
