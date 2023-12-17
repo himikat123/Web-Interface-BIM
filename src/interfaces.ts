@@ -52,6 +52,13 @@ export interface iColumnsTemplate {
     footer?: React.ReactNode
 }
 
+export interface iSelectSwitch {
+    label: string,
+    options: Array<string>,
+    value: number,
+    onChange(i: number): void
+}
+
 export interface iRadioSwitch {
     id: string,
     name: string,
@@ -135,5 +142,10 @@ export interface iModal {
 }
 
 export interface iModalRestart {
+    modalClose(): void
+}
+
+export interface iModalNetList {
+    ssidSelect(ssid: string): void,
     modalClose(): void
 }

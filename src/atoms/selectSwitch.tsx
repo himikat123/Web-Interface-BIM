@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ReactComponent as ArrowDownSVG } from '../atoms/icons/arrowDown.svg';
+import { iSelectSwitch } from '../interfaces';
 import "./selectSwitch.scss";
 
-const SelectSwitch = (props: any) => {
+const SelectSwitch = (props: iSelectSwitch) => {
     function useOutsideAlerter(ref: React.RefObject<HTMLDivElement>) {
         useEffect(() => {
             function handleClickOutside(event: TouchEvent | MouseEvent) {

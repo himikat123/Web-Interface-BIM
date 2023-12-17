@@ -3,8 +3,9 @@ import { useSelector } from 'react-redux';
 import Modal from "../templates/modal";
 import i18n from "../i18n/main";
 import { iData } from "../redux/dataTypes";
+import { iModalNetList } from "../interfaces";
 
-const ModalNetList = (props: any) => {
+const ModalNetList = (props: iModalNetList) => {
     let ssids = Object.values(useSelector((state: iData) => state.data.ssids)).sort(function(a, b) {
         return a[1] - b[1];
     });
