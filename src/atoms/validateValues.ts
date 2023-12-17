@@ -22,6 +22,10 @@ export const validateBatteryVoltage = (volt: number): boolean => {
     return (volt >= 0.6 && volt <= 20); 
 }
 
+export const validateBatteryADC = (adc: number): boolean => {
+    return (adc >= 0 && adc < 1024); 
+}
+
 export const validateHighVoltage = (volt: number): boolean => {
     return (volt >= 80 && volt <= 260); 
 }
