@@ -3,10 +3,20 @@ import i18n from '../i18n/main';
 import cn, { Argument } from 'classnames';
 import { twMerge } from 'tailwind-merge';
 import { iNumberInput } from '../interfaces';
+import { ReactComponent as ArrowDownSVG } from '../atoms/icons/arrowDown.svg';
 import './numberInput.scss';
 
 const NumberInput = (props: iNumberInput) => {
     const [valid, setValid] = useState<boolean>(true);
+
+    const minus = () => {
+        if(props.value > props.min) props.onChange(Number(props.value) - 1);
+    }
+
+    const plus = () => {
+        if(props.value < props.max) props.onChange(Number(props.value) + 1);
+    }
+
 
     /* Validate changed value */
     useEffect(() => {
@@ -36,27 +46,39 @@ const NumberInput = (props: iNumberInput) => {
     }
 
     return <> 
-        <div className={cnMerge([inputClasses.root.base, (valid) ? inputClasses.root.normal : inputClasses.root.error, props.className])}>
+        <div className={cnMerge(["number-input relative", inputClasses.root.base, (valid) ? inputClasses.root.normal : inputClasses.root.error, props.className])}>
             <label className={cnMerge([inputClasses.label, props.value && 'top-0 text-xs'])}>
                 {props.label}
             </label>
             <input className={cnMerge([
-                inputClasses.input.base, 
-                (valid) ? inputClasses.input.normal : inputClasses.input.error
-            ])} 
+                    inputClasses.input.base, 
+                    (valid) ? inputClasses.input.normal : inputClasses.input.error
+                ])} 
                 type="number"
                 value={props.value ?? 0}
                 min={props.min}
                 max={props.max} 
-                onChange={props.onChange} 
+            
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => props.onChange(Number(e.target.value))} 
                 readOnly={props.readonly}
             />
             {props.children}
+            
+            <div className={"w-4 absolute top-2 rotate-180 right-3 number-icon cursor-pointer"}
+                onClick={() => plus()}
+            >
+                <ArrowDownSVG />
+            </div>
+            <div className={"w-4 absolute top-8 right-3 number-icon cursor-pointer"}
+                onClick={() => minus()}
+            >
+                <ArrowDownSVG />
+            </div>
         </div>
         
         {/* error tips */}
-        <div className={"number_input-tip text-red-500" + (!valid ? " open" : "")}>
-            {props.tip}
+        <div className={"number-input-tip text-red-500" + (!valid ? " open" : "")}>
+            {i18n.t('tips.tip3').replace('{min}', String(props.min)).replace('{max}', String(props.max))}
         </div>
     </>;
 }

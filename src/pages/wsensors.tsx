@@ -172,7 +172,7 @@ const WSensors = () => {
                         min={1}
                         max={100}
                         label={i18n.t('channelNumber')}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(cf.WSensChannelChange(e.target.value))}
+                        onChange={val => dispatch(cf.WSensChannelChange(val))}
                         isValid={(valid: boolean) => {
                             let nv = isValid;
                             nv[wsensorNum] = valid;
@@ -186,7 +186,7 @@ const WSensors = () => {
                         min={1}
                         max={100}
                         label={i18n.t('dataExpirationTime')}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(cf.WSensExpireChange({val: e.target.value, num: wsensorNum}))}
+                        onChange={val => dispatch(cf.WSensExpireChange({val: val, num: wsensorNum}))}
                         isValid={(valid: boolean) => {
                             let nv = isValid;
                             nv[wsensorNum + 2] = valid;

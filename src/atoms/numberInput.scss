@@ -1,4 +1,27 @@
-.number_input-tip {
+.number-input {
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        appearance: textfield;
+        -moz-appearance: textfield;
+    }
+}
+
+.number-icon svg path {
+    fill: var(--text_light);
+}
+
+:is(.dark) {
+    .number-icon svg path {
+        fill: var(--text_dark);
+    }
+}
+
+.number-input-tip {
     max-height: 0;
     overflow: hidden;
     margin-top: 0;

@@ -90,7 +90,7 @@ export interface iNumberInput {
     readonly?: boolean,
     className?: string,
     label: string,
-    onChange?(e: React.ChangeEvent<HTMLInputElement>): void,
+    onChange(e: number): void,
     isValid?(v: boolean): void,
     children?: React.ReactNode | undefined
 }
