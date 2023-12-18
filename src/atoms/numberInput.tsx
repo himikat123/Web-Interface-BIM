@@ -59,7 +59,7 @@ const NumberInput = (props: iNumberInput) => {
                 min={props.min}
                 max={props.max} 
             
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => props.onChange(Math.round(Number(e.target.value)))} 
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => props.onChange(Number(e.target.value))} 
                 readOnly={props.readonly}
             />
             {props.children}
