@@ -47,7 +47,7 @@ const NumberInput = (props: iNumberInput) => {
 
     return <> 
         <div className={cnMerge(["number-input relative", inputClasses.root.base, (valid) ? inputClasses.root.normal : inputClasses.root.error, props.className])}>
-            <label className={cnMerge([inputClasses.label, props.value && 'top-0 text-xs'])}>
+            <label className={cnMerge([inputClasses.label, String(props.value) && 'top-0 text-xs'])}>
                 {props.label}
             </label>
             <input className={cnMerge([
