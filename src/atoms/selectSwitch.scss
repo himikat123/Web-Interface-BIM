@@ -26,3 +26,13 @@
         max-height: 400px;
     }
 }
+
+.select-item:hover {
+    filter: brightness(95%);
+}
+
+:is(.dark) {
+    .select-item:hover {
+        filter: brightness(150%);
+    }
+}

@@ -42,7 +42,7 @@ const SelectSwitch = (props: iSelectSwitch) => {
                 <div className="rounded-md border border-menu_light dark:border-menu_dark cursor-pointer">
                     {props.options.map((option: string, i: number) => {
                         return <div key={option} 
-                            className={"p-4 first:rounded-t-md last:rounded-b-md " + (props.value === i 
+                            className={"select-item p-4 first:rounded-t-md last:rounded-b-md " + (props.value === i 
                                 ? "bg-menu_active_light dark:bg-menu_active_dark text-text_dark" 
                                 : "bg-card_light dark:bg-card_dark"
                             )}
