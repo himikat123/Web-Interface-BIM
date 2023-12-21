@@ -100,10 +100,10 @@
     "latitude": "Широта",
     "longitude": "Долгота",
     "detectCoordinatesAutomatically": "Определить координаты автоматически",
+    "wind": "Ветер",
     "units": {
         "hpa": "гПа",
         "mm": "мм",
-        "wind": "Ветер",
         "mps": "м/с",
         "lux": "Люкс",
         "v": "В",

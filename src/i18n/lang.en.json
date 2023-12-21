@@ -100,10 +100,10 @@
     "latitude": "Latitude",
     "longitude": "Longitude",
     "detectCoordinatesAutomatically": "Detect coordinates automatically",
+    "wind": "Wind",
     "units": {
         "hpa": "hPa",
         "mm": "mm",
-        "wind": "Wind",
         "mps": "m/s",
         "lux": "Lux",
         "v": "V",

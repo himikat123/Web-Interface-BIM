@@ -100,10 +100,10 @@
     "latitude": "Szerokość geograficzna",
     "longitude": "Długość geograficzna",
     "detectCoordinatesAutomatically": "Automatyczne wykrywanie współrzędnych",
+    "wind": "Wiatr",
     "units": {
         "hpa": "hPa",
         "mm": "mm",
-        "wind": "Wiatr",
         "mps": "m/s",
         "lux": "Lux",
         "v": "V",
