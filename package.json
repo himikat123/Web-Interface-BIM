@@ -13,6 +13,8 @@
     "@types/react-dom": "^18.2.14",
     "autoprefixer": "^10.4.16",
     "classnames": "^2.3.2",
+    "concurrently": "^8.2.2",
+    "express": "^4.18.2",
     "i18n-js": "^4.3.2",
     "postcss": "^8.4.31",
     "react": "^18.2.0",
@@ -28,10 +30,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start:frontend": "react-scripts start",
+    "start:backend": "node server.js",
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\""
   },
   "eslintConfig": {
     "extends": [
