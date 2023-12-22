@@ -13,60 +13,62 @@ const sensorCorrection = (type: string, val: number, lblType: string, lblData: n
     let units: string = "";
     let labels: string[] = ['', ''];
     switch(type) {
-        case 't': { // Temperature
+        case 't': // Temperature
             units = "°C";
             labels[0] = (vl.validateTemperature(lblData) ? round() : "--");
-        }; break;
-        case 'h': { // Humidity
+            break;
+        case 'h': // Humidity
             units = "%";
             labels[0] = (vl.validateHumidity(lblData) ? round() : "--");
-        }; break;
-        case 'p': { // Pressure
+            break;
+        case 'p': // Pressure
             const hpa = round();
             const mm = (Math.round((lblData + val) * 7.5) / 10).toFixed(1);
             units = i18n.t('units.hpa');
             labels[0] = (vl.validatePressure(lblData) ? hpa : "--");
             labels[1] = (vl.validatePressure(lblData) ? ` (~${mm}${i18n.t('units.mm')})` : '');
-        }; break;
-        case 'l': { // Ambient light
+            break;
+        case 'l': // Ambient light
             units = i18n.t('units.lux');
             labels[0] = (vl.validateLight(lblData) ? round() : "--");
-        }; break;
+            break;
 
-        case 'v': { // Voltage
+        case 'v': // Voltage
             units = i18n.t('units.v');
             labels[0] = (vl.validateAnalogVoltage(lblData) ? round() : "--");
-        }; break;
+            break;
 
-        case 'co2': { // CO2
+        case 'co2': // CO2
             units = 'ppm';
             labels[0] = (vl.validateCO2(lblData) ? round() : "--");
-        }; break;
+            break;
 
-        case 'hv': { // High voltage
+        case 'hv': // High voltage
             units = i18n.t('units.v');
             labels[0] = (vl.validateHighVoltage(lblData) ? round() : "--");
-        }; break;
+            break;
 
-        case 'cr': { // Current
+        case 'cr': // Current
             units = i18n.t('units.a');
             labels[0] = (vl.validateCurrent(lblData) ? round() : "--");
-        }; break;
+            break;
 
-        case 'pw': { // Power
+        case 'pw': // Power
             units = i18n.t('units.w');
             labels[0] = (vl.validatePower(lblData) ? round() : "--");
-        }; break;
+            break;
 
-        case 'eg': { // Energy
+        case 'eg': // Energy
             units = i18n.t('units.wh');
             labels[0] = (vl.validateEnergy(lblData) ? round() : "--");
-        }; break;
+            break;
 
-        case 'fr': { // Frequency
+        case 'fr': // Frequency
             units = i18n.t('units.hz');
             labels[0] = (vl.validateFrequency(lblData) ? round() : "--");
-        }; break;
+            break;
+
+        default: break;
     }
 
     return <RangeInput value={val}

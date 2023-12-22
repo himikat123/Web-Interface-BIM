@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from 'react-redux';
 import i18n from '../i18n/main';
 import Button from "../atoms/button";
@@ -15,11 +15,11 @@ const FooterButtons = (props: iFooterButtons) => {
     const valid = useSelector((state: iValid) => state.valid);
     const areAllPagesValid = !Object.values(valid).includes(false);
     const config = useSelector((state: iConfig) => state.config);
-    let timeout: NodeJS.Timeout; 
+    const timeout = useRef<ReturnType<typeof setInterval> | null>(null);
 
     const Save_config = () => {
         if(saveButton === 'save') {
-            clearTimeout(timeout);
+            clearTimeout(timeout.current ?? undefined);
             setSaveColor('yellow');
             setSaveButton('saving');
             
@@ -53,11 +53,13 @@ const FooterButtons = (props: iFooterButtons) => {
 
     useEffect(() => {
         if(saveButton === 'notSaved') {
-            timeout = setTimeout(() => {
+            timeout.current = setTimeout(() => {
                 setSaveColor('blue');
                 setSaveButton('save');
             }, 5000);
         }
+
+        return () => window.clearTimeout(timeout.current ?? undefined);
     }, [saveButton]);
 
     return (<>

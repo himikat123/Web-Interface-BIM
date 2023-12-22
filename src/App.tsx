@@ -24,7 +24,7 @@ function App() {
     const configState = useSelector((stateConfig: iConfig) => stateConfig.config.configState);
     const dataState = useSelector((stateData: iData) => stateData.data.dataState);
 
-    const fetchConfig = () => {
+    useEffect(() => {
         fetch("./config.json")
         .then(res => res.json())
         .then((result) => {
@@ -38,34 +38,34 @@ function App() {
                 console.error(error);
             }
         )
-    }
-
-    const fetchData = () => {
-        fetch("./data.json")
-        .then(res => res.json())
-        .then((result) => {
-            dispatch(dataStateChange('ok'));
-            dispatch(setDataState(result));
-        },
-            (error) => {
-                dispatch(dataStateChange('error'));
-                console.error(error);
-            }
-        )
-    }
-
-    useEffect(() => {
-        fetchConfig();
-    }, []);
+    }, [dispatch]);
     
     useEffect(() => {
+        let dataFetchInterval: NodeJS.Timeout;
+
+        const fetchData = () => {
+            fetch("./data.json")
+            .then(res => res.json())
+            .then((result) => {
+                dispatch(dataStateChange('ok'));
+                dispatch(setDataState(result));
+            },
+                (error) => {
+                    dispatch(dataStateChange('error'));
+                    console.error(error);
+                }
+            )
+        }
+
         if(configState === 'ok') {
             fetchData();
-            setInterval(() => {
+            dataFetchInterval = setInterval(() => {
                 fetchData();
             }, 10000);
         }
-    }, [configState]);
+
+        return () => clearInterval(dataFetchInterval);
+    }, [configState, dispatch]);
 
     return (
         <div className={"bg-page_light dark:bg-page_dark text-text_light dark:text-text_dark min-h-screen"}>

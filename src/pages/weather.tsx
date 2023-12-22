@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React from "react";
 import ThreeColumns from "../templates/threeColumns";
 import { useSelector, useDispatch } from 'react-redux';
 import i18n from '../i18n/main';
