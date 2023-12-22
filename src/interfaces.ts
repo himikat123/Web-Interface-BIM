@@ -161,3 +161,41 @@ export interface iModalNetList {
     ssidSelect(ssid: string): void,
     modalClose(): void
 }
+
+export interface iWeather {
+    main: {
+        temp: number,
+        humidity: number,
+        pressure: number
+    },
+    wind: {
+        speed: number,
+        deg: number
+    },
+    weather: [{
+        description: string
+    }],
+    name: string,
+    sys: {
+        country: string
+    },
+    coord: {
+        lat: number,
+        lon: number
+    },
+
+    data: [{
+        temp: number,
+        rh: number,
+        pres: number,
+        wind_spd: number,
+        wind_dir: number,
+        weather: {
+            description: string
+        },
+        city_name: string,
+        country_code: string,
+        lat: number,
+        lon: number
+    }]
+}

@@ -1,0 +1,9 @@
+.arrow-wind {
+    fill: rgb(29 78 216);
+}
+
+:is(.dark) {
+    .arrow-wind {
+        fill: rgb(96 165 250);
+    }
+}
