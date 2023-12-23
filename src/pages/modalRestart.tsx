@@ -1,11 +1,12 @@
 import React from "react"
 import Modal from "../templates/modal";
 import i18n from "../i18n/main";
+import hostUrl from "../atoms/hostUrl";
 import { iModalRestart } from "../interfaces";
 
 const ModalRestart = (props: iModalRestart) => {
     const handleRestart = () => {
-        fetch("./esp/restart");
+        fetch(`${hostUrl()}/esp/restart`);
     }
 
     return <Modal header={i18n.t('confirmation')}
