@@ -34,7 +34,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start:frontend": "react-scripts start",
-    "start:backend": "node server/run.js",
+    "start:backend": "nodemon server/run.js",
     "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\""
   },
   "eslintConfig": {
