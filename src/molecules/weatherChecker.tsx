@@ -97,39 +97,41 @@ const WeatherChecker = () => {
     return <>
         <div className={"text-center " + weatherColor}>{descript}</div>
         <table className="my-2 mb-8 m-auto table-fixed">
-            <tr>
-                <td className="text-end w-1/2">{i18n.t('temperature')}:</td>
-                <td className={"ps-4 " + weatherColor}>{temp}</td>
-            </tr>
-            <tr>
-                <td className="text-end">{i18n.t('humidity')}:</td>
-                <td className={"ps-4 " + weatherColor}>{hum}</td>
-            </tr>
-            <tr>
-                <td className="text-end">{i18n.t('pressure')}:</td>
-                <td className={"ps-4 " + weatherColor}>{pres}</td>
-            </tr>
-            <tr>
-                <td className="text-end">{i18n.t('wind')}:</td>
-                <td className={"ps-4 flex items-center " + weatherColor}>
-                    {wind} 
-                    {windDir >= 0 && windDir <= 360 ? <div className="ms-2 w-4 h-4">
-                        <ArrowWindSVG style={{fill: weatherColor, transform: `rotate(${90 + windDir}deg)`}} />
-                    </div> : null}
-                </td>
-            </tr>
-            <tr>
-                <td className="text-end">{i18n.t('city')}:</td>
-                <td className={"ps-4 " + weatherColor}>{city}</td>  
-            </tr>
-            <tr>
-                <td className="text-end">{i18n.t('latitude')}:</td>
-                <td className={"ps-4 " + weatherColor}>{lat}</td>
-            </tr>
-            <tr>
-                <td className="text-end">{i18n.t('longitude')}:</td>
-                <td className={"ps-4 " + weatherColor}>{lon}</td>
-            </tr>
+            <tbody>
+                <tr>
+                    <td className="text-end w-1/2">{i18n.t('temperature')}:</td>
+                    <td className={"ps-4 " + weatherColor}>{temp}</td>
+                </tr>
+                <tr>
+                    <td className="text-end">{i18n.t('humidity')}:</td>
+                    <td className={"ps-4 " + weatherColor}>{hum}</td>
+                </tr>
+                <tr>
+                    <td className="text-end">{i18n.t('pressure')}:</td>
+                    <td className={"ps-4 " + weatherColor}>{pres}</td>
+                </tr>
+                <tr>
+                    <td className="text-end">{i18n.t('wind')}:</td>
+                    <td className={"ps-4 flex items-center " + weatherColor}>
+                        {wind} 
+                        {windDir >= 0 && windDir <= 360 ? <div className="ms-2 w-4 h-4">
+                            <ArrowWindSVG style={{fill: weatherColor, transform: `rotate(${90 + windDir}deg)`}} />
+                        </div> : null}
+                    </td>
+                </tr>
+                <tr>
+                    <td className="text-end">{i18n.t('city')}:</td>
+                    <td className={"ps-4 " + weatherColor}>{city}</td>  
+                </tr>
+                <tr>
+                    <td className="text-end">{i18n.t('latitude')}:</td>
+                    <td className={"ps-4 " + weatherColor}>{lat}</td>
+                </tr>
+                <tr>
+                    <td className="text-end">{i18n.t('longitude')}:</td>
+                    <td className={"ps-4 " + weatherColor}>{lon}</td>
+                </tr>
+            </tbody>
         </table>
 
         <div className="w-full flex justify-center">
