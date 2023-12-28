@@ -29,7 +29,7 @@ const FooterButtons = (props: iFooterButtons) => {
                 headers: {
                     'Content-Type': 'text/plain'
                 },
-                body: 'config:' + JSON.stringify(config) 
+                body: 'config:' + JSON.stringify(config).replace('"configState":"ok",', '') 
             })
             .then(res => res.text())
             .then((result) => {
