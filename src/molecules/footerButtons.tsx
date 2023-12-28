@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import i18n from '../i18n/main';
 import Button from "../atoms/button";
 import ModalRestart from "../pages/modalRestart";
+import hostUrl from "../atoms/hostUrl";
 import { iFooterButtons } from "../interfaces";
 import { iValid } from "../redux/validTypes";
 import { iConfig } from "../redux/configTypes";
@@ -23,11 +24,11 @@ const FooterButtons = (props: iFooterButtons) => {
             setSaveColor('yellow');
             setSaveButton('saving');
             
-            let origin = window.location.origin;
-            let href = [origin.split(':')[0], origin.split(':')[1]].join(':');
-            fetch(`${href}/esp/saveConfig`, { 
-                method: 'post', 
-                mode: 'cors',
+            fetch(`${hostUrl()}/esp/saveConfig`, { 
+                method: 'post',
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
                 body: 'config:' + JSON.stringify(config) 
             })
             .then(res => res.text())
@@ -41,13 +42,12 @@ const FooterButtons = (props: iFooterButtons) => {
                     setSaveButton('notSaved');
                     console.error(result);
                 }
-            },
-                (error) => {
-                    setSaveColor('red');
-                    setSaveButton('notSaved');
-                    console.error(error);
-                }
-            )
+            }, 
+            (error) => {
+                setSaveColor('red');
+                setSaveButton('notSaved');
+                console.error(error);
+            })
         }
     }
 
