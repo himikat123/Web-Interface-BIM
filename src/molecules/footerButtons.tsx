@@ -52,7 +52,7 @@ const FooterButtons = (props: iFooterButtons) => {
     }
 
     useEffect(() => {
-        if(saveButton === 'notSaved') {
+        if(saveButton === 'notSaved' || saveButton === 'saved') {
             timeout.current = setTimeout(() => {
                 setSaveColor('blue');
                 setSaveButton('save');
