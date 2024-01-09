@@ -44,7 +44,7 @@ const SelectSwitch = (props: iSelectSwitch) => {
                         return <div key={option} 
                             className={"select-item p-4 first:rounded-t-md last:rounded-b-md " + (props.value === i 
                                 ? "bg-menu_active_light dark:bg-menu_active_dark text-text_dark" 
-                                : "bg-card_light dark:bg-card_dark"
+                                : "bg-page_light dark:bg-page_dark"
                             )}
                             onClick={() => {
                                 props.onChange(i);
