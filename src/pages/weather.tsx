@@ -70,7 +70,7 @@ const Weather = () => {
                 <Button className="bg-green-600 hover:bg-green-700 text-text_dark"
                     label={i18n.t('cityIdSearchProgram')}
                     onClick={() => window.open(
-                        "https://github.com/himikat123/Weather-monitor-BIM32/blob/master/CityID_RU.zip?raw=true", 
+                        "https://himikat123.github.io/City_ID_Finder/", 
                         "_blank", 
                         "noreferrer"
                     )}
