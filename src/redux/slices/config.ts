@@ -154,6 +154,12 @@ export const configSlice = createSlice({
             }
         },
         sensors: {
+            bme680: {
+                t: 0,
+                h: 0,
+                p: 0,
+                i: 0
+            },
             bme280: {
                 t: 0,
                 h: 0,
@@ -383,7 +389,11 @@ export const configSlice = createSlice({
         // ?Change: (state, action) => { state.sound.hourly: 0, = action.payload },
         // ?Change: (state, action) => { state.sound.hour.from: 7, = action.payload },
         // ?Change: (state, action) => { state.sound.hour.to: 21 = action.payload },
-        // 
+        //
+        BME680TempCorrChange: (state, action) => { state.sensors.bme680.t = action.payload },
+        BME680HumCorrChange: (state, action) => { state.sensors.bme680.h = action.payload },
+        BME680PresCorrChange: (state, action) => { state.sensors.bme680.p = action.payload },
+        BME680IaqCorrChange: (state, action) => { state.sensors.bme680.i = action.payload }, 
         BME280TempCorrChange: (state, action) => { state.sensors.bme280.t = action.payload },
         BME280HumCorrChange: (state, action) => { state.sensors.bme280.h = action.payload },
         BME280PresCorrChange: (state, action) => { state.sensors.bme280.p = action.payload },
@@ -463,6 +473,7 @@ export const {
     usernameChange, passwordRequiredSwitch,
     netSsidChange, netPassChange, netTypeSwitch, netIpChange, netMaskChange, netGwChange, netDns1Change, netDns2Change,
     acPointSsidChange, acPointPassChange,
+    BME680TempCorrChange, BME680HumCorrChange, BME680PresCorrChange, BME680IaqCorrChange,
     BME280TempCorrChange, BME280HumCorrChange, BME280PresCorrChange, BMP180TempCorrChange, BMP180PresCorrChange,
     SHT21TempCorrChange, SHT21HumCorrChange, DHT22TempCorrChange, DHT22HumCorrChange, DS18B20TempCorrChange,
     ESP32TempCorrChange, MAX44009LightCorrChange, BH1750LightCorrChange, AnalogCorrChange,

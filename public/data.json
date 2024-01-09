@@ -29,6 +29,13 @@
         ["My-WiFi", 99],
         ["Hotel za uglom", 55]
     ],
+    "bme680": {
+        "temp": 240.6,
+        "hum": 550,
+        "pres": 9009,
+        "iaq": 1230,
+        "iaqAccr": 3
+    },
     "bme280": {
         "temp": 4500,
         "hum": -100,

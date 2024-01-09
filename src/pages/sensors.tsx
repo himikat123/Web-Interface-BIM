@@ -19,6 +19,49 @@ const Sensors = () => {
     const data = useSelector((state: iData) => state.data);
 
     let content = [];
+    content.push(<Card header="BME680" key="BME680"
+        content={<>
+            {sensorCorrection("t", 
+                config.sensors.bme680.t, 
+                i18n.t('temperature'), 
+                data.bme680.temp, 
+                (val: number) => dispatch(cf.BME680TempCorrChange(val)), 
+                -10, 10, 0.1
+            )}
+            {sensorCorrection("h", 
+                config.sensors.bme680.h, 
+                i18n.t('humidity'), 
+                data.bme680.hum, 
+                (val: number) => dispatch(cf.BME680HumCorrChange(val)), 
+                -10, 10, 0.1
+            )}
+            {sensorCorrection("p", 
+                config.sensors.bme680.p, 
+                i18n.t('pressure'), 
+                data.bme680.pres, 
+                (val: number) => dispatch(cf.BME680PresCorrChange(val)), 
+                -10, 10, 0.1
+            )}
+            {sensorCorrection("i", 
+                config.sensors.bme680.i,
+                i18n.t('indexForAirQuality'), 
+                data.bme680.iaq, 
+                (val: number) => dispatch(cf.BME680IaqCorrChange(val)), 
+                -10, 10, 0.1
+            )}
+            <div className="mt-2 text-center">
+                {i18n.t('sensorAccuracy')}:
+                <span className="ms-1 text-blue-700 dark:text-blue-400">
+                    {vl.validateIaqArrc(data.bme680.iaqAccr) ? data.bme680.iaqAccr : '--'}
+                </span>
+            </div>
+        </>}
+        className={!vl.validateTemperature(data.bme680.temp) && !vl.validateHumidity(data.bme680.hum) && !vl.validatePressure(data.bme680.pres) && !vl.validateIaq(data.bme680.iaq)
+            ? 'invalid' + (hideUnnecessary ? ' hide' : '')
+            : ''
+        }
+    />);
+
     content.push(<Card header="BME280" key="BME280"
         content={<>
             {sensorCorrection("t", 

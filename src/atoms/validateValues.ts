@@ -46,6 +46,14 @@ export const validateFrequency = (freq: number): boolean => {
     return (freq >= 45 && freq <= 65); 
 }
 
+export const validateIaq = (iaq: number): boolean => {
+    return (iaq >= 0 && iaq <= 500); 
+}
+
+export const validateIaqArrc = (accr: number): boolean => {
+    return (accr >= 0 && accr <= 9); 
+}
+
 export const validateCO2 = (co2: number): boolean => {
     return (co2 >= 400 && co2 <= 2000); 
 }

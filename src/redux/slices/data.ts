@@ -23,6 +23,13 @@ export const dataSlice = createSlice({
             dns2: ""
         },    
         ssids: [],
+        bme680: {
+            temp: 4040,
+            hum: 4040,
+            pres: 4040,
+            iaq: 4040,
+            iaqAccr: 4040
+        },
         bme280: {
             temp: 4040,
             hum: 4040,

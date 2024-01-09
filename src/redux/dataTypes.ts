@@ -20,6 +20,13 @@ export interface iData {
             dns2: string
         },    
         ssids: [ [string, number] ],
+        bme680: {
+            temp: number,
+            hum: number,
+            pres: number,
+            iaq: number,
+            iaqAccr: number
+        },
         bme280: {
             temp: number,
             hum: number,

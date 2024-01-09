@@ -87,6 +87,8 @@
     "power": "Moc",
     "energy": "Energia",
     "frequency": "Częstotliwość",
+    "indexForAirQuality": "Indeks jakości powietrza",
+    "sensorAccuracy": "Dokładność czujnika",
     "weatherCheckError": "Nie udało się pobrać informacji o pogodzie, sprawdź ustawienia i połączenie internetowe",
     "byCityName": "Według nazwy miasta",
     "byCityId": "Według identyfikatora miasta",

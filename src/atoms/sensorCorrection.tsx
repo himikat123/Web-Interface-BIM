@@ -38,6 +38,11 @@ const sensorCorrection = (type: string, val: number, lblType: string, lblData: n
             labels[0] = (vl.validateAnalogVoltage(lblData) ? round() : "--");
             break;
 
+        case 'i': // Index for Air Quality
+            units = '';
+            labels[0] = (vl.validateIaq(lblData) ? round() : "--");
+            break;
+
         case 'co2': // CO2
             units = 'ppm';
             labels[0] = (vl.validateCO2(lblData) ? round() : "--");

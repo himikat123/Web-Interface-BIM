@@ -151,6 +151,12 @@ export interface iConfig {
             }
         },
         sensors: {
+            bme680: {
+                t: number,
+                h: number,
+                p: number,
+                i: number
+            },
             bme280: {
                 t: number,
                 h: number,

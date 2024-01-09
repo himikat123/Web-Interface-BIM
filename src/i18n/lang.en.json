@@ -87,6 +87,8 @@
     "power": "Power",
     "energy": "Energy",
     "frequency": "Frequency",
+    "indexForAirQuality": "Index for Air Quality",
+    "sensorAccuracy": "Sensor accuracy",
     "weatherCheckError": "Failed to load weather, please check settings and internet connection",
     "byCityName": "By city name",
     "byCityId": "By city ID",

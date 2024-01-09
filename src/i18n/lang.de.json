@@ -87,6 +87,8 @@
     "power": "Leistung",
     "energy": "Energie",
     "frequency": "Frequenz",
+    "indexForAirQuality": "Index für Luftqualität",
+    "sensorAccuracy": "Sensorgenauigkeit",
     "weatherCheckError": "Fehler beim Laden des Wetters, überprüfen Sie die Einstellungen und die Internetverbindung",
     "byCityName": "Nach Stadtname",
     "byCityId": "Nach Stadt-ID",
