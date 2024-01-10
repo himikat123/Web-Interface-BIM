@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Route, Routes } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux';
+import hostUrl from './atoms/hostUrl';
 import Loading from './pages/loading';
 import NoConfig from './pages/noConfig';
 import NoData from './pages/noData';
@@ -44,7 +45,7 @@ function App() {
         let dataFetchInterval: NodeJS.Timeout;
 
         const fetchData = () => {
-            fetch("./data.json")
+            fetch(`${hostUrl()}/data.json`)
             .then(res => res.json())
             .then((result) => {
                 dispatch(dataStateChange('ok'));

@@ -2,7 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const fs = require('fs');
-const path = require('path')
+const path = require('path');
+const data = require('./data');
 
 app.use(bodyParser.text({ type: "*/*" }));
 
@@ -24,6 +25,11 @@ app.post("/esp/saveConfig", (req, res) => {
         }
         res.send("OK");
     }, 2000);
+});
+
+app.get('/data.json', (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
+    res.send(JSON.stringify(data()));
 });
 
 app.get('/esp/bright', (req, res) => {
