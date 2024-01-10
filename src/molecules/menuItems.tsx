@@ -124,12 +124,12 @@ const MenuItems = (props: iMenuItems) => {
             >
                 <MenuSubItem link="/display1" 
                     current={props.current} 
-                    title={i18n.t('display.one') + " 1"} 
+                    title={i18n.t('display.singular') + " 1"} 
                     valid={true} 
                 />
                 <MenuSubItem link="/display2" 
                     current={props.current} 
-                    title={i18n.t('display.one') + " 2"} 
+                    title={i18n.t('display.singular') + " 2"} 
                     valid={true} 
                 />
             </MenuItem>
