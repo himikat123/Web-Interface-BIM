@@ -82,11 +82,11 @@ const data = () => {
             ],
             temp: {
                 data: [ 
-                    [random(-10, -5), random(10, 5)],
-                    [random(14, 18), random(70, 75)],
-                    [random(400, 405), random(40, 50)],
-                    [random(-14, -11), random(-8, -5)],
-                    [random(30, 40), random(90, 100)]
+                    [random(-100, -500), random(10, 5)],
+                    [random(14, 18), random(700, 750)],
+                    [random(400, 405), random(400, 500)],
+                    [random(-140, -110), random(-800, -500)],
+                    [random(300, 400), random(900, 1000)]
                 ],
                 name: [
                     ["BME280", "SHT21"],
@@ -101,35 +101,35 @@ const data = () => {
                 name: ["BME280", "SHT21"]
             },
             pres: {
-                data: [random(600, 650), random(750, 800)],
+                data: [random(6000, 6500), random(750, 800)],
                 name: ["BME280", "BMP180"]
             },
             light: {
-                data: [random(1, 2), random(12000, 12500)],
+                data: [random(-1, -2), random(12000, 12500)],
                 name: ["MAX44009", "BH1750"]
             },
             co2: {
-                data: [random(400, 450), random(450, 470)],
+                data: [random(4000, 4500), random(450, 470)],
                 name: ["Senseair S8", "Senseair S8"]
             },
             voltage: {
-                data: [random(216, 223), random(222, 232)],
+                data: [random(216, 223), random(2220, 2320)],
                 name: ["PZEM-004t", "PZEM-004t"]
             },
             current: {
-                data: [random(0, 10) / 10, random(0, 10) / 10],
+                data: [random(0, 10) / 10, random(1110, 11110) / 10],
                 name: ["PZEM-004t", "PZEM-004t"]
             },
             power: {
-                data: [random(50, 60), random(120, 130)],
+                data: [random(50, 60), random(-1200, -1300)],
                 name: ["PZEM-004t", "PZEM-004t"]
             },
             energy: {
-                data: [random(400, 500), random(100, 150)],
+                data: [random(400, 500), random(-100, -150)],
                 name: ["PZEM-004t", "PZEM-004t"]
             },
             freq: {
-                data: [random(45, 55), random(45, 55)],
+                data: [random(45, 55), random(450, 550)],
                 name: ["PZEM-004t", "PZEM-004t"]
             },
             bat: [random(500, 550), random(250, 300)]
