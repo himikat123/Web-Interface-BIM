@@ -24,8 +24,8 @@
         "plural": "Sensors"
     },
     "wirelessSensor": {
-        "singular": "Wireless sensor",
-        "plural": "Wireless sensors"
+        "singular": "Radio-sensor",
+        "plural": "Radio-sensors"
     },
     "display": {
         "singular": "Display",

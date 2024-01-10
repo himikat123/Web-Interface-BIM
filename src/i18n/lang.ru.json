@@ -24,8 +24,8 @@
         "plural": "Датчики"
     },    
     "wirelessSensor": {
-        "singular": "Беспроводной датчик",
-        "plural": "Беспроводные датчики"
+        "singular": "Радиодатчик",
+        "plural": "Радиодатчики"
     },
     "display": {
         "singular": "Дисплей",

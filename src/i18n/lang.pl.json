@@ -24,8 +24,8 @@
         "plural": "Sensory"
     },
     "wirelessSensor": {
-        "singular": "Czujnik bezprzewodowy",
-        "plural": "Czujniki bezprzewodowe"
+        "singular": "Czujnik radiowy",
+        "plural": "Czujniki radiowe"
     },
     "display": {
         "singular": "Wyświetlacz",

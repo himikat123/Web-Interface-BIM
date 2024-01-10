@@ -24,8 +24,8 @@
         "plural": "Sensoren"
     },
     "wirelessSensor": {
-        "singular": "Kabelloser Sensor",
-        "plural": "Kabellose Sensoren"
+        "singular": "Funksensor",
+        "plural": "Funksensoren"
     },
     "display": {
         "singular": "Display",
