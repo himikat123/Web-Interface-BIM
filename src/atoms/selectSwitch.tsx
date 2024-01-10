@@ -21,11 +21,17 @@ const SelectSwitch = (props: iSelectSwitch) => {
     useOutsideAlerter(wrapperRef);
 
     return <> 
+        <select className="form-select" value={props.value ?? 0} >
+            {props.options.map((option: string, i: number) => 
+                <option value={i}>{option}</option>
+            )}
+        </select>
+
         <div ref={wrapperRef}
             className="relative rounded-md border border-menu_light dark:border-menu_dark p-4"  
             onClick={() => {setDropdownOpen(!dropdownOpen)}}
         >
-            <input className="h-full w-full rounded-md outline-none bg-card_light dark:bg-card_dark text-text_light dark:text-text_dark cursor-pointer" 
+            <input className="pe-6 h-full w-full rounded-md outline-none bg-card_light dark:bg-card_dark text-text_light dark:text-text_dark cursor-pointer" 
                 value={props.options[props.value ?? 0]} 
                 readOnly
             />
@@ -38,11 +44,11 @@ const SelectSwitch = (props: iSelectSwitch) => {
                 <ArrowDownSVG />
             </div>
 
-            <div className={"absolute w-full top-14 left-0 z-10 select-options overflow-hidden " + (dropdownOpen ? "dropdownOpen" : "")}>
-                <div className="rounded-md border border-menu_light dark:border-menu_dark cursor-pointer">
+            <div className={"absolute w-max top-14 left-0 z-10 select-options overflow-hidden " + (dropdownOpen ? "dropdownOpen" : "")}>
+                <div className="rounded-md border border-menu_light dark:border-menu_dark cursor-pointer overflow-y-scroll">
                     {props.options.map((option: string, i: number) => {
                         return <div key={option} 
-                            className={"select-item p-4 first:rounded-t-md last:rounded-b-md " + (props.value === i 
+                            className={"select-item p-3 first:rounded-t-md last:rounded-b-md " + (props.value === i 
                                 ? "bg-menu_active_light dark:bg-menu_active_dark text-text_dark" 
                                 : "bg-page_light dark:bg-page_dark"
                             )}
