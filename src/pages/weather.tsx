@@ -10,6 +10,7 @@ import NumberInput from "../atoms/numberInput";
 import WeatherChecker from "../molecules/weatherChecker";
 import { iConfig } from "../redux/configTypes";
 import * as cf from "../redux/slices/config";
+import device from "../device";
 
 const Weather = () => {
     const dispatch = useDispatch();
@@ -34,13 +35,13 @@ const Weather = () => {
                 />
             </div>
 
-            <div className="my-8">
+            {device() === 'WeatherMonitorBIM' && <div className="my-8">
                 <TextInput label={i18n.t('parsingServer')} 
                     value={config.weather.parsingServer}
                     maxLength={127}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(cf.WeatherParsingServerChange(e.target.value.trim()))}
                 />
-            </div>
+            </div>}
         </>} />
 
         <Card content={<>
