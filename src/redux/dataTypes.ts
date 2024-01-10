@@ -110,6 +110,7 @@ export interface iData {
             },
             descript: string
         },
+        thing: number[],
         fs: { 
             total: number,
             free: number,

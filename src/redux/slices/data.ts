@@ -113,6 +113,7 @@ export const dataSlice = createSlice({
             },
             descript: ""
         },
+        thing: [],
         fs: { 
             total: -1,
             free: -1,
