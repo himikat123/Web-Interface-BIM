@@ -324,8 +324,8 @@ export const configSlice = createSlice({
         // ?Change: (state, action) => { state.clock.utc: 0, = action.payload },
         // ?Change: (state, action) => { state.clock.dlst: 0, = action.payload },
         // ?Change: (state, action) => { state.clock.ntp_period: 15 = action.payload },
-        // 
-        // ?Change: (state, action) => { state.display.type: [0, 2], = action.payload },
+
+        DisplayTypeChange: (state, action) => { state.display.type[action.payload.num] = action.payload.val },
         // ?Change: (state, action) => { state.display.sled: 0, = action.payload },
         // ?Change: (state, action) => { state.display.dayTime: ["07:00", "07:00"], = action.payload },
         // ?Change: (state, action) => { state.display.nightTime: ["21:00", "21:00"], = action.payload },
@@ -481,7 +481,8 @@ export const {
     WSensHighVoltChange, WSensCurrentChange, WSensPowerChange, WSensEnergyChange, WSensFreqChange,
     WSensBatKChange, WSensBatTypeChange, WSensExpireChange, WSensChannelChange,
     WeatherAppIdChange, WeatherCityChange, WeatherCityIdChange, WeatherLatChange, 
-    WeatherLonChange, WeatherProwiderChange, WeatherCitySearchChange, WeatherParsingServerChange
+    WeatherLonChange, WeatherProwiderChange, WeatherCitySearchChange, WeatherParsingServerChange,
+    DisplayTypeChange
 } = configSlice.actions;
   
 export default configSlice.reducer;
