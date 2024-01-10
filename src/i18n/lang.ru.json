@@ -261,6 +261,7 @@
     "liIonBattery": "Li-ion аккумулятор (3.7В)",
     "dataFrom": "Данные от",
     "dataExpirationTime": "Срок годности данных (минут)",
+    "dataExpired": "Данные просрочены",
     "wirelessSensorNumber": "Номер датчика",
     "temperatureSensorNumber": "Номер датчика температуры",
     "parsingServer": "Парсинг сервер",

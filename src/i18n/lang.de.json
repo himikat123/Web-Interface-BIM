@@ -261,6 +261,7 @@
     "liIonBattery": "Li-Ionen-Batterie (3,7V)",
     "dataFrom": "Daten von",
     "dataExpirationTime": "Ablaufzeit der Daten (Minuten)",
+    "dataExpired": "Daten abgelaufen",
     "wirelessSensorNumber": "Kabelloser Sensornummer",
     "temperatureSensorNumber": "Temperatursensornummer",
     "parsingServer": "Parsing-Server",

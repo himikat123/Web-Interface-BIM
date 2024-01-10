@@ -1,6 +1,7 @@
 import React, { useEffect, useState} from "react";
 import TwoColumns from "../templates/twoColumns";
 import { useSelector, useDispatch } from 'react-redux';
+import Moment from 'react-moment';
 import i18n from '../i18n/main';
 import Card from "../atoms/card";
 import Button from "../atoms/button";
@@ -25,15 +26,34 @@ const WSensors = () => {
         dispatch(wsensorsValidChange(!isValid.includes(false)));
     });
 
+    const dataRelevance = (num: number) => {
+        return (Math.floor(Date.now() / 1000) - data.wsensor.time[num] > config.wsensor.expire[num] * 60) && data.wsensor.time[num] > 0;
+    }
+
     const content = <>{[...Array(2)].map((c, wsensorNum: number) =>
         <Card key={'ws' + wsensorNum} header={`${i18n.t('wirelessSensor.singular')} ${wsensorNum}`}
             content={<>
                 <div className="text-center mb-4">
-                    {i18n.t('dataFrom')}: 
-                    <span className="ms-1 text-blue-700 dark:text-blue-400">{data.wsensor.time[wsensorNum]}</span>
+                    {i18n.t('dataFrom')}:
+                    <span className={"ms-1 " + (dataRelevance(wsensorNum) 
+                        ? "text-red-500 dark:text-red-600" 
+                        : "text-blue-700 dark:text-blue-400"
+                    )}>
+                        {data.wsensor.time[wsensorNum] === 0
+                            ? <span>--</span>
+                            : <Moment unix format="HH:mm:ss DD.MM.YYYY">{data.wsensor.time[wsensorNum]}</Moment>
+                        }
+                        {dataRelevance(wsensorNum) 
+                            ? <div>{i18n.t("dataExpired")}</div>
+                            : <div className="h-6"></div>
+                        }
+                    </span>
                 </div>
+
+                <hr className="mt-8" />
+                
                 {[...Array(5)].map((x, tempSensorNum: number) => <div key={'t' + tempSensorNum}>
-                    {sensorCorrection("t", 
+                    {sensorCorrection(dataRelevance(wsensorNum), "t", 
                         config.wsensor.temp.corr[wsensorNum][tempSensorNum], 
                         `${i18n.t('temperature')} ${tempSensorNum}`, 
                         data.wsensor.temp.data[tempSensorNum][wsensorNum], 
@@ -44,7 +64,7 @@ const WSensors = () => {
                     )}
                 </div>)}
 
-                {sensorCorrection("h", 
+                {sensorCorrection(dataRelevance(wsensorNum), "h", 
                     config.wsensor.hum.corr[wsensorNum], 
                     i18n.t('humidity'), 
                     data.wsensor.hum.data[wsensorNum], 
@@ -54,7 +74,7 @@ const WSensors = () => {
                     data.wsensor.hum.name[wsensorNum]
                 )}
 
-                {sensorCorrection("p", 
+                {sensorCorrection(dataRelevance(wsensorNum), "p", 
                     config.wsensor.pres.corr[wsensorNum], 
                     i18n.t('pressure'), 
                     data.wsensor.pres.data[wsensorNum], 
@@ -64,7 +84,7 @@ const WSensors = () => {
                     data.wsensor.pres.name[wsensorNum]
                 )}
 
-                {sensorCorrection("l", 
+                {sensorCorrection(dataRelevance(wsensorNum), "l", 
                     config.wsensor.light.corr[wsensorNum], 
                     i18n.t('ambientLight'), 
                     data.wsensor.light.data[wsensorNum], 
@@ -74,7 +94,7 @@ const WSensors = () => {
                     data.wsensor.light.name[wsensorNum]
                 )}
 
-                {sensorCorrection("co2", 
+                {sensorCorrection(dataRelevance(wsensorNum), "co2", 
                     config.wsensor.co2.corr[wsensorNum], 
                     i18n.t('CO2Level'), 
                     data.wsensor.co2.data[wsensorNum], 
@@ -84,7 +104,7 @@ const WSensors = () => {
                     data.wsensor.co2.name[wsensorNum]
                 )}
 
-                {sensorCorrection("hv", 
+                {sensorCorrection(dataRelevance(wsensorNum), "hv", 
                     config.wsensor.volt.corr[wsensorNum], 
                     i18n.t('voltage'), 
                     data.wsensor.voltage.data[wsensorNum], 
@@ -94,7 +114,7 @@ const WSensors = () => {
                     data.wsensor.voltage.name[wsensorNum]
                 )}
 
-                {sensorCorrection("cr", 
+                {sensorCorrection(dataRelevance(wsensorNum), "cr", 
                     config.wsensor.curr.corr[wsensorNum], 
                     i18n.t('current'), 
                     data.wsensor.current.data[wsensorNum], 
@@ -104,7 +124,7 @@ const WSensors = () => {
                     data.wsensor.current.name[wsensorNum]
                 )}
 
-                {sensorCorrection("pw", 
+                {sensorCorrection(dataRelevance(wsensorNum), "pw", 
                     config.wsensor.pow.corr[wsensorNum], 
                     i18n.t('power'), 
                     data.wsensor.power.data[wsensorNum], 
@@ -114,7 +134,7 @@ const WSensors = () => {
                     data.wsensor.power.name[wsensorNum]
                 )}
 
-                {sensorCorrection("eg", 
+                {sensorCorrection(dataRelevance(wsensorNum), "eg", 
                     config.wsensor.enrg.corr[wsensorNum], 
                     i18n.t('energy'), 
                     data.wsensor.energy.data[wsensorNum], 
@@ -124,7 +144,7 @@ const WSensors = () => {
                     data.wsensor.energy.name[wsensorNum]
                 )}
 
-                {sensorCorrection("fr", 
+                {sensorCorrection(dataRelevance(wsensorNum), "fr", 
                     config.wsensor.freq.corr[wsensorNum], 
                     i18n.t('frequency'), 
                     data.wsensor.freq.data[wsensorNum], 
@@ -139,7 +159,7 @@ const WSensors = () => {
                 <RangeInput value={config.wsensor.bat.k[wsensorNum]}
                     label={<div className="mt-8">
                         {i18n.t('batteryVoltage')}:
-                        <span className="ms-1 text-blue-700 dark:text-blue-400">
+                        <span className={"ms-1 " + (dataRelevance(wsensorNum) ? "text-red-500 dark:text-red-600" : "text-blue-700 dark:text-blue-400")}>
                             {vl.validateBatteryADC(data.wsensor.bat[wsensorNum])
                                 ? (Math.round((data.wsensor.bat[wsensorNum] / (300 - config.wsensor.bat.k[wsensorNum])) * 1000) / 1000).toFixed(3)
                                 : "--"

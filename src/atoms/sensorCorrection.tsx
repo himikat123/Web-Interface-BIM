@@ -3,7 +3,7 @@ import RangeInput from "./rangeInput";
 import i18n from "../i18n/main";
 import * as vl from "./validateValues";
 
-const sensorCorrection = (type: string, val: number, lblType: string, lblData: number, onChange: any, min: number, max: number, step: number, hide?: boolean, lblName?: string) => {
+const sensorCorrection = (color: boolean, type: string, val: number, lblType: string, lblData: number, onChange: any, min: number, max: number, step: number, hide?: boolean, lblName?: string) => {
     const countSymbolsAfterComma = () => ((step.toString().includes('.')) ? (step.toString().split('.').pop()?.length) : (0));
 
     const round = () => {
@@ -79,7 +79,7 @@ const sensorCorrection = (type: string, val: number, lblType: string, lblData: n
     return <RangeInput value={val}
         label={<div className="mt-8">
             {lblType}:
-            <span className="ms-1 text-blue-700 dark:text-blue-400">
+            <span className={"ms-1 " + (color ? "text-red-500 dark:text-red-600" : "text-blue-700 dark:text-blue-400")}>
                 {labels[0]}{units}{labels[1]}{lblName ? (', ' + lblName) : ''}
             </span>
         </div>} 

@@ -57,7 +57,7 @@ export interface iData {
             volt: number
         },
         wsensor: {
-            time: [string, string],
+            time: [number, number],
             temp: {
                 data: number[][],
                 name: string[][]

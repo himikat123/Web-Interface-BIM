@@ -261,6 +261,7 @@
     "liIonBattery": "Bateria Li-ion (3,7 V)",
     "dataFrom": "Dane od:",
     "dataExpirationTime": "Czas ważności danych (minuty)",
+    "dataExpired": "Dane wygasły",
     "wirelessSensorNumber": "Numer czujnika",
     "temperatureSensorNumber": "Numer czujnika temperatury",
     "parsingServer": "Serwer analizujący",

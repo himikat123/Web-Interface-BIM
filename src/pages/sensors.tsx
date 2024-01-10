@@ -21,28 +21,28 @@ const Sensors = () => {
     let content = [];
     content.push(<Card header="BME680" key="BME680"
         content={<>
-            {sensorCorrection("t", 
+            {sensorCorrection(false, "t", 
                 config.sensors.bme680.t, 
                 i18n.t('temperature'), 
                 data.bme680.temp, 
                 (val: number) => dispatch(cf.BME680TempCorrChange(val)), 
                 -10, 10, 0.1
             )}
-            {sensorCorrection("h", 
+            {sensorCorrection(false, "h", 
                 config.sensors.bme680.h, 
                 i18n.t('humidity'), 
                 data.bme680.hum, 
                 (val: number) => dispatch(cf.BME680HumCorrChange(val)), 
                 -10, 10, 0.1
             )}
-            {sensorCorrection("p", 
+            {sensorCorrection(false, "p", 
                 config.sensors.bme680.p, 
                 i18n.t('pressure'), 
                 data.bme680.pres, 
                 (val: number) => dispatch(cf.BME680PresCorrChange(val)), 
                 -10, 10, 0.1
             )}
-            {sensorCorrection("i", 
+            {sensorCorrection(false, "i", 
                 config.sensors.bme680.i,
                 i18n.t('indexForAirQuality'), 
                 data.bme680.iaq, 
@@ -64,21 +64,21 @@ const Sensors = () => {
 
     content.push(<Card header="BME280" key="BME280"
         content={<>
-            {sensorCorrection("t", 
+            {sensorCorrection(false, "t", 
                 config.sensors.bme280.t, 
                 i18n.t('temperature'), 
                 data.bme280.temp, 
                 (val: number) => dispatch(cf.BME280TempCorrChange(val)), 
                 -10, 10, 0.1
             )}
-            {sensorCorrection("h", 
+            {sensorCorrection(false, "h", 
                 config.sensors.bme280.h, 
                 i18n.t('humidity'), 
                 data.bme280.hum, 
                 (val: number) => dispatch(cf.BME280HumCorrChange(val)), 
                 -10, 10, 0.1
             )}
-            {sensorCorrection("p", 
+            {sensorCorrection(false, "p", 
                 config.sensors.bme280.p, 
                 i18n.t('pressure'), 
                 data.bme280.pres, 
@@ -94,14 +94,14 @@ const Sensors = () => {
 
     content.push(<Card header="BMP180" key="BMP180"
         content={<>
-            {sensorCorrection("t", 
+            {sensorCorrection(false, "t", 
                 config.sensors.bmp180.t, 
                 i18n.t('temperature'), 
                 data.bmp180.temp, 
                 (val: number) => dispatch(cf.BMP180TempCorrChange(val)), 
                 -10, 10, 0.1
             )}
-            {sensorCorrection("p", 
+            {sensorCorrection(false, "p", 
                 config.sensors.bmp180.p, 
                 i18n.t('pressure'), 
                 data.bmp180.pres, 
@@ -117,14 +117,14 @@ const Sensors = () => {
 
     content.push(<Card header="SHT21" key="SHT21"
         content={<>
-            {sensorCorrection("t", 
+            {sensorCorrection(false, "t", 
                 config.sensors.sht21.t, 
                 i18n.t('temperature'), 
                 data.sht21.temp, 
                 (val: number) => dispatch(cf.SHT21TempCorrChange(val)), 
                 -10, 10, 0.1
             )}
-            {sensorCorrection("h", 
+            {sensorCorrection(false, "h", 
                 config.sensors.sht21.h, 
                 i18n.t('humidity'), 
                 data.sht21.hum, 
@@ -140,14 +140,14 @@ const Sensors = () => {
 
     content.push(<Card header="DHT22" key="DHT22"
         content={<>
-            {sensorCorrection("t", 
+            {sensorCorrection(false, "t", 
                 config.sensors.dht22.t, 
                 i18n.t('temperature'), 
                 data.dht22.temp, 
                 (val: number) => dispatch(cf.DHT22TempCorrChange(val)), 
                 -10, 10, 0.1
             )}
-            {sensorCorrection("h", 
+            {sensorCorrection(false, "h", 
                 config.sensors.dht22.h, 
                 i18n.t('humidity'), 
                 data.dht22.hum, 
@@ -163,7 +163,7 @@ const Sensors = () => {
 
     content.push(<Card header="MAX44009" key="MAX44009"
         content={<>
-            {sensorCorrection("l", 
+            {sensorCorrection(false, "l", 
                 config.sensors.max44009.l, 
                 i18n.t('ambientLight'), 
                 data.max44009.light, 
@@ -179,7 +179,7 @@ const Sensors = () => {
 
     content.push(<Card header="BH1750" key="BH1750"
         content={<>
-            {sensorCorrection("l", 
+            {sensorCorrection(false, "l", 
                 config.sensors.bh1750.l, 
                 i18n.t('ambientLight'), 
                 data.bh1750.light, 
@@ -195,7 +195,7 @@ const Sensors = () => {
 
     content.push(<Card header="DS18B20" key="DS18B20"
         content={<>
-            {sensorCorrection("t", 
+            {sensorCorrection(false, "t", 
                 config.sensors.ds18b20.t, 
                 i18n.t('temperature'), 
                 data.ds18b20.temp, 
@@ -211,7 +211,7 @@ const Sensors = () => {
 
     content.push(<Card header={i18n.t('analogInput')} key="analog"
         content={<>
-            {sensorCorrection("v", 
+            {sensorCorrection(false, "v", 
                 config.sensors.analog.v, 
                 i18n.t('voltage'), 
                 data.analog.volt, 
@@ -227,7 +227,7 @@ const Sensors = () => {
 
     if(device() === 'WeatherMonitorBIM32') content.push(<Card header="ESP32" key="ESP32"
         content={<>
-            {sensorCorrection("t", 
+            {sensorCorrection(false, "t", 
                 config.sensors.esp32.t, 
                 i18n.t('temperature'), 
                 data.esp32.temp, 
