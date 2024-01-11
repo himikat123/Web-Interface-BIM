@@ -329,13 +329,13 @@ export const configSlice = createSlice({
         DisplaySledChange: (state, action) => { state.display.sled[action.payload.num] = action.payload.val },
         // ?Change: (state, action) => { state.display.dayTime: ["07:00", "07:00"], = action.payload },
         // ?Change: (state, action) => { state.display.nightTime: ["21:00", "21:00"], = action.payload },
-        // ?Change: (state, action) => { state.display.brightMethod: [3, 3], = action.payload },
+        DisplayBrightMethodChange: (state, action) => { state.display.brightMethod[action.payload.num] = action.payload.val },
         // ?Change: (state, action) => { state.display.autoOff: [0, 0], = action.payload },
         // ?Change: (state, action) => { state.display.nightOff.need: [0, 0], = action.payload },
         // ?Change: (state, action) => { state.display.nightOff.from: [22, 22], = action.payload },
         // ?Change: (state, action) => { state.display.nightOff.to: [7, 7] = action.payload },
-        // ?Change: (state, action) => { state.display.brightness.day: [100, 100], = action.payload },
-        // ?Change: (state, action) => { state.display.brightness.night: [50, 50], = action.payload },
+        DisplayBrightDayChange: (state, action) => { state.display.brightness.day[action.payload.num] = action.payload.val },
+        DisplayBrightNightChange: (state, action) => { state.display.brightness.night[action.payload.num] = action.payload.val },
         DisplayBrightMinChange: (state, action) => { state.display.brightness.min[action.payload.num] = action.payload.val },
         DisplayBrightMaxChange: (state, action) => { state.display.brightness.max[action.payload.num] = action.payload.val },
         // ?Change: (state, action) => { state.display.lightSensor: [0, 0], = action.payload },
@@ -482,7 +482,8 @@ export const {
     WSensBatKChange, WSensBatTypeChange, WSensExpireChange, WSensChannelChange,
     WeatherAppIdChange, WeatherCityChange, WeatherCityIdChange, WeatherLatChange, 
     WeatherLonChange, WeatherProwiderChange, WeatherCitySearchChange, WeatherParsingServerChange,
-    DisplayTypeChange, DisplayBrightMinChange, DisplayBrightMaxChange, DisplaySledChange
+    DisplayTypeChange, DisplayBrightMinChange, DisplayBrightMaxChange, DisplaySledChange,
+    DisplayBrightMethodChange, DisplayBrightDayChange, DisplayBrightNightChange
 } = configSlice.actions;
   
 export default configSlice.reducer;
