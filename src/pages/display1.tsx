@@ -3,8 +3,8 @@ import FourColumns from "../templates/fourColumns";
 import { useSelector, useDispatch } from 'react-redux';
 import i18n from '../i18n/main';
 import Card from "../atoms/card";
-import CardDisplayType from "../molecules/cardDisplayType";
-import CardDisplayBrightness from "../molecules/cardDisplayBrightness";
+import CardDisplayType from "../organisms/cardDisplayType";
+import CardDisplayBrightness from "../organisms/cardDisplayBrightness";
 
 import { iConfig } from "../redux/configTypes";
 import { iData } from "../redux/dataTypes";
