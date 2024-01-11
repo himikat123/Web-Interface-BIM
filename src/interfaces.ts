@@ -204,3 +204,7 @@ export interface iIndication {
     error: boolean,
     value: string | React.ReactNode
 }
+
+export interface iDisplay {
+    num: number
+}

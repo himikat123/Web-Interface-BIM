@@ -6,10 +6,11 @@ import RangeInput from "../atoms/rangeInput";
 import Indication from "../atoms/indication";
 import { iConfig } from "../redux/configTypes";
 import { iData } from "../redux/dataTypes";
+import { iDisplay } from "../interfaces";
 import * as cf from "../redux/slices/config";
 import * as vl from "../atoms/validateValues";
 
-const BrightSensor = (props: any) => {
+const BrightSensor = (props: iDisplay) => {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
@@ -29,7 +30,7 @@ const BrightSensor = (props: any) => {
     if(brightness < 1) brightness = 1;
     if(brightness > 100) brightness = 100;
     brightness = Math.round(brightness);
-    
+
     const lightSensors = [
         i18n.t('analogInput') + ' (' + analogInputValue + ')',
         'MAX44009 (' + max44009Value + ')',

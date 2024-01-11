@@ -6,9 +6,10 @@ import SelectSwitch from "../atoms/selectSwitch";
 import BrightSunriseSunset from "../molecules/brightSunriseSunset";
 import BrightSensor from "../molecules/brightSensor";
 import { iConfig } from "../redux/configTypes";
+import { iDisplay } from "../interfaces";
 import * as cf from "../redux/slices/config";
 
-const CardDisplayBrightness = (props: any) => {
+const CardDisplayBrightness = (props: iDisplay) => {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
        

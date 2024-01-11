@@ -6,10 +6,11 @@ import SelectSwitch from "../atoms/selectSwitch";
 import RangeInput from "../atoms/rangeInput";
 import Toggle from "../atoms/toggle";
 import { iConfig } from "../redux/configTypes";
+import { iDisplay } from "../interfaces";
 import * as cf from "../redux/slices/config";
 import Indication from "../atoms/indication";
 
-const CardDisplayType = (props: any) => {
+const CardDisplayType = (props: iDisplay) => {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const displays = [

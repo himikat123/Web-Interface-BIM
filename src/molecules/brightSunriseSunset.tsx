@@ -2,10 +2,11 @@ import React from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import { iConfig } from "../redux/configTypes";
+import { iDisplay } from "../interfaces";
 import RangeInput from "../atoms/rangeInput";
 import * as cf from "../redux/slices/config";
 
-const BrightSunriseSunset = (props: any) => {
+const BrightSunriseSunset = (props: iDisplay) => {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
 
