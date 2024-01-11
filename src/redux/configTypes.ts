@@ -55,7 +55,7 @@ export interface iConfig {
         },
         display: {
             type: number[],
-            sled: number,
+            sled: number[],
             dayTime: string[],
             nightTime: string[],
             brightMethod: number[],

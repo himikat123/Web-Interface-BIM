@@ -58,7 +58,7 @@ export const configSlice = createSlice({
         },
         display: {
             type: [0, 0],
-            sled: 0,
+            sled: [0, 0],
             dayTime: ["", ""],
             nightTime: ["", ""],
             brightMethod: [0, 0],
@@ -326,7 +326,7 @@ export const configSlice = createSlice({
         // ?Change: (state, action) => { state.clock.ntp_period: 15 = action.payload },
 
         DisplayTypeChange: (state, action) => { state.display.type[action.payload.num] = action.payload.val },
-        // ?Change: (state, action) => { state.display.sled: 0, = action.payload },
+        DisplaySledChange: (state, action) => { state.display.sled[action.payload.num] = action.payload.val },
         // ?Change: (state, action) => { state.display.dayTime: ["07:00", "07:00"], = action.payload },
         // ?Change: (state, action) => { state.display.nightTime: ["21:00", "21:00"], = action.payload },
         // ?Change: (state, action) => { state.display.brightMethod: [3, 3], = action.payload },
@@ -336,8 +336,8 @@ export const configSlice = createSlice({
         // ?Change: (state, action) => { state.display.nightOff.to: [7, 7] = action.payload },
         // ?Change: (state, action) => { state.display.brightness.day: [100, 100], = action.payload },
         // ?Change: (state, action) => { state.display.brightness.night: [50, 50], = action.payload },
-        // ?Change: (state, action) => { state.display.brightness.min: [1, 1], = action.payload },
-        // ?Change: (state, action) => { state.display.brightness.max: [255, 50] = action.payload },
+        DisplayBrightMinChange: (state, action) => { state.display.brightness.min[action.payload.num] = action.payload.val },
+        DisplayBrightMaxChange: (state, action) => { state.display.brightness.max[action.payload.num] = action.payload.val },
         // ?Change: (state, action) => { state.display.lightSensor: [0, 0], = action.payload },
         // ?Change: (state, action) => { state.display.sensitivity: [50, 50], = action.payload },
         // ?Change: (state, action) => { state.display.animation.type: 0, = action.payload },
@@ -482,7 +482,7 @@ export const {
     WSensBatKChange, WSensBatTypeChange, WSensExpireChange, WSensChannelChange,
     WeatherAppIdChange, WeatherCityChange, WeatherCityIdChange, WeatherLatChange, 
     WeatherLonChange, WeatherProwiderChange, WeatherCitySearchChange, WeatherParsingServerChange,
-    DisplayTypeChange
+    DisplayTypeChange, DisplayBrightMinChange, DisplayBrightMaxChange, DisplaySledChange
 } = configSlice.actions;
   
 export default configSlice.reducer;

@@ -3,8 +3,11 @@ import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../atoms/card";
 import SelectSwitch from "../atoms/selectSwitch";
+import RangeInput from "../atoms/rangeInput";
+import Toggle from "../atoms/toggle";
 import { iConfig } from "../redux/configTypes";
 import * as cf from "../redux/slices/config";
+import Indication from "../atoms/indication";
 
 const CardDisplayType = (props: any) => {
     const dispatch = useDispatch();
@@ -26,6 +29,23 @@ const CardDisplayType = (props: any) => {
         ]
     ];
 
+    const consum = [
+        [
+            0,
+            140,
+            140,
+            1800,
+            3480,
+            5160
+        ],
+        [
+            0,
+            1800,
+            3480,
+            5160
+        ]
+    ];
+
     return <>
         <Card content={<>
             <SelectSwitch label={i18n.t('connectionType')}
@@ -33,6 +53,50 @@ const CardDisplayType = (props: any) => {
                 value={config.display.type[props.num]}
                 onChange={(val: number) => dispatch(cf.DisplayTypeChange({num: props.num, val: val}))}
             />
+
+            <div>
+                <div className="mt-4 mb-1 text-xs">{i18n.t('sacrificial')}</div>
+                <Toggle checked={config.display.sled[props.num]}
+                    onChange={() => dispatch(cf.DisplaySledChange({num: props.num, val: config.display.sled[props.num] ? 0 : 1}))}
+                    label=""
+                />
+            </div>
+
+            <RangeInput value={config.display.brightness.min[props.num]}
+                label={i18n.t('minimumBrightnessLimit')}
+                min={0}
+                max={255}
+                limitMin={0}
+                limitMax={config.display.brightness.max[props.num]}
+                step={1}
+                indication={String(config.display.brightness.min[props.num])}
+                onChange={(val) => dispatch(cf.DisplayBrightMinChange({num: props.num, val: val}))}
+                className="mt-4"
+            />
+
+            <RangeInput value={config.display.brightness.max[props.num]}
+                label={i18n.t('maximumBrightnessLimit')}
+                min={0}
+                max={255}
+                limitMin={config.display.brightness.min[props.num]}
+                limitMax={255}
+                step={1}
+                indication={String(config.display.brightness.max[props.num])}
+                onChange={(val) => dispatch(cf.DisplayBrightMaxChange({num: props.num, val: val}))}
+                className="mt-2"
+            />
+
+            <div className="mt-4 text-xs">
+                {i18n.t('maximumDisplayCurrent')}:
+                <Indication error={false} 
+                    value={String(
+                        Math.round(consum[props.num][config.display.type[props.num]] 
+                            * config.display.brightness.max[props.num] 
+                            / 255
+                        ) + config.display.sled[props.num]
+                    ) + i18n.t('units.ma')} 
+                />
+            </div>
         </>} />
     </>
 }
