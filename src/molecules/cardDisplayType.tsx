@@ -54,49 +54,53 @@ const CardDisplayType = (props: any) => {
                 onChange={(val: number) => dispatch(cf.DisplayTypeChange({num: props.num, val: val}))}
             />
 
-            <div>
+            {displays[props.num][config.display.type[props.num]].includes('WS2812b') && <div>
                 <div className="mt-4 mb-1 text-xs">{i18n.t('sacrificial')}</div>
                 <Toggle checked={config.display.sled[props.num]}
                     onChange={() => dispatch(cf.DisplaySledChange({num: props.num, val: config.display.sled[props.num] ? 0 : 1}))}
                     label=""
                 />
-            </div>
+            </div>}
 
-            <RangeInput value={config.display.brightness.min[props.num]}
-                label={i18n.t('minimumBrightnessLimit')}
-                min={0}
-                max={255}
-                limitMin={0}
-                limitMax={config.display.brightness.max[props.num]}
-                step={1}
-                indication={String(config.display.brightness.min[props.num])}
-                onChange={(val) => dispatch(cf.DisplayBrightMinChange({num: props.num, val: val}))}
-                className="mt-4"
-            />
-
-            <RangeInput value={config.display.brightness.max[props.num]}
-                label={i18n.t('maximumBrightnessLimit')}
-                min={0}
-                max={255}
-                limitMin={config.display.brightness.min[props.num]}
-                limitMax={255}
-                step={1}
-                indication={String(config.display.brightness.max[props.num])}
-                onChange={(val) => dispatch(cf.DisplayBrightMaxChange({num: props.num, val: val}))}
-                className="mt-2"
-            />
-
-            <div className="mt-4 text-xs">
-                {i18n.t('maximumDisplayCurrent')}:
-                <Indication error={false} 
-                    value={String(
-                        Math.round(consum[props.num][config.display.type[props.num]] 
-                            * config.display.brightness.max[props.num] 
-                            / 255
-                        ) + config.display.sled[props.num]
-                    ) + i18n.t('units.ma')} 
+            {config.display.type[props.num] > 0 && <>
+                <RangeInput value={config.display.brightness.min[props.num]}
+                    label={i18n.t('minimumBrightnessLimit')}
+                    min={0}
+                    max={255}
+                    limitMin={0}
+                    limitMax={config.display.brightness.max[props.num]}
+                    step={1}
+                    indication={String(config.display.brightness.min[props.num])}
+                    onChange={(val) => dispatch(cf.DisplayBrightMinChange({num: props.num, val: val}))}
+                    className="mt-4"
                 />
-            </div>
+
+                <RangeInput value={config.display.brightness.max[props.num]}
+                    label={i18n.t('maximumBrightnessLimit')}
+                    min={0}
+                    max={255}
+                    limitMin={config.display.brightness.min[props.num]}
+                    limitMax={255}
+                    step={1}
+                    indication={String(config.display.brightness.max[props.num])}
+                    onChange={(val) => dispatch(cf.DisplayBrightMaxChange({num: props.num, val: val}))}
+                    className="mt-2"
+                />
+
+                <div className="mt-4 text-xs">
+                    {i18n.t('maximumDisplayCurrent')}:
+                    <Indication error={false} 
+                        value={String(
+                            displays[props.num][config.display.type[props.num]].includes('WS2812b') 
+                                ? (Math.round(consum[props.num][config.display.type[props.num]] 
+                                    * config.display.brightness.max[props.num] 
+                                    / 255
+                                ) + config.display.sled[props.num])
+                                : consum[props.num][config.display.type[props.num]]
+                        ) + i18n.t('units.ma')} 
+                    />
+                </div>
+            </>}
         </>} />
     </>
 }
