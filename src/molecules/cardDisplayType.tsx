@@ -48,7 +48,7 @@ const CardDisplayType = (props: any) => {
 
     return <>
         <Card content={<>
-            <SelectSwitch label={i18n.t('connectionType')}
+            <SelectSwitch label={i18n.t('displayType')}
                 options={displays[props.num]}
                 value={config.display.type[props.num]}
                 onChange={(val: number) => dispatch(cf.DisplayTypeChange({num: props.num, val: val}))}
