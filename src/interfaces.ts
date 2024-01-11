@@ -199,3 +199,8 @@ export interface iWeather {
         lon: number
     }]
 }
+
+export interface iIndication {
+    error: boolean,
+    value: string | React.ReactNode
+}

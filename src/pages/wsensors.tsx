@@ -9,6 +9,7 @@ import RangeInput from "../atoms/rangeInput";
 import SelectSwitch from "../atoms/selectSwitch";
 import NumberInput from "../atoms/numberInput";
 import sensorCorrection from "../atoms/sensorCorrection";
+import Indication from "../atoms/indication";
 import { iConfig } from "../redux/configTypes";
 import { iData } from "../redux/dataTypes";
 import { wsensorsValidChange } from "../redux/slices/valid";
@@ -36,19 +37,18 @@ const WSensors = () => {
                 <div>
                     <div className="text-center mb-4">
                         {i18n.t('dataFrom')}:
-                        <span className={"ms-1 " + (dataRelevance(wsensorNum) 
-                            ? "text-red-500 dark:text-red-600" 
-                            : "text-blue-700 dark:text-blue-400"
-                        )}>
-                            {data.wsensor.time[wsensorNum] === 0
-                                ? <span>--</span>
-                                : <Moment unix format="HH:mm:ss DD.MM.YYYY">{data.wsensor.time[wsensorNum]}</Moment>
-                            }
-                            {dataRelevance(wsensorNum) 
-                                ? <div>{i18n.t("dataExpired")}</div>
-                                : <div className="h-6"></div>
-                            }
-                        </span>
+                        <Indication error={dataRelevance(wsensorNum)} 
+                            value={<>
+                                {data.wsensor.time[wsensorNum] === 0
+                                    ? <span>--</span>
+                                    : <Moment unix format="HH:mm:ss DD.MM.YYYY">{data.wsensor.time[wsensorNum]}</Moment>
+                                }
+                                { dataRelevance(wsensorNum) 
+                                    ? <div>{i18n.t("dataExpired")}</div>
+                                    : <div className="h-6"></div>
+                                }
+                            </>} 
+                        />
                     </div>
 
                     <hr className="mt-8" />
@@ -162,14 +162,16 @@ const WSensors = () => {
                     <RangeInput value={config.wsensor.bat.k[wsensorNum]}
                         label={<div className="mt-8">
                             {i18n.t('batteryVoltage')}:
-                            <span className={"ms-1 " + (dataRelevance(wsensorNum) ? "text-red-500 dark:text-red-600" : "text-blue-700 dark:text-blue-400")}>
-                                {vl.validateBatteryADC(data.wsensor.bat[wsensorNum])
-                                    ? (Math.round((data.wsensor.bat[wsensorNum] / (300 - config.wsensor.bat.k[wsensorNum])) * 1000) / 1000).toFixed(3)
-                                    : "--"
-                                }
-                                {i18n.t('units.v')}
-                            </span></div>
-                        } 
+                            <Indication error={dataRelevance(wsensorNum)} 
+                                value={<>
+                                    {vl.validateBatteryADC(data.wsensor.bat[wsensorNum])
+                                        ? (Math.round((data.wsensor.bat[wsensorNum] / (300 - config.wsensor.bat.k[wsensorNum])) * 1000) / 1000).toFixed(3)
+                                        : "--"
+                                    }
+                                    {i18n.t('units.v')}
+                                </>} 
+                            />
+                        </div>} 
                         min={10}
                         max={250}
                         limitMin={10}
