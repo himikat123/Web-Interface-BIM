@@ -338,8 +338,8 @@ export const configSlice = createSlice({
         DisplayBrightNightChange: (state, action) => { state.display.brightness.night[action.payload.num] = action.payload.val },
         DisplayBrightMinChange: (state, action) => { state.display.brightness.min[action.payload.num] = action.payload.val },
         DisplayBrightMaxChange: (state, action) => { state.display.brightness.max[action.payload.num] = action.payload.val },
-        // ?Change: (state, action) => { state.display.lightSensor: [0, 0], = action.payload },
-        // ?Change: (state, action) => { state.display.sensitivity: [50, 50], = action.payload },
+        DisplayLightSensorChange: (state, action) => { state.display.lightSensor[action.payload.num] = action.payload.val },
+        DisplaySensitivityChange: (state, action) => { state.display.sensitivity[action.payload.num] = action.payload.val },
         // ?Change: (state, action) => { state.display.animation.type: 0, = action.payload },
         // ?Change: (state, action) => { state.display.animation.speed: 10, = action.payload },
         // ?Change: (state, action) => { state.display.animation.points: 0 = action.payload },
@@ -483,7 +483,7 @@ export const {
     WeatherAppIdChange, WeatherCityChange, WeatherCityIdChange, WeatherLatChange, 
     WeatherLonChange, WeatherProwiderChange, WeatherCitySearchChange, WeatherParsingServerChange,
     DisplayTypeChange, DisplayBrightMinChange, DisplayBrightMaxChange, DisplaySledChange,
-    DisplayBrightMethodChange, DisplayBrightDayChange, DisplayBrightNightChange
+    DisplayBrightMethodChange, DisplayBrightDayChange, DisplayBrightNightChange, DisplayLightSensorChange, DisplaySensitivityChange
 } = configSlice.actions;
   
 export default configSlice.reducer;
