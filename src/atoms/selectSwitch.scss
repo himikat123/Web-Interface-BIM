@@ -1,62 +1,15 @@
-.select-icon {
-    transform: rotate(0deg);
-    transition: transform 0.3s ease;
-
-    &.dropdownOpen {
-        transform: rotate(180deg);
-    }
-
-    svg path{
-        fill: var(--text_light);
-    }
-}
-
-:is(.dark) {
-    .select-icon svg path {
-        fill: var(--text_dark);
-    }
-}
-
-.select-options {
-    margin-top: 1px;
-    max-height: 0;
-    transition: max-height 0.3s ease;
-
-    &.dropdownOpen {
-        max-height: 400px;
-    }
-}
-
-.select-item:hover {
-    filter: brightness(95%);
-}
-
-:is(.dark) {
-    .select-item:hover {
-        filter: brightness(250%);
-    }
-}
-
-
-
-//@media (prefers-color-scheme: dark)
-//.form-select {
-//    background-color: #222;
-//    color: #eee;
-//}
-
 .form-select {
     -moz-padding-start: calc(.75rem - 3px);
     -webkit-appearance: none;
     appearance: none;
-    background-color: #fff;
-    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3E%3C/svg%3E");
+    background-color: var(--card_light);
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23777777' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3E%3C/svg%3E");
     background-position: right 0.75rem center;
     background-repeat: no-repeat;
     background-size: 16px 12px;
-    border: 1px solid #ced4da;
+    border: 1px solid var(--menu_light);
     border-radius: 0.375rem;
-    color: #212529;
+    color: var(--text_light);
     display: block;
     font-size: 1rem;
     font-weight: 400;
@@ -64,19 +17,17 @@
     padding: 0.375rem 2.25rem 0.375rem 0.75rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     width: 100%;
-}
-
-.form-select {
     word-wrap: normal;
-}
-
-.form-select {
     text-transform: none;
-}
-
-.form-select {
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
     margin: 0;
+}
+
+:is(.dark) {
+    .form-select {
+        background-color: var(--card_dark);
+        color: var(--text_dark);
+    }
 }
