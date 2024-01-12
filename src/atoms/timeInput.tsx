@@ -9,6 +9,7 @@ const TimeInput = (props: iTimeInput) => {
             </label>
             <input className="z-10 h-full w-full rounded-md px-3.5 py-4 outline-none bg-card_light dark:bg-card_dark text-text_light dark:text-text_dark" 
                 type="time"
+                step={props.step}
                 value={props.value ?? 0}
             
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => props.onChange(e.target.value)} 

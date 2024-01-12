@@ -97,6 +97,7 @@ export interface iNumberInput {
 
 export interface iTimeInput {
     value: string,
+    step: number,
     label: string,
     onChange(e: string): void
 }
