@@ -211,7 +211,7 @@
     "nightBrightness": "Nacht-Helligkeit",
     "sensorType": "Sensortyp",
     "sensorSensitivity": "Sensorempfindlichkeit",
-    "dayMode": "Tagmodus",
+    "dayMode": "Startzeit des Tages",
     "nightMode": "Nachtmodus",
     "brightness": "Helligkeit",
     "timeSlot": "Zeitschlitz",
