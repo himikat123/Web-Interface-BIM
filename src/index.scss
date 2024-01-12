@@ -24,6 +24,9 @@ select:-webkit-autofill {
         -webkit-box-shadow: 0 0 0 1000px var(--card_dark) inset !important;
         -webkit-text-fill-color: var(--text_dark) !important;
     }
+    input[type="time"] {
+        color-scheme: dark;
+    }
 }
 
 ::-webkit-scrollbar {
