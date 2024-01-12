@@ -5,6 +5,7 @@ import Card from "../atoms/card";
 import SelectSwitch from "../atoms/selectSwitch";
 import BrightSunriseSunset from "../molecules/brightSunriseSunset";
 import BrightSensor from "../molecules/brightSensor";
+import BrightTime from "../molecules/brightTime";
 import { iConfig } from "../redux/configTypes";
 import { iDisplay } from "../interfaces";
 import * as cf from "../redux/slices/config";
@@ -32,6 +33,9 @@ const CardDisplayBrightness = (props: iDisplay) => {
 
         {/* Brightess by light sensor */}
         {config.display.brightMethod[props.num] === 1 && <BrightSensor num={props.num} />}
+
+        {/* Brightess by time */}
+        {config.display.brightMethod[props.num] === 2 && <BrightTime num={props.num} />}
     </>} />
 }
 
