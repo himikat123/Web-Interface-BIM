@@ -327,8 +327,8 @@ export const configSlice = createSlice({
 
         DisplayTypeChange: (state, action) => { state.display.type[action.payload.num] = action.payload.val },
         DisplaySledChange: (state, action) => { state.display.sled[action.payload.num] = action.payload.val },
-        // ?Change: (state, action) => { state.display.dayTime: ["07:00", "07:00"], = action.payload },
-        // ?Change: (state, action) => { state.display.nightTime: ["21:00", "21:00"], = action.payload },
+        DisplayDayTimeChange: (state, action) => { state.display.dayTime[action.payload.num] = action.payload.val },
+        DisplayNightTimeChange: (state, action) => { state.display.nightTime[action.payload.num] = action.payload.val },
         DisplayBrightMethodChange: (state, action) => { state.display.brightMethod[action.payload.num] = action.payload.val },
         // ?Change: (state, action) => { state.display.autoOff: [0, 0], = action.payload },
         // ?Change: (state, action) => { state.display.nightOff.need: [0, 0], = action.payload },
@@ -483,7 +483,8 @@ export const {
     WeatherAppIdChange, WeatherCityChange, WeatherCityIdChange, WeatherLatChange, 
     WeatherLonChange, WeatherProwiderChange, WeatherCitySearchChange, WeatherParsingServerChange,
     DisplayTypeChange, DisplayBrightMinChange, DisplayBrightMaxChange, DisplaySledChange,
-    DisplayBrightMethodChange, DisplayBrightDayChange, DisplayBrightNightChange, DisplayLightSensorChange, DisplaySensitivityChange
+    DisplayBrightMethodChange, DisplayBrightDayChange, DisplayBrightNightChange, DisplayLightSensorChange, DisplaySensitivityChange,
+    DisplayDayTimeChange, DisplayNightTimeChange
 } = configSlice.actions;
   
 export default configSlice.reducer;

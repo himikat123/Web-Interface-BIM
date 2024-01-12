@@ -95,6 +95,12 @@ export interface iNumberInput {
     children?: React.ReactNode | undefined
 }
 
+export interface iTimeInput {
+    value: string,
+    label: string,
+    onChange(e: string): void
+}
+
 export interface iPasswordInput {
     label: string,
     value: string,
