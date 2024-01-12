@@ -30,7 +30,7 @@ const BrightTime = (props: iDisplay) => {
             className="mt-4"
         />
 
-        <div className="mt-8">
+        <div className="mt-14">
             <TimeInput value={config.display.nightTime[props.num]} 
                 label={i18n.t('nightMode')} 
                 onChange={val => dispatch(cf.DisplayNightTimeChange({num: props.num, val: val}))} 
