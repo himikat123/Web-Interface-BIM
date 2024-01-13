@@ -77,9 +77,9 @@ export const configSlice = createSlice({
             lightSensor: [0, 0],
             sensitivity: [0, 0],
             animation: {
-                type: 0,
-                speed: 0,
-                points: 0
+                type: [0, 0],
+                speed: [0, 0],
+                points: [0, 0]
             },
             source: {
                 tempOut: {
@@ -340,9 +340,9 @@ export const configSlice = createSlice({
         DisplayBrightMaxChange: (state, action) => { state.display.brightness.max[action.payload.num] = action.payload.val },
         DisplayLightSensorChange: (state, action) => { state.display.lightSensor[action.payload.num] = action.payload.val },
         DisplaySensitivityChange: (state, action) => { state.display.sensitivity[action.payload.num] = action.payload.val },
-        // ?Change: (state, action) => { state.display.animation.type: 0, = action.payload },
-        // ?Change: (state, action) => { state.display.animation.speed: 10, = action.payload },
-        // ?Change: (state, action) => { state.display.animation.points: 0 = action.payload },
+        DisplayAnimationTypeChange: (state, action) => { state.display.animation.type[action.payload.num] = action.payload.val },
+        DisplayAnimationSpeedChange: (state, action) => { state.display.animation.speed[action.payload.num] = action.payload.val },
+        DisplayAnimationPointsChange: (state, action) => { state.display.animation.points[action.payload.num] = action.payload.val },
         // ?Change: (state, action) => { state.display.source.tempOut.sens: 0, = action.payload },
         // ?Change: (state, action) => { state.display.source.tempOut.wsensNum: 0, = action.payload },
         // ?Change: (state, action) => { state.display.source.tempOut.temp: 0, = action.payload },
@@ -485,7 +485,8 @@ export const {
     DisplayTypeChange, DisplayBrightMinChange, DisplayBrightMaxChange, DisplaySledChange,
     DisplayBrightMethodChange, DisplayBrightDayChange, DisplayBrightNightChange, DisplayLightSensorChange, DisplaySensitivityChange,
     DisplayDayTimeChange, DisplayNightTimeChange, DisplayAutoOffChange,
-    DisplayNightOffNeedChange, DisplayNightOffFromChange, DisplayNightOffToChange
+    DisplayNightOffNeedChange, DisplayNightOffFromChange, DisplayNightOffToChange,
+    DisplayAnimationTypeChange, DisplayAnimationSpeedChange, DisplayAnimationPointsChange
 } = configSlice.actions;
   
 export default configSlice.reducer;

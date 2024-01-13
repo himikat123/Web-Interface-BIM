@@ -128,9 +128,9 @@
             50
         ],
         "animation": {
-            "type": 0,
-            "speed": 10,
-            "points": 0
+            "type": [0, 0],
+            "speed": [10, 10],
+            "points": [0, 0]
         },
         "source": {
             "tempOut": {

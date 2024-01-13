@@ -6,6 +6,7 @@ import Card from "../atoms/card";
 import CardDisplayType from "../organisms/cardDisplayType";
 import CardDisplayBrightness from "../organisms/cardDisplayBrightness";
 import CardDisplayAutoOff from "../organisms/cardDisplayAutoOff";
+import CardDisplayAnimation from "../organisms/cardDisplayAnimation";
 
 import { iConfig } from "../redux/configTypes";
 import { iData } from "../redux/dataTypes";
@@ -20,6 +21,7 @@ const Display1 = () => {
         <CardDisplayType num={0} />
         <CardDisplayBrightness num={0} />
         <CardDisplayAutoOff num={0} />
+        <CardDisplayAnimation num={0} />
     </>
 
     return <>

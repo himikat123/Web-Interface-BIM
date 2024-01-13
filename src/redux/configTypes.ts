@@ -74,9 +74,9 @@ export interface iConfig {
             lightSensor: number[],
             sensitivity: number[],
             animation: {
-                type: number,
-                speed: number,
-                points: number
+                type: number[],
+                speed: number[],
+                points: number[]
             },
             source: {
                 tempOut: {
