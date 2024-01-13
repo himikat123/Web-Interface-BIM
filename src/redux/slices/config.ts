@@ -330,10 +330,10 @@ export const configSlice = createSlice({
         DisplayDayTimeChange: (state, action) => { state.display.dayTime[action.payload.num] = action.payload.val },
         DisplayNightTimeChange: (state, action) => { state.display.nightTime[action.payload.num] = action.payload.val },
         DisplayBrightMethodChange: (state, action) => { state.display.brightMethod[action.payload.num] = action.payload.val },
-        // ?Change: (state, action) => { state.display.autoOff: [0, 0], = action.payload },
-        // ?Change: (state, action) => { state.display.nightOff.need: [0, 0], = action.payload },
-        // ?Change: (state, action) => { state.display.nightOff.from: [22, 22], = action.payload },
-        // ?Change: (state, action) => { state.display.nightOff.to: [7, 7] = action.payload },
+        DisplayAutoOffChange: (state, action) => { state.display.autoOff[action.payload.num] = action.payload.val },
+        DisplayNightOffNeedChange: (state, action) => { state.display.nightOff.need[action.payload.num] = action.payload.val },
+        DisplayNightOffFromChange: (state, action) => { state.display.nightOff.from[action.payload.num] = action.payload.val },
+        DisplayNightOffToChange: (state, action) => { state.display.nightOff.to[action.payload.num] = action.payload.val },
         DisplayBrightDayChange: (state, action) => { state.display.brightness.day[action.payload.num] = action.payload.val },
         DisplayBrightNightChange: (state, action) => { state.display.brightness.night[action.payload.num] = action.payload.val },
         DisplayBrightMinChange: (state, action) => { state.display.brightness.min[action.payload.num] = action.payload.val },
@@ -484,7 +484,8 @@ export const {
     WeatherLonChange, WeatherProwiderChange, WeatherCitySearchChange, WeatherParsingServerChange,
     DisplayTypeChange, DisplayBrightMinChange, DisplayBrightMaxChange, DisplaySledChange,
     DisplayBrightMethodChange, DisplayBrightDayChange, DisplayBrightNightChange, DisplayLightSensorChange, DisplaySensitivityChange,
-    DisplayDayTimeChange, DisplayNightTimeChange
+    DisplayDayTimeChange, DisplayNightTimeChange, DisplayAutoOffChange,
+    DisplayNightOffNeedChange, DisplayNightOffFromChange, DisplayNightOffToChange
 } = configSlice.actions;
   
 export default configSlice.reducer;

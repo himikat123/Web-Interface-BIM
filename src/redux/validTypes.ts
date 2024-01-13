@@ -3,6 +3,7 @@ export interface iValid {
         connect: boolean,
         accesspoint: boolean,
         wsensors: boolean,
+        display1: boolean,
 
         account: boolean
     }

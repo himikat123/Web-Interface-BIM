@@ -31,6 +31,7 @@ const MenuItems = (props: iMenuItems) => {
     const validConnect = useSelector((state: iValid) => state.valid.connect);
     const validAccesspoint = useSelector((state: iValid) => state.valid.accesspoint);
     const validWsensors = useSelector((state: iValid) => state.valid.wsensors);
+    const validDisplay1 = useSelector((state: iValid) => state.valid.display1)
 
     return <>
         <MenuItem link="/" 
@@ -120,12 +121,12 @@ const MenuItems = (props: iMenuItems) => {
                 title={i18n.t('display.plural')} 
                 mobile={props.mobile} 
                 icon={<DisplaySVG />} 
-                valid={true}
+                valid={validDisplay1}
             >
                 <MenuSubItem link="/display1" 
                     current={props.current} 
                     title={i18n.t('display.singular') + " 1"} 
-                    valid={true} 
+                    valid={validDisplay1} 
                 />
                 <MenuSubItem link="/display2" 
                     current={props.current} 

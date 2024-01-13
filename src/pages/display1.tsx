@@ -5,6 +5,7 @@ import i18n from '../i18n/main';
 import Card from "../atoms/card";
 import CardDisplayType from "../organisms/cardDisplayType";
 import CardDisplayBrightness from "../organisms/cardDisplayBrightness";
+import CardDisplayAutoOff from "../organisms/cardDisplayAutoOff";
 
 import { iConfig } from "../redux/configTypes";
 import { iData } from "../redux/dataTypes";
@@ -18,6 +19,7 @@ const Display1 = () => {
     const content1 = <>
         <CardDisplayType num={0} />
         <CardDisplayBrightness num={0} />
+        <CardDisplayAutoOff num={0} />
     </>
 
     return <>
