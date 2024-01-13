@@ -1,24 +1,11 @@
-.number-input {
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    input[type=number] {
-        appearance: textfield;
-        -moz-appearance: textfield;
-    }
-}
-
-.number-icon svg path {
-    fill: var(--text_light);
-}
-
-:is(.dark) {
-    .number-icon svg path {
-        fill: var(--text_dark);
-    }
+input[type=number]::-webkit-outer-spin-button, 
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: inner-spin-button !important;
+    width: 30px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    height: 30px;
 }
 
 .number-input-tip {

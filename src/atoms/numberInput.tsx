@@ -3,20 +3,10 @@ import i18n from '../i18n/main';
 import cn, { Argument } from 'classnames';
 import { twMerge } from 'tailwind-merge';
 import { iNumberInput } from '../interfaces';
-import { ReactComponent as ArrowDownSVG } from '../atoms/icons/arrowDown.svg';
 import './numberInput.scss';
 
 const NumberInput = (props: iNumberInput) => {
     const [valid, setValid] = useState<boolean>(true);
-
-    const minus = () => {
-        if(props.value > props.min) props.onChange(Number(props.value) - 1);
-    }
-
-    const plus = () => {
-        if(props.value < props.max) props.onChange(Number(props.value) + 1);
-    }
-
 
     /* Validate changed value */
     useEffect(() => {
@@ -63,17 +53,6 @@ const NumberInput = (props: iNumberInput) => {
                 readOnly={props.readonly}
             />
             {props.children}
-            
-            <div className={"w-4 absolute top-2 rotate-180 right-3 number-icon cursor-pointer"}
-                onClick={() => plus()}
-            >
-                <ArrowDownSVG />
-            </div>
-            <div className={"w-4 absolute top-8 right-3 number-icon cursor-pointer"}
-                onClick={() => minus()}
-            >
-                <ArrowDownSVG />
-            </div>
         </div>
         
         {/* error tips */}
