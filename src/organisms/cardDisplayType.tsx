@@ -1,6 +1,7 @@
 import React from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
+import hostUrl from "../atoms/hostUrl";
 import Card from "../atoms/card";
 import SelectSwitch from "../atoms/selectSwitch";
 import RangeInput from "../atoms/rangeInput";
@@ -40,6 +41,14 @@ const CardDisplayType = (props: iDisplay) => {
     const displays = props.num == 0 ? [...displays1, ...displays2].map(d => Object.keys(d)[0]) : displays2.map(d => Object.keys(d)[0]);
     const consums = props.num == 0 ? [...displays1, ...displays2].map(d => Object.values(d)[0]) : displays2.map(d => Object.values(d)[0]);
     
+    const sendLimits = () => {
+        let url = `${hostUrl()}/esp/brightLimit`;
+        url += `?min=${config.display.brightness.min[props.num]}`;
+        url += `&max=${config.display.brightness.max[props.num]}`;
+        url += `&num=${props.num}`;
+        fetch(url);
+    }
+
     return <>
         <Card content={<>
             <SelectSwitch label={i18n.t('displayType')}
@@ -65,7 +74,10 @@ const CardDisplayType = (props: iDisplay) => {
                     limitMax={config.display.brightness.max[props.num]}
                     step={1}
                     indication={String(config.display.brightness.min[props.num])}
-                    onChange={(val) => dispatch(cf.DisplayBrightMinChange({num: props.num, val: val}))}
+                    onChange={val => {
+                        dispatch(cf.DisplayBrightMinChange({num: props.num, val: val}));
+                        sendLimits();
+                    }}
                     className="mt-4"
                 />
 
@@ -77,7 +89,10 @@ const CardDisplayType = (props: iDisplay) => {
                     limitMax={255}
                     step={1}
                     indication={String(config.display.brightness.max[props.num])}
-                    onChange={(val) => dispatch(cf.DisplayBrightMaxChange({num: props.num, val: val}))}
+                    onChange={val => {
+                        dispatch(cf.DisplayBrightMaxChange({num: props.num, val: val}));
+                        sendLimits();
+                    }}
                     className="mt-2"
                 />
 

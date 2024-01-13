@@ -1,6 +1,7 @@
 import React from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
+import hostUrl from "../atoms/hostUrl";
 import SelectSwitch from "../atoms/selectSwitch";
 import RangeInput from "../atoms/rangeInput";
 import Indication from "../atoms/indication";
@@ -37,6 +38,13 @@ const BrightSensor = (props: iDisplay) => {
         'BH1750 (' + bh1750Value + ')'
     ];
 
+    const sendSensitivity = (bright: number) => {
+        let url = `${hostUrl()}/esp/sensitivity`;
+        url += `?bright=${String(bright)}`;
+        url += `&num=${props.num}`;
+        fetch(url);
+    }
+
     return <div className="my-8">
         <SelectSwitch label={i18n.t('sensorType')}
             options={lightSensors}
@@ -52,7 +60,10 @@ const BrightSensor = (props: iDisplay) => {
             limitMax={100}
             step={1}
             indication={String(config.display.sensitivity[props.num])}
-            onChange={(val) => dispatch(cf.DisplaySensitivityChange({num: props.num, val: val}))}
+            onChange={val => {
+                dispatch(cf.DisplaySensitivityChange({num: props.num, val: val}));
+                sendSensitivity(val);
+            }}
             className="mt-2"
         />
         <div className="mt-4 text-end">
