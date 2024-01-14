@@ -51,7 +51,7 @@ const CardDisplayAnimation = (props: iDisplay) => {
     }
 
     return <>
-        <Card content={config.display.type[props.num] >= 4 && config.display.type[props.num] <= 18 && <>
+        <Card content={config.display.type[props.num] - props.num >= 2 && <>
             <SelectSwitch label={i18n.t('animation')}
                 options={animations}
                 value={config.display.animation.type[props.num]}
@@ -76,7 +76,7 @@ const CardDisplayAnimation = (props: iDisplay) => {
                 className="mt-4"
             />
 
-            <div className="mt-12">
+            {config.display.type[props.num] - props.num < 5 && <div className="mt-12">
                 <SelectSwitch label={i18n.t('clockPoints')}
                     options={clockPoints}
                     value={config.display.animation.points[props.num]}
@@ -85,7 +85,7 @@ const CardDisplayAnimation = (props: iDisplay) => {
                         sendAnimationPoints(val);
                     }}
                 />
-            </div>
+            </div>}
         </>} />
     </>
 }
