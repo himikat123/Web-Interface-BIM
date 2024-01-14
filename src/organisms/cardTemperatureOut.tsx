@@ -20,7 +20,6 @@ const CardTemperature = () => {
         'SHT21 (' + SensorData().SHT21temp + ')',
         'DHT22 (' + SensorData().DHT22temp + ')',
         'DS18B20 (' + SensorData().DS18B20temp + ')',
-        i18n.t('sequence') + ' (...)',
         'BME680 (' + SensorData().BME680temp + ')'
     ];
 
