@@ -22,7 +22,7 @@ const CardDisplayAutoOff = (props: iDisplay) => {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
        
-    return <Card content={<>
+    return <Card content={config.display.type[props.num] > 0 && <>
         <NumberInput value={config.display.autoOff[props.num]}
             min={0}
             max={1440}

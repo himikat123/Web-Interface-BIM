@@ -22,7 +22,7 @@ const CardDisplayBrightness = (props: iDisplay) => {
         i18n.t('constantBrightness')
     ];
 
-    return <Card content={<>
+    return <Card content={config.display.type[props.num] > 0 && <>
         <SelectSwitch label={i18n.t('displayBrightness')}
             options={brightSources}
             value={config.display.brightMethod[props.num]}
