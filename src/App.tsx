@@ -13,6 +13,7 @@ import Sensors from './pages/sensors';
 import WSensors from './pages/wsensors';
 import Weather from './pages/weather';
 import Display1 from './pages/display1';
+import Display2 from './pages/display2';
 import Language from './pages/language';
 import Username from './pages/username';
 import { changeLanguage } from './i18n/main';
@@ -83,6 +84,7 @@ function App() {
                 <Route path="/wsensors"    element={ <WSensors /> }>    </Route>
                 <Route path="/weather"     element={ <Weather /> }>     </Route>
                 <Route path="/display1"    element={ <Display1 /> }>    </Route>
+                <Route path="/display2"    element={ <Display2 /> }>    </Route>
 
                 <Route path="/language"    element={ <Language /> }>    </Route>
                 <Route path="/username"    element={ <Username /> }>    </Route>
