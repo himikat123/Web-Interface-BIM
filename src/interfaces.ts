@@ -102,6 +102,12 @@ export interface iTimeInput {
     onChange(e: string): void
 }
 
+export interface iColorInput {
+    value: string,
+    label: string,
+    onChange(e: string): void
+}
+
 export interface iPasswordInput {
     label: string,
     value: string,
@@ -214,4 +220,9 @@ export interface iIndication {
 
 export interface iDisplay {
     num: number
+}
+
+export interface iDisplayTimeSlot {
+    num: number,
+    slot: number
 }
