@@ -40,11 +40,11 @@ const data = () => {
         ],
         
         bme680: {
-            temp: random(200, 250), // obviously incorrect values
-            hum: random(500, 550),
-            pres: random(9000, 9500),
-            iaq: random(1230, 1350),
-            iaqAccr: random(0, 3)
+            temp: random(20, 25), // obviously correct values
+            hum: random(50, 55),
+            pres: random(900, 950),
+            iaq: random(123, 135),
+            iaqAccr: Math.round(random(0, 3))
         },
         bme280: {
             temp: random(450, 500), // obviously incorrect values
