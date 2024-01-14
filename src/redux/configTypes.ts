@@ -55,6 +55,7 @@ export interface iConfig {
         },
         display: {
             type: number[],
+            model: number[],
             sled: number[],
             dayTime: string[],
             nightTime: string[],
@@ -130,15 +131,15 @@ export interface iConfig {
                 }
             },
             timeSlot: {
-                period: number[],
-                sensor: number[],
-                data: number[],
-                thing: number[],
+                period: number[][],
+                sensor: number[][],
+                data: number[][],
+                thing: number[][],
                 wsensor: {
-                    num: number[],
-                    type: number[]
+                    num: number[][],
+                    type: number[][]
                 },
-                    color: string[]
+                    color: string[][]
             }
         },
         sound: {
