@@ -272,6 +272,7 @@
     "threeBatteries": "3 baterie (4,5 V)",
     "liIonBattery": "Bateria Li-ion (3,7 V)",
     "dataFrom": "Dane od:",
+    "ago": "temu",
     "dataExpirationTime": "Czas ważności danych (minuty)",
     "dataExpired": "Dane wygasły",
     "wirelessSensorNumber": "Numer czujnika",

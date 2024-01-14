@@ -272,6 +272,7 @@
     "threeBatteries": "3 батарейки (4.5В)",
     "liIonBattery": "Li-ion аккумулятор (3.7В)",
     "dataFrom": "Данные от",
+    "ago": "назад",
     "dataExpirationTime": "Срок годности данных (минут)",
     "dataExpired": "Данные просрочены",
     "wirelessSensorNumber": "Номер датчика",

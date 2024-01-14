@@ -272,6 +272,7 @@
     "threeBatteries": "3 Batterien (4,5V)",
     "liIonBattery": "Li-Ionen-Batterie (3,7V)",
     "dataFrom": "Daten von",
+    "ago": "vor",
     "dataExpirationTime": "Ablaufzeit der Daten (Minuten)",
     "dataExpired": "Daten abgelaufen",
     "wirelessSensorNumber": "Kabelloser Sensornummer",

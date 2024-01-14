@@ -77,8 +77,8 @@ const data = () => {
         },
         wsensor: {
             time: [
-                Math.floor(Date.now() / 1000) - 314, // 5 minutes 14 seconds ago
-                Math.floor(Date.now() / 1000) - 1102 // 18 minutes 22 seconds ago
+                Math.floor(Date.now() / 1000) - random(300, 360), // 5 - 6 minutes ago
+                Math.floor(Date.now() / 1000) - 1000000 // 12 days ago
             ],
             temp: {
                 data: [ 

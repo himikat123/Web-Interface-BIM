@@ -2,6 +2,10 @@ import React, { useEffect, useState} from "react";
 import TwoColumns from "../templates/twoColumns";
 import { useSelector, useDispatch } from 'react-redux';
 import Moment from 'react-moment';
+import 'moment/locale/de';
+import 'moment/locale/ru';
+import 'moment/locale/pl';
+import 'moment/locale/uk';
 import i18n from '../i18n/main';
 import Card from "../atoms/card";
 import Button from "../atoms/button";
@@ -23,6 +27,15 @@ const WSensors = () => {
     const [hideUnnecessary, setHideUnnecessary] = useState<boolean>(true);
     const [isValid, setIsValid] = useState<boolean[]>([]);
 
+    let locale = 'en';
+    switch(config.lang) {
+        case 'de': locale = 'de'; break;
+        case 'ru': locale = 'ru'; break;
+        case 'pl': locale = 'pl'; break;
+        case 'ua': locale = 'uk'; break;
+        default: locale = 'en'; break; 
+    }
+
     useEffect(() => {
         dispatch(wsensorsValidChange(!isValid.includes(false)));
     });
@@ -41,7 +54,12 @@ const WSensors = () => {
                             value={<>
                                 {data.wsensor.time[wsensorNum] === 0
                                     ? <span>--</span>
-                                    : <Moment unix format="HH:mm:ss DD.MM.YYYY">{data.wsensor.time[wsensorNum]}</Moment>
+                                    : <>
+                                        <Moment unix format="HH:mm:ss DD.MM.YYYY">{data.wsensor.time[wsensorNum]}</Moment><br />
+                                        {config.lang == 'de' && i18n.t('ago') + ' '}
+                                        <Moment locale={locale} unix fromNow ago>{data.wsensor.time[wsensorNum]}</Moment>
+                                        {config.lang != 'de' && ' ' + i18n.t('ago')}
+                                    </>
                                 }
                                 { dataRelevance(wsensorNum) 
                                     ? <div>{i18n.t("dataExpired")}</div>
