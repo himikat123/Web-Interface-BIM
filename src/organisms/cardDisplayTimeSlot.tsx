@@ -112,7 +112,7 @@ const CardDisplayTimeSlot = (props: iDisplayTimeSlot) => {
     }
 
     return <>
-        <Card header={i18n.t('timeSlot') + ' ' + String(props.slot)} 
+        <Card header={i18n.t('timeSlot') + ' ' + String(props.slot + 1)} 
             content={<>
 
                 {/* Duration */}
