@@ -58,6 +58,7 @@ export const configSlice = createSlice({
         },
         display: {
             type: [0, 0],
+            model: [0, 0],
             sled: [0, 0],
             dayTime: ["", ""],
             nightTime: ["", ""],
@@ -133,15 +134,15 @@ export const configSlice = createSlice({
                 }
             },
             timeSlot: {
-                period: [0, 0, 0, 0, 0, 0, 0, 0],
-                sensor: [0, 0, 0, 0, 0, 0, 0, 0],
-                data: [0, 0, 0, 0, 0, 0, 0, 0],
-                thing: [0, 0, 0, 0, 0, 0, 0, 0],
+                period: [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]],
+                sensor: [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]],
+                data: [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]],
+                thing: [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]],
                 wsensor: {
-                    num: [0, 0, 0, 0, 0, 0, 0, 0],
-                    type: [0, 0, 0, 0, 0, 0, 0, 0]
+                    num: [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]],
+                    type: [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
                 },
-                color: ["", "", "", "", "", "", "", ""]
+                color: [["", ""], ["", ""], ["", ""], ["", ""], ["", ""], ["", ""], ["", ""], ["", ""]]
             }
         },
         sound: {
@@ -326,6 +327,7 @@ export const configSlice = createSlice({
         // ?Change: (state, action) => { state.clock.ntp_period: 15 = action.payload },
 
         DisplayTypeChange: (state, action) => { state.display.type[action.payload.num] = action.payload.val },
+        DisplayModelChange: (state, action) => { state.display.model[action.payload.num] = action.payload.val },
         DisplaySledChange: (state, action) => { state.display.sled[action.payload.num] = action.payload.val },
         DisplayDayTimeChange: (state, action) => { state.display.dayTime[action.payload.num] = action.payload.val },
         DisplayNightTimeChange: (state, action) => { state.display.nightTime[action.payload.num] = action.payload.val },
@@ -376,14 +378,14 @@ export const configSlice = createSlice({
         // ?Change: (state, action) => { state.display.source.sequence.thnghum: [0, 0, 0, 0], = action.payload },
         // ?Change: (state, action) => { state.display.source.sequence.wsenshum: [0, 0, 0, 0], = action.payload },
         // ?Change: (state, action) => { state.display.source.sequence.dur: 5 = action.payload },
-        // ?Change: (state, action) => { state.display.timeSlot.period: [6, 2, 2, 0, 0, 0, 0, 0], = action.payload },
-        // ?Change: (state, action) => { state.display.timeSlot.sensor: [0, 9, 9, 0, 0, 0, 0, 0], = action.payload },
-        // ?Change: (state, action) => { state.display.timeSlot.data: [0, 0, 1, 0, 0, 0, 0, 0], = action.payload },
-        // ?Change: (state, action) => { state.display.timeSlot.thing: [0, 0, 0, 0, 0, 0, 0, 0], = action.payload },
-        // ?Change: (state, action) => { state.display.timeSlot.wsensor.num: [0, 0, 0, 0, 0, 0, 0, 0], = action.payload },
-        // ?Change: (state, action) => { state.display.timeSlot.wsensor.type: [0, 0, 0, 0, 0, 0, 0, 0] = action.payload },
-        // ?Change: (state, action) => { state.display.timeSlot.color: ["#FFFFFF", "#FFFF00", "#00FFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF"] = action.payload },
-        // 
+        DisplayTimeslotPeriodChange: (state, action) => { state.display.timeSlot.period[action.payload.slot][action.payload.num] = action.payload.val },
+        DisplayTimeslotSensorChange: (state, action) => { state.display.timeSlot.sensor [action.payload.slot][action.payload.num] = action.payload.val },
+        DisplayTimeslotDataChange: (state, action) => { state.display.timeSlot.data [action.payload.slot][action.payload.num] = action.payload.val },
+        DisplayTimeslotThingChange: (state, action) => { state.display.timeSlot.thing [action.payload.slot][action.payload.num] = action.payload.val },
+        DisplayTimeslotWsensorNumChange: (state, action) => { state.display.timeSlot.wsensor.num [action.payload.slot][action.payload.num] = action.payload.val },
+        DisplayTimeslotWsensorTypeChange: (state, action) => { state.display.timeSlot.wsensor.type [action.payload.slot][action.payload.num] = action.payload.val },
+        DisplayTimeslotColorChange: (state, action) => { state.display.timeSlot.color [action.payload.slot][action.payload.num] = action.payload.val },
+
         // ?Change: (state, action) => { state.sound.vol: 15, = action.payload },
         // ?Change: (state, action) => { state.sound.eq: 0, = action.payload },
         // ?Change: (state, action) => { state.sound.hourly: 0, = action.payload },
@@ -482,11 +484,13 @@ export const {
     WSensBatKChange, WSensBatTypeChange, WSensExpireChange, WSensChannelChange,
     WeatherAppIdChange, WeatherCityChange, WeatherCityIdChange, WeatherLatChange, 
     WeatherLonChange, WeatherProwiderChange, WeatherCitySearchChange, WeatherParsingServerChange,
-    DisplayTypeChange, DisplayBrightMinChange, DisplayBrightMaxChange, DisplaySledChange,
+    DisplayTypeChange, DisplayModelChange, DisplayBrightMinChange, DisplayBrightMaxChange, DisplaySledChange,
     DisplayBrightMethodChange, DisplayBrightDayChange, DisplayBrightNightChange, DisplayLightSensorChange, DisplaySensitivityChange,
     DisplayDayTimeChange, DisplayNightTimeChange, DisplayAutoOffChange,
     DisplayNightOffNeedChange, DisplayNightOffFromChange, DisplayNightOffToChange,
-    DisplayAnimationTypeChange, DisplayAnimationSpeedChange, DisplayAnimationPointsChange
+    DisplayAnimationTypeChange, DisplayAnimationSpeedChange, DisplayAnimationPointsChange,
+    DisplayTimeslotPeriodChange, DisplayTimeslotSensorChange, DisplayTimeslotDataChange, DisplayTimeslotThingChange, 
+    DisplayTimeslotWsensorNumChange, DisplayTimeslotWsensorTypeChange, DisplayTimeslotColorChange
 } = configSlice.actions;
   
 export default configSlice.reducer;
