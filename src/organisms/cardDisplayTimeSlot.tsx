@@ -124,73 +124,75 @@ const CardDisplayTimeSlot = (props: iDisplayTimeSlot) => {
                     isValid={valid => setIsValid(valid)}
                 />
 
-                {/* Color */}
-                {config.display.type[props.num] + props.num === 4 && <div className="mt-8">
-                    <ColorInput value={config.display.timeSlot.color[props.slot][props.num]}
-                        label={i18n.t('displayColor')} 
-                        onChange={val => {
-                            dispatch(cf.DisplayTimeslotColorChange({slot: props.slot, num: props.num, val: val}));
-                            sendSlotColor(val);
-                        }}
-                    />
-                </div>}
+                {config.display.timeSlot.period[props.slot][props.num] > 0 && <>
+                    {/* Color */}
+                    {config.display.type[props.num] + props.num === 4 && <div className="mt-8">
+                        <ColorInput value={config.display.timeSlot.color[props.slot][props.num]}
+                            label={i18n.t('displayColor')} 
+                            onChange={val => {
+                                dispatch(cf.DisplayTimeslotColorChange({slot: props.slot, num: props.num, val: val}));
+                                sendSlotColor(val);
+                            }}
+                        />
+                    </div>}
 
-                {/* Data source */}
-                <div className="mt-8">
-                    <SelectSwitch label={i18n.t('dataSource.singular')}
-                        options={sensors}
-                        value={config.display.timeSlot.sensor[props.slot][props.num]}
-                        onChange={val => {
-                            dispatch(cf.DisplayTimeslotSensorChange({slot: props.slot, num: props.num, val: val}));
-                            dispatch(cf.DisplayTimeslotDataChange({slot: props.slot, num: props.num, val: 0}))
-                        }}
-                    />
-                </div>
+                    {/* Data source */}
+                    <div className="mt-8">
+                        <SelectSwitch label={i18n.t('dataSource.singular')}
+                            options={sensors}
+                            value={config.display.timeSlot.sensor[props.slot][props.num]}
+                            onChange={val => {
+                                dispatch(cf.DisplayTimeslotSensorChange({slot: props.slot, num: props.num, val: val}));
+                                dispatch(cf.DisplayTimeslotDataChange({slot: props.slot, num: props.num, val: 0}))
+                            }}
+                        />
+                    </div>
 
-                {/* Sensor type */}
-                {types[config.display.timeSlot.sensor[props.slot][props.num]].length > 0 && <div className="mt-8">
-                    <SelectSwitch label={i18n.t('sensorType')}
-                        options={types[config.display.timeSlot.sensor[props.slot][props.num]]}
-                        value={config.display.timeSlot.data[props.slot][props.num]}
-                        onChange={val => dispatch(cf.DisplayTimeslotDataChange({slot: props.slot, num: props.num, val: val}))}
-                    />
-                </div>}
+                    {/* Sensor type */}
+                    {types[config.display.timeSlot.sensor[props.slot][props.num]].length > 0 && <div className="mt-8">
+                        <SelectSwitch label={i18n.t('sensorType')}
+                            options={types[config.display.timeSlot.sensor[props.slot][props.num]]}
+                            value={config.display.timeSlot.data[props.slot][props.num]}
+                            onChange={val => dispatch(cf.DisplayTimeslotDataChange({slot: props.slot, num: props.num, val: val}))}
+                        />
+                    </div>}
 
-                {/* Thingspeak sensor type */}
-                {config.display.timeSlot.sensor[props.slot][props.num] === 8 && <div className="mt-8">
-                    <SelectSwitch label={i18n.t('sensorType')}
-                        options={[i18n.t('temperature'), i18n.t('humidity'), i18n.t('pressure')]}
-                        value={config.display.timeSlot.data[props.slot][props.num]}
-                        onChange={val => dispatch(cf.DisplayTimeslotDataChange({slot: props.slot, num: props.num, val: val}))}
-                    />
-                </div>}
+                    {/* Thingspeak sensor type */}
+                    {config.display.timeSlot.sensor[props.slot][props.num] === 8 && <div className="mt-8">
+                        <SelectSwitch label={i18n.t('sensorType')}
+                            options={[i18n.t('temperature'), i18n.t('humidity'), i18n.t('pressure')]}
+                            value={config.display.timeSlot.data[props.slot][props.num]}
+                            onChange={val => dispatch(cf.DisplayTimeslotDataChange({slot: props.slot, num: props.num, val: val}))}
+                        />
+                    </div>}
 
-                {/* Thingspeak field number */}
-                {config.display.timeSlot.sensor[props.slot][props.num] === 8 && <div className="mt-8">
-                    <SelectSwitch label={i18n.t('field')}
-                        options={[...Array(8)].map((x, i) => i18n.t('field') + ' ' + String(i + 1) + ' (' + SensorData().Thingspeak[i] + ')')}
-                        value={config.display.timeSlot.thing[props.slot][props.num]}
-                        onChange={val => dispatch(cf.DisplayTimeslotThingChange({slot: props.slot, num: props.num, val: val}))}
-                    />
-                </div>}
+                    {/* Thingspeak field number */}
+                    {config.display.timeSlot.sensor[props.slot][props.num] === 8 && <div className="mt-8">
+                        <SelectSwitch label={i18n.t('field')}
+                            options={[...Array(8)].map((x, i) => i18n.t('field') + ' ' + String(i + 1) + ' (' + SensorData().Thingspeak[i] + ')')}
+                            value={config.display.timeSlot.thing[props.slot][props.num]}
+                            onChange={val => dispatch(cf.DisplayTimeslotThingChange({slot: props.slot, num: props.num, val: val}))}
+                        />
+                    </div>}
 
-                {/* Wireless sensor number */}
-                {config.display.timeSlot.sensor[props.slot][props.num] === 10 && <div className="mt-8">
-                    <SelectSwitch label={i18n.t('wirelessSensor.singular')}
-                        options={[...Array(2)].map((x, i) => i18n.t('wirelessSensor.singular') + ' ' + String(i))}
-                        value={config.display.timeSlot.wsensor.num[props.slot][props.num]}
-                        onChange={val => dispatch(cf.DisplayTimeslotWsensorNumChange({slot: props.slot, num: props.num, val: val}))}
-                    />
-                </div>}
+                    {/* Wireless sensor number */}
+                    {config.display.timeSlot.sensor[props.slot][props.num] === 10 && <div className="mt-8">
+                        <SelectSwitch label={i18n.t('wirelessSensor.singular')}
+                            options={[...Array(2)].map((x, i) => i18n.t('wirelessSensor.singular') + ' ' + String(i))}
+                            value={config.display.timeSlot.wsensor.num[props.slot][props.num]}
+                            onChange={val => dispatch(cf.DisplayTimeslotWsensorNumChange({slot: props.slot, num: props.num, val: val}))}
+                        />
+                    </div>}
 
-                {/* Wireless sensor data type */}
-                {config.display.timeSlot.sensor[props.slot][props.num] === 10 && <div className="mt-8">
-                    <SelectSwitch label={i18n.t('sensorType')}
-                        options={wsensorTypes[config.display.timeSlot.wsensor.num[props.slot][props.num]]}
-                        value={config.display.timeSlot.wsensor.type[props.slot][props.num]}
-                        onChange={val => dispatch(cf.DisplayTimeslotWsensorTypeChange({slot: props.slot, num: props.num, val: val}))}
-                    />
-                </div>}
+                    {/* Wireless sensor data type */}
+                    {config.display.timeSlot.sensor[props.slot][props.num] === 10 && <div className="mt-8">
+                        <SelectSwitch label={i18n.t('sensorType')}
+                            options={wsensorTypes[config.display.timeSlot.wsensor.num[props.slot][props.num]]}
+                            value={config.display.timeSlot.wsensor.type[props.slot][props.num]}
+                            onChange={val => dispatch(cf.DisplayTimeslotWsensorTypeChange({slot: props.slot, num: props.num, val: val}))}
+                        />
+                    </div>}
+                </>}
             </>}
         />
     </>

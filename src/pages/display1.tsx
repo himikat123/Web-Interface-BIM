@@ -26,11 +26,11 @@ const Display1 = () => {
     </>
 
     const row2 = <>
-        {[...Array(4)].map((x, i) => <CardDisplayTimeSlot key={i} slot={i} num={0} />)}
+        {config.display.type[0] >= 2 && [...Array(4)].map((x, i) => <CardDisplayTimeSlot key={i} slot={i} num={0} />)}
     </>
 
     const row3 = <>
-        {[...Array(4)].map((x, i) => <CardDisplayTimeSlot key={i} slot={i + 4} num={0} />)}
+        {config.display.type[0] >= 2 && [...Array(4)].map((x, i) => <CardDisplayTimeSlot key={i} slot={i + 4} num={0} />)}
     </>
 
     return <>

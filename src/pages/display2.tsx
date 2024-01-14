@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from 'react-redux';
 import FourColumns from "../templates/fourColumns";
 import i18n from '../i18n/main';
 import CardDisplayType from "../organisms/cardDisplayType";
@@ -6,8 +7,11 @@ import CardDisplayBrightness from "../organisms/cardDisplayBrightness";
 import CardDisplayAutoOff from "../organisms/cardDisplayAutoOff";
 import CardDisplayAnimation from "../organisms/cardDisplayAnimation";
 import CardDisplayTimeSlot from "../organisms/cardDisplayTimeSlot";
+import { iConfig } from "../redux/configTypes";
 
 const Display2 = () => {
+    const config = useSelector((state: iConfig) => state.config);
+
     const row1 = <>
         <CardDisplayType num={1} />
         <CardDisplayBrightness num={1} />
@@ -16,11 +20,11 @@ const Display2 = () => {
     </>
 
     const row2 = <>
-        {[...Array(4)].map((x, i) => <CardDisplayTimeSlot key={i} slot={i} num={1} />)}
+        {config.display.type[1] > 0 && [...Array(4)].map((x, i) => <CardDisplayTimeSlot key={i} slot={i} num={1} />)}
     </>
 
     const row3 = <>
-        {[...Array(4)].map((x, i) => <CardDisplayTimeSlot key={i} slot={i + 4} num={1} />)}
+        {config.display.type[1] > 0 && [...Array(4)].map((x, i) => <CardDisplayTimeSlot key={i} slot={i + 4} num={1} />)}
     </>
 
     return <>
