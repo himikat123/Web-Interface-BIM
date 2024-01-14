@@ -56,9 +56,9 @@ const WSensors = () => {
                                     ? <span>--</span>
                                     : <>
                                         <Moment unix format="HH:mm:ss DD.MM.YYYY">{data.wsensor.time[wsensorNum]}</Moment><br />
-                                        {config.lang == 'de' && i18n.t('ago') + ' '}
+                                        {config.lang === 'de' && i18n.t('ago') + ' '}
                                         <Moment locale={locale} unix fromNow ago>{data.wsensor.time[wsensorNum]}</Moment>
-                                        {config.lang != 'de' && ' ' + i18n.t('ago')}
+                                        {config.lang !== 'de' && ' ' + i18n.t('ago')}
                                     </>
                                 }
                                 { dataRelevance(wsensorNum) 
