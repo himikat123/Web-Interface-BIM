@@ -17,7 +17,7 @@ const CardDisplayAutoOff = (props: iDisplay) => {
     const config = useSelector((state: iConfig) => state.config);
        
     return <>
-        {config.display.type[props.num] > 0 && <Card content={<>
+        {config.display.type[props.num] > 0 ? <Card content={<>
             <NumberInput value={config.display.autoOff[props.num]}
                 min={0}
                 max={1440}
@@ -57,7 +57,7 @@ const CardDisplayAutoOff = (props: iDisplay) => {
                     onChange={val => dispatch(cf.DisplayNightOffToChange({num: props.num, val: Number(val.split(':')[0])}))} 
                 />
             </div>
-        </>} />}
+        </>} /> : <Card className="invisible lg:visible" content={<></>} />}
     </>
 }
 

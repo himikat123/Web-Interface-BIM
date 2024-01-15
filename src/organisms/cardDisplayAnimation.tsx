@@ -51,7 +51,7 @@ const CardDisplayAnimation = (props: iDisplay) => {
     }
 
     return <>
-        {config.display.type[props.num] + props.num >= 2 && <Card content={<>
+        {config.display.type[props.num] + props.num >= 2 ? <Card content={<>
             <SelectSwitch label={i18n.t('animation')}
                 options={animations}
                 value={config.display.animation.type[props.num]}
@@ -86,7 +86,7 @@ const CardDisplayAnimation = (props: iDisplay) => {
                     }}
                 />
             </div>}
-        </>} />}
+        </>} /> : <Card className="invisible lg:visible" content={<></>} />}
     </>
 }
 
