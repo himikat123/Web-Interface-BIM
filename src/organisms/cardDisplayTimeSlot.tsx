@@ -96,6 +96,9 @@ const CardDisplayTimeSlot = (props: iDisplayTimeSlot) => {
         ],
     ];
 
+    let things: string[] = [];
+    for(let i=0; i<8; i++) things.push(`${i18n.t('field')} ${i + 1} (${SensorData().Thingspeak[i]})`);
+
     const sendSlotColor = (val: string) => {
         let url = `${hostUrl()}/esp/color`;
         url += `?hex=${val.replace('#', '')}`;
@@ -162,7 +165,7 @@ const CardDisplayTimeSlot = (props: iDisplayTimeSlot) => {
                     {/* Thingspeak field number */}
                     {config.display.timeSlot.sensor[props.slot][props.num] === 8 && <div className="mt-8">
                         <SelectSwitch label={i18n.t('field')}
-                            options={[...Array(8)].map((x, i) => i18n.t('field') + ' ' + String(i + 1) + ' (' + SensorData().Thingspeak[i] + ')')}
+                            options={things}
                             value={config.display.timeSlot.thing[props.slot][props.num]}
                             onChange={val => dispatch(cf.DisplayTimeslotThingChange({slot: props.slot, num: props.num, val: val}))}
                         />
