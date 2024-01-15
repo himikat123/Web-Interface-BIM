@@ -1,3 +1,8 @@
+import { useSelector } from 'react-redux';
+import { iConfig } from "../redux/configTypes";
+import { iData } from "../redux/dataTypes";
+
+
 export const validateTemperature = (temp: number): boolean => {
     return (temp >= -55 && temp <= 125); 
 }
@@ -56,4 +61,16 @@ export const validateIaqArrc = (accr: number): boolean => {
 
 export const validateCO2 = (co2: number): boolean => {
     return (co2 >= 400 && co2 <= 2000); 
+}
+
+export const WsensorDataRelevance = (num: number) => {
+    const config = useSelector((state: iConfig) => state.config);
+    const data = useSelector((state: iData) => state.data);
+    return !((Math.floor(Date.now() / 1000) - data.wsensor.time[num] > config.wsensor.expire[num] * 60) && data.wsensor.time[num] > 0);
+}
+
+export const ThingspeakDataRelevance = () => {
+    const config = useSelector((state: iConfig) => state.config);
+    const data = useSelector((state: iData) => state.data);
+    return !((Math.floor(Date.now() / 1000) - data.thing.time > config.thingspeakReceive.expire * 60) && data.thing.time > 0);
 }
