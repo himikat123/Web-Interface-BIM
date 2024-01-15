@@ -7,14 +7,14 @@ import { iConfig } from "../redux/configTypes";
 import * as cf from "../redux/slices/config";
 import SensorData from "../atoms/sensorData";
 
-const CardTemperature = () => {
+const CardTemperatureOut = () => {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const sensors = [
         "--",
         i18n.t('forecast') + ' (' + SensorData().ForecastTemp + ')',
-        i18n.t('wirelessSensor.singular') + ' (' + SensorData().Wsensor[config.display.source.tempIn.wsensNum].temp[config.display.source.tempIn.temp] + ')',
-        'Thingspeak (' + SensorData().Thingspeak[config.display.source.tempIn.thing] + '°C)',
+        i18n.t('wirelessSensor.singular'),
+        'Thingspeak',
         'BME280 (' + SensorData().BME280temp + ')',
         'BMP180 (' + SensorData().BME280temp + ')',
         'SHT21 (' + SensorData().SHT21temp + ')',
@@ -24,10 +24,10 @@ const CardTemperature = () => {
     ];
 
     let wsensors: string[] = [];
-    for(let i=0; i<2; i++) wsensors.push(`${i18n.t('wirelessSensor.singular')} ${i} (${SensorData().Wsensor[i].temp[config.display.source.tempIn.temp]})`);
+    for(let i=0; i<2; i++) wsensors.push(`${i18n.t('wirelessSensor.singular')} ${i}`);
 
     let temps: string[] = [];
-    for(let i=0; i<5; i++) temps.push(`${i18n.t('temperature')} ${i} (${SensorData().Wsensor[config.display.source.tempIn.wsensNum].temp[i]})`);
+    for(let i=0; i<5; i++) temps.push(`${i18n.t('temperature')} ${i} (${SensorData().Wsensor[config.display.source.tempOut.wsensNum].temp[i]})`);
     
     let things: string[] = [];
     for(let i=0; i<8; i++) things.push(`${i18n.t('field')} ${i + 1} (${SensorData().Thingspeak[i]})`);
@@ -38,34 +38,34 @@ const CardTemperature = () => {
                 {/* Sensor type */}
                 <SelectSwitch label={i18n.t('dataSource.singular')}
                     options={sensors}
-                    value={config.display.source.tempIn.sens}
-                    onChange={val => dispatch(cf.DisplaySourceTempInSensChange(val))}
+                    value={config.display.source.tempOut.sens}
+                    onChange={val => dispatch(cf.DisplaySourceTempOutSensChange(val))}
                 />
 
                 {/* Wireless sensor number */}
-                {config.display.source.tempIn.sens === 2 && <div className="mt-8">
+                {config.display.source.tempOut.sens === 2 && <div className="mt-8">
                     <SelectSwitch label={i18n.t('wirelessSensorNumber')}
                         options={wsensors}
-                        value={config.display.source.tempIn.wsensNum}
-                        onChange={val => dispatch(cf.DisplaySourceTempInWsensNumChange(val))}
+                        value={config.display.source.tempOut.wsensNum}
+                        onChange={val => dispatch(cf.DisplaySourceTempOutWsensNumChange(val))}
                     />
                 </div>}
 
                 {/* Wireless sensor temperature sensor number */}
-                {config.display.source.tempIn.sens === 2 && <div className="mt-8">
+                {config.display.source.tempOut.sens === 2 && <div className="mt-8">
                     <SelectSwitch label={i18n.t('temperatureSensorNumber')}
                         options={temps}
-                        value={config.display.source.tempIn.temp}
-                        onChange={val => dispatch(cf.DisplaySourceTempInTempChange(val))}
+                        value={config.display.source.tempOut.temp}
+                        onChange={val => dispatch(cf.DisplaySourceTempOutTempChange(val))}
                     />
                 </div>}
 
                 {/* Thingspeak */}
-                {config.display.source.tempIn.sens === 3 && <div className="mt-8">
+                {config.display.source.tempOut.sens === 3 && <div className="mt-8">
                     <SelectSwitch label={i18n.t('field')}
                         options={things}
-                        value={config.display.source.tempIn.thing}
-                        onChange={val => dispatch(cf.DisplaySourceTempInThingChange(val))}
+                        value={config.display.source.tempOut.thing}
+                        onChange={val => dispatch(cf.DisplaySourceTempOutThingChange(val))}
                     />
                 </div>}
             </>} 
@@ -73,4 +73,4 @@ const CardTemperature = () => {
     </>
 }
 
-export default CardTemperature;
+export default CardTemperatureOut;
