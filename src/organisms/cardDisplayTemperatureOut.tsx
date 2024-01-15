@@ -7,7 +7,7 @@ import { iConfig } from "../redux/configTypes";
 import * as cf from "../redux/slices/config";
 import SensorData from "../atoms/sensorData";
 
-const CardTemperatureOut = () => {
+const CardDisplayTemperatureOut = () => {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const sensors = [
@@ -73,4 +73,4 @@ const CardTemperatureOut = () => {
     </>
 }
 
-export default CardTemperatureOut;
+export default CardDisplayTemperatureOut;

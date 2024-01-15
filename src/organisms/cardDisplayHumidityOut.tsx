@@ -7,7 +7,7 @@ import { iConfig } from "../redux/configTypes";
 import * as cf from "../redux/slices/config";
 import SensorData from "../atoms/sensorData";
 
-const CardHumidityOut = () => {
+const CardDisplayHumidityOut = () => {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const sensors = [
@@ -59,4 +59,4 @@ const CardHumidityOut = () => {
     </>
 }
 
-export default CardHumidityOut;
+export default CardDisplayHumidityOut;
