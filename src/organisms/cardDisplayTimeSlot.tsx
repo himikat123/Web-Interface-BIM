@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import moment from "moment";
@@ -9,20 +9,13 @@ import ColorInput from "../atoms/colorInput";
 import SelectSwitch from "../atoms/selectSwitch";
 import SensorData from "../atoms/sensorData";
 import { iConfig } from "../redux/configTypes";
-import { iData } from "../redux/dataTypes";
 import { iDisplayTimeSlot } from "../interfaces";
 import { display1ValidChange } from "../redux/slices/valid";
 import * as cf from "../redux/slices/config";
 
 const CardDisplayTimeSlot = (props: iDisplayTimeSlot) => {
-    const [isValid, setIsValid] = useState<boolean>(true);
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
-    const data = useSelector((state: iData) => state.data);
-
-    useEffect(() => {
-        dispatch(display1ValidChange(isValid));
-    });
 
     const sensors = [
         i18n.t('time') + ' (' + moment().format('HH:mm:ss') + ')',
@@ -121,7 +114,7 @@ const CardDisplayTimeSlot = (props: iDisplayTimeSlot) => {
                     max={99}
                     label={i18n.t('displayDuration')}
                     onChange={val => dispatch(cf.DisplayTimeslotPeriodChange({slot: props.slot, num: props.num, val: val}))}
-                    isValid={valid => setIsValid(valid)}
+                    isValid={valid => dispatch(display1ValidChange(valid))}
                 />
 
                 {config.display.timeSlot.period[props.slot][props.num] > 0 && <>

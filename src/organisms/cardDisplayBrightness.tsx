@@ -22,25 +22,27 @@ const CardDisplayBrightness = (props: iDisplay) => {
         i18n.t('constantBrightness')
     ];
 
-    return <Card content={config.display.type[props.num] > 0 && <>
-        <SelectSwitch label={i18n.t('displayBrightness')}
-            options={brightSources}
-            value={config.display.brightMethod[props.num]}
-            onChange={(val: number) => dispatch(cf.DisplayBrightMethodChange({num: props.num, val: val}))}
-        />
+    return <>
+        {config.display.type[props.num] > 0 && <Card content={ <>
+            <SelectSwitch label={i18n.t('displayBrightness')}
+                options={brightSources}
+                value={config.display.brightMethod[props.num]}
+                onChange={(val: number) => dispatch(cf.DisplayBrightMethodChange({num: props.num, val: val}))}
+            />
 
-        {/* Brightess at sunrise and sunset */}
-        {config.display.brightMethod[props.num] === 0 && <BrightSunriseSunset num={props.num} />}
+            {/* Brightess at sunrise and sunset */}
+            {config.display.brightMethod[props.num] === 0 && <BrightSunriseSunset num={props.num} />}
 
-        {/* Brightess by light sensor */}
-        {config.display.brightMethod[props.num] === 1 && <BrightSensor num={props.num} />}
+            {/* Brightess by light sensor */}
+            {config.display.brightMethod[props.num] === 1 && <BrightSensor num={props.num} />}
 
-        {/* Brightess over time */}
-        {config.display.brightMethod[props.num] === 2 && <BrightTime num={props.num} />}
+            {/* Brightess over time */}
+            {config.display.brightMethod[props.num] === 2 && <BrightTime num={props.num} />}
 
-        {/* Constant brightess */}
-        {config.display.brightMethod[props.num] === 3 && <BrightConstant num={props.num} />}
-    </>} />
+            {/* Constant brightess */}
+            {config.display.brightMethod[props.num] === 3 && <BrightConstant num={props.num} />}
+        </>} />}
+    </>
 }
 
 export default CardDisplayBrightness;
