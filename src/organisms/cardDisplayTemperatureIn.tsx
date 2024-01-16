@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../atoms/card";
@@ -11,6 +11,7 @@ import SensorData from "../atoms/sensorData";
 
 const CardDisplayTemperatureIn = () => {
     const [tempWsensNum, setTempWsensNum] = useState<number>(0);
+    const [prevSens, setPrevSens] = useState<number>(0);
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const sensors = [
@@ -39,6 +40,10 @@ const CardDisplayTemperatureIn = () => {
     let things: string[] = [];
     for(let i=0; i<8; i++) things.push(`${i18n.t('field')} ${i + 1} (${SensorData().Thingspeak[i]})`);
 
+    useEffect(() => {
+        setPrevSens(config.display.source.tempIn.sens);
+    }, [config.display.source.tempIn.sens]);
+
     return <>
         <Card header={i18n.t('temperatureIn')}
             content={<>
@@ -46,7 +51,11 @@ const CardDisplayTemperatureIn = () => {
                 <SelectSwitch label={i18n.t('dataSource.singular')}
                     options={sensors}
                     value={config.display.source.tempIn.sens}
-                    onChange={val => dispatch(cf.DisplaySourceTempInSensChange(val))}
+                    onChange={val => {
+                        dispatch(cf.DisplaySourceTempInSensChange(val));
+                        if(val === 4) dispatch(cf.DisplaySourceHumInSensChange(val));
+                        if(prevSens === 4) dispatch(cf.DisplaySourceHumInSensChange(0));
+                    }}
                 />
 
                 {/* Wireless sensor number */}
