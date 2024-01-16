@@ -6,6 +6,7 @@ import CardDisplayType from "../organisms/cardDisplayType";
 import CardDisplayBrightness from "../organisms/cardDisplayBrightness";
 import CardDisplayAutoOff from "../organisms/cardDisplayAutoOff";
 import CardDisplayAnimation from "../organisms/cardDisplayAnimation";
+import CardDisplayTemperatureIn from "../organisms/cardDisplayTemperatureIn";
 import CardDisplayTemperatureOut from "../organisms/cardDisplayTemperatureOut";
 import CardDisplayHumidityOut from "../organisms/cardDisplayHumidityOut";
 import CardDisplayPressureOut from "../organisms/cardDisplayPressureOut";
@@ -25,6 +26,9 @@ const Display1 = () => {
     </>
 
     const row2 = <>
+        {config.display.type[0] === 1 && <>
+            <CardDisplayTemperatureIn />
+        </>}
         {config.display.type[0] >= 2 && [...Array(4)].map((x, i) => <CardDisplayTimeSlot key={i} slot={i} num={0} />)}
     </>
 

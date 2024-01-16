@@ -379,14 +379,14 @@ export const configSlice = createSlice({
         DisplaySourceBetWsensNumChange: (state, action) => { state.display.source.bat.wsensNum = action.payload },
         DisplaySourceBatThingChange: (state, action) => { state.display.source.bat.thing = action.payload },
         DisplaySourceDescrChange: (state, action) => { state.display.source.descr = action.payload },
-        // ?Change: (state, action) => { state.display.source.sequence.name: ["", "", "", ""], = action.payload },
-        // ?Change: (state, action) => { state.display.source.sequence.temp: [0, 0, 0, 0], = action.payload },
-        // ?Change: (state, action) => { state.display.source.sequence.thngtemp: [0, 0, 0, 0], = action.payload },
-        // ?Change: (state, action) => { state.display.source.sequence.wsenstemp: [[0, 0], [0, 0], [0, 0], [0, 0]], = action.payload },
+        DisplaySourceSequenceNameChange: (state, action) => { state.display.source.sequence.name[action.payload.num] = action.payload.val },
+        DisplaySourceSequenceTempChange: (state, action) => { state.display.source.sequence.temp[action.payload.num] = action.payload.val },
+        DisplaySourceSequenceThngTempChange: (state, action) => { state.display.source.sequence.thngtemp[action.payload.num] = action.payload.val },
+        DisplaySourceSequenceWsensTempChange: (state, action) => { state.display.source.sequence.wsenstemp[action.payload.num][action.payload.wsens] = action.payload.val },
         // ?Change: (state, action) => { state.display.source.sequence.hum: [0, 0, 0, 0], = action.payload }, = action.payload },
         // ?Change: (state, action) => { state.display.source.sequence.thnghum: [0, 0, 0, 0], = action.payload },
         // ?Change: (state, action) => { state.display.source.sequence.wsenshum: [0, 0, 0, 0], = action.payload },
-        // ?Change: (state, action) => { state.display.source.sequence.dur: 5 = action.payload },
+        DisplaySourceSequenceDurChange: (state, action) => { state.display.source.sequence.dur = action.payload },
         DisplayTimeslotPeriodChange: (state, action) => { state.display.timeSlot.period[action.payload.slot][action.payload.num] = action.payload.val },
         DisplayTimeslotSensorChange: (state, action) => { state.display.timeSlot.sensor[action.payload.slot][action.payload.num] = action.payload.val },
         DisplayTimeslotDataChange: (state, action) => { state.display.timeSlot.data[action.payload.slot][action.payload.num] = action.payload.val },
@@ -507,7 +507,9 @@ export const {
     DisplaySourceHumInSensChange, DisplaySourceHumInWsensNumChange, DisplaySourceHumInThingChange,
     DisplaySourceVoltSensChange, DisplaySourceVoltWsensNumChange, DisplaySourceVoltVoltChange,
     DisplaySourceVoltThingChange, DisplaySourceBatSensChange, DisplaySourceBetWsensNumChange,
-    DisplaySourceBatThingChange, DisplaySourceDescrChange
+    DisplaySourceBatThingChange, DisplaySourceDescrChange, DisplaySourceSequenceDurChange,
+    DisplaySourceSequenceTempChange, DisplaySourceSequenceWsensTempChange, DisplaySourceSequenceThngTempChange,
+    DisplaySourceSequenceNameChange
 } = configSlice.actions;
   
 export default configSlice.reducer;
