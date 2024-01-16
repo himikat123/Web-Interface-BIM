@@ -16,6 +16,13 @@ export interface iConfig {
                 thing: number,
                 min: number,
                 max: number
+            },
+            iaq: {
+                source: number
+            },
+            co2: {
+                source: number,
+                wsensNum: number
             }
         },
         network: {

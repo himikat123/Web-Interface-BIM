@@ -293,5 +293,17 @@
         "tip1": "Nur englische Buchstaben, Zahlen und Symbole *)_.@$%(",
         "tip2": "Nur englische Buchstaben, Zahlen, Leerzeichen und Symbole *)_.@$%(",
         "tip3": "Geben Sie eine Zahl von {min} bis {max} ein"
-    }
+    },
+    "comfortable": "Gemütlich",
+    "tooHot": "Zu heiß",
+    "tooCold": "Zu kalt",
+    "tooDry": "Zu trocken",
+    "tooHumid": "Zu feucht",
+    "hotAndHumid": "Heiß und feucht",
+    "hotAndDry": "Heiß und trocken",
+    "coldAndHumid": "Kalt und feucht",
+    "coldAndDry": "Kalt und trocken",
+    "cleanAir": "Saubere Luft",
+    "polutedAir": "Luft ist verschmutzt",
+    "havilyPolutedAir": "Luft ist stark verschmutzt"
 }

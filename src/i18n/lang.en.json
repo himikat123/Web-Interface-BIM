@@ -293,5 +293,17 @@
         "tip1": "Only english letters, numbers and symbols *)_.@$%(",
         "tip2": "Only English letters, numbers, spaces and symbols *)_.@$%(",
         "tip3": "Enter a number from {min} to {max}"
-    }
+    },
+    "comfortable": "Comfortable",
+    "tooHot": "Too hot",
+    "tooCold": "Too cold",
+    "tooDry": "Too dry",
+    "tooHumid": "Too humid",
+    "hotAndHumid": "Hot and humid",
+    "hotAndDry": "Hot and dry",
+    "coldAndHumid": "Cold and humid",
+    "coldAndDry": "Cold and dry",
+    "cleanAir": "Clean Air",
+    "polutedAir": "Air is polluted",
+    "havilyPolutedAir": "Air is heavily polluted"
 }

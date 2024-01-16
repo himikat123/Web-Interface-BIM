@@ -1,8 +1,7 @@
 import React from "react";
 import FourColumns from "../templates/fourColumns";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import i18n from '../i18n/main';
-import Card from "../atoms/card";
 import CardDisplayType from "../organisms/cardDisplayType";
 import CardDisplayBrightness from "../organisms/cardDisplayBrightness";
 import CardDisplayAutoOff from "../organisms/cardDisplayAutoOff";
@@ -10,17 +9,13 @@ import CardDisplayAnimation from "../organisms/cardDisplayAnimation";
 import CardDisplayTemperatureOut from "../organisms/cardDisplayTemperatureOut";
 import CardDisplayHumidityOut from "../organisms/cardDisplayHumidityOut";
 import CardDisplayPressureOut from "../organisms/cardDisplayPressureOut";
-
+import CardDisplayComfort from "../organisms/cardDisplayComfort";
 import CardDisplayTimeSlot from "../organisms/cardDisplayTimeSlot";
 
 import { iConfig } from "../redux/configTypes";
-import { iData } from "../redux/dataTypes";
-import * as cf from "../redux/slices/config";
 
 const Display1 = () => {
-    const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
-    const data = useSelector((state: iData) => state.data);
 
     const row1 = <>
         <CardDisplayType num={0} />
@@ -38,6 +33,7 @@ const Display1 = () => {
             <CardDisplayTemperatureOut />
             <CardDisplayHumidityOut />
             <CardDisplayPressureOut />
+            <CardDisplayComfort />
         </>}
         {config.display.type[0] >= 2 && [...Array(4)].map((x, i) => <CardDisplayTimeSlot key={i} slot={i + 4} num={0} />)}
     </>

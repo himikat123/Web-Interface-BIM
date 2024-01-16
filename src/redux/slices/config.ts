@@ -19,6 +19,13 @@ export const configSlice = createSlice({
                 thing: 0,
                 min: 0,
                 max: 0
+            },
+            iaq: {
+                source: 0
+            },
+            co2: {
+                source: 0,
+                wsensNum: 0
             }
         },
         network: {
@@ -287,12 +294,14 @@ export const configSlice = createSlice({
         // ?Change: (state, action) => { state.comfort.temp.thing = action.payload },
         // ?Change: (state, action) => { state.comfort.temp.min = action.payload },
         // ?Change: (state, action) => { state.comfort.temp.max = action.payload },
-        // 
         // ?Change: (state, action) => { state.comfort.hum.source = action.payload },
         // ?Change: (state, action) => { state.comfort.hum.wsensNum = action.payload },
         // ?Change: (state, action) => { state.comfort.hum.thing = action.payload },
         // ?Change: (state, action) => { state.comfort.hum.min = action.payload },
         // ?Change: (state, action) => { state.comfort.hum.max = action.payload },
+        //iaq.source
+        //co2.source
+        //co2.wsensNum
 
         netSsidChange: (state, action) => { state.network.ssid[action.payload.num] = action.payload.val },
         netPassChange: (state, action) => { state.network.pass[action.payload.num] = action.payload.val },

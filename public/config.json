@@ -14,6 +14,13 @@
             "thing": 0,
             "min": 30,
             "max": 60
+        },
+        "iaq": {
+            "source": 0
+        },
+        "co2": {
+            "source": 0,
+            "wsensNum": 0
         }
     },
     "network": {

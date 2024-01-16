@@ -293,5 +293,17 @@
         "tip1": "Tylko angielskie litery, cyfry i symbole *)_.@$%(",
         "tip2": "Tylko angielskie litery, cyfry, spacje i symbole *)_.@$%(",
         "tip3": "Wpisz liczbę od {min} do {max}"
-    }
+    },
+    "comfortable": "Przyjemny",
+    "tooHot": "Gorąco",
+    "tooCold": "Zimno",
+    "tooDry": "Zbyt sucho",
+    "tooHumid": "Zbyt wilgotno",
+    "hotAndHumid": "Gorąco i wilgotno",
+    "hotAndDry": "Gorąco i sucho",
+    "coldAndHumid": "Zimno i wilgotno",
+    "coldAndDry": "Zimno i sucho",
+    "cleanAir": "Powietrze czyste",
+    "polutedAir": "Powietrze zanieczyszczone",
+    "havilyPolutedAir": "Powietrze silnie zanieczyszczone"
 }
