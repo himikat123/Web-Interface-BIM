@@ -33,6 +33,25 @@ function SensorData() {
         else return i18n.t('dataExpired');
     }
 
+    const betLevel = (num: number) => {
+        if(vl.WsensorDataRelevance(num)) {
+            if(vl.validateBatteryADC(data.wsensor.bat[num])) {
+                const voltage = data.wsensor.bat[num] / (300.0 - config.wsensor.bat.k[num]);
+                const umin = 3.75;
+                const umax = config.wsensor.bat.type[num] == 0 ? 4.5 : 3.9;
+                const stp = (umax - umin) / 4;
+                let level = 0;
+                if(voltage < (umin + stp)) level = 1;
+                else if(voltage < (umin + stp * 2)) level = 2;
+                else if(voltage < (umin + stp * 3)) level = 3;
+                else level = 4;
+                return level.toFixed();
+            }
+            else return '--';
+        }
+        else return i18n.t('dataExpired');
+    }
+
     const sensors = {
         BME680temp: vl.validateTemperature(data.bme680.temp) ? ((data.bme680.temp + config.sensors.bme680.t).toFixed(2) + '°C') : '--',
         BME680hum: vl.validateHumidity(data.bme680.hum) ? ((data.bme680.hum + config.sensors.bme680.h).toFixed(2) + '%') : '--',
@@ -147,7 +166,8 @@ function SensorData() {
                         : '--' 
                     : i18n.t('dataExpired'),
                 batVoltage: batVoltage(0),
-                batPercent: batPercent(0)
+                batPercent: batPercent(0),
+                batLevel: betLevel(0)
             },
             {
                 temp: [
@@ -218,7 +238,8 @@ function SensorData() {
                         : '--' 
                     : i18n.t('dataExpired'),
                 batVoltage: batVoltage(1),
-                batPercent: batPercent(1)
+                batPercent: batPercent(1),
+                batLevel: betLevel(1)
             }
         ]
     }
