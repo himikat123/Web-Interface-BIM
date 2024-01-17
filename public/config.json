@@ -175,7 +175,8 @@
                 "sens": 0,
                 "wsensNum": 0,
                 "volt": 0,
-                "thing": 0
+                "thing": 0,
+                "thingType": 0
             },
             "bat": {
                 "sens": 0,

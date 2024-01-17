@@ -47,10 +47,8 @@ const CardDisplayVoltage = () => {
                         value={config.display.source.volt.wsensNum}
                         onChange={val => dispatch(cf.DisplaySourceVoltWsensNumChange(val))}
                     />
-                </div>}
 
-                {/* Wireless sensor type of sensor */}
-                {config.display.source.volt.sens === 1 && <div className="mt-8">
+                    {/* Wireless sensor type of sensor */}
                     <SelectSwitch label={i18n.t('sensor.singular')}
                         options={wsensTypes}
                         value={config.display.source.volt.volt}
@@ -60,11 +58,18 @@ const CardDisplayVoltage = () => {
 
                 {/* Thingspeak */}
                 {config.display.source.volt.sens === 2 && <div className="mt-8">
-                    <SelectSwitch label={i18n.t('field')}
-                        options={things}
-                        value={config.display.source.volt.thing}
-                        onChange={val => dispatch(cf.DisplaySourceVoltThingChange(val))}
+                    <SelectSwitch label={i18n.t('sensorType')}
+                        options={[i18n.t('voltage'), i18n.t('batteryPercentage')]}
+                        value={config.display.source.volt.thingType}
+                        onChange={val => dispatch(cf.DisplaySourceVoltThingTypeChange(val))}
                     />
+                    <div className="mt-8">
+                        <SelectSwitch label={i18n.t('field')}
+                            options={things}
+                            value={config.display.source.volt.thing}
+                            onChange={val => dispatch(cf.DisplaySourceVoltThingChange(val))}
+                        />
+                    </div>
                 </div>}
             </>} 
         />

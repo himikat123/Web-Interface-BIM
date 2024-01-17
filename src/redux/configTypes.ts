@@ -118,7 +118,8 @@ export interface iConfig {
                     sens: number,
                     wsensNum: number,
                     volt: number,
-                    thing: number
+                    thing: number,
+                    thingType: number
                 },
                 bat: {
                     sens: number,

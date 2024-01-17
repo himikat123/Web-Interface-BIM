@@ -121,7 +121,8 @@ export const configSlice = createSlice({
                     sens: 0,
                     wsensNum: 0,
                     volt: 0,
-                    thing: 0
+                    thing: 0,
+                    thingType: 0
                 },
                 bat: {
                     sens: 0,
@@ -375,8 +376,9 @@ export const configSlice = createSlice({
         DisplaySourceVoltWsensNumChange: (state, action) => { state.display.source.volt.wsensNum = action.payload },
         DisplaySourceVoltVoltChange: (state, action) => { state.display.source.volt.volt = action.payload },
         DisplaySourceVoltThingChange: (state, action) => { state.display.source.volt.thing = action.payload },
+        DisplaySourceVoltThingTypeChange: (state, action) => { state.display.source.volt.thingType = action.payload },
         DisplaySourceBatSensChange: (state, action) => { state.display.source.bat.sens = action.payload },
-        DisplaySourceBetWsensNumChange: (state, action) => { state.display.source.bat.wsensNum = action.payload },
+        DisplaySourceBatWsensNumChange: (state, action) => { state.display.source.bat.wsensNum = action.payload },
         DisplaySourceBatThingChange: (state, action) => { state.display.source.bat.thing = action.payload },
         DisplaySourceDescrChange: (state, action) => { state.display.source.descr = action.payload },
         DisplaySourceSequenceNameChange: (state, action) => { state.display.source.sequence.name[action.payload.num] = action.payload.val },
@@ -506,10 +508,11 @@ export const {
     DisplaySourceTempInSensChange, DisplaySourceTempInWsensNumChange, DisplaySourceTempInTempChange, 
     DisplaySourceTempInThingChange, DisplaySourceHumInSensChange, DisplaySourceHumInWsensNumChange, 
     DisplaySourceHumInThingChange, DisplaySourceVoltSensChange, DisplaySourceVoltWsensNumChange, 
-    DisplaySourceVoltVoltChange, DisplaySourceVoltThingChange, DisplaySourceBatSensChange, DisplaySourceBetWsensNumChange, 
+    DisplaySourceVoltVoltChange, DisplaySourceVoltThingChange, DisplaySourceBatSensChange, DisplaySourceBatWsensNumChange, 
     DisplaySourceBatThingChange, DisplaySourceDescrChange, DisplaySourceSequenceDurChange, DisplaySourceSequenceTempChange, 
     DisplaySourceSequenceWsensTempChange, DisplaySourceSequenceThngTempChange, DisplaySourceSequenceNameChange, 
-    DisplaySourceSequenceHumChange, DisplaySourceSequenceThngHumChange, DisplaySourceSequenceWsensHumChange
+    DisplaySourceSequenceHumChange, DisplaySourceSequenceThngHumChange, DisplaySourceSequenceWsensHumChange,
+    DisplaySourceVoltThingTypeChange
 } = configSlice.actions;
   
 export default configSlice.reducer;
