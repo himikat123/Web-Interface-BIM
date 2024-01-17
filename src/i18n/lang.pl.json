@@ -274,7 +274,7 @@
     "dataFrom": "Dane od:",
     "ago": "temu",
     "dataExpirationTime": "Czas ważności danych (minuty)",
-    "dataExpired": "Dane wygasły",
+    "dataExpired": "dane wygasły",
     "wirelessSensorNumber": "Numer czujnika",
     "temperatureSensorNumber": "Numer czujnika temperatury",
     "parsingServer": "Serwer analizujący",

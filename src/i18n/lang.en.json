@@ -274,7 +274,7 @@
     "dataFrom": "Data from",
     "ago": "ago",
     "dataExpirationTime": "Data expiration time (minutes)",
-    "dataExpired": "Data expired",
+    "dataExpired": "data expired",
     "wirelessSensorNumber": "Sensor number",
     "temperatureSensorNumber": "Temperature sensor number",
     "parsingServer": "Parsing server",

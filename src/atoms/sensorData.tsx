@@ -8,6 +8,31 @@ function SensorData() {
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
 
+    const batVoltage = (num: number) => {
+        if(vl.WsensorDataRelevance(num)) {
+            if(vl.validateBatteryADC(data.wsensor.bat[num]))
+                return (data.wsensor.bat[num] / (300.0 - config.wsensor.bat.k[num])).toFixed(2) + i18n.t('units.v');
+            else return '--';
+        }
+        else return i18n.t('dataExpired');
+    }
+
+    const batPercent =(num: number) => {
+        if(vl.WsensorDataRelevance(num)) {
+            if(vl.validateBatteryADC(data.wsensor.bat[num])) {
+                const voltage = data.wsensor.bat[num] / (300.0 - config.wsensor.bat.k[num]);
+                const umin = 3.75;
+                const umax = config.wsensor.bat.type[num] == 0 ? 4.5 : 3.9;
+                let batPercentage = (voltage - umin) * 100.0 / (umax - umin); 
+                if(batPercentage < 0) batPercentage = 0;
+                if(batPercentage > 100) batPercentage = 100;
+                return batPercentage.toFixed() + '%';
+            }
+            else return '--';
+        }
+        else return i18n.t('dataExpired');
+    }
+
     const sensors = {
         BME680temp: vl.validateTemperature(data.bme680.temp) ? ((data.bme680.temp + config.sensors.bme680.t).toFixed(2) + '°C') : '--',
         BME680hum: vl.validateHumidity(data.bme680.hum) ? ((data.bme680.hum + config.sensors.bme680.h).toFixed(2) + '%') : '--',
@@ -95,7 +120,34 @@ function SensorData() {
                     ? vl.validateCO2(data.wsensor.co2.data[0]) 
                         ? ((data.wsensor.co2.data[0] + config.wsensor.co2.corr[0]).toFixed(2) + 'ppm') 
                         : '--' 
-                    : i18n.t('dataExpired')
+                    : i18n.t('dataExpired'),
+                hiVoltage: vl.WsensorDataRelevance(0) 
+                    ? vl.validateHighVoltage(data.wsensor.voltage.data[0]) 
+                        ? ((data.wsensor.voltage.data[0] + config.wsensor.volt.corr[0]).toFixed(2) + i18n.t('units.v')) 
+                        : '--' 
+                    : i18n.t('dataExpired'),
+                current: vl.WsensorDataRelevance(0) 
+                    ? vl.validateCurrent(data.wsensor.current.data[0]) 
+                        ? ((data.wsensor.current.data[0] + config.wsensor.curr.corr[0]).toFixed(2) + i18n.t('units.a')) 
+                        : '--' 
+                    : i18n.t('dataExpired'),
+                power: vl.WsensorDataRelevance(0) 
+                    ? vl.validatePower(data.wsensor.power.data[0]) 
+                        ? ((data.wsensor.power.data[0] + config.wsensor.pow.corr[0]).toFixed(2) + i18n.t('units.w')) 
+                        : '--' 
+                    : i18n.t('dataExpired'),
+                energy: vl.WsensorDataRelevance(0) 
+                    ? vl.validateEnergy(data.wsensor.energy.data[0]) 
+                        ? ((data.wsensor.energy.data[0] + config.wsensor.enrg.corr[0]).toFixed(2) + i18n.t('wh')) 
+                        : '--' 
+                    : i18n.t('dataExpired'),
+                freq: vl.WsensorDataRelevance(0) 
+                    ? vl.validateFrequency(data.wsensor.freq.data[0]) 
+                        ? ((data.wsensor.freq.data[0] + config.wsensor.freq.corr[0]).toFixed(2) + i18n.t('units.hz')) 
+                        : '--' 
+                    : i18n.t('dataExpired'),
+                batVoltage: batVoltage(0),
+                batPercent: batPercent(0)
             },
             {
                 temp: [
@@ -139,7 +191,34 @@ function SensorData() {
                     ? vl.validateCO2(data.wsensor.co2.data[1]) 
                         ? ((data.wsensor.co2.data[1] + config.wsensor.co2.corr[1]).toFixed(2) + 'ppm') 
                         : '--' 
-                    : i18n.t('dataExpired')
+                    : i18n.t('dataExpired'),
+                hiVoltage: vl.WsensorDataRelevance(1) 
+                    ? vl.validateHighVoltage(data.wsensor.voltage.data[1]) 
+                        ? ((data.wsensor.voltage.data[1] + config.wsensor.volt.corr[1]).toFixed(2) + i18n.t('units.v')) 
+                        : '--' 
+                    : i18n.t('dataExpired'),
+                current: vl.WsensorDataRelevance(1) 
+                    ? vl.validateCurrent(data.wsensor.current.data[1]) 
+                        ? ((data.wsensor.current.data[1] + config.wsensor.curr.corr[1]).toFixed(2) + i18n.t('units.a')) 
+                        : '--' 
+                    : i18n.t('dataExpired'),
+                power: vl.WsensorDataRelevance(1) 
+                    ? vl.validatePower(data.wsensor.power.data[1]) 
+                        ? ((data.wsensor.power.data[1] + config.wsensor.pow.corr[1]).toFixed(2) + i18n.t('units.w')) 
+                        : '--' 
+                    : i18n.t('dataExpired'),
+                energy: vl.WsensorDataRelevance(1) 
+                    ? vl.validateEnergy(data.wsensor.energy.data[1]) 
+                        ? ((data.wsensor.energy.data[1] + config.wsensor.enrg.corr[1]).toFixed(2) + i18n.t('wh')) 
+                        : '--' 
+                    : i18n.t('dataExpired'),
+                freq: vl.WsensorDataRelevance(1) 
+                    ? vl.validateFrequency(data.wsensor.freq.data[1]) 
+                        ? ((data.wsensor.freq.data[1] + config.wsensor.freq.corr[1]).toFixed(2) + i18n.t('units.hz')) 
+                        : '--' 
+                    : i18n.t('dataExpired'),
+                batVoltage: batVoltage(1),
+                batPercent: batPercent(1)
             }
         ]
     }

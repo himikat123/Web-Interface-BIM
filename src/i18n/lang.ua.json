@@ -274,7 +274,7 @@
     "dataFrom": "Дані від",
     "ago": "назад",
     "dataExpirationTime": "Термін придатності даних (хвилин)",
-    "dataExpired": "Данні прострочені",
+    "dataExpired": "данні прострочені",
     "wirelessSensorNumber": "Номер датчика",
     "temperatureSensorNumber": "Номер датчика температури",
     "parsingServer": "Парсинг сервер",

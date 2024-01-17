@@ -8,6 +8,7 @@ import CardDisplayAutoOff from "../organisms/cardDisplayAutoOff";
 import CardDisplayAnimation from "../organisms/cardDisplayAnimation";
 import CardDisplayTemperatureIn from "../organisms/cardDisplayTemperatureIn";
 import CardDisplayHumidityIn from "../organisms/cardDisplayHumidityIn";
+import CardDisplayVoltage from "../organisms/cardDisplayVoltage";
 import CardDisplayTemperatureOut from "../organisms/cardDisplayTemperatureOut";
 import CardDisplayHumidityOut from "../organisms/cardDisplayHumidityOut";
 import CardDisplayPressureOut from "../organisms/cardDisplayPressureOut";
@@ -30,6 +31,7 @@ const Display1 = () => {
         {config.display.type[0] === 1 && <>
             <CardDisplayTemperatureIn />
             <CardDisplayHumidityIn />
+            <CardDisplayVoltage />
         </>}
         {config.display.type[0] >= 2 && [...Array(4)].map((x, i) => <CardDisplayTimeSlot key={i} slot={i} num={0} />)}
     </>
