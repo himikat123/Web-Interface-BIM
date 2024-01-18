@@ -114,7 +114,11 @@
         "w": "W",
         "wh": "Wh",
         "hz": "Hz",
-        "kb": "KB"
+        "kb": "KB",
+        "bar": {
+            "singular": "pasek",
+            "plural": "paski"
+        }
     },
     "check": "Sprawdź",
     "checkingWeatherSettings": "Sprawdzanie ustawień pogodowych",

@@ -45,7 +45,7 @@ function SensorData() {
                 else if(voltage < (umin + stp * 2)) level = 2;
                 else if(voltage < (umin + stp * 3)) level = 3;
                 else level = 4;
-                return level.toFixed();
+                return level.toFixed() + ' ' + i18n.t(`units.bar.${level === 1 ? 'singular' : 'plural'}`);
             }
             else return '--';
         }

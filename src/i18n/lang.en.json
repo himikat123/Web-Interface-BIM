@@ -114,7 +114,11 @@
         "w": "W",
         "wh": "Wh",
         "hz": "Hz",
-        "kb": "kB"
+        "kb": "kB",
+        "bar": {
+            "singular": "bar",
+            "plural": "bars"
+        }
     },
     "check": "Check",
     "checkingWeatherSettings": "Checking the performance of the weather forecast settings",
