@@ -49,11 +49,13 @@ const CardDisplayVoltage = () => {
                     />
 
                     {/* Wireless sensor type of sensor */}
-                    <SelectSwitch label={i18n.t('sensor.singular')}
-                        options={wsensTypes}
-                        value={config.display.source.volt.volt}
-                        onChange={val => dispatch(cf.DisplaySourceVoltVoltChange(val))}
-                    />
+                    <div className="mt-8">
+                        <SelectSwitch label={i18n.t('sensor.singular')}
+                            options={wsensTypes}
+                            value={config.display.source.volt.volt}
+                            onChange={val => dispatch(cf.DisplaySourceVoltVoltChange(val))}
+                        />
+                    </div>
                 </div>}
 
                 {/* Thingspeak */}
