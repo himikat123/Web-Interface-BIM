@@ -89,7 +89,7 @@ export interface iNumberInput {
     max: number,
     readonly?: boolean,
     className?: string,
-    label: string,
+    label: string | React.ReactNode,
     onChange(e: number): void,
     isValid?(v: boolean): void,
     children?: React.ReactNode | undefined
@@ -98,6 +98,12 @@ export interface iNumberInput {
 export interface iTimeInput {
     value: string,
     step: number,
+    label: string,
+    onChange(e: string): void
+}
+
+export interface iDateTimeInput {
+    value: string,
     label: string,
     onChange(e: string): void
 }

@@ -25,6 +25,7 @@ select:-webkit-autofill {
         -webkit-text-fill-color: var(--text_dark) !important;
     }
     input[type="time"],
+    input[type="datetime-local"],
     input[type="number"] {
         color-scheme: dark;
     }
