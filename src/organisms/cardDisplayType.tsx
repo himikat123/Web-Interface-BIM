@@ -44,12 +44,17 @@ const CardDisplayType = (props: iDisplay) => {
         { [`MAX7219 (${i18n.t('matrices4')}, ${i18n.t('withoutSeconds')}, ${i18n.t('points')})`]: 680 }
     ];
     const neopixel = [
-        { [`WS2812b (1 ${i18n.t('ledPerSegment')})`]: 1800 },
-        { [`WS2812b (2 ${i18n.t('ledsPerSegment')})`]: 3480 },
-        { [`WS2812b (3 ${i18n.t('ledsPerSegment')})`]: 5160 }
+        { [`WS2812b (4${i18n.t('digits')}, ${i18n.t('withoutSeconds')}, 1 ${i18n.t('ledPerSegment')})`]: 1800 },
+        { [`WS2812b (4${i18n.t('digits')}, ${i18n.t('withoutSeconds')}, 2 ${i18n.t('ledsPerSegment')})`]: 3480 },
+        { [`WS2812b (4${i18n.t('digits')}, ${i18n.t('withoutSeconds')}, 3 ${i18n.t('ledsPerSegment')})`]: 5160 },
+        { [`WS2812b (6${i18n.t('digits')}, ${i18n.t('withSeconds')}, 1 ${i18n.t('ledPerSegment')})`]: 2760 },
+        { [`WS2812b (6${i18n.t('digits')}, ${i18n.t('withSeconds')}, 2 ${i18n.t('ledsPerSegment')})`]: 5280 },
+        { [`WS2812b (6${i18n.t('digits')}, ${i18n.t('withSeconds')}, 3 ${i18n.t('ledsPerSegment')})`]: 7800 }
     ];
     const nixie = [
-        { [`Nixie (4${i18n.t('tubes')})`]: 1000 }
+        { [`Nixie (4${i18n.t('tubes')})`]: 1000 },
+        { [`Nixie (6${i18n.t('tubes')})`]: 1000 },
+        { [`Nixie (8${i18n.t('tubes')})`]: 1000 }
     ];
     if(props.num == 1) types.splice(1, 1);
 
