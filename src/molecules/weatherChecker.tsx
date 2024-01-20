@@ -6,7 +6,7 @@ import { ReactComponent as SpinnerSVG } from '../atoms/icons/spinner.svg';
 import { ReactComponent as ArrowWindSVG } from '../atoms/icons/arrowWind.svg';
 import { iConfig } from "../redux/configTypes";
 import { iWeather } from "../interfaces";
-import "./weatherChacker.scss";
+import "./weatherChecker.scss";
 
 const WeatherChecker = () => {
     const [weatherColor, setWeatherColor] = useState<string>('text-blue-700 dark:text-blue-400');
