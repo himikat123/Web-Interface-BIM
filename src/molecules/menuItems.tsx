@@ -31,7 +31,9 @@ const MenuItems = (props: iMenuItems) => {
     const validConnect = useSelector((state: iValid) => state.valid.connect);
     const validAccesspoint = useSelector((state: iValid) => state.valid.accesspoint);
     const validWsensors = useSelector((state: iValid) => state.valid.wsensors);
-    const validDisplay1 = useSelector((state: iValid) => state.valid.display1)
+    const validClock = useSelector((state: iValid) => state.valid.clock);
+    const validDisplay1 = useSelector((state: iValid) => state.valid.display1);
+    const validDisplay2 = useSelector((state: iValid) => state.valid.display2)
 
     return <>
         <MenuItem link="/" 
@@ -92,7 +94,7 @@ const MenuItems = (props: iMenuItems) => {
             title={i18n.t('clock')} 
             mobile={props.mobile} 
             icon={<ClockSVG />} 
-            valid={true} 
+            valid={validClock} 
         />
 
         {device() === 'WeatherMonitorBIM32' &&
@@ -111,7 +113,7 @@ const MenuItems = (props: iMenuItems) => {
                 title={i18n.t('display.one')} 
                 mobile={props.mobile} 
                 icon={<DisplaySVG />} 
-                valid={true} 
+                valid={validDisplay1} 
             />
         }
 
@@ -126,12 +128,12 @@ const MenuItems = (props: iMenuItems) => {
                 <MenuSubItem link="/display1" 
                     current={props.current} 
                     title={i18n.t('display.singular') + " 1"} 
-                    valid={validDisplay1} 
+                    valid={validDisplay1 && validDisplay2} 
                 />
                 <MenuSubItem link="/display2" 
                     current={props.current} 
                     title={i18n.t('display.singular') + " 2"} 
-                    valid={true} 
+                    valid={validDisplay2} 
                 />
             </MenuItem>
         }
