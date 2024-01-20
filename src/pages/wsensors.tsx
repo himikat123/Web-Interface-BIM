@@ -76,7 +76,7 @@ const WSensors = () => {
                             config.wsensor.temp.corr[wsensorNum][tempSensorNum], 
                             `${i18n.t('temperature')} ${tempSensorNum}`, 
                             data.wsensor.temp.data[tempSensorNum][wsensorNum], 
-                            (val: number) => dispatch(cf.WSensTempChange({val: val, sens: wsensorNum, num: tempSensorNum})), 
+                            (val: number) => dispatch(cf.wSensTempChange({val: val, sens: wsensorNum, num: tempSensorNum})), 
                             -10, 10, 0.1,
                             hideUnnecessary,
                             data.wsensor.temp.name[tempSensorNum][wsensorNum]
@@ -87,7 +87,7 @@ const WSensors = () => {
                         config.wsensor.hum.corr[wsensorNum], 
                         i18n.t('humidity'), 
                         data.wsensor.hum.data[wsensorNum], 
-                        (val: number) => dispatch(cf.WSensHumChange({val: val, num: wsensorNum})),
+                        (val: number) => dispatch(cf.wSensHumChange({val: val, num: wsensorNum})),
                         -10, 10, 0.1, 
                         hideUnnecessary,
                         data.wsensor.hum.name[wsensorNum]
@@ -97,7 +97,7 @@ const WSensors = () => {
                         config.wsensor.pres.corr[wsensorNum], 
                         i18n.t('pressure'), 
                         data.wsensor.pres.data[wsensorNum], 
-                        (val: number) => dispatch(cf.WSensPresChange({val: val, num: wsensorNum})),
+                        (val: number) => dispatch(cf.wSensPresChange({val: val, num: wsensorNum})),
                         -10, 10, 0.1, 
                         hideUnnecessary,
                         data.wsensor.pres.name[wsensorNum]
@@ -107,7 +107,7 @@ const WSensors = () => {
                         config.wsensor.light.corr[wsensorNum], 
                         i18n.t('ambientLight'), 
                         data.wsensor.light.data[wsensorNum], 
-                        (val: number) => dispatch(cf.WSensLightChange({val: val, num: wsensorNum})),
+                        (val: number) => dispatch(cf.wSensLightChange({val: val, num: wsensorNum})),
                         -10, 10, 0.1, 
                         hideUnnecessary,
                         data.wsensor.light.name[wsensorNum]
@@ -117,7 +117,7 @@ const WSensors = () => {
                         config.wsensor.co2.corr[wsensorNum], 
                         i18n.t('CO2Level'), 
                         data.wsensor.co2.data[wsensorNum], 
-                        (val: number) => dispatch(cf.WSensCO2Change({val: val, num: wsensorNum})),
+                        (val: number) => dispatch(cf.wSensCO2Change({val: val, num: wsensorNum})),
                         -10, 10, 0.1, 
                         hideUnnecessary,
                         data.wsensor.co2.name[wsensorNum]
@@ -127,7 +127,7 @@ const WSensors = () => {
                         config.wsensor.volt.corr[wsensorNum], 
                         i18n.t('voltage'), 
                         data.wsensor.voltage.data[wsensorNum], 
-                        (val: number) => dispatch(cf.WSensHighVoltChange({val: val, num: wsensorNum})),
+                        (val: number) => dispatch(cf.wSensHighVoltChange({val: val, num: wsensorNum})),
                         -10, 10, 0.1, 
                         hideUnnecessary,
                         data.wsensor.voltage.name[wsensorNum]
@@ -137,7 +137,7 @@ const WSensors = () => {
                         config.wsensor.curr.corr[wsensorNum], 
                         i18n.t('current'), 
                         data.wsensor.current.data[wsensorNum], 
-                        (val: number) => dispatch(cf.WSensCurrentChange({val: val, num: wsensorNum})),
+                        (val: number) => dispatch(cf.wSensCurrentChange({val: val, num: wsensorNum})),
                         -1, 1, 0.001,
                         hideUnnecessary,
                         data.wsensor.current.name[wsensorNum]
@@ -147,7 +147,7 @@ const WSensors = () => {
                         config.wsensor.pow.corr[wsensorNum], 
                         i18n.t('power'), 
                         data.wsensor.power.data[wsensorNum], 
-                        (val: number) => dispatch(cf.WSensPowerChange({val: val, num: wsensorNum})),
+                        (val: number) => dispatch(cf.wSensPowerChange({val: val, num: wsensorNum})),
                         -10, 10, 0.1,
                         hideUnnecessary,
                         data.wsensor.power.name[wsensorNum]
@@ -157,7 +157,7 @@ const WSensors = () => {
                         config.wsensor.enrg.corr[wsensorNum], 
                         i18n.t('energy'), 
                         data.wsensor.energy.data[wsensorNum], 
-                        (val: number) => dispatch(cf.WSensEnergyChange({val: val, num: wsensorNum})),
+                        (val: number) => dispatch(cf.wSensEnergyChange({val: val, num: wsensorNum})),
                         -10, 10, 0.1,
                         hideUnnecessary,
                         data.wsensor.energy.name[wsensorNum]
@@ -167,7 +167,7 @@ const WSensors = () => {
                         config.wsensor.freq.corr[wsensorNum], 
                         i18n.t('frequency'), 
                         data.wsensor.freq.data[wsensorNum], 
-                        (val: number) => dispatch(cf.WSensFreqChange({val: val, num: wsensorNum})),
+                        (val: number) => dispatch(cf.wSensFreqChange({val: val, num: wsensorNum})),
                         -10, 10, 0.1,
                         hideUnnecessary,
                         data.wsensor.power.name[wsensorNum]
@@ -196,7 +196,7 @@ const WSensors = () => {
                         limitMax={250}
                         step={0.2}
                         indication={config.wsensor.bat.k[wsensorNum].toFixed(1)}
-                        onChange={(val: number) => dispatch(cf.WSensBatKChange({val: val, num: wsensorNum}))}
+                        onChange={(val: number) => dispatch(cf.wSensBatKChange({val: val, num: wsensorNum}))}
                     />
 
                     <div className="my-8">
@@ -206,7 +206,7 @@ const WSensors = () => {
                                 i18n.t('liIonBattery')
                             ]}
                             value={config.wsensor.bat.type[wsensorNum]}
-                            onChange={(val: number) => dispatch(cf.WSensBatTypeChange({val: val, num: wsensorNum}))}
+                            onChange={(val: number) => dispatch(cf.wSensBatTypeChange({val: val, num: wsensorNum}))}
                         />
                     </div>
 
@@ -215,7 +215,7 @@ const WSensors = () => {
                             min={1}
                             max={100}
                             label={i18n.t('channelNumber')}
-                            onChange={val => dispatch(cf.WSensChannelChange(val))}
+                            onChange={val => dispatch(cf.wSensChannelChange(val))}
                             isValid={(valid: boolean) => {
                                 let nv = isValid;
                                 nv[wsensorNum] = valid;
@@ -229,7 +229,7 @@ const WSensors = () => {
                             min={1}
                             max={100}
                             label={i18n.t('dataExpirationTime')}
-                            onChange={val => dispatch(cf.WSensExpireChange({val: val, num: wsensorNum}))}
+                            onChange={val => dispatch(cf.wSensExpireChange({val: val, num: wsensorNum}))}
                             isValid={(valid: boolean) => {
                                 let nv = isValid;
                                 nv[wsensorNum + 2] = valid;

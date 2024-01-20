@@ -24,7 +24,7 @@ const CardDisplayComfort = () => {
                 <SelectSwitch label={i18n.t('dataSource.singular')}
                     options={comforts}
                     value={config.display.source.descr}
-                    onChange={val => dispatch(cf.DisplaySourceDescrChange(val))}
+                    onChange={val => dispatch(cf.displaySourceDescrChange(val))}
                 />
             </>} 
         />

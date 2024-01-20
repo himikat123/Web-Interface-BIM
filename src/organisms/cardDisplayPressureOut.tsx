@@ -33,7 +33,7 @@ const CardDisplayPressureOut = () => {
                 <SelectSwitch label={i18n.t('dataSource.singular')}
                     options={sensors}
                     value={config.display.source.presOut.sens}
-                    onChange={val => dispatch(cf.DisplaySourcePresOutSensChange(val))}
+                    onChange={val => dispatch(cf.displaySourcePresOutSensChange(val))}
                 />
 
                 {/* Wireless sensor number */}
@@ -41,7 +41,7 @@ const CardDisplayPressureOut = () => {
                     <SelectSwitch label={i18n.t('wirelessSensorNumber')}
                         options={wsensors}
                         value={config.display.source.presOut.wsensNum}
-                        onChange={val => dispatch(cf.DisplaySourcePresOutWsensNumChange(val))}
+                        onChange={val => dispatch(cf.displaySourcePresOutWsensNumChange(val))}
                     />
                 </div>}
 
@@ -50,7 +50,7 @@ const CardDisplayPressureOut = () => {
                     <SelectSwitch label={i18n.t('field')}
                         options={things}
                         value={config.display.source.presOut.thing}
-                        onChange={val => dispatch(cf.DisplaySourcePresOutThingChange(val))}
+                        onChange={val => dispatch(cf.displaySourcePresOutThingChange(val))}
                     />
                 </div>}
             </>} 

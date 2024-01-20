@@ -37,7 +37,7 @@ const CardDisplayVoltage = () => {
                 <SelectSwitch label={i18n.t('dataSource.singular')}
                     options={sensors}
                     value={config.display.source.volt.sens}
-                    onChange={val => dispatch(cf.DisplaySourceVoltSensChange(val))}
+                    onChange={val => dispatch(cf.displaySourceVoltSensChange(val))}
                 />
 
                 {/* Wireless sensor number */}
@@ -45,7 +45,7 @@ const CardDisplayVoltage = () => {
                     <SelectSwitch label={i18n.t('wirelessSensorNumber')}
                         options={wsensors}
                         value={config.display.source.volt.wsensNum}
-                        onChange={val => dispatch(cf.DisplaySourceVoltWsensNumChange(val))}
+                        onChange={val => dispatch(cf.displaySourceVoltWsensNumChange(val))}
                     />
 
                     {/* Wireless sensor type of sensor */}
@@ -53,7 +53,7 @@ const CardDisplayVoltage = () => {
                         <SelectSwitch label={i18n.t('sensor.singular')}
                             options={wsensTypes}
                             value={config.display.source.volt.volt}
-                            onChange={val => dispatch(cf.DisplaySourceVoltVoltChange(val))}
+                            onChange={val => dispatch(cf.displaySourceVoltVoltChange(val))}
                         />
                     </div>
                 </div>}
@@ -63,13 +63,13 @@ const CardDisplayVoltage = () => {
                     <SelectSwitch label={i18n.t('sensorType')}
                         options={[i18n.t('voltage'), i18n.t('batteryPercentage')]}
                         value={config.display.source.volt.thingType}
-                        onChange={val => dispatch(cf.DisplaySourceVoltThingTypeChange(val))}
+                        onChange={val => dispatch(cf.displaySourceVoltThingTypeChange(val))}
                     />
                     <div className="mt-8">
                         <SelectSwitch label={i18n.t('field')}
                             options={things}
                             value={config.display.source.volt.thing}
-                            onChange={val => dispatch(cf.DisplaySourceVoltThingChange(val))}
+                            onChange={val => dispatch(cf.displaySourceVoltThingChange(val))}
                         />
                     </div>
                 </div>}

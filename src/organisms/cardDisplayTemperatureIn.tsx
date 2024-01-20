@@ -52,9 +52,9 @@ const CardDisplayTemperatureIn = () => {
                     options={sensors}
                     value={config.display.source.tempIn.sens}
                     onChange={val => {
-                        dispatch(cf.DisplaySourceTempInSensChange(val));
-                        if(val === 4) dispatch(cf.DisplaySourceHumInSensChange(val));
-                        if(prevSens === 4) dispatch(cf.DisplaySourceHumInSensChange(0));
+                        dispatch(cf.displaySourceTempInSensChange(val));
+                        if(val === 4) dispatch(cf.displaySourceHumInSensChange(val));
+                        if(prevSens === 4) dispatch(cf.displaySourceHumInSensChange(0));
                     }}
                 />
 
@@ -63,7 +63,7 @@ const CardDisplayTemperatureIn = () => {
                     <SelectSwitch label={i18n.t('wirelessSensorNumber')}
                         options={wsensors}
                         value={config.display.source.tempIn.wsensNum}
-                        onChange={val => dispatch(cf.DisplaySourceTempInWsensNumChange(val))}
+                        onChange={val => dispatch(cf.displaySourceTempInWsensNumChange(val))}
                     />
                 </div>}
 
@@ -72,7 +72,7 @@ const CardDisplayTemperatureIn = () => {
                     <SelectSwitch label={i18n.t('temperatureSensorNumber')}
                         options={temps}
                         value={config.display.source.tempIn.temp}
-                        onChange={val => dispatch(cf.DisplaySourceTempInTempChange(val))}
+                        onChange={val => dispatch(cf.displaySourceTempInTempChange(val))}
                     />
                 </div>}
 
@@ -81,7 +81,7 @@ const CardDisplayTemperatureIn = () => {
                     <SelectSwitch label={i18n.t('field')}
                         options={things}
                         value={config.display.source.tempIn.thing}
-                        onChange={val => dispatch(cf.DisplaySourceTempInThingChange(val))}
+                        onChange={val => dispatch(cf.displaySourceTempInThingChange(val))}
                     />
                 </div>}
 
@@ -95,7 +95,7 @@ const CardDisplayTemperatureIn = () => {
                         limitMax={20}
                         step={1}
                         indication={String(config.display.source.sequence.dur)}
-                        onChange={val => dispatch(cf.DisplaySourceSequenceDurChange(val))}
+                        onChange={val => dispatch(cf.displaySourceSequenceDurChange(val))}
                     />
 
                     {[...Array(4)].map((m, num) => <>
@@ -106,7 +106,7 @@ const CardDisplayTemperatureIn = () => {
                             <SelectSwitch label={i18n.t('timeSlot') + ' ' + String(num + 1)}
                                 options={sensors.filter(sens => sens != i18n.t('sequence'))}
                                 value={config.display.source.sequence.temp[num]}
-                                onChange={val => dispatch(cf.DisplaySourceSequenceTempChange({ num: num, val: val }))}
+                                onChange={val => dispatch(cf.displaySourceSequenceTempChange({ num: num, val: val }))}
                             />
                         </div>
 
@@ -117,8 +117,8 @@ const CardDisplayTemperatureIn = () => {
                                 value={tempWsensNum}
                                 onChange={val => {
                                     setTempWsensNum(val);
-                                    dispatch(cf.DisplaySourceSequenceWsensTempChange({ num: num, wsens: 0, val: 0 }));
-                                    dispatch(cf.DisplaySourceSequenceWsensTempChange({ num: num, wsens: 1, val: 0 }))
+                                    dispatch(cf.displaySourceSequenceWsensTempChange({ num: num, wsens: 0, val: 0 }));
+                                    dispatch(cf.displaySourceSequenceWsensTempChange({ num: num, wsens: 1, val: 0 }))
                                 }}
                             />
                         </div>}
@@ -128,7 +128,7 @@ const CardDisplayTemperatureIn = () => {
                             <SelectSwitch label={i18n.t('temperatureSensorNumber')}
                                 options={sequenceTemps}
                                 value={config.display.source.sequence.wsenstemp[num][tempWsensNum]}
-                                onChange={val => dispatch(cf.DisplaySourceSequenceWsensTempChange({ num: num, wsens: tempWsensNum, val: val }))}
+                                onChange={val => dispatch(cf.displaySourceSequenceWsensTempChange({ num: num, wsens: tempWsensNum, val: val }))}
                             />
                         </div>}
 
@@ -137,7 +137,7 @@ const CardDisplayTemperatureIn = () => {
                             <SelectSwitch label={i18n.t('field')}
                                 options={things}
                                 value={config.display.source.sequence.thngtemp[num]}
-                                onChange={val => dispatch(cf.DisplaySourceSequenceThngTempChange({ num: num, val: val }))}
+                                onChange={val => dispatch(cf.displaySourceSequenceThngTempChange({ num: num, val: val }))}
                             />
                         </div>}
 
@@ -146,7 +146,7 @@ const CardDisplayTemperatureIn = () => {
                             <TextInput label={i18n.t('name')} 
                                 value={config.display.source.sequence.name[num]}
                                 maxLength={15}
-                                onChange={val => dispatch(cf.DisplaySourceSequenceNameChange({ num: num, val: val.target.value})) }
+                                onChange={val => dispatch(cf.displaySourceSequenceNameChange({ num: num, val: val.target.value})) }
                             />
                         </div>
                     </>)}

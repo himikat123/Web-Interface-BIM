@@ -24,7 +24,7 @@ const BrightTime = (props: iDisplay) => {
             <TimeInput value={config.display.dayTime[props.num]}
                 step={60} 
                 label={i18n.t('dayMode')} 
-                onChange={val => dispatch(cf.DisplayDayTimeChange({num: props.num, val: val}))} 
+                onChange={val => dispatch(cf.displayDayTimeChange({num: props.num, val: val}))} 
             />
         </div>
         <RangeInput value={config.display.brightness.day[props.num]}
@@ -36,7 +36,7 @@ const BrightTime = (props: iDisplay) => {
             step={1}
             indication={String(config.display.brightness.day[props.num])}
             onChange={val => {
-                dispatch(cf.DisplayBrightDayChange({num: props.num, val: val}));
+                dispatch(cf.displayBrightDayChange({num: props.num, val: val}));
                 sendBright(val);
             }}
             className="mt-4"
@@ -46,7 +46,7 @@ const BrightTime = (props: iDisplay) => {
             <TimeInput value={config.display.nightTime[props.num]} 
                 step={60}
                 label={i18n.t('nightMode')} 
-                onChange={val => dispatch(cf.DisplayNightTimeChange({num: props.num, val: val}))} 
+                onChange={val => dispatch(cf.displayNightTimeChange({num: props.num, val: val}))} 
             />
         </div>
         <RangeInput value={config.display.brightness.night[props.num]}
@@ -58,7 +58,7 @@ const BrightTime = (props: iDisplay) => {
             step={1}
             indication={String(config.display.brightness.night[props.num])}
             onChange={val => {
-                dispatch(cf.DisplayBrightNightChange({num: props.num, val: val}));
+                dispatch(cf.displayBrightNightChange({num: props.num, val: val}));
                 sendBright(val);
             }}
             className="mt-4"

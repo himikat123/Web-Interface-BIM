@@ -215,7 +215,7 @@ const Sensors = () => {
                 config.sensors.analog.v, 
                 i18n.t('voltage'), 
                 data.analog.volt, 
-                (val: number) => dispatch(cf.AnalogCorrChange(val)), 
+                (val: number) => dispatch(cf.analogCorrChange(val)), 
                 -10, 10, 0.1
             )}
         </>}

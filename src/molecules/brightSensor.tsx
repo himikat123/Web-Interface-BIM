@@ -43,7 +43,7 @@ const BrightSensor = (props: iDisplay) => {
         <SelectSwitch label={i18n.t('sensorType')}
             options={lightSensors}
             value={config.display.lightSensor[props.num]}
-            onChange={(val: number) => dispatch(cf.DisplayLightSensorChange({num: props.num, val: val}))}
+            onChange={(val: number) => dispatch(cf.displayLightSensorChange({num: props.num, val: val}))}
         />
         
         <RangeInput value={config.display.sensitivity[props.num]}
@@ -55,7 +55,7 @@ const BrightSensor = (props: iDisplay) => {
             step={1}
             indication={String(config.display.sensitivity[props.num])}
             onChange={val => {
-                dispatch(cf.DisplaySensitivityChange({num: props.num, val: val}));
+                dispatch(cf.displaySensitivityChange({num: props.num, val: val}));
                 sendSensitivity(val);
             }}
             className="mt-2"

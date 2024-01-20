@@ -116,7 +116,7 @@ const CardDisplayTimeSlot = (props: iDisplayTimeSlot) => {
                     min={0}
                     max={99}
                     label={i18n.t('displayDuration')}
-                    onChange={val => dispatch(cf.DisplayTimeslotPeriodChange({slot: props.slot, num: props.num, val: val}))}
+                    onChange={val => dispatch(cf.displayTimeslotPeriodChange({slot: props.slot, num: props.num, val: val}))}
                     isValid={valid => dispatch(display1ValidChange(valid))}
                 />
 
@@ -126,7 +126,7 @@ const CardDisplayTimeSlot = (props: iDisplayTimeSlot) => {
                         <ColorInput value={config.display.timeSlot.color[props.slot][props.num]}
                             label={i18n.t('displayColor')} 
                             onChange={val => {
-                                dispatch(cf.DisplayTimeslotColorChange({slot: props.slot, num: props.num, val: val}));
+                                dispatch(cf.displayTimeslotColorChange({slot: props.slot, num: props.num, val: val}));
                                 sendSlotColor(val);
                             }}
                         />
@@ -138,8 +138,8 @@ const CardDisplayTimeSlot = (props: iDisplayTimeSlot) => {
                             options={sensors}
                             value={config.display.timeSlot.sensor[props.slot][props.num]}
                             onChange={val => {
-                                dispatch(cf.DisplayTimeslotSensorChange({slot: props.slot, num: props.num, val: val}));
-                                dispatch(cf.DisplayTimeslotDataChange({slot: props.slot, num: props.num, val: 0}))
+                                dispatch(cf.displayTimeslotSensorChange({slot: props.slot, num: props.num, val: val}));
+                                dispatch(cf.displayTimeslotDataChange({slot: props.slot, num: props.num, val: 0}))
                             }}
                         />
                     </div>
@@ -149,7 +149,7 @@ const CardDisplayTimeSlot = (props: iDisplayTimeSlot) => {
                         <SelectSwitch label={i18n.t('sensorType')}
                             options={types[config.display.timeSlot.sensor[props.slot][props.num]]}
                             value={config.display.timeSlot.data[props.slot][props.num]}
-                            onChange={val => dispatch(cf.DisplayTimeslotDataChange({slot: props.slot, num: props.num, val: val}))}
+                            onChange={val => dispatch(cf.displayTimeslotDataChange({slot: props.slot, num: props.num, val: val}))}
                         />
                     </div>}
 
@@ -158,7 +158,7 @@ const CardDisplayTimeSlot = (props: iDisplayTimeSlot) => {
                         <SelectSwitch label={i18n.t('sensorType')}
                             options={[i18n.t('temperature'), i18n.t('humidity'), i18n.t('pressure')]}
                             value={config.display.timeSlot.data[props.slot][props.num]}
-                            onChange={val => dispatch(cf.DisplayTimeslotDataChange({slot: props.slot, num: props.num, val: val}))}
+                            onChange={val => dispatch(cf.displayTimeslotDataChange({slot: props.slot, num: props.num, val: val}))}
                         />
                     </div>}
 
@@ -167,7 +167,7 @@ const CardDisplayTimeSlot = (props: iDisplayTimeSlot) => {
                         <SelectSwitch label={i18n.t('field')}
                             options={things}
                             value={config.display.timeSlot.thing[props.slot][props.num]}
-                            onChange={val => dispatch(cf.DisplayTimeslotThingChange({slot: props.slot, num: props.num, val: val}))}
+                            onChange={val => dispatch(cf.displayTimeslotThingChange({slot: props.slot, num: props.num, val: val}))}
                         />
                     </div>}
 
@@ -176,7 +176,7 @@ const CardDisplayTimeSlot = (props: iDisplayTimeSlot) => {
                         <SelectSwitch label={i18n.t('wirelessSensor.singular')}
                             options={[...Array(2)].map((x, i) => i18n.t('wirelessSensor.singular') + ' ' + String(i))}
                             value={config.display.timeSlot.wsensor.num[props.slot][props.num]}
-                            onChange={val => dispatch(cf.DisplayTimeslotWsensorNumChange({slot: props.slot, num: props.num, val: val}))}
+                            onChange={val => dispatch(cf.displayTimeslotWsensorNumChange({slot: props.slot, num: props.num, val: val}))}
                         />
                     </div>}
 
@@ -185,7 +185,7 @@ const CardDisplayTimeSlot = (props: iDisplayTimeSlot) => {
                         <SelectSwitch label={i18n.t('sensorType')}
                             options={wsensorTypes[config.display.timeSlot.wsensor.num[props.slot][props.num]]}
                             value={config.display.timeSlot.wsensor.type[props.slot][props.num]}
-                            onChange={val => dispatch(cf.DisplayTimeslotWsensorTypeChange({slot: props.slot, num: props.num, val: val}))}
+                            onChange={val => dispatch(cf.displayTimeslotWsensorTypeChange({slot: props.slot, num: props.num, val: val}))}
                         />
                     </div>}
                 </>}

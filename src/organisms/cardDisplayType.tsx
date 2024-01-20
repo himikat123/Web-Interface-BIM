@@ -98,8 +98,8 @@ const CardDisplayType = (props: iDisplay) => {
                 options={types}
                 value={config.display.type[props.num]}
                 onChange={val => {
-                    dispatch(cf.DisplayTypeChange({num: props.num, val: val}));
-                    dispatch(cf.DisplayModelChange({num: props.num, val: 0}));
+                    dispatch(cf.displayTypeChange({num: props.num, val: val}));
+                    dispatch(cf.displayModelChange({num: props.num, val: 0}));
                 }}
             />
 
@@ -107,14 +107,14 @@ const CardDisplayType = (props: iDisplay) => {
                 <SelectSwitch label={i18n.t('displayModel')}
                     options={models}
                     value={config.display.model[props.num]}
-                    onChange={val => dispatch(cf.DisplayModelChange({num: props.num, val: val}))}
+                    onChange={val => dispatch(cf.displayModelChange({num: props.num, val: val}))}
                 />
             </div>}
 
             {config.display.type[props.num] + props.num == 4 && <div>
                 <div className="mt-4 mb-1 text-xs">{i18n.t('sacrificial')}</div>
                 <Toggle checked={config.display.sled[props.num]}
-                    onChange={() => dispatch(cf.DisplaySledChange({num: props.num, val: config.display.sled[props.num] ? 0 : 1}))}
+                    onChange={() => dispatch(cf.displaySledChange({num: props.num, val: config.display.sled[props.num] ? 0 : 1}))}
                     label=""
                 />
             </div>}
@@ -129,7 +129,7 @@ const CardDisplayType = (props: iDisplay) => {
                     step={1}
                     indication={String(config.display.brightness.min[props.num])}
                     onChange={val => {
-                        dispatch(cf.DisplayBrightMinChange({num: props.num, val: val}));
+                        dispatch(cf.displayBrightMinChange({num: props.num, val: val}));
                         sendLimits();
                     }}
                     className="mt-4"
@@ -144,7 +144,7 @@ const CardDisplayType = (props: iDisplay) => {
                     step={1}
                     indication={String(config.display.brightness.max[props.num])}
                     onChange={val => {
-                        dispatch(cf.DisplayBrightMaxChange({num: props.num, val: val}));
+                        dispatch(cf.displayBrightMaxChange({num: props.num, val: val}));
                         sendLimits();
                     }}
                     className="mt-2"

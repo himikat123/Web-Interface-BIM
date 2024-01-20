@@ -15,7 +15,6 @@ import CardDisplayHumidityOut from "../organisms/cardDisplayHumidityOut";
 import CardDisplayPressureOut from "../organisms/cardDisplayPressureOut";
 import CardDisplayComfort from "../organisms/cardDisplayComfort";
 import CardDisplayTimeSlot from "../organisms/cardDisplayTimeSlot";
-
 import { iConfig } from "../redux/configTypes";
 
 const Display1 = () => {

@@ -28,7 +28,7 @@ const BrightSunriseSunset = (props: iDisplay) => {
             step={1}
             indication={String(config.display.brightness.day[props.num])}
             onChange={val => {
-                dispatch(cf.DisplayBrightDayChange({num: props.num, val: val}));
+                dispatch(cf.displayBrightDayChange({num: props.num, val: val}));
                 sendBright(val);
             }}
             className="mt-4"
@@ -43,7 +43,7 @@ const BrightSunriseSunset = (props: iDisplay) => {
             step={1}
             indication={String(config.display.brightness.night[props.num])}
             onChange={val => {
-                dispatch(cf.DisplayBrightNightChange({num: props.num, val: val}));
+                dispatch(cf.displayBrightNightChange({num: props.num, val: val}));
                 sendBright(val);
             }}
             className="mt-4"

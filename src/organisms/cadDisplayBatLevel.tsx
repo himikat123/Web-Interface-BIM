@@ -29,7 +29,7 @@ const CardDisplayBatLevel = () => {
                 <SelectSwitch label={i18n.t('dataSource.singular')}
                     options={sensors}
                     value={config.display.source.bat.sens}
-                    onChange={val => dispatch(cf.DisplaySourceBatSensChange(val))}
+                    onChange={val => dispatch(cf.displaySourceBatSensChange(val))}
                 />
 
                 {/* Wireless sensor number */}
@@ -37,7 +37,7 @@ const CardDisplayBatLevel = () => {
                     <SelectSwitch label={i18n.t('wirelessSensorNumber')}
                         options={wsensors}
                         value={config.display.source.bat.wsensNum}
-                        onChange={val => dispatch(cf.DisplaySourceBatWsensNumChange(val))}
+                        onChange={val => dispatch(cf.displaySourceBatWsensNumChange(val))}
                     />
                 </div>}
 
@@ -46,7 +46,7 @@ const CardDisplayBatLevel = () => {
                     <SelectSwitch label={i18n.t('field')}
                         options={things}
                         value={config.display.source.bat.thing}
-                        onChange={val => dispatch(cf.DisplaySourceBatThingChange(val))}
+                        onChange={val => dispatch(cf.displaySourceBatThingChange(val))}
                     />
                 </div>}
             </>} 

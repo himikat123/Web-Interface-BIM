@@ -21,15 +21,15 @@ const Weather = () => {
             <SelectSwitch label={i18n.t('weatherForecastSource')}
                 options={['openweathermap.org', 'weatherbit.io']}
                 value={config.weather.provider}
-                onChange={(val: number) => dispatch(cf.WeatherProwiderChange(val))}
+                onChange={val => dispatch(cf.weatherProwiderChange(val))}
             />
             
             <div className="my-8">
                 <TextInput label={"API KEY"} 
                     value={config.weather.appid[config.weather.provider]}
                     maxLength={32}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(cf.WeatherAppIdChange({
-                        val: e.target.value.trim(), 
+                    onChange={val => dispatch(cf.weatherAppIdChange({
+                        val: val.target.value.trim(), 
                         num: config.weather.provider
                     }))}
                 />
@@ -39,7 +39,7 @@ const Weather = () => {
                 <TextInput label={i18n.t('parsingServer')} 
                     value={config.weather.parsingServer}
                     maxLength={127}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(cf.WeatherParsingServerChange(e.target.value.trim()))}
+                    onChange={val => dispatch(cf.weatherParsingServerChange(val.target.value.trim()))}
                 />
             </div>}
         </>} />
@@ -48,14 +48,14 @@ const Weather = () => {
             <SelectSwitch label={i18n.t('cityIdentification')}
                 options={[i18n.t('byCityName'), i18n.t('byCityId'), i18n.t('byCoordinates')]}
                 value={config.weather.citysearch}
-                onChange={(val: number) => dispatch(cf.WeatherCitySearchChange(val))}
+                onChange={val => dispatch(cf.weatherCitySearchChange(val))}
             />
             
             {config.weather.citysearch === 0 && <div className="my-8">
                 <TextInput label={i18n.t('cityName')} 
                     value={config.weather.city}
                     maxLength={40}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(cf.WeatherCityChange(e.target.value.trim()))}
+                    onChange={val => dispatch(cf.weatherCityChange(val.target.value.trim()))}
                 />
             </div>}
 
@@ -64,7 +64,7 @@ const Weather = () => {
                     min={0}
                     max={4000000000}
                     label={i18n.t('cityIdNumber')}
-                    onChange={val => dispatch(cf.WeatherCityIdChange(val))}
+                    onChange={val => dispatch(cf.weatherCityIdChange(val))}
                 />
 
                 <div className="my-8" />
@@ -83,7 +83,7 @@ const Weather = () => {
                     min={-90}
                     max={90}
                     label={i18n.t('latitude')}
-                    onChange={val => dispatch(cf.WeatherLatChange(val))}
+                    onChange={val => dispatch(cf.weatherLatChange(val))}
                 />
 
                 <div className="my-8" />
@@ -91,7 +91,7 @@ const Weather = () => {
                     min={-180}
                     max={180}
                     label={i18n.t('longitude')}
-                    onChange={val => dispatch(cf.WeatherLonChange(val))}
+                    onChange={val => dispatch(cf.weatherLonChange(val))}
                 />
             </div>}
         </>} />

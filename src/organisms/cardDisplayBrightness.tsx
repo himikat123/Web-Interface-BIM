@@ -27,7 +27,7 @@ const CardDisplayBrightness = (props: iDisplay) => {
             <SelectSwitch label={i18n.t('displayBrightness')}
                 options={brightSources}
                 value={config.display.brightMethod[props.num]}
-                onChange={(val: number) => dispatch(cf.DisplayBrightMethodChange({num: props.num, val: val}))}
+                onChange={val => dispatch(cf.displayBrightMethodChange({num: props.num, val: val}))}
             />
 
             {/* Brightess at sunrise and sunset */}

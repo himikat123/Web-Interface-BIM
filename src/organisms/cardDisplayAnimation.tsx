@@ -56,7 +56,7 @@ const CardDisplayAnimation = (props: iDisplay) => {
                 options={animations}
                 value={config.display.animation.type[props.num]}
                 onChange={val => {
-                    dispatch(cf.DisplayAnimationTypeChange({num: props.num, val: val}));
+                    dispatch(cf.displayAnimationTypeChange({num: props.num, val: val}));
                     sendAnimationType(val);
                 }}
             />
@@ -70,7 +70,7 @@ const CardDisplayAnimation = (props: iDisplay) => {
                 step={1}
                 indication={String(config.display.animation.speed[props.num])}
                 onChange={val => {
-                    dispatch(cf.DisplayAnimationSpeedChange({num: props.num, val: val}));
+                    dispatch(cf.displayAnimationSpeedChange({num: props.num, val: val}));
                     sendAnimationSpeed(val);
                 }}
                 className="mt-4"
@@ -81,7 +81,7 @@ const CardDisplayAnimation = (props: iDisplay) => {
                     options={clockPoints}
                     value={config.display.animation.points[props.num]}
                     onChange={val => {
-                        dispatch(cf.DisplayAnimationPointsChange({num: props.num, val: val}));
+                        dispatch(cf.displayAnimationPointsChange({num: props.num, val: val}));
                         sendAnimationPoints(val);
                     }}
                 />

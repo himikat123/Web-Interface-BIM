@@ -39,7 +39,7 @@ const CardDisplayTemperatureOut = () => {
                 <SelectSwitch label={i18n.t('dataSource.singular')}
                     options={sensors}
                     value={config.display.source.tempOut.sens}
-                    onChange={val => dispatch(cf.DisplaySourceTempOutSensChange(val))}
+                    onChange={val => dispatch(cf.displaySourceTempOutSensChange(val))}
                 />
 
                 {/* Wireless sensor number */}
@@ -47,7 +47,7 @@ const CardDisplayTemperatureOut = () => {
                     <SelectSwitch label={i18n.t('wirelessSensorNumber')}
                         options={wsensors}
                         value={config.display.source.tempOut.wsensNum}
-                        onChange={val => dispatch(cf.DisplaySourceTempOutWsensNumChange(val))}
+                        onChange={val => dispatch(cf.displaySourceTempOutWsensNumChange(val))}
                     />
                 </div>}
 
@@ -56,7 +56,7 @@ const CardDisplayTemperatureOut = () => {
                     <SelectSwitch label={i18n.t('temperatureSensorNumber')}
                         options={temps}
                         value={config.display.source.tempOut.temp}
-                        onChange={val => dispatch(cf.DisplaySourceTempOutTempChange(val))}
+                        onChange={val => dispatch(cf.displaySourceTempOutTempChange(val))}
                     />
                 </div>}
 
@@ -65,7 +65,7 @@ const CardDisplayTemperatureOut = () => {
                     <SelectSwitch label={i18n.t('field')}
                         options={things}
                         value={config.display.source.tempOut.thing}
-                        onChange={val => dispatch(cf.DisplaySourceTempOutThingChange(val))}
+                        onChange={val => dispatch(cf.displaySourceTempOutThingChange(val))}
                     />
                 </div>}
             </>} 

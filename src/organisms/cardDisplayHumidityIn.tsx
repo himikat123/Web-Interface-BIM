@@ -43,9 +43,9 @@ const CardDisplayHumidityIn = () => {
                     options={sensors}
                     value={config.display.source.humIn.sens}
                     onChange={val => {
-                        dispatch(cf.DisplaySourceHumInSensChange(val));
-                        if(val === 4) dispatch(cf.DisplaySourceTempInSensChange(val));
-                        if(prevSens === 4) dispatch(cf.DisplaySourceTempInSensChange(0));
+                        dispatch(cf.displaySourceHumInSensChange(val));
+                        if(val === 4) dispatch(cf.displaySourceTempInSensChange(val));
+                        if(prevSens === 4) dispatch(cf.displaySourceTempInSensChange(0));
                     }}
                 />
 
@@ -54,7 +54,7 @@ const CardDisplayHumidityIn = () => {
                     <SelectSwitch label={i18n.t('wirelessSensorNumber')}
                         options={wsensors}
                         value={config.display.source.humIn.wsensNum}
-                        onChange={val => dispatch(cf.DisplaySourceHumInWsensNumChange(val))}
+                        onChange={val => dispatch(cf.displaySourceHumInWsensNumChange(val))}
                     />
                 </div>}
 
@@ -63,7 +63,7 @@ const CardDisplayHumidityIn = () => {
                     <SelectSwitch label={i18n.t('field')}
                         options={things}
                         value={config.display.source.humIn.thing}
-                        onChange={val => dispatch(cf.DisplaySourceHumInThingChange(val))}
+                        onChange={val => dispatch(cf.displaySourceHumInThingChange(val))}
                     />
                 </div>}
 
@@ -77,7 +77,7 @@ const CardDisplayHumidityIn = () => {
                         limitMax={20}
                         step={1}
                         indication={String(config.display.source.sequence.dur)}
-                        onChange={val => dispatch(cf.DisplaySourceSequenceDurChange(val))}
+                        onChange={val => dispatch(cf.displaySourceSequenceDurChange(val))}
                     />
 
                     {[...Array(4)].map((m, num) => <>
@@ -88,7 +88,7 @@ const CardDisplayHumidityIn = () => {
                             <SelectSwitch label={i18n.t('timeSlot') + ' ' + String(num + 1)}
                                 options={sensors.filter(sens => sens != i18n.t('sequence'))}
                                 value={config.display.source.sequence.hum[num]}
-                                onChange={val => dispatch(cf.DisplaySourceSequenceHumChange({ num: num, val: val }))}
+                                onChange={val => dispatch(cf.displaySourceSequenceHumChange({ num: num, val: val }))}
                             />
                         </div>
 
@@ -97,7 +97,7 @@ const CardDisplayHumidityIn = () => {
                             <SelectSwitch label={i18n.t('wirelessSensorNumber')}
                                 options={wsensors}
                                 value={config.display.source.sequence.wsenshum[num]}
-                                onChange={val => dispatch(cf.DisplaySourceSequenceWsensHumChange({ num: num, val: 0 }))}
+                                onChange={val => dispatch(cf.displaySourceSequenceWsensHumChange({ num: num, val: 0 }))}
                             />
                         </div>}
 
@@ -106,7 +106,7 @@ const CardDisplayHumidityIn = () => {
                             <SelectSwitch label={i18n.t('field')}
                                 options={things}
                                 value={config.display.source.sequence.thnghum[num]}
-                                onChange={val => dispatch(cf.DisplaySourceSequenceThngHumChange({ num: num, val: val }))}
+                                onChange={val => dispatch(cf.displaySourceSequenceThngHumChange({ num: num, val: val }))}
                             />
                         </div>}
 
@@ -115,7 +115,7 @@ const CardDisplayHumidityIn = () => {
                             <TextInput label={i18n.t('name')} 
                                 value={config.display.source.sequence.name[num]}
                                 maxLength={15}
-                                onChange={val => dispatch(cf.DisplaySourceSequenceNameChange({ num: num, val: val.target.value})) }
+                                onChange={val => dispatch(cf.displaySourceSequenceNameChange({ num: num, val: val.target.value})) }
                             />
                         </div>
                     </>)}

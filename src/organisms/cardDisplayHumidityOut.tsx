@@ -34,7 +34,7 @@ const CardDisplayHumidityOut = () => {
                 <SelectSwitch label={i18n.t('dataSource.singular')}
                     options={sensors}
                     value={config.display.source.humOut.sens}
-                    onChange={val => dispatch(cf.DisplaySourceHumOutSensChange(val))}
+                    onChange={val => dispatch(cf.displaySourceHumOutSensChange(val))}
                 />
 
                 {/* Wireless sensor number */}
@@ -42,7 +42,7 @@ const CardDisplayHumidityOut = () => {
                     <SelectSwitch label={i18n.t('wirelessSensorNumber')}
                         options={wsensors}
                         value={config.display.source.humOut.wsensNum}
-                        onChange={val => dispatch(cf.DisplaySourceHumOutWsensNumChange(val))}
+                        onChange={val => dispatch(cf.displaySourceHumOutWsensNumChange(val))}
                     />
                 </div>}
 
@@ -51,7 +51,7 @@ const CardDisplayHumidityOut = () => {
                     <SelectSwitch label={i18n.t('field')}
                         options={things}
                         value={config.display.source.humOut.thing}
-                        onChange={val => dispatch(cf.DisplaySourceHumOutThingChange(val))}
+                        onChange={val => dispatch(cf.displaySourceHumOutThingChange(val))}
                     />
                 </div>}
             </>} 
