@@ -146,7 +146,7 @@ const data = () => {
         },
         thing: {
             time: Math.floor(Date.now() / 1000) - random(600, 660), // 10 - 11 minutes ago
-            data: [-5.2, 56.9, 768.1, 403.2, 40400.0, 99.8, 1359.4, -12.2]
+            data: [random(-5, -4), random(56, 59), random(768, 777), random(403, 407), 40400.0, random(99, 102), random(1359, 1362), random(-12, -10)]
         },
         fs: { 
             total: 2564.4,
