@@ -140,15 +140,6 @@
     "setTimeManually": "Set date and time manually",
     "set": "Set",
     "neverSync": "Never sync",
-    "weekdays": {
-        "mo": "Mo",
-        "tu": "Tu",
-        "we": "We",
-        "th": "Th",
-        "fr": "Fr",
-        "sa": "Sa",
-        "su": "Su"
-    },
     "alwaysOn": "Always On",
     "alwaysOff": "Always Off",
     "onFromDawnToDusk": "On from dawn to dusk",

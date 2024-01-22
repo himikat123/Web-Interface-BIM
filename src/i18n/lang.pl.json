@@ -140,15 +140,6 @@
     "setTimeManually": "Ustaw datę i czas ręcznie",
     "set": "Ustaw",
     "neverSync": "Nigdy nie synchronizuj",
-    "weekdays": {
-        "mo": "Pn",
-        "tu": "Wt",
-        "we": "Śr",
-        "th": "Cz",
-        "fr": "Pt",
-        "sa": "So",
-        "su": "Nd"
-    },
     "alwaysOn": "Zawsze włączony",
     "alwaysOff": "Zawsze wyłączony",
     "onFromDawnToDusk": "Włączony od wschodu do zachodu słońca",
