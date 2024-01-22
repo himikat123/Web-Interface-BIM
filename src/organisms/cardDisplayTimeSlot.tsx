@@ -75,92 +75,31 @@ const CardDisplayTimeSlot = (props: iDisplayTimeSlot) => {
         ]
     ];
 
-    const wsensorTypes = [
-        [
-            `${i18n.t('temperature')} 0 (${vl.WsensorDataRelevance(0) 
-                ? vl.validateTemperature(data.wsensor.temp.data[0][0]) 
-                    ? ((data.wsensor.temp.data[0][0] + config.wsensor.temp.corr[0][0]).toFixed(2) + '°C') 
+    let wsensorTypes = [];
+    for(let i=0; i<2; i++) {
+        wsensorTypes.push([
+            ...([...Array(5)].map((x, n) => `${i18n.t('temperature')} ${n} (${vl.WsensorDataRelevance(i) 
+                ? vl.validateTemperature(data.wsensor.temp.data[n][i]) 
+                    ? ((data.wsensor.temp.data[n][i] + config.wsensor.temp.corr[i][n]).toFixed(2) + '°C') 
+                    : '--' 
+                : i18n.t('dataExpired')})`)),
+            `${i18n.t('humidity')} (${vl.WsensorDataRelevance(i) 
+                ? vl.validateHumidity(data.wsensor.hum.data[i]) 
+                    ? ((data.wsensor.hum.data[i] + config.wsensor.hum.corr[i]).toFixed(2) + '%') 
                     : '--' 
                 : i18n.t('dataExpired')})`,
-            `${i18n.t('temperature')} 1 (${vl.WsensorDataRelevance(0) 
-                ? vl.validateTemperature(data.wsensor.temp.data[1][0]) 
-                    ? ((data.wsensor.temp.data[1][0] + config.wsensor.temp.corr[0][1]).toFixed(2) + '°C') 
+            `${i18n.t('pressure')} (${vl.WsensorDataRelevance(i) 
+                ? vl.validatePressure(data.wsensor.pres.data[i]) 
+                    ? ((data.wsensor.pres.data[i] + config.wsensor.pres.corr[i]).toFixed(2) + i18n.t('units.hpa') + ' / ' + ((data.wsensor.pres.data[i] + config.wsensor.pres.corr[i]) * 0.75).toFixed(2) + i18n.t('units.mm')) 
                     : '--' 
                 : i18n.t('dataExpired')})`,
-            `${i18n.t('temperature')} 2 (${vl.WsensorDataRelevance(0) 
-                ? vl.validateTemperature(data.wsensor.temp.data[2][0]) 
-                    ? ((data.wsensor.temp.data[2][0] + config.wsensor.temp.corr[0][2]).toFixed(2) + '°C') 
-                    : '--' 
-                : i18n.t('dataExpired')})`,
-            `${i18n.t('temperature')} 3 (${vl.WsensorDataRelevance(0) 
-                ? vl.validateTemperature(data.wsensor.temp.data[3][0]) 
-                    ? ((data.wsensor.temp.data[3][0] + config.wsensor.temp.corr[0][3]).toFixed(2) + '°C') 
-                    : '--' 
-                : i18n.t('dataExpired')})`,
-            `${i18n.t('temperature')} 4 (${vl.WsensorDataRelevance(0) 
-                ? vl.validateTemperature(data.wsensor.temp.data[4][0]) 
-                    ? ((data.wsensor.temp.data[4][0] + config.wsensor.temp.corr[0][4]).toFixed(2) + '°C') 
-                    : '--' 
-                : i18n.t('dataExpired')})`,
-            `${i18n.t('humidity')} (${vl.WsensorDataRelevance(0) 
-                ? vl.validateHumidity(data.wsensor.hum.data[0]) 
-                    ? ((data.wsensor.hum.data[0] + config.wsensor.hum.corr[0]).toFixed(2) + '%') 
-                    : '--' 
-                : i18n.t('dataExpired')})`,
-            `${i18n.t('pressure')} (${vl.WsensorDataRelevance(0) 
-                ? vl.validatePressure(data.wsensor.pres.data[0]) 
-                    ? ((data.wsensor.pres.data[0] + config.wsensor.pres.corr[0]).toFixed(2) + i18n.t('units.hpa') + ' / ' + ((data.wsensor.pres.data[0] + config.wsensor.pres.corr[0]) * 0.75).toFixed(2) + i18n.t('units.mm')) 
-                    : '--' 
-                : i18n.t('dataExpired')})`,
-            `CO2 (${vl.WsensorDataRelevance(0) 
-                ? vl.validateCO2(data.wsensor.co2.data[0]) 
-                    ? ((data.wsensor.co2.data[0] + config.wsensor.co2.corr[0]).toFixed(2) + 'ppm') 
+            `CO2 (${vl.WsensorDataRelevance(i) 
+                ? vl.validateCO2(data.wsensor.co2.data[i]) 
+                    ? ((data.wsensor.co2.data[i] + config.wsensor.co2.corr[i]).toFixed(2) + 'ppm') 
                     : '--' 
                 : i18n.t('dataExpired')})`
-        ],
-        [
-            `${i18n.t('temperature')} 0 (${vl.WsensorDataRelevance(1) 
-                ? vl.validateTemperature(data.wsensor.temp.data[0][1]) 
-                    ? ((data.wsensor.temp.data[0][1] + config.wsensor.temp.corr[1][0]).toFixed(2) + '°C') 
-                    : '--' 
-                : i18n.t('dataExpired')})`,
-            `${i18n.t('temperature')} 1 (${vl.WsensorDataRelevance(1) 
-                ? vl.validateTemperature(data.wsensor.temp.data[1][1]) 
-                    ? ((data.wsensor.temp.data[1][1] + config.wsensor.temp.corr[1][1]).toFixed(2) + '°C') 
-                    : '--' 
-                : i18n.t('dataExpired')})`,
-            `${i18n.t('temperature')} 2 (${vl.WsensorDataRelevance(1) 
-                ? vl.validateTemperature(data.wsensor.temp.data[2][1]) 
-                    ? ((data.wsensor.temp.data[2][1] + config.wsensor.temp.corr[1][2]).toFixed(2) + '°C') 
-                    : '--' 
-                : i18n.t('dataExpired')})`,
-            `${i18n.t('temperature')} 3 (${vl.WsensorDataRelevance(1) 
-                ? vl.validateTemperature(data.wsensor.temp.data[3][1]) 
-                    ? ((data.wsensor.temp.data[3][1] + config.wsensor.temp.corr[1][3]).toFixed(2) + '°C') 
-                    : '--' 
-                : i18n.t('dataExpired')})`,
-            `${i18n.t('temperature')} 4 (${vl.WsensorDataRelevance(1) 
-                ? vl.validateTemperature(data.wsensor.temp.data[4][1]) 
-                    ? ((data.wsensor.temp.data[4][1] + config.wsensor.temp.corr[1][4]).toFixed(2) + '°C') 
-                    : '--' 
-                : i18n.t('dataExpired')})`,
-            `${i18n.t('humidity')} (${vl.WsensorDataRelevance(1) 
-                ? vl.validateHumidity(data.wsensor.hum.data[1]) 
-                    ? ((data.wsensor.hum.data[1] + config.wsensor.hum.corr[1]).toFixed(2) + '%') 
-                    : '--' 
-                : i18n.t('dataExpired')})`,
-            `${i18n.t('pressure')} (${vl.WsensorDataRelevance(1) 
-                ? vl.validatePressure(data.wsensor.pres.data[1]) 
-                    ? ((data.wsensor.pres.data[1] + config.wsensor.pres.corr[1]).toFixed(2) + i18n.t('units.hpa') + ' / ' + ((data.wsensor.pres.data[1] + config.wsensor.pres.corr[1]) * 0.75).toFixed(2) + i18n.t('units.mm')) 
-                    : '--' 
-                : i18n.t('dataExpired')})`,
-            `CO2 (${vl.WsensorDataRelevance(1) 
-                ? vl.validateCO2(data.wsensor.co2.data[1]) 
-                    ? ((data.wsensor.co2.data[1] + config.wsensor.co2.corr[1]).toFixed(2) + 'ppm') 
-                    : '--' 
-                : i18n.t('dataExpired')})`
-        ],
-    ];
+        ])
+    }
 
     let things: string[] = [];
     for(let i=0; i<8; i++) things.push(`${i18n.t('field')} ${i + 1} (${vl.ThingspeakDataRelevance() ? data.thing.data[i] : i18n.t('dataExpired')})`);
