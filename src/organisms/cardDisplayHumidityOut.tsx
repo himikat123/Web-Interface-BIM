@@ -4,28 +4,35 @@ import { useSelector, useDispatch } from 'react-redux';
 import Card from "../atoms/card";
 import SelectSwitch from "../atoms/selectSwitch";
 import { iConfig } from "../redux/configTypes";
+import { iData } from "../redux/dataTypes";
 import * as cf from "../redux/slices/config";
-import SensorData from "../atoms/sensorData";
+import * as vl from "../atoms/validateValues";
 
 const CardDisplayHumidityOut = () => {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
+    const data = useSelector((state: iData) => state.data);
+
     const sensors = [
         "--",
-        i18n.t('forecast') + ' (' + SensorData().ForecastHum + ')',
+        `${i18n.t('forecast')} (${vl.validateHumidity(data.weather.hum) ? (data.weather.hum.toFixed(2) + '%') : '--'})`,
         i18n.t('wirelessSensor.singular'),
         'Thingspeak',
-        'BME280 (' + SensorData().BME280hum + ')',
-        'SHT21 (' + SensorData().SHT21hum + ')',
-        'DHT22 (' + SensorData().DHT22hum + ')',
-        'BME680 (' + SensorData().BME680hum + ')'
+        `BME280 (${vl.validateHumidity(data.bme280.hum) ? ((data.bme280.hum + config.sensors.bme280.h).toFixed(2) + '%') : '--'})`,
+        `SHT21 (${vl.validateHumidity(data.sht21.hum) ? ((data.sht21.hum + config.sensors.dht22.h).toFixed(2) + '%') : '--'})`,
+        `DHT22 (${vl.validateHumidity(data.dht22.hum) ? ((data.dht22.hum + config.sensors.dht22.h).toFixed(2) + '%') : '--'})`,
+        `BME680 (${vl.validateHumidity(data.bme680.hum) ? ((data.bme680.hum + config.sensors.bme680.h).toFixed(2) + '%') : '--'})`
     ];
 
     let wsensors: string[] = [];
-    for(let i=0; i<2; i++) wsensors.push(`${i18n.t('wirelessSensor.singular')} ${i} (${SensorData().Wsensor[i].hum})`);
+    for(let i=0; i<2; i++) wsensors.push(`${i18n.t('wirelessSensor.singular')} ${i} (${vl.WsensorDataRelevance(i) 
+        ? vl.validateHumidity(data.wsensor.hum.data[i]) 
+            ? ((data.wsensor.hum.data[i] + config.wsensor.hum.corr[i]).toFixed(2) + '%') 
+            : '--' 
+        : i18n.t('dataExpired')})`);
 
     let things: string[] = [];
-    for(let i=0; i<8; i++) things.push(`${i18n.t('field')} ${i + 1} (${SensorData().Thingspeak[i]})`);
+    for(let i=0; i<8; i++) things.push(`${i18n.t('field')} ${i + 1} (${vl.ThingspeakDataRelevance() ? data.thing.data[i] : i18n.t('dataExpired')})`);
 
     return <>
         <Card header={i18n.t('humidityOut')}

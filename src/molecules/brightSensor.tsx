@@ -5,31 +5,37 @@ import hostUrl from "../atoms/hostUrl";
 import SelectSwitch from "../atoms/selectSwitch";
 import RangeInput from "../atoms/rangeInput";
 import Indication from "../atoms/indication";
-import SensorData from "../atoms/sensorData";
 import { iConfig } from "../redux/configTypes";
+import { iData } from "../redux/dataTypes";
 import { iDisplay } from "../interfaces";
 import * as cf from "../redux/slices/config";
+import * as vl from "../atoms/validateValues";
 
 const BrightSensor = (props: iDisplay) => {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
+    const data = useSelector((state: iData) => state.data);
 
-    let sensorData = NaN;
+    const analogData =  vl.validateAnalogVoltage(data.analog.volt) ? ((data.analog.volt + config.sensors.analog.v)) : null;
+    const max44009Data = vl.validateLight(data.max44009.light) ? ((data.max44009.light + config.sensors.max44009.l)) : null; 
+    const bh1750Data = vl.validateLight(data.bh1750.light) ? ((data.bh1750.light + config.sensors.bh1750.l)) : null;
+
+    let sensorData = null;
     switch(config.display.lightSensor[props.num]) {
-        case 0: sensorData = parseFloat(SensorData().AnalogVolt); break;
-        case 1: sensorData = parseFloat(SensorData().MAX44009light); break; 
-        case 2: sensorData = parseFloat(SensorData().BH1750light); break;
+        case 0: sensorData = analogData; break;
+        case 1: sensorData = max44009Data; break; 
+        case 2: sensorData = bh1750Data; break;
     }
-    let brightness = config.display.lightSensor[props.num] == 0 ? sensorData * 30 : sensorData;
+    let brightness = config.display.lightSensor[props.num] == 0 ? (sensorData ?? 0) * 30 : sensorData ?? 0;
     brightness *= config.display.sensitivity[props.num] / 20;
     if(brightness < 1) brightness = 1;
     if(brightness > 100) brightness = 100;
     brightness = Math.round(brightness);
 
     const lightSensors = [
-        i18n.t('analogInput') + ' (' + SensorData().AnalogVolt + ')',
-        'MAX44009 (' + SensorData().MAX44009light + ')',
-        'BH1750 (' + SensorData().BH1750light + ')'
+        `${i18n.t('analogInput')} (${analogData ? (analogData.toFixed(2) + i18n.t('units.v')) : '--'})`,
+        `MAX44009 (${max44009Data ? (max44009Data.toFixed(2) + i18n.t('units.lux')) : '--'})`,
+        `BH1750 (${bh1750Data ? (bh1750Data.toFixed(2) + i18n.t('units.lux')) : '--'})`
     ];
 
     const sendSensitivity = (bright: number) => {

@@ -6,39 +6,50 @@ import SelectSwitch from "../atoms/selectSwitch";
 import RangeInput from "../atoms/rangeInput";
 import TextInput from "../atoms/textInput";
 import { iConfig } from "../redux/configTypes";
+import { iData } from "../redux/dataTypes";
 import * as cf from "../redux/slices/config";
-import SensorData from "../atoms/sensorData";
+import * as vl from "../atoms/validateValues";
 
 const CardDisplayTemperatureIn = () => {
     const [tempWsensNum, setTempWsensNum] = useState<number>(0);
     const [prevSens, setPrevSens] = useState<number>(0);
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
+    const data = useSelector((state: iData) => state.data);
+
     const sensors = [
         "--",
-        i18n.t('forecast') + ' (' + SensorData().ForecastTemp + ')',
+        `${i18n.t('forecast')} (${vl.validateTemperature(data.weather.temp) ? (data.weather.temp.toFixed(2) + '°C') : '--'})`,
         i18n.t('wirelessSensor.singular'),
         'Thingspeak',
         i18n.t('sequence'),
-        'BME280 (' + SensorData().BME280temp + ')',
-        'BMP180 (' + SensorData().BME280temp + ')',
-        'SHT21 (' + SensorData().SHT21temp + ')',
-        'DHT22 (' + SensorData().DHT22temp + ')',
-        'DS18B20 (' + SensorData().DS18B20temp + ')',
-        'BME680 (' + SensorData().BME680temp + ')'
+        `BME280 (${vl.validateTemperature(data.bme280.temp) ? ((data.bme280.temp + config.sensors.bme280.t).toFixed(2) + '°C') : '--'})`,
+        `BMP180 (${vl.validateTemperature(data.bmp180.temp) ? ((data.bmp180.temp + config.sensors.bmp180.t).toFixed(2) + '°C') : '--'})`,
+        `SHT21 (${vl.validateTemperature(data.sht21.temp) ? ((data.sht21.temp + config.sensors.sht21.t).toFixed(2) + '°C') : '--'})`,
+        `DHT22 (${vl.validateTemperature(data.dht22.temp) ? ((data.dht22.temp + config.sensors.dht22.t).toFixed(2) + '°C') : '--'})`,
+        `DS18B20 (${vl.validateTemperature(data.ds18b20.temp) ? ((data.ds18b20.temp + config.sensors.ds18b20.t).toFixed(2) + '°C') : '--'})`,
+        `BME680 (${vl.validateTemperature(data.bme680.temp) ? ((data.bme680.temp + config.sensors.bme680.t).toFixed(2) + '°C') : '--'})`
     ];
 
     let wsensors: string[] = [];
     for(let i=0; i<2; i++) wsensors.push(`${i18n.t('wirelessSensor.singular')} ${i}`);
 
     let temps: string[] = [];
-    for(let i=0; i<5; i++) temps.push(`${i18n.t('temperature')} ${i} (${SensorData().Wsensor[config.display.source.tempIn.wsensNum].temp[i]})`);
+    for(let i=0; i<5; i++) temps.push(`${i18n.t('temperature')} ${i} (${vl.WsensorDataRelevance(config.display.source.tempOut.wsensNum) 
+        ? vl.validateTemperature(data.wsensor.temp.data[i][config.display.source.tempOut.wsensNum]) 
+            ? ((data.wsensor.temp.data[i][config.display.source.tempOut.wsensNum] + config.wsensor.temp.corr[config.display.source.tempOut.wsensNum][i]).toFixed(2) + '°C') 
+            : '--' 
+        : i18n.t('dataExpired')})`);
 
     let sequenceTemps: string[] = [];
-    for(let i=0; i<5; i++) sequenceTemps.push(`${i18n.t('temperature')} ${i} (${SensorData().Wsensor[tempWsensNum].temp[i]})`);
+    for(let i=0; i<5; i++) sequenceTemps.push(`${i18n.t('temperature')} ${i} (${vl.WsensorDataRelevance(tempWsensNum) 
+        ? vl.validateTemperature(data.wsensor.temp.data[i][tempWsensNum]) 
+            ? ((data.wsensor.temp.data[i][tempWsensNum] + config.wsensor.temp.corr[tempWsensNum][i]).toFixed(2) + '°C') 
+            : '--' 
+        : i18n.t('dataExpired')})`);
     
     let things: string[] = [];
-    for(let i=0; i<8; i++) things.push(`${i18n.t('field')} ${i + 1} (${SensorData().Thingspeak[i]})`);
+    for(let i=0; i<8; i++) things.push(`${i18n.t('field')} ${i + 1} (${vl.ThingspeakDataRelevance() ? data.thing.data[i] : i18n.t('dataExpired')})`);
 
     useEffect(() => {
         setPrevSens(config.display.source.tempIn.sens);
