@@ -494,7 +494,12 @@ export const configSlice = createSlice({
         // ?Change: (state, action) => { state.history.tFields: [0, 0, 0, 0, 0] = action.payload },
         //
         usernameChange: (state, action) => { state.account.name = action.payload },
-        passwordRequiredSwitch: (state, action) => { state.account.required = action.payload }
+        passwordRequiredSwitch: (state, action) => { state.account.required = action.payload },
+
+        alarmTimeChange: (state, action) => { state.alarm.time[action.payload.num][action.payload.level] = action.payload.val },
+        alarmWeekdayChange: (state, action) => { state.alarm.weekdays[action.payload.num][action.payload.weekday] = action.payload.val },
+        alarmStateChange: (state, action) => { state.alarm.states[action.payload.num] = action.payload.val },
+        alarmMelodieChange: (state, action) => { state.alarm.melodies[action.payload.num] = action.payload.val }
     }
 });
 
@@ -532,7 +537,8 @@ export const {
     displaySourceBatThingChange, displaySourceDescrChange, displaySourceSequenceDurChange, displaySourceSequenceTempChange, 
     displaySourceSequenceWsensTempChange, displaySourceSequenceThngTempChange, displaySourceSequenceNameChange, 
     displaySourceSequenceHumChange, displaySourceSequenceThngHumChange, displaySourceSequenceWsensHumChange,
-    displaySourceVoltThingTypeChange
+    displaySourceVoltThingTypeChange, 
+    alarmTimeChange, alarmWeekdayChange, alarmStateChange, alarmMelodieChange
 } = configSlice.actions;
   
 export default configSlice.reducer;

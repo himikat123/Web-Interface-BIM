@@ -232,3 +232,7 @@ export interface iDisplayTimeSlot {
     num: number,
     slot: number
 }
+
+export interface iAlarm {
+    num: number
+}
