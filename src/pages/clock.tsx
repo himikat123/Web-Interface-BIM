@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import i18n from '../i18n/main';
 import ThreeColumns from "../templates/threeColumns";
 import CardClockTime from "../organisms/cardClockTime";
