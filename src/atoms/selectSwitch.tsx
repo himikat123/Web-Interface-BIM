@@ -3,7 +3,7 @@ import { iSelectSwitch } from '../interfaces';
 import "./selectSwitch.scss";
 
 const SelectSwitch = (props: iSelectSwitch) => {
-    return <div className="relative">
+    return <div className="relative w-full">
         <select className="form-select h-14" 
             value={props.value ?? 0} 
             onChange={(event: React.ChangeEvent<HTMLSelectElement>) => props.onChange(Number(event.target.value))}
