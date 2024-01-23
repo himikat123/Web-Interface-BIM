@@ -26,7 +26,7 @@ const MenuThemeSwitch = () => {
     }, [darkSide]);
 
     return ( 
-        <div className="bg-menu_light dark:bg-menu_dark" title={i18n.t('theme')}>
+        <div className="hover:scale-110 transition bg-menu_light dark:bg-menu_dark" title={i18n.t('theme')}>
             <DarkModeSwitch
                 sunColor="white"
                 moonColor="white"

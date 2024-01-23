@@ -34,7 +34,7 @@ const MenuItem = (props: iMenuItem) => {
     return (
         <div ref={wrapperRef} className="relative">
             <div onClick={() => setSubMenuOpen(!subMenuOpen)} title={props.title}>
-                <Link className={"text-text_dark " + highlight + (props.mobile ? mobile : desktop)} 
+                <Link className={"hover:scale-110 transition text-text_dark " + highlight + (props.mobile ? mobile : desktop)} 
                   to={props.children ? '#' : props.link}
                 >
                     <span className={props.valid ? "" : "error"}>{props.icon}</span>
