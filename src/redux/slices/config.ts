@@ -416,12 +416,12 @@ export const configSlice = createSlice({
         displayTimeslotWsensorTypeChange: (state, action) => { state.display.timeSlot.wsensor.type[action.payload.slot][action.payload.num] = action.payload.val },
         displayTimeslotColorChange: (state, action) => { state.display.timeSlot.color[action.payload.slot][action.payload.num] = action.payload.val },
 
-        // ?Change: (state, action) => { state.sound.vol: 15, = action.payload },
-        // ?Change: (state, action) => { state.sound.eq: 0, = action.payload },
-        // ?Change: (state, action) => { state.sound.hourly: 0, = action.payload },
-        // ?Change: (state, action) => { state.sound.hour.from: 7, = action.payload },
-        // ?Change: (state, action) => { state.sound.hour.to: 21 = action.payload },
-        //
+        soundVolChange: (state, action) => { state.sound.vol = action.payload },
+        soundEqChange: (state, action) => { state.sound.eq = action.payload },
+        soundHourlyChange: (state, action) => { state.sound.hourly = action.payload },
+        soundHourFromChange: (state, action) => { state.sound.hour.from = action.payload },
+        soundHourToChange: (state, action) => { state.sound.hour.to = action.payload },
+
         BME680TempCorrChange: (state, action) => { state.sensors.bme680.t = action.payload },
         BME680HumCorrChange: (state, action) => { state.sensors.bme680.h = action.payload },
         BME680PresCorrChange: (state, action) => { state.sensors.bme680.p = action.payload },
@@ -538,6 +538,7 @@ export const {
     displaySourceSequenceWsensTempChange, displaySourceSequenceThngTempChange, displaySourceSequenceNameChange, 
     displaySourceSequenceHumChange, displaySourceSequenceThngHumChange, displaySourceSequenceWsensHumChange,
     displaySourceVoltThingTypeChange, 
+    soundVolChange, soundEqChange, soundHourlyChange, soundHourFromChange, soundHourToChange,
     alarmTimeChange, alarmWeekdayChange, alarmStateChange, alarmMelodieChange
 } = configSlice.actions;
   
