@@ -153,9 +153,9 @@
     "listenToAlarmMelodies": "Listen to alarm melodies",
     "melody": "Melody",
     "hour": {
-        "one": "hour",
-        "few": "hours",
-        "many": "hours"
+        "one": "o'clock",
+        "few": "o'clock",
+        "many": "o'clock"
     },
     "forecast": "Forecast",
     "sendDataTo": "Send data to",

@@ -153,9 +153,9 @@
     "listenToAlarmMelodies": "Hören die Weckermelodien",
     "melody": "Melodie",
     "hour": {
-        "one": "Stunde",
-        "few": "Stunden",
-        "many": "Stunden"
+        "one": "Uhr",
+        "few": "Uhr",
+        "many": "Uhr"
     },
     "forecast": "Vorhersage",
     "sendDataTo": "Daten senden an",
