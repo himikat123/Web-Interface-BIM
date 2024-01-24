@@ -236,3 +236,7 @@ export interface iDisplayTimeSlot {
 export interface iAlarm {
     num: number
 }
+
+export interface iButtonPlay {
+    play(): void
+}
