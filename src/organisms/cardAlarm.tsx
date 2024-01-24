@@ -11,8 +11,8 @@ import Card from "../atoms/card";
 import SelectSwitch from "../atoms/selectSwitch";
 import TimeInput from "../atoms/timeInput";
 import Toggle from "../atoms/toggle";
-import { ReactComponent as PlaySVG } from '../atoms/icons/play.svg';
-import { ReactComponent as StopSVG } from '../atoms/icons/stop.svg';
+import ButtonPlay from "../atoms/buttonPlay";
+import ButtonStop from "../atoms/buttonStop";
 import { iConfig } from "../redux/configTypes";
 import { iAlarm } from "../interfaces";
 import * as cf from "../redux/slices/config";
@@ -33,11 +33,6 @@ const CardAlarm = (props: iAlarm) => {
     const sendPlay = (track: number) => {
         let url = `${hostUrl()}/esp/mp3play`;
         url += `?folder=2&track=${track}`;
-        fetch(url);
-    }
-
-    const sendStop = () => {
-        let url = `${hostUrl()}/esp/mp3stop`;
         fetch(url);
     }
 
@@ -79,13 +74,8 @@ const CardAlarm = (props: iAlarm) => {
                     onChange={val => dispatch(cf.alarmMelodieChange({num: props.num, val: val}))}
                 />
 
-                <div className="ms-2 hover:scale-110 transition" onClick={() => sendPlay(config.alarm.melodies[props.num])}>
-                    {<PlaySVG />}
-                </div>
-
-                <div className="ms-2 hover:scale-110 transition" onClick={() => {sendStop()}}>
-                    {<StopSVG />}
-                </div>
+                <ButtonPlay play={() => sendPlay(config.alarm.melodies[props.num])} />
+                <ButtonStop />
             </div>
         </>} />
     </>
