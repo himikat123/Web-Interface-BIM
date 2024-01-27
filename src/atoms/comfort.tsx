@@ -48,14 +48,14 @@ function Comfort() {
     }
   
     if(vl.validateTemperature(temp)) {
-        if(temp > config.comfort.temp.max) tempLevel = 1;
-        if(temp < config.comfort.temp.min) tempLevel = 2;
+        if(temp > config.comfort.temp.max[0]) tempLevel = 1;
+        if(temp < config.comfort.temp.min[0]) tempLevel = 2;
     }
     else tempLevel = -1;
 
     if(vl.validateHumidity(hum)) {
-        if(hum > config.comfort.hum.max) humLevel = 1;
-        if(hum < config.comfort.hum.min) humLevel = 2;
+        if(hum > config.comfort.hum.max[0]) humLevel = 1;
+        if(hum < config.comfort.hum.min[0]) humLevel = 2;
     }
     else humLevel = -1;
 
