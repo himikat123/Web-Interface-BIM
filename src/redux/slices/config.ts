@@ -10,22 +10,26 @@ export const configSlice = createSlice({
                 wsensNum: 0,
                 sens: 0,
                 thing: 0,
-                min: 0,
-                max: 0
+                min: [0, 0],
+                max: [0, 0],
+                sound: 0
             },
             hum: {
                 source: 0,
                 wsensNum: 0,
                 thing: 0,
-                min: 0,
-                max: 0
+                min: [0, 0],
+                max: [0, 0],
+                sound: 0
             },
             iaq: {
-                source: 0
+                source: 0,
+                sound: 0
             },
             co2: {
                 source: 0,
-                wsensNum: 0
+                wsensNum: 0,
+                sound: 0
             }
         },
         network: {
@@ -308,20 +312,25 @@ export const configSlice = createSlice({
     reducers: {
         configStateChange: (state, action) => { state.configState = action.payload },
         setConfigState: (state, action) => { Object.assign(state, action.payload) },
-        // ?Change: (state, action) => { state.comfort.temp.source = action.payload },
-        // ?Change: (state, action) => { state.comfort.temp.wsensNum = action.payload },
-        // ?Change: (state, action) => { state.comfort.temp.sens = action.payload },
-        // ?Change: (state, action) => { state.comfort.temp.thing = action.payload },
-        // ?Change: (state, action) => { state.comfort.temp.min = action.payload },
-        // ?Change: (state, action) => { state.comfort.temp.max = action.payload },
-        // ?Change: (state, action) => { state.comfort.hum.source = action.payload },
-        // ?Change: (state, action) => { state.comfort.hum.wsensNum = action.payload },
-        // ?Change: (state, action) => { state.comfort.hum.thing = action.payload },
-        // ?Change: (state, action) => { state.comfort.hum.min = action.payload },
-        // ?Change: (state, action) => { state.comfort.hum.max = action.payload },
-        //iaq.source
-        //co2.source
-        //co2.wsensNum
+
+        comfortTempSourceChange: (state, action) => { state.comfort.temp.source = action.payload },
+        comfortTempWsensNumChange: (state, action) => { state.comfort.temp.wsensNum = action.payload },
+        comfortTempSensChange: (state, action) => { state.comfort.temp.sens = action.payload },
+        comfortTempThingChange: (state, action) => { state.comfort.temp.thing = action.payload },
+        comfortTempMinChange: (state, action) => { state.comfort.temp.min[action.payload.num] = action.payload.val },
+        comfortTempMaxChange: (state, action) => { state.comfort.temp.max[action.payload.num] = action.payload.val },
+        comfortTempSoundChange: (state, action) => { state.comfort.temp.sound = action.payload },
+        comfortHumSourceChange: (state, action) => { state.comfort.hum.source = action.payload },
+        comfortHumWsensNumChange: (state, action) => { state.comfort.hum.wsensNum = action.payload },
+        comfortHumThingChange: (state, action) => { state.comfort.hum.thing = action.payload },
+        comfortHumMinChange: (state, action) => { state.comfort.hum.min[action.payload.num] = action.payload.val },
+        comfortHumMaxChange: (state, action) => { state.comfort.hum.max[action.payload.num] = action.payload.val },
+        comfortHumSoundChange: (state, action) => { state.comfort.hum.sound = action.payload },
+        comfortIaqSourceChange: (state, action) => { state.comfort.iaq.source = action.payload },
+        comfortIaqSoundChange: (state, action) => { state.comfort.iaq.sound = action.payload },
+        comfortCo2SourceChange: (state, action) => { state.comfort.co2.source = action.payload },
+        comfortCo2WsensNumChange: (state, action) => { state.comfort.co2.wsensNum = action.payload },
+        comfortCo2SoundChange: (state, action) => { state.comfort.co2.sound = action.payload },
 
         netSsidChange: (state, action) => { state.network.ssid[action.payload.num] = action.payload.val },
         netPassChange: (state, action) => { state.network.pass[action.payload.num] = action.payload.val },
@@ -539,7 +548,13 @@ export const {
     displaySourceSequenceHumChange, displaySourceSequenceThngHumChange, displaySourceSequenceWsensHumChange,
     displaySourceVoltThingTypeChange, 
     soundVolChange, soundEqChange, soundHourlyChange, soundHourFromChange, soundHourToChange,
-    alarmTimeChange, alarmWeekdayChange, alarmStateChange, alarmMelodieChange
+    alarmTimeChange, alarmWeekdayChange, alarmStateChange, alarmMelodieChange,
+    comfortTempSourceChange, comfortTempWsensNumChange, comfortTempSensChange, 
+    comfortTempThingChange, comfortTempMinChange, comfortTempMaxChange, comfortTempSoundChange,
+    comfortHumSourceChange, comfortHumWsensNumChange, comfortHumThingChange,
+    comfortHumMinChange, comfortHumMaxChange, comfortHumSoundChange,
+    comfortIaqSourceChange, comfortIaqSoundChange, 
+    comfortCo2SourceChange, comfortCo2WsensNumChange, comfortCo2SoundChange
 } = configSlice.actions;
   
 export default configSlice.reducer;

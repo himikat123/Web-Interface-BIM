@@ -1,0 +1,9 @@
+.card-comfort {
+    max-height: 800px;
+    overflow: hidden;
+    transition: max-height 0.6s ease;
+
+    &.hide {
+        max-height: 0;
+    }
+}

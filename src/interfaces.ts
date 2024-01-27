@@ -153,7 +153,7 @@ export interface iRangeInput {
 export interface iToggle {
     checked: number,
     onChange(): void,
-    label: string
+    label: string | React.ReactNode
 }
 
 export interface iButton {

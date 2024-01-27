@@ -7,22 +7,26 @@ export interface iConfig {
                 wsensNum: number,
                 sens: number,
                 thing: number,
-                min: number,
-                max: number
+                min: number[],
+                max: number[],
+                sound: number
             },
             hum: {
                 source: number,
                 wsensNum: number,
                 thing: number,
-                min: number,
-                max: number
+                min: number[],
+                max: number[],
+                sound: number
             },
             iaq: {
-                source: number
+                source: number,
+                sound: number
             },
             co2: {
                 source: number,
-                wsensNum: number
+                wsensNum: number,
+                sound: number
             }
         },
         network: {

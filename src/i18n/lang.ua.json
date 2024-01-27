@@ -88,6 +88,7 @@
     "energy": "Енергія",
     "frequency": "Частота",
     "indexForAirQuality": "Індекс якості повітря",
+    "airQuality": "Якість повітря",
     "sensorAccuracy": "Точність датчика",
     "weatherCheckError": "Не вдалося завантажити погоду, перевірте налаштування та підключення до Інтернету",
     "byCityName": "За назвою міста",
@@ -301,5 +302,13 @@
     "coldAndDry": "Холодно та сухо",
     "cleanAir": "Повітря чисте",
     "polutedAir": "Повітря забруднене",
-    "havilyPolutedAir": "Повітря сильно забруднене"
+    "havilyPolutedAir": "Повітря сильно забруднене",
+    "on": "вкл.",
+    "off": "выкл.",
+    "heater": "Нагрівач",
+    "conditioner": "Кондиціонер",
+    "humidifier": "Зволожувач",
+    "dryer": "Осушувач",
+    "hysteresis": "Гістерезис",
+    "soundNotification": "Звукове сповіщення"
 }

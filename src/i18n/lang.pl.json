@@ -88,6 +88,7 @@
     "energy": "Energia",
     "frequency": "Częstotliwość",
     "indexForAirQuality": "Indeks jakości powietrza",
+    "airQuality": "Jakość powietrza",
     "sensorAccuracy": "Dokładność czujnika",
     "weatherCheckError": "Nie udało się pobrać informacji o pogodzie, sprawdź ustawienia i połączenie internetowe",
     "byCityName": "Według nazwy miasta",
@@ -301,5 +302,13 @@
     "coldAndDry": "Zimno i sucho",
     "cleanAir": "Powietrze czyste",
     "polutedAir": "Powietrze zanieczyszczone",
-    "havilyPolutedAir": "Powietrze silnie zanieczyszczone"
+    "havilyPolutedAir": "Powietrze silnie zanieczyszczone",
+    "on": "On",
+    "off": "Off",
+    "heater": "Podgrzewacz",
+    "conditioner": "Klimatyzator",
+    "humidifier": "Nawilżacz",
+    "dryer": "Osuszacz",
+    "hysteresis": "Histereza",
+    "soundNotification": "Powiadomienie dźwiękowe"
 }
