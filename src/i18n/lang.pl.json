@@ -275,7 +275,6 @@
     "wirelessSensorNumber": "Numer czujnika",
     "temperatureSensorNumber": "Numer czujnika temperatury",
     "parsingServer": "Serwer analizujący",
-    "sacrificial": "Użyj \"ofiarnej\" diody LED do konwersji poziomu",
     "networkError": "Błąd sieci. Brak komunikacji z jednostką główną",
     "tempMin": "Minimalna temperatura",
     "tempMax": "Maksymalna temperatura",

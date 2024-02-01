@@ -275,7 +275,6 @@
     "wirelessSensorNumber": "Kabelloser Sensornummer",
     "temperatureSensorNumber": "Temperatursensornummer",
     "parsingServer": "Parsing-Server",
-    "sacrificial": "\"Opfer\"-LED zur Pegelkonvertierung verwenden",
     "networkError": "Netzwerkfehler. Keine Verbindung zum Hauptgerät",
     "tempMin": "Mindesttemperatur",
     "tempMax": "Maximaltemperatur",

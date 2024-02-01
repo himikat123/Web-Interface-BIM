@@ -275,7 +275,6 @@
     "wirelessSensorNumber": "Sensor number",
     "temperatureSensorNumber": "Temperature sensor number",
     "parsingServer": "Parsing server",
-    "sacrificial": "Use \"sacrificial\" LED for level conversion",
     "networkError": "Network error. No communication with head unit",
     "tempMin": "Minimum temperature",
     "tempMax": "Maximum temperature",

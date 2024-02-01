@@ -113,14 +113,6 @@ const CardDisplayType = (props: iDisplay) => {
                 />
             </div>}
 
-            {config.display.type[props.num] + props.num == 2 && <div>
-                <div className="mt-4 mb-1 text-xs">{i18n.t('sacrificial')}</div>
-                <Toggle checked={config.display.sled[props.num]}
-                    onChange={() => dispatch(cf.displaySledChange({num: props.num, val: config.display.sled[props.num] ? 0 : 1}))}
-                    label=""
-                />
-            </div>}
-
             {config.display.type[props.num] > 0 && <>
                 <RangeInput value={config.display.brightness.min[props.num]}
                     label={i18n.t('minimumBrightnessLimit')}
@@ -156,11 +148,11 @@ const CardDisplayType = (props: iDisplay) => {
                     {i18n.t('maximumDisplayCurrent')}:
                     <Indication error={false} 
                         value={String(
-                            config.display.type[props.num] + props.num == 4 
+                            config.display.type[props.num] + props.num == 2 
                                 ? (Math.round(consums[config.display.model[props.num]] 
                                     * config.display.brightness.max[props.num] 
                                     / 255
-                                ) + config.display.sled[props.num])
+                                ) + 1)
                                 : consums[config.display.model[props.num]]
                         ) + i18n.t('units.ma')} 
                     />
