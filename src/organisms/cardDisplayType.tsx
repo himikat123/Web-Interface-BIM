@@ -17,9 +17,9 @@ const CardDisplayType = (props: iDisplay) => {
     let types = [
         "--",
         "LCD/TFT",
+        i18n.t('neopixel'),
         i18n.t('segment7'),
         i18n.t('matrix'),
-        i18n.t('neopixel'),
         i18n.t('nixie')
     ];
     const lcd = [

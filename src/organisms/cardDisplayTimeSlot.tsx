@@ -127,7 +127,7 @@ const CardDisplayTimeSlot = (props: iDisplayTimeSlot) => {
 
                 {config.display.timeSlot.period[props.slot][props.num] > 0 && <>
                     {/* Color */}
-                    {config.display.type[props.num] + props.num === 4 && <div className="mt-8">
+                    {config.display.type[props.num] + props.num === 2 && <div className="mt-8">
                         <ColorInput value={config.display.timeSlot.color[props.slot][props.num]}
                             label={i18n.t('displayColor')} 
                             onChange={val => {
