@@ -61,26 +61,28 @@ const CardDisplayType = (props: iDisplay) => {
     let models: string[] = [];
     let consums: number[] = [];
 
-    switch(config.display.type[props.num]) {
+    switch(config.display.type[props.num] + props.num) {
         case 1: 
-            models = props.num === 0 ? lcd.map(d => Object.keys(d)[0]) : segment.map(d => Object.keys(d)[0]);
-            consums = props.num === 0 ? lcd.map(d => Object.values(d)[0]) : segment.map(d => Object.values(d)[0]);
+            if(props.num == 0) {
+                models = lcd.map(d => Object.keys(d)[0]);
+                consums = lcd.map(d => Object.values(d)[0]);
+            }
             break;
         case 2: 
-            models = props.num === 0 ? segment.map(d => Object.keys(d)[0]) : matrix.map(d => Object.keys(d)[0]);
-            consums = props.num === 0 ? segment.map(d => Object.values(d)[0]) : matrix.map(d => Object.values(d)[0]);
+            models = neopixel.map(d => Object.keys(d)[0]);
+            consums = neopixel.map(d => Object.values(d)[0]);
             break;
         case 3: 
-            models = props.num === 0 ? matrix.map(d => Object.keys(d)[0]) : neopixel.map(d => Object.keys(d)[0]);
-            consums = props.num === 0 ? matrix.map(d => Object.values(d)[0]) : neopixel.map(d => Object.values(d)[0]);
+            models = segment.map(d => Object.keys(d)[0]);
+            consums = segment.map(d => Object.values(d)[0]);
             break;
         case 4: 
-            models = props.num === 0 ? neopixel.map(d => Object.keys(d)[0]) : nixie.map(d => Object.keys(d)[0]);
-            consums = props.num === 0 ? neopixel.map(d => Object.values(d)[0]) : nixie.map(d => Object.values(d)[0]);
+            models = matrix.map(d => Object.keys(d)[0]);
+            consums = matrix.map(d => Object.values(d)[0]);
             break;
         case 5: 
-            models = props.num === 0 ? nixie.map(d => Object.keys(d)[0]) : [];
-            consums = props.num === 0 ? nixie.map(d => Object.values(d)[0]) : [];
+            models = nixie.map(d => Object.keys(d)[0]);
+            consums = nixie.map(d => Object.values(d)[0]);
             break;
     }
     
@@ -111,7 +113,7 @@ const CardDisplayType = (props: iDisplay) => {
                 />
             </div>}
 
-            {config.display.type[props.num] + props.num == 4 && <div>
+            {config.display.type[props.num] + props.num == 2 && <div>
                 <div className="mt-4 mb-1 text-xs">{i18n.t('sacrificial')}</div>
                 <Toggle checked={config.display.sled[props.num]}
                     onChange={() => dispatch(cf.displaySledChange({num: props.num, val: config.display.sled[props.num] ? 0 : 1}))}
