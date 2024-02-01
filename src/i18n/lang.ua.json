@@ -81,7 +81,7 @@
     "humidity": "Вологість",
     "pressure": "Атмосферний тиск",
     "ambientLight": "Освітленість",
-    "CO2Level": "Рівень CO2",
+    "CO2Level": "Рівень CO<sub>2</sub>",
     "voltage": "Напруга",
     "current": "Сила струму",
     "power": "Потужність",

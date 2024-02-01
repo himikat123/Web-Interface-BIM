@@ -81,7 +81,7 @@
     "humidity": "Wilgotność",
     "pressure": "Ciśnienie atmosferyczne",
     "ambientLight": "Światło otoczenia",
-    "CO2Level": "Poziom CO2",
+    "CO2Level": "Poziom CO<sub>2</sub>",
     "voltage": "Napięcie",
     "current": "Prąd",
     "power": "Moc",

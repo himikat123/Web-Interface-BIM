@@ -41,7 +41,7 @@ const CardComfortCo2 = () => {
     else comfort = '--';
 
     return <>
-        <Card header={i18n.t('indexForAirQuality')}
+        <Card header={<div dangerouslySetInnerHTML={{ __html: i18n.t('CO2Level') }} />}
             content={<>
                 {/* Sensor type */}
                 <SelectSwitch label={i18n.t('dataSource.singular')}
@@ -71,7 +71,7 @@ const CardComfortCo2 = () => {
                     <table className="table-auto w-full mt-8">
                         <thead>
                             <tr className="bg-gray-200 dark:bg-gray-600">
-                                <th>{i18n.t('indexForAirQuality')}</th>
+                                <th><div dangerouslySetInnerHTML={{ __html: i18n.t('CO2Level') }} /></th>
                                 <th>{i18n.t('airQuality')}</th>
                             </tr>
                         </thead>

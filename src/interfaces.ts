@@ -35,7 +35,7 @@ export interface iDropdownBox {
 }
 
 export interface iCard {
-    header?: string,
+    header?: string | React.ReactNode,
     content: React.ReactNode,
     className?: string
 }

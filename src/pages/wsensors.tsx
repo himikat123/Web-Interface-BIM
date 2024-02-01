@@ -115,7 +115,7 @@ const WSensors = () => {
 
                     {sensorCorrection(dataRelevance(wsensorNum), "co2", 
                         config.wsensor.co2.corr[wsensorNum], 
-                        i18n.t('CO2Level'), 
+                        <span dangerouslySetInnerHTML={{ __html: i18n.t('CO2Level') }} />, 
                         data.wsensor.co2.data[wsensorNum], 
                         (val: number) => dispatch(cf.wSensCO2Change({val: val, num: wsensorNum})),
                         -10, 10, 0.1, 
