@@ -88,6 +88,7 @@
     "energy": "Energy",
     "frequency": "Frequency",
     "indexForAirQuality": "Index for Air Quality",
+    "airQuality": "Air Quality",
     "sensorAccuracy": "Sensor accuracy",
     "weatherCheckError": "Failed to load weather, please check settings and internet connection",
     "byCityName": "By city name",
@@ -153,9 +154,9 @@
     "listenToAlarmMelodies": "Listen to alarm melodies",
     "melody": "Melody",
     "hour": {
-        "one": "hour",
-        "few": "hours",
-        "many": "hours"
+        "one": "o'clock",
+        "few": "o'clock",
+        "many": "o'clock"
     },
     "forecast": "Forecast",
     "sendDataTo": "Send data to",
@@ -301,5 +302,13 @@
     "coldAndDry": "Cold and dry",
     "cleanAir": "Clean Air",
     "polutedAir": "Air is polluted",
-    "havilyPolutedAir": "Air is heavily polluted"
+    "havilyPolutedAir": "Air is heavily polluted",
+    "on": "On",
+    "off": "Off",
+    "heater": "Heater",
+    "conditioner": "Conditioner",
+    "humidifier": "Humidifier",
+    "dryer": "Dehumidifier",
+    "hysteresis": "Hysteresis",
+    "soundNotification": "Sound notification"
 }

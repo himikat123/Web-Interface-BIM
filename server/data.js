@@ -43,7 +43,7 @@ const data = () => {
             temp: random(20, 25), // obviously correct values
             hum: random(50, 55),
             pres: random(900, 950),
-            iaq: random(123, 135),
+            iaq: random(80, 235),
             iaqAccr: Math.round(random(0, 3))
         },
         bme280: {
@@ -97,7 +97,7 @@ const data = () => {
                 ]
             },
             hum: {
-                data: [random(-100, -90), random(50, 60)],
+                data: [random(90, 100), random(50, 60)],
                 name: ["BME280", "SHT21"]
             },
             pres: {

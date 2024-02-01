@@ -88,6 +88,7 @@
     "energy": "Энергия",
     "frequency": "Частота",
     "indexForAirQuality": "Индекс качества воздуха",
+    "airQuality": "Качество воздуха",
     "sensorAccuracy": "Точность датчика",
     "weatherCheckError": "Не удалось загрузить погоду, проверьте настройки и интернет соединение",
     "byCityName": "По названию города",
@@ -155,7 +156,7 @@
     "hour": {
         "one": "час",
         "few": "часа",
-        "more": "часов"
+        "many": "часов"
     },
     "forecast": "Прогноз",
     "sendDataTo": "Отправлять данные на",
@@ -301,5 +302,13 @@
     "coldAndDry": "Холодно и сухо",
     "cleanAir": "Воздух чистый",
     "polutedAir": "Воздух загрязнен",
-    "havilyPolutedAir": "Воздух сильно загрязнен"
+    "havilyPolutedAir": "Воздух сильно загрязнен",
+    "on": "вкл.",
+    "off": "выкл.",
+    "heater": "Нагреватель",
+    "conditioner": "Кондиционер",
+    "humidifier": "Увлажнитель",
+    "dryer": "Осушитель",
+    "hysteresis": "Гистерезис",
+    "soundNotification": "Звуковое оповещение"
 }

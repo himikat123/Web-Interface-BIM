@@ -5,22 +5,26 @@
             "wsensNum": 0,
             "sens": 0,
             "thing": 0,
-            "min": 21,
-            "max": 25
+            "min": [22, 5],
+            "max": [25, 2],
+            "sound": 0
         },
         "hum": {
             "source": 0,
             "wsensNum": 0,
             "thing": 0,
-            "min": 30,
-            "max": 60
+            "min": [30, 3],
+            "max": [60, 6],
+            "sound": 0
         },
         "iaq": {
-            "source": 0
+            "source": 0,
+            "sound": 0
         },
         "co2": {
             "source": 0,
-            "wsensNum": 0
+            "wsensNum": 0,
+            "sound": 0
         }
     },
     "network": {

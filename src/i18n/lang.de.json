@@ -88,6 +88,7 @@
     "energy": "Energie",
     "frequency": "Frequenz",
     "indexForAirQuality": "Index für Luftqualität",
+    "airQuality": "Luftqualität",
     "sensorAccuracy": "Sensorgenauigkeit",
     "weatherCheckError": "Fehler beim Laden des Wetters, überprüfen Sie die Einstellungen und die Internetverbindung",
     "byCityName": "Nach Stadtname",
@@ -153,9 +154,9 @@
     "listenToAlarmMelodies": "Hören die Weckermelodien",
     "melody": "Melodie",
     "hour": {
-        "one": "Stunde",
-        "few": "Stunden",
-        "many": "Stunden"
+        "one": "Uhr",
+        "few": "Uhr",
+        "many": "Uhr"
     },
     "forecast": "Vorhersage",
     "sendDataTo": "Daten senden an",
@@ -301,5 +302,13 @@
     "coldAndDry": "Kalt und trocken",
     "cleanAir": "Saubere Luft",
     "polutedAir": "Luft ist verschmutzt",
-    "havilyPolutedAir": "Luft ist stark verschmutzt"
+    "havilyPolutedAir": "Luft ist stark verschmutzt",
+    "on": "An",
+    "off": "Aus",
+    "heater": "Heizung",
+    "conditioner": "Klimaanlage",
+    "humidifier": "Luftbefeuchter",
+    "dryer": "Luftentfeuchter",
+    "hysteresis": "Hysterese",
+    "soundNotification": "Akustische Benachrichtigung"
 }

@@ -17,6 +17,7 @@ import Alarm from './pages/alarm';
 import Display1 from './pages/display1';
 import Display2 from './pages/display2';
 import Sound from './pages/sound';
+import Comfort from './pages/comfort';
 import Language from './pages/language';
 import Username from './pages/username';
 import { changeLanguage } from './i18n/main';
@@ -91,6 +92,7 @@ function App() {
                 <Route path="/display1"    element={ <Display1 /> }>    </Route>
                 <Route path="/display2"    element={ <Display2 /> }>    </Route>
                 <Route path='/sound'       element={ <Sound /> }>       </Route>
+                <Route path='/comfort'     element={ <Comfort />}>      </Route>
                 <Route path="/language"    element={ <Language /> }>    </Route>
                 <Route path="/username"    element={ <Username /> }>    </Route>
                 <Route path="/*"           element={ <PageNotFound /> }></Route>
