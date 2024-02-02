@@ -51,12 +51,12 @@ const CardDisplayVoltage = () => {
     let wsensTypes = [
         `${i18n.t('batteryVoltage')} (${batVoltage(config.display.source.volt.wsensNum)})`,
         `${i18n.t('batteryPercentage')} (${batPercent(config.display.source.volt.wsensNum)})`,
-        `${i18n.t('voltage')} PZEM-004t (${vl.WsensorDataRelevance(config.display.source.volt.wsensNum) 
+        `${i18n.t('voltage')} (${vl.WsensorDataRelevance(config.display.source.volt.wsensNum) 
             ? vl.validateHighVoltage(data.wsensor.voltage.data[config.display.source.volt.wsensNum]) 
                 ? ((data.wsensor.voltage.data[config.display.source.volt.wsensNum] + config.wsensor.volt.corr[config.display.source.volt.wsensNum]).toFixed(2) + i18n.t('units.v')) 
                 : '--' 
             : i18n.t('dataExpired')})`,
-        `${i18n.t('CO2Level')} (${vl.WsensorDataRelevance(config.display.source.volt.wsensNum) 
+        `CO2 (${vl.WsensorDataRelevance(config.display.source.volt.wsensNum) 
             ? vl.validateCO2(data.wsensor.co2.data[config.display.source.volt.wsensNum]) 
                 ? ((data.wsensor.co2.data[config.display.source.volt.wsensNum] + config.wsensor.co2.corr[config.display.source.volt.wsensNum]).toFixed(2) + 'ppm') 
                 : '--' 
@@ -67,7 +67,7 @@ const CardDisplayVoltage = () => {
     for(let i=0; i<8; i++) things.push(`${i18n.t('field')} ${i + 1} (${vl.ThingspeakDataRelevance() ? data.thing.data[i] : i18n.t('dataExpired')})`);
 
     return <>
-        <Card header={i18n.t('voltage') + ' / ' + i18n.t('indexForAirQuality') + ' / ' + i18n.t('CO2Level')}
+        <Card header={<div>{`${i18n.t('voltage')} / ${i18n.t('indexForAirQuality')} / `}<div dangerouslySetInnerHTML={{ __html: i18n.t('CO2Level') }} /></div>}
             content={<>
                 {/* Sensor type */}
                 <SelectSwitch label={i18n.t('dataSource.singular')}
