@@ -18,7 +18,7 @@ const CardComfortAirQuality = () => {
 
     const sensors = [
         "--",
-        `BME680 (${vl.validateIaq(data.bme680.iaq) ? ('iaq ' + (data.bme680.iaq + config.sensors.bme680.i).toFixed(2)) : '--'})`
+        `BME680 (${vl.validateIaq(data.bme680.iaq) ? ('IAQ ' + (data.bme680.iaq + config.sensors.bme680.i).toFixed(2)) : '--'})`
     ];
 
     let iaq = -40400;

@@ -42,7 +42,7 @@ const CardDisplayVoltage = () => {
         "--",
         i18n.t('wirelessSensor.singular'),
         'Thingspeak',
-        `BME680 (iaq ${vl.validateIaq(data.bme680.iaq) ? (data.bme680.iaq.toFixed(2)) : '--'})`
+        `BME680 (IAQ ${vl.validateIaq(data.bme680.iaq) ? (data.bme680.iaq.toFixed(2)) : '--'})`
     ];
 
     let wsensors: string[] = [];
