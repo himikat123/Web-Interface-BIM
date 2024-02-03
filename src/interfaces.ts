@@ -53,7 +53,7 @@ export interface iColumnsTemplate {
 }
 
 export interface iSelectSwitch {
-    label: string,
+    label: string | React.ReactNode,
     options: Array<string>,
     value: number,
     onChange(i: number): void

@@ -82,11 +82,11 @@ const data = () => {
             ],
             temp: {
                 data: [ 
-                    [random(-100, -500), random(10, 5)],
+                    [random(-10, -50), random(10, 5)],
                     [random(14, 18), random(700, 750)],
-                    [random(400, 405), random(400, 500)],
-                    [random(-140, -110), random(-800, -500)],
-                    [random(300, 400), random(900, 1000)]
+                    [random(40, 45), random(400, 500)],
+                    [random(-14, -11), random(-800, -500)],
+                    [random(30, 40), random(900, 1000)]
                 ],
                 name: [
                     ["BME280", "SHT21"],
@@ -101,15 +101,15 @@ const data = () => {
                 name: ["BME280", "SHT21"]
             },
             pres: {
-                data: [random(6000, 6500), random(750, 800)],
+                data: [random(600, 650), random(750, 800)],
                 name: ["BME280", "BMP180"]
             },
             light: {
-                data: [random(-1, -2), random(12000, 12500)],
+                data: [random(1, 20), random(12000, 12500)],
                 name: ["MAX44009", "BH1750"]
             },
             co2: {
-                data: [random(4000, 4500), random(450, 470)],
+                data: [random(400, 450), random(450, 470)],
                 name: ["Senseair S8", "Senseair S8"]
             },
             voltage: {

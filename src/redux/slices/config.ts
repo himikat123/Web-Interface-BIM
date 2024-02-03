@@ -279,10 +279,10 @@ export const configSlice = createSlice({
             channelID: "",
             wrkey: "",
             rdkey: "",
-            fields: [0, 0, 0, 0, 0],
-            wSensors: [0, 0, 0, 0, 0],
-            wTypes: [0, 0, 0, 0, 0],
-            tFields: [0, 0, 0, 0, 0]
+            fields: [0, 0, 0, 0, 0, 0, 0],
+            wSensors: [0, 0, 0, 0, 0, 0, 0],
+            wTypes: [0, 0, 0, 0, 0, 0, 0],
+            tFields: [0, 0, 0, 0, 0, 0, 0]
         },
         account: {
             name: "",
@@ -490,16 +490,16 @@ export const configSlice = createSlice({
         // ?Change: (state, action) => { state.narodmonSend.wtypes: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], = action.payload },
         // ?Change: (state, action) => { state.narodmonSend.thing: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], = action.payload },
         // ?Change: (state, action) => { state.narodmonSend.metrics: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"] = action.payload },
-        // 
-        // ?Change: (state, action) => { state.history.period: 60, = action.payload },
-        // ?Change: (state, action) => { state.history.channelID: "", = action.payload },
-        // ?Change: (state, action) => { state.history.wrkey: "", = action.payload },
-        // ?Change: (state, action) => { state.history.rdkey: "", = action.payload },
-        // ?Change: (state, action) => { state.history.fields: [0, 0, 0, 0, 0], = action.payload },
-        // ?Change: (state, action) => { state.history.wSensors: [0, 0, 0, 0, 0], = action.payload },
-        // ?Change: (state, action) => { state.history.wTypes: [0, 0, 0, 0, 0], = action.payload },
-        // ?Change: (state, action) => { state.history.tFields: [0, 0, 0, 0, 0] = action.payload },
-        //
+
+        historyPriodChange: (state, action) => { state.history.period = action.payload },
+        historyChannelIDChange: (state, action) => { state.history.channelID = action.payload },
+        historyWrkeyChange: (state, action) => { state.history.wrkey = action.payload },
+        historyRdkeyChange: (state, action) => { state.history.rdkey = action.payload },
+        historyFieldsChange: (state, action) => { state.history.fields[action.payload.num] = action.payload.val },
+        historyWsensorsChange: (state, action) => { state.history.wSensors[action.payload.num] = action.payload.val },
+        historyWtypesChange: (state, action) => { state.history.wTypes[action.payload.num] = action.payload.val },
+        historyTfieldsChange: (state, action) => { state.history.tFields[action.payload.num] = action.payload.val },
+
         usernameChange: (state, action) => { state.account.name = action.payload },
         passwordRequiredSwitch: (state, action) => { state.account.required = action.payload },
 
@@ -552,7 +552,9 @@ export const {
     comfortHumSourceChange, comfortHumWsensNumChange, comfortHumThingChange,
     comfortHumMinChange, comfortHumMaxChange, comfortHumSoundChange,
     comfortIaqSourceChange, comfortIaqSoundChange, 
-    comfortCo2SourceChange, comfortCo2WsensNumChange, comfortCo2SoundChange
+    comfortCo2SourceChange, comfortCo2WsensNumChange, comfortCo2SoundChange,
+    historyPriodChange, historyChannelIDChange, historyWrkeyChange, historyRdkeyChange,
+    historyFieldsChange, historyWsensorsChange, historyWtypesChange, historyTfieldsChange
 } = configSlice.actions;
   
 export default configSlice.reducer;

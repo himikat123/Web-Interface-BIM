@@ -6,6 +6,7 @@ export interface iValid {
         clock: boolean,
         display1: boolean,
         display2: boolean,
+        history: boolean,
 
         account: boolean
     }

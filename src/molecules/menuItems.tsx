@@ -33,7 +33,8 @@ const MenuItems = (props: iMenuItems) => {
     const validWsensors = useSelector((state: iValid) => state.valid.wsensors);
     const validClock = useSelector((state: iValid) => state.valid.clock);
     const validDisplay1 = useSelector((state: iValid) => state.valid.display1);
-    const validDisplay2 = useSelector((state: iValid) => state.valid.display2)
+    const validDisplay2 = useSelector((state: iValid) => state.valid.display2);
+    const validHistory = useSelector((state: iValid) => state.valid.history);
 
     return <>
         <MenuItem link="/" 
@@ -164,7 +165,7 @@ const MenuItems = (props: iMenuItems) => {
                 title={i18n.t('weatherHistory')} 
                 mobile={props.mobile} 
                 icon={<HistorySVG />} 
-                valid={true} 
+                valid={validHistory} 
             />
         }
 

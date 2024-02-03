@@ -9,7 +9,8 @@ export const validSlice = createSlice({
         clock: true,
         display1: true,
         display2: true,
-        
+        history: true,
+
         account: true
     },
     reducers: {
@@ -19,6 +20,7 @@ export const validSlice = createSlice({
         clockValidChange: (state, action) => { state.clock = action.payload },
         display1ValidChange: (state, action) => { state.display1 = action.payload },
         display2ValidChange: (state, action) => { state.display2 = action.payload },
+        historyValidChange: (state, action) => { state.history = action.payload },
         accountValidChange: (state, action) => { state.account = action.payload },
     }
 });
@@ -30,6 +32,7 @@ export const {
     clockValidChange,
     display1ValidChange,
     display2ValidChange,
+    historyValidChange,
     accountValidChange
 } = validSlice.actions;
   
