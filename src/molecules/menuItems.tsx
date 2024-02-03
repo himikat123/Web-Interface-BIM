@@ -35,6 +35,7 @@ const MenuItems = (props: iMenuItems) => {
     const validDisplay1 = useSelector((state: iValid) => state.valid.display1);
     const validDisplay2 = useSelector((state: iValid) => state.valid.display2);
     const validHistory = useSelector((state: iValid) => state.valid.history);
+    const validRecieve = useSelector((state: iValid) => state.valid.receive);
 
     return <>
         <MenuItem link="/" 
@@ -182,7 +183,7 @@ const MenuItems = (props: iMenuItems) => {
             title={i18n.t('dataReceive')} 
             mobile={props.mobile} 
             icon={<ReceiveSVG />} 
-            valid={true} 
+            valid={validRecieve} 
         />
 
         <MenuItem link="#" 

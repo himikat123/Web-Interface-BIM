@@ -160,7 +160,7 @@
     },
     "forecast": "Прогноз",
     "sendDataTo": "Надсилати дані на",
-    "periodMinutes": "Період (хвилини)",
+    "periodMinutes": "Період оновлення (хвилин)",
     "field": "Поле",
     "receiveDataFrom": "Отримувати дані з",
     "downloadSettingsBackupFile": "Завантажити файл резервної копії налаштувань",
@@ -309,5 +309,6 @@
     "humidifier": "Зволожувач",
     "dryer": "Осушувач",
     "hysteresis": "Гістерезис",
-    "soundNotification": "Звукове сповіщення"
+    "soundNotification": "Звукове сповіщення",
+    "receivedData": "Прийняті дані"
 }

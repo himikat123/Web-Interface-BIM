@@ -252,7 +252,6 @@ export interface iConfig {
             wtypes: number[]
         },
         thingspeakReceive: {
-            turnOn: number,
             period: number,
             channelID: string,
             rdkey: string,

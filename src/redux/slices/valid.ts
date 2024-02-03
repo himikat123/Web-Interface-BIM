@@ -10,6 +10,7 @@ export const validSlice = createSlice({
         display1: true,
         display2: true,
         history: true,
+        receive: true,
 
         account: true
     },
@@ -21,6 +22,7 @@ export const validSlice = createSlice({
         display1ValidChange: (state, action) => { state.display1 = action.payload },
         display2ValidChange: (state, action) => { state.display2 = action.payload },
         historyValidChange: (state, action) => { state.history = action.payload },
+        receiveValidChange: (state, action) => { state.receive = action.payload },
         accountValidChange: (state, action) => { state.account = action.payload },
     }
 });
@@ -33,6 +35,7 @@ export const {
     display1ValidChange,
     display2ValidChange,
     historyValidChange,
+    receiveValidChange,
     accountValidChange
 } = validSlice.actions;
   

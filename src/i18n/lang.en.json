@@ -160,7 +160,7 @@
     },
     "forecast": "Forecast",
     "sendDataTo": "Send data to",
-    "periodMinutes": "Period (minutes)",
+    "periodMinutes": "Update period (minutes)",
     "field": "Field",
     "receiveDataFrom": "Receive data from",
     "downloadSettingsBackupFile": "Download settings backup file",
@@ -309,5 +309,6 @@
     "humidifier": "Humidifier",
     "dryer": "Dehumidifier",
     "hysteresis": "Hysteresis",
-    "soundNotification": "Sound notification"
+    "soundNotification": "Sound notification",
+    "receivedData": "Received data"
 }

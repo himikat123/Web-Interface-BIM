@@ -19,6 +19,7 @@ import Display2 from './pages/display2';
 import Sound from './pages/sound';
 import Comfort from './pages/comfort';
 import History from './pages/history';
+import ReceiveThingspeak from './pages/receiveThingspeak';
 import Language from './pages/language';
 import Username from './pages/username';
 import { changeLanguage } from './i18n/main';
@@ -82,22 +83,23 @@ function App() {
             (configState === 'default' || dataState === 'default') && <Loading />}
             
             {configState === 'ok' && dataState === 'ok' && <Routes>
-                <Route path="/"            element={ <Status /> }>      </Route>
-                <Route path="/connect"     element={ <Connect /> }>     </Route>
-                <Route path="/accesspoint" element={ <AccessPoint /> }> </Route>
-                <Route path="/sensors"     element={ <Sensors /> }>     </Route>
-                <Route path="/wsensors"    element={ <WSensors /> }>    </Route>
-                <Route path="/weather"     element={ <Weather /> }>     </Route>
-                <Route path="/clock"       element={ <Clock /> }>       </Route>
-                <Route path="/alarm"       element={ <Alarm /> }>       </Route>
-                <Route path="/display1"    element={ <Display1 /> }>    </Route>
-                <Route path="/display2"    element={ <Display2 /> }>    </Route>
-                <Route path='/sound'       element={ <Sound /> }>       </Route>
-                <Route path='/comfort'     element={ <Comfort /> }>     </Route>
-                <Route path='/history'     element={ <History /> }>     </Route>
-                <Route path="/language"    element={ <Language /> }>    </Route>
-                <Route path="/username"    element={ <Username /> }>    </Route>
-                <Route path="/*"           element={ <PageNotFound /> }></Route>
+                <Route path="/"            element={ <Status /> }>           </Route>
+                <Route path="/connect"     element={ <Connect /> }>          </Route>
+                <Route path="/accesspoint" element={ <AccessPoint /> }>      </Route>
+                <Route path="/sensors"     element={ <Sensors /> }>          </Route>
+                <Route path="/wsensors"    element={ <WSensors /> }>         </Route>
+                <Route path="/weather"     element={ <Weather /> }>          </Route>
+                <Route path="/clock"       element={ <Clock /> }>            </Route>
+                <Route path="/alarm"       element={ <Alarm /> }>            </Route>
+                <Route path="/display1"    element={ <Display1 /> }>         </Route>
+                <Route path="/display2"    element={ <Display2 /> }>         </Route>
+                <Route path='/sound'       element={ <Sound /> }>            </Route>
+                <Route path='/comfort'     element={ <Comfort /> }>          </Route>
+                <Route path='/history'     element={ <History /> }>          </Route>
+                <Route path='/receive'     element={ <ReceiveThingspeak />}> </Route>
+                <Route path="/language"    element={ <Language /> }>         </Route>
+                <Route path="/username"    element={ <Username /> }>         </Route>
+                <Route path="/*"           element={ <PageNotFound /> }>     </Route>
             </Routes>}
         </div>
     );

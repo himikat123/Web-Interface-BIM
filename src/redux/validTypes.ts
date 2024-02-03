@@ -7,6 +7,7 @@ export interface iValid {
         display1: boolean,
         display2: boolean,
         history: boolean,
+        receive: boolean,
 
         account: boolean
     }

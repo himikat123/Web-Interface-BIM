@@ -160,7 +160,7 @@
     },
     "forecast": "Прогноз",
     "sendDataTo": "Отправлять данные на",
-    "periodMinutes": "Период (минут)",
+    "periodMinutes": "Период обновления (минут)",
     "field": "Поле",
     "receiveDataFrom": "Получать данные с",
     "downloadSettingsBackupFile": "Скачать файл резервной копии настроек",
@@ -309,5 +309,6 @@
     "humidifier": "Увлажнитель",
     "dryer": "Осушитель",
     "hysteresis": "Гистерезис",
-    "soundNotification": "Звуковое оповещение"
+    "soundNotification": "Звуковое оповещение",
+    "receivedData": "Принятые данные"
 }

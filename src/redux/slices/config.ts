@@ -255,7 +255,6 @@ export const configSlice = createSlice({
             wtypes: [0, 0, 0, 0, 0, 0, 0, 0]
         },
         thingspeakReceive: {
-            turnOn: 0,
             period: 0,
             channelID: "",
             rdkey: "",
@@ -472,13 +471,12 @@ export const configSlice = createSlice({
         // ?Change: (state, action) => { state.thingspeakSend.types: [0, 0, 0, 0, 0, 0, 0, 0], = action.payload },
         // ?Change: (state, action) => { state.thingspeakSend.wsensors: [0, 0, 0, 0, 0, 0, 0, 0], = action.payload },
         // ?Change: (state, action) => { state.thingspeakSend.wtypes: [0, 0, 0, 0, 0, 0, 0, 0] = action.payload },
-        // 
-        // ?Change: (state, action) => { state.thingspeakReceive.turnOn: 0, = action.payload },
-        // ?Change: (state, action) => { state.thingspeakReceive.period: 5, = action.payload },
-        // ?Change: (state, action) => { state.thingspeakReceive.channelID: "", = action.payload },
-        // ?Change: (state, action) => { state.thingspeakReceive.rdkey: "", = action.payload },
-        // ?Change: (state, action) => { state.thingspeakReceive.expire: 20 = action.payload },
-        // 
+
+        thingspeakReceivePeriodChange: (state, action) => { state.thingspeakReceive.period = action.payload },
+        thingspeakReceiveChannelIdChange: (state, action) => { state.thingspeakReceive.channelID = action.payload },
+        thingspeakReceiveRdkeyChange: (state, action) => { state.thingspeakReceive.rdkey = action.payload },
+        thingspeakReceiveExpireChange: (state, action) => { state.thingspeakReceive.expire = action.payload },
+
         // ?Change: (state, action) => { state.narodmonSend.turnOn: 0, = action.payload },
         // ?Change: (state, action) => { state.narodmonSend.period: 5, = action.payload },
         // ?Change: (state, action) => { state.narodmonSend.lat: "", = action.payload },
@@ -554,7 +552,8 @@ export const {
     comfortIaqSourceChange, comfortIaqSoundChange, 
     comfortCo2SourceChange, comfortCo2WsensNumChange, comfortCo2SoundChange,
     historyPriodChange, historyChannelIDChange, historyWrkeyChange, historyRdkeyChange,
-    historyFieldsChange, historyWsensorsChange, historyWtypesChange, historyTfieldsChange
+    historyFieldsChange, historyWsensorsChange, historyWtypesChange, historyTfieldsChange,
+    thingspeakReceivePeriodChange, thingspeakReceiveChannelIdChange, thingspeakReceiveRdkeyChange, thingspeakReceiveExpireChange
 } = configSlice.actions;
   
 export default configSlice.reducer;

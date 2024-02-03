@@ -160,7 +160,7 @@
     },
     "forecast": "Vorhersage",
     "sendDataTo": "Daten senden an",
-    "periodMinutes": "Zeitraum (Minuten)",
+    "periodMinutes": "Aktualisierungszeitraum (Minuten)",
     "field": "Feld",
     "receiveDataFrom": "Daten empfangen von",
     "downloadSettingsBackupFile": "Einstellungs-Sicherungsdatei herunterladen",
@@ -309,5 +309,6 @@
     "humidifier": "Luftbefeuchter",
     "dryer": "Luftentfeuchter",
     "hysteresis": "Hysterese",
-    "soundNotification": "Akustische Benachrichtigung"
+    "soundNotification": "Akustische Benachrichtigung",
+    "receivedData": "Empfangene Daten"
 }
