@@ -241,7 +241,6 @@ export interface iConfig {
             channel: number
         },
         thingspeakSend: {
-            turnOn: number,
             period: number,
             channelID: string,
             wrkey: string,
@@ -258,7 +257,6 @@ export interface iConfig {
             expire: number
         },
         narodmonSend: {
-            turnOn: number,
             period: number,
             lat: string,
             lon: string,
@@ -267,7 +265,6 @@ export interface iConfig {
             types: number[],
             wsensors: number[],
             wtypes: number[],
-            thing: number[],
             metrics: string[]
         },
         history: {

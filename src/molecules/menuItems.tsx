@@ -36,6 +36,8 @@ const MenuItems = (props: iMenuItems) => {
     const validDisplay2 = useSelector((state: iValid) => state.valid.display2);
     const validHistory = useSelector((state: iValid) => state.valid.history);
     const validRecieve = useSelector((state: iValid) => state.valid.receive);
+    const validSendThingspeak = useSelector((state: iValid) => state.valid.sendThingspeak);
+    const validSendNarodmon = useSelector((state: iValid) => state.valid.sendNarodmon);
 
     return <>
         <MenuItem link="/" 
@@ -170,13 +172,25 @@ const MenuItems = (props: iMenuItems) => {
             />
         }
 
-        <MenuItem link="/send" 
+        <MenuItem link="#" 
             current={props.current} 
             title={i18n.t('dataSend')} 
             mobile={props.mobile} 
             icon={<SendSVG />}
-            valid={true} 
-        />
+            valid={validSendThingspeak && validSendNarodmon} 
+        >
+            <MenuSubItem link="/sendthingspeak" 
+                current={props.current} 
+                title={i18n.t('sendToThingspeak')} 
+                valid={validSendThingspeak} 
+            />
+
+            <MenuSubItem link="/sendnarodmon" 
+                current={props.current} 
+                title={i18n.t('sendToNarodmon')} 
+                valid={validSendNarodmon} 
+            />
+        </MenuItem>
 
         <MenuItem link="/receive" 
             current={props.current} 
@@ -217,11 +231,6 @@ const MenuItems = (props: iMenuItems) => {
             <MenuSubItem link="/default" 
                 current={props.current} 
                 title={i18n.t('defaultSettings')} 
-                valid={true} 
-            />
-            <MenuSubItem link="/firmware" 
-                current={props.current} 
-                title={i18n.t('firmware')} 
                 valid={true} 
             />
             <MenuSubItem link="/filesystem" 

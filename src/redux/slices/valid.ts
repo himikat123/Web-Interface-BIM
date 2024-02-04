@@ -11,7 +11,8 @@ export const validSlice = createSlice({
         display2: true,
         history: true,
         receive: true,
-
+        sendThingspeak: true,
+        sendNarodmon: true,
         account: true
     },
     reducers: {
@@ -23,6 +24,8 @@ export const validSlice = createSlice({
         display2ValidChange: (state, action) => { state.display2 = action.payload },
         historyValidChange: (state, action) => { state.history = action.payload },
         receiveValidChange: (state, action) => { state.receive = action.payload },
+        sendThingspeakValidChange: (state, action) => { state.sendThingspeak = action.payload },
+        sendNarodmonValidChange: (state, action) => { state.sendNarodmon = action.payload },
         accountValidChange: (state, action) => { state.account = action.payload },
     }
 });
@@ -36,6 +39,8 @@ export const {
     display2ValidChange,
     historyValidChange,
     receiveValidChange,
+    sendThingspeakValidChange,
+    sendNarodmonValidChange,
     accountValidChange
 } = validSlice.actions;
   

@@ -11,7 +11,7 @@ const data = () => {
         esp32: {
             temp: random(50, 60)
         },
-        runtime: Math.round(random(300, 3000)),
+        runtime: Math.round(random(3, 3000)),
         time: Math.floor(Date.now() / 1000),
         
         network: {

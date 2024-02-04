@@ -7,16 +7,13 @@ import Toggle from "../atoms/toggle";
 import TextInput from "../atoms/textInput";
 import NumberInput from "../atoms/numberInput";
 import { iConfig } from "../redux/configTypes";
-import { iData } from "../redux/dataTypes";
 import { receiveValidChange } from "../redux/slices/valid";
 import * as cf from "../redux/slices/config";
-import * as vl from "../atoms/validateValues";
 
 const ReceiveThingspeak = () => {
     const [isValid, setIsValid] = useState<boolean[]>([]);
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
-    const data = useSelector((state: iData) => state.data);
 
     useEffect(() => {
         dispatch(receiveValidChange(!isValid.includes(false)));

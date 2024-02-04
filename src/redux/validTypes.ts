@@ -8,7 +8,8 @@ export interface iValid {
         display2: boolean,
         history: boolean,
         receive: boolean,
-
+        sendThingspeak: boolean,
+        sendNarodmon: boolean,
         account: boolean
     }
 }

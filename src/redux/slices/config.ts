@@ -244,7 +244,6 @@ export const configSlice = createSlice({
             channel: 0
         },
         thingspeakSend: {
-            turnOn: 0,
             period: 0,
             channelID: "",
             wrkey: "",
@@ -261,7 +260,6 @@ export const configSlice = createSlice({
             expire: 0
         },
         narodmonSend: {
-            turnOn: 0,
             period: 0,
             lat: "",
             lon: "",
@@ -270,7 +268,6 @@ export const configSlice = createSlice({
             types: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             wsensors: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             wtypes: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            thing: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             metrics: ["", "", "", "", "", "", "", "", "", "", "", ""]
         },
         history: {
@@ -462,32 +459,29 @@ export const configSlice = createSlice({
         wSensExpireChange: (state, action) => { state.wsensor.expire[action.payload.num] = Math.round(action.payload.val) },
         wSensChannelChange: (state, action) => { state.wsensor.channel = Math.round(action.payload) },
 
-        // ?Change: (state, action) => { state.thingspeakSend.turnOn: 0, = action.payload },
-        // ?Change: (state, action) => { state.thingspeakSend.period: 5, = action.payload },
-        // ?Change: (state, action) => { state.thingspeakSend.channelID: "", = action.payload },
-        // ?Change: (state, action) => { state.thingspeakSend.wrkey: "", = action.payload },
-        // ?Change: (state, action) => { state.thingspeakSend.rdkey: "", = action.payload },
-        // ?Change: (state, action) => { state.thingspeakSend.fields: [0, 0, 0, 0, 0, 0, 0, 0], = action.payload },
-        // ?Change: (state, action) => { state.thingspeakSend.types: [0, 0, 0, 0, 0, 0, 0, 0], = action.payload },
-        // ?Change: (state, action) => { state.thingspeakSend.wsensors: [0, 0, 0, 0, 0, 0, 0, 0], = action.payload },
-        // ?Change: (state, action) => { state.thingspeakSend.wtypes: [0, 0, 0, 0, 0, 0, 0, 0] = action.payload },
+        thingspeakSendPeriodChange: (state, action) => { state.thingspeakSend.period = action.payload },
+        thingspeakSendChannelIdChange: (state, action) => { state.thingspeakSend.channelID = action.payload },
+        thingspeakSendWrkeyChange: (state, action) => { state.thingspeakSend.wrkey = action.payload },
+        thingspeakSendRdkeyChange: (state, action) => { state.thingspeakSend.rdkey = action.payload },
+        thingspeakSendFieldsChange: (state, action) => { state.thingspeakSend.fields[action.payload.num] = action.payload.val },
+        thingspeakSendTypesChange: (state, action) => { state.thingspeakSend.types[action.payload.num] = action.payload.val },
+        thingspeakSendWsensorsChange: (state, action) => { state.thingspeakSend.wsensors[action.payload.num] = action.payload.val },
+        thingspeakSendWtypesChange: (state, action) => { state.thingspeakSend.wtypes[action.payload.num] = action.payload.val },
 
         thingspeakReceivePeriodChange: (state, action) => { state.thingspeakReceive.period = action.payload },
         thingspeakReceiveChannelIdChange: (state, action) => { state.thingspeakReceive.channelID = action.payload },
         thingspeakReceiveRdkeyChange: (state, action) => { state.thingspeakReceive.rdkey = action.payload },
         thingspeakReceiveExpireChange: (state, action) => { state.thingspeakReceive.expire = action.payload },
 
-        // ?Change: (state, action) => { state.narodmonSend.turnOn: 0, = action.payload },
-        // ?Change: (state, action) => { state.narodmonSend.period: 5, = action.payload },
-        // ?Change: (state, action) => { state.narodmonSend.lat: "", = action.payload },
-        // ?Change: (state, action) => { state.narodmonSend.lon: "", = action.payload },
-        // ?Change: (state, action) => { state.narodmonSend.name: "", = action.payload },
-        // ?Change: (state, action) => { state.narodmonSend.sensors: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], = action.payload },
-        // ?Change: (state, action) => { state.narodmonSend.types: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], = action.payload },
-        // ?Change: (state, action) => { state.narodmonSend.wsensors: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], = action.payload },
-        // ?Change: (state, action) => { state.narodmonSend.wtypes: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], = action.payload },
-        // ?Change: (state, action) => { state.narodmonSend.thing: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], = action.payload },
-        // ?Change: (state, action) => { state.narodmonSend.metrics: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"] = action.payload },
+        narodmonSendPeriodChange: (state, action) => { state.narodmonSend.period = action.payload },
+        narodmonSendLatChange: (state, action) => { state.narodmonSend.lat = action.payload },
+        narodmonSendLonChange: (state, action) => { state.narodmonSend.lon = action.payload },
+        narodmonSendNameChange: (state, action) => { state.narodmonSend.name = action.payload },
+        narodmonSendSensorsChange: (state, action) => { state.narodmonSend.sensors[action.payload.num] = action.payload.val },
+        narodmonSendTypesChange: (state, action) => { state.narodmonSend.types[action.payload.num] = action.payload.val },
+        narodmonSendWsensorsChange: (state, action) => { state.narodmonSend.wsensors[action.payload.num] = action.payload.val },
+        narodmonSendWtypesChange: (state, action) => { state.narodmonSend.wtypes[action.payload.num] = action.payload.val },
+        narodmonSendMetricsChange: (state, action) => { state.narodmonSend.metrics[action.payload.num] = action.payload.val },
 
         historyPriodChange: (state, action) => { state.history.period = action.payload },
         historyChannelIDChange: (state, action) => { state.history.channelID = action.payload },
@@ -553,7 +547,11 @@ export const {
     comfortCo2SourceChange, comfortCo2WsensNumChange, comfortCo2SoundChange,
     historyPriodChange, historyChannelIDChange, historyWrkeyChange, historyRdkeyChange,
     historyFieldsChange, historyWsensorsChange, historyWtypesChange, historyTfieldsChange,
-    thingspeakReceivePeriodChange, thingspeakReceiveChannelIdChange, thingspeakReceiveRdkeyChange, thingspeakReceiveExpireChange
+    thingspeakReceivePeriodChange, thingspeakReceiveChannelIdChange, thingspeakReceiveRdkeyChange, thingspeakReceiveExpireChange,
+    thingspeakSendPeriodChange, thingspeakSendChannelIdChange, thingspeakSendWrkeyChange, thingspeakSendRdkeyChange,
+    thingspeakSendFieldsChange, thingspeakSendTypesChange, thingspeakSendWsensorsChange, thingspeakSendWtypesChange,
+    narodmonSendPeriodChange, narodmonSendLatChange, narodmonSendLonChange, narodmonSendNameChange, narodmonSendSensorsChange,
+    narodmonSendTypesChange, narodmonSendWsensorsChange, narodmonSendWtypesChange, narodmonSendMetricsChange
 } = configSlice.actions;
   
 export default configSlice.reducer;

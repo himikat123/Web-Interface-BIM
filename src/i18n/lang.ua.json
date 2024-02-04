@@ -38,6 +38,8 @@
     "comfort": "Комфорт",
     "weatherHistory": "Історія погоди",
     "dataSend": "Відправка даних",
+    "sendToThingspeak": "Відправка на thingspeak",
+    "sendToNarodmon": "Відправка на narodmon",
     "dataReceive": "Приймання даних",
     "system": "Система",
     "backup": "Резервна копія",

@@ -240,3 +240,19 @@ export interface iAlarm {
 export interface iButtonPlay {
     play(): void
 }
+
+export interface iTypesList {
+    [key: string]: string
+};
+
+export interface iSensor {
+    title: string,
+    types: string[],
+    data: number[]
+}
+
+export type iSensors = Array<iSensor>;
+
+export interface iCardSend {
+    num: number
+}
