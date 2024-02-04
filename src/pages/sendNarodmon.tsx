@@ -38,7 +38,7 @@ const SendNarodmon = () => {
         </>} />
 
 
-        {config.thingspeakSend.period > 0 && <>
+        {config.narodmonSend.period > 0 && <>
             {/* Channel ID */}
             <Card content={<>
                 <TextInput label={i18n.t('latitude')}
