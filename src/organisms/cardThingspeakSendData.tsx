@@ -100,21 +100,14 @@ const CardThingpeakSendData = (props: iCardSend) => {
         };
         const list = sens.types.map((type, i) => {
             return `${typesList[type]} (${
-                type === 't'
-                    ? vl.validateTemperature(sens.data[i]) ? (sens.data[i].toFixed(2) + '°C') : '--'
-                    : type === 'h'
-                        ? vl.validateHumidity(sens.data[i]) ? (sens.data[i].toFixed(2) + '%') : '--'
-                        : type === 'p'
-                            ? vl.validatePressure(sens.data[i]) ? (sens.data[i].toFixed(2) + i18n.t('units.hpa') + ' / ' + (sens.data[i] * 0.75).toFixed(2) + i18n.t('units.mm')) : '--'
-                            : type === 'i'
-                                ? vl.validateIaq(sens.data[i]) ? ('IAQ ' + sens.data[i].toFixed(2)) : '--'
-                                : type === 'l'
-                                    ? vl.validateLight(sens.data[i]) ? (sens.data[i].toFixed(2) + i18n.t('units.lux')) : '--'
-                                    : type === 'a'
-                                        ? vl.validateAnalogVoltage(sens.data[i]) ? (sens.data[i].toFixed(2) + i18n.t('units.v')) : '--'
-                                        : type === 'r'
-                                            ? moment.duration(sens.data[i], 'seconds').locale(locale).humanize()
-                                            : '???'
+                type === 't' ? vl.validateTemperature(sens.data[i]) ? (sens.data[i].toFixed(2) + '°C') : '--'
+              : type === 'h' ? vl.validateHumidity(sens.data[i]) ? (sens.data[i].toFixed(2) + '%') : '--'
+              : type === 'p' ? vl.validatePressure(sens.data[i]) ? (sens.data[i].toFixed(2) + i18n.t('units.hpa') + ' / ' + (sens.data[i] * 0.75).toFixed(2) + i18n.t('units.mm')) : '--'
+              : type === 'i' ? vl.validateIaq(sens.data[i]) ? ('IAQ ' + sens.data[i].toFixed(2)) : '--'
+              : type === 'l' ? vl.validateLight(sens.data[i]) ? (sens.data[i].toFixed(2) + i18n.t('units.lux')) : '--'
+              : type === 'a' ? vl.validateAnalogVoltage(sens.data[i]) ? (sens.data[i].toFixed(2) + i18n.t('units.v')) : '--'
+              : type === 'r' ? moment.duration(sens.data[i], 'seconds').locale(locale).humanize()
+              : '???'
             })`;
         });
         return list;
@@ -194,7 +187,10 @@ const CardThingpeakSendData = (props: iCardSend) => {
             <SelectSwitch label={i18n.t('dataSource.singular')}
                 options={sensors.map(sensor => sensor.title)}
                 value={config.thingspeakSend.fields[props.num]}
-                onChange={val => dispatch(cf.thingspeakSendFieldsChange({ num: props.num, val: val }))}
+                onChange={val => {
+                    dispatch(cf.thingspeakSendFieldsChange({ num: props.num, val: val }));
+                    dispatch(cf.thingspeakSendTypesChange({ num: props.num, val: 0 }));
+                }}
             />
 
             {/* Sensor type */}
