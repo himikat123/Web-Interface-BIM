@@ -25,39 +25,39 @@ const ReceiveThingspeak = () => {
             <Toggle label={i18n.t('receiveDataFrom') + " thingspeak.com"}
                 checked={config.thingspeakReceive.period > 0 ? 1 : 0}
                 onChange={() => dispatch(cf.thingspeakReceivePeriodChange(config.thingspeakReceive.period > 0 ? 0 : 5))}
-            /> 
+            />
+        </>} />
 
-            {config.thingspeakReceive.period > 0 && <>    
+        {config.thingspeakReceive.period > 0 && <>
+            <Card content={<>
                 {/* Period */}
+                <NumberInput label={i18n.t('periodMinutes')}
+                    value={config.thingspeakReceive.period}
+                    min={1}
+                    max={999}
+                    onChange={val => dispatch(cf.thingspeakReceivePeriodChange(val))}
+                    isValid={valid => {
+                        let nv = isValid;
+                        nv[0] = valid;
+                        setIsValid(nv);
+                    }}
+                />
+        
+                {/* Data expire */}
                 <div className="mt-8">
-                    <NumberInput label={i18n.t('periodMinutes')}
-                        value={config.thingspeakReceive.period}
+                    <NumberInput label={i18n.t('dataExpirationTime')}
+                        value={config.thingspeakReceive.expire}
                         min={1}
                         max={999}
-                        onChange={val => dispatch(cf.thingspeakReceivePeriodChange(val))}
+                        onChange={val => dispatch(cf.thingspeakReceiveExpireChange(val))}
                         isValid={valid => {
                             let nv = isValid;
-                            nv[0] = valid;
+                            nv[1] = valid;
                             setIsValid(nv);
                         }}
                     />
                 </div>
-            </>}
-        </>} />
-
-        {config.thingspeakReceive.period > 0 && <>
-            {/* Data expire */}
-            <Card content={<NumberInput label={i18n.t('dataExpirationTime')}
-                value={config.thingspeakReceive.expire}
-                min={1}
-                max={999}
-                onChange={val => dispatch(cf.thingspeakReceiveExpireChange(val))}
-                isValid={valid => {
-                    let nv = isValid;
-                    nv[1] = valid;
-                    setIsValid(nv);
-                }}
-            />} />
+            </>} />
 
             {/* Channel ID */}
             <Card content={<TextInput label="Channel ID"
