@@ -24,12 +24,14 @@ const FooterButtons = (props: iFooterButtons) => {
             setSaveColor('yellow');
             setSaveButton('saving');
             
-            fetch(`${hostUrl()}/esp/saveConfig`, { 
+            fetch(`${hostUrl()}/esp/${props.passChange ? 'changePass' : 'saveConfig'}`, { 
                 method: 'post',
                 headers: {
                     'Content-Type': 'text/plain'
                 },
-                body: 'config:' + JSON.stringify(config).replace('"configState":"ok",', '') 
+                body: (props.passChange
+                    ? 'oldPass=' + props.passChange.old + '&newPass=' + props.passChange.new
+                    : 'config=' + JSON.stringify(config).replace('"configState":"ok",', '')) 
             })
             .then(res => res.text())
             .then((result) => {

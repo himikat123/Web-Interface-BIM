@@ -41,7 +41,8 @@ export interface iCard {
 }
 
 export interface iFooterButtons {
-    buttons: Array<string>
+    buttons: Array<string>,
+    passChange?: {old: string, new: string}
 }
 
 export interface iColumnsTemplate {
@@ -50,7 +51,8 @@ export interface iColumnsTemplate {
     content: Array<React.ReactNode>,
     buttons?: Array<string>,
     footer?: React.ReactNode,
-    full?: boolean
+    full?: boolean,
+    passChange?: {old: string, new: string}
 }
 
 export interface iSelectSwitch {

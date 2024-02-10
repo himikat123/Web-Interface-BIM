@@ -26,6 +26,7 @@ import Language from './pages/language';
 import Backup from './pages/backup';
 import Default from './pages/default';
 import Username from './pages/username';
+import Password from './pages/password';
 import { changeLanguage } from './i18n/main';
 import { iConfig } from './redux/configTypes';
 import { iData } from './redux/dataTypes';
@@ -107,6 +108,7 @@ function App() {
                 <Route path="/backup"         element={ <Backup /> }>            </Route>
                 <Route path="/default"        element={ <Default /> }>           </Route> 
                 <Route path="/username"       element={ <Username /> }>          </Route>
+                <Route path="/userpass"       element={ <Password /> }>          </Route>
                 <Route path="/*"              element={ <PageNotFound /> }>      </Route>
             </Routes>}
         </div>

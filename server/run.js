@@ -14,16 +14,17 @@ app.get('/esp/restart', (req, res) => {
 });
 
 app.post("/esp/saveConfig", (req, res) => {
-    console.log('POST /esp/saveConfig', req.query);
+    console.log('POST /esp/saveConfig', req.body);
     res.set('Access-Control-Allow-Origin', '*');
-    let data = req.body.replace('config:', '');
+    let data = req.body.replace('config=', '');
     setTimeout(() => {
         if(data) {
             const configFile = path.join(__dirname, '..', 'public', 'config.json');
             fs.unlinkSync(configFile);
             fs.writeFileSync(configFile, data);
+            res.send("OK");
         }
-        res.send("OK");
+        else res.send("ERROR");
     }, 2000);
 });
 
@@ -31,16 +32,16 @@ app.post("/esp/defaultConfig", (req, res) => {
     console.log('POST /esp/defaultConfig', req.query);
     res.set('Access-Control-Allow-Origin', '*');
     let data = req.body.replace('config:', '');
-    console.log(data, typeof data, data.length);
     setTimeout(() => {
         if(data == 'default') {
             const defaultConfigFile = path.join(__dirname, '..', 'public', 'defaultConfig.json');
             const configFile = path.join(__dirname, '..', 'public', 'config.json');
             fs.copyFile(defaultConfigFile, configFile, err => {
-                if(err) console.log(err);
+                if(err) res.send("ERROR");
+                else res.send("OK");
             });
         }
-        res.send("OK");
+        else res.send("ERROR");
     }, 2000);
 });
 
@@ -92,9 +93,22 @@ app.get('/esp/syncdialog', (req, res) => {
 });
 
 app.post('/esp/changePass', (req, res) => {
-    console.log('GET /esp/changePass', req.query);
+    console.log('POST /esp/changePass', req.body);
     res.set('Access-Control-Allow-Origin', '*');
-    res.send("OK");
+    const pass = req.body.split('&');
+    const oldPass = pass[0].split('=')[1];
+    const newPass = pass[1].split('=')[1];
+    const userFile = path.join(__dirname, '..', 'public', 'user.us');
+    const user = JSON.parse(fs.readFileSync(userFile));
+    setTimeout(() => {
+        if(oldPass && newPass && user.pass === oldPass) {
+            const userFile = path.join(__dirname, '..', 'public', 'user.us');
+            fs.unlinkSync(userFile);
+            fs.writeFileSync(userFile, JSON.stringify({pass: newPass}));
+            res.send("OK");
+        }
+        else res.send("ERROR");
+    }, 2000);
 });
 
 app.post('/esp/fileUpload', (req, res) => {

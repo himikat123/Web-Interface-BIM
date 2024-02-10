@@ -19,7 +19,12 @@ const OneColumn = (props: iColumnsTemplate) => {
 
         {props.footer}
 
-        {props.buttons && <FooterButtons buttons={props.buttons} />}
+        {props.buttons 
+            ? props.passChange 
+                ? <FooterButtons buttons={props.buttons} passChange={props.passChange} />
+                : <FooterButtons buttons={props.buttons} />
+            : null
+        }
     </div>);
 }
 
