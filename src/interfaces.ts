@@ -49,7 +49,8 @@ export interface iColumnsTemplate {
     header: Array<string>,
     content: Array<React.ReactNode>,
     buttons?: Array<string>,
-    footer?: React.ReactNode
+    footer?: React.ReactNode,
+    full?: boolean
 }
 
 export interface iSelectSwitch {

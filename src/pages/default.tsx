@@ -99,6 +99,7 @@ const Default = () => {
             header={[i18n.t('defaultSettings')]} 
             content={[content]} 
             buttons={['reset']} 
+            full
         />
     </>
 }
