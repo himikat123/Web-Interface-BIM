@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import i18n from '../i18n/main';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { xcode, vs2015 } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { JsonView, darkStyles, defaultStyles } from 'react-json-view-lite';
+import 'react-json-view-lite/dist/index.css';
 import OneColumn from "../templates/oneColumn";
 import Card from "../atoms/card";
 import Button from "../atoms/button";
@@ -11,7 +11,7 @@ import { ReactComponent as SpinnerSVG } from '../atoms/icons/spinner.svg';
 const Default = () => {
     const [saveButton, setSaveButton] = useState<string>('resetToFactory');
     const [saveColor, setSaveColor] = useState<string>('blue');
-    const [defaultConfig, setDefaultConfig] = useState<string>('');
+    const [defaultConfig, setDefaultConfig] = useState<object>({});
     const timeout = useRef<ReturnType<typeof setInterval> | null>(null);
 
     const restore = () => {
@@ -63,18 +63,17 @@ const Default = () => {
         fetch('./defaultConfig.json')
         .then(res => res.text())
         .then((result: string) => {
-            setDefaultConfig(JSON.stringify(JSON.parse(result), undefined, 2))
+            console.log(result);
+            setDefaultConfig(JSON.parse(result))
         })
     }, []);
 
-    const theme = window.document.documentElement.classList[0] == 'dark' ? vs2015 : xcode;
+    const theme = window.document.documentElement.classList[0] == 'dark' ? darkStyles : defaultStyles;
 
     const content = <>
         <Card header={i18n.t('fileContents')}
             content={<div className="max-h-96 overflow-y-scroll">
-                <SyntaxHighlighter language="json" style={theme}>
-                    {defaultConfig}
-                </SyntaxHighlighter>
+                <JsonView data={defaultConfig} shouldExpandNode={(level) => level == 0} style={theme} />
             </div>} 
         />
 
