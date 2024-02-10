@@ -16,9 +16,9 @@ const BrightSensor = (props: iDisplay) => {
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
 
-    const analogData =  vl.validateAnalogVoltage(data.analog.volt) ? ((data.analog.volt + config.sensors.analog.v)) : null;
-    const max44009Data = vl.validateLight(data.max44009.light) ? ((data.max44009.light + config.sensors.max44009.l)) : null; 
-    const bh1750Data = vl.validateLight(data.bh1750.light) ? ((data.bh1750.light + config.sensors.bh1750.l)) : null;
+    const analogData =  vl.validateAnalogVoltage(data.analog.volt) ? (data.analog.volt + config.sensors.analog.v) : null;
+    const max44009Data = vl.validateLight(data.max44009.light) ? (data.max44009.light + config.sensors.max44009.l) : null; 
+    const bh1750Data = vl.validateLight(data.bh1750.light) ? (data.bh1750.light + config.sensors.bh1750.l) : null;
 
     let sensorData = null;
     switch(config.display.lightSensor[props.num]) {
