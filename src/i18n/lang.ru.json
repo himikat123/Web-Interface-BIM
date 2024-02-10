@@ -241,6 +241,8 @@
     "selectFirmwareFile": "Выберите файл прошивки",
     "upgrade": "Обновить",
     "upload": "Загрузить",
+    "clickToSelectFile": "Нажмите, чтоб выбрать файл",
+    "orDragAndDrop": "или перетащите",
     "open": "Открыть",
     "rename": "Переименовать",
     "delete": "Удалить",

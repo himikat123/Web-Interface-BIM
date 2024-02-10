@@ -241,6 +241,8 @@
     "selectFirmwareFile": "Wybierz plik oprogramowania układowego",
     "upgrade": "Aktualizuj",
     "upload": "Prześlij",
+    "clickToSelectFile": "Kliknij, aby wybrać plik",
+    "orDragAndDrop": "lub przeciągnij i upuść",
     "open": "Otwórz",
     "rename": "Zmień nazwę",
     "delete": "Usuń",

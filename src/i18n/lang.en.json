@@ -241,6 +241,8 @@
     "selectFirmwareFile": "Select firmware file",
     "upgrade": "Upgrade",
     "upload": "Upload",
+    "clickToSelectFile": "Click to select file",
+    "orDragAndDrop": "or drag and drop",
     "open": "Open",
     "rename": "Rename",
     "delete": "Delete",

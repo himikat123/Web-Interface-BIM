@@ -241,6 +241,8 @@
     "selectFirmwareFile": "Firmware-Datei auswählen",
     "upgrade": "Aktualisieren",
     "upload": "Hochladen",
+    "clickToSelectFile": "Klicken Sie, um die Datei auszuwählen",
+    "orDragAndDrop": "oder per Drag & Drop",
     "open": "Öffnen",
     "rename": "Umbenennen",
     "delete": "Löschen",
