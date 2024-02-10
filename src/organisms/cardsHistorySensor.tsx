@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../atoms/card";
@@ -146,14 +146,15 @@ const CardsHistorySensor = () => {
     let things: string[] = [];
     for(let i=0; i<8; i++) things.push(`${i18n.t('field')} ${i + 1} (${vl.ThingspeakDataRelevance() ? data.thing.data[i] : i18n.t('dataExpired')})`);
 
-    const bgColor = window.document.documentElement.classList[0] == 'dark' ? '000000' : 'FFFFFF';
+    const bgColor = window.document.documentElement.classList[0] === 'dark' ? '000000' : 'FFFFFF';
     const chartColors = ['FFCC00', '00FFFF', 'FF00FF', 'FFCC00', '00FFFF', 'FF7700', '0000FF'];
 
     return <>{[...Array(7)].map((x, i) =>
         <Card key={'t' + i} content={<div className="thchart">
             {/* History Chart */}
             <div className="w-100 text-center">
-                <iframe width={chartWidth - 1} 
+                <iframe title={`chart${i}`} 
+                    width={chartWidth - 1} 
                     height="261" 
                     style={{border: '1px solid #cccccc'}} 
                     src={`https://thingspeak.com/channels/${config.history.channelID}/charts/${i+1}?bgcolor=%23${bgColor}&color=%23${chartColors[i]}&dynamic=true&results=72&round=2&title=${labels[i]}&type=line&api_key=${config.history.rdkey}&width=${chartWidth}`}>

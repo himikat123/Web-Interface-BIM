@@ -68,12 +68,12 @@ const Default = () => {
         })
     }, []);
 
-    const theme = window.document.documentElement.classList[0] == 'dark' ? darkStyles : defaultStyles;
+    const theme = window.document.documentElement.classList[0] === 'dark' ? darkStyles : defaultStyles;
 
     const content = <>
         <Card header={i18n.t('fileContents')}
             content={<div className="max-h-96 overflow-y-scroll">
-                <JsonView data={defaultConfig} shouldExpandNode={(level) => level == 0} style={theme} />
+                <JsonView data={defaultConfig} shouldExpandNode={(level) => level === 0} style={theme} />
             </div>} 
         />
 

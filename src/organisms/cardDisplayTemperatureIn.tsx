@@ -115,7 +115,7 @@ const CardDisplayTemperatureIn = () => {
                         {/* Sensor type */}
                         <div className="mt-8">  
                             <SelectSwitch label={i18n.t('timeSlot') + ' ' + String(num + 1)}
-                                options={sensors.filter(sens => sens != i18n.t('sequence'))}
+                                options={sensors.filter(sens => sens !== i18n.t('sequence'))}
                                 value={config.display.source.sequence.temp[num]}
                                 onChange={val => dispatch(cf.displaySourceSequenceTempChange({ num: num, val: val }))}
                             />

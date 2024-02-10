@@ -26,7 +26,7 @@ const BrightSensor = (props: iDisplay) => {
         case 1: sensorData = max44009Data; break; 
         case 2: sensorData = bh1750Data; break;
     }
-    let brightness = config.display.lightSensor[props.num] == 0 ? (sensorData ?? 0) * 30 : sensorData ?? 0;
+    let brightness = config.display.lightSensor[props.num] === 0 ? (sensorData ?? 0) * 30 : sensorData ?? 0;
     brightness *= config.display.sensitivity[props.num] / 20;
     if(brightness < 1) brightness = 1;
     if(brightness > 100) brightness = 100;

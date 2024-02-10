@@ -42,7 +42,7 @@ const CardThingpeakSendData = (props: iCardSend) => {
             if(vl.validateBatteryADC(data.wsensor.bat[num])) {
                 const voltage = data.wsensor.bat[num] / (300.0 - config.wsensor.bat.k[num]);
                 const umin = 3.75;
-                const umax = config.wsensor.bat.type[num] == 0 ? 4.5 : 3.9;
+                const umax = config.wsensor.bat.type[num] === 0 ? 4.5 : 3.9;
                 let batPercentage = (voltage - umin) * 100.0 / (umax - umin); 
                 if(batPercentage < 0) batPercentage = 0;
                 if(batPercentage > 100) batPercentage = 100;
@@ -58,7 +58,7 @@ const CardThingpeakSendData = (props: iCardSend) => {
             if(vl.validateBatteryADC(data.wsensor.bat[num])) {
                 const voltage = data.wsensor.bat[num] / (300.0 - config.wsensor.bat.k[num]);
                 const umin = 3.75;
-                const umax = config.wsensor.bat.type[num] == 0 ? 4.5 : 3.9;
+                const umax = config.wsensor.bat.type[num] === 0 ? 4.5 : 3.9;
                 const stp = (umax - umin) / 4;
                 let level = 0;
                 if(voltage < (umin + stp)) level = 1;

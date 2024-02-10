@@ -5,7 +5,6 @@ import hostUrl from "../atoms/hostUrl";
 import Card from "../atoms/card";
 import SelectSwitch from "../atoms/selectSwitch";
 import RangeInput from "../atoms/rangeInput";
-import Toggle from "../atoms/toggle";
 import { iConfig } from "../redux/configTypes";
 import { iDisplay } from "../interfaces";
 import * as cf from "../redux/slices/config";
@@ -56,14 +55,14 @@ const CardDisplayType = (props: iDisplay) => {
         { [`Nixie (6${i18n.t('tubes')})`]: 1000 },
         { [`Nixie (8${i18n.t('tubes')})`]: 1000 }
     ];
-    if(props.num == 1) types.splice(1, 1);
+    if(props.num === 1) types.splice(1, 1);
 
     let models: string[] = [];
     let consums: number[] = [];
 
     switch(config.display.type[props.num] + props.num) {
         case 1: 
-            if(props.num == 0) {
+            if(props.num === 0) {
                 models = lcd.map(d => Object.keys(d)[0]);
                 consums = lcd.map(d => Object.values(d)[0]);
             }
@@ -148,7 +147,7 @@ const CardDisplayType = (props: iDisplay) => {
                     {i18n.t('maximumDisplayCurrent')}:
                     <Indication error={false} 
                         value={String(
-                            config.display.type[props.num] + props.num == 2 
+                            config.display.type[props.num] + props.num === 2 
                                 ? (Math.round(consums[config.display.model[props.num]] 
                                     * config.display.brightness.max[props.num] 
                                     / 255
