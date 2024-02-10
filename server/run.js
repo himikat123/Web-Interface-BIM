@@ -27,6 +27,23 @@ app.post("/esp/saveConfig", (req, res) => {
     }, 2000);
 });
 
+app.post("/esp/defaultConfig", (req, res) => {
+    console.log('POST /esp/defaultConfig', req.query);
+    res.set('Access-Control-Allow-Origin', '*');
+    let data = req.body.replace('config:', '');
+    console.log(data, typeof data, data.length);
+    setTimeout(() => {
+        if(data == 'default') {
+            const defaultConfigFile = path.join(__dirname, '..', 'public', 'defaultConfig.json');
+            const configFile = path.join(__dirname, '..', 'public', 'config.json');
+            fs.copyFile(defaultConfigFile, configFile, err => {
+                if(err) console.log(err);
+            });
+        }
+        res.send("OK");
+    }, 2000);
+});
+
 app.get('/data.json', (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
     res.send(JSON.stringify(data()));

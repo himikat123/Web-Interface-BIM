@@ -24,6 +24,7 @@ import SendThingspeak from './pages/sendThingspeak';
 import SendNarodmon from './pages/sendNarodmon';
 import Language from './pages/language';
 import Backup from './pages/backup';
+import Default from './pages/default';
 import Username from './pages/username';
 import { changeLanguage } from './i18n/main';
 import { iConfig } from './redux/configTypes';
@@ -104,6 +105,7 @@ function App() {
                 <Route path='/sendnarodmon'   element={ <SendNarodmon /> }>      </Route>
                 <Route path="/language"       element={ <Language /> }>          </Route>
                 <Route path="/backup"         element={ <Backup /> }>            </Route>
+                <Route path="/default"        element={ <Default /> }>           </Route> 
                 <Route path="/username"       element={ <Username /> }>          </Route>
                 <Route path="/*"              element={ <PageNotFound /> }>      </Route>
             </Routes>}
