@@ -1,11 +1,20 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const data = require('./data');
 
 app.use(bodyParser.text({ type: "*/*" }));
+
+const corsConf = {
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 204
+}  
+app.use(cors(corsConf));
 
 app.get('/esp/restart', (req, res) => {
     console.log('GET /esp/restart', req.query);

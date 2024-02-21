@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from 'react-redux';
+import axios from "axios";
 import i18n from '../i18n/main';
 import Button from "../atoms/button";
 import ModalRestart from "../pages/modalRestart";
@@ -24,32 +25,40 @@ const FooterButtons = (props: iFooterButtons) => {
             setSaveColor('yellow');
             setSaveButton('saving');
             
-            fetch(`${hostUrl()}/esp/${props.passChange ? 'changePass' : 'saveConfig'}`, { 
+            const cfg = new URLSearchParams();
+            cfg.append('config', JSON.stringify(config).replace('"configState":"ok",', ''));
+
+            const pass = new URLSearchParams();
+            pass.append('oldPass', JSON.stringify(props.passChange?.old));
+            pass.append('newPass', JSON.stringify(props.passChange?.new));
+            
+            axios(`${hostUrl()}/esp/${props.passChange ? 'changePass' : 'saveConfig'}`, {
                 method: 'post',
                 headers: {
-                    'Content-Type': 'text/plain'
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Headers': '*',
+                    'Access-Control-Allow-Credentials': 'true'
                 },
-                body: (props.passChange
-                    ? 'oldPass=' + props.passChange.old + '&newPass=' + props.passChange.new
-                    : 'config=' + JSON.stringify(config).replace('"configState":"ok",', '')) 
+                data: props.passChange
+                    ? `oldPass=${props.passChange.old}&newPass=${props.passChange.new}` 
+                    : `config=${JSON.stringify(config, null).replace('"configState":"ok",', '')}`
             })
-            .then(res => res.text())
-            .then((result) => {
-                if(result === 'OK') {
+            .then(res => {
+                if(res.data === 'OK') {
                     setSaveColor('green');
                     setSaveButton('saved');
                 }
                 else {
                     setSaveColor('red');
                     setSaveButton('notSaved');
-                    console.error(result);
+                    console.error(res.data);
                 }
-            }, 
-            (error) => {
+            })
+            .catch(err => {
                 setSaveColor('red');
                 setSaveButton('notSaved');
-                console.error(error);
-            })
+                console.error(err);
+            });
         }
     }
 
