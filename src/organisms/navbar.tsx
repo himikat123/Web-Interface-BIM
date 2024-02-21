@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import MenuMobileButton from "../molecules/menuMobileButton";
 import MenuItems from "../molecules/menuItems";
-import MenuThemaSwitch from "../atoms/menuThemeSwitch";
+import MenuThemeSwitch from "../atoms/menuThemeSwitch";
 import MenuUserDropdown from "../molecules/menuUserDropdown";
 import { ReactComponent as HamburgerSVG } from '../atoms/icons/hamburger.svg';
 import { ReactComponent as CloseSVG } from '../atoms/icons/close.svg';
@@ -48,7 +48,7 @@ const Navbar = () => {
                     </div>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
-                    <MenuThemaSwitch />
+                    <MenuThemeSwitch />
                     <MenuUserDropdown current={currentPath} />
                 </div>
             </div>
