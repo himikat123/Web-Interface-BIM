@@ -64,7 +64,7 @@ function Comfort() {
     if(tempLevel === 1 && humLevel < 1) comfort = i18n.t('tooHot');
     if(tempLevel === 2 && humLevel < 1) comfort = i18n.t('tooCold');
     if(tempLevel < 1 && humLevel === 1) comfort = i18n.t('tooHumid');
-    if(tempLevel < 0 && humLevel === 2) comfort = i18n.t('tooDry');
+    if(tempLevel < 1 && humLevel === 2) comfort = i18n.t('tooDry');
     if(tempLevel === 1 && humLevel === 1) comfort = i18n.t('hotAndHumid');
     if(tempLevel === 1 && humLevel === 2) comfort = i18n.t('hotAndDry');
     if(tempLevel === 2 && humLevel === 1) comfort = i18n.t('coldAndHumid');
