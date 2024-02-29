@@ -49,7 +49,7 @@ const RangeInput = (props: iRangeInput) => {
                 <ArrowLeft />
             </div>
             
-            <div className="ms-2 w-20 select-none text-right">
+            <div className="ms-2 w-24 select-none text-right">
                 {props.indication}
             </div>
         </div>
