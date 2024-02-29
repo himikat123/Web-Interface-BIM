@@ -57,7 +57,7 @@ const CardAlarm = (props: iAlarm) => {
             </div>
 
             <div className="mt-8 w-full flex justify-around">
-                {[...Array(7)].map((x, i) => <div key={'a' + i} className={i > 4 ? 'text-red-500' : ''}>
+                {[...Array(7)].map((x, i) => <div key={'a' + i} className={i > 5 ? 'text-red-500' : ''}>
                     {moment(`${i+1}-01-24`, 'DD-MM-YY').locale(locale).format('dd')}<br />
                     <input type="checkbox" 
                         checked={config.alarm.weekdays[props.num][i] === 1}
