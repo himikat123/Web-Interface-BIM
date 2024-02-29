@@ -37,8 +37,9 @@ const CardSoundListen = () => {
     }
 
     return <Card content={<>
+            <p className="mb-4">{i18n.t('listenToTheSoundOfTheClock')}</p>
             <div className="flex w-full items-center">
-                <SelectSwitch label={i18n.t('listenToTheSoundOfTheClock')}
+                <SelectSwitch label={i18n.t('melody')}
                     options={clockSounds}
                     value={hourly}
                     onChange={val => setHourly(val)}
@@ -47,8 +48,9 @@ const CardSoundListen = () => {
                 <ButtonStop />
             </div>
 
-            <div className="mt-8 flex w-full items-center">
-                <SelectSwitch label={i18n.t('listenToAlarmMelodies')}
+            <p className="mt-8 mb-4">{i18n.t('listenToAlarmMelodies')}</p>
+            <div className="flex w-full items-center">
+                <SelectSwitch label={i18n.t('melody')}
                     options={[...Array(20)].map((x, i) => `${i18n.t('melody')} ${i + 1}`)}
                     value={melody}
                     onChange={val => setMelody(val)}
