@@ -69,8 +69,6 @@ const WSensors = () => {
                         />
                     </div>
 
-                    <hr className="mt-8" />
-                    
                     {[...Array(5)].map((x, tempSensorNum: number) => <div key={'t' + tempSensorNum}>
                         {sensorCorrection(dataRelevance(wsensorNum), "t", 
                             config.wsensor.temp.corr[wsensorNum][tempSensorNum], 
@@ -172,13 +170,11 @@ const WSensors = () => {
                         hideUnnecessary,
                         data.wsensor.power.name[wsensorNum]
                     )}
-
-                    <hr className="mt-8" />
                 </div>
 
                 <div>
                     <RangeInput value={config.wsensor.bat.k[wsensorNum]}
-                        label={<div className="mt-8">
+                        label={<div className="mt-4">
                             {i18n.t('batteryVoltage')}:
                             <Indication error={dataRelevance(wsensorNum)} 
                                 value={<>
