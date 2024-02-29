@@ -193,6 +193,7 @@
     "matrices4": "4 8x8-Matrizen",
     "tubes": " Röhren",
     "withSeconds": "mit Sekunden",
+    "withMilliSeconds": "mit Millisekunden",
     "withoutSeconds": "keine Sekunden",
     "points": "Punkte",
     "dashes": "Striche",

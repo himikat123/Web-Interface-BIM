@@ -193,6 +193,7 @@
     "matrices4": "4 matryce 8x8",
     "tubes": " lampy",
     "withSeconds": "z sekundami",
+    "withMilliSeconds": "z milisekundami",
     "withoutSeconds": "żadnych sekund",
     "points": "zwrotnica",
     "dashes": "kreski",

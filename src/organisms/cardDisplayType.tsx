@@ -37,7 +37,8 @@ const CardDisplayType = (props: iDisplay) => {
         { [`MAX7219 (8${i18n.t('digits')}, ${i18n.t('withoutSeconds')}, ${i18n.t('points')})`]: 170 },
         { [`MAX7219 (8${i18n.t('digits')}, ${i18n.t('withoutSeconds')}, ${i18n.t('dashes')})`]: 170 },
         { [`MAX7219 (8${i18n.t('digits')}, ${i18n.t('withSeconds')}, ${i18n.t('points')})`]: 170 },
-        { [`MAX7219 (8${i18n.t('digits')}, ${i18n.t('withSeconds')}, ${i18n.t('dashes')})`]: 170 }
+        { [`MAX7219 (8${i18n.t('digits')}, ${i18n.t('withSeconds')}, ${i18n.t('dashes')})`]: 170 },
+        { [`MAX7219 (8${i18n.t('digits')}, ${i18n.t('withMilliSeconds')}, ${i18n.t('points')})`]: 170 }
     ];
     const matrix = [
         { [`MAX7219 (${i18n.t('matrices4')}, ${i18n.t('withoutSeconds')}, ${i18n.t('points')})`]: 680 }
@@ -46,9 +47,12 @@ const CardDisplayType = (props: iDisplay) => {
         { [`WS2812b (4${i18n.t('digits')}, ${i18n.t('withoutSeconds')}, 1 ${i18n.t('ledPerSegment')})`]: 1800 },
         { [`WS2812b (4${i18n.t('digits')}, ${i18n.t('withoutSeconds')}, 2 ${i18n.t('ledsPerSegment')})`]: 3480 },
         { [`WS2812b (4${i18n.t('digits')}, ${i18n.t('withoutSeconds')}, 3 ${i18n.t('ledsPerSegment')})`]: 5160 },
-        { [`WS2812b (6${i18n.t('digits')}, ${i18n.t('withSeconds')}, 1 ${i18n.t('ledPerSegment')})`]: 2760 },
-        { [`WS2812b (6${i18n.t('digits')}, ${i18n.t('withSeconds')}, 2 ${i18n.t('ledsPerSegment')})`]: 5280 },
-        { [`WS2812b (6${i18n.t('digits')}, ${i18n.t('withSeconds')}, 3 ${i18n.t('ledsPerSegment')})`]: 7800 }
+        //{ [`WS2812b (6${i18n.t('digits')}, ${i18n.t('withSeconds')}, 1 ${i18n.t('ledPerSegment')})`]: 2760 },
+        //{ [`WS2812b (6${i18n.t('digits')}, ${i18n.t('withSeconds')}, 2 ${i18n.t('ledsPerSegment')})`]: 5280 },
+        //{ [`WS2812b (6${i18n.t('digits')}, ${i18n.t('withSeconds')}, 3 ${i18n.t('ledsPerSegment')})`]: 7800 },
+        //{ [`WS2812b (8${i18n.t('digits')}, ${i18n.t('withMilliSeconds')}, 1 ${i18n.t('ledPerSegment')})`]: 3720 },
+        //{ [`WS2812b (8${i18n.t('digits')}, ${i18n.t('withMilliSeconds')}, 2 ${i18n.t('ledsPerSegment')})`]: 7080 },
+        //{ [`WS2812b (8${i18n.t('digits')}, ${i18n.t('withMilliSeconds')}, 3 ${i18n.t('ledsPerSegment')})`]: 10440 }
     ];
     const nixie = [
         { [`Nixie (4${i18n.t('tubes')})`]: 1000 },

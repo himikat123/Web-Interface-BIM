@@ -193,6 +193,7 @@
     "matrices4": "4 матрицы 8x8",
     "tubes": "-ламповый",
     "withSeconds": "с секундами",
+    "withMilliSeconds": "с миллисекундами",
     "withoutSeconds": "без секунд",
     "points": "точки",
     "dashes": "чёрточки",
