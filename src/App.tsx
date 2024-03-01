@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import axios from 'axios';
 import { Route, Routes } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux';
 import hostUrl from './atoms/hostUrl';
@@ -39,36 +40,32 @@ function App() {
     const dataState = useSelector((stateData: iData) => stateData.data.dataState);
 
     useEffect(() => {
-        fetch("./config.json")
-        .then(res => res.json())
-        .then((result) => {
+        axios("./config.json")
+        .then(res => {
             dispatch(configStateChange('ok'));
-            dispatch(setConfigState(result));
-            changeLanguage(result.lang);
-            localStorage.setItem('lang', result.lang);
-        },
-            (error) => {
-                dispatch(configStateChange('error'));
-                console.error(error);
-            }
-        )
+            dispatch(setConfigState(res.data));
+            changeLanguage(res.data.lang);
+            localStorage.setItem('lang', res.data.lang);
+        })
+        .catch(err => {
+            dispatch(configStateChange('error'));
+            console.error(err);
+        })
     }, [dispatch]);
     
     useEffect(() => {
         let dataFetchInterval: NodeJS.Timeout;
 
         const fetchData = () => {
-            fetch(`${hostUrl()}/data.json`)
-            .then(res => res.json())
-            .then((result) => {
+            axios(`${hostUrl()}/data.json`)
+            .then((res) => {
                 dispatch(dataStateChange('ok'));
-                dispatch(setDataState(result));
-            },
-                (error) => {
-                    dispatch(dataStateChange('error'));
-                    console.error(error);
-                }
-            )
+                dispatch(setDataState(res.data));
+            })
+            .catch(err => {
+                dispatch(dataStateChange('error'));
+                console.error(err);
+            })
         }
 
         if(configState === 'ok') {
