@@ -14,7 +14,7 @@ gulp.task('inline', function() {
                     mangle: false
                 });
             },
-            css: [minifyCss({level: {1: {specialComments: 0}}}), autoprefixer],
+            css: [/*minifyCss({level: {1: {specialComments: 0}}}), */autoprefixer],
         }))
         .pipe(gulp.dest('build/')
     );
