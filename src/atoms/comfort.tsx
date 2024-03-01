@@ -21,7 +21,7 @@ function Comfort() {
             break;
         case 3: // temperature from thingspeak
             if(vl.ThingspeakDataRelevance())
-                temp = data.thing.data[config.comfort.temp.thing];
+                temp = data.thing?.data ? data.thing.data[config.comfort.temp.thing] : -40400;
             break;
         case 4: temp = data.bme280.temp + config.sensors.bme280.t; break; // temperature from BME280
         case 5: temp = data.bmp180.temp + config.sensors.bmp180.t; break; // temperature from BMP180
@@ -39,7 +39,7 @@ function Comfort() {
             break;
         case 3: // humidity from thingspeak
             if(vl.ThingspeakDataRelevance())
-                hum = data.thing.data[config.comfort.hum.thing];
+                hum = data.thing?.data ? data.thing.data[config.comfort.hum.thing] : -40400;
             break;
         case 4: hum = data.bme280.hum + config.sensors.bme280.h; break; // humidity from BME280
         case 5: hum = data.sht21.hum + config.sensors.sht21.h; break; // humidity from SHT21

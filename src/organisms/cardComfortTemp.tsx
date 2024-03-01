@@ -42,7 +42,7 @@ const CardComfortTemp = () => {
     
     let things: string[] = [];
     for(let i=0; i<8; i++) things.push(`${i18n.t('field')} ${i + 1} (${vl.ThingspeakDataRelevance() 
-        ? vl.validateThingspeak(data.thing.data[i]) ? data.thing.data[i] : '--' 
+        ? vl.validateThingspeak(data.thing?.data ? data.thing?.data[i] : -40400) ? data.thing?.data ? data.thing?.data[i] : '--' : '--' 
         : i18n.t('dataExpired')})`
     );
 
@@ -53,7 +53,7 @@ const CardComfortTemp = () => {
             temp = data.wsensor.temp.data[config.comfort.temp.sens][config.comfort.temp.wsensNum] + config.wsensor.temp.corr[config.comfort.temp.wsensNum][config.comfort.temp.sens];
             break;
         case 3: // temperature from thingspeak
-            temp = data.thing.data[config.comfort.temp.thing];
+            temp = data.thing?.data ? data.thing?.data[config.comfort.temp.thing] : -40400;
             break;
         case 4: temp = data.bme280.temp + config.sensors.bme280.t; break; // temperature from BME280
         case 5: temp = data.bmp180.temp + config.sensors.bmp180.t; break; // temperature from BMP180

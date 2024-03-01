@@ -44,7 +44,7 @@ const CardDisplayBatLevel = () => {
     let things: string[] = [];
     for(let i=0; i<8; i++) {
         things.push(`${i18n.t('field')} ${i + 1} (${vl.ThingspeakDataRelevance() 
-            ? vl.validateThingspeak(data.thing.data[i]) ? data.thing.data[i] : '--' 
+            ? vl.validateThingspeak(data.thing?.data ? data.thing?.data[i] : -40400) ? data.thing?.data ? data.thing?.data[i] : '--' : '--' 
             : i18n.t('dataExpired')})`
         );
     }

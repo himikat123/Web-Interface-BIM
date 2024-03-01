@@ -40,7 +40,7 @@ const CardComfortHum = () => {
     
     let things: string[] = [];
     for(let i=0; i<8; i++) things.push(`${i18n.t('field')} ${i + 1} (${vl.ThingspeakDataRelevance() 
-        ? vl.validateThingspeak(data.thing.data[i]) ? data.thing.data[i] : '--' 
+        ? vl.validateThingspeak(data.thing?.data ? data.thing?.data[i] : -40400) ? data.thing?.data ? data.thing?.data[i] : '--' : '--' 
         : i18n.t('dataExpired')})`
     );
 
@@ -51,7 +51,7 @@ const CardComfortHum = () => {
             hum = data.wsensor.hum.data[config.comfort.hum.wsensNum] + config.wsensor.hum.corr[config.comfort.temp.wsensNum];
             break;
         case 3: // humidity from thingspeak
-            hum = data.thing.data[config.comfort.hum.thing];
+            hum = data.thing?.data ? data.thing?.data[config.comfort.hum.thing] : -40400;
             break;
         case 4: hum = data.bme280.hum + config.sensors.bme280.h; break; // humidity from BME280
         case 5: hum = data.sht21.hum + config.sensors.sht21.h; break; // humidity from SHT21

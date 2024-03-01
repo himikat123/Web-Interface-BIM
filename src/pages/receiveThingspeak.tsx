@@ -49,13 +49,15 @@ const ReceiveThingspeak = () => {
                         {i18n.t('dataFrom')}:
                     </div>
                     <div className={"table-cell ps-1 " + (vl.ThingspeakDataRelevance() ? "text-blue-700 dark:text-blue-400" : "text-red-700 dark:text-red-400")}>
-                        <Moment unix format="HH:mm:ss DD.MM.YYYY">
-                            {data.thing.time > 1700000000 ? data.thing.time : '--'}
-                        </Moment> (
-                            {config.lang === 'de' && i18n.t('ago') + ' '}
-                            <Moment locale={locale} unix fromNow ago>{data.thing.time}</Moment>
-                            {config.lang !== 'de' && ' ' + i18n.t('ago')}
-                        ) - {!vl.ThingspeakDataRelevance() && i18n.t('dataExpired')}
+                        {(data.thing?.time && data.thing.time > 1700000000) ? <>
+                            <Moment unix format="HH:mm:ss DD.MM.YYYY">
+                                {data.thing.time}
+                            </Moment> (
+                                {config.lang === 'de' && i18n.t('ago') + ' '}
+                                <Moment locale={locale} unix fromNow ago>{data.thing.time}</Moment>
+                                {config.lang !== 'de' && ' ' + i18n.t('ago')}
+                            ) {!vl.ThingspeakDataRelevance() && <> - {i18n.t('dataExpired')}</>}
+                        </> : '???'}
                     </div>
                 </div>
 
@@ -65,7 +67,7 @@ const ReceiveThingspeak = () => {
                         {`${i18n.t('field')} ${i + 1}:`}
                     </div>
                     <div className={"table-cell ps-1 " + (vl.ThingspeakDataRelevance() ? "text-blue-700 dark:text-blue-400" : "text-red-700 dark:text-red-400")}>
-                        {vl.validateThingspeak(data.thing.data[i]) ? data.thing.data[i] : '--'}
+                        {vl.validateThingspeak(data.thing?.data ? data.thing.data[i] : -40400) ? data.thing?.data ? data.thing?.data[i] : '--' : '--'}
                     </div>
                 </div>)}
             </div>}

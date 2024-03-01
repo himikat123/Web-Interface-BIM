@@ -76,5 +76,9 @@ export const WsensorDataRelevance = (num: number) => {
 export const ThingspeakDataRelevance = () => {
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
-    return !((Math.floor(Date.now() / 1000) - data.thing.time > config.thingspeakReceive.expire * 60) && data.thing.time > 0);
+    let result = false;
+    if(data.thing?.time) {
+        result = !((Math.floor(Date.now() / 1000) - data.thing.time > config.thingspeakReceive.expire * 60) && data.thing.time > 0);
+    }
+    return result;
 }
