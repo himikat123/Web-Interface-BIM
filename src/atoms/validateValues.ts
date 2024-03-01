@@ -63,6 +63,10 @@ export const validateCO2 = (co2: number): boolean => {
     return (co2 >= 400 && co2 <= 2000); 
 }
 
+export const validateThingspeak = (thng: number): boolean => {
+    return (thng >= -100 && thng <= 120000);
+}
+
 export const WsensorDataRelevance = (num: number) => {
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
