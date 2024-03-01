@@ -48,7 +48,7 @@ const SendThingspeak = () => {
                 onChange={val => dispatch(cf.thingspeakSendWrkeyChange(val.target.value))}
             />} />
 
-            {[...Array(8)].map((x, i) => <CardThingspeakSendData num={i} />)}
+            {[...Array(8)].map((x, i) => <CardThingspeakSendData key={i} num={i} />)}
         </>}
     </>
 
