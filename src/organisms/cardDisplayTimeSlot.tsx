@@ -102,7 +102,10 @@ const CardDisplayTimeSlot = (props: iDisplayTimeSlot) => {
     }
 
     let things: string[] = [];
-    for(let i=0; i<8; i++) things.push(`${i18n.t('field')} ${i + 1} (${vl.ThingspeakDataRelevance() ? data.thing.data[i] : i18n.t('dataExpired')})`);
+    for(let i=0; i<8; i++) things.push(`${i18n.t('field')} ${i + 1} (${vl.ThingspeakDataRelevance() 
+        ? vl.validateThingspeak(data.thing.data[i]) ? data.thing.data[i] : '--'
+        : i18n.t('dataExpired')})`
+    );
 
     const sendSlotColor = (val: string) => {
         let url = `${hostUrl()}/esp/color`;

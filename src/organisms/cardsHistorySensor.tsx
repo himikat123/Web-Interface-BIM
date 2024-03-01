@@ -144,7 +144,10 @@ const CardsHistorySensor = () => {
     ];
 
     let things: string[] = [];
-    for(let i=0; i<8; i++) things.push(`${i18n.t('field')} ${i + 1} (${vl.ThingspeakDataRelevance() ? data.thing.data[i] : i18n.t('dataExpired')})`);
+    for(let i=0; i<8; i++) things.push(`${i18n.t('field')} ${i + 1} (${vl.ThingspeakDataRelevance() 
+        ? vl.validateThingspeak(data.thing.data[i]) ? data.thing.data[i] : '--'
+        : i18n.t('dataExpired')})`
+    );
 
     const bgColor = window.document.documentElement.classList[0] === 'dark' ? '000000' : 'FFFFFF';
     const chartColors = ['FFCC00', '00FFFF', 'FF00FF', 'FFCC00', '00FFFF', 'FF7700', '0000FF'];
