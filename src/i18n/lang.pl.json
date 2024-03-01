@@ -89,6 +89,7 @@
     "power": "Moc",
     "energy": "Energia",
     "frequency": "Częstotliwość",
+    "air": "Powietrze",
     "indexForAirQuality": "Indeks jakości powietrza",
     "airQuality": "Jakość powietrza",
     "sensorAccuracy": "Dokładność czujnika",

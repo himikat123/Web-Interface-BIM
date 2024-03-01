@@ -89,6 +89,7 @@
     "power": "Leistung",
     "energy": "Energie",
     "frequency": "Frequenz",
+    "air": "Luft",
     "indexForAirQuality": "Index für Luftqualität",
     "airQuality": "Luftqualität",
     "sensorAccuracy": "Sensorgenauigkeit",

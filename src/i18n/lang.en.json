@@ -89,6 +89,7 @@
     "power": "Power",
     "energy": "Energy",
     "frequency": "Frequency",
+    "air": "Air",
     "indexForAirQuality": "Index for Air Quality",
     "airQuality": "Air Quality",
     "sensorAccuracy": "Sensor accuracy",

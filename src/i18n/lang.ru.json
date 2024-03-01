@@ -89,6 +89,7 @@
     "power": "Мощность",
     "energy": "Энергия",
     "frequency": "Частота",
+    "air": "Воздух",
     "indexForAirQuality": "Индекс качества воздуха",
     "airQuality": "Качество воздуха",
     "sensorAccuracy": "Точность датчика",

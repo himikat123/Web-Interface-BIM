@@ -67,7 +67,7 @@ const CardDisplayVoltage = () => {
     for(let i=0; i<8; i++) things.push(`${i18n.t('field')} ${i + 1} (${vl.ThingspeakDataRelevance() ? data.thing.data[i] : i18n.t('dataExpired')})`);
 
     return <>
-        <Card header={<div>{`${i18n.t('voltage')} / ${i18n.t('indexForAirQuality')} / `}<div dangerouslySetInnerHTML={{ __html: i18n.t('CO2Level') }} /></div>}
+        <Card header={<div>{`${i18n.t('voltage')} / ${i18n.t('air')}`}</div>}
             content={<>
                 {/* Sensor type */}
                 <SelectSwitch label={i18n.t('dataSource.singular')}
