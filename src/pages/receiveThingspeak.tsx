@@ -43,31 +43,32 @@ const ReceiveThingspeak = () => {
                 checked={config.thingspeakReceive.period > 0 ? 1 : 0}
                 onChange={() => dispatch(cf.thingspeakReceivePeriodChange(config.thingspeakReceive.period > 0 ? 0 : 5))}
             />
-            <div className="mt-8 table">
+            {config.thingspeakReceive.period > 0 && <div className="mt-8 table">
                 <div className="table-row">
                     <div className="table-cell">
                         {i18n.t('dataFrom')}:
                     </div>
-                    <div className="table-cell ps-1 text-blue-700 dark:text-blue-400">
+                    <div className={"table-cell ps-1 " + (vl.ThingspeakDataRelevance() ? "text-blue-700 dark:text-blue-400" : "text-red-700 dark:text-red-400")}>
                         <Moment unix format="HH:mm:ss DD.MM.YYYY">
-                            {data.thing.time > 11111111 ? data.thing.time : '--'}
+                            {data.thing.time > 1700000000 ? data.thing.time : '--'}
                         </Moment> (
                             {config.lang === 'de' && i18n.t('ago') + ' '}
                             <Moment locale={locale} unix fromNow ago>{data.thing.time}</Moment>
                             {config.lang !== 'de' && ' ' + i18n.t('ago')}
-                        )
+                        ) - {!vl.ThingspeakDataRelevance() && i18n.t('dataExpired')}
                     </div>
                 </div>
-                <div className="table-row h-2"></div>
+
+                <div className="table-row h-2" />
                 {[...Array(8)].map((x, i) => <div key={i} className="table-row">
                     <div className="table-cell">
                         {`${i18n.t('field')} ${i + 1}:`}
                     </div>
-                    <div className="table-cell ps-1 text-blue-700 dark:text-blue-400">
+                    <div className={"table-cell ps-1 " + (vl.ThingspeakDataRelevance() ? "text-blue-700 dark:text-blue-400" : "text-red-700 dark:text-red-400")}>
                         {vl.validateThingspeak(data.thing.data[i]) ? data.thing.data[i] : '--'}
                     </div>
                 </div>)}
-            </div>
+            </div>}
         </>} />
 
         {config.thingspeakReceive.period > 0 && <>
