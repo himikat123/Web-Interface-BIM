@@ -294,7 +294,8 @@
         "tip0": "Dieses Feld darf nicht leer sein",
         "tip1": "Nur englische Buchstaben, Zahlen und Symbole *)_.@$%(",
         "tip2": "Nur englische Buchstaben, Zahlen, Leerzeichen und Symbole *)_.@$%(",
-        "tip3": "Geben Sie eine Zahl von {min} bis {max} ein"
+        "tip3": "Geben Sie eine Zahl von {min} bis {max} ein",
+        "tip4": "Nutzen Sie verschiedene Kanäle, um die Wetterhistorie zu speichern und Daten an Thingspeak zu senden"
     },
     "comfortable": "Gemütlich",
     "tooHot": "Zu heiß",

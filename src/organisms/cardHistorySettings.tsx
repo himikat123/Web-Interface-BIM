@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../atoms/card";
@@ -10,8 +10,14 @@ import { historyValidChange } from "../redux/slices/valid";
 import * as cf from "../redux/slices/config";
 
 const CardHistorySettings = () => {
+    const [isValid, setIsValid] = useState<boolean[]>([]);
+
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
+
+    useEffect(() => {
+        dispatch(historyValidChange(!isValid.includes(false)));
+    });
 
     return <Card content={<>
         {/* History Repository */}
@@ -28,7 +34,11 @@ const CardHistorySettings = () => {
                 max={999}
                 label={i18n.t('periodMinutes')}
                 onChange={val => dispatch(cf.historyPriodChange(val))}
-                isValid={valid => dispatch(historyValidChange(valid))}
+                isValid={valid => {
+                    let nv = isValid;
+                    nv[0] = valid;
+                    setIsValid(nv);
+                }}
             />
         </div>
 
@@ -37,7 +47,14 @@ const CardHistorySettings = () => {
             <TextInput label="Channel ID" 
                 value={config.history.channelID}
                 maxLength={20}
+                pattern={[new RegExp(config.thingspeakSend.channelID.length ? config.thingspeakSend.channelID : "-"), false]}
+                tip={i18n.t('tips.tip4')}
                 onChange={val => dispatch(cf.historyChannelIDChange(val.target.value))}
+                isValid={(valid: boolean) => {
+                    let nv = isValid;
+                    nv[1] = valid;
+                    setIsValid(nv);
+                }}
             />
         </div>
 

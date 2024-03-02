@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import i18n from '../i18n/main';
 import { useSelector, useDispatch } from 'react-redux';
 import FourColumns from "../templates/fourColumns";
@@ -12,8 +12,14 @@ import { sendThingspeakValidChange } from "../redux/slices/valid";
 import * as cf from "../redux/slices/config";
 
 const SendThingspeak = () => {
+    const [isValid, setIsValid] = useState<boolean[]>([]);
+
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
+
+    useEffect(() => {
+        dispatch(sendThingspeakValidChange(!isValid.includes(false)));
+    });
 
     const content = <>
         {/* On/Off */}
@@ -29,7 +35,11 @@ const SendThingspeak = () => {
                 min={1}
                 max={999}
                 onChange={val => dispatch(cf.thingspeakSendPeriodChange(val))}
-                isValid={valid => dispatch(sendThingspeakValidChange(valid))}
+                isValid={(valid: boolean) => {
+                    let nv = isValid;
+                    nv[0] = valid;
+                    setIsValid(nv);
+                }}
             />
         } />}
 
@@ -38,7 +48,14 @@ const SendThingspeak = () => {
             <Card content={<TextInput label="Channel ID"
                 value={config.thingspeakSend.channelID}
                 maxLength={20}
+                pattern={[new RegExp(config.history.channelID.length ? config.history.channelID : "-"), false]}
+                tip={i18n.t('tips.tip4')}
                 onChange={val => dispatch(cf.thingspeakSendChannelIdChange(val.target.value))}
+                isValid={(valid: boolean) => {
+                    let nv = isValid;
+                    nv[1] = valid;
+                    setIsValid(nv);
+                }}
             />} />
 
             {/* Write API Key */}
