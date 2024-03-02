@@ -82,7 +82,7 @@ const ReceiveThingspeak = () => {
                     max={999}
                     onChange={val => {
                         dispatch(cf.thingspeakReceivePeriodChange(val));
-                        dispatch(cf.thingspeakReceiveExpireChange(Math.min(config.thingspeakReceive.expire, val)))
+                        dispatch(cf.thingspeakReceiveExpireChange(Math.max(config.thingspeakReceive.expire, val)))
                     }}
                     isValid={valid => {
                         let nv = isValid;
@@ -95,8 +95,8 @@ const ReceiveThingspeak = () => {
                 <div className="mt-8">
                     <NumberInput label={i18n.t('dataExpirationTime')}
                         value={config.thingspeakReceive.expire}
-                        min={1}
-                        max={config.thingspeakReceive.period}
+                        min={config.thingspeakReceive.period}
+                        max={999}
                         onChange={val => dispatch(cf.thingspeakReceiveExpireChange(val))}
                         isValid={valid => {
                             let nv = isValid;
