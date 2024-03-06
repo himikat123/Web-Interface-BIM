@@ -118,10 +118,20 @@
         "w": "W",
         "wh": "Wh",
         "hz": "Hz",
-        "kb": "kB",
         "bar": {
             "singular": "bar",
             "plural": "bars"
+        }
+    },
+    "number": {
+        "human": {
+            "storage_units": {
+                "units": {
+                    "byte": "bytes",
+                    "kb": "kB",
+                    "mb": "MB"
+                }
+            }
         }
     },
     "check": "Check",
@@ -317,5 +327,6 @@
     "dryer": "Dehumidifier",
     "hysteresis": "Hysteresis",
     "soundNotification": "Sound notification",
-    "receivedData": "Received data"
+    "receivedData": "Received data",
+    "unsupportedFormat": "Unsupported format"
 }

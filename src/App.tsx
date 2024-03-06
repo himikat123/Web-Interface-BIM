@@ -26,6 +26,7 @@ import SendNarodmon from './pages/sendNarodmon';
 import Language from './pages/language';
 import Backup from './pages/backup';
 import Default from './pages/default';
+import Filesystem from './pages/filesystem';
 import Username from './pages/username';
 import Password from './pages/password';
 import { changeLanguage } from './i18n/main';
@@ -103,7 +104,8 @@ function App() {
                 <Route path='/sendnarodmon'   element={ <SendNarodmon /> }>      </Route>
                 <Route path="/language"       element={ <Language /> }>          </Route>
                 <Route path="/backup"         element={ <Backup /> }>            </Route>
-                <Route path="/default"        element={ <Default /> }>           </Route> 
+                <Route path="/default"        element={ <Default /> }>           </Route>
+                <Route path="/filesystem"     element={ <Filesystem /> }>        </Route> 
                 <Route path="/username"       element={ <Username /> }>          </Route>
                 <Route path="/userpass"       element={ <Password /> }>          </Route>
                 <Route path="/*"              element={ <PageNotFound /> }>      </Route>

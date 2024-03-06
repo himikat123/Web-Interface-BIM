@@ -1,8 +1,25 @@
+const fs = require('fs');
+const path = require('path');
+
 const random = (min, max) => { 
     max *= 100;
     min *= 100;
     return Math.floor(Math.random() * (max - min + 1) + min) / 100;
 }
+
+const getFiles = (dir, files_) => {
+	files_ = files_ || [];
+    const files = fs.readdirSync(dir);
+    for(let i in files) {
+        let name = dir + '/' + files[i];
+        if(fs.statSync(name).isDirectory()) getFiles(name, files_);
+        else {
+            if(files[i] !== 'user.us' && files[i] !== 'data.json_')
+                files_.push({name: name.split('public')[1], size: fs.statSync(name).size});
+        }
+    }
+    return files_;
+};
 
 const data = () => {
     obj = {
@@ -150,26 +167,9 @@ const data = () => {
             data: [random(-5, -4), random(56, 59), random(768, 777), random(403, 407), -40400.0, random(99, 102), random(1359, 1362), random(-12, -10)]
         },
         fs: { 
-            total: 2564.4,
-            free: 563.7,
-            list: [
-                {
-                    name: "index.html.gz",
-                    size: 536702
-                },
-                {
-                    name: "config.json",
-                    size: 2983
-                },
-                {
-                    name: "alarm.json",
-                    size: 823
-                },
-                {
-                    name: "icon48.png",
-                    size: 20000
-                }
-            ]
+            total: 2056988,
+            free: 563727,
+            list: getFiles(path.join(__dirname, '../public'))
         }
     }
 

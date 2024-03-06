@@ -259,3 +259,17 @@ export type iSensors = Array<iSensor>;
 export interface iCardSend {
     num: number
 }
+
+export interface iFile {
+    name: string,
+    size?: number | undefined,
+    type: string
+}
+
+export type iFilelist = Array<iFile>;
+
+export interface iModalFileViewer {
+    path: string,
+    selected: string,
+    modalClose(): void
+}

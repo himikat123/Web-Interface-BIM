@@ -20,7 +20,7 @@ const Modal = (props: iModal) => {
             </div>
 
             {/* body */}
-            <div className="p-4 border-b border-gray-500 overflow-auto" style={{maxHeight: 'calc(100vh - 230px)'}}>
+            <div className="p-4 border-b border-gray-500 overflow-auto" style={{maxHeight: 'calc(100vh - 216px)'}}>
                 {props.content}
             </div>
 

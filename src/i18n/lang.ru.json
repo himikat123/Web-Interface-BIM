@@ -118,10 +118,20 @@
         "w": "Вт",
         "wh": "Вт/ч",
         "hz": "Гц",
-        "kb": "кБ",
         "bar": {
             "singular": "палка",
             "plural": "палки"
+        }
+    },
+    "number": {
+        "human": {
+            "storage_units": {
+                "units": {
+                    "byte": "байт",
+                    "kb": "кБ",
+                    "mb": "МБ"
+                }
+            }
         }
     },
     "check": "Проверить",
@@ -317,5 +327,6 @@
     "dryer": "Осушитель",
     "hysteresis": "Гистерезис",
     "soundNotification": "Звуковое оповещение",
-    "receivedData": "Принятые данные"
+    "receivedData": "Принятые данные",
+    "unsupportedFormat": "Неподдерживаемый формат"
 }

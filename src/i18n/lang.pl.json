@@ -118,10 +118,20 @@
         "w": "W",
         "wh": "Wh",
         "hz": "Hz",
-        "kb": "KB",
         "bar": {
             "singular": "pasek",
             "plural": "paski"
+        }
+    },
+    "number": {
+        "human": {
+            "storage_units": {
+                "units": {
+                    "byte": "bajtów",
+                    "kb": "kB",
+                    "mb": "MB"
+                }
+            }
         }
     },
     "check": "Sprawdź",
@@ -317,5 +327,6 @@
     "dryer": "Osuszacz",
     "hysteresis": "Histereza",
     "soundNotification": "Powiadomienie dźwiękowe",
-    "receivedData": "Otrzymane dane"
+    "receivedData": "Otrzymane dane",
+    "unsupportedFormat": "Format nie jest obsługiwany"
 }

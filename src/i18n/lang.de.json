@@ -118,10 +118,20 @@
         "w": "W",
         "wh": "Wh",
         "hz": "Hz",
-        "kb": "kB",
         "bar": {
             "singular": "Balken",
             "plural": "Balken"
+        }
+    },
+    "number": {
+        "human": {
+            "storage_units": {
+                "units": {
+                    "byte": "Byte",
+                    "kb": "kB",
+                    "mb": "MB"
+                }
+            }
         }
     },
     "check": "Überprüfen",
@@ -317,5 +327,6 @@
     "dryer": "Luftentfeuchter",
     "hysteresis": "Hysterese",
     "soundNotification": "Akustische Benachrichtigung",
-    "receivedData": "Empfangene Daten"
+    "receivedData": "Empfangene Daten",
+    "unsupportedFormat": "Nicht unterstütztes Format"
 }

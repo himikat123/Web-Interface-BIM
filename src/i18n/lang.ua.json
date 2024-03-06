@@ -118,10 +118,20 @@
         "w": "Вт",
         "wh": "Вт/год",
         "hz": "Гц",
-        "kb": "кБ",
         "bar": {
             "singular": "палиця",
             "plural": "палиці"
+        }
+    },
+    "number": {
+        "human": {
+            "storage_units": {
+                "units": {
+                    "byte": "байт",
+                    "kb": "кБ",
+                    "mb": "МБ"
+                }
+            }
         }
     },
     "check": "Перевірити",
@@ -317,5 +327,6 @@
     "dryer": "Осушувач",
     "hysteresis": "Гістерезис",
     "soundNotification": "Звукове сповіщення",
-    "receivedData": "Прийняті дані"
+    "receivedData": "Прийняті дані",
+    "unsupportedFormat": "Непідтримуваний формат"
 }
