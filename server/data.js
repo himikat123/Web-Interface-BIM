@@ -149,7 +149,7 @@ const data = () => {
                 data: [random(45, 55), random(450, 550)],
                 name: ["PZEM-004t", "PZEM-004t"]
             },
-            bat: [random(500, 550), random(250, 300)]
+            bat: [random(700, 850), random(750, 800)]
         },
         weather: {
             temp: random(-10, 10),

@@ -1,6 +1,7 @@
 import React from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
+import { BatLevel } from "../atoms/battery";
 import Card from "../atoms/card";
 import SelectSwitch from "../atoms/selectSwitch";
 import { iConfig } from "../redux/configTypes";
@@ -13,25 +14,6 @@ const CardDisplayBatLevel = () => {
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
 
-    const batLevel = (num: number) => {
-        if(vl.WsensorDataRelevance(num)) {
-            if(vl.validateBatteryADC(data.wsensor.bat[num])) {
-                const voltage = data.wsensor.bat[num] / (300.0 - config.wsensor.bat.k[num]);
-                const umin = 3.75;
-                const umax = config.wsensor.bat.type[num] === 0 ? 4.5 : 3.9;
-                const stp = (umax - umin) / 4;
-                let level = 0;
-                if(voltage < (umin + stp)) level = 1;
-                else if(voltage < (umin + stp * 2)) level = 2;
-                else if(voltage < (umin + stp * 3)) level = 3;
-                else level = 4;
-                return level.toFixed() + ' ' + i18n.t(`units.bar.${level === 1 ? 'singular' : 'plural'}`);
-            }
-            else return '--';
-        }
-        else return i18n.t('dataExpired');
-    }
-
     const sensors = [
         "--",
         i18n.t('wirelessSensor.singular'),
@@ -39,7 +21,7 @@ const CardDisplayBatLevel = () => {
     ];
 
     let wsensors: string[] = [];
-    for(let i=0; i<2; i++) wsensors.push(`${i18n.t('wirelessSensor.singular')} ${i} (${batLevel(i)})`);
+    for(let i=0; i<2; i++) wsensors.push(`${i18n.t('wirelessSensor.singular')} ${i} (${BatLevel(i)})`);
 
     let things: string[] = [];
     for(let i=0; i<8; i++) {

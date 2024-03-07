@@ -6,6 +6,7 @@ import 'moment/locale/ru';
 import 'moment/locale/pl';
 import 'moment/locale/uk';
 import { useSelector, useDispatch } from 'react-redux';
+import { BatVoltage, BatPercent, BatLevel } from "../atoms/battery";
 import Card from "../atoms/card";
 import SelectSwitch from "../atoms/selectSwitch";
 import TextInput from "../atoms/textInput";
@@ -29,50 +30,6 @@ const CardNarodmonSendData = (props: iCardSend) => {
         default: locale = 'en'; break; 
     }
     
-    const batVoltage = (num: number) => {
-        if(vl.WsensorDataRelevance(num)) {
-            if(vl.validateBatteryADC(data.wsensor.bat[num]))
-                return (data.wsensor.bat[num] / (300.0 - config.wsensor.bat.k[num])).toFixed(2) + i18n.t('units.v');
-            else return '--';
-        }
-        else return i18n.t('dataExpired');
-    }
-
-    const batPercent =(num: number) => {
-        if(vl.WsensorDataRelevance(num)) {
-            if(vl.validateBatteryADC(data.wsensor.bat[num])) {
-                const voltage = data.wsensor.bat[num] / (300.0 - config.wsensor.bat.k[num]);
-                const umin = 3.75;
-                const umax = config.wsensor.bat.type[num] === 0 ? 4.5 : 3.9;
-                let batPercentage = (voltage - umin) * 100.0 / (umax - umin); 
-                if(batPercentage < 0) batPercentage = 0;
-                if(batPercentage > 100) batPercentage = 100;
-                return batPercentage.toFixed() + '%';
-            }
-            else return '--';
-        }
-        else return i18n.t('dataExpired');
-    }
-
-    const batLevel = (num: number) => {
-        if(vl.WsensorDataRelevance(num)) {
-            if(vl.validateBatteryADC(data.wsensor.bat[num])) {
-                const voltage = data.wsensor.bat[num] / (300.0 - config.wsensor.bat.k[num]);
-                const umin = 3.75;
-                const umax = config.wsensor.bat.type[num] === 0 ? 4.5 : 3.9;
-                const stp = (umax - umin) / 4;
-                let level = 0;
-                if(voltage < (umin + stp)) level = 1;
-                else if(voltage < (umin + stp * 2)) level = 2;
-                else if(voltage < (umin + stp * 3)) level = 3;
-                else level = 4;
-                return level.toFixed() + ' ' + i18n.t(`units.bar.${level === 1 ? 'singular' : 'plural'}`);
-            }
-            else return '--';
-        }
-        else return i18n.t('dataExpired');
-    }
-
     const sensors: iSensors = [
         {title: '--', types: [], data: []},
         {title: i18n.t('forecast'), types: ['t', 'h', 'p'], data: [data.weather.temp, data.weather.hum, data.weather.pres]},
@@ -172,9 +129,9 @@ const CardNarodmonSendData = (props: iCardSend) => {
             : '--' 
         : i18n.t('dataExpired')})`
     );
-    wTypes.push(`${i18n.t('batteryVoltage')} (${batVoltage(config.narodmonSend.wsensors[props.num])})`);
-    wTypes.push(`${i18n.t('batteryPercentage')} (${batPercent(config.narodmonSend.wsensors[props.num])})`);
-    wTypes.push(`${i18n.t('batteryLevel')} (${batLevel(config.narodmonSend.wsensors[props.num])})`);
+    wTypes.push(`${i18n.t('batteryVoltage')} (${BatVoltage(config.narodmonSend.wsensors[props.num])})`);
+    wTypes.push(`${i18n.t('batteryPercentage')} (${BatPercent(config.narodmonSend.wsensors[props.num])})`);
+    wTypes.push(`${i18n.t('batteryLevel')} (${BatLevel(config.narodmonSend.wsensors[props.num])})`);
     wTypes.push(`CO2 (${vl.WsensorDataRelevance(config.narodmonSend.wsensors[props.num]) 
         ? vl.validateLight(data.wsensor.co2.data[config.narodmonSend.wsensors[props.num]]) 
             ? ((data.wsensor.co2.data[config.narodmonSend.wsensors[props.num]] + config.wsensor.co2.corr[config.narodmonSend.wsensors[props.num]]).toFixed(2) + 'ppm') 

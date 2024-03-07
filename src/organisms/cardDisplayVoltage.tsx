@@ -1,6 +1,7 @@
 import React from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
+import { BatVoltage, BatPercent } from "../atoms/battery";
 import Card from "../atoms/card";
 import SelectSwitch from "../atoms/selectSwitch";
 import { iConfig } from "../redux/configTypes";
@@ -13,31 +14,6 @@ const CardDisplayVoltage = () => {
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
 
-    const batVoltage = (num: number) => {
-        if(vl.WsensorDataRelevance(num)) {
-            if(vl.validateBatteryADC(data.wsensor.bat[num]))
-                return (data.wsensor.bat[num] / (300.0 - config.wsensor.bat.k[num])).toFixed(2) + i18n.t('units.v');
-            else return '--';
-        }
-        else return i18n.t('dataExpired');
-    }
-
-    const batPercent =(num: number) => {
-        if(vl.WsensorDataRelevance(num)) {
-            if(vl.validateBatteryADC(data.wsensor.bat[num])) {
-                const voltage = data.wsensor.bat[num] / (300.0 - config.wsensor.bat.k[num]);
-                const umin = 3.75;
-                const umax = config.wsensor.bat.type[num] === 0 ? 4.5 : 3.9;
-                let batPercentage = (voltage - umin) * 100.0 / (umax - umin); 
-                if(batPercentage < 0) batPercentage = 0;
-                if(batPercentage > 100) batPercentage = 100;
-                return batPercentage.toFixed() + '%';
-            }
-            else return '--';
-        }
-        else return i18n.t('dataExpired');
-    }
-
     const sensors = [
         "--",
         i18n.t('wirelessSensor.singular'),
@@ -49,8 +25,8 @@ const CardDisplayVoltage = () => {
     for(let i=0; i<2; i++) wsensors.push(`${i18n.t('wirelessSensor.singular')} ${i}`);
 
     let wsensTypes = [
-        `${i18n.t('batteryVoltage')} (${batVoltage(config.display.source.volt.wsensNum)})`,
-        `${i18n.t('batteryPercentage')} (${batPercent(config.display.source.volt.wsensNum)})`,
+        `${i18n.t('batteryVoltage')} (${BatVoltage(config.display.source.volt.wsensNum)})`,
+        `${i18n.t('batteryPercentage')} (${BatPercent(config.display.source.volt.wsensNum)})`,
         `${i18n.t('voltage')} (${vl.WsensorDataRelevance(config.display.source.volt.wsensNum) 
             ? vl.validateHighVoltage(data.wsensor.voltage.data[config.display.source.volt.wsensNum]) 
                 ? ((data.wsensor.voltage.data[config.display.source.volt.wsensNum] + config.wsensor.volt.corr[config.display.source.volt.wsensNum]).toFixed(2) + i18n.t('units.v')) 
