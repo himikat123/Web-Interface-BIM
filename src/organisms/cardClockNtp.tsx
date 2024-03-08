@@ -17,16 +17,8 @@ import { clockValidChange } from "../redux/slices/valid";
 const CardClockNtp = () => {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
-
-    let locale = 'en';
-    switch(config.lang) {
-        case 'de': locale = 'de'; break;
-        case 'ru': locale = 'ru'; break;
-        case 'pl': locale = 'pl'; break;
-        case 'ua': locale = 'uk'; break;
-        default: locale = 'en'; break; 
-    }
-
+    const locale = config.lang === 'ua' ? 'uk' : config.lang;
+    
     return <Card content={<>
         <TextInput label={i18n.t('ntpServerAddress')}
             value={config.clock.ntp}

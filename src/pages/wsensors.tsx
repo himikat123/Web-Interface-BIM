@@ -26,16 +26,8 @@ const WSensors = () => {
     const data = useSelector((state: iData) => state.data);
     const [hideUnnecessary, setHideUnnecessary] = useState<boolean>(true);
     const [isValid, setIsValid] = useState<boolean[]>([]);
-
-    let locale = 'en';
-    switch(config.lang) {
-        case 'de': locale = 'de'; break;
-        case 'ru': locale = 'ru'; break;
-        case 'pl': locale = 'pl'; break;
-        case 'ua': locale = 'uk'; break;
-        default: locale = 'en'; break; 
-    }
-
+    const locale = config.lang === 'ua' ? 'uk' : config.lang;
+    
     useEffect(() => {
         dispatch(wsensorsValidChange(!isValid.includes(false)));
     });

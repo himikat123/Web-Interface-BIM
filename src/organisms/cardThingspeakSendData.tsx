@@ -19,15 +19,7 @@ const CardThingpeakSendData = (props: iCardSend) => {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
-    let locale = 'en';
-    
-    switch(config.lang) {
-        case 'de': locale = 'de'; break;
-        case 'ru': locale = 'ru'; break;
-        case 'pl': locale = 'pl'; break;
-        case 'ua': locale = 'uk'; break;
-        default: locale = 'en'; break; 
-    }
+    const locale = config.lang === 'ua' ? 'uk' : config.lang;
     
     const sensors: iSensors = [
         {title: '--', types: [], data: []},

@@ -20,15 +20,7 @@ import * as cf from "../redux/slices/config";
 const CardAlarm = (props: iAlarm) => {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
-    
-    let locale = 'en';
-    switch(config.lang) {
-        case 'de': locale = 'de'; break;
-        case 'ru': locale = 'ru'; break;
-        case 'pl': locale = 'pl'; break;
-        case 'ua': locale = 'uk'; break;
-        default: locale = 'en'; break; 
-    }
+    const locale = config.lang === 'ua' ? 'uk' : config.lang;
 
     const sendPlay = (track: number) => {
         let url = `${hostUrl()}/esp/mp3play`;
