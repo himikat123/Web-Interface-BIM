@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import i18n from '../i18n/main';
 import cn, { Argument } from 'classnames';
 import { twMerge } from 'tailwind-merge';
 import { iTextInput } from '../interfaces';
 import './textInput.scss';
 
-const TextInput = (props: iTextInput) => {
+export default function TextInput(props: iTextInput) {
     const [valid, setValid] = useState<boolean>(true);
     const [notEmpty, setNotEmpty] = useState<boolean>(true);
     const [tip, setTip] = useState<string>('');
@@ -49,7 +49,7 @@ const TextInput = (props: iTextInput) => {
         return twMerge(cn(classNames));
     }
 
-    return <> 
+    return <>
         <div className={cnMerge([inputClasses.root.base, (valid && notEmpty) ? inputClasses.root.normal : inputClasses.root.error, props.className])}>
             <label className={cnMerge([inputClasses.label, props.value && 'top-0 text-xs'])}>
                 {props.label} {props.required ? '*' : ''}
@@ -72,7 +72,5 @@ const TextInput = (props: iTextInput) => {
         <div className={"text_input-tip text-red-500" + (!valid || !notEmpty ? " open" : "")}>
             {tip}
         </div>
-    </>;
+    </>
 }
-
-export default TextInput;

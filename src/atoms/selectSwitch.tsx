@@ -2,7 +2,7 @@ import React from 'react';
 import { iSelectSwitch } from '../interfaces';
 import "./selectSwitch.scss";
 
-const SelectSwitch = (props: iSelectSwitch) => {
+export default function SelectSwitch(props: iSelectSwitch) {
     return <div className="relative w-full">
         <select className="form-select h-14" 
             value={props.value ?? 0} 
@@ -18,5 +18,3 @@ const SelectSwitch = (props: iSelectSwitch) => {
         </div>
     </div>
 }
-
-export default SelectSwitch;

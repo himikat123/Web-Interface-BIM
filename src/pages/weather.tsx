@@ -1,4 +1,3 @@
-import React from "react";
 import ThreeColumns from "../templates/threeColumns";
 import { useSelector, useDispatch } from 'react-redux';
 import i18n from '../i18n/main';
@@ -12,7 +11,7 @@ import { iConfig } from "../redux/configTypes";
 import * as cf from "../redux/slices/config";
 import device from "../device";
 
-const Weather = () => {
+export default function Weather() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
 
@@ -99,13 +98,9 @@ const Weather = () => {
         <Card content={<WeatherChecker />} />
     </>;
 
-    return <>
-        <ThreeColumns navbar={true}
-            header={[i18n.t('weatherForecast')]} 
-            content={[content]} 
-            buttons={['save', 'reset']} 
-        />
-    </>
+    return <ThreeColumns navbar={true}
+        header={[i18n.t('weatherForecast')]} 
+        content={[content]} 
+        buttons={['save', 'reset']} 
+    />
 }
-
-export default Weather;

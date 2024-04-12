@@ -5,7 +5,7 @@ import MenuItem from "../atoms/menuItem";
 import i18n from '../i18n/main';
 import { CloudArrowDown } from "@phosphor-icons/react";
 
-const MenuDataReceive = (props: iMenuItems) => {
+export default function MenuDataReceive(props: iMenuItems) {
     const validRecieve = useSelector((state: iValid) => state.valid.receive);
     
     return <MenuItem link="/receive" 
@@ -16,5 +16,3 @@ const MenuDataReceive = (props: iMenuItems) => {
         valid={validRecieve} 
     />
 }
-
-export default MenuDataReceive;

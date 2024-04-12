@@ -1,4 +1,3 @@
-import React from "react";
 import OneColumn from "../templates/oneColumn";
 import { useSelector, useDispatch } from 'react-redux';
 import { languageSwitch } from '../redux/slices/config';
@@ -12,7 +11,7 @@ import { ReactComponent as FlagPL } from '../atoms/icons/flagPL.svg';
 import { ReactComponent as FlagUA } from '../atoms/icons/flagUA.svg';
 import { iConfig } from "../redux/configTypes";
 
-const Language = () => {
+export default function Language() {
     const language = useSelector((state: iConfig) => state.config.lang);
     const dispatch = useDispatch();
 
@@ -73,13 +72,9 @@ const Language = () => {
         />
     </>} />;
 
-    return (<>
-        <OneColumn header={[i18n.t('language')]} 
-            content={[content]} 
-            navbar={true} 
-            buttons={['save', 'reset']} 
-        />
-    </>);
+    return <OneColumn header={[i18n.t('language')]} 
+        content={[content]} 
+        navbar={true} 
+        buttons={['save', 'reset']} 
+    />
 }
-
-export default Language;

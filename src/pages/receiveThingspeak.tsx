@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import i18n from '../i18n/main';
 import Moment from 'react-moment';
 import 'moment/locale/de';
@@ -17,7 +17,7 @@ import { receiveValidChange } from "../redux/slices/valid";
 import * as cf from "../redux/slices/config";
 import * as vl from "../atoms/validateValues";
 
-const ReceiveThingspeak = () => {
+export default function ReceiveThingspeak() {
     const [isValid, setIsValid] = useState<boolean[]>([]);
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
@@ -115,13 +115,9 @@ const ReceiveThingspeak = () => {
         </>}
     </>
 
-    return <>
-        <TwoColumns navbar={true}
-            header={[i18n.t('dataReceive')]} 
-            content={[content]} 
-            buttons={['save', 'reset']} 
-        />
-    </>
+    return <TwoColumns navbar={true}
+        header={[i18n.t('dataReceive')]} 
+        content={[content]} 
+        buttons={['save', 'reset']} 
+    />
 }
-
-export default ReceiveThingspeak;

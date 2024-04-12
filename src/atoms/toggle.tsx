@@ -1,7 +1,6 @@
-import React from "react";
 import { iToggle } from "../interfaces";
 
-const Toggle = (props: iToggle) => {
+export default function Toggle(props: iToggle) {
     return <div className="relative rounded-md border border-menu_light dark:border-menu_dark p-4"> 
         <label className="relative cursor-pointer">
             <input type="checkbox" className="sr-only peer" checked={props.checked ? true : false} onChange={props.onChange} />
@@ -12,5 +11,3 @@ const Toggle = (props: iToggle) => {
         </div>
     </div>
 }
-
-export default Toggle;

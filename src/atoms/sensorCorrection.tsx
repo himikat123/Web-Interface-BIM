@@ -4,7 +4,7 @@ import i18n from "../i18n/main";
 import Indication from "./indication";
 import * as vl from "./validateValues";
 
-const sensorCorrection = (color: boolean, type: string, val: number, lblType: string | React.ReactNode, lblData: number, onChange: any, min: number, max: number, step: number, hide?: boolean, lblName?: string) => {
+export default function sensorCorrection(color: boolean, type: string, val: number, lblType: string | React.ReactNode, lblData: number, onChange: any, min: number, max: number, step: number, hide?: boolean, lblName?: string) {
     const countSymbolsAfterComma = () => ((step.toString().includes('.')) ? (step.toString().split('.').pop()?.length) : (0));
 
     const round = () => {
@@ -92,5 +92,3 @@ const sensorCorrection = (color: boolean, type: string, val: number, lblType: st
         className={hide && labels[0] === '--' ? 'hide' : ''}
     />
 }
-
-export default sensorCorrection;

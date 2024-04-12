@@ -1,4 +1,3 @@
-import React from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../atoms/card";
@@ -8,7 +7,7 @@ import { iData } from "../redux/dataTypes";
 import * as cf from "../redux/slices/config";
 import * as vl from "../atoms/validateValues";
 
-const CardDisplayTemperatureOut = () => {
+export default function CardDisplayTemperatureOut() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
@@ -42,45 +41,41 @@ const CardDisplayTemperatureOut = () => {
         : i18n.t('dataExpired')})`
     );
 
-    return <>
-        <Card header={i18n.t('temperatureOut')}
-            content={<>
-                {/* Sensor type */}
-                <SelectSwitch label={i18n.t('dataSource.singular')}
-                    options={sensors}
-                    value={config.display.source.tempOut.sens}
-                    onChange={val => dispatch(cf.displaySourceTempOutSensChange(val))}
+    return <Card header={i18n.t('temperatureOut')}
+        content={<>
+            {/* Sensor type */}
+            <SelectSwitch label={i18n.t('dataSource.singular')}
+                options={sensors}
+                value={config.display.source.tempOut.sens}
+                onChange={val => dispatch(cf.displaySourceTempOutSensChange(val))}
+            />
+
+            {/* Wireless sensor number */}
+            {config.display.source.tempOut.sens === 2 && <div className="mt-8">
+                <SelectSwitch label={i18n.t('wirelessSensorNumber')}
+                    options={wsensors}
+                    value={config.display.source.tempOut.wsensNum}
+                    onChange={val => dispatch(cf.displaySourceTempOutWsensNumChange(val))}
                 />
+            </div>}
 
-                {/* Wireless sensor number */}
-                {config.display.source.tempOut.sens === 2 && <div className="mt-8">
-                    <SelectSwitch label={i18n.t('wirelessSensorNumber')}
-                        options={wsensors}
-                        value={config.display.source.tempOut.wsensNum}
-                        onChange={val => dispatch(cf.displaySourceTempOutWsensNumChange(val))}
-                    />
-                </div>}
+            {/* Wireless sensor temperature sensor number */}
+            {config.display.source.tempOut.sens === 2 && <div className="mt-8">
+                <SelectSwitch label={i18n.t('temperatureSensorNumber')}
+                    options={temps}
+                    value={config.display.source.tempOut.temp}
+                    onChange={val => dispatch(cf.displaySourceTempOutTempChange(val))}
+                />
+            </div>}
 
-                {/* Wireless sensor temperature sensor number */}
-                {config.display.source.tempOut.sens === 2 && <div className="mt-8">
-                    <SelectSwitch label={i18n.t('temperatureSensorNumber')}
-                        options={temps}
-                        value={config.display.source.tempOut.temp}
-                        onChange={val => dispatch(cf.displaySourceTempOutTempChange(val))}
-                    />
-                </div>}
-
-                {/* Thingspeak */}
-                {config.display.source.tempOut.sens === 3 && <div className="mt-8">
-                    <SelectSwitch label={i18n.t('field')}
-                        options={things}
-                        value={config.display.source.tempOut.thing}
-                        onChange={val => dispatch(cf.displaySourceTempOutThingChange(val))}
-                    />
-                </div>}
-            </>} 
-        />
-    </>
+            {/* Thingspeak */}
+            {config.display.source.tempOut.sens === 3 && <div className="mt-8">
+                <SelectSwitch label={i18n.t('field')}
+                    options={things}
+                    value={config.display.source.tempOut.thing}
+                    onChange={val => dispatch(cf.displaySourceTempOutThingChange(val))}
+                />
+            </div>}
+        </>} 
+    />
 }
-
-export default CardDisplayTemperatureOut;

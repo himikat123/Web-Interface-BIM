@@ -1,4 +1,3 @@
-import React from "react";
 import i18n from '../i18n/main';
 import CardSoundVolume from "../organisms/cardSoundVolume";
 import CardSoundEqualizer from "../organisms/cardSoundEqualizer";
@@ -6,7 +5,7 @@ import CardSoundHourlySignal from "../organisms/cardHourlySignal";
 import CardSoundListen from "../organisms/cardSoundListen";
 import TwoColumns from "../templates/twoColumns";
 
-const Sound = () => {
+export default function Sound() {
     const content = <>
         <CardSoundVolume />
         <CardSoundEqualizer />
@@ -14,13 +13,9 @@ const Sound = () => {
         <CardSoundListen />
     </>;
 
-    return (<>
-        <TwoColumns header={[i18n.t('sound')]} 
-            content={[content]} 
-            navbar={true} 
-            buttons={['save', 'reset']} 
-        />
-    </>);
+    return <TwoColumns header={[i18n.t('sound')]} 
+        content={[content]} 
+        navbar={true} 
+        buttons={['save', 'reset']} 
+    />
 }
-
-export default Sound;

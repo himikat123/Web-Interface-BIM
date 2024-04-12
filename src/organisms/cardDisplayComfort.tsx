@@ -1,4 +1,3 @@
-import React from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../atoms/card";
@@ -7,7 +6,7 @@ import Comfort from "../atoms/comfort";
 import { iConfig } from "../redux/configTypes";
 import * as cf from "../redux/slices/config";
 
-const CardDisplayComfort = () => {
+export default function CardDisplayComfort() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const names = config.display.source.sequence.name.filter(name => name !== '').join(', ');
@@ -17,18 +16,14 @@ const CardDisplayComfort = () => {
         `${i18n.t('nameSequence')} (${names.length ? names : '--'})`
     ];
 
-    return <>
-        <Card header={i18n.t('additionalDescription')}
-            content={<>
-                {/* Sensor type */}
-                <SelectSwitch label={i18n.t('dataSource.singular')}
-                    options={comforts}
-                    value={config.display.source.descr}
-                    onChange={val => dispatch(cf.displaySourceDescrChange(val))}
-                />
-            </>} 
-        />
-    </>
+    return <Card header={i18n.t('additionalDescription')}
+        content={<>
+            {/* Sensor type */}
+            <SelectSwitch label={i18n.t('dataSource.singular')}
+                options={comforts}
+                value={config.display.source.descr}
+                onChange={val => dispatch(cf.displaySourceDescrChange(val))}
+            />
+        </>} 
+    />
 }
-
-export default CardDisplayComfort;

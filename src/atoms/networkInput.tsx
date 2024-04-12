@@ -2,7 +2,7 @@ import TextInput from './textInput';
 import { List } from '@phosphor-icons/react';
 import { iNetworkInput } from '../interfaces';
 
-const NetworkInput = (props: iNetworkInput) => {
+export default function NetworkInput(props: iNetworkInput) {
     return <TextInput label={props.label} 
         className="pe-9"
         value={props.value}
@@ -18,5 +18,3 @@ const NetworkInput = (props: iNetworkInput) => {
         </div>
     </TextInput>
 }
-
-export default NetworkInput;

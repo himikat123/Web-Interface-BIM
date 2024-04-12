@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import i18n from '../i18n/main';
 import TwoColumns from "../templates/twoColumns";
 import Card from "../atoms/card";
@@ -6,7 +6,7 @@ import Button from "../atoms/button";
 import hostUrl from "../atoms/hostUrl";
 import { ReactComponent as SpinnerSVG } from '../atoms/icons/spinner.svg';
 
-const Backup = () => {
+export default function Backup() {
     const [saveButton, setSaveButton] = useState<string>('restore');
     const [saveColor, setSaveColor] = useState<string>('blue');
     const [filenameOK, setFilenameOK] = useState<boolean>(false);
@@ -130,13 +130,9 @@ const Backup = () => {
         />
     </>
 
-    return <>
-        <TwoColumns navbar={true}
-            header={[i18n.t('backup')]} 
-            content={[content]} 
-            buttons={['reset']} 
-        />
-    </>
+    return <TwoColumns navbar={true}
+        header={[i18n.t('backup')]} 
+        content={[content]} 
+        buttons={['reset']} 
+    />
 }
-
-export default Backup;

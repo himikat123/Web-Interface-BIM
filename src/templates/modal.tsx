@@ -3,7 +3,7 @@ import Button from "../atoms/button";
 import { X } from "@phosphor-icons/react";
 import { iModal } from "../interfaces";
 
-const Modal = (props: iModal) => {
+export default function Modal(props: iModal) {
     useEffect(() => {
         document.querySelector('body')?.classList.add('modal-open');
     }, []);
@@ -42,5 +42,3 @@ const Modal = (props: iModal) => {
         </div>
     </div>
 }
-
-export default Modal;

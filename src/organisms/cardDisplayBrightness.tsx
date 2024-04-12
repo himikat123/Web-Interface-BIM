@@ -1,4 +1,3 @@
-import React from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../atoms/card";
@@ -11,7 +10,7 @@ import { iConfig } from "../redux/configTypes";
 import { iDisplay } from "../interfaces";
 import * as cf from "../redux/slices/config";
 
-const CardDisplayBrightness = (props: iDisplay) => {
+export default function CardDisplayBrightness(props: iDisplay) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
        
@@ -44,5 +43,3 @@ const CardDisplayBrightness = (props: iDisplay) => {
         </>} /> : <Card className="invisible sm:visible" content={<></>} />}
     </>
 }
-
-export default CardDisplayBrightness;

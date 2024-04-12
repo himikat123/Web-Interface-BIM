@@ -3,8 +3,8 @@ import { iColumnsTemplate } from "../interfaces";
 import Navbar from '../organisms/navbar';
 import FooterButtons from "../molecules/footerButtons";
 
-const OneColumn = (props: iColumnsTemplate) => {
-    return (<div className="flex flex-col min-h-screen">
+export default function OneColumn(props: iColumnsTemplate) {
+    return <div className="flex flex-col min-h-screen">
         {props.navbar && <Navbar />}
 
         <>{props.content.map((c: React.ReactNode, i: number) => {
@@ -25,7 +25,5 @@ const OneColumn = (props: iColumnsTemplate) => {
                 : <FooterButtons buttons={props.buttons} />
             : null
         }
-    </div>);
+    </div>
 }
-
-export default OneColumn;

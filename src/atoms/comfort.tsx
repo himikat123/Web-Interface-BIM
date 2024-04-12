@@ -4,7 +4,7 @@ import { iConfig } from "../redux/configTypes";
 import { iData } from "../redux/dataTypes";
 import * as vl from "./validateValues";
 
-function Comfort() {
+export default function Comfort() {
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
 
@@ -96,5 +96,3 @@ function Comfort() {
 
     return comfort.length ? comfort : null;
 }
-
-export default Comfort;

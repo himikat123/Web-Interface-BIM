@@ -1,4 +1,3 @@
-import React from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../atoms/card";
@@ -7,7 +6,7 @@ import TimeInput from "../atoms/timeInput";
 import { iConfig } from "../redux/configTypes";
 import * as cf from "../redux/slices/config";
 
-const CardSoundHourlySignal = () => {
+export default function CardSoundHourlySignal() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
 
@@ -37,5 +36,3 @@ const CardSoundHourlySignal = () => {
         </div>}
     </>} />
 }
-
-export default CardSoundHourlySignal;

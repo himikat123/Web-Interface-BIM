@@ -1,7 +1,7 @@
 import hostUrl from "../atoms/hostUrl";
 import { StopCircle } from "@phosphor-icons/react";
 
-const ButtonStop = () => {
+export default function ButtonStop() {
     const sendStop = () => {
         let url = `${hostUrl()}/esp/mp3stop`;
         fetch(url);
@@ -13,5 +13,3 @@ const ButtonStop = () => {
         {<StopCircle size={60} weight="fill" />}
     </div>
 }
-
-export default ButtonStop;

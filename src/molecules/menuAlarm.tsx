@@ -3,7 +3,7 @@ import MenuItem from "../atoms/menuItem";
 import i18n from '../i18n/main';
 import { Alarm } from "@phosphor-icons/react";
 
-const MenuAlarm = (props: iMenuItems) => {
+export default function MenuAlarm(props: iMenuItems) {
     return <MenuItem link="/alarm" 
         current={props.current} 
         title={i18n.t('alarm')} 
@@ -12,5 +12,3 @@ const MenuAlarm = (props: iMenuItems) => {
         valid={true} 
     />
 }
-
-export default MenuAlarm;

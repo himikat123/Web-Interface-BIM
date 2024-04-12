@@ -8,7 +8,7 @@ import Button from "../atoms/button";
 import hostUrl from "../atoms/hostUrl";
 import { ReactComponent as SpinnerSVG } from '../atoms/icons/spinner.svg';
 
-const Default = () => {
+export default function Default() {
     const [saveButton, setSaveButton] = useState<string>('resetToFactory');
     const [saveColor, setSaveColor] = useState<string>('blue');
     const [defaultConfig, setDefaultConfig] = useState<object>({});
@@ -94,14 +94,10 @@ const Default = () => {
         </div>
     </>
 
-    return <>
-        <OneColumn navbar={true}
-            header={[i18n.t('defaultSettings')]} 
-            content={[content]} 
-            buttons={['reset']} 
-            full
-        />
-    </>
+    return <OneColumn navbar={true}
+        header={[i18n.t('defaultSettings')]} 
+        content={[content]} 
+        buttons={['reset']} 
+        full
+    />
 }
-
-export default Default;

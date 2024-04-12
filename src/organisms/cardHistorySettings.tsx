@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../atoms/card";
@@ -9,7 +9,7 @@ import { iConfig } from "../redux/configTypes";
 import { historyValidChange } from "../redux/slices/valid";
 import * as cf from "../redux/slices/config";
 
-const CardHistorySettings = () => {
+export default function CardHistorySettings() {
     const [isValid, setIsValid] = useState<boolean[]>([]);
 
     const dispatch = useDispatch();
@@ -77,5 +77,3 @@ const CardHistorySettings = () => {
         </div>
     </>} />
 }
-
-export default CardHistorySettings;

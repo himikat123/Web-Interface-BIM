@@ -1,4 +1,3 @@
-import React from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../atoms/card";
@@ -8,7 +7,7 @@ import { iData } from "../redux/dataTypes";
 import * as cf from "../redux/slices/config";
 import * as vl from "../atoms/validateValues";
 
-const CardDisplayHumidityOut = () => {
+export default function CardDisplayHumidityOut() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
@@ -37,36 +36,32 @@ const CardDisplayHumidityOut = () => {
         : i18n.t('dataExpired')})`
     );
 
-    return <>
-        <Card header={i18n.t('humidityOut')}
-            content={<>
-                {/* Sensor type */}
-                <SelectSwitch label={i18n.t('dataSource.singular')}
-                    options={sensors}
-                    value={config.display.source.humOut.sens}
-                    onChange={val => dispatch(cf.displaySourceHumOutSensChange(val))}
+    return <Card header={i18n.t('humidityOut')}
+        content={<>
+            {/* Sensor type */}
+            <SelectSwitch label={i18n.t('dataSource.singular')}
+                options={sensors}
+                value={config.display.source.humOut.sens}
+                onChange={val => dispatch(cf.displaySourceHumOutSensChange(val))}
+            />
+
+            {/* Wireless sensor number */}
+            {config.display.source.humOut.sens === 2 && <div className="mt-8">
+                <SelectSwitch label={i18n.t('wirelessSensorNumber')}
+                    options={wsensors}
+                    value={config.display.source.humOut.wsensNum}
+                    onChange={val => dispatch(cf.displaySourceHumOutWsensNumChange(val))}
                 />
+            </div>}
 
-                {/* Wireless sensor number */}
-                {config.display.source.humOut.sens === 2 && <div className="mt-8">
-                    <SelectSwitch label={i18n.t('wirelessSensorNumber')}
-                        options={wsensors}
-                        value={config.display.source.humOut.wsensNum}
-                        onChange={val => dispatch(cf.displaySourceHumOutWsensNumChange(val))}
-                    />
-                </div>}
-
-                {/* Thingspeak */}
-                {config.display.source.humOut.sens === 3 && <div className="mt-8">
-                    <SelectSwitch label={i18n.t('field')}
-                        options={things}
-                        value={config.display.source.humOut.thing}
-                        onChange={val => dispatch(cf.displaySourceHumOutThingChange(val))}
-                    />
-                </div>}
-            </>} 
-        />
-    </>
+            {/* Thingspeak */}
+            {config.display.source.humOut.sens === 3 && <div className="mt-8">
+                <SelectSwitch label={i18n.t('field')}
+                    options={things}
+                    value={config.display.source.humOut.thing}
+                    onChange={val => dispatch(cf.displaySourceHumOutThingChange(val))}
+                />
+            </div>}
+        </>} 
+    />
 }
-
-export default CardDisplayHumidityOut;

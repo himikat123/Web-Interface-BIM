@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ThreeColumns from "../templates/threeColumns";
 import { useSelector, useDispatch } from 'react-redux';
 import i18n from '../i18n/main';
@@ -11,7 +11,7 @@ import device from '../device';
 import * as cf from "../redux/slices/config";
 import * as vl from "../atoms/validateValues";
 
-const Sensors = () => {
+export default function Sensors() {
     const [hideUnnecessary, setHideUnnecessary] = useState<boolean>(true);
 
     const dispatch = useDispatch();
@@ -257,5 +257,3 @@ const Sensors = () => {
         </div>}
     />
 }
-
-export default Sensors;

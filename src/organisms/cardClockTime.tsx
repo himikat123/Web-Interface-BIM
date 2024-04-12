@@ -1,4 +1,3 @@
-import React from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../atoms/card";
@@ -6,7 +5,7 @@ import SelectSwitch from "../atoms/selectSwitch";
 import { iConfig } from "../redux/configTypes";
 import * as cf from "../redux/slices/config";
 
-const CardClockTime = () => {
+export default function CardClockTime() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     
@@ -37,5 +36,3 @@ const CardClockTime = () => {
         </div>
     </>} />
 }
-
-export default CardClockTime;

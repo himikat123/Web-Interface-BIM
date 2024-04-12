@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import i18n from '../i18n/main';
 import { useSelector, useDispatch } from 'react-redux';
 import FourColumns from "../templates/fourColumns";
@@ -11,7 +11,7 @@ import { iConfig } from "../redux/configTypes";
 import { sendThingspeakValidChange } from "../redux/slices/valid";
 import * as cf from "../redux/slices/config";
 
-const SendThingspeak = () => {
+export default function SendThingspeak() {
     const [isValid, setIsValid] = useState<boolean[]>([]);
 
     const dispatch = useDispatch();
@@ -69,13 +69,9 @@ const SendThingspeak = () => {
         </>}
     </>
 
-    return <>
-        <FourColumns navbar={true}
-            header={[i18n.t('sendToThingspeak')]} 
-            content={[content]} 
-            buttons={['save', 'reset']} 
-        />
-    </>
+    return <FourColumns navbar={true}
+        header={[i18n.t('sendToThingspeak')]} 
+        content={[content]} 
+        buttons={['save', 'reset']} 
+    />
 }
-
-export default SendThingspeak;

@@ -1,4 +1,3 @@
-import React from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
@@ -14,7 +13,7 @@ import { iConfig } from "../redux/configTypes";
 import * as cf from "../redux/slices/config";
 import { clockValidChange } from "../redux/slices/valid";
 
-const CardClockNtp = () => {
+export default function CardClockNtp() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const locale = config.lang === 'ua' ? 'uk' : config.lang;
@@ -42,5 +41,3 @@ const CardClockNtp = () => {
         </div>
     </>} />
 }
-
-export default CardClockNtp;

@@ -3,7 +3,7 @@ import { CaretLeft, CaretRight } from "@phosphor-icons/react";
 import { iRangeInput } from "../interfaces";
 import "./rangeInput.scss";
 
-const RangeInput = (props: iRangeInput) => {
+export default function RangeInput(props: iRangeInput) {
     const round = (val: number): number => {
         return Math.round(val * (1 / props.step)) / (1 / props.step);
     }
@@ -23,7 +23,7 @@ const RangeInput = (props: iRangeInput) => {
     const min = (props.limitMin - props.min) * 100 / (props.max - props.min);
     const max = (props.max - props.limitMax) * 100 / (props.max - props.min);
 
-    return (<div className={"range-input " + (props.className ?? '')}>
+    return <div className={"range-input " + (props.className ?? '')}>
         {props.label && <div className="text-center mt-3 select-none">
             <label className="form-label">{props.label}</label>
         </div>}
@@ -53,7 +53,5 @@ const RangeInput = (props: iRangeInput) => {
                 {props.indication}
             </div>
         </div>
-    </div>);
-};
-
-export default RangeInput;
+    </div>
+}

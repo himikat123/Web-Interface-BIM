@@ -3,7 +3,7 @@ import MenuItem from "../atoms/menuItem";
 import i18n from '../i18n/main';
 import { SpeakerHigh } from "@phosphor-icons/react";
 
-const MenuSound = (props: iMenuItems) => {
+export default function MenuSound(props: iMenuItems) {
     return <MenuItem link="/sound" 
         current={props.current} 
         title={i18n.t('sound')} 
@@ -12,5 +12,3 @@ const MenuSound = (props: iMenuItems) => {
         valid={true} 
     />
 }
-
-export default MenuSound;

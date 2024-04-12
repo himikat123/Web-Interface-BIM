@@ -1,4 +1,3 @@
-import React from "react";
 import i18n from "../i18n/main";
 import moment from "moment";
 import 'moment/locale/de';
@@ -15,7 +14,7 @@ import { iCardSend, iTypesList, iSensor, iSensors } from "../interfaces";
 import * as cf from "../redux/slices/config";
 import * as vl from "../atoms/validateValues";
 
-const CardThingpeakSendData = (props: iCardSend) => {
+export default function CardThingpeakSendData(props: iCardSend) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
@@ -171,5 +170,3 @@ const CardThingpeakSendData = (props: iCardSend) => {
         </>} 
     />
 }
-
-export default CardThingpeakSendData;

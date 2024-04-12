@@ -1,4 +1,3 @@
-import React from "react";
 import i18n from '../i18n/main';
 import { useSelector, useDispatch } from 'react-redux';
 import FourColumns from "../templates/fourColumns";
@@ -12,7 +11,7 @@ import { iData } from "../redux/dataTypes";
 import { sendNarodmonValidChange } from "../redux/slices/valid";
 import * as cf from "../redux/slices/config";
 
-const SendNarodmon = () => {
+export default function SendNarodmon() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
@@ -72,13 +71,9 @@ const SendNarodmon = () => {
         </>}
     </>
 
-    return <>
-        <FourColumns navbar={true}
-            header={[i18n.t('sendToNarodmon')]} 
-            content={[content]} 
-            buttons={['save', 'reset']} 
-        />
-    </>
+    return <FourColumns navbar={true}
+        header={[i18n.t('sendToNarodmon')]} 
+        content={[content]} 
+        buttons={['save', 'reset']} 
+    />
 }
-
-export default SendNarodmon;

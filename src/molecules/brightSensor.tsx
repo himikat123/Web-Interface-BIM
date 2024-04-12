@@ -1,4 +1,3 @@
-import React from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import hostUrl from "../atoms/hostUrl";
@@ -11,7 +10,7 @@ import { iDisplay } from "../interfaces";
 import * as cf from "../redux/slices/config";
 import * as vl from "../atoms/validateValues";
 
-const BrightSensor = (props: iDisplay) => {
+export default function BrightSensor(props: iDisplay) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
@@ -72,5 +71,3 @@ const BrightSensor = (props: iDisplay) => {
         </div>
     </div>
 }
-
-export default BrightSensor;

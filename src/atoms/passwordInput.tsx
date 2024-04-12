@@ -3,7 +3,7 @@ import TextInput from './textInput';
 import { Eye, EyeSlash } from "@phosphor-icons/react";
 import { iPasswordInput } from '../interfaces';
 
-const PasswordInput = (props: iPasswordInput) => {
+export default function PasswordInput(props: iPasswordInput) {
     const [type, setType] = useState<string>('password');
 
     return <TextInput label={props.label}
@@ -24,5 +24,3 @@ const PasswordInput = (props: iPasswordInput) => {
         </div>
     </TextInput>
 }
-
-export default PasswordInput;

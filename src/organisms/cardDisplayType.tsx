@@ -1,4 +1,3 @@
-import React from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import hostUrl from "../atoms/hostUrl";
@@ -10,7 +9,7 @@ import { iDisplay } from "../interfaces";
 import * as cf from "../redux/slices/config";
 import Indication from "../atoms/indication";
 
-const CardDisplayType = (props: iDisplay) => {
+export default function CardDisplayType(props: iDisplay) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     let types = [
@@ -97,72 +96,68 @@ const CardDisplayType = (props: iDisplay) => {
         fetch(url);
     }
 
-    return <>
-        <Card content={<>
-            <SelectSwitch label={i18n.t('displayType')}
-                options={types}
-                value={config.display.type[props.num]}
+    return <Card content={<>
+        <SelectSwitch label={i18n.t('displayType')}
+            options={types}
+            value={config.display.type[props.num]}
+            onChange={val => {
+                dispatch(cf.displayTypeChange({num: props.num, val: val}));
+                dispatch(cf.displayModelChange({num: props.num, val: 0}));
+            }}
+        />
+
+        {models.length > 0 && <div className="mt-8">
+            <SelectSwitch label={i18n.t('displayModel')}
+                options={models}
+                value={config.display.model[props.num]}
+                onChange={val => dispatch(cf.displayModelChange({num: props.num, val: val}))}
+            />
+        </div>}
+
+        {config.display.type[props.num] > 0 && <>
+            <RangeInput value={config.display.brightness.min[props.num]}
+                label={i18n.t('minimumBrightnessLimit')}
+                min={0}
+                max={255}
+                limitMin={0}
+                limitMax={config.display.brightness.max[props.num]}
+                step={1}
+                indication={String(config.display.brightness.min[props.num])}
                 onChange={val => {
-                    dispatch(cf.displayTypeChange({num: props.num, val: val}));
-                    dispatch(cf.displayModelChange({num: props.num, val: 0}));
+                    dispatch(cf.displayBrightMinChange({num: props.num, val: val}));
+                    sendLimits();
                 }}
+                className="mt-4"
             />
 
-            {models.length > 0 && <div className="mt-8">
-                <SelectSwitch label={i18n.t('displayModel')}
-                    options={models}
-                    value={config.display.model[props.num]}
-                    onChange={val => dispatch(cf.displayModelChange({num: props.num, val: val}))}
-                />
-            </div>}
+            <RangeInput value={config.display.brightness.max[props.num]}
+                label={i18n.t('maximumBrightnessLimit')}
+                min={0}
+                max={255}
+                limitMin={config.display.brightness.min[props.num]}
+                limitMax={255}
+                step={1}
+                indication={String(config.display.brightness.max[props.num])}
+                onChange={val => {
+                    dispatch(cf.displayBrightMaxChange({num: props.num, val: val}));
+                    sendLimits();
+                }}
+                className="mt-2"
+            />
 
-            {config.display.type[props.num] > 0 && <>
-                <RangeInput value={config.display.brightness.min[props.num]}
-                    label={i18n.t('minimumBrightnessLimit')}
-                    min={0}
-                    max={255}
-                    limitMin={0}
-                    limitMax={config.display.brightness.max[props.num]}
-                    step={1}
-                    indication={String(config.display.brightness.min[props.num])}
-                    onChange={val => {
-                        dispatch(cf.displayBrightMinChange({num: props.num, val: val}));
-                        sendLimits();
-                    }}
-                    className="mt-4"
+            <div className="mt-4 text-xs">
+                {i18n.t('maximumDisplayCurrent')}:
+                <Indication error={false} 
+                    value={String(
+                        config.display.type[props.num] + props.num === 2 
+                            ? (Math.round(consums[config.display.model[props.num]] 
+                                * config.display.brightness.max[props.num] 
+                                / 255
+                            ) + 1)
+                            : consums[config.display.model[props.num]]
+                    ) + i18n.t('units.ma')} 
                 />
-
-                <RangeInput value={config.display.brightness.max[props.num]}
-                    label={i18n.t('maximumBrightnessLimit')}
-                    min={0}
-                    max={255}
-                    limitMin={config.display.brightness.min[props.num]}
-                    limitMax={255}
-                    step={1}
-                    indication={String(config.display.brightness.max[props.num])}
-                    onChange={val => {
-                        dispatch(cf.displayBrightMaxChange({num: props.num, val: val}));
-                        sendLimits();
-                    }}
-                    className="mt-2"
-                />
-
-                <div className="mt-4 text-xs">
-                    {i18n.t('maximumDisplayCurrent')}:
-                    <Indication error={false} 
-                        value={String(
-                            config.display.type[props.num] + props.num === 2 
-                                ? (Math.round(consums[config.display.model[props.num]] 
-                                    * config.display.brightness.max[props.num] 
-                                    / 255
-                                ) + 1)
-                                : consums[config.display.model[props.num]]
-                        ) + i18n.t('units.ma')} 
-                    />
-                </div>
-            </>}
-        </>} />
-    </>
+            </div>
+        </>}
+    </>} />
 }
-
-export default CardDisplayType;

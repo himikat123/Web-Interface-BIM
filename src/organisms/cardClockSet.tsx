@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import i18n from "../i18n/main";
 import moment from "moment";
 import hostUrl from "../atoms/hostUrl";
@@ -8,7 +8,7 @@ import Button from "../atoms/button";
 import DateTimeInput from "../atoms/dateTimeInput";
 import { ReactComponent as SpinnerSVG } from '../atoms/icons/spinner.svg';
 
-const CardClockSet = () => {
+export default function CardClockSet() {
     const [send, setSend] = useState<string>('...');
     const [receive, setReceive] = useState<string>('...');
     const [manualDateTime, setManualDateTime] = useState<string>('');
@@ -139,5 +139,3 @@ const CardClockSet = () => {
         </div>
     </>} />
 }
-
-export default CardClockSet;

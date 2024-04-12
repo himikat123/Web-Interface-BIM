@@ -6,7 +6,7 @@ import MenuUserDropdown from "../molecules/menuUserDropdown";
 import { List, X } from "@phosphor-icons/react";
 import "./navbar.scss";
 
-const Navbar = () => {
+export default function Navbar() {
     /**
      * Tracking a click outside the mobile menu to close it
      */
@@ -63,5 +63,3 @@ const Navbar = () => {
         </div>
     </nav>
 }
-
-export default Navbar;

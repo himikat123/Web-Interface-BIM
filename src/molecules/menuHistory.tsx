@@ -5,7 +5,7 @@ import MenuItem from "../atoms/menuItem";
 import i18n from '../i18n/main';
 import { ChartLineUp } from "@phosphor-icons/react";
 
-const MenuHistory = (props: iMenuItems) => {
+export default function MenuHistory(props: iMenuItems) {
     const validHistory = useSelector((state: iValid) => state.valid.history);
 
     return <MenuItem link="/history" 
@@ -16,5 +16,3 @@ const MenuHistory = (props: iMenuItems) => {
         valid={validHistory} 
     />
 }
-
-export default MenuHistory;

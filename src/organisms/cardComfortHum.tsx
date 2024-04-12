@@ -1,4 +1,3 @@
-import React from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../atoms/card";
@@ -12,7 +11,7 @@ import * as cf from "../redux/slices/config";
 import * as vl from "../atoms/validateValues";
 import "./cardComfort.scss";
 
-const CardComfortHum = () => {
+export default function CardComfortHum() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
@@ -66,113 +65,109 @@ const CardComfortHum = () => {
     }
     else comfort = '--';
 
-    return <>
-        <Card header={i18n.t('humidity')}
-            content={<>
-                {/* Sensor type */}
-                <SelectSwitch label={i18n.t('dataSource.singular')}
-                    options={sensors}
-                    value={config.comfort.hum.source}
-                    onChange={val => dispatch(cf.comfortHumSourceChange(val))}
+    return <Card header={i18n.t('humidity')}
+        content={<>
+            {/* Sensor type */}
+            <SelectSwitch label={i18n.t('dataSource.singular')}
+                options={sensors}
+                value={config.comfort.hum.source}
+                onChange={val => dispatch(cf.comfortHumSourceChange(val))}
+            />
+
+            {/* Wireless sensor number */}
+            {config.comfort.hum.source === 2 && <div className="mt-8">
+                <SelectSwitch label={i18n.t('wirelessSensorNumber')}
+                    options={wsensors}
+                    value={config.comfort.hum.wsensNum}
+                    onChange={val => dispatch(cf.comfortHumWsensNumChange(val))}
+                />
+            </div>}
+
+            {/* Thingspeak */}
+            {config.comfort.hum.source === 3 && <div className="mt-8">
+                <SelectSwitch label={i18n.t('field')}
+                    options={things}
+                    value={config.comfort.hum.thing}
+                    onChange={val => dispatch(cf.comfortHumThingChange(val))}
+                />
+            </div>}
+
+            {<div className={'card-comfort ' + (config.comfort.hum.source > 0 ? 'show' : 'hide')}>
+                <div className="mt-6"><Indication error={false} value={comfort} /></div>
+
+                <div className="mt-8">
+                    <Toggle label={i18n.t('soundNotification')}
+                        checked={config.comfort.hum.sound}
+                        onChange={() => dispatch(cf.comfortHumSoundChange(config.comfort.hum.sound ? 0 : 1))}
+                    />
+                </div>
+
+                {/* Max humidity */}
+                <RangeInput label={i18n.t('humMax')}
+                    value={config.comfort.hum.max[0]}
+                    min={0}
+                    max={100}
+                    limitMin={config.comfort.hum.min[0]}
+                    limitMax={100}
+                    step={0.1}
+                    indication={`${config.comfort.hum.max[0].toFixed(1)}%`}
+                    onChange={val => dispatch(cf.comfortHumMaxChange({ num: 0, val: val }))}
+                    className="mt-4"
                 />
 
-                {/* Wireless sensor number */}
-                {config.comfort.hum.source === 2 && <div className="mt-8">
-                    <SelectSwitch label={i18n.t('wirelessSensorNumber')}
-                        options={wsensors}
-                        value={config.comfort.hum.wsensNum}
-                        onChange={val => dispatch(cf.comfortHumWsensNumChange(val))}
-                    />
-                </div>}
+                {/* Max humidity hysteresis */}
+                <RangeInput label={i18n.t('hysteresis')}
+                    value={config.comfort.hum.max[1]}
+                    min={0}
+                    max={10}
+                    limitMin={0}
+                    limitMax={10}
+                    step={0.1}
+                    indication={`±${(config.comfort.hum.max[1] / 2).toFixed(2)}%`}
+                    onChange={val => dispatch(cf.comfortHumMaxChange({ num: 1, val: val }))}
+                    className="mt-4"
+                />
 
-                {/* Thingspeak */}
-                {config.comfort.hum.source === 3 && <div className="mt-8">
-                    <SelectSwitch label={i18n.t('field')}
-                        options={things}
-                        value={config.comfort.hum.thing}
-                        onChange={val => dispatch(cf.comfortHumThingChange(val))}
-                    />
-                </div>}
+                <div className="mt-4 select-none text-green-500 dark:text-green-200">
+                    <div>{i18n.t('dryer')}</div>
+                    <div>{i18n.t('on')}: {(config.comfort.hum.max[0] + (config.comfort.hum.max[1] / 2)).toFixed(2)}%</div>
+                    <div>{i18n.t('off')}: {(config.comfort.hum.max[0] - (config.comfort.hum.max[1] / 2)).toFixed(2)}%</div>
+                </div>
 
-                {<div className={'card-comfort ' + (config.comfort.hum.source > 0 ? 'show' : 'hide')}>
-                    <div className="mt-6"><Indication error={false} value={comfort} /></div>
+                <hr className="mt-8 mb-6" />
 
-                    <div className="mt-8">
-                        <Toggle label={i18n.t('soundNotification')}
-                            checked={config.comfort.hum.sound}
-                            onChange={() => dispatch(cf.comfortHumSoundChange(config.comfort.hum.sound ? 0 : 1))}
-                        />
-                    </div>
+                {/* Min Humidity */}
+                <RangeInput label={i18n.t('humMin')}
+                    value={config.comfort.hum.min[0]}
+                    min={0}
+                    max={100}
+                    limitMin={0}
+                    limitMax={config.comfort.hum.max[0]}
+                    step={0.1}
+                    indication={`${config.comfort.hum.min[0].toFixed(1)}%`}
+                    onChange={val => dispatch(cf.comfortHumMinChange({ num: 0, val: val }))}
+                    className="mt-4"
+                />
 
-                    {/* Max humidity */}
-                    <RangeInput label={i18n.t('humMax')}
-                        value={config.comfort.hum.max[0]}
-                        min={0}
-                        max={100}
-                        limitMin={config.comfort.hum.min[0]}
-                        limitMax={100}
-                        step={0.1}
-                        indication={`${config.comfort.hum.max[0].toFixed(1)}%`}
-                        onChange={val => dispatch(cf.comfortHumMaxChange({ num: 0, val: val }))}
-                        className="mt-4"
-                    />
+                {/* Min Humidity hysteresis */}
+                <RangeInput label={i18n.t('hysteresis')}
+                    value={config.comfort.hum.min[1]}
+                    min={0}
+                    max={10}
+                    limitMin={0}
+                    limitMax={10}
+                    step={0.1}
+                    indication={`±${(config.comfort.hum.min[1] / 2).toFixed(2)}%`}
+                    onChange={val => dispatch(cf.comfortHumMinChange({ num: 1, val: val }))}
+                    className="mt-4"
+                />
 
-                    {/* Max humidity hysteresis */}
-                    <RangeInput label={i18n.t('hysteresis')}
-                        value={config.comfort.hum.max[1]}
-                        min={0}
-                        max={10}
-                        limitMin={0}
-                        limitMax={10}
-                        step={0.1}
-                        indication={`±${(config.comfort.hum.max[1] / 2).toFixed(2)}%`}
-                        onChange={val => dispatch(cf.comfortHumMaxChange({ num: 1, val: val }))}
-                        className="mt-4"
-                    />
-
-                    <div className="mt-4 select-none text-green-500 dark:text-green-200">
-                        <div>{i18n.t('dryer')}</div>
-                        <div>{i18n.t('on')}: {(config.comfort.hum.max[0] + (config.comfort.hum.max[1] / 2)).toFixed(2)}%</div>
-                        <div>{i18n.t('off')}: {(config.comfort.hum.max[0] - (config.comfort.hum.max[1] / 2)).toFixed(2)}%</div>
-                    </div>
-
-                    <hr className="mt-8 mb-6" />
-
-                    {/* Min Humidity */}
-                    <RangeInput label={i18n.t('humMin')}
-                        value={config.comfort.hum.min[0]}
-                        min={0}
-                        max={100}
-                        limitMin={0}
-                        limitMax={config.comfort.hum.max[0]}
-                        step={0.1}
-                        indication={`${config.comfort.hum.min[0].toFixed(1)}%`}
-                        onChange={val => dispatch(cf.comfortHumMinChange({ num: 0, val: val }))}
-                        className="mt-4"
-                    />
-
-                    {/* Min Humidity hysteresis */}
-                    <RangeInput label={i18n.t('hysteresis')}
-                        value={config.comfort.hum.min[1]}
-                        min={0}
-                        max={10}
-                        limitMin={0}
-                        limitMax={10}
-                        step={0.1}
-                        indication={`±${(config.comfort.hum.min[1] / 2).toFixed(2)}%`}
-                        onChange={val => dispatch(cf.comfortHumMinChange({ num: 1, val: val }))}
-                        className="mt-4"
-                    />
-
-                    <div className="mt-4 select-none text-green-500 dark:text-green-200">
-                        <div>{i18n.t('humidifier')}</div>
-                        <div>{i18n.t('on')}: {(config.comfort.hum.min[0] - (config.comfort.hum.min[1] / 2)).toFixed(2)}%</div>
-                        <div>{i18n.t('off')}: {(config.comfort.hum.min[0] + (config.comfort.hum.min[1] / 2)).toFixed(2)}%</div>
-                    </div>
-                </div>}
-            </>} 
-        />
-    </>
+                <div className="mt-4 select-none text-green-500 dark:text-green-200">
+                    <div>{i18n.t('humidifier')}</div>
+                    <div>{i18n.t('on')}: {(config.comfort.hum.min[0] - (config.comfort.hum.min[1] / 2)).toFixed(2)}%</div>
+                    <div>{i18n.t('off')}: {(config.comfort.hum.min[0] + (config.comfort.hum.min[1] / 2)).toFixed(2)}%</div>
+                </div>
+            </div>}
+        </>} 
+    />
 }
-
-export default CardComfortHum;

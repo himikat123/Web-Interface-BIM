@@ -1,4 +1,3 @@
-import React from "react";
 import FourColumns from "../templates/fourColumns";
 import { useSelector } from 'react-redux';
 import i18n from '../i18n/main';
@@ -17,7 +16,7 @@ import CardDisplayComfort from "../organisms/cardDisplayComfort";
 import CardDisplayTimeSlot from "../organisms/cardDisplayTimeSlot";
 import { iConfig } from "../redux/configTypes";
 
-const Display1 = () => {
+export default function Display1() {
     const config = useSelector((state: iConfig) => state.config);
 
     const row1 = <>
@@ -47,13 +46,9 @@ const Display1 = () => {
         {config.display.type[0] >= 2 && [...Array(4)].map((x, i) => <CardDisplayTimeSlot key={i} slot={i + 4} num={0} />)}
     </>
 
-    return <>
-        <FourColumns navbar={true}
-            header={[i18n.t('display.singular') + " 1"]} 
-            content={[row1, row2, row3]} 
-            buttons={['save', 'reset']} 
-        />
-    </>
+    return <FourColumns navbar={true}
+        header={[i18n.t('display.singular') + " 1"]} 
+        content={[row1, row2, row3]} 
+        buttons={['save', 'reset']} 
+    />
 }
-
-export default Display1;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../atoms/card";
@@ -10,7 +10,7 @@ import { iData } from "../redux/dataTypes";
 import * as cf from "../redux/slices/config";
 import * as vl from "../atoms/validateValues";
 
-const CardDisplayTemperatureIn = () => {
+export default function CardDisplayTemperatureIn() {
     const [tempWsensNum, setTempWsensNum] = useState<number>(0);
     const [prevSens, setPrevSens] = useState<number>(0);
     const dispatch = useDispatch();
@@ -58,116 +58,112 @@ const CardDisplayTemperatureIn = () => {
         setPrevSens(config.display.source.tempIn.sens);
     }, [config.display.source.tempIn.sens]);
 
-    return <>
-        <Card header={i18n.t('temperatureIn')}
-            content={<>
-                {/* Sensor type */}
-                <SelectSwitch label={i18n.t('dataSource.singular')}
-                    options={sensors}
-                    value={config.display.source.tempIn.sens}
-                    onChange={val => {
-                        dispatch(cf.displaySourceTempInSensChange(val));
-                        if(val === 4) dispatch(cf.displaySourceHumInSensChange(val));
-                        if(prevSens === 4) dispatch(cf.displaySourceHumInSensChange(0));
-                    }}
+    return <Card header={i18n.t('temperatureIn')}
+        content={<>
+            {/* Sensor type */}
+            <SelectSwitch label={i18n.t('dataSource.singular')}
+                options={sensors}
+                value={config.display.source.tempIn.sens}
+                onChange={val => {
+                    dispatch(cf.displaySourceTempInSensChange(val));
+                    if(val === 4) dispatch(cf.displaySourceHumInSensChange(val));
+                    if(prevSens === 4) dispatch(cf.displaySourceHumInSensChange(0));
+                }}
+            />
+
+            {/* Wireless sensor number */}
+            {config.display.source.tempIn.sens === 2 && <div className="mt-8">
+                <SelectSwitch label={i18n.t('wirelessSensorNumber')}
+                    options={wsensors}
+                    value={config.display.source.tempIn.wsensNum}
+                    onChange={val => dispatch(cf.displaySourceTempInWsensNumChange(val))}
+                />
+            </div>}
+
+            {/* Wireless sensor temperature sensor number */}
+            {config.display.source.tempIn.sens === 2 && <div className="mt-8">
+                <SelectSwitch label={i18n.t('temperatureSensorNumber')}
+                    options={temps}
+                    value={config.display.source.tempIn.temp}
+                    onChange={val => dispatch(cf.displaySourceTempInTempChange(val))}
+                />
+            </div>}
+
+            {/* Thingspeak */}
+            {config.display.source.tempIn.sens === 3 && <div className="mt-8">
+                <SelectSwitch label={i18n.t('field')}
+                    options={things}
+                    value={config.display.source.tempIn.thing}
+                    onChange={val => dispatch(cf.displaySourceTempInThingChange(val))}
+                />
+            </div>}
+
+            {/* Sequence */}
+            {config.display.source.tempIn.sens === 4 && <div className="mt-8">
+                <RangeInput value={config.display.source.sequence.dur}
+                    label={i18n.t('displayDuration')}
+                    min={1}
+                    max={20}
+                    limitMin={1}
+                    limitMax={20}
+                    step={1}
+                    indication={String(config.display.source.sequence.dur)}
+                    onChange={val => dispatch(cf.displaySourceSequenceDurChange(val))}
                 />
 
-                {/* Wireless sensor number */}
-                {config.display.source.tempIn.sens === 2 && <div className="mt-8">
-                    <SelectSwitch label={i18n.t('wirelessSensorNumber')}
-                        options={wsensors}
-                        value={config.display.source.tempIn.wsensNum}
-                        onChange={val => dispatch(cf.displaySourceTempInWsensNumChange(val))}
-                    />
-                </div>}
+                {[...Array(4)].map((m, num) => <>
+                    <hr className="mt-8" />
 
-                {/* Wireless sensor temperature sensor number */}
-                {config.display.source.tempIn.sens === 2 && <div className="mt-8">
-                    <SelectSwitch label={i18n.t('temperatureSensorNumber')}
-                        options={temps}
-                        value={config.display.source.tempIn.temp}
-                        onChange={val => dispatch(cf.displaySourceTempInTempChange(val))}
-                    />
-                </div>}
+                    {/* Sensor type */}
+                    <div className="mt-8">  
+                        <SelectSwitch label={i18n.t('timeSlot') + ' ' + String(num + 1)}
+                            options={sensors.filter(sens => sens !== i18n.t('sequence'))}
+                            value={config.display.source.sequence.temp[num]}
+                            onChange={val => dispatch(cf.displaySourceSequenceTempChange({ num: num, val: val }))}
+                        />
+                    </div>
 
-                {/* Thingspeak */}
-                {config.display.source.tempIn.sens === 3 && <div className="mt-8">
-                    <SelectSwitch label={i18n.t('field')}
-                        options={things}
-                        value={config.display.source.tempIn.thing}
-                        onChange={val => dispatch(cf.displaySourceTempInThingChange(val))}
-                    />
-                </div>}
+                    {/* Wireless sensor number */}
+                    {config.display.source.sequence.temp[num] === 2 && <div className="mt-8">
+                        <SelectSwitch label={i18n.t('wirelessSensorNumber')}
+                            options={wsensors}
+                            value={tempWsensNum}
+                            onChange={val => {
+                                setTempWsensNum(val);
+                                dispatch(cf.displaySourceSequenceWsensTempChange({ num: num, wsens: 0, val: 0 }));
+                                dispatch(cf.displaySourceSequenceWsensTempChange({ num: num, wsens: 1, val: 0 }))
+                            }}
+                        />
+                    </div>}
 
-                {/* Sequence */}
-                {config.display.source.tempIn.sens === 4 && <div className="mt-8">
-                    <RangeInput value={config.display.source.sequence.dur}
-                        label={i18n.t('displayDuration')}
-                        min={1}
-                        max={20}
-                        limitMin={1}
-                        limitMax={20}
-                        step={1}
-                        indication={String(config.display.source.sequence.dur)}
-                        onChange={val => dispatch(cf.displaySourceSequenceDurChange(val))}
-                    />
+                    {/* Wireless sensor temperature sensor number */}
+                    {config.display.source.sequence.temp[num] === 2 && <div className="mt-8">
+                        <SelectSwitch label={i18n.t('temperatureSensorNumber')}
+                            options={sequenceTemps}
+                            value={config.display.source.sequence.wsenstemp[num][tempWsensNum]}
+                            onChange={val => dispatch(cf.displaySourceSequenceWsensTempChange({ num: num, wsens: tempWsensNum, val: val }))}
+                        />
+                    </div>}
 
-                    {[...Array(4)].map((m, num) => <>
-                        <hr className="mt-8" />
+                    {/* Thingspeak */}
+                    {config.display.source.sequence.temp[num] === 3 && <div className="mt-8">
+                        <SelectSwitch label={i18n.t('field')}
+                            options={things}
+                            value={config.display.source.sequence.thngtemp[num]}
+                            onChange={val => dispatch(cf.displaySourceSequenceThngTempChange({ num: num, val: val }))}
+                        />
+                    </div>}
 
-                        {/* Sensor type */}
-                        <div className="mt-8">  
-                            <SelectSwitch label={i18n.t('timeSlot') + ' ' + String(num + 1)}
-                                options={sensors.filter(sens => sens !== i18n.t('sequence'))}
-                                value={config.display.source.sequence.temp[num]}
-                                onChange={val => dispatch(cf.displaySourceSequenceTempChange({ num: num, val: val }))}
-                            />
-                        </div>
-
-                        {/* Wireless sensor number */}
-                        {config.display.source.sequence.temp[num] === 2 && <div className="mt-8">
-                            <SelectSwitch label={i18n.t('wirelessSensorNumber')}
-                                options={wsensors}
-                                value={tempWsensNum}
-                                onChange={val => {
-                                    setTempWsensNum(val);
-                                    dispatch(cf.displaySourceSequenceWsensTempChange({ num: num, wsens: 0, val: 0 }));
-                                    dispatch(cf.displaySourceSequenceWsensTempChange({ num: num, wsens: 1, val: 0 }))
-                                }}
-                            />
-                        </div>}
-
-                        {/* Wireless sensor temperature sensor number */}
-                        {config.display.source.sequence.temp[num] === 2 && <div className="mt-8">
-                            <SelectSwitch label={i18n.t('temperatureSensorNumber')}
-                                options={sequenceTemps}
-                                value={config.display.source.sequence.wsenstemp[num][tempWsensNum]}
-                                onChange={val => dispatch(cf.displaySourceSequenceWsensTempChange({ num: num, wsens: tempWsensNum, val: val }))}
-                            />
-                        </div>}
-
-                        {/* Thingspeak */}
-                        {config.display.source.sequence.temp[num] === 3 && <div className="mt-8">
-                            <SelectSwitch label={i18n.t('field')}
-                                options={things}
-                                value={config.display.source.sequence.thngtemp[num]}
-                                onChange={val => dispatch(cf.displaySourceSequenceThngTempChange({ num: num, val: val }))}
-                            />
-                        </div>}
-
-                        {/* Slot name */}
-                        <div className="mt-8">
-                            <TextInput label={i18n.t('name')} 
-                                value={config.display.source.sequence.name[num]}
-                                maxLength={15}
-                                onChange={val => dispatch(cf.displaySourceSequenceNameChange({ num: num, val: val.target.value})) }
-                            />
-                        </div>
-                    </>)}
-                </div>}
-            </>} 
-        />
-    </>
+                    {/* Slot name */}
+                    <div className="mt-8">
+                        <TextInput label={i18n.t('name')} 
+                            value={config.display.source.sequence.name[num]}
+                            maxLength={15}
+                            onChange={val => dispatch(cf.displaySourceSequenceNameChange({ num: num, val: val.target.value})) }
+                        />
+                    </div>
+                </>)}
+            </div>}
+        </>} 
+    />
 }
-
-export default CardDisplayTemperatureIn;

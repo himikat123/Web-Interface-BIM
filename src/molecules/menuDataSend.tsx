@@ -6,7 +6,7 @@ import MenuSubItem from "../atoms/menuSubItem";
 import i18n from '../i18n/main';
 import { CloudArrowUp } from "@phosphor-icons/react";
 
-const MenuDataSend = (props: iMenuItems) => {
+export default function MenuDataSend(props: iMenuItems) {
     const validSendThingspeak = useSelector((state: iValid) => state.valid.sendThingspeak);
     const validSendNarodmon = useSelector((state: iValid) => state.valid.sendNarodmon);
 
@@ -30,5 +30,3 @@ const MenuDataSend = (props: iMenuItems) => {
         />
     </MenuItem>
 }
-
-export default MenuDataSend;

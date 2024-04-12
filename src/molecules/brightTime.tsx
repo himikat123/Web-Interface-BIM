@@ -1,4 +1,3 @@
-import React from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import hostUrl from "../atoms/hostUrl";
@@ -8,7 +7,7 @@ import RangeInput from "../atoms/rangeInput";
 import TimeInput from "../atoms/timeInput";
 import * as cf from "../redux/slices/config";
 
-const BrightTime = (props: iDisplay) => {
+export default function BrightTime(props: iDisplay) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
 
@@ -65,5 +64,3 @@ const BrightTime = (props: iDisplay) => {
         />
     </>
 }
-
-export default BrightTime;

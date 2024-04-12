@@ -13,7 +13,7 @@ import { iData } from "../redux/dataTypes";
 import { connectValidChange } from "../redux/slices/valid";
 import * as cf from "../redux/slices/config";
 
-const Connect = () => {
+export default function Connect() {
     const [isValid, setIsValid] = useState<boolean[]>([]);
     const [netListOpen, setNetListOpen] = useState<boolean[]>([false, false, false]);
     
@@ -130,7 +130,7 @@ const Connect = () => {
                 : <TextInput label={i18n.t('alternativeDns')} value={data.network.dns2} readonly />
             }
         </>} />
-    </>;
+    </>
 
     return <ThreeColumns navbar={true}
         header={[
@@ -141,5 +141,3 @@ const Connect = () => {
         buttons={['save', 'reset']} 
     />
 }
-
-export default Connect;

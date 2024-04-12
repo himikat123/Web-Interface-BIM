@@ -7,7 +7,7 @@ import i18n from '../i18n/main';
 import device from '../device';
 import { Binary } from "@phosphor-icons/react";
 
-const MenuSource = (props: iMenuItems) => {
+export default function MenuSource(props: iMenuItems) {
     const validWsensors = useSelector((state: iValid) => state.valid.wsensors);
     
     return <MenuItem link="#" 
@@ -36,5 +36,3 @@ const MenuSource = (props: iMenuItems) => {
         />
     </MenuItem>
 }
-
-export default MenuSource;

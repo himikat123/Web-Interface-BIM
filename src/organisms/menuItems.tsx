@@ -14,7 +14,7 @@ import MenuDataSend from "../molecules/menuDataSend";
 import MenuDataReceive from "../molecules/menuDataReceive";
 import MenuSystem from '../molecules/menuSystem';
 
-const MenuItems = (props: iMenuItems) => {
+export default function MenuItems(props: iMenuItems) {
     return <>
         <MenuStatus current={props.current} mobile={props.mobile} />
         <MenuNetwork current={props.current} mobile={props.mobile} />
@@ -31,5 +31,3 @@ const MenuItems = (props: iMenuItems) => {
         <MenuSystem current={props.current} mobile={props.mobile} />
     </>
 }
-
-export default MenuItems;

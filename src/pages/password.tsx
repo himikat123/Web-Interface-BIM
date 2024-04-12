@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import i18n from '../i18n/main';
 import { sha512_224 } from 'js-sha512';
 import PasswordInput from "../atoms/passwordInput";
 import OneColumn from "../templates/oneColumn";
 import Card from "../atoms/card";
 
-const Password = () => {
+export default function Password() {
     const [oldPass, setOldPass] = useState<string>('');
     const [newPass, setNewPass] = useState<string>('');
 
@@ -27,14 +27,10 @@ const Password = () => {
         </>} />
     </>
 
-    return <>
-        <OneColumn navbar={true}
-            header={[i18n.t('changePassword')]} 
-            content={[content]} 
-            buttons={['save', 'reset']}
-            passChange={{ old: sha512_224(oldPass), new: sha512_224(newPass)}}
-        />
-    </>
+    return <OneColumn navbar={true}
+        header={[i18n.t('changePassword')]} 
+        content={[content]} 
+        buttons={['save', 'reset']}
+        passChange={{ old: sha512_224(oldPass), new: sha512_224(newPass)}}
+    />
 }
-
-export default Password;

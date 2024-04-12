@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import i18n from '../i18n/main';
 
-const MenuThemeSwitch = () => {
+export default function MenuThemeSwitch() {
     const [darkSide, setDarkSide] = useState<boolean>(false);
 
     const applyDarkMode = (checked: boolean) => {
@@ -25,17 +25,13 @@ const MenuThemeSwitch = () => {
         applyDarkMode(theme);
     }, [darkSide]);
 
-    return ( 
-        <div className="hover:scale-110 transition bg-menu_light dark:bg-menu_dark" title={i18n.t('theme')}>
-            <DarkModeSwitch
-                sunColor="white"
-                moonColor="white"
-                checked={darkSide ? true : false }
-                onChange={toggleDarkMode}
-                size={32}
-            />
-        </div>
-    )
+    return <div className="hover:scale-110 transition bg-menu_light dark:bg-menu_dark" title={i18n.t('theme')}>
+        <DarkModeSwitch
+            sunColor="white"
+            moonColor="white"
+            checked={darkSide ? true : false }
+            onChange={toggleDarkMode}
+            size={32}
+        />
+    </div>
 }
-
-export default MenuThemeSwitch;

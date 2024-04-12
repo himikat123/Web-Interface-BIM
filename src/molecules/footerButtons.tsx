@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSelector } from 'react-redux';
 import axios from "axios";
 import i18n from '../i18n/main';
@@ -10,7 +10,7 @@ import { iValid } from "../redux/validTypes";
 import { iConfig } from "../redux/configTypes";
 import { ReactComponent as SpinnerSVG } from '../atoms/icons/spinner.svg';
 
-const FooterButtons = (props: iFooterButtons) => {
+export default function FooterButtons(props: iFooterButtons) {
     const [saveButton, setSaveButton] = useState<string>('save');
     const [saveColor, setSaveColor] = useState<string>('blue');
     const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -73,7 +73,7 @@ const FooterButtons = (props: iFooterButtons) => {
         return () => window.clearTimeout(timeout.current ?? undefined);
     }, [saveButton]);
 
-    return (<>
+    return <>
         <div className="flex flex-col sm:flex-row justify-center w-full p-8">
             {(props.buttons.includes('save')) && <Button 
                 className={
@@ -101,7 +101,5 @@ const FooterButtons = (props: iFooterButtons) => {
             document.querySelector('body')?.classList.remove('modal-open');
             setModalOpen(false);
         }} />}
-    </>);
+    </>
 }
-
-export default FooterButtons;

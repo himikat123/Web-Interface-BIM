@@ -2,7 +2,7 @@ import { changeLanguage } from '../i18n/main';
 import i18n from '../i18n/main';
 import { SmileySad } from '@phosphor-icons/react';
 
-const PageNotFound = () => {
+export default function PageNotFound() {
     changeLanguage(localStorage.lang);
 
     return <div className="flex justify-center items-center w-full h-screen">
@@ -15,5 +15,3 @@ const PageNotFound = () => {
         </div>
     </div>
 }
-
-export default PageNotFound;

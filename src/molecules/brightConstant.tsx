@@ -1,4 +1,3 @@
-import React from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import hostUrl from "../atoms/hostUrl";
@@ -7,7 +6,7 @@ import { iDisplay } from "../interfaces";
 import RangeInput from "../atoms/rangeInput";
 import * as cf from "../redux/slices/config";
 
-const BrightConstant = (props: iDisplay) => {
+export default function BrightConstant(props: iDisplay) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
 
@@ -33,5 +32,3 @@ const BrightConstant = (props: iDisplay) => {
         className="mt-4"
     />
 }
-
-export default BrightConstant;

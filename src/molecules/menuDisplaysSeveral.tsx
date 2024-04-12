@@ -6,7 +6,7 @@ import MenuSubItem from "../atoms/menuSubItem";
 import i18n from '../i18n/main';
 import { Monitor } from "@phosphor-icons/react";
 
-const MenuDisplaysSeveral = (props: iMenuItems) => {
+export default function MenuDisplaysSeveral(props: iMenuItems) {
     const validDisplay1 = useSelector((state: iValid) => state.valid.display1);
     const validDisplay2 = useSelector((state: iValid) => state.valid.display2);
 
@@ -29,5 +29,3 @@ const MenuDisplaysSeveral = (props: iMenuItems) => {
         />
     </MenuItem>
 }
-
-export default MenuDisplaysSeveral;

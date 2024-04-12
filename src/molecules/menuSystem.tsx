@@ -11,7 +11,7 @@ import { ReactComponent as FlagRU } from '../atoms/icons/flagRU.svg';
 import { ReactComponent as FlagPL } from '../atoms/icons/flagPL.svg';
 import { ReactComponent as FlagUA } from '../atoms/icons/flagUA.svg';
 
-const MenuSystem = (props: iMenuItems) => {
+export default function MenuSystem(props: iMenuItems) {
     const config = useSelector((state: iConfig) => state.config);
         
     return <MenuItem link="#" 
@@ -59,5 +59,3 @@ const MenuSystem = (props: iMenuItems) => {
         
     </MenuItem>
 }
-
-export default MenuSystem;

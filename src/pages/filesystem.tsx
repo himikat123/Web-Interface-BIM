@@ -16,7 +16,7 @@ import { ReactComponent as JsonSVG } from '../atoms/icons/json.svg';
 import { ReactComponent as ImageSVG } from '../atoms/icons/image.svg';
 import { ReactComponent as RubickSVG } from '../atoms/icons/rubick.svg';
 
-const Filesystem = () => {
+export default function Filesystem() {
     const data = useSelector((state: iData) => state.data);
     const [filelist, setFilelist] = useState<iFilelist>([]);
     const [selected, setSelected] = useState<string>('.');
@@ -368,5 +368,3 @@ const Filesystem = () => {
         buttons={['reset']} 
     />
 }
-
-export default Filesystem;

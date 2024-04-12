@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useSelector } from 'react-redux';
 import i18n from '../i18n/main';
 import Button from "../atoms/button";
@@ -8,7 +8,7 @@ import { iConfig } from "../redux/configTypes";
 import { iWeather } from "../interfaces";
 import "./weatherChecker.scss";
 
-const WeatherChecker = () => {
+export default function WeatherChecker() {
     const [weatherColor, setWeatherColor] = useState<string>('text-blue-700 dark:text-blue-400');
     const [loading, setLoading] = useState<boolean>(false);
     const [descript, setDescript] = useState<string>('--');
@@ -143,7 +143,5 @@ const WeatherChecker = () => {
                 onClick={() => weatherCheck()}
             />
         </div>
-    </>;
+    </>
 }
-
-export default WeatherChecker;

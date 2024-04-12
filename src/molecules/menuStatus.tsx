@@ -3,7 +3,7 @@ import MenuItem from "../atoms/menuItem";
 import i18n from '../i18n/main';
 import { Info } from "@phosphor-icons/react";
 
-const MenuStatus = (props: iMenuItems) => {
+export default function MenuStatus(props: iMenuItems) {
     return <MenuItem link="/" 
         current={props.current} 
         title={i18n.t('status')} 
@@ -12,5 +12,3 @@ const MenuStatus = (props: iMenuItems) => {
         valid={true} 
     />
 }
-
-export default MenuStatus;

@@ -5,7 +5,7 @@ import { twMerge } from 'tailwind-merge';
 import { iNumberInput } from '../interfaces';
 import './numberInput.scss';
 
-const NumberInput = (props: iNumberInput) => {
+export default function NumberInput(props: iNumberInput) {
     const [valid, setValid] = useState<boolean>(true);
 
     /* Validate changed value */
@@ -59,7 +59,5 @@ const NumberInput = (props: iNumberInput) => {
         <div className={"number-input-tip text-red-500" + (!valid ? " open" : "")}>
             {i18n.t('tips.tip3').replace('{min}', String(props.min)).replace('{max}', String(props.max))}
         </div>
-    </>;
+    </>
 }
-
-export default NumberInput;

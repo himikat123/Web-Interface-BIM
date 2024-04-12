@@ -1,4 +1,3 @@
-import React from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../atoms/card";
@@ -8,7 +7,7 @@ import { iData } from "../redux/dataTypes";
 import * as cf from "../redux/slices/config";
 import * as vl from "../atoms/validateValues";
 
-const CardDisplayPressureOut = () => {
+export default function CardDisplayPressureOut() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
@@ -36,36 +35,32 @@ const CardDisplayPressureOut = () => {
         : i18n.t('dataExpired')})`
     );
 
-    return <>
-        <Card header={i18n.t('pressure')}
-            content={<>
-                {/* Sensor type */}
-                <SelectSwitch label={i18n.t('dataSource.singular')}
-                    options={sensors}
-                    value={config.display.source.presOut.sens}
-                    onChange={val => dispatch(cf.displaySourcePresOutSensChange(val))}
+    return <Card header={i18n.t('pressure')}
+        content={<>
+            {/* Sensor type */}
+            <SelectSwitch label={i18n.t('dataSource.singular')}
+                options={sensors}
+                value={config.display.source.presOut.sens}
+                onChange={val => dispatch(cf.displaySourcePresOutSensChange(val))}
+            />
+
+            {/* Wireless sensor number */}
+            {config.display.source.presOut.sens === 2 && <div className="mt-8">
+                <SelectSwitch label={i18n.t('wirelessSensorNumber')}
+                    options={wsensors}
+                    value={config.display.source.presOut.wsensNum}
+                    onChange={val => dispatch(cf.displaySourcePresOutWsensNumChange(val))}
                 />
+            </div>}
 
-                {/* Wireless sensor number */}
-                {config.display.source.presOut.sens === 2 && <div className="mt-8">
-                    <SelectSwitch label={i18n.t('wirelessSensorNumber')}
-                        options={wsensors}
-                        value={config.display.source.presOut.wsensNum}
-                        onChange={val => dispatch(cf.displaySourcePresOutWsensNumChange(val))}
-                    />
-                </div>}
-
-                {/* Thingspeak */}
-                {config.display.source.presOut.sens === 3 && <div className="mt-8">
-                    <SelectSwitch label={i18n.t('field')}
-                        options={things}
-                        value={config.display.source.presOut.thing}
-                        onChange={val => dispatch(cf.displaySourcePresOutThingChange(val))}
-                    />
-                </div>}
-            </>} 
-        />
-    </>
+            {/* Thingspeak */}
+            {config.display.source.presOut.sens === 3 && <div className="mt-8">
+                <SelectSwitch label={i18n.t('field')}
+                    options={things}
+                    value={config.display.source.presOut.thing}
+                    onChange={val => dispatch(cf.displaySourcePresOutThingChange(val))}
+                />
+            </div>}
+        </>} 
+    />
 }
-
-export default CardDisplayPressureOut;

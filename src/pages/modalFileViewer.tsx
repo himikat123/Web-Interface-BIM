@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { JsonView, darkStyles, defaultStyles } from 'react-json-view-lite';
 import Modal from "../templates/modal";
 import i18n from "../i18n/main";
 import { iModalFileViewer } from "../interfaces";
 
-const ModalFileViewer = (props: iModalFileViewer) => {
+export default function ModalFileViewer(props: iModalFileViewer) {
     const [fileContent, setFileContent] = useState<string>('');
     const theme = window.document.documentElement.classList[0] === 'dark' ? darkStyles : defaultStyles;
 
@@ -38,5 +38,3 @@ const ModalFileViewer = (props: iModalFileViewer) => {
         labelCancel={i18n.t('close')}
     />
 }
-
-export default ModalFileViewer;

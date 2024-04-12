@@ -5,7 +5,7 @@ import MenuItem from "../atoms/menuItem";
 import i18n from '../i18n/main';
 import { Clock } from "@phosphor-icons/react";
 
-const MenuClock = (props: iMenuItems) => {
+export default function MenuClock(props: iMenuItems) {
     const validClock = useSelector((state: iValid) => state.valid.clock);
 
     return <MenuItem link="/clock" 
@@ -16,5 +16,3 @@ const MenuClock = (props: iMenuItems) => {
         valid={validClock} 
     />
 }
-
-export default MenuClock;

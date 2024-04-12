@@ -3,7 +3,7 @@ import i18n from '../i18n/main';
 import Button from '../atoms/button';
 import { Warning } from '@phosphor-icons/react';
 
-const NoConfig = () => {
+export default function NoConfig() {
     changeLanguage(localStorage.lang);
 
     return <div className="flex justify-center items-center w-full h-screen">
@@ -22,5 +22,3 @@ const NoConfig = () => {
         </div>
     </div>
 }
-
-export default NoConfig;

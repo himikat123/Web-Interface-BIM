@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../atoms/card";
@@ -8,7 +8,7 @@ import { iData } from "../redux/dataTypes";
 import * as cf from "../redux/slices/config";
 import * as vl from "../atoms/validateValues";
 
-const CardsHistorySensor = () => {
+export default function CardsHistorySensor() {
     const [chartWidth, setChartWidth] = useState<number>(100);
 
     const changeChartWidth = () => {
@@ -16,7 +16,6 @@ const CardsHistorySensor = () => {
         setChartWidth(Math.round(width));
     }
 
-    
     useEffect(() => {
         changeChartWidth();
 
@@ -202,5 +201,3 @@ const CardsHistorySensor = () => {
         </div>} />
     )}</>
 }
-
-export default CardsHistorySensor;

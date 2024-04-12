@@ -1,4 +1,3 @@
-import React from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../atoms/card";
@@ -12,7 +11,7 @@ import * as cf from "../redux/slices/config";
 import * as vl from "../atoms/validateValues";
 import "./cardComfort.scss";
 
-const CardComfortTemp = () => {
+export default function CardComfortTemp() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
@@ -70,121 +69,117 @@ const CardComfortTemp = () => {
     }
     else comfort = '--';
 
-    return <>
-        <Card header={i18n.t('temperature')}
-            content={<>
-                {/* Sensor type */}
-                <SelectSwitch label={i18n.t('dataSource.singular')}
-                    options={sensors}
-                    value={config.comfort.temp.source}
-                    onChange={val => dispatch(cf.comfortTempSourceChange(val))}
+    return <Card header={i18n.t('temperature')}
+        content={<>
+            {/* Sensor type */}
+            <SelectSwitch label={i18n.t('dataSource.singular')}
+                options={sensors}
+                value={config.comfort.temp.source}
+                onChange={val => dispatch(cf.comfortTempSourceChange(val))}
+            />
+
+            {/* Wireless sensor number */}
+            {config.comfort.temp.source === 2 && <div className="mt-8">
+                <SelectSwitch label={i18n.t('wirelessSensorNumber')}
+                    options={wsensors}
+                    value={config.comfort.temp.wsensNum}
+                    onChange={val => dispatch(cf.comfortTempWsensNumChange(val))}
                 />
 
-                {/* Wireless sensor number */}
-                {config.comfort.temp.source === 2 && <div className="mt-8">
-                    <SelectSwitch label={i18n.t('wirelessSensorNumber')}
-                        options={wsensors}
-                        value={config.comfort.temp.wsensNum}
-                        onChange={val => dispatch(cf.comfortTempWsensNumChange(val))}
+                {/* Wireless sensor temperature sensor number */}
+                <div className="mt-8">
+                    <SelectSwitch label={i18n.t('temperatureSensorNumber')}
+                        options={temps}
+                        value={config.comfort.temp.sens}
+                        onChange={val => dispatch(cf.comfortTempSensChange(val))}
                     />
+                </div>
+            </div>}
 
-                    {/* Wireless sensor temperature sensor number */}
-                    <div className="mt-8">
-                        <SelectSwitch label={i18n.t('temperatureSensorNumber')}
-                            options={temps}
-                            value={config.comfort.temp.sens}
-                            onChange={val => dispatch(cf.comfortTempSensChange(val))}
-                        />
-                    </div>
-                </div>}
+            {/* Thingspeak */}
+            {config.comfort.temp.source === 3 && <div className="mt-8">
+                <SelectSwitch label={i18n.t('field')}
+                    options={things}
+                    value={config.comfort.temp.thing}
+                    onChange={val => dispatch(cf.comfortTempThingChange(val))}
+                />
+            </div>}
 
-                {/* Thingspeak */}
-                {config.comfort.temp.source === 3 && <div className="mt-8">
-                    <SelectSwitch label={i18n.t('field')}
-                        options={things}
-                        value={config.comfort.temp.thing}
-                        onChange={val => dispatch(cf.comfortTempThingChange(val))}
+            {<div className={'card-comfort ' + (config.comfort.temp.source > 0 ? 'show' : 'hide')}>
+                <div className="mt-6"><Indication error={false} value={comfort} /></div>
+
+                <div className="mt-8">
+                    <Toggle label={i18n.t('soundNotification')}
+                        checked={config.comfort.temp.sound}
+                        onChange={() => dispatch(cf.comfortTempSoundChange(config.comfort.temp.sound ? 0 : 1))}
                     />
-                </div>}
+                </div>
 
-                {<div className={'card-comfort ' + (config.comfort.temp.source > 0 ? 'show' : 'hide')}>
-                    <div className="mt-6"><Indication error={false} value={comfort} /></div>
+                {/* Max temperature */}
+                <RangeInput label={i18n.t('tempMax')}
+                    value={config.comfort.temp.max[0]}
+                    min={-50}
+                    max={100}
+                    limitMin={config.comfort.temp.min[0]}
+                    limitMax={100}
+                    step={0.1}
+                    indication={`${config.comfort.temp.max[0].toFixed(1)}°C`}
+                    onChange={val => dispatch(cf.comfortTempMaxChange({ num: 0, val: val }))}
+                    className="mt-4"
+                />
 
-                    <div className="mt-8">
-                        <Toggle label={i18n.t('soundNotification')}
-                            checked={config.comfort.temp.sound}
-                            onChange={() => dispatch(cf.comfortTempSoundChange(config.comfort.temp.sound ? 0 : 1))}
-                        />
-                    </div>
+                {/* Max temperature hysteresis */}
+                <RangeInput label={i18n.t('hysteresis')}
+                    value={config.comfort.temp.max[1]}
+                    min={0}
+                    max={10}
+                    limitMin={0}
+                    limitMax={10}
+                    step={0.1}
+                    indication={`±${(config.comfort.temp.max[1] / 2).toFixed(2)}°C`}
+                    onChange={val => dispatch(cf.comfortTempMaxChange({ num: 1, val: val }))}
+                    className="mt-4"
+                />
+                <div className="mt-4 select-none text-green-500 dark:text-green-200">
+                    <div>{i18n.t('conditioner')}</div>
+                    <div>{i18n.t('on')}: {(config.comfort.temp.max[0] + (config.comfort.temp.max[1] / 2)).toFixed(2)}°C</div>
+                    <div>{i18n.t('off')}: {(config.comfort.temp.max[0] - (config.comfort.temp.max[1] / 2)).toFixed(2)}°C</div>
+                </div>
 
-                    {/* Max temperature */}
-                    <RangeInput label={i18n.t('tempMax')}
-                        value={config.comfort.temp.max[0]}
-                        min={-50}
-                        max={100}
-                        limitMin={config.comfort.temp.min[0]}
-                        limitMax={100}
-                        step={0.1}
-                        indication={`${config.comfort.temp.max[0].toFixed(1)}°C`}
-                        onChange={val => dispatch(cf.comfortTempMaxChange({ num: 0, val: val }))}
-                        className="mt-4"
-                    />
+                <hr className="mt-8 mb-6" />
 
-                    {/* Max temperature hysteresis */}
-                    <RangeInput label={i18n.t('hysteresis')}
-                        value={config.comfort.temp.max[1]}
-                        min={0}
-                        max={10}
-                        limitMin={0}
-                        limitMax={10}
-                        step={0.1}
-                        indication={`±${(config.comfort.temp.max[1] / 2).toFixed(2)}°C`}
-                        onChange={val => dispatch(cf.comfortTempMaxChange({ num: 1, val: val }))}
-                        className="mt-4"
-                    />
-                    <div className="mt-4 select-none text-green-500 dark:text-green-200">
-                        <div>{i18n.t('conditioner')}</div>
-                        <div>{i18n.t('on')}: {(config.comfort.temp.max[0] + (config.comfort.temp.max[1] / 2)).toFixed(2)}°C</div>
-                        <div>{i18n.t('off')}: {(config.comfort.temp.max[0] - (config.comfort.temp.max[1] / 2)).toFixed(2)}°C</div>
-                    </div>
+                {/* Min temperature */}
+                <RangeInput label={i18n.t('tempMin')}
+                    value={config.comfort.temp.min[0]}
+                    min={-50}
+                    max={100}
+                    limitMin={-50}
+                    limitMax={config.comfort.temp.max[0]}
+                    step={0.1}
+                    indication={`${config.comfort.temp.min[0].toFixed(1)}°C`}
+                    onChange={val => dispatch(cf.comfortTempMinChange({ num: 0, val: val }))}
+                    className="mt-4"
+                />
 
-                    <hr className="mt-8 mb-6" />
+                {/* Min temperature hysteresis */}
+                <RangeInput label={i18n.t('hysteresis')}
+                    value={config.comfort.temp.min[1]}
+                    min={0}
+                    max={10}
+                    limitMin={0}
+                    limitMax={10}
+                    step={0.1}
+                    indication={`±${(config.comfort.temp.min[1] / 2).toFixed(1)}°C`}
+                    onChange={val => dispatch(cf.comfortTempMinChange({ num: 1, val: val }))}
+                    className="mt-4"
+                />
 
-                    {/* Min temperature */}
-                    <RangeInput label={i18n.t('tempMin')}
-                        value={config.comfort.temp.min[0]}
-                        min={-50}
-                        max={100}
-                        limitMin={-50}
-                        limitMax={config.comfort.temp.max[0]}
-                        step={0.1}
-                        indication={`${config.comfort.temp.min[0].toFixed(1)}°C`}
-                        onChange={val => dispatch(cf.comfortTempMinChange({ num: 0, val: val }))}
-                        className="mt-4"
-                    />
-
-                    {/* Min temperature hysteresis */}
-                    <RangeInput label={i18n.t('hysteresis')}
-                        value={config.comfort.temp.min[1]}
-                        min={0}
-                        max={10}
-                        limitMin={0}
-                        limitMax={10}
-                        step={0.1}
-                        indication={`±${(config.comfort.temp.min[1] / 2).toFixed(1)}°C`}
-                        onChange={val => dispatch(cf.comfortTempMinChange({ num: 1, val: val }))}
-                        className="mt-4"
-                    />
-
-                    <div className="mt-4 select-none text-green-500 dark:text-green-200">
-                        <div>{i18n.t('heater')}</div>
-                        <div>{i18n.t('on')}: {(config.comfort.temp.min[0] - (config.comfort.temp.min[1] / 2)).toFixed(2)}°C</div>
-                        <div>{i18n.t('off')}: {(config.comfort.temp.min[0] + (config.comfort.temp.min[1] / 2)).toFixed(2)}°C</div>
-                    </div>
-                </div>}
-            </>} 
-        />
-    </>
+                <div className="mt-4 select-none text-green-500 dark:text-green-200">
+                    <div>{i18n.t('heater')}</div>
+                    <div>{i18n.t('on')}: {(config.comfort.temp.min[0] - (config.comfort.temp.min[1] / 2)).toFixed(2)}°C</div>
+                    <div>{i18n.t('off')}: {(config.comfort.temp.min[0] + (config.comfort.temp.min[1] / 2)).toFixed(2)}°C</div>
+                </div>
+            </div>}
+        </>} 
+    />
 }
-
-export default CardComfortTemp;

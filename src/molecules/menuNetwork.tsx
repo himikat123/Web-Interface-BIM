@@ -6,7 +6,7 @@ import MenuSubItem from "../atoms/menuSubItem";
 import i18n from '../i18n/main';
 import { WifiHigh } from "@phosphor-icons/react";
 
-const MenuNetwork = (props: iMenuItems) => {
+export default function MenuNetwork(props: iMenuItems) {
     const validConnect = useSelector((state: iValid) => state.valid.connect);
     const validAccesspoint = useSelector((state: iValid) => state.valid.accesspoint);
 
@@ -29,5 +29,3 @@ const MenuNetwork = (props: iMenuItems) => {
         />
     </MenuItem>
 }
-
-export default MenuNetwork;

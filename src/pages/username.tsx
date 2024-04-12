@@ -9,7 +9,7 @@ import TextInput from "../atoms/textInput";
 import Toggle from "../atoms/toggle";
 import { iConfig } from '../redux/configTypes';
 
-const Username = () => {
+export default function Username() {
     const username = useSelector((state: iConfig) => state.config.account.name);
     const loginRequired = useSelector((state: iConfig) => state.config.account.required);
     const dispatch = useDispatch();
@@ -35,13 +35,9 @@ const Username = () => {
         } />
     </>;
 
-    return (<>
-        <OneColumn header={[i18n.t('username')]} 
-            content={[content]} 
-            navbar={true} 
-            buttons={['save', 'reset']} 
-        />
-    </>);
+    return <OneColumn header={[i18n.t('username')]} 
+        content={[content]} 
+        navbar={true} 
+        buttons={['save', 'reset']} 
+    />
 }
-
-export default Username;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import { useEffect, useState} from "react";
 import TwoColumns from "../templates/twoColumns";
 import { useSelector, useDispatch } from 'react-redux';
 import Moment from 'react-moment';
@@ -20,7 +20,7 @@ import { wsensorsValidChange } from "../redux/slices/valid";
 import * as cf from "../redux/slices/config";
 import * as vl from "../atoms/validateValues";
 
-const WSensors = () => {
+export default function WSensors() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
@@ -230,19 +230,15 @@ const WSensors = () => {
         />)}
     </>;
 
-    return <>
-        <TwoColumns navbar={true}
-            header={[i18n.t('wirelessSensor.plural')]} 
-            content={[content]} 
-            buttons={['save', 'reset']} 
-            footer={<div className="text-center">
-                <Button className="bg-green-600 hover:bg-green-700 text-text_dark"
-                    label={i18n.t(hideUnnecessary ? 'showAll' : 'hideUnused')}
-                    onClick={() => {setHideUnnecessary(!hideUnnecessary)}}
-                />
-            </div>}
-        />
-    </>
+    return <TwoColumns navbar={true}
+        header={[i18n.t('wirelessSensor.plural')]} 
+        content={[content]} 
+        buttons={['save', 'reset']} 
+        footer={<div className="text-center">
+            <Button className="bg-green-600 hover:bg-green-700 text-text_dark"
+                label={i18n.t(hideUnnecessary ? 'showAll' : 'hideUnused')}
+                onClick={() => {setHideUnnecessary(!hideUnnecessary)}}
+            />
+        </div>}
+    />
 }
-
-export default WSensors;

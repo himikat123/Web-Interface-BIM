@@ -1,4 +1,3 @@
-import React from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import hostUrl from "../atoms/hostUrl";
@@ -12,7 +11,7 @@ import { iDisplay } from "../interfaces";
 import { display1ValidChange } from "../redux/slices/valid";
 import * as cf from "../redux/slices/config";
 
-const CardDisplayAutoOff = (props: iDisplay) => {
+export default function CardDisplayAutoOff(props: iDisplay) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
        
@@ -60,5 +59,3 @@ const CardDisplayAutoOff = (props: iDisplay) => {
         </>} /> : <Card className="invisible lg:visible" content={<></>} />}
     </>
 }
-
-export default CardDisplayAutoOff;

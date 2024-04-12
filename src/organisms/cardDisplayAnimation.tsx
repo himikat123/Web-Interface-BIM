@@ -1,4 +1,3 @@
-import React from "react";
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import hostUrl from "../atoms/hostUrl";
@@ -9,7 +8,7 @@ import { iConfig } from "../redux/configTypes";
 import { iDisplay } from "../interfaces";
 import * as cf from "../redux/slices/config";
 
-const CardDisplayAnimation = (props: iDisplay) => {
+export default function CardDisplayAnimation(props: iDisplay) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const animations = [
@@ -89,5 +88,3 @@ const CardDisplayAnimation = (props: iDisplay) => {
         </>} /> : <Card className="invisible lg:visible" content={<></>} />}
     </>
 }
-
-export default CardDisplayAnimation;

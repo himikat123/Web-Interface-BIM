@@ -9,7 +9,7 @@ import { iConfig } from "../redux/configTypes";
 import { accesspointValidChange } from "../redux/slices/valid";
 import { acPointSsidChange, acPointPassChange } from "../redux/slices/config";
 
-const AccessPoint = () => {
+export default function AccessPoint() {
     const [isValid, setIsValid] = useState<boolean[]>([]);
 
     useEffect(() => {
@@ -56,5 +56,3 @@ const AccessPoint = () => {
         buttons={['save', 'reset']} 
     />
 }
-
-export default AccessPoint;
