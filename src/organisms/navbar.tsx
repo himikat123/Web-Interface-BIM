@@ -1,10 +1,9 @@
 import React, { useRef, useEffect, useState } from "react";
 import MenuMobileButton from "../molecules/menuMobileButton";
-import MenuItems from "../molecules/menuItems";
+import MenuItems from "./menuItems";
 import MenuThemeSwitch from "../atoms/menuThemeSwitch";
 import MenuUserDropdown from "../molecules/menuUserDropdown";
-import { ReactComponent as HamburgerSVG } from '../atoms/icons/hamburger.svg';
-import { ReactComponent as CloseSVG } from '../atoms/icons/close.svg';
+import { List, X } from "@phosphor-icons/react";
 import "./navbar.scss";
 
 const Navbar = () => {
@@ -37,7 +36,7 @@ const Navbar = () => {
             <div className="relative flex h-16 items-center justify-between">
                 <div onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
                     <MenuMobileButton>
-                        {mobileMenuOpen ? <CloseSVG /> : <HamburgerSVG />}
+                        {mobileMenuOpen ? <X /> : <List />}
                     </MenuMobileButton>
                 </div>
                 <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-start">

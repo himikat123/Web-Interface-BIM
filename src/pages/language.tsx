@@ -5,11 +5,11 @@ import { languageSwitch } from '../redux/slices/config';
 import i18n, { changeLanguage } from '../i18n/main';
 import Card from "../atoms/card";
 import RadioSwitch from "../atoms/radioSwitch";
-import { ReactComponent as EnSVG } from '../atoms/icons/en.svg';
-import { ReactComponent as DeSVG } from '../atoms/icons/de.svg';
-import { ReactComponent as RuSVG } from '../atoms/icons/ru.svg';
-import { ReactComponent as PlSVG } from '../atoms/icons/pl.svg';
-import { ReactComponent as UaSVG } from '../atoms/icons/ua.svg';
+import { ReactComponent as FlagEN } from '../atoms/icons/flagEN.svg';
+import { ReactComponent as FlagDE } from '../atoms/icons/flagDE.svg';
+import { ReactComponent as FlagRU } from '../atoms/icons/flagRU.svg';
+import { ReactComponent as FlagPL } from '../atoms/icons/flagPL.svg';
+import { ReactComponent as FlagUA } from '../atoms/icons/flagUA.svg';
 import { iConfig } from "../redux/configTypes";
 
 const Language = () => {
@@ -25,7 +25,7 @@ const Language = () => {
                 dispatch(languageSwitch('en'));
             }} 
             label="English"
-            icon={<EnSVG />}
+            icon={<FlagEN />}
         />
 
         <RadioSwitch id="de" 
@@ -36,7 +36,7 @@ const Language = () => {
                 dispatch(languageSwitch('de')); 
             }} 
             label="Deutsch"
-            icon={<DeSVG />}
+            icon={<FlagDE />}
         />
 
         <RadioSwitch id="ru" 
@@ -47,7 +47,7 @@ const Language = () => {
                 dispatch(languageSwitch('ru')); 
             }} 
             label="Русский"
-            icon={<RuSVG />}
+            icon={<FlagRU />}
         />
 
         <RadioSwitch id="pl" 
@@ -58,7 +58,7 @@ const Language = () => {
                 dispatch(languageSwitch('pl')); 
             }} 
             label="Polski"
-            icon={<PlSVG />}
+            icon={<FlagPL />}
         />
 
         <RadioSwitch id="ua" 
@@ -69,7 +69,7 @@ const Language = () => {
                 dispatch(languageSwitch('ua')); 
             }} 
             label="Українська"
-            icon={<UaSVG />}
+            icon={<FlagUA />}
         />
     </>} />;
 

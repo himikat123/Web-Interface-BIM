@@ -1,6 +1,5 @@
-import React from 'react';
 import hostUrl from "../atoms/hostUrl";
-import { ReactComponent as StopSVG } from '../atoms/icons/stop.svg';
+import { StopCircle } from "@phosphor-icons/react";
 
 const ButtonStop = () => {
     const sendStop = () => {
@@ -8,10 +7,10 @@ const ButtonStop = () => {
         fetch(url);
     }
 
-    return <div className="ms-2 hover:scale-110 transition" 
+    return <div className="hover:scale-110 transition" 
         onClick={() => sendStop()}
     >
-        {<StopSVG />}
+        {<StopCircle size={60} weight="fill" />}
     </div>
 }
 

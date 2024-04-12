@@ -1,4 +1,0 @@
-<svg viewBox="0 0 64 64">
-    <circle className='menu-svg-bg dark:menu-svg-bg-dark' cx="32" cy="32" r="32"/>
-    <path className='menu-svg-col1 dark:menu-svg-col1-dark' d="M23.088 49V45.352H30.96V28.648H24.192V25H35.712V45.352H43.176V49H23.088ZM30.816 14.992H35.808V20.44H30.816V14.992Z"/>
-</svg>

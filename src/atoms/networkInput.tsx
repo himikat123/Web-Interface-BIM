@@ -1,6 +1,5 @@
-import React from 'react';
 import TextInput from './textInput';
-import { ReactComponent as ListSVG } from '../atoms/icons/list.svg';
+import { List } from '@phosphor-icons/react';
 import { iNetworkInput } from '../interfaces';
 
 const NetworkInput = (props: iNetworkInput) => {
@@ -14,8 +13,8 @@ const NetworkInput = (props: iNetworkInput) => {
         onChange={props.onChange}
         isValid={props.isValid}
     >
-        <div className="w-8 absolute top-3 right-3 cursor-pointer input-icon" onClick={props.openList}>
-            <ListSVG />
+        <div className="w-8 h-8 absolute top-3 right-3 cursor-pointer input-icon" onClick={props.openList}>
+            <List size={32} />
         </div>
     </TextInput>
 }

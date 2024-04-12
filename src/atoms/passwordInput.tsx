@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import TextInput from './textInput';
-import { ReactComponent as ShowSVG } from '../atoms/icons/show.svg';
-import { ReactComponent as HideSVG } from '../atoms/icons/hide.svg';
+import { Eye, EyeSlash } from "@phosphor-icons/react";
 import { iPasswordInput } from '../interfaces';
 
 const PasswordInput = (props: iPasswordInput) => {
@@ -18,10 +17,10 @@ const PasswordInput = (props: iPasswordInput) => {
         onChange={props.onChange}
         isValid={props.isValid}
     >
-        <div className="w-8 absolute top-3 right-3 cursor-pointer input-icon" 
+        <div className="w-8 h-8 absolute top-3 right-3 cursor-pointer input-icon" 
             onClick={() => setType(type === 'password' ? 'text' : 'password')}
         >
-            {type === 'password' ? <HideSVG /> : <ShowSVG />}
+            {type === 'password' ? <EyeSlash size={32} /> : <Eye size={32} />}
         </div>
     </TextInput>
 }

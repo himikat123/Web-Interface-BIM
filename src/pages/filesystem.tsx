@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useSelector } from 'react-redux';
 import i18n from "../i18n/main";
 import axios from "axios";
@@ -9,13 +9,12 @@ import Button from "../atoms/button";
 import ModalFileViewer from "./modalFileViewer";
 import { iData } from "../redux/dataTypes";
 import { iFile, iFilelist } from "../interfaces";
+import { CheckCircle, XCircle } from "@phosphor-icons/react";
 import { ReactComponent as FolderSVG } from '../atoms/icons/folder.svg';
 import { ReactComponent as HtmlSVG } from '../atoms/icons/html.svg';
 import { ReactComponent as JsonSVG } from '../atoms/icons/json.svg';
 import { ReactComponent as ImageSVG } from '../atoms/icons/image.svg';
 import { ReactComponent as RubickSVG } from '../atoms/icons/rubick.svg';
-import { ReactComponent as OkSVG } from '../atoms/icons/ok.svg';
-import { ReactComponent as CancelSVG } from '../atoms/icons/cancel.svg';
 
 const Filesystem = () => {
     const data = useSelector((state: iData) => state.data);
@@ -350,10 +349,10 @@ const Filesystem = () => {
                         ? file.size ? i18n.numberToHumanSize(file.size) : ''
                         : <div className="flex">
                             <div className="w-6" onClick={() => rename()}>
-                                <OkSVG />
+                                <CheckCircle size={28} weight="fill" color="#0D0" />
                             </div>
                             <div className="w-6 ms-1" onClick={() => setRenaming('')}>
-                                <CancelSVG />
+                                <XCircle size={28} weight="fill" color="#F00" />
                             </div>
                         </div>
                     }</div>

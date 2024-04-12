@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import MenuSubItem from "../atoms/menuSubItem";
 import DropdownBox from "../atoms/dropdownBox";
 import i18n from '../i18n/main';
-import { ReactComponent as AccountSVG } from '../atoms/icons/account.svg';
+import { User } from "@phosphor-icons/react";
 import { iMenuUserDropdown } from "../interfaces";
 import { iValid } from "../redux/validTypes";
 
@@ -31,7 +31,7 @@ const MenuUserDropdown = (props: iMenuUserDropdown) => {
             <div onClick={() => setMenuUserOpen(!menuUserOpen)} title={i18n.t('account')}>
                 <button type="button" className="hover:scale-110 transition relative flex rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                     <span className="absolute -inset-1.5"></span>
-                    <span className={validAccount ? "" : "error"}><AccountSVG /></span>
+                    <span className={validAccount ? "" : "error"}><User color="#FFF" /></span>
                 </button>
             </div>
 

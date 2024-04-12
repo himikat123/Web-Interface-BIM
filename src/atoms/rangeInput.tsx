@@ -1,5 +1,5 @@
 import React from "react";
-import {ReactComponent as ArrowLeft} from "./icons/arrowLeft.svg";
+import { CaretLeft, CaretRight } from "@phosphor-icons/react";
 import { iRangeInput } from "../interfaces";
 import "./rangeInput.scss";
 
@@ -30,7 +30,7 @@ const RangeInput = (props: iRangeInput) => {
 
         <div className="flex items-center mt-2 cursor-pointer input-icon">
             <div className="me-2 w-4" onClick={() => minus()}>
-                <ArrowLeft />
+                <CaretLeft />
             </div>
 
             <div className="h-2 bg-gray-300 dark:bg-gray-500" style={{width: `${min}%`}} />
@@ -45,8 +45,8 @@ const RangeInput = (props: iRangeInput) => {
             />
             <div className="h-2 bg-gray-300 dark:bg-gray-500" style={{width: `${max}%`}} />
             
-            <div className="ms-2 w-4 rotate-180 cursor-pointer" onClick={() => plus()}>
-                <ArrowLeft />
+            <div className="ms-2 w-4 cursor-pointer" onClick={() => plus()}>
+                <CaretRight />
             </div>
             
             <div className="ms-2 w-24 select-none text-right">

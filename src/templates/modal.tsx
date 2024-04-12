@@ -1,6 +1,6 @@
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import Button from "../atoms/button";
-import { ReactComponent as CloseSVG } from '../atoms/icons/close.svg';
+import { X } from "@phosphor-icons/react";
 import { iModal } from "../interfaces";
 
 const Modal = (props: iModal) => {
@@ -15,7 +15,7 @@ const Modal = (props: iModal) => {
             <div className="p-4 border-b border-gray-500 flex justify-between items-center">
                 <div>{props.header}</div>
                 <div onClick={props.modalClose} className="p-1 bg-gray-500 hover:bg-gray-700 cursor-pointer border-2 rounded border-menu_light dark:border-menu_dark text-text_dark">
-                    <CloseSVG />
+                    <X />
                 </div>
             </div>
 
