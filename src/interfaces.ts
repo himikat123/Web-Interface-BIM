@@ -273,3 +273,12 @@ export interface iModalFileViewer {
     selected: string,
     modalClose(): void
 }
+
+export interface iSelectSensor {
+    value: number,
+    changeValue(val: number): void
+}
+
+export interface iSensorTypeSequence {
+    num: number
+}
