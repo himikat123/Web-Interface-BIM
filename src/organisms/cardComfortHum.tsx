@@ -134,7 +134,7 @@ export default function CardComfortHum() {
                     <div>{i18n.t('off')}: {(config.comfort.hum.max[0] - (config.comfort.hum.max[1] / 2)).toFixed(2)}%</div>
                 </div>
 
-                <hr className="mt-8 mb-6" />
+                <hr className="mt-8 mb-6 border-menu_light dark:border-menu_dark" />
 
                 {/* Min Humidity */}
                 <RangeInput label={i18n.t('humMin')}

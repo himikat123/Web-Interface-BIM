@@ -253,7 +253,7 @@ export default function Filesystem() {
             </div>
         </div>
 
-        <hr className="my-8" />
+        <hr className="my-8 border-menu_light dark:border-menu_dark" />
 
         {/* Buttons section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -278,7 +278,7 @@ export default function Filesystem() {
             />
         </div>
 
-        <hr className="my-8" />
+        <hr className="my-8 border-menu_light dark:border-menu_dark" />
 
         <div className="mt-4 border max-w-2xl mx-auto">
             {/* Filesystem info section */}

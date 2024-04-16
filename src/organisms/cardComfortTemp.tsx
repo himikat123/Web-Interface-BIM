@@ -146,7 +146,7 @@ export default function CardComfortTemp() {
                     <div>{i18n.t('off')}: {(config.comfort.temp.max[0] - (config.comfort.temp.max[1] / 2)).toFixed(2)}°C</div>
                 </div>
 
-                <hr className="mt-8 mb-6" />
+                <hr className="mt-8 mb-6 border-menu_light dark:border-menu_dark" />
 
                 {/* Min temperature */}
                 <RangeInput label={i18n.t('tempMin')}

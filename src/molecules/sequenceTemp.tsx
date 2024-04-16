@@ -18,7 +18,7 @@ export default function SequenceTemp() {
         <SequenceDuration />
 
         {[...Array(4)].map((m, num) => <>
-            <hr className="my-8" />
+            <hr className="my-8 border-menu_light dark:border-menu_dark" />
 
             {/* Sensor type */}
             <div className="mt-8">

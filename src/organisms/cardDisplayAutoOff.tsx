@@ -35,7 +35,7 @@ export default function CardDisplayAutoOff(props: iDisplay) {
                 />
             </div>
 
-            <hr className="mt-4 mb-12" />
+            <hr className="mt-4 mb-12 border-menu_light dark:border-menu_dark" />
 
             <Toggle label={i18n.t('turnOffDisplayAtNight')}
                 checked={config.display.nightOff.need[props.num]}

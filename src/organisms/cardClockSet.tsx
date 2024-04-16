@@ -100,7 +100,7 @@ export default function CardClockSet() {
     return <Card content={<>
         <div>⇒ <Indication error={false} value={send} /></div>
         <div>⇐ <Indication error={false} value={receive} /></div>
-        <hr className="mt-4" />
+        <hr className="mt-4 border-menu_light dark:border-menu_dark" />
 
         <div className="text-center mt-4">
             <Button className="bg-green-600 hover:bg-green-700 text-text_dark"
@@ -120,7 +120,7 @@ export default function CardClockSet() {
                 />
             </div>
         </div>
-        <hr className="mt-4" />
+        <hr className="mt-4 border-menu_light dark:border-menu_dark" />
 
         <div className="mt-8">
             <DateTimeInput label={i18n.t('setTimeManually')}
