@@ -5,8 +5,8 @@ import { iSelectSensor } from "../interfaces";
 
 export default function WsensorNumber(props: iSelectSensor) {
     let wsensors = [
-        `${i18n.t('wirelessSensor.singular')} 0`,
-        `${i18n.t('wirelessSensor.singular')} 1`
+        `${i18n.t('wirelessSensor.singular')} 0 ${props.indications ? props.indications[0] : ''}`,
+        `${i18n.t('wirelessSensor.singular')} 1 ${props.indications ? props.indications[1] : ''}`
     ];
 
     return <div className="mt-8">

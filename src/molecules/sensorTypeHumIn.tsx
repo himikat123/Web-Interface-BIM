@@ -6,42 +6,38 @@ import { iConfig } from "../redux/configTypes";
 import * as cf from "../redux/slices/config";
 import Forecast from "../atoms/indications/forecast";
 import BME280 from "../atoms/indications/BME280";
-import BMP180 from "../atoms/indications/BMP180";
 import SHT21 from "../atoms/indications/SHT21";
 import DHT22 from "../atoms/indications/DHT22";
-import DS18B20 from "../atoms/indications/DS18B20";
 import BME680 from "../atoms/indications/BME680";
 
-export default function SensorTypeTempIn() {
+export default function SensorTypeHumIn() {
     const [prevSens, setPrevSens] = useState<number>(0);
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
 
     const sensors = [
         '--', 
-        Forecast().temp, 
+        Forecast().hum, 
         i18n.t('wirelessSensor.singular'), 
         'Thingspeak', 
         i18n.t('sequence'),
-        BME280().temp, 
-        BMP180().temp, 
-        SHT21().temp, 
-        DHT22().temp, 
-        DS18B20().temp, 
-        BME680().temp
+        BME280().hum,
+        SHT21().hum, 
+        DHT22().hum,
+        BME680().hum
     ];
 
     useEffect(() => {
-        setPrevSens(config.display.source.tempIn.sens);
-    }, [config.display.source.tempIn.sens]);
+        setPrevSens(config.display.source.humIn.sens);
+    }, [config.display.source.humIn.sens]);
 
     return <SelectSwitch label={i18n.t('dataSource.singular')}
         options={sensors}
-        value={config.display.source.tempIn.sens}
+        value={config.display.source.humIn.sens}
         onChange={val => {
-            dispatch(cf.displaySourceTempInSensChange(val));
-            if(val === 4) dispatch(cf.displaySourceHumInSensChange(val));
-            if(prevSens === 4) dispatch(cf.displaySourceHumInSensChange(0));
+            dispatch(cf.displaySourceHumInSensChange(val));
+            if(val === 4) dispatch(cf.displaySourceTempInSensChange(val));
+            if(prevSens === 4) dispatch(cf.displaySourceTempInSensChange(0));
         }}
     />
 }

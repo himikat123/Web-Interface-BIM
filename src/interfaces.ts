@@ -276,7 +276,8 @@ export interface iModalFileViewer {
 
 export interface iSelectSensor {
     value: number,
-    changeValue(val: number): void
+    changeValue(val: number): void,
+    indications?: Array<string> | undefined
 }
 
 export interface iSensorTypeSequence {

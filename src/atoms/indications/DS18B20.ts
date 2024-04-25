@@ -1,6 +1,6 @@
 import { iConfig } from "../../redux/configTypes";
 import { iData } from "../../redux/dataTypes";
-import * as vl from "../../atoms/validateValues";
+import * as vl from "../validateValues";
 import { useSelector } from 'react-redux';
 
 export default function DS18B20() {

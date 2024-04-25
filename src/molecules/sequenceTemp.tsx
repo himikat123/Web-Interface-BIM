@@ -17,7 +17,7 @@ export default function SequenceTemp() {
     return <div className="mt-8">
         <SequenceDuration />
 
-        {[...Array(4)].map((m, num) => <>
+        {[...Array(4)].map((m, num) => <div key={num}>
             <hr className="my-8 border-menu_light dark:border-menu_dark" />
 
             {/* Sensor type */}
@@ -46,6 +46,6 @@ export default function SequenceTemp() {
 
             {/* Slot name */}
             <SequenceSlotName num={num} />
-        </>)}
+        </div>)}
     </div>
 }

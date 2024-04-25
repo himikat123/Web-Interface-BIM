@@ -1,7 +1,7 @@
 import { iConfig } from "../../redux/configTypes";
 import { iData } from "../../redux/dataTypes";
 import { useSelector } from 'react-redux';
-import * as vl from "../../atoms/validateValues";
+import * as vl from "../validateValues";
 
 export default function SHT21() {
     const config = useSelector((state: iConfig) => state.config);

@@ -5,33 +5,29 @@ import { iConfig } from "../redux/configTypes";
 import * as cf from "../redux/slices/config";
 import Forecast from "../atoms/indications/forecast";
 import BME280 from "../atoms/indications/BME280";
-import BMP180 from "../atoms/indications/BMP180";
 import SHT21 from "../atoms/indications/SHT21";
 import DHT22 from "../atoms/indications/DHT22";
-import DS18B20 from "../atoms/indications/DS18B20";
 import BME680 from "../atoms/indications/BME680";
 import { iSensorTypeSequence } from "../interfaces";
 
-export default function SensorTypeTempSequence(props: iSensorTypeSequence) {
+export default function SensorTypeHumSequence(props: iSensorTypeSequence) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
 
     const sensors = [
         '--', 
-        Forecast().temp, 
+        Forecast().hum, 
         i18n.t('wirelessSensor.singular'), 
         'Thingspeak',
-        BME280().temp, 
-        BMP180().temp, 
-        SHT21().temp, 
-        DHT22().temp, 
-        DS18B20().temp, 
-        BME680().temp
+        BME280().hum,
+        SHT21().hum,
+        DHT22().hum,
+        BME680().hum
     ];
 
     return <SelectSwitch label={i18n.t('timeSlot') + ' ' + String(props.num + 1)}
         options={sensors}
-        value={config.display.source.sequence.temp[props.num]}
-        onChange={val => dispatch(cf.displaySourceSequenceTempChange({ num: props.num, val: val }))}
+        value={config.display.source.sequence.hum[props.num]}
+        onChange={val => dispatch(cf.displaySourceSequenceHumChange({ num: props.num, val: val }))}
     />
 }
