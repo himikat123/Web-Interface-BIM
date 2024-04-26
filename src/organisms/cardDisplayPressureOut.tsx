@@ -5,7 +5,7 @@ import { iConfig } from "../redux/configTypes";
 import * as cf from "../redux/slices/config";
 import SensorTypePresOut from "../molecules/sensorTypePresOut";
 import WsensorNumber from "../molecules/wsensorNumber";
-import ThingspeakField from "../molecules/thingspeakField";
+import ThingspeakField from "../molecules/thingspeakFields";
 import Wsensor from "../atoms/indications/wsensor";
 
 export default function CardDisplayPressureOut() {
@@ -13,7 +13,7 @@ export default function CardDisplayPressureOut() {
     const config = useSelector((state: iConfig) => state.config);
     const indications = [Wsensor()[0].pres, Wsensor()[1].pres];
 
-    return <Card header={i18n.t('pressureOut')}
+    return <Card header={i18n.t('pressure')}
         content={<>
             {/* Sensor type */}
             <SensorTypePresOut />

@@ -5,7 +5,7 @@ import { iConfig } from "../redux/configTypes";
 import * as cf from "../redux/slices/config";
 import SensorTypeHumOut from "../molecules/sensorTypeHumOut";
 import WsensorNumber from "../molecules/wsensorNumber";
-import ThingspeakField from "../molecules/thingspeakField";
+import ThingspeakField from "../molecules/thingspeakFields";
 import Wsensor from "../atoms/indications/wsensor";
 
 export default function CardDisplayHumidityOut() {

@@ -1,8 +1,8 @@
-import i18n from "../i18n/main";
+import i18n from "../../i18n/main";
 import { useSelector } from 'react-redux';
-import { iConfig } from "../redux/configTypes";
-import { iData } from "../redux/dataTypes";
-import * as vl from "../atoms/validateValues";
+import { iConfig } from "../../redux/configTypes";
+import { iData } from "../../redux/dataTypes";
+import * as vl from "../validateValues";
 
 const voltage = (adc: number, k: number) => adc / (300.0 - k);
 
@@ -21,10 +21,10 @@ export const BatVoltage = (num: number) => {
 
     if(vl.WsensorDataRelevance(num)) {
         if(vl.validateBatteryADC(data.wsensor.bat[num]))
-            return voltage(data.wsensor.bat[num], config.wsensor.bat.k[num]).toFixed(2) + i18n.t('units.v');
-        else return '--';
+            return `(${voltage(data.wsensor.bat[num], config.wsensor.bat.k[num]).toFixed(2)} ${i18n.t('units.v')})`;
+        else return '(--)';
     }
-    else return i18n.t('dataExpired');
+    else return `(${i18n.t('dataExpired')})`;
 }
 
 export const BatPercent = (num: number) => {
@@ -33,11 +33,11 @@ export const BatPercent = (num: number) => {
 
     if(vl.WsensorDataRelevance(num)) {
         if(vl.validateBatteryADC(data.wsensor.bat[num])) {
-            return percentage(config.wsensor.bat.type[num], data.wsensor.bat[num], config.wsensor.bat.k[num]).toFixed(2) + '%';
+            return `(${percentage(config.wsensor.bat.type[num], data.wsensor.bat[num], config.wsensor.bat.k[num]).toFixed(2)} %)`;
         }
-        else return '--';
+        else return '(--)';
     }
-    else return i18n.t('dataExpired');
+    else return `(${i18n.t('dataExpired')})`;
 }
 
 export const BatLevel = (num: number) => {
@@ -50,9 +50,9 @@ export const BatLevel = (num: number) => {
             let level = Math.round(percent / 25);
             if(level < 1) level = 1;
             if(level > 4) level = 4;
-            return level.toFixed() + ' ' + i18n.t(`units.bar.${level === 1 ? 'singular' : 'plural'}`);
+            return `(${level.toFixed()} ${i18n.t(`units.bar.${level === 1 ? 'singular' : 'plural'}`)})`;
         }
-        else return '--';
+        else return '(--)';
     }
-    else return i18n.t('dataExpired');
+    else return `(${i18n.t('dataExpired')})`;
 }

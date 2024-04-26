@@ -5,7 +5,7 @@ import { iConfig } from "../redux/configTypes";
 import * as cf from "../redux/slices/config";
 import SensorTypeHumIn from "../molecules/sensorTypeHumIn";
 import WsensorNumber from "../molecules/wsensorNumber";
-import ThingspeakField from "../molecules/thingspeakField";
+import ThingspeakField from "../molecules/thingspeakFields";
 import SequenceHum from "../molecules/sequenceHum";
 import Wsensor from "../atoms/indications/wsensor";
 

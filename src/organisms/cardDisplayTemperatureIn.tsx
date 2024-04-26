@@ -6,7 +6,7 @@ import * as cf from "../redux/slices/config";
 import SensorTypeTempIn from "../molecules/sensorTypeTempIn";
 import WsensorNumber from "../molecules/wsensorNumber";
 import WsensorTempNumber from "../molecules/wsensorTempNumber";
-import ThingspeakField from "../molecules/thingspeakField";
+import ThingspeakField from "../molecules/thingspeakFields";
 import SequenceTemp from "../molecules/sequenceTemp";
 
 export default function CardDisplayTemperatureIn() {
@@ -22,7 +22,8 @@ export default function CardDisplayTemperatureIn() {
             <WsensorNumber value={config.display.source.tempIn.wsensNum} 
                 changeValue={val => dispatch(cf.displaySourceTempInWsensNumChange(val))}
             />
-            <WsensorTempNumber value={config.display.source.tempIn.temp}
+            <WsensorTempNumber wSensNum={config.display.source.tempIn.wsensNum}
+                value={config.display.source.tempIn.temp}
                 changeValue={val => dispatch(cf.displaySourceTempInTempChange(val))}
             />
         </>}

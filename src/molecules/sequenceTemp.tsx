@@ -6,7 +6,7 @@ import SequenceDuration from "./sequenceDuration";
 import SensorTypeTempSequence from "./sensorTypeTempSequence";
 import WsensorNumber from "./wsensorNumber";
 import WsensorTempNumber from "./wsensorTempNumber";
-import ThingspeakField from "./thingspeakField";
+import ThingspeakField from "./thingspeakFields";
 import SequenceSlotName from "./sequenceSlotName";
 
 export default function SequenceTemp() {
@@ -34,7 +34,8 @@ export default function SequenceTemp() {
                         dispatch(cf.displaySourceSequenceWsensTempChange({ num: num, wsens: 1, val: 0 }))
                     }}
                 />
-                <WsensorTempNumber value={config.display.source.sequence.wsenstemp[num][tempWsensNum]}
+                <WsensorTempNumber wSensNum={tempWsensNum}
+                    value={config.display.source.sequence.wsenstemp[num][tempWsensNum]}
                     changeValue={val => dispatch(cf.displaySourceSequenceWsensTempChange({ num: num, wsens: tempWsensNum, val: val }))}
                 />
             </>}

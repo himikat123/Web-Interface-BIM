@@ -5,7 +5,7 @@ import 'moment/locale/ru';
 import 'moment/locale/pl';
 import 'moment/locale/uk';
 import { useSelector, useDispatch } from 'react-redux';
-import { BatVoltage, BatPercent, BatLevel } from "../atoms/battery";
+import { BatVoltage, BatPercent, BatLevel } from "../atoms/indications/battery";
 import Card from "../atoms/card";
 import SelectSwitch from "../atoms/selectSwitch";
 import { iConfig } from "../redux/configTypes";

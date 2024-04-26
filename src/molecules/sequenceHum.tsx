@@ -5,7 +5,7 @@ import * as cf from "../redux/slices/config";
 import SequenceDuration from "./sequenceDuration";
 import SensorTypeHumSequence from "./sensorTypeHumSequence";
 import WsensorNumber from "./wsensorNumber";
-import ThingspeakField from "./thingspeakField";
+import ThingspeakField from "./thingspeakFields";
 import SequenceSlotName from "./sequenceSlotName";
 import Wsensor from "../atoms/indications/wsensor";
 

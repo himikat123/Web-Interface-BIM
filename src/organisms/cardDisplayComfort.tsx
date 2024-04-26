@@ -17,13 +17,10 @@ export default function CardDisplayComfort() {
     ];
 
     return <Card header={i18n.t('additionalDescription')}
-        content={<>
-            {/* Sensor type */}
-            <SelectSwitch label={i18n.t('dataSource.singular')}
-                options={comforts}
-                value={config.display.source.descr}
-                onChange={val => dispatch(cf.displaySourceDescrChange(val))}
-            />
-        </>} 
+        content={<SelectSwitch label={i18n.t('dataSource.singular')}
+            options={comforts}
+            value={config.display.source.descr}
+            onChange={val => dispatch(cf.displaySourceDescrChange(val))}
+        />} 
     />
 }

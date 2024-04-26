@@ -5,7 +5,7 @@ import { iData } from "../redux/dataTypes";
 import { iSelectSensor } from "../interfaces";
 import * as vl from "../atoms/validateValues";
 
-export default function ThingspeakField(props: iSelectSensor) {
+export default function ThingspeakFields(props: iSelectSensor) {
     const data = useSelector((state: iData) => state.data);
 
     let fields: string[] = [];

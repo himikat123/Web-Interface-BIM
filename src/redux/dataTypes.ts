@@ -6,8 +6,8 @@ export interface iData {
         esp32: {
             temp: number
         },
-        runtime: string,
-        time: string,
+        runtime: number,
+        time: number,
         network: {
             ssid: string,
             ch: number,

@@ -283,3 +283,17 @@ export interface iSelectSensor {
 export interface iSensorTypeSequence {
     num: number
 }
+
+export interface iWsensTempNum {
+    value: number,
+    changeValue(val: number): void,
+    wSensNum: number
+}
+
+export interface iWsensIndications {
+    temp: Array<string>,
+    hum: string,
+    pres: string,
+    volt: string,
+    co2: string
+}
