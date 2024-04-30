@@ -8,8 +8,10 @@ export default function ESP32() {
     const data = useSelector((state: iData) => state.data);
 
     return {
-        temp: `ESP32 (${vl.validateTemperature(data.esp32.temp) 
+        temp: vl.validateTemperature(data.esp32.temp) 
             ? ((data.esp32.temp + config.sensors.esp32.t).toFixed(2) + '°C') 
-            : '--'})`
+            : '--',
+
+        runtime: data.runtime
     }
 }

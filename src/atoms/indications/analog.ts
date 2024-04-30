@@ -1,15 +1,16 @@
+import i18n from "../../i18n/main";
 import { iConfig } from "../../redux/configTypes";
 import { iData } from "../../redux/dataTypes";
 import * as vl from "../validateValues";
 import { useSelector } from 'react-redux';
 
-export default function DS18B20() {
+export default function Analog() {
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
 
     return {
-        temp: vl.validateTemperature(data.ds18b20.temp) 
-            ? ((data.ds18b20.temp + config.sensors.ds18b20.t).toFixed(2) + '°C') 
+        volt: vl.validateAnalogVoltage(data.analog.volt) 
+            ? ((data.analog.volt + config.sensors.analog.v).toFixed(2) + i18n.t('units.v')) 
             : '--'
     }
 }

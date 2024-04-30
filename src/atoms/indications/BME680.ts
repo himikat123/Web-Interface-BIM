@@ -9,21 +9,21 @@ export default function BME680() {
     const data = useSelector((state: iData) => state.data);
 
     return {
-        temp: `BME680 (${vl.validateTemperature(data.bme680.temp) 
+        temp: vl.validateTemperature(data.bme680.temp) 
             ? ((data.bme680.temp + config.sensors.bme680.t).toFixed(2) + '°C') 
-            : '--'})`,
+            : '--',
 
-        hum: `BME680 (${vl.validateHumidity(data.bme680.hum) 
+        hum: vl.validateHumidity(data.bme680.hum) 
             ? ((data.bme680.hum + config.sensors.bme680.h).toFixed(2) + '%') 
-            : '--'})`,
+            : '--',
 
-        pres: `BME680 (${vl.validatePressure(data.bme680.pres) 
+        pres: vl.validatePressure(data.bme680.pres) 
             ? ((data.bme680.pres + config.sensors.bme680.p).toFixed(2) + i18n.t('units.hpa') + ' / ' 
                 + ((data.bme680.pres + config.sensors.bme680.p) * 0.75).toFixed(2) + i18n.t('units.mm')) 
-            : '--'})`,
+            : '--',
 
-        iaq: `BME680 (${vl.validateIaq(data.bme680.iaq) 
+        iaq: vl.validateIaq(data.bme680.iaq) 
             ? ('IAQ ' + (data.bme680.iaq + config.sensors.bme680.i).toFixed(2)) 
-            : '--'})`
+            : '--'
     }
 }

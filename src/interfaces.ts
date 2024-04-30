@@ -295,5 +295,11 @@ export interface iWsensIndications {
     hum: string,
     pres: string,
     volt: string,
+    light: string,
+    hiVoltage: string,
+    current: string,
+    power: string,
+    energy: string,
+    frequency: string,
     co2: string
 }
