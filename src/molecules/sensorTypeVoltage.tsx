@@ -13,7 +13,7 @@ export default function SensorTypeVoltage() {
         "--",
         i18n.t('wirelessSensor.singular'),
         'Thingspeak',
-        BME680().iaq
+        `BME680 (${BME680().iaq})`
     ];
 
     return <SelectSwitch label={i18n.t('dataSource.singular')}

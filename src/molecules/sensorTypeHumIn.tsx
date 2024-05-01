@@ -17,14 +17,14 @@ export default function SensorTypeHumIn() {
 
     const sensors = [
         '--', 
-        Forecast().hum, 
+        `${i18n.t('forecast')} (${Forecast().hum})`,
         i18n.t('wirelessSensor.singular'), 
         'Thingspeak', 
         i18n.t('sequence'),
-        BME280().hum,
-        SHT21().hum, 
-        DHT22().hum,
-        BME680().hum
+        `BME280 (${BME280().hum})`, 
+        `SHT21 (${SHT21().hum})`, 
+        `DHT22 (${DHT22().hum})`, 
+        `BME680 (${BME680().hum})`
     ];
 
     useEffect(() => {

@@ -14,12 +14,12 @@ export default function SensorTypePresOut() {
 
     const sensors = [
         '--', 
-        Forecast().pres, 
+        `${i18n.t('forecast')} (${Forecast().pres})`, 
         i18n.t('wirelessSensor.singular'), 
         'Thingspeak',
-        BME280().pres, 
-        BMP180().pres, 
-        BME680().pres
+        `BME280 (${BME280().pres})`, 
+        `BMP180 (${BMP180().pres})`, 
+        `BME680 (${BME680().pres})`
     ];
 
     return <SelectSwitch label={i18n.t('dataSource.singular')}

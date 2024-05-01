@@ -15,13 +15,13 @@ export default function SensorTypeHumOut() {
 
     const sensors = [
         '--', 
-        Forecast().hum, 
+        `${i18n.t('forecast')} (${Forecast().hum})`,
         i18n.t('wirelessSensor.singular'), 
         'Thingspeak',
-        BME280().hum,
-        SHT21().hum, 
-        DHT22().hum,
-        BME680().hum
+        `BME280 (${BME280().hum})`, 
+        `SHT21 (${SHT21().hum})`, 
+        `DHT22 (${DHT22().hum})`, 
+        `BME680 (${BME680().hum})`
     ];
 
     return <SelectSwitch label={i18n.t('dataSource.singular')}

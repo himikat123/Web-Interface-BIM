@@ -11,7 +11,7 @@ import Wsensor from "../atoms/indications/wsensor";
 export default function CardDisplayHumidityOut() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
-    const indications = [Wsensor()[0].hum, Wsensor()[1].hum];
+    const indications = [`(${Wsensor()[0].hum})`, `(${Wsensor()[1].hum})`];
 
     return <Card header={i18n.t('humidityOut')}
         content={<>

@@ -11,7 +11,7 @@ import Wsensor from "../atoms/indications/wsensor";
 export default function CardDisplayPressureOut() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
-    const indications = [Wsensor()[0].pres, Wsensor()[1].pres];
+    const indications = [`(${Wsensor()[0].pres})`, `(${Wsensor()[1].pres})`];
 
     return <Card header={i18n.t('pressure')}
         content={<>

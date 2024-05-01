@@ -19,16 +19,16 @@ export default function SensorTypeTempIn() {
 
     const sensors = [
         '--', 
-        Forecast().temp, 
+        `${i18n.t('forecast')} (${Forecast().temp})`, 
         i18n.t('wirelessSensor.singular'), 
         'Thingspeak', 
         i18n.t('sequence'),
-        BME280().temp, 
-        BMP180().temp, 
-        SHT21().temp, 
-        DHT22().temp, 
-        DS18B20().temp, 
-        BME680().temp
+        `BME280 (${BME280().temp})`, 
+        `BMP180 (${BMP180().temp})`, 
+        `SHT21 (${SHT21().temp})`, 
+        `DHT22 (${DHT22().temp})`, 
+        `DS18B20 (${DS18B20().temp})`, 
+        `BME680 (${BME680().temp})`
     ];
 
     useEffect(() => {

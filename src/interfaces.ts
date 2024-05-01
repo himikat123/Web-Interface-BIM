@@ -325,3 +325,21 @@ export interface iCloudSensorType {
 export interface iThingReceiveValid {
     setIsValid(valid: boolean): void
 }
+
+export interface iHistoryChart {
+    num: number,
+    chartColor: string,
+    title: string
+}
+
+export interface iHistorySensor {
+    label: string | React.ReactNode,
+    num: number, 
+    value: number, 
+    onChange(val: number): void   
+}
+
+export interface iCardHistory {
+    type: number,
+    title: string
+}

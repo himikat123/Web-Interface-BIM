@@ -13,7 +13,7 @@ export default function SequenceHum() {
     const [humWsensNum, setHumWsensNum] = useState<number>(0);
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
-    const indications = [Wsensor()[0].hum, Wsensor()[1].hum];
+    const indications = [`(${Wsensor()[0].hum})`, `(${Wsensor()[1].hum})`];
 
     return <div className="mt-8">
         <SequenceDuration />
