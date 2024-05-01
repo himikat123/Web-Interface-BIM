@@ -303,3 +303,21 @@ export interface iWsensIndications {
     frequency: string,
     co2: string
 }
+
+export interface iCardThingSend {
+    isValid: boolean[], 
+    setIsValid(nv: boolean[]): void
+}
+
+export interface iCloudSensor {
+    num: number, 
+    value: number, 
+    onChange(val: number): void
+}
+
+export interface iCloudSensorType {
+    num: number, 
+    value: number, 
+    sens: number,
+    onChange(val: number): void
+}

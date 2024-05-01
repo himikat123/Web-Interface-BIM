@@ -4,10 +4,10 @@ import Card from "../atoms/card";
 import { iConfig } from "../redux/configTypes";
 import { iCardSend } from "../interfaces";
 import * as cf from "../redux/slices/config";
-import NarodmonSourceSensor from "../molecules/narodmonSourceSensor";
-import NarodmonSensorType from "../molecules/narodmonSensorType";
+import CloudSourceSensor from "../molecules/cloudSourceSensor";
+import CloudSensorType from "../molecules/cloudSensorType";
 import WsensorNumber from "../molecules/wsensorNumber";
-import NarodmonWsensDataType from "../molecules/narodmonWsensDataType";
+import CloudWsensDataType from "../molecules/cloudWsensDataType";
 import NarodmonSensorMetric from "../molecules/narodmonSensorMetric";
 
 export default function CardNarodmonSendData(props: iCardSend) {
@@ -17,10 +17,20 @@ export default function CardNarodmonSendData(props: iCardSend) {
     return <Card header={`${i18n.t('sensor.singular')} ${props.num + 1}`}
         content={<>
             {/* Data source */}
-            <NarodmonSourceSensor num={props.num} />
+            <CloudSourceSensor num={props.num}
+                value={config.narodmonSend.sensors[props.num]}
+                onChange={val => {
+                    dispatch(cf.narodmonSendSensorsChange({ num: props.num, val: val }));
+                    dispatch(cf.narodmonSendTypesChange({ num: props.num, val: 0 }))
+                }}
+            />
 
             {/* Sensor type */}
-            <NarodmonSensorType num={props.num} />
+            <CloudSensorType num={props.num}
+                value={config.narodmonSend.types[props.num]}
+                onChange={val => dispatch(cf.narodmonSendTypesChange({ num: props.num, val: val }))}
+                sens={config.narodmonSend.sensors[props.num]}
+            />
 
             {config.narodmonSend.sensors[props.num] === 2 && <div className="mt-8">
                 {/* Wireless sensor number */}
@@ -30,7 +40,11 @@ export default function CardNarodmonSendData(props: iCardSend) {
 
                 {/* Wireless sensor type of sensor */}
                 <div className="mt-8">
-                    <NarodmonWsensDataType num={props.num} />
+                    <CloudWsensDataType num={props.num} 
+                        value={config.narodmonSend.wtypes[props.num]}
+                        onChange={val => dispatch(cf.narodmonSendWtypesChange({ num: props.num, val: val }))}
+                        sens={config.narodmonSend.wsensors[props.num]}
+                    />
                 </div>
             </div>}
 

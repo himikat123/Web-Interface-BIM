@@ -1,8 +1,5 @@
 import i18n from "../i18n/main";
-import { useSelector, useDispatch } from 'react-redux';
 import SelectSwitch from "../atoms/selectSwitch";
-import { iConfig } from "../redux/configTypes";
-import * as cf from "../redux/slices/config";
 import Forecast from "../atoms/indications/forecast";
 import BME280 from "../atoms/indications/BME280";
 import BMP180 from "../atoms/indications/BMP180";
@@ -14,10 +11,9 @@ import BH1750 from "../atoms/indications/BH1750";
 import Analog from "../atoms/indications/analog";
 import ESP32 from "../atoms/indications/ESP32";
 import BME680 from "../atoms/indications/BME680";
+import { iCloudSensorType } from "../interfaces";
 
-export default function NarodmonSensorType(props: {num: number}) {
-    const dispatch = useDispatch();
-    const config = useSelector((state: iConfig) => state.config);
+export default function CloudSensorType(props: iCloudSensorType) {
     const t = i18n.t('temperature');
     const h = i18n.t('humidity');
     const p = i18n.t('pressure');
@@ -43,11 +39,11 @@ export default function NarodmonSensorType(props: {num: number}) {
     ];
 
     return <>
-        {sensors[config.narodmonSend.sensors[props.num]].length > 0 && <div className="mt-8">
+        {sensors[props.sens].length > 0 && <div className="mt-8">
             <SelectSwitch label={i18n.t('sensorType')}
-                options={sensors[config.narodmonSend.sensors[props.num]]}
-                value={config.narodmonSend.types[props.num]}
-                onChange={val => dispatch(cf.narodmonSendTypesChange({ num: props.num, val: val }))}
+                options={sensors[props.sens]}
+                value={props.value}
+                onChange={val => props.onChange(val)}
             />
         </div>}
     </>

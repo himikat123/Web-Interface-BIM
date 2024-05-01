@@ -2,20 +2,18 @@ import { useState, useEffect } from "react";
 import i18n from '../i18n/main';
 import { useSelector, useDispatch } from 'react-redux';
 import FourColumns from "../templates/fourColumns";
-import Card from "../atoms/card";
-import Toggle from "../atoms/toggle";
-import TextInput from "../atoms/textInput";
-import NumberInput from "../atoms/numberInput";
-import CardThingspeakSendData from "../organisms/cardThingspeakSendData";
 import { iConfig } from "../redux/configTypes";
 import { sendThingspeakValidChange } from "../redux/slices/valid";
-import * as cf from "../redux/slices/config";
+import CardThingSendOnOff from "../organisms/cardThingSendOnOff";
+import CardThingSendPeriod from "../organisms/cardThingSendPeriod";
+import CardThingSendCHID from "../organisms/cardThingSendCHID";
+import CardThingWrKey from "../organisms/cardThingWrKey";
+import CardThingSendData from "../organisms/cardThingSendData";
 
 export default function SendThingspeak() {
-    const [isValid, setIsValid] = useState<boolean[]>([]);
-
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
+    const [isValid, setIsValid] = useState<boolean[]>([]);
 
     useEffect(() => {
         dispatch(sendThingspeakValidChange(!isValid.includes(false)));
@@ -23,49 +21,24 @@ export default function SendThingspeak() {
 
     const content = <>
         {/* On/Off */}
-        <Card content={<Toggle label={i18n.t('sendToThingspeak')}
-            checked={config.thingspeakSend.period > 0 ? 1 : 0}
-            onChange={() => dispatch(cf.thingspeakSendPeriodChange(config.thingspeakSend.period > 0 ? 0 : 5))}
-        />} />
-
-        {/* Period */}
-        {config.thingspeakSend.period > 0 && <Card content={
-            <NumberInput label={i18n.t('periodMinutes')}
-                value={config.thingspeakSend.period}
-                min={1}
-                max={999}
-                onChange={val => dispatch(cf.thingspeakSendPeriodChange(val))}
-                isValid={(valid: boolean) => {
-                    let nv = isValid;
-                    nv[0] = valid;
-                    setIsValid(nv);
-                }}
-            />
-        } />}
+        <CardThingSendOnOff />
 
         {config.thingspeakSend.period > 0 && <>
+            {/* Period */}
+            <CardThingSendPeriod isValid={isValid}
+                setIsValid={setIsValid}
+            />
+
             {/* Channel ID */}
-            <Card content={<TextInput label="Channel ID"
-                value={config.thingspeakSend.channelID}
-                maxLength={20}
-                pattern={[new RegExp(config.history.channelID.length ? config.history.channelID : "-"), false]}
-                tip={i18n.t('tips.tip4')}
-                onChange={val => dispatch(cf.thingspeakSendChannelIdChange(val.target.value))}
-                isValid={(valid: boolean) => {
-                    let nv = isValid;
-                    nv[1] = valid;
-                    setIsValid(nv);
-                }}
-            />} />
+            <CardThingSendCHID isValid={isValid}
+                setIsValid={setIsValid}
+            />
 
             {/* Write API Key */}
-            <Card content={<TextInput label="Write API Key"
-                value={config.thingspeakSend.wrkey}
-                maxLength={32}
-                onChange={val => dispatch(cf.thingspeakSendWrkeyChange(val.target.value))}
-            />} />
+            <CardThingWrKey />
 
-            {[...Array(8)].map((x, i) => <CardThingspeakSendData key={i} num={i} />)}
+            {/* Data to send */}
+            {[...Array(8)].map((x, i) => <CardThingSendData key={i} num={i} />)}
         </>}
     </>
 

@@ -1,15 +1,10 @@
 import i18n from "../i18n/main";
-import { useSelector, useDispatch } from 'react-redux';
 import SelectSwitch from "../atoms/selectSwitch";
-import { iConfig } from "../redux/configTypes";
-import * as cf from "../redux/slices/config";
 import Wsensor from "../atoms/indications/wsensor";
 import { BatVoltage, BatPercent, BatLevel } from "../atoms/indications/battery";
+import { iCloudSensorType } from "../interfaces";
 
-export default function NarodmonWsensDataType(props: {num: number}) {
-    const dispatch = useDispatch();
-    const config = useSelector((state: iConfig) => state.config);
-
+export default function CloudWsensDataType(props: iCloudSensorType) {
     let wsensorTypes = [];
     for(let i=0; i<2; i++) {
         wsensorTypes.push([
@@ -30,8 +25,8 @@ export default function NarodmonWsensDataType(props: {num: number}) {
     }
 
     return <SelectSwitch label={i18n.t('sensorType')}
-        options={wsensorTypes[config.narodmonSend.wsensors[props.num]]}
-        value={config.narodmonSend.wtypes[props.num]}
-        onChange={val => dispatch(cf.narodmonSendWtypesChange({ num: props.num, val: val }))}
+        options={wsensorTypes[props.sens]}
+        value={props.value}
+        onChange={val => props.onChange(val)}
     />
 }
