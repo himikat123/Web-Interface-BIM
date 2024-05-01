@@ -321,3 +321,7 @@ export interface iCloudSensorType {
     sens: number,
     onChange(val: number): void
 }
+
+export interface iThingReceiveValid {
+    setIsValid(valid: boolean): void
+}

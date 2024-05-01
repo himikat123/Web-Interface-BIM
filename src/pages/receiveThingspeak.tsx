@@ -1,117 +1,28 @@
-import { useState, useEffect } from "react";
 import i18n from '../i18n/main';
-import Moment from 'react-moment';
-import 'moment/locale/de';
-import 'moment/locale/ru';
-import 'moment/locale/pl';
-import 'moment/locale/uk';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import TwoColumns from "../templates/twoColumns";
-import Card from "../atoms/card";
-import Toggle from "../atoms/toggle";
-import TextInput from "../atoms/textInput";
-import NumberInput from "../atoms/numberInput";
 import { iConfig } from "../redux/configTypes";
-import { iData } from "../redux/dataTypes";
-import { receiveValidChange } from "../redux/slices/valid";
-import * as cf from "../redux/slices/config";
-import * as vl from "../atoms/validateValues";
+import CardThingReceiveOnOff from "../organisms/cardThingReceiveOnOff";
+import CardThingReceivePeriodExpire from "../organisms/cardThingReseivePeriodExpire";
+import CardThingReceiveCHID from "../organisms/cardThingReceiveCHID";
+import CardThingReceiveRdKey from "../organisms/cardThingReceiveRdKey";
 
 export default function ReceiveThingspeak() {
-    const [isValid, setIsValid] = useState<boolean[]>([]);
-    const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
-    const data = useSelector((state: iData) => state.data);
-    const locale = config.lang === 'ua' ? 'uk' : config.lang;
-    
-    useEffect(() => {
-        dispatch(receiveValidChange(!isValid.includes(false)));
-    });
 
     const content = <>
         {/* On/Off */}
-        <Card content={<>
-            <Toggle label={i18n.t('receiveDataFrom') + " thingspeak.com"}
-                checked={config.thingspeakReceive.period > 0 ? 1 : 0}
-                onChange={() => dispatch(cf.thingspeakReceivePeriodChange(config.thingspeakReceive.period > 0 ? 0 : 5))}
-            />
-            {config.thingspeakReceive.period > 0 && <div className="mt-8 table">
-                <div className="table-row">
-                    <div className="table-cell">
-                        {i18n.t('dataFrom')}:
-                    </div>
-                    <div className={"table-cell ps-1 " + (vl.ThingspeakDataRelevance() ? "text-blue-700 dark:text-blue-400" : "text-red-700 dark:text-red-400")}>
-                        {(data.thing?.time && data.thing.time > 1700000000) ? <>
-                            <Moment unix format="HH:mm:ss DD.MM.YYYY">
-                                {data.thing.time}
-                            </Moment> (
-                                {config.lang === 'de' && i18n.t('ago') + ' '}
-                                <Moment locale={locale} unix fromNow ago>{data.thing.time}</Moment>
-                                {config.lang !== 'de' && ' ' + i18n.t('ago')}
-                            ) {!vl.ThingspeakDataRelevance() && <> - {i18n.t('dataExpired')}</>}
-                        </> : '???'}
-                    </div>
-                </div>
-
-                <div className="table-row h-2" />
-                {[...Array(8)].map((x, i) => <div key={i} className="table-row">
-                    <div className="table-cell">
-                        {`${i18n.t('field')} ${i + 1}:`}
-                    </div>
-                    <div className={"table-cell ps-1 " + (vl.ThingspeakDataRelevance() ? "text-blue-700 dark:text-blue-400" : "text-red-700 dark:text-red-400")}>
-                        {vl.validateThingspeak(data.thing?.data ? data.thing.data[i] : -40400) ? data.thing?.data ? data.thing?.data[i] : '--' : '--'}
-                    </div>
-                </div>)}
-            </div>}
-        </>} />
+        <CardThingReceiveOnOff />
 
         {config.thingspeakReceive.period > 0 && <>
-            <Card content={<>
-                {/* Period */}
-                <NumberInput label={i18n.t('periodMinutes')}
-                    value={config.thingspeakReceive.period}
-                    min={1}
-                    max={999}
-                    onChange={val => {
-                        dispatch(cf.thingspeakReceivePeriodChange(val));
-                        dispatch(cf.thingspeakReceiveExpireChange(Math.max(config.thingspeakReceive.expire, val)))
-                    }}
-                    isValid={valid => {
-                        let nv = isValid;
-                        nv[0] = valid;
-                        setIsValid(nv);
-                    }}
-                />
-        
-                {/* Data expire */}
-                <div className="mt-8">
-                    <NumberInput label={i18n.t('dataExpirationTime')}
-                        value={config.thingspeakReceive.expire}
-                        min={config.thingspeakReceive.period}
-                        max={999}
-                        onChange={val => dispatch(cf.thingspeakReceiveExpireChange(val))}
-                        isValid={valid => {
-                            let nv = isValid;
-                            nv[1] = valid;
-                            setIsValid(nv);
-                        }}
-                    />
-                </div>
-            </>} />
+            {/* Period & Data expire */}
+            <CardThingReceivePeriodExpire />
 
             {/* Channel ID */}
-            <Card content={<TextInput label="Channel ID"
-                value={config.thingspeakReceive.channelID}
-                maxLength={20}
-                onChange={val => dispatch(cf.thingspeakReceiveChannelIdChange(val.target.value))}
-            />} />
+            <CardThingReceiveCHID />
 
             {/* Read API Key */}
-            <Card content={<TextInput label="Read API Key"
-                value={config.thingspeakReceive.rdkey}
-                maxLength={32}
-                onChange={val => dispatch(cf.thingspeakReceiveRdkeyChange(val.target.value))}
-            />} />
+            <CardThingReceiveRdKey />
         </>}
     </>
 
