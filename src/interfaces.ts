@@ -343,3 +343,9 @@ export interface iCardHistory {
     type: number,
     title: string
 }
+
+export interface iComfortAirExplicationTable {
+    param: string| React.ReactNode,
+    min: number,
+    max: number
+}
