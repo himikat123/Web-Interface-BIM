@@ -41,7 +41,7 @@ export default function FooterButtons(props: iFooterButtons) {
                 },
                 data: props.passChange
                     ? `oldPass=${props.passChange.old}&newPass=${props.passChange.new}` 
-                    : `config=${JSON.stringify(config, null).replace('"configState":"ok",', '')}`
+                    : `config=${JSON.stringify(config, null, 2).replace('"configState":"ok",', '')}`
             })
             .then(res => {
                 if(res.data === 'OK') {
