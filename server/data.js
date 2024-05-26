@@ -21,6 +21,8 @@ const getFiles = (dir, files_) => {
     return files_;
 };
 
+const mainIcons = [0, 1, 2, 4, 9, 10, 11, 13, 50];
+
 const data = () => {
     obj = {
         state: "OK", // or "LOGIN",
@@ -30,6 +32,12 @@ const data = () => {
         },
         runtime: Math.round(random(3, 3000)),
         time: Math.floor(Date.now() / 1000),
+        wd: ['Mo', 'Tu', 'We', 'Th'],
+        units: {
+            v: "V",
+            mm: "mm",
+            ms: "m/s"
+        },
         
         network: {
             ssid: "budulai",
@@ -152,6 +160,8 @@ const data = () => {
             bat: [random(700, 850), random(750, 800)]
         },
         weather: {
+            icon: mainIcons[Math.round(random(0, 9))],
+            isDay: Math.round(random(0, 1)),
             temp: random(-10, 10),
             hum: random(90, 100),
             pres: random(600, 650),
@@ -159,12 +169,18 @@ const data = () => {
                 speed: random(1, 7),
                 dir: random(0, 360)
             },
-            descript: "мокрый дождь холодный",
+            descript: "rain mit снег",
             time: Math.round(Math.floor(Date.now() / 1000) - random(600, 660)), // 10 - 11 minutes ago
+            daily: {
+                tMax: [random(-25, 25), random(-25, 25), random(-25, 25), random(-25, 25)],
+                tMin: [random(-25, 25), random(-25, 25), random(-25, 25), random(-25, 25)],
+                wind: [random(0, 15), random(0, 15), random(0, 15), random(0, 15)],
+                icon: [mainIcons[Math.round(random(0, 9))], mainIcons[Math.round(random(0, 9))], mainIcons[Math.round(random(0, 9))], mainIcons[Math.round(random(0, 9))]],
+            }
         },
         thing: {
             time: Math.round(Math.floor(Date.now() / 1000) - random(600, 660)), // 10 - 11 minutes ago
-            data: [random(-5, -4), random(56, 59), random(768, 777), random(403, 407), -40400.0, random(99, 102), random(1359, 1362), random(-12, -10)]
+            data: [random(-5, -4), random(56, 59), random(768, 777), Math.round(random(2, 4)), -40400.0, random(99, 102), random(1359, 1362), random(-12, -10)]
         },
         fs: { 
             total: 2056988,

@@ -1,11 +1,12 @@
 import i18n from '../i18n/main';
 import TwoColumns from "../templates/twoColumns";
 import Card from "../atoms/card";
+import CardStatusDisplay from '../organisms/cardStatusDisplay';
 
 export default function Status() {
     const content = <>
-        <Card content={<div>1</div>} />
-        <Card content={<div>2</div>} />
+        <Card content={<CardStatusDisplay num={0} />} />
+        <Card content={<CardStatusDisplay num={1} />} />
         <Card content={<div>3</div>} />
         <Card content={<div>4</div>} />
     </>;

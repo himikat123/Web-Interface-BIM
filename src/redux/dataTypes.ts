@@ -8,6 +8,12 @@ export interface iData {
         },
         runtime: number,
         time: number,
+        wd: [string],
+        units: {
+            v: string,
+            mm: string,
+            ms: string
+        },
         network: {
             ssid: string,
             ch: number,
@@ -101,6 +107,8 @@ export interface iData {
             bat: number[]
         },
         weather: {
+            icon: number,
+            isDay: number,
             temp: number,
             hum: number,
             pres: number,
@@ -108,7 +116,14 @@ export interface iData {
                 speed: number,
                 dir: number
             },
-            descript: string
+            descript: string,
+            time: number,
+            daily: {
+                tMax: [number],
+                tMin: [number],
+                wind: [number],
+                icon: [number],
+            }
         },
         thing?: {
             time?: number,
