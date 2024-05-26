@@ -1,7 +1,7 @@
 import i18n from '../i18n/main';
 import CardSoundVolume from "../organisms/cardSoundVolume";
 import CardSoundEqualizer from "../organisms/cardSoundEqualizer";
-import CardSoundHourlySignal from "../organisms/cardHourlySignal";
+import CardSoundHourlySignal from "../organisms/cardSoundHourlySignal";
 import CardSoundListen from "../organisms/cardSoundListen";
 import TwoColumns from "../templates/twoColumns";
 
