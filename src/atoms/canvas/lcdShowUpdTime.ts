@@ -1,6 +1,6 @@
 import moment from "moment";
 import { printText, drawImage } from "./primitives";
-import Symb_upd from "../img/symb/upd";
+import * as symbols from "../img/symbols";
 
 export default function lcdShowUpdTime(ctx: CanvasRenderingContext2D, time: number, lang: string, font: number, color: string, bgColor: string) {
     const usa = 'YYYY-DD-MM hh:mm:ss';
@@ -9,5 +9,5 @@ export default function lcdShowUpdTime(ctx: CanvasRenderingContext2D, time: numb
 
     printText(ctx, 184, 148, 133, 16, upd, font, 'right', color, bgColor);
     let w = ctx.measureText(upd).width;
-    if(w) drawImage(ctx, Symb_upd(), 300 - w, 147);
+    if(w) drawImage(ctx, symbols.upd(), 300 - w, 147);
 }

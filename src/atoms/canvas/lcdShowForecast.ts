@@ -1,13 +1,5 @@
 import { printText, drawImage } from "./primitives";
-import Icon_small_01 from '../img/icons/small/01';
-import Icon_small_02 from '../img/icons/small/02';
-import Icon_small_04 from '../img/icons/small/04';
-import Icon_small_09 from '../img/icons/small/09';
-import Icon_small_10 from '../img/icons/small/10';
-import Icon_small_11 from '../img/icons/small/11';
-import Icon_small_13 from '../img/icons/small/13';
-import Icon_small_50 from '../img/icons/small/50';
-import Icon_small_loading from '../img/icons/small/loading';
+import * as icons from '../img/icons/small';
 
 function showTemperature(
     ctx: CanvasRenderingContext2D, 
@@ -41,16 +33,16 @@ export default function lcdShowForecast(
 
     /* Show icon */
     switch(icon) {
-        case 1: drawImage(ctx, Icon_small_01(), x + 4, 183); break;
-        case 2: drawImage(ctx, Icon_small_02(), x + 4, 183); break;
-        case 3: drawImage(ctx, Icon_small_02(), x + 4, 183); break;
-        case 4: drawImage(ctx, Icon_small_04(), x + 4, 183); break;
-        case 9: drawImage(ctx, Icon_small_09(), x + 4, 183); break;
-        case 10: drawImage(ctx, Icon_small_10(), x + 4, 183); break;
-        case 11: drawImage(ctx, Icon_small_11(), x + 4, 183); break;
-        case 13: drawImage(ctx, Icon_small_13(), x + 4, 183); break;
-        case 50: drawImage(ctx, Icon_small_50(), x + 4, 183); break;
-        default: drawImage(ctx, Icon_small_loading(), x + 4, 183); break;
+        case 1: drawImage(ctx, icons.small_01(), x + 4, 183); break;
+        case 2: drawImage(ctx, icons.small_02(), x + 4, 183); break;
+        case 3: drawImage(ctx, icons.small_02(), x + 4, 183); break;
+        case 4: drawImage(ctx, icons.small_04(), x + 4, 183); break;
+        case 9: drawImage(ctx, icons.small_09(), x + 4, 183); break;
+        case 10: drawImage(ctx, icons.small_10(), x + 4, 183); break;
+        case 11: drawImage(ctx, icons.small_11(), x + 4, 183); break;
+        case 13: drawImage(ctx, icons.small_13(), x + 4, 183); break;
+        case 50: drawImage(ctx, icons.small_50(), x + 4, 183); break;
+        default: drawImage(ctx, icons.small_loading(), x + 4, 183); break;
     }
     
     /* Show weekday */
