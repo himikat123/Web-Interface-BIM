@@ -18,7 +18,7 @@ import lcdShowWindDirection from '../atoms/canvas/lcdShowWindDirection';
 import lcdShowUpdTime from '../atoms/canvas/lcdShowUpdTime';
 import lcdShowForecast from '../atoms/canvas/lcdShowForecast';
 
-import Symb_temp_minus from '../atoms/img/symb/temp-';
+//import { temp_minus } from '../atoms/img/symb';
 
 
 export default function DisplayViewLCD(props: any) {
@@ -337,13 +337,9 @@ export default function DisplayViewLCD(props: any) {
 
     }, [draw, clockPointsState]);
 
-    return <canvas width="320" height="240" id="canvas" 
-        style={{
-            margin: '20px auto 0', 
-            padding: 0, 
-            width: '328px', 
-            height: '248px',
-            border: '8px solid #999'
-        }}
-    />
+    return <div className='w-fit mx-auto mt-4 p-2 bg-gray-400 dark:bg-gray-600'>
+        <canvas width="320" height="240" id="canvas" 
+            style={{margin: 0, padding: 0, width: '320px', height: '240px', border: '4px solid black'}}
+        />
+    </div>
 }
