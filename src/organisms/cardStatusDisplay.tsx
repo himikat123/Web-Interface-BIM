@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import i18n from '../i18n/main';
 import { useSelector } from 'react-redux';
 import { iConfig } from "../redux/configTypes";
@@ -9,7 +10,11 @@ export default function CardStatisDisplay(props: iDisplay) {
     const ws2812b = <>WS2812</>;
 
     function displayHeader(num: number) {
-        return <h2 className='text-center text-lg'>{i18n.t('display.singular')} {num}</h2>
+        return <div className='text-center'>
+            <Link to={'display' + num} className='text-lg'>
+                {i18n.t('display.singular')} {num}
+            </Link>
+        </div>
     }
     
     function displayView() {
