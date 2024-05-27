@@ -13,6 +13,10 @@ import lcdShowBatteryLevel from '../atoms/canvas/lcdShowBatteryLevel';
 import lcdShowComfort from '../atoms/canvas/lcdShowComfort';
 import lcdShowWeatherIcon from '../atoms/canvas/lcdShowWeatherIcon';
 import lcdShowDescription from '../atoms/canvas/lcdShowDescription';
+import { lcdShowTemperatureInside, lcdShowTemperatureOutside } from '../atoms/canvas/lcdShowTemperature';
+import { lcdShowHumidityInside, lcdShowHumidityOutside } from '../atoms/canvas/lcdShowHumidity';
+import lcdShowPressure from '../atoms/canvas/lcdShowPressure';
+
 import lcdShowWindSpeed from '../atoms/canvas/lcdShowWindSpeed';
 import lcdShowWindDirection from '../atoms/canvas/lcdShowWindDirection';
 import lcdShowUpdTime from '../atoms/canvas/lcdShowUpdTime';
@@ -62,44 +66,6 @@ export default function DisplayViewLCD(props: any) {
     const [prevBatLevel, setPrevBatLevel] = useState<number>(-1);
     const [prevVolt, setPrevVolt] = useState<number>(-40400.00);
 
-    function showTemperature(ctx: CanvasRenderingContext2D | null, temp: number, x: number, y: number, font: number, color: string) {
-        //printText(ctx, x, y, font == FONT3 ? 70 : 56, font == FONT3 ? 26 : 20, (temp >= -50 && temp < 100) ? `${temp}°C` : '--°C', font, font == FONT3 ? CENTER : RIGHT, color);
-    }
-
-    function showTemperatureInside(ctx: CanvasRenderingContext2D | null, temp: number) {
-        if(prevTempIn != temp) {
-            showTemperature(ctx, temp, 173, 53, FONT3, TEMPERATURE_COLOR);
-            setPrevTempIn(temp);
-        }
-    }
-
-    function showTemperatureOutside(ctx: CanvasRenderingContext2D | null, temp: number) {
-        if(prevTempOut != temp) {
-            // if(temp < 0) drawImage(ctx, Symb_temp_minus(), 62, 104);
-            // else drawImage(ctx, Symb_temp_plus(), 62, 104);
-            showTemperature(ctx, temp, 71, 113, FONT3, TEMPERATURE_COLOR);
-            setPrevTempOut(temp);
-        }
-    }
-
-    function showHumidity(ctx: CanvasRenderingContext2D | null, hum: number, x: number, y: number) {
-        //printText(ctx, x, y, 58, 20, (hum >= 0 && hum <= 100) ? `${hum}%` : '--%', FONT2, CENTER, HUMIDITY_COLOR);
-    }
-
-    function showHumidityInside(ctx: CanvasRenderingContext2D | null, hum: number) {
-        if(prevHumIn != hum) {
-            showHumidity(ctx, hum, 264, 58);
-            setPrevHumIn(hum);
-        }
-    }
-
-    function showHumidityOutside(ctx: CanvasRenderingContext2D | null, hum: number) {
-        if(prevHumOut != hum) {
-            showHumidity(ctx, hum, 164, 119);
-            setPrevHumOut(hum);
-        }
-    }
-
     function showVoltageOrPercentage(ctx: CanvasRenderingContext2D | null) {
         let volt = "--";
         let percent = "--";
@@ -131,39 +97,120 @@ export default function DisplayViewLCD(props: any) {
         // else printText(ctx, 198, 10, 58, 16, " ", FONT1, RIGHT, BATTERY_COLOR);
     }
 
-    function showPressure(ctx: CanvasRenderingContext2D | null) {
-        let pres = getPres();
-        if(prevPresOut != pres) {
-            let p = (pres >= 800 && pres <= 1200) ? Math.round(pres * 0.75) : '--';
-            p += props.data.units.mm;
-            //printText(ctx, 250, 119, 70, 20, p, FONT2, CENTER, PRESSURE_COLOR);
-            setPrevPresOut(pres);
-        }
-    }
-
-    function getTemp(sens: number, thing: number) {
+    function getTempIn() {
         let temp = 40400.0;
-        switch(sens) {
-            case 1: temp = props.data.weather.temp; break;
-            case 2: if(props.data.thing.expired == -1) temp = props.data.thing.fields[thing]; break;
-            case 3: temp = props.data.bme280.temp + props.config.sensors.bme280.t; break;
-            case 4: temp = props.data.bmp180.temp + props.config.sensors.bmp180.t; break;
-            case 5: temp = props.data.sht21.temp + props.config.sensors.sht21.t; break;
-            case 6: temp = props.data.dht22.temp + props.config.sensors.dht22.t; break;
-            case 7: temp = props.data.ds18b20.temp + props.config.sensors.ds18b20.t; break;
+        const wsensNum = config.display.source.tempIn.wsensNum;
+        const thingNum = config.display.source.tempIn.thing;
+
+        switch(config.display.source.tempIn.sens) {
+            case 1: temp = data.weather.temp; break;
+            case 2: if(vl.WsensorDataRelevance(wsensNum)) {
+                //temp = vl.validateTemperature(data.wsensor.temp.data[wsensNum]) 
+                //    ? data.wsensor.temp.data[wsensNum] + config.wsensor.temp.corr[wsensNum] 
+                //    : 40400
+            }; break;
+            // case 3: if(vl.ThingspeakDataRelevance()) {
+            //     temp = vl.validateThingspeak(
+            //         data.thing?.data 
+            //             ? data.thing?.data[thingNum] 
+            //             : -40400
+            //     )
+            //     ? data.thing?.data 
+            //         ? data.thing?.data[thingNum] 
+            //         : 40400 
+            //     : 40400
+            // }; break;
+            case 4: ; break;
+            case 5: temp = data.bme280.temp + config.sensors.bme280.t; break;
+            case 6: temp = data.bmp180.temp + config.sensors.bmp180.t; break;
+            case 7: temp = data.sht21.temp + config.sensors.sht21.t; break;
+            case 8: temp = data.dht22.temp + config.sensors.dht22.t; break;
+            case 9: temp = data.ds18b20.temp + config.sensors.ds18b20.t; break;
+            case 10: temp = data.bme680.temp + config.sensors.bme680.t; break;
             default: ; break;
         }
         return Math.round(temp);
     }
 
-    function getHum(sens: number, thing: number) {
+    function getTempOut() {
+        let temp = 40400.0;
+        const wsensNum = config.display.source.tempOut.wsensNum;
+        const thingNum = config.display.source.tempOut.thing;
+
+        switch(config.display.source.tempOut.sens) {
+            case 1: temp = data.weather.temp; break;
+                        
+            case 4: temp = data.bme280.temp + config.sensors.bme280.t; break;
+            case 5: temp = data.bmp180.temp + config.sensors.bmp180.t; break;
+            case 6: temp = data.sht21.temp + config.sensors.sht21.t; break;
+            case 7: temp = data.dht22.temp + config.sensors.dht22.t; break;
+            case 8: temp = data.ds18b20.temp + config.sensors.ds18b20.t; break;
+            case 9: temp = data.bme680.temp + config.sensors.bme680.t; break;
+            default: ; break;
+        }
+        return Math.round(temp);
+    }
+
+    function getHumIn() {
         let hum = 40400.0;
-        switch(sens) {
-            case 1: hum = props.data.weather.hum; break;
-            case 2: if(props.data.thing.expired == -1) hum = props.data.thing.fields[thing]; break;
-            case 3: hum = props.data.bme280.hum + props.config.sensors.bme280.h; break;
-            case 4: hum = props.data.sht21.hum + props.config.sensors.sht21.h; break;
-            case 5: hum = props.data.dht22.hum + props.config.sensors.dht22.h; break;
+        const wsensNum = config.display.source.humIn.wsensNum;
+        const thingNum = config.display.source.humIn.thing;
+
+        switch(config.display.source.humIn.sens) {
+            case 1: hum = data.weather.hum; break;
+            case 2: if(vl.WsensorDataRelevance(wsensNum)) {
+                hum = vl.validateHumidity(data.wsensor.hum.data[wsensNum]) 
+                    ? data.wsensor.hum.data[wsensNum] + config.wsensor.hum.corr[wsensNum] 
+                    : 40400
+            }; break;
+            case 3: if(vl.ThingspeakDataRelevance()) {
+                hum = vl.validateThingspeak(
+                    data.thing?.data 
+                        ? data.thing?.data[thingNum] 
+                        : -40400
+                )
+                ? data.thing?.data 
+                    ? data.thing?.data[thingNum] 
+                    : 40400 
+                : 40400
+            }; break;
+            case 4: ; break;
+            case 5: hum = data.bme280.hum + config.sensors.bme280.h; break;
+            case 6: hum = data.sht21.hum + config.sensors.sht21.h; break;
+            case 7: hum = data.dht22.hum + config.sensors.dht22.h; break;
+            case 8: hum = data.bme680.hum + config.sensors.bme680.h; break;
+            default: ; break;
+        }
+        return Math.round(hum);
+    }
+
+    function getHumOut() {
+        let hum = 40400.0;
+        const wsensNum = config.display.source.humOut.wsensNum;
+        const thingNum = config.display.source.humOut.thing;
+
+        switch(config.display.source.humOut.sens) {
+            case 1: hum = data.weather.hum; break;
+            case 2: if(vl.WsensorDataRelevance(wsensNum)) {
+                hum = vl.validateHumidity(data.wsensor.hum.data[wsensNum]) 
+                    ? data.wsensor.hum.data[wsensNum] + config.wsensor.hum.corr[wsensNum] 
+                    : 40400
+            }; break;
+            case 3: if(vl.ThingspeakDataRelevance()) {
+                hum = vl.validateThingspeak(
+                    data.thing?.data 
+                        ? data.thing?.data[thingNum] 
+                        : -40400
+                )
+                ? data.thing?.data 
+                    ? data.thing?.data[thingNum] 
+                    : 40400 
+                : 40400
+            }; break;
+            case 4: hum = data.bme280.hum + config.sensors.bme280.h; break;
+            case 5: hum = data.sht21.hum + config.sensors.sht21.h; break;
+            case 6: hum = data.dht22.hum + config.sensors.dht22.h; break;
+            case 7: hum = data.bme680.hum + config.sensors.bme680.h; break;
             default: ; break;
         }
         return Math.round(hum);
@@ -171,11 +218,30 @@ export default function DisplayViewLCD(props: any) {
 
     function getPres() {
         let pres = 40400.0;
-        switch(props.config.display.source.presOut.sens) {
-            case 1: pres = props.data.weather.pres; break;
-            case 2: if(props.data.thing.expired == -1) pres = props.data.thingspeak[props.config.display.source.presOut.thing]; break;
-            case 3: pres = props.data.sensors.bme280.p + props.config.sensors.bme280.p; break;
-            case 4: pres = props.data.sensors.bmp180.p + props.config.sensors.bmp180.p; break;
+        const wsensNum = config.display.source.presOut.wsensNum;
+        const thingNum = config.display.source.presOut.thing;
+
+        switch(config.display.source.presOut.sens) {
+            case 1: pres = data.weather.pres; break;
+            case 2: if(vl.WsensorDataRelevance(wsensNum)) {
+                pres = vl.validatePressure(data.wsensor.pres.data[wsensNum]) 
+                    ? data.wsensor.pres.data[wsensNum] + config.wsensor.pres.corr[wsensNum] 
+                    : 40400
+            }; break;
+            case 3: if(vl.ThingspeakDataRelevance()) {
+                pres = vl.validateThingspeak(
+                    data.thing?.data 
+                        ? data.thing?.data[thingNum] 
+                        : -40400
+                )
+                ? data.thing?.data 
+                    ? data.thing?.data[thingNum] 
+                    : 40400 
+                : 40400
+            }; break;
+            case 4: pres = data.bme280.pres + config.sensors.bme280.p; break;
+            case 5: pres = data.bmp180.pres + config.sensors.bmp180.p; break;
+            case 6: pres = data.bme680.pres + config.sensors.bme680.p; break;
             default: ; break;
         }
         return pres;
@@ -280,6 +346,41 @@ export default function DisplayViewLCD(props: any) {
                 setPrevDescr(descr);
             }
 
+            /* Show temperature inside */
+            const tempIn = getTempIn();
+            if(prevTempIn !== tempIn) {
+                lcdShowTemperatureInside(ctx, tempIn, FONT3, TEMPERATURE_COLOR, BG_COLOR);
+                setPrevTempIn(tempIn);
+            }
+        
+            /* Show temperature outside */
+            const tempOut = getTempOut();
+            if(prevTempOut !== tempOut) {
+                lcdShowTemperatureOutside(ctx, tempOut, FONT3, TEMPERATURE_COLOR, BG_COLOR);
+                setPrevTempOut(tempOut);
+            }
+
+            /* Show humidity inside */
+            const humIn = getHumIn();
+            if(prevHumIn != humIn) {
+                lcdShowHumidityInside(ctx, humIn, FONT2, HUMIDITY_COLOR, BG_COLOR);
+                setPrevHumIn(humIn);
+            }
+
+            /* Show humidity outside */
+            const humOut = getHumOut();
+            if(prevHumOut != humOut) {
+                lcdShowHumidityOutside(ctx, humOut, FONT2, HUMIDITY_COLOR, BG_COLOR);
+                setPrevHumOut(humOut);
+            }
+
+            /* Show pressure */
+            let pres = getPres();
+            if(prevPresOut !== pres) {
+                lcdShowPressure(ctx, pres, data.units.mm, FONT2, PRESSURE_COLOR, BG_COLOR);
+                setPrevPresOut(pres);
+            }
+
             /* Show wind speed */
             const speed = data.weather.wind.speed;
             if(prevWindSpeed !== speed) {
@@ -308,11 +409,6 @@ export default function DisplayViewLCD(props: any) {
                 );
             }
         }
-        //showTemperatureInside(ctx, getTemp(props.config.display.source.tempIn.sens, props.config.display.source.tempIn.thing));
-        //showHumidityInside(ctx, getHum(props.config.display.source.humIn.sens, props.config.display.source.humIn.thing));
-        // showTemperatureOutside(ctx, getTemp(props.config.display.source.tempOut.sens, props.config.display.source.tempOut.thing));
-        // showHumidityOutside(ctx, getHum(props.config.display.source.humOut.sens, props.config.display.source.humOut.thing));
-        // showPressure(ctx);
     }
 
     useEffect(() => {
@@ -330,8 +426,8 @@ export default function DisplayViewLCD(props: any) {
         }
 
         const int = setInterval(() => {
-            render();
             setClockPointsState((clockPointsState) => !clockPointsState);
+            render();
         }, 500);
         return () => clearInterval(int);
 

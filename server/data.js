@@ -164,7 +164,7 @@ const data = () => {
             isDay: Math.round(random(0, 1)),
             temp: random(-10, 10),
             hum: random(90, 100),
-            pres: random(600, 650),
+            pres: random(800, 850),
             wind: {
                 speed: random(1, 7),
                 dir: random(0, 360)
