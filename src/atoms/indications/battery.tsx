@@ -4,9 +4,9 @@ import { iConfig } from "../../redux/configTypes";
 import { iData } from "../../redux/dataTypes";
 import * as vl from "../validateValues";
 
-const voltage = (adc: number, k: number) => adc / (300.0 - k);
+export const voltage = (adc: number, k: number) => adc / (300.0 - k);
 
-const percentage = (type: number, adc: number, k: number) => {
+export const percentage = (type: number, adc: number, k: number) => {
     const umin = 3.75;
     const umax = type === 0 ? 4.5 : 3.9;
     let percent = (voltage(adc, k) - umin) * 100.0 / (umax - umin); 
