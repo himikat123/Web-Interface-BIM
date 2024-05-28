@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { iConfig } from '../redux/configTypes';
 import { iData } from "../redux/dataTypes";
 import { iPrevForecast } from '../interfaces';
-import * as vl from "../atoms/validateValues";
 
 import lcdDrawSkeleton from '../atoms/canvas/lcdDrawSkeleton';
 import lcdShowTime from '../atoms/canvas/lcdShowTime';
@@ -21,6 +20,7 @@ import lcdShowWindSpeed from '../atoms/canvas/lcdShowWindSpeed';
 import lcdShowWindDirection from '../atoms/canvas/lcdShowWindDirection';
 import lcdShowUpdTime from '../atoms/canvas/lcdShowUpdTime';
 import lcdShowForecast from '../atoms/canvas/lcdShowForecast';
+import lcdShowVoltageOrPercentage from '../atoms/canvas/lcdShowVoltageOrPercentage';
 
 import lcdGetTempIn from '../atoms/lcdGetTempIn';
 import lcdGetTempOut from '../atoms/lcdGetTempOut';
@@ -63,7 +63,7 @@ export default function DisplayViewLCD() {
     const [prevUpdTime, setPrevUpdTime] = useState<number>(0);
     const [prevAnt, setPrevAnt] = useState<string>('');
     const [prevBatLevel, setPrevBatLevel] = useState<number>(-1);
-    const [prevVolt, setPrevVolt] = useState<number>(-40400.00);
+    const [prevVolt, setPrevVolt] = useState<string>('');
     const [prevForecast, setPrevForecast] = useState<iPrevForecast>({
         wd: ['', '', '', ''],
         tMax: [40400, 40400, 40400, 40400],
@@ -71,37 +71,6 @@ export default function DisplayViewLCD() {
         wSpeed: [-1, -1, -1, -1],
         icon: [-1, -1, -1, -1]
     });
-
-    function showVoltageOrPercentage(ctx: CanvasRenderingContext2D | null) {
-        let volt = "--";
-        let percent = "--";
-  
-        // if(props.config.display.source.volt.sens == 1) { // Thingspeak
-        //     if(props.data.thing.expired == -1) {
-        //         let value = props.data.thing.fields[props.config.display.source.volt.thing];
-        //         volt = value.toFixed(2);
-        //         percent = String(value);
-        //     }
-        
-        //     if(prevVolt != volt) {
-        //         if(props.config.display.source.volt.volt == 0) { // Voltage
-        //             let v = (!checkVoltage(volt)) ? '--' : volt;
-        //             v += props.data.units.v;
-        //             printText(ctx, 198, 10, 58, 16, v, FONT1, RIGHT, BATTERY_COLOR);
-        //         }
-
-        //         else if(props.config.display.source.volt.volt == 1) { // Percentage
-        //             let p = (!checkPercentage(percent)) ? '--%' : `${percent}%`;
-        //             printText(ctx, 198, 10, 58, 16, p, FONT1, RIGHT, BATTERY_COLOR);
-        //         }
-
-        //         else printText(ctx, 198, 10, 58, 16, " ", FONT1, RIGHT, BATTERY_COLOR);
-
-        //         setPrevVolt(volt);
-        //     }
-        // }
-        // else printText(ctx, 198, 10, 58, 16, " ", FONT1, RIGHT, BATTERY_COLOR);
-    }
 
     function draw(ctx: CanvasRenderingContext2D | null) {
         if(ctx) {
@@ -119,6 +88,7 @@ export default function DisplayViewLCD() {
             setPrevBatLevel(lcdShowBatteryLevel(ctx, lcdGetBatteryLevel(), prevBatLevel, BG_COLOR));
 
             //showVoltageOrPercentage(ctx);
+            setPrevVolt(lcdShowVoltageOrPercentage(ctx, prevVolt, FONT1, BATTERY_COLOR, TEMP_MIN_COLOR, BG_COLOR));
 
             //lcdShowComfort() {
             //     if(props.config.display.source.descr == 1) {

@@ -62,46 +62,46 @@ export const dataSlice = createSlice({
         wsensor: {
             time: [],
             temp: {
-                data: [],
-                name: []
+                data: [[404, 404], [404, 404], [404, 404], [404, 404], [404, 404]],
+                name: [['', ''], ['', ''], ['', ''], ['', ''], ['', '']]
             },
             hum: {
-                data: [],
-                name: []
+                data: [404, 404],
+                name: ['', '']
             },
             pres: {
-                data: [],
-                name: []
+                data: [4040, 4040],
+                name: ['', '']
             },
             light: {
-                data: [],
-                name: []
+                data: [-1, -1],
+                name: ['', '']
             },
             co2: {
-                data: [],
-                name: []
+                data: [-1, -1],
+                name: ['', '']
             },
             voltage: {
-                data: [],
-                name: []
+                data: [-1, -1],
+                name: ['', '']
             },
             current: {
-                data: [],
-                name: []
+                data: [-1, -1],
+                name: ['', '']
             },
             power: {
-                data: [],
-                name: []
+                data: [-1, -1],
+                name: ['', '']
             },
             energy: {
-                data: [],
-                name: []
+                data: [-1, -1],
+                name: ['', '']
             },
             freq: {
-                data: [],
-                name: []
+                data: [-1, -1],
+                name: ['', '']
             },
-            bat: []
+            bat: [-1, -1]
         },
         weather: {
             temp: 4040,
@@ -115,7 +115,7 @@ export const dataSlice = createSlice({
         },
         thing: {
             time: 0,
-            data: []
+            data: [-40400, -40400, -40400, -40400, -40400, -40400, -40400, -40400]
         },
         fs: { 
             total: -1,
