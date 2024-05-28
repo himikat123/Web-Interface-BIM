@@ -1,16 +1,12 @@
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { iConfig } from '../redux/configTypes';
-import { iData } from "../redux/dataTypes";
+import { useEffect, useState, useCallback } from 'react';
 import { iPrevForecast } from '../interfaces';
-
 import lcdDrawSkeleton from '../atoms/canvas/lcdDrawSkeleton';
 import lcdShowTime from '../atoms/canvas/lcdShowTime';
 import lcdShowClockPoints from '../atoms/canvas/lcdShowClockPoints';
 import lcdShowWeekday from '../atoms/canvas/lcdShowWeekday';
 import lcdShowAntenna from '../atoms/canvas/lcdShowAntenna';
 import lcdShowBatteryLevel from '../atoms/canvas/lcdShowBatteryLevel';
-import lcdShowComfort from '../atoms/canvas/lcdShowComfort';
+//import lcdShowComfort from '../atoms/canvas/lcdShowComfort';
 import lcdShowWeatherIcon from '../atoms/canvas/lcdShowWeatherIcon';
 import lcdShowDescription from '../atoms/canvas/lcdShowDescription';
 import { lcdShowTemperatureInside, lcdShowTemperatureOutside } from '../atoms/canvas/lcdShowTemperature';
@@ -23,9 +19,6 @@ import lcdShowForecast from '../atoms/canvas/lcdShowForecast';
 import lcdShowVoltageOrPercentage from '../atoms/canvas/lcdShowVoltageOrPercentage';
 
 export default function DisplayViewLCD() {
-    const config = useSelector((state: iConfig) => state.config);
-    const data = useSelector((state: iData) => state.data);
-
     const BG_COLOR          = '#000';
     const FRAME_COLOR       = '#00F';
     const TEXT_COLOR        = '#FFF';
@@ -43,7 +36,7 @@ export default function DisplayViewLCD() {
     const [clockPointsState, setClockPointsState] = useState<boolean>(false);
     const [prevTime, setPrevTime] = useState<number>(-1);
     const [prevWeekday, setPrevWeekday] = useState<string>('');
-    const [prevComfort, setPrevComfort] = useState<string>(''); 
+//    const [prevComfort, setPrevComfort] = useState<string>(''); 
     const [prevTempIn, setPrevTempIn] = useState<number>(-40400);
     const [prevTempOut, setPrevTempOut] = useState<number>(-40400);
     const [prevHumIn, setPrevHumIn] = useState<number>(-40400);
@@ -65,7 +58,10 @@ export default function DisplayViewLCD() {
         icon: [-1, -1, -1, -1]
     });
 
-    function draw(ctx: CanvasRenderingContext2D | null) {
+    const draw = useCallback(() => {
+        const canvas = document.getElementById('canvas') as HTMLCanvasElement;
+        const ctx = canvas.getContext('2d');
+
         if(ctx) {
             /* Show time */
             setPrevTime(lcdShowTime(ctx, prevTime, BG_COLOR));
@@ -111,25 +107,27 @@ export default function DisplayViewLCD() {
             setPrevHumOut(lcdShowHumidityOutside(ctx, prevHumOut, FONT2, HUMIDITY_COLOR, BG_COLOR));
 
             /* Show pressure */
-            setPrevPresOut(lcdShowPressure(ctx, prevPresOut, data.units.mm, FONT2, PRESSURE_COLOR, BG_COLOR));
+            setPrevPresOut(lcdShowPressure(ctx, prevPresOut, FONT2, PRESSURE_COLOR, BG_COLOR));
 
             /* Show wind speed */
-            setPrevWindSpeed(lcdShowWindSpeed(ctx, prevWindSpeed, data.units.ms, FONT1, TEXT_COLOR, BG_COLOR));
+            setPrevWindSpeed(lcdShowWindSpeed(ctx, prevWindSpeed, FONT1, TEXT_COLOR, BG_COLOR));
 
             /* Show wind direction */
             setPrevWindDirection(lcdShowWindDirection(ctx, prevWindDirection, BG_COLOR));
 
             /* Show updated time */
-            setPrevUpdTime(lcdShowUpdTime(ctx, prevUpdTime, config.lang, FONT1, TEXT_COLOR, BG_COLOR));
+            setPrevUpdTime(lcdShowUpdTime(ctx, prevUpdTime, FONT1, TEXT_COLOR, BG_COLOR));
 
             /* Show forecast */
             for(let i=0; i<3; i++) {
-                setPrevForecast(lcdShowForecast(ctx, i, prevForecast, data.units.ms, 
-                    FONT1, FONT2, TEXT_COLOR, TEMPERATURE_COLOR, TEMP_MIN_COLOR, BG_COLOR
+                setPrevForecast(lcdShowForecast(ctx, i, prevForecast, FONT1, 
+                    FONT2, TEXT_COLOR, TEMPERATURE_COLOR, TEMP_MIN_COLOR, BG_COLOR
                 ));
             }
         }
-    }
+    }, [clockPointsState, prevAnt, prevBatLevel, prevDescr, prevForecast, prevHumIn, prevHumOut, 
+        prevIcon, prevPresOut, prevTempIn, prevTempOut, prevTime, prevUpdTime, prevVolt, 
+        prevWeekday, prevWindDirection, prevWindSpeed]);
 
     useEffect(() => {
         const canvas = document.getElementById('canvas') as HTMLCanvasElement;
@@ -138,20 +136,12 @@ export default function DisplayViewLCD() {
     }, []);
   
     useEffect(() => {
-        const canvas = document.getElementById('canvas') as HTMLCanvasElement;
-        const context = canvas.getContext('2d');
-
-        const render = () => {
-            draw(context);
-        }
-
         const int = setInterval(() => {
             setClockPointsState((clockPointsState) => !clockPointsState);
-            render();
+            draw();
         }, 500);
         return () => clearInterval(int);
-
-    }, [draw, clockPointsState]);
+    }, [draw]);
 
     return <div className='w-fit mx-auto mt-4 p-2 bg-gray-400 dark:bg-gray-600'>
         <canvas width="320" height="240" id="canvas" style={{

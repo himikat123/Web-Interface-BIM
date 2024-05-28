@@ -2,7 +2,6 @@ import i18n from '../i18n/main';
 import store from '../redux/store';
 import * as vl from "./validateValues";
 import { voltage, percentage } from './indications/battery';
-import { d_1 } from './img/digits';
 
 interface iReturn {
     val: string,
