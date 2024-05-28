@@ -10,7 +10,8 @@ export const dataSlice = createSlice({
             temp: 0
         },
         runtime: "",
-        time: "",
+        time: 0,
+        wd: ['', '', '', ''],
         network: {
             ssid: "",
             ch: 0,
@@ -111,7 +112,16 @@ export const dataSlice = createSlice({
                 speed: -1,
                 dir: -1
             },
-            descript: ""
+            descript: "",
+            icon: -1,
+            isDay: 0,
+            time: -1,
+            daily: {
+                tMax: [404, 404, 404, 404],
+                tMin: [404, 404, 404, 404],
+                wind: [-1, -1, -1, -1],
+                icon: [-1, -1, -1, -1]
+            }
         },
         thing: {
             time: 0,

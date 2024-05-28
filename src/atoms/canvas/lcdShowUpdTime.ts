@@ -1,10 +1,12 @@
+import store from '../../redux/store';
 import moment from "moment";
 import { printText, drawImage } from "./primitives";
 import * as symbols from "../img/symbols";
 
 export default function lcdShowUpdTime(ctx: CanvasRenderingContext2D, 
-    time: number, prevTime: number, lang: string, font: number, color: string, bgColor: string
+    prevTime: number, lang: string, font: number, color: string, bgColor: string
 ): number {
+    const time = store.getState().data.weather.time;
     if(time !== prevTime) {
         const usa = 'YYYY-DD-MM hh:mm:ss';
         const others = 'DD.MM.YYYY hh:mm:ss';

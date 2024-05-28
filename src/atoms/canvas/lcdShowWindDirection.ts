@@ -1,7 +1,9 @@
+import store from '../../redux/store';
 import { drawImage, fillRect } from "./primitives";
 import * as wind from "../img/wind";
 
-export default function lcdShowWindDirection(ctx: CanvasRenderingContext2D, dir: number, prevDir: number, bgColor: string): number {
+export default function lcdShowWindDirection(ctx: CanvasRenderingContext2D, prevDir: number, bgColor: string): number {
+    const dir = store.getState().data.weather.wind.dir;
     if(dir !== prevDir) {
         if((dir >= 338 && dir < 360) || (dir >= 0 && dir < 22)) drawImage(ctx, wind.north(), 133, 143);
         else if(dir >= 22 && dir < 67) drawImage(ctx, wind.north_east(), 133, 143);

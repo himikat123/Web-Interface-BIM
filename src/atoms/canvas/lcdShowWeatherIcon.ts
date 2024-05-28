@@ -1,7 +1,10 @@
+import store from '../../redux/store';
 import { drawImage } from "./primitives";
 import * as icons from '../img/icons/big';
 
-export default function lcdShowWeatherIcon(ctx: CanvasRenderingContext2D, icon: number, isDay: number, prevIcon: number): number {
+export default function lcdShowWeatherIcon(ctx: CanvasRenderingContext2D, prevIcon: number): number {
+    const icon = store.getState().data.weather.icon;
+    const isDay = store.getState().data.weather.isDay;
     if(prevIcon !== (icon * 100 + isDay)) {
         switch(icon) {
             case 1: drawImage(ctx, isDay ? icons.big_01_d() : icons.big_01_n(), 0, 104); break;

@@ -1,3 +1,4 @@
+import store from '../../redux/store';
 import { printText, drawImage } from "./primitives";
 import * as icons from '../img/icons/small';
 import { iPrevForecast } from "../../interfaces";
@@ -10,10 +11,14 @@ function showTemperature(ctx: CanvasRenderingContext2D, temp: number,
 }
 
 export default function lcdShowForecast(ctx: CanvasRenderingContext2D, num: number, 
-    prevForecast: iPrevForecast, tMax: number, tMin: number, wind: number, icon: number, 
-    wd: string, units: string, font1: number, font2: number, color: string,
-    colorTempMax: string, colorTempMin: string, bgColor: string
+    prevForecast: iPrevForecast, units: string, font1: number, font2: number, 
+    color: string, colorTempMax: string, colorTempMin: string, bgColor: string
 ): iPrevForecast {
+    const tMax = store.getState().data.weather.daily.tMax[num];
+    const tMin = store.getState().data.weather.daily.tMin[num];
+    const wind = store.getState().data.weather.daily.wind[num];
+    const icon = store.getState().data.weather.daily.icon[num];
+    const wd = store.getState().data.wd[num]
     const x = num * 106;
 
     /* Show icon */

@@ -1,4 +1,5 @@
 import moment from "moment";
+import store from '../../redux/store';
 import { drawImage, fillRect } from "./primitives";
 import * as digit from '../img/digits';
 
@@ -18,7 +19,8 @@ function showDigit(ctx: CanvasRenderingContext2D, dig: number, x: number, bgColo
     }
 }
 
-export default function lcdShowTime(ctx: CanvasRenderingContext2D, time: number, prevTime: number, bgColor: string): number {
+export default function lcdShowTime(ctx: CanvasRenderingContext2D, prevTime: number, bgColor: string): number {
+    const time = store.getState().data.time;
     if(time !== prevTime) {
         const hr = moment.unix(time).hour();
         const mn = moment.unix(time).minute();

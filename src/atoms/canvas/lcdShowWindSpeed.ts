@@ -1,9 +1,11 @@
+import store from '../../redux/store';
 import { printText } from "./primitives";
 import { validateWindSpeed } from "../validateValues";
 
 export default function lcdShowWindSpeed(ctx: CanvasRenderingContext2D, 
-    speed: number, prevSpeed: number, units: string, font: number, color: string, bgColor:string
+    prevSpeed: number, units: string, font: number, color: string, bgColor:string
 ): number {
+    const speed = store.getState().data.weather.wind.speed;
     if(speed !== prevSpeed) {
         let w = validateWindSpeed(speed) ? String(Math.round(speed)) : '--';
         w += units;

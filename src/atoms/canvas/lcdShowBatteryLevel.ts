@@ -1,7 +1,9 @@
 import { drawImage, fillRect } from "./primitives";
 import { bat_1, bat_2, bat_3, bat_4 } from '../img/bat';
+import lcdGetBatteryLevel from "../lcdGetBatLevel";
 
-export default function lcdShowBatteryLevel(ctx: CanvasRenderingContext2D, level: number, prevLevel: number, bgColor: string): number {
+export default function lcdShowBatteryLevel(ctx: CanvasRenderingContext2D, prevLevel: number, bgColor: string): number {
+    const level = lcdGetBatteryLevel();
     if(level !== prevLevel) {
         switch(level) {
             case 1: drawImage(ctx, bat_1(), 258, 2); break;

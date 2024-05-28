@@ -22,13 +22,6 @@ import lcdShowUpdTime from '../atoms/canvas/lcdShowUpdTime';
 import lcdShowForecast from '../atoms/canvas/lcdShowForecast';
 import lcdShowVoltageOrPercentage from '../atoms/canvas/lcdShowVoltageOrPercentage';
 
-import lcdGetTempIn from '../atoms/lcdGetTempIn';
-import lcdGetTempOut from '../atoms/lcdGetTempOut';
-import lcdGetHumIn from '../atoms/lcdGetHumIn';
-import lcdGetHumOut from '../atoms/lcdGetHumOut';
-import lcdGetPres from '../atoms/lcdGetPres';
-import lcdGetBatteryLevel from '../atoms/lcdGetBatLevel';
-
 export default function DisplayViewLCD() {
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
@@ -75,19 +68,19 @@ export default function DisplayViewLCD() {
     function draw(ctx: CanvasRenderingContext2D | null) {
         if(ctx) {
             /* Show time */
-            setPrevTime(lcdShowTime(ctx, data.time, prevTime, BG_COLOR));
+            setPrevTime(lcdShowTime(ctx, prevTime, BG_COLOR));
             lcdShowClockPoints(ctx, clockPointsState ? HUMIDITY_COLOR : BG_COLOR);
 
             /* Show weekday */
-            setPrevWeekday(lcdShowWeekday(ctx, data.wd[0], prevWeekday, FONT2, CLOCK_COLOR, BG_COLOR));
+            setPrevWeekday(lcdShowWeekday(ctx, prevWeekday, FONT2, CLOCK_COLOR, BG_COLOR));
 
             /* Show antenna */
-            setPrevAnt(lcdShowAntenna(ctx, data.network.sig, prevAnt));
+            setPrevAnt(lcdShowAntenna(ctx, prevAnt));
 
             /* Show battery level symbol */
-            setPrevBatLevel(lcdShowBatteryLevel(ctx, lcdGetBatteryLevel(), prevBatLevel, BG_COLOR));
+            setPrevBatLevel(lcdShowBatteryLevel(ctx, prevBatLevel, BG_COLOR));
 
-            //showVoltageOrPercentage(ctx);
+            /* Show voltage or percentage */
             setPrevVolt(lcdShowVoltageOrPercentage(ctx, prevVolt, FONT1, BATTERY_COLOR, TEMP_MIN_COLOR, BG_COLOR));
 
             //lcdShowComfort() {
@@ -100,40 +93,39 @@ export default function DisplayViewLCD() {
             // }
 
             /* Show weather icon */
-            setPrevIcon(lcdShowWeatherIcon(ctx, data.weather.icon, data.weather.isDay, prevIcon));
+            setPrevIcon(lcdShowWeatherIcon(ctx, prevIcon));
 
             /* Show weather description */
-            setPrevDescr(lcdShowDescription(ctx, data.weather.descript, prevDescr, FONT1, FONT2, TEXT_COLOR, BG_COLOR));
+            setPrevDescr(lcdShowDescription(ctx, prevDescr, FONT1, FONT2, TEXT_COLOR, BG_COLOR));
 
             /* Show temperature inside */
-            setPrevTempIn(lcdShowTemperatureInside(ctx, lcdGetTempIn(-1/*sequenceTemp*/), prevTempIn, FONT3, TEMPERATURE_COLOR, BG_COLOR));
+            setPrevTempIn(lcdShowTemperatureInside(ctx, prevTempIn, FONT3, TEMPERATURE_COLOR, BG_COLOR));
         
             /* Show temperature outside */
-            setPrevTempOut(lcdShowTemperatureOutside(ctx, lcdGetTempOut(), prevTempOut, FONT3, TEMPERATURE_COLOR, BG_COLOR));
+            setPrevTempOut(lcdShowTemperatureOutside(ctx, prevTempOut, FONT3, TEMPERATURE_COLOR, BG_COLOR));
 
             /* Show humidity inside */
-            setPrevHumIn(lcdShowHumidityInside(ctx, lcdGetHumIn(10 /*sequenceHum*/), prevHumIn, FONT2, HUMIDITY_COLOR, BG_COLOR));
+            setPrevHumIn(lcdShowHumidityInside(ctx, prevHumIn, FONT2, HUMIDITY_COLOR, BG_COLOR));
 
             /* Show humidity outside */
-            setPrevHumOut(lcdShowHumidityOutside(ctx, lcdGetHumOut(), prevHumOut, FONT2, HUMIDITY_COLOR, BG_COLOR));
+            setPrevHumOut(lcdShowHumidityOutside(ctx, prevHumOut, FONT2, HUMIDITY_COLOR, BG_COLOR));
 
             /* Show pressure */
-            setPrevPresOut(lcdShowPressure(ctx, lcdGetPres(), prevPresOut, data.units.mm, FONT2, PRESSURE_COLOR, BG_COLOR));
+            setPrevPresOut(lcdShowPressure(ctx, prevPresOut, data.units.mm, FONT2, PRESSURE_COLOR, BG_COLOR));
 
             /* Show wind speed */
-            setPrevWindSpeed(lcdShowWindSpeed(ctx, data.weather.wind.speed, prevWindSpeed, data.units.ms, FONT1, TEXT_COLOR, BG_COLOR));
+            setPrevWindSpeed(lcdShowWindSpeed(ctx, prevWindSpeed, data.units.ms, FONT1, TEXT_COLOR, BG_COLOR));
 
             /* Show wind direction */
-            setPrevWindDirection(lcdShowWindDirection(ctx, data.weather.wind.dir, prevWindDirection, BG_COLOR));
+            setPrevWindDirection(lcdShowWindDirection(ctx, prevWindDirection, BG_COLOR));
 
             /* Show updated time */
-            setPrevUpdTime(lcdShowUpdTime(ctx, data.weather.time, prevUpdTime, config.lang, FONT1, TEXT_COLOR, BG_COLOR));
+            setPrevUpdTime(lcdShowUpdTime(ctx, prevUpdTime, config.lang, FONT1, TEXT_COLOR, BG_COLOR));
 
             /* Show forecast */
             for(let i=0; i<3; i++) {
-                setPrevForecast(lcdShowForecast(ctx, i, prevForecast, data.weather.daily.tMax[i], 
-                    data.weather.daily.tMin[i], data.weather.daily.wind[i], data.weather.daily.icon[i], 
-                    data.wd[i], data.units.ms, FONT1, FONT2, TEXT_COLOR, TEMPERATURE_COLOR, TEMP_MIN_COLOR, BG_COLOR
+                setPrevForecast(lcdShowForecast(ctx, i, prevForecast, data.units.ms, 
+                    FONT1, FONT2, TEXT_COLOR, TEMPERATURE_COLOR, TEMP_MIN_COLOR, BG_COLOR
                 ));
             }
         }
