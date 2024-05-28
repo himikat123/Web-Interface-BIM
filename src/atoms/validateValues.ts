@@ -1,6 +1,4 @@
-import { useSelector } from 'react-redux';
-import { iConfig } from "../redux/configTypes";
-import { iData } from "../redux/dataTypes";
+import store from '../redux/store';
 
 
 export const validateTemperature = (temp: number): boolean => {
@@ -12,7 +10,11 @@ export const validateHumidity = (hum: number): boolean => {
 }
 
 export const validatePressure = (pres: number): boolean => {
-    return (pres >= 300 && pres <= 1100); 
+    return (pres >= 800 && pres <= 1200); 
+}
+
+export const validateWindSpeed = (speed: number): boolean => {
+    return (speed >= 0 && speed <= 100)
 }
 
 export const validateLight = (light: number): boolean => {
@@ -68,14 +70,14 @@ export const validateThingspeak = (thng: number): boolean => {
 }
 
 export const WsensorDataRelevance = (num: number) => {
-    const config = useSelector((state: iConfig) => state.config);
-    const data = useSelector((state: iData) => state.data);
+    const config = store.getState().config;
+    const data = store.getState().data;
     return !((Math.floor(Date.now() / 1000) - data.wsensor.time[num] > config.wsensor.expire[num] * 60) && data.wsensor.time[num] > 0);
 }
 
 export const ThingspeakDataRelevance = () => {
-    const config = useSelector((state: iConfig) => state.config);
-    const data = useSelector((state: iData) => state.data);
+    const config = store.getState().config;
+    const data = store.getState().data;
     let result = false;
     if(data.thing?.time) {
         result = !((Math.floor(Date.now() / 1000) - data.thing.time > config.thingspeakReceive.expire * 60) && data.thing.time > 0);
