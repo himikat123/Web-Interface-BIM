@@ -38,7 +38,7 @@ const data = () => {
             mm: "mm",
             ms: "m/s"
         },
-        
+        comfort: "cold and dry",
         network: {
             ssid: "budulai",
             ch: 14,

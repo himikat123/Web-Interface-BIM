@@ -14,6 +14,7 @@ export interface iData {
             mm: string,
             ms: string
         },
+        comfort: string,
         network: {
             ssid: string,
             ch: number,

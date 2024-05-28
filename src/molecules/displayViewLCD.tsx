@@ -6,7 +6,7 @@ import lcdShowClockPoints from '../atoms/canvas/lcdShowClockPoints';
 import lcdShowWeekday from '../atoms/canvas/lcdShowWeekday';
 import lcdShowAntenna from '../atoms/canvas/lcdShowAntenna';
 import lcdShowBatteryLevel from '../atoms/canvas/lcdShowBatteryLevel';
-//import lcdShowComfort from '../atoms/canvas/lcdShowComfort';
+import lcdShowComfort from '../atoms/canvas/lcdShowComfort';
 import lcdShowWeatherIcon from '../atoms/canvas/lcdShowWeatherIcon';
 import lcdShowDescription from '../atoms/canvas/lcdShowDescription';
 import { lcdShowTemperatureInside, lcdShowTemperatureOutside } from '../atoms/canvas/lcdShowTemperature';
@@ -36,7 +36,7 @@ export default function DisplayViewLCD() {
     const [clockPointsState, setClockPointsState] = useState<boolean>(false);
     const [prevTime, setPrevTime] = useState<number>(-1);
     const [prevWeekday, setPrevWeekday] = useState<string>('');
-//    const [prevComfort, setPrevComfort] = useState<string>(''); 
+    const [prevComfort, setPrevComfort] = useState<string>(''); 
     const [prevTempIn, setPrevTempIn] = useState<number>(-40400);
     const [prevTempOut, setPrevTempOut] = useState<number>(-40400);
     const [prevHumIn, setPrevHumIn] = useState<number>(-40400);
@@ -79,14 +79,8 @@ export default function DisplayViewLCD() {
             /* Show voltage or percentage */
             setPrevVolt(lcdShowVoltageOrPercentage(ctx, prevVolt, FONT1, BATTERY_COLOR, TEMP_MIN_COLOR, BG_COLOR));
 
-            //lcdShowComfort() {
-            //     if(props.config.display.source.descr == 1) {
-            //         if(prevComfort != props.data.comfort) {
-            //             //printText(ctx, 145, 28, 175, 16, props.data.comfort, FONT1, CENTER, TEXT_COLOR);
-            //             setPrevComfort(props.data.comfort);
-            //         }
-            //     }
-            // }
+            /* Show comfort level */
+            setPrevComfort(lcdShowComfort(ctx, prevComfort, FONT1, TEXT_COLOR, BG_COLOR));
 
             /* Show weather icon */
             setPrevIcon(lcdShowWeatherIcon(ctx, prevIcon));
@@ -127,7 +121,7 @@ export default function DisplayViewLCD() {
         }
     }, [clockPointsState, prevAnt, prevBatLevel, prevDescr, prevForecast, prevHumIn, prevHumOut, 
         prevIcon, prevPresOut, prevTempIn, prevTempOut, prevTime, prevUpdTime, prevVolt, 
-        prevWeekday, prevWindDirection, prevWindSpeed]);
+        prevWeekday, prevWindDirection, prevWindSpeed, prevComfort]);
 
     useEffect(() => {
         const canvas = document.getElementById('canvas') as HTMLCanvasElement;

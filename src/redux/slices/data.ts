@@ -17,6 +17,7 @@ export const dataSlice = createSlice({
             mm: '',
             ms: ''
         },
+        comfort: '',
         network: {
             ssid: "",
             ch: 0,
