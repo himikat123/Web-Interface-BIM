@@ -345,7 +345,15 @@ export interface iCardHistory {
 }
 
 export interface iComfortAirExplicationTable {
-    param: string| React.ReactNode,
+    param: string | React.ReactNode,
     min: number,
     max: number
+}
+
+export interface iPrevForecast {
+    wd: string[],
+    tMax: number[],
+    tMin: number[],
+    wSpeed: number[],
+    icon: number[]
 }

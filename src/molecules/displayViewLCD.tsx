@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { iConfig } from '../redux/configTypes';
 import { iData } from "../redux/dataTypes";
+import { iPrevForecast } from '../interfaces';
 import * as vl from "../atoms/validateValues";
-import { drawLine, fillCircle, drawRoundRect, fillRect, drawImage, printText } from '../atoms/canvas/primitives';
+
 import lcdDrawSkeleton from '../atoms/canvas/lcdDrawSkeleton';
 import lcdShowTime from '../atoms/canvas/lcdShowTime';
 import lcdShowClockPoints from '../atoms/canvas/lcdShowClockPoints';
-import lcdShowWeekday from '../atoms/canvas/lcdShawWeekday';
+import lcdShowWeekday from '../atoms/canvas/lcdShowWeekday';
 import lcdShowAntenna from '../atoms/canvas/lcdShowAntenna';
 import lcdShowBatteryLevel from '../atoms/canvas/lcdShowBatteryLevel';
 import lcdShowComfort from '../atoms/canvas/lcdShowComfort';
@@ -16,20 +17,15 @@ import lcdShowDescription from '../atoms/canvas/lcdShowDescription';
 import { lcdShowTemperatureInside, lcdShowTemperatureOutside } from '../atoms/canvas/lcdShowTemperature';
 import { lcdShowHumidityInside, lcdShowHumidityOutside } from '../atoms/canvas/lcdShowHumidity';
 import lcdShowPressure from '../atoms/canvas/lcdShowPressure';
-
 import lcdShowWindSpeed from '../atoms/canvas/lcdShowWindSpeed';
 import lcdShowWindDirection from '../atoms/canvas/lcdShowWindDirection';
 import lcdShowUpdTime from '../atoms/canvas/lcdShowUpdTime';
 import lcdShowForecast from '../atoms/canvas/lcdShowForecast';
 
-//import { temp_minus } from '../atoms/img/symb';
-
-
-export default function DisplayViewLCD(props: any) {
+export default function DisplayViewLCD() {
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
 
-    //const canvasRef = useRef(null);
     const BG_COLOR          = '#000';
     const FRAME_COLOR       = '#00F';
     const TEXT_COLOR        = '#FFF';
@@ -40,18 +36,14 @@ export default function DisplayViewLCD(props: any) {
     const CLOCK_COLOR       = '#0F0';
     const BATTERY_COLOR     = '#0F0';
 
-    const LEFT = 'left';
-    const CENTER = 'center';
-    const RIGHT = 'right';
-
     const FONT1 = 14;
     const FONT2 = 21;
     const FONT3 = 29;
 
-    const [clockPointsState, setClockPointsState] = useState(false);
+    const [clockPointsState, setClockPointsState] = useState<boolean>(false);
     const [prevTime, setPrevTime] = useState<number>(-1);
     const [prevWeekday, setPrevWeekday] = useState<string>('');
-    const [prevComfort, setPrevComfort] = useState(0); 
+    const [prevComfort, setPrevComfort] = useState<string>(''); 
     const [prevTempIn, setPrevTempIn] = useState<number>(-40400);
     const [prevTempOut, setPrevTempOut] = useState<number>(-40400);
     const [prevHumIn, setPrevHumIn] = useState<number>(-40400);
@@ -65,6 +57,13 @@ export default function DisplayViewLCD(props: any) {
     const [prevAnt, setPrevAnt] = useState<string>('');
     const [prevBatLevel, setPrevBatLevel] = useState<number>(-1);
     const [prevVolt, setPrevVolt] = useState<number>(-40400.00);
+    const [prevForecast, setPrevForecast] = useState<iPrevForecast>({
+        wd: ['', '', '', ''],
+        tMax: [40400, 40400, 40400, 40400],
+        tMin: [40400, 40400, 40400, 40400],
+        wSpeed: [-1, -1, -1, -1],
+        icon: [-1, -1, -1, -1]
+    });
 
     function showVoltageOrPercentage(ctx: CanvasRenderingContext2D | null) {
         let volt = "--";
@@ -247,6 +246,27 @@ export default function DisplayViewLCD(props: any) {
         return pres;
     }
 
+    function getBatteryLevel() {
+        let level = -1;
+        if(config.display.source.bat.sens == 1) { // Wsensor
+            const wSensNum = config.display.source.bat.wsensNum;
+            if(Math.floor(Date.now() / 1000) - data.wsensor.time[wSensNum] < config.wsensor.expire[wSensNum] * 60) {
+                if(vl.validateBatteryADC(data.wsensor.bat[wSensNum])) {
+                    const percent = percentage(config.wsensor.bat.type[wSensNum], data.wsensor.bat[wSensNum], config.wsensor.bat.k[wSensNum]);
+                    level = Math.round(percent / 25);
+                    if(level < 1) level = 1;
+                    if(level > 4) level = 4;
+                }
+            }
+        }
+        if(config.display.source.bat.sens == 2) { // Thingspeak
+            if(data.thing?.time && (Math.floor(Date.now() / 1000) - data.thing.time < config.thingspeakReceive.expire * 60)) {
+                level = data.thing.data ? data.thing.data[config.display.source.bat.thing] : -1;
+            }
+        }
+        return level;
+    }
+
     function checkVoltage(val: number) {
         if(val >= 0.0 && val <= 12.0) return true;
         else return false;
@@ -275,50 +295,17 @@ export default function DisplayViewLCD(props: any) {
     function draw(ctx: CanvasRenderingContext2D | null) {
         if(ctx) {
             /* Show time */
-            const time = data.time;
-            if(prevTime !== time) {
-                lcdShowTime(ctx, time, BG_COLOR);
-                setPrevTime(time);
-            }
-
+            setPrevTime(lcdShowTime(ctx, data.time, prevTime, BG_COLOR));
             lcdShowClockPoints(ctx, clockPointsState ? HUMIDITY_COLOR : BG_COLOR);
 
             /* Show weekday */
-            const wd = data.wd[0];
-            if(prevWeekday !== wd) {
-                lcdShowWeekday(ctx, wd, FONT2, CLOCK_COLOR, BG_COLOR);
-                setPrevWeekday(wd);
-            }
+            setPrevWeekday(lcdShowWeekday(ctx, data.wd[0], prevWeekday, FONT2, CLOCK_COLOR, BG_COLOR));
 
             /* Show antenna */
-            const signal = data.network.sig;
-            if(prevAnt !== signal) {
-                lcdShowAntenna(ctx, signal);
-                setPrevAnt(signal);
-            }
+            setPrevAnt(lcdShowAntenna(ctx, data.network.sig, prevAnt));
 
             /* Show battery level symbol */
-            let level = -1;
-            if(config.display.source.bat.sens == 1) { // Wsensor
-                const wSensNum = config.display.source.bat.wsensNum;
-                if(Math.floor(Date.now() / 1000) - data.wsensor.time[wSensNum] < config.wsensor.expire[wSensNum] * 60) {
-                    if(vl.validateBatteryADC(data.wsensor.bat[wSensNum])) {
-                        const percent = percentage(config.wsensor.bat.type[wSensNum], data.wsensor.bat[wSensNum], config.wsensor.bat.k[wSensNum]);
-                        level = Math.round(percent / 25);
-                        if(level < 1) level = 1;
-                        if(level > 4) level = 4;
-                    }
-                }
-            }
-            if(config.display.source.bat.sens == 2) { // Thingspeak
-                if(data.thing?.time && (Math.floor(Date.now() / 1000) - data.thing.time < config.thingspeakReceive.expire * 60)) {
-                    level = data.thing.data ? data.thing.data[config.display.source.bat.thing] : -1;
-                }
-            }
-            if(prevBatLevel !== level) {
-                lcdShowBatteryLevel(ctx, level, BG_COLOR);
-                setPrevBatLevel(level);
-            }
+            setPrevBatLevel(lcdShowBatteryLevel(ctx, getBatteryLevel(), prevBatLevel, BG_COLOR));
 
             //showVoltageOrPercentage(ctx);
 
@@ -332,81 +319,41 @@ export default function DisplayViewLCD(props: any) {
             // }
 
             /* Show weather icon */
-            const icon = data.weather.icon;
-            const isDay = data.weather.isDay;
-            if(prevIcon !== (icon * 100 + isDay)) {
-                lcdShowWeatherIcon(ctx, icon, isDay == 1);
-                setPrevIcon(icon * 100 + isDay);
-            }
+            setPrevIcon(lcdShowWeatherIcon(ctx, data.weather.icon, data.weather.isDay, prevIcon));
 
             /* Show weather description */
-            const descr = data.weather.descript;
-            if(prevDescr !== descr) {
-                lcdShowDescription(ctx, descr, FONT1, FONT2, TEXT_COLOR, BG_COLOR);
-                setPrevDescr(descr);
-            }
+            setPrevDescr(lcdShowDescription(ctx, data.weather.descript, prevDescr, FONT1, FONT2, TEXT_COLOR, BG_COLOR));
 
             /* Show temperature inside */
-            const tempIn = getTempIn();
-            if(prevTempIn !== tempIn) {
-                lcdShowTemperatureInside(ctx, tempIn, FONT3, TEMPERATURE_COLOR, BG_COLOR);
-                setPrevTempIn(tempIn);
-            }
+            setPrevTempIn(lcdShowTemperatureInside(ctx, getTempIn(), prevTempIn, FONT3, TEMPERATURE_COLOR, BG_COLOR));
         
             /* Show temperature outside */
-            const tempOut = getTempOut();
-            if(prevTempOut !== tempOut) {
-                lcdShowTemperatureOutside(ctx, tempOut, FONT3, TEMPERATURE_COLOR, BG_COLOR);
-                setPrevTempOut(tempOut);
-            }
+            setPrevTempOut(lcdShowTemperatureOutside(ctx, getTempOut(), prevTempOut, FONT3, TEMPERATURE_COLOR, BG_COLOR));
 
             /* Show humidity inside */
-            const humIn = getHumIn();
-            if(prevHumIn != humIn) {
-                lcdShowHumidityInside(ctx, humIn, FONT2, HUMIDITY_COLOR, BG_COLOR);
-                setPrevHumIn(humIn);
-            }
+            setPrevHumIn(lcdShowHumidityInside(ctx, getHumIn(), prevHumIn, FONT2, HUMIDITY_COLOR, BG_COLOR));
 
             /* Show humidity outside */
-            const humOut = getHumOut();
-            if(prevHumOut != humOut) {
-                lcdShowHumidityOutside(ctx, humOut, FONT2, HUMIDITY_COLOR, BG_COLOR);
-                setPrevHumOut(humOut);
-            }
+            setPrevHumOut(lcdShowHumidityOutside(ctx, getHumOut(), prevHumOut, FONT2, HUMIDITY_COLOR, BG_COLOR));
 
             /* Show pressure */
-            let pres = getPres();
-            if(prevPresOut !== pres) {
-                lcdShowPressure(ctx, pres, data.units.mm, FONT2, PRESSURE_COLOR, BG_COLOR);
-                setPrevPresOut(pres);
-            }
+            setPrevPresOut(lcdShowPressure(ctx, getPres(), prevPresOut, data.units.mm, FONT2, PRESSURE_COLOR, BG_COLOR));
 
             /* Show wind speed */
-            const speed = data.weather.wind.speed;
-            if(prevWindSpeed !== speed) {
-                lcdShowWindSpeed(ctx, speed, data.units.ms, FONT1, TEXT_COLOR, BG_COLOR);
-                setPrevWindSpeed(speed);
-            }
+            setPrevWindSpeed(lcdShowWindSpeed(ctx, data.weather.wind.speed, prevWindSpeed, data.units.ms, FONT1, TEXT_COLOR, BG_COLOR));
 
             /* Show wind direction */
-            const windDirection = data.weather.wind.dir;
-            if(prevWindDirection !== windDirection) {
-                lcdShowWindDirection(ctx, windDirection, BG_COLOR);
-                setPrevWindDirection(windDirection);
-            }
+            setPrevWindDirection(lcdShowWindDirection(ctx, data.weather.wind.dir, prevWindDirection, BG_COLOR));
 
             /* Show updated time */
-            if(prevUpdTime !== data.weather.time) {
-                lcdShowUpdTime(ctx, data.weather.time, config.lang, FONT1, TEXT_COLOR, BG_COLOR);
-                setPrevUpdTime(data.weather.time);
-            }
+            setPrevUpdTime(lcdShowUpdTime(ctx, data.weather.time, prevUpdTime, config.lang, FONT1, TEXT_COLOR, BG_COLOR));
 
             /* Show forecast */
             for(let i=0; i<3; i++) {
-                lcdShowForecast(ctx, i, data.weather.daily.tMax[i], data.weather.daily.tMin[i], 
-                    data.weather.daily.wind[i], data.weather.daily.icon[i], data.wd[i], data.units.ms,
-                    FONT1, FONT2, TEXT_COLOR, TEMPERATURE_COLOR, TEMP_MIN_COLOR, BG_COLOR
-                );
+                setPrevForecast(lcdShowForecast(ctx, i, prevForecast, data.weather.daily.tMax[i], 
+                    data.weather.daily.tMin[i], data.weather.daily.wind[i], data.weather.daily.icon[i], 
+                    data.wd[i], data.units.ms, FONT1, FONT2, TEXT_COLOR, TEMPERATURE_COLOR, TEMP_MIN_COLOR, BG_COLOR
+                ));
             }
         }
     }
@@ -434,8 +381,9 @@ export default function DisplayViewLCD(props: any) {
     }, [draw, clockPointsState]);
 
     return <div className='w-fit mx-auto mt-4 p-2 bg-gray-400 dark:bg-gray-600'>
-        <canvas width="320" height="240" id="canvas" 
-            style={{margin: 0, padding: 0, width: '320px', height: '240px', border: '4px solid black'}}
+        <canvas width="320" height="240" id="canvas" style={{
+                margin: 0, padding: 0, width: '320px', height: '240px', border: '4px solid black'
+            }}
         />
     </div>
 }

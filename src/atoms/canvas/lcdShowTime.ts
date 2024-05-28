@@ -18,13 +18,16 @@ function showDigit(ctx: CanvasRenderingContext2D, dig: number, x: number, bgColo
     }
 }
 
-export default function lcdShowTime(ctx: CanvasRenderingContext2D, time: number, bgColor: string) {
-    const hr = moment.unix(time).hour();
-    const mn = moment.unix(time).minute();
+export default function lcdShowTime(ctx: CanvasRenderingContext2D, time: number, prevTime: number, bgColor: string): number {
+    if(time !== prevTime) {
+        const hr = moment.unix(time).hour();
+        const mn = moment.unix(time).minute();
     
-    if(hr < 10) showDigit(ctx, 10, 0, bgColor);
-    else showDigit(ctx, Math.floor(hr / 10), 0, bgColor);
-    showDigit(ctx, hr % 10, 33, bgColor);
-    showDigit(ctx, Math.floor(mn / 10), 77, bgColor);
-    showDigit(ctx, mn % 10, 109, bgColor);
+        if(hr < 10) showDigit(ctx, 10, 0, bgColor);
+        else showDigit(ctx, Math.floor(hr / 10), 0, bgColor);
+        showDigit(ctx, hr % 10, 33, bgColor);
+        showDigit(ctx, Math.floor(mn / 10), 77, bgColor);
+        showDigit(ctx, mn % 10, 109, bgColor);
+    }
+    return time;
 }
