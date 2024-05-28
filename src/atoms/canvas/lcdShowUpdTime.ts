@@ -4,9 +4,11 @@ import { printText, drawImage } from "./primitives";
 import * as symbols from "../img/symbols";
 
 export default function lcdShowUpdTime(ctx: CanvasRenderingContext2D, 
-    prevTime: number, lang: string, font: number, color: string, bgColor: string
+    prevTime: number, font: number, color: string, bgColor: string
 ): number {
     const time = store.getState().data.weather.time;
+    const lang = store.getState().config.lang;
+
     if(time !== prevTime) {
         const usa = 'YYYY-DD-MM hh:mm:ss';
         const others = 'DD.MM.YYYY hh:mm:ss';

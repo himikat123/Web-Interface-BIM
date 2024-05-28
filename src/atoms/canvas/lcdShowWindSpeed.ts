@@ -3,9 +3,11 @@ import { printText } from "./primitives";
 import { validateWindSpeed } from "../validateValues";
 
 export default function lcdShowWindSpeed(ctx: CanvasRenderingContext2D, 
-    prevSpeed: number, units: string, font: number, color: string, bgColor:string
+    prevSpeed: number, font: number, color: string, bgColor:string
 ): number {
     const speed = store.getState().data.weather.wind.speed;
+    const units = store.getState().data.units.ms;
+
     if(speed !== prevSpeed) {
         let w = validateWindSpeed(speed) ? String(Math.round(speed)) : '--';
         w += units;

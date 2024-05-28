@@ -10,15 +10,16 @@ function showTemperature(ctx: CanvasRenderingContext2D, temp: number,
     printText(ctx, x, y, 56, 20, vl.validateTemperature(temp) ? `${temp}°C` : '--°C', font, 'right', color, bgColor);
 }
 
-export default function lcdShowForecast(ctx: CanvasRenderingContext2D, num: number, 
-    prevForecast: iPrevForecast, units: string, font1: number, font2: number, 
+export default function lcdShowForecast(ctx: CanvasRenderingContext2D, 
+    num: number,prevForecast: iPrevForecast, font1: number, font2: number, 
     color: string, colorTempMax: string, colorTempMin: string, bgColor: string
 ): iPrevForecast {
     const tMax = store.getState().data.weather.daily.tMax[num];
     const tMin = store.getState().data.weather.daily.tMin[num];
     const wind = store.getState().data.weather.daily.wind[num];
     const icon = store.getState().data.weather.daily.icon[num];
-    const wd = store.getState().data.wd[num]
+    const wd = store.getState().data.wd[num];
+    const units = store.getState().data.units.ms;
     const x = num * 106;
 
     /* Show icon */

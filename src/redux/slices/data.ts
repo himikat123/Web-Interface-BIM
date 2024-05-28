@@ -12,6 +12,11 @@ export const dataSlice = createSlice({
         runtime: "",
         time: 0,
         wd: ['', '', '', ''],
+        units: {
+            v: '',
+            mm: '',
+            ms: ''
+        },
         network: {
             ssid: "",
             ch: 0,
