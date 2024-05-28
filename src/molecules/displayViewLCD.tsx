@@ -22,6 +22,13 @@ import lcdShowWindDirection from '../atoms/canvas/lcdShowWindDirection';
 import lcdShowUpdTime from '../atoms/canvas/lcdShowUpdTime';
 import lcdShowForecast from '../atoms/canvas/lcdShowForecast';
 
+import lcdGetTempIn from '../atoms/lcdGetTempIn';
+import lcdGetTempOut from '../atoms/lcdGetTempOut';
+import lcdGetHumIn from '../atoms/lcdGetHumIn';
+import lcdGetHumOut from '../atoms/lcdGetHumOut';
+import lcdGetPres from '../atoms/lcdGetPres';
+import lcdGetBatteryLevel from '../atoms/lcdGetBatLevel';
+
 export default function DisplayViewLCD() {
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
@@ -96,202 +103,6 @@ export default function DisplayViewLCD() {
         // else printText(ctx, 198, 10, 58, 16, " ", FONT1, RIGHT, BATTERY_COLOR);
     }
 
-    function getTempIn() {
-        let temp = 40400.0;
-        const wsensNum = config.display.source.tempIn.wsensNum;
-        const thingNum = config.display.source.tempIn.thing;
-
-        switch(config.display.source.tempIn.sens) {
-            case 1: temp = data.weather.temp; break;
-            case 2: if(vl.WsensorDataRelevance(wsensNum)) {
-                //temp = vl.validateTemperature(data.wsensor.temp.data[wsensNum]) 
-                //    ? data.wsensor.temp.data[wsensNum] + config.wsensor.temp.corr[wsensNum] 
-                //    : 40400
-            }; break;
-            // case 3: if(vl.ThingspeakDataRelevance()) {
-            //     temp = vl.validateThingspeak(
-            //         data.thing?.data 
-            //             ? data.thing?.data[thingNum] 
-            //             : -40400
-            //     )
-            //     ? data.thing?.data 
-            //         ? data.thing?.data[thingNum] 
-            //         : 40400 
-            //     : 40400
-            // }; break;
-            case 4: ; break;
-            case 5: temp = data.bme280.temp + config.sensors.bme280.t; break;
-            case 6: temp = data.bmp180.temp + config.sensors.bmp180.t; break;
-            case 7: temp = data.sht21.temp + config.sensors.sht21.t; break;
-            case 8: temp = data.dht22.temp + config.sensors.dht22.t; break;
-            case 9: temp = data.ds18b20.temp + config.sensors.ds18b20.t; break;
-            case 10: temp = data.bme680.temp + config.sensors.bme680.t; break;
-            default: ; break;
-        }
-        return Math.round(temp);
-    }
-
-    function getTempOut() {
-        let temp = 40400.0;
-        const wsensNum = config.display.source.tempOut.wsensNum;
-        const thingNum = config.display.source.tempOut.thing;
-
-        switch(config.display.source.tempOut.sens) {
-            case 1: temp = data.weather.temp; break;
-                        
-            case 4: temp = data.bme280.temp + config.sensors.bme280.t; break;
-            case 5: temp = data.bmp180.temp + config.sensors.bmp180.t; break;
-            case 6: temp = data.sht21.temp + config.sensors.sht21.t; break;
-            case 7: temp = data.dht22.temp + config.sensors.dht22.t; break;
-            case 8: temp = data.ds18b20.temp + config.sensors.ds18b20.t; break;
-            case 9: temp = data.bme680.temp + config.sensors.bme680.t; break;
-            default: ; break;
-        }
-        return Math.round(temp);
-    }
-
-    function getHumIn() {
-        let hum = 40400.0;
-        const wsensNum = config.display.source.humIn.wsensNum;
-        const thingNum = config.display.source.humIn.thing;
-
-        switch(config.display.source.humIn.sens) {
-            case 1: hum = data.weather.hum; break;
-            case 2: if(vl.WsensorDataRelevance(wsensNum)) {
-                hum = vl.validateHumidity(data.wsensor.hum.data[wsensNum]) 
-                    ? data.wsensor.hum.data[wsensNum] + config.wsensor.hum.corr[wsensNum] 
-                    : 40400
-            }; break;
-            case 3: if(vl.ThingspeakDataRelevance()) {
-                hum = vl.validateThingspeak(
-                    data.thing?.data 
-                        ? data.thing?.data[thingNum] 
-                        : -40400
-                )
-                ? data.thing?.data 
-                    ? data.thing?.data[thingNum] 
-                    : 40400 
-                : 40400
-            }; break;
-            case 4: ; break;
-            case 5: hum = data.bme280.hum + config.sensors.bme280.h; break;
-            case 6: hum = data.sht21.hum + config.sensors.sht21.h; break;
-            case 7: hum = data.dht22.hum + config.sensors.dht22.h; break;
-            case 8: hum = data.bme680.hum + config.sensors.bme680.h; break;
-            default: ; break;
-        }
-        return Math.round(hum);
-    }
-
-    function getHumOut() {
-        let hum = 40400.0;
-        const wsensNum = config.display.source.humOut.wsensNum;
-        const thingNum = config.display.source.humOut.thing;
-
-        switch(config.display.source.humOut.sens) {
-            case 1: hum = data.weather.hum; break;
-            case 2: if(vl.WsensorDataRelevance(wsensNum)) {
-                hum = vl.validateHumidity(data.wsensor.hum.data[wsensNum]) 
-                    ? data.wsensor.hum.data[wsensNum] + config.wsensor.hum.corr[wsensNum] 
-                    : 40400
-            }; break;
-            case 3: if(vl.ThingspeakDataRelevance()) {
-                hum = vl.validateThingspeak(
-                    data.thing?.data 
-                        ? data.thing?.data[thingNum] 
-                        : -40400
-                )
-                ? data.thing?.data 
-                    ? data.thing?.data[thingNum] 
-                    : 40400 
-                : 40400
-            }; break;
-            case 4: hum = data.bme280.hum + config.sensors.bme280.h; break;
-            case 5: hum = data.sht21.hum + config.sensors.sht21.h; break;
-            case 6: hum = data.dht22.hum + config.sensors.dht22.h; break;
-            case 7: hum = data.bme680.hum + config.sensors.bme680.h; break;
-            default: ; break;
-        }
-        return Math.round(hum);
-    }
-
-    function getPres() {
-        let pres = 40400.0;
-        const wsensNum = config.display.source.presOut.wsensNum;
-        const thingNum = config.display.source.presOut.thing;
-
-        switch(config.display.source.presOut.sens) {
-            case 1: pres = data.weather.pres; break;
-            case 2: if(vl.WsensorDataRelevance(wsensNum)) {
-                pres = vl.validatePressure(data.wsensor.pres.data[wsensNum]) 
-                    ? data.wsensor.pres.data[wsensNum] + config.wsensor.pres.corr[wsensNum] 
-                    : 40400
-            }; break;
-            case 3: if(vl.ThingspeakDataRelevance()) {
-                pres = vl.validateThingspeak(
-                    data.thing?.data 
-                        ? data.thing?.data[thingNum] 
-                        : -40400
-                )
-                ? data.thing?.data 
-                    ? data.thing?.data[thingNum] 
-                    : 40400 
-                : 40400
-            }; break;
-            case 4: pres = data.bme280.pres + config.sensors.bme280.p; break;
-            case 5: pres = data.bmp180.pres + config.sensors.bmp180.p; break;
-            case 6: pres = data.bme680.pres + config.sensors.bme680.p; break;
-            default: ; break;
-        }
-        return pres;
-    }
-
-    function getBatteryLevel() {
-        let level = -1;
-        if(config.display.source.bat.sens == 1) { // Wsensor
-            const wSensNum = config.display.source.bat.wsensNum;
-            if(Math.floor(Date.now() / 1000) - data.wsensor.time[wSensNum] < config.wsensor.expire[wSensNum] * 60) {
-                if(vl.validateBatteryADC(data.wsensor.bat[wSensNum])) {
-                    const percent = percentage(config.wsensor.bat.type[wSensNum], data.wsensor.bat[wSensNum], config.wsensor.bat.k[wSensNum]);
-                    level = Math.round(percent / 25);
-                    if(level < 1) level = 1;
-                    if(level > 4) level = 4;
-                }
-            }
-        }
-        if(config.display.source.bat.sens == 2) { // Thingspeak
-            if(data.thing?.time && (Math.floor(Date.now() / 1000) - data.thing.time < config.thingspeakReceive.expire * 60)) {
-                level = data.thing.data ? data.thing.data[config.display.source.bat.thing] : -1;
-            }
-        }
-        return level;
-    }
-
-    function checkVoltage(val: number) {
-        if(val >= 0.0 && val <= 12.0) return true;
-        else return false;
-    }
-
-    function checkPercentage(val: number) {
-        if(val >= 0.0 && val <= 100.0) return true;
-        else return false;
-    }
-
-
-
-    function voltage(adc: number, k: number) {
-        return adc / (300.0 - k);
-    }
-
-    function percentage(type: number, adc: number, k: number) {
-        const umin = 3.75;
-        const umax = type === 0 ? 4.5 : 3.9;
-        let percent = (voltage(adc, k) - umin) * 100.0 / (umax - umin); 
-        if(percent < 0) percent = 0;
-        if(percent > 100) percent = 100;
-        return percent;
-    }
-
     function draw(ctx: CanvasRenderingContext2D | null) {
         if(ctx) {
             /* Show time */
@@ -305,7 +116,7 @@ export default function DisplayViewLCD() {
             setPrevAnt(lcdShowAntenna(ctx, data.network.sig, prevAnt));
 
             /* Show battery level symbol */
-            setPrevBatLevel(lcdShowBatteryLevel(ctx, getBatteryLevel(), prevBatLevel, BG_COLOR));
+            setPrevBatLevel(lcdShowBatteryLevel(ctx, lcdGetBatteryLevel(), prevBatLevel, BG_COLOR));
 
             //showVoltageOrPercentage(ctx);
 
@@ -325,19 +136,19 @@ export default function DisplayViewLCD() {
             setPrevDescr(lcdShowDescription(ctx, data.weather.descript, prevDescr, FONT1, FONT2, TEXT_COLOR, BG_COLOR));
 
             /* Show temperature inside */
-            setPrevTempIn(lcdShowTemperatureInside(ctx, getTempIn(), prevTempIn, FONT3, TEMPERATURE_COLOR, BG_COLOR));
+            setPrevTempIn(lcdShowTemperatureInside(ctx, lcdGetTempIn(-1/*sequenceTemp*/), prevTempIn, FONT3, TEMPERATURE_COLOR, BG_COLOR));
         
             /* Show temperature outside */
-            setPrevTempOut(lcdShowTemperatureOutside(ctx, getTempOut(), prevTempOut, FONT3, TEMPERATURE_COLOR, BG_COLOR));
+            setPrevTempOut(lcdShowTemperatureOutside(ctx, lcdGetTempOut(), prevTempOut, FONT3, TEMPERATURE_COLOR, BG_COLOR));
 
             /* Show humidity inside */
-            setPrevHumIn(lcdShowHumidityInside(ctx, getHumIn(), prevHumIn, FONT2, HUMIDITY_COLOR, BG_COLOR));
+            setPrevHumIn(lcdShowHumidityInside(ctx, lcdGetHumIn(10 /*sequenceHum*/), prevHumIn, FONT2, HUMIDITY_COLOR, BG_COLOR));
 
             /* Show humidity outside */
-            setPrevHumOut(lcdShowHumidityOutside(ctx, getHumOut(), prevHumOut, FONT2, HUMIDITY_COLOR, BG_COLOR));
+            setPrevHumOut(lcdShowHumidityOutside(ctx, lcdGetHumOut(), prevHumOut, FONT2, HUMIDITY_COLOR, BG_COLOR));
 
             /* Show pressure */
-            setPrevPresOut(lcdShowPressure(ctx, getPres(), prevPresOut, data.units.mm, FONT2, PRESSURE_COLOR, BG_COLOR));
+            setPrevPresOut(lcdShowPressure(ctx, lcdGetPres(), prevPresOut, data.units.mm, FONT2, PRESSURE_COLOR, BG_COLOR));
 
             /* Show wind speed */
             setPrevWindSpeed(lcdShowWindSpeed(ctx, data.weather.wind.speed, prevWindSpeed, data.units.ms, FONT1, TEXT_COLOR, BG_COLOR));

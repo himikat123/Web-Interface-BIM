@@ -126,7 +126,7 @@ const data = () => {
                 name: ["BME280", "SHT21"]
             },
             pres: {
-                data: [random(600, 650), random(750, 800)],
+                data: [random(800, 1000), random(800, 1000)],
                 name: ["BME280", "BMP180"]
             },
             light: {
