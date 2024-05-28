@@ -1,10 +1,11 @@
 import { printText, drawImage } from "./primitives";
 import { temp_minus, temp_plus } from "../img/symbols";
+import { validateTemperature } from "../validateValues";
 
 function showTemperature(ctx: CanvasRenderingContext2D, temp: number, 
     x: number, y: number, font: number, color: string, bgColor: string
 ) {
-    printText(ctx, x, y, 70, 26, (temp >= -50 && temp < 100) ? `${temp}°C` : '--°C', font, 'center', color, bgColor);
+    printText(ctx, x, y, 70, 26, validateTemperature(temp) ? `${temp}°C` : '--°C', font, 'center', color, bgColor);
 }
 
 export function lcdShowTemperatureInside(ctx: CanvasRenderingContext2D, 

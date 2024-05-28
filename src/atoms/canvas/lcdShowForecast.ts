@@ -1,11 +1,12 @@
 import { printText, drawImage } from "./primitives";
 import * as icons from '../img/icons/small';
 import { iPrevForecast } from "../../interfaces";
+import * as vl from "../validateValues";
 
 function showTemperature(ctx: CanvasRenderingContext2D, temp: number, 
     x: number, y: number, font: number, color: string, bgColor: string
 ) {
-    printText(ctx, x, y, 56, 20, (temp >= -50 && temp < 100) ? `${temp}°C` : '--°C', font, 'right', color, bgColor);
+    printText(ctx, x, y, 56, 20, vl.validateTemperature(temp) ? `${temp}°C` : '--°C', font, 'right', color, bgColor);
 }
 
 export default function lcdShowForecast(ctx: CanvasRenderingContext2D, num: number, 
@@ -33,7 +34,7 @@ export default function lcdShowForecast(ctx: CanvasRenderingContext2D, num: numb
     
     /* Show weekday */
     if(wd !== prevForecast.wd[num]) {
-        printText(ctx, x + 33, 168, 40, 16, wd, font1, 'center', color, bgColor);
+        if(wd.length === 2) printText(ctx, x + 33, 168, 40, 16, wd, font1, 'center', color, bgColor);
     }
     
     /* Show max temperature */
@@ -48,7 +49,7 @@ export default function lcdShowForecast(ctx: CanvasRenderingContext2D, num: numb
 
     /* Show wind speed */
     if(wind !== prevForecast.wSpeed[num]) {
-        let w = (wind >= 0 && wind < 100) ? String(Math.round(wind)) : '--';
+        let w = vl.validateWindSpeed(wind) ? String(Math.round(wind)) : '--';
         w += units;
         printText(ctx, x + 31, 224, 44, 15, w, font1, 'center', color, bgColor);
     }
