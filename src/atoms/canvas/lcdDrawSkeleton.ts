@@ -10,9 +10,9 @@ export default function lcdDrawSkeleton(ctx: CanvasRenderingContext2D | null, fr
         drawRoundRect(ctx, 106, 165, 106, 75, 10, frameColor);
         drawRoundRect(ctx, 212, 165, 107, 75, 10, frameColor);
         drawImage(ctx, symb.home(), 145, 48);
-        drawImage(ctx, symb.hum(), 243, 48);
+        drawImage(ctx, symb.hum(), 243, 50);
         drawImage(ctx, symb.temp_plus(), 62, 104);
-        drawImage(ctx, symb.hum(), 143, 109);
+        drawImage(ctx, symb.hum(), 143, 111);
         drawImage(ctx, symb.pres(), 222, 109);
         drawImage(ctx, symb.wind(), 61, 146);
     }
