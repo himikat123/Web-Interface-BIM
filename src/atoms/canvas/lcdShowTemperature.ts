@@ -2,7 +2,7 @@ import { printText, drawImage } from "./primitives";
 import { temp_minus, temp_plus } from "../img/symbols";
 import { validateTemperature } from "../validateValues";
 import lcdGetTempIn from "../lcdGetTempIn";
-import lcdGetTempOut from "../lcdGetTempOut";
+import { lcdGetTempOut } from "../lcdGetTemp";
 
 function showTemperature(ctx: CanvasRenderingContext2D, temp: number, 
     x: number, y: number, font: number, color: string, bgColor: string
@@ -11,9 +11,9 @@ function showTemperature(ctx: CanvasRenderingContext2D, temp: number,
 }
 
 export function lcdShowTemperatureInside(ctx: CanvasRenderingContext2D, 
-    prevTemp: number, font: number, color: string, bgColor: string
+    prevTemp: number, sequence: number, font: number, color: string, bgColor: string
 ): number {
-    const temp = lcdGetTempIn(-1/*sequenceTemp*/);
+    const temp = lcdGetTempIn(sequence);
     if(temp !== prevTemp) {
         showTemperature(ctx, temp, 173, 53, font, color, bgColor);
     }

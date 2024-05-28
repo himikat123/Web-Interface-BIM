@@ -1,16 +1,12 @@
 import store from '../redux/store';
 import * as vl from "./validateValues";
 
-export default function lcdGetTempOut() {
+function lcdGetTemp(wsensNum: number, wsensTempNum: number, thingNum: number, source: number) {
     const config = store.getState().config;
     const data = store.getState().data;
-
     let temp = 40400.0;
-    const wsensNum = config.display.source.tempOut.wsensNum;
-    const wsensTempNum = config.display.source.tempOut.temp;
-    const thingNum = config.display.source.tempOut.thing;
 
-    switch(config.display.source.tempOut.sens) {
+    switch(source) {
         case 1: temp = data.weather.temp; break;
         case 2: if(vl.WsensorDataRelevance(wsensNum)) {
             temp = vl.validateTemperature(data.wsensor.temp.data[wsensTempNum][wsensNum]) 
@@ -37,4 +33,22 @@ export default function lcdGetTempOut() {
         default: ; break;
     }
     return Math.round(temp);
+}
+
+export function lcdGetTempOut(): number {
+    const config = store.getState().config;
+    const wsensNum = config.display.source.tempOut.wsensNum;
+    const wsensTempNum = config.display.source.tempOut.temp;
+    const thingNum = config.display.source.tempOut.thing;
+    const source = config.display.source.tempOut.sens;
+    return lcdGetTemp(wsensNum, wsensTempNum, thingNum, source);
+}
+
+export function lcdGetTempSequence(slot: number): number {
+    const config = store.getState().config;
+    const wsensNum = config.display.source.sequence.wsenstemp[slot][0];
+    const wsensTempNum = config.display.source.sequence.wsenstemp[slot][1];
+    const thingNum = config.display.source.sequence.thngtemp[slot];
+    const source = config.display.source.sequence.temp[slot];
+    return lcdGetTemp(wsensNum, wsensTempNum, thingNum, source);
 }

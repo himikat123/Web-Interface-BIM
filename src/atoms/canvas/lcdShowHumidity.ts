@@ -1,7 +1,7 @@
 import { printText } from "./primitives";
 import { validateHumidity } from "../validateValues";
 import lcdGetHumIn from "../lcdGetHumIn";
-import lcdGetHumOut from "../lcdGetHumOut";
+import { lcdGetHumOut } from "../lcdGetHum";
 
 function showHumidity(ctx: CanvasRenderingContext2D, hum: number, 
     x: number, y: number, font: number, color: string, bgColor: string
@@ -10,9 +10,9 @@ function showHumidity(ctx: CanvasRenderingContext2D, hum: number,
 }
 
 export function lcdShowHumidityInside(ctx: CanvasRenderingContext2D, 
-    prevHum: number, font: number, color: string, bgColor: string
+    prevHum: number, sequence: number, font: number, color: string, bgColor: string
 ): number {
-    const hum = lcdGetHumIn(-1/*sequenceTemp*/);
+    const hum = lcdGetHumIn(sequence);
     if(hum !== prevHum) {
         showHumidity(ctx, hum, 264, 58, font, color, bgColor);
     }

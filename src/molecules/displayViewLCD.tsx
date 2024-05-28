@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { iPrevForecast } from '../interfaces';
+import { iPrevForecast, iSequence } from '../interfaces';
 import lcdDrawSkeleton from '../atoms/canvas/lcdDrawSkeleton';
 import lcdShowTime from '../atoms/canvas/lcdShowTime';
 import lcdShowClockPoints from '../atoms/canvas/lcdShowClockPoints';
@@ -17,6 +17,7 @@ import lcdShowWindDirection from '../atoms/canvas/lcdShowWindDirection';
 import lcdShowUpdTime from '../atoms/canvas/lcdShowUpdTime';
 import lcdShowForecast from '../atoms/canvas/lcdShowForecast';
 import lcdShowVoltageOrPercentage from '../atoms/canvas/lcdShowVoltageOrPercentage';
+import lcdGetSequence from '../atoms/lcdGetSequence';
 
 export default function DisplayViewLCD() {
     const BG_COLOR          = '#000';
@@ -52,13 +53,21 @@ export default function DisplayViewLCD() {
     const [prevVolt, setPrevVolt] = useState<string>('');
     const [prevForecast, setPrevForecast] = useState<iPrevForecast>({
         wd: ['', '', '', ''],
-        tMax: [40400, 40400, 40400, 40400],
-        tMin: [40400, 40400, 40400, 40400],
+        tMax: [404, 404, 404, 404],
+        tMin: [404, 404, 404, 404],
         wSpeed: [-1, -1, -1, -1],
         icon: [-1, -1, -1, -1]
     });
+    const [sequence, setSequence] = useState<iSequence>({
+        descript: '',
+        temp: 404,
+        hum: 404,
+        slot: 0,
+        counter: 0
+    });
 
     const draw = useCallback(() => {
+        setSequence(lcdGetSequence(sequence));
         const canvas = document.getElementById('canvas') as HTMLCanvasElement;
         const ctx = canvas.getContext('2d');
 
@@ -80,7 +89,7 @@ export default function DisplayViewLCD() {
             setPrevVolt(lcdShowVoltageOrPercentage(ctx, prevVolt, FONT1, BATTERY_COLOR, TEMP_MIN_COLOR, BG_COLOR));
 
             /* Show comfort level */
-            setPrevComfort(lcdShowComfort(ctx, prevComfort, FONT1, TEXT_COLOR, BG_COLOR));
+            setPrevComfort(lcdShowComfort(ctx, prevComfort, sequence.descript, FONT1, TEXT_COLOR, BG_COLOR));
 
             /* Show weather icon */
             setPrevIcon(lcdShowWeatherIcon(ctx, prevIcon));
@@ -89,13 +98,13 @@ export default function DisplayViewLCD() {
             setPrevDescr(lcdShowDescription(ctx, prevDescr, FONT1, FONT2, TEXT_COLOR, BG_COLOR));
 
             /* Show temperature inside */
-            setPrevTempIn(lcdShowTemperatureInside(ctx, prevTempIn, FONT3, TEMPERATURE_COLOR, BG_COLOR));
+            setPrevTempIn(lcdShowTemperatureInside(ctx, prevTempIn, sequence.temp, FONT3, TEMPERATURE_COLOR, BG_COLOR));
         
             /* Show temperature outside */
             setPrevTempOut(lcdShowTemperatureOutside(ctx, prevTempOut, FONT3, TEMPERATURE_COLOR, BG_COLOR));
 
             /* Show humidity inside */
-            setPrevHumIn(lcdShowHumidityInside(ctx, prevHumIn, FONT2, HUMIDITY_COLOR, BG_COLOR));
+            setPrevHumIn(lcdShowHumidityInside(ctx, prevHumIn, sequence.hum, FONT2, HUMIDITY_COLOR, BG_COLOR));
 
             /* Show humidity outside */
             setPrevHumOut(lcdShowHumidityOutside(ctx, prevHumOut, FONT2, HUMIDITY_COLOR, BG_COLOR));
@@ -119,9 +128,11 @@ export default function DisplayViewLCD() {
                 ));
             }
         }
-    }, [clockPointsState, prevAnt, prevBatLevel, prevDescr, prevForecast, prevHumIn, prevHumOut, 
-        prevIcon, prevPresOut, prevTempIn, prevTempOut, prevTime, prevUpdTime, prevVolt, 
-        prevWeekday, prevWindDirection, prevWindSpeed, prevComfort]);
+    }, [
+        clockPointsState, prevAnt, prevBatLevel, prevDescr, prevForecast, prevHumIn, 
+        prevHumOut, prevIcon, prevPresOut, prevTempIn, prevTempOut, prevTime, prevUpdTime, 
+        prevVolt, prevWeekday, prevWindDirection, prevWindSpeed, prevComfort, sequence
+    ]);
 
     useEffect(() => {
         const canvas = document.getElementById('canvas') as HTMLCanvasElement;

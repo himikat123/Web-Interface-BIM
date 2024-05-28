@@ -10,7 +10,6 @@ import ThingspeakField from "./thingspeakFields";
 import SequenceSlotName from "./sequenceSlotName";
 
 export default function SequenceTemp() {
-    const [tempWsensNum, setTempWsensNum] = useState<number>(0);
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
 
@@ -27,16 +26,12 @@ export default function SequenceTemp() {
 
             {/* Wireless sensor */}
             {config.display.source.sequence.temp[num] === 2 && <>
-                <WsensorNumber value={tempWsensNum}
-                    changeValue={val => {
-                        setTempWsensNum(val);
-                        dispatch(cf.displaySourceSequenceWsensTempChange({ num: num, wsens: 0, val: 0 }));
-                        dispatch(cf.displaySourceSequenceWsensTempChange({ num: num, wsens: 1, val: 0 }))
-                    }}
+                <WsensorNumber value={config.display.source.sequence.wsenstemp[num][0]}
+                    changeValue={val => dispatch(cf.displaySourceSequenceWsensTempChange({ num: num, wsens: 0, val: val }))}
                 />
-                <WsensorTempNumber wSensNum={tempWsensNum}
-                    value={config.display.source.sequence.wsenstemp[num][tempWsensNum]}
-                    changeValue={val => dispatch(cf.displaySourceSequenceWsensTempChange({ num: num, wsens: tempWsensNum, val: val }))}
+                <WsensorTempNumber wSensNum={config.display.source.sequence.wsenstemp[num][0]}
+                    value={config.display.source.sequence.wsenstemp[num][1]}
+                    changeValue={val => dispatch(cf.displaySourceSequenceWsensTempChange({ num: num, wsens: 1, val: val }))}
                 />
             </>}
 

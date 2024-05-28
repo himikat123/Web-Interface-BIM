@@ -357,3 +357,11 @@ export interface iPrevForecast {
     wSpeed: number[],
     icon: number[]
 }
+
+export interface iSequence {
+    descript: string,
+    temp: number,
+    hum: number,
+    slot: number,
+    counter: number
+}

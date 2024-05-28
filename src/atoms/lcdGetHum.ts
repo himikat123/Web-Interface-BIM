@@ -1,15 +1,12 @@
 import store from '../redux/store';
 import * as vl from "./validateValues";
 
-export default function lcdGetHumOut() {
+function lcdGetHum(wsensNum: number, thingNum: number, source: number) {
     const config = store.getState().config;
     const data = store.getState().data;
-
     let hum = 40400.0;
-    const wsensNum = config.display.source.humOut.wsensNum;
-    const thingNum = config.display.source.humOut.thing;
 
-    switch(config.display.source.humOut.sens) {
+    switch(source) {
         case 1: hum = data.weather.hum; break;
         case 2: if(vl.WsensorDataRelevance(wsensNum)) {
             hum = vl.validateHumidity(data.wsensor.hum.data[wsensNum]) 
@@ -34,4 +31,20 @@ export default function lcdGetHumOut() {
         default: ; break;
     }
     return Math.round(hum);
+}
+
+export function lcdGetHumOut() {
+    const config = store.getState().config;
+    const wsensNum = config.display.source.humOut.wsensNum;
+    const thingNum = config.display.source.humOut.thing;
+    const source = config.display.source.humOut.sens;
+    return lcdGetHum(wsensNum, thingNum, source);
+}
+
+export function lcdGetHumSequence(slot: number) {
+    const config = store.getState().config;
+    const wsensNum = config.display.source.sequence.wsenshum[slot];
+    const thingNum = config.display.source.sequence.thnghum[slot];
+    const source = config.display.source.sequence.hum[slot];
+    return lcdGetHum(wsensNum, thingNum, source);
 }
