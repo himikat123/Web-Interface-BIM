@@ -1,18 +1,17 @@
 import store from '../../redux/store';
-import { printText, drawImage } from "./primitives";
-import * as icons from '../img/icons/small';
+import { printText, drawScaledImage } from "./primitives";
+import * as icons from '../img/icons';
 import { iPrevForecast } from "../../interfaces";
 import * as vl from "../validateValues";
 
 function showTemperature(ctx: CanvasRenderingContext2D, temp: number, 
-    x: number, y: number, font: number, color: string, bgColor: string
+    x: number, y: number, w: number, font: number, color: string, bgColor: string
 ) {
-    printText(ctx, x, y, 56, 20, vl.validateTemperature(temp) ? `${temp}°C` : '--°C', font, 'right', color, bgColor);
+    printText(ctx, x, y, w, 20, vl.validateTemperature(temp) ? `${temp}°C` : '--°C', font, 'center', color, bgColor);
 }
 
-export default function lcdShowForecast(ctx: CanvasRenderingContext2D, 
-    num: number,prevForecast: iPrevForecast, font1: number, font2: number, 
-    color: string, colorTempMax: string, colorTempMin: string, bgColor: string
+export default function lcdShowForecast(ctx: CanvasRenderingContext2D, num: number, 
+    prevForecast: iPrevForecast, color: string, colorTempMax: string, colorTempMin: string, bgColor: string
 ): iPrevForecast {
     const tMax = store.getState().data.weather.daily.tMax[num];
     const tMin = store.getState().data.weather.daily.tMin[num];
@@ -20,44 +19,50 @@ export default function lcdShowForecast(ctx: CanvasRenderingContext2D,
     const icon = store.getState().data.weather.daily.icon[num];
     const wd = store.getState().data.wd[num];
     const units = store.getState().data.units.ms;
-    const x = num * 106;
+    const model = store.getState().config.display.model[0];
+    const dispModel = (model === 0 || model === 1) ? 0 : 1;
+    const x = num * (dispModel === 0 ? 90 : 106);
+    const imgShift = dispModel === 0 ? 1 : 4;
 
     /* Show icon */
     if(icon !== prevForecast.icon[num]) {
-        switch(icon) {
-            case 1: drawImage(ctx, icons.small_01(), x + 4, 183); break;
-            case 2: drawImage(ctx, icons.small_02(), x + 4, 183); break;
-            case 3: drawImage(ctx, icons.small_02(), x + 4, 183); break;
-            case 4: drawImage(ctx, icons.small_04(), x + 4, 183); break;
-            case 9: drawImage(ctx, icons.small_09(), x + 4, 183); break;
-            case 10: drawImage(ctx, icons.small_10(), x + 4, 183); break;
-            case 11: drawImage(ctx, icons.small_11(), x + 4, 183); break;
-            case 13: drawImage(ctx, icons.small_13(), x + 4, 183); break;
-            case 50: drawImage(ctx, icons.small_50(), x + 4, 183); break;
-            default: drawImage(ctx, icons.small_loading(), x + 4, 183); break;
+        let wIcon = icons.w_01_d();
+        switch(icon) { // png 40x40px
+            case 1: wIcon = icons.w_01_d(); break;
+            case 2: wIcon = icons.w_02_d(); break;
+            case 3: wIcon = icons.w_02_d(); break;
+            case 4: wIcon = icons.w_04(); break;
+            case 9: wIcon = icons.w_09(); break;
+            case 10: wIcon = icons.w_10(); break;
+            case 11: wIcon = icons.w_11_d(); break;
+            case 13: wIcon = icons.w_13(); break;
+            case 50: wIcon = icons.w_50(); break;
+            default: wIcon = icons.w_loading(); break;
         }
+        drawScaledImage(ctx, wIcon, x + imgShift, 184, 40, 40);
     }
     
     /* Show weekday */
     if(wd !== prevForecast.wd[num]) {
-        if(wd.length === 2) printText(ctx, x + 33, 168, 40, 16, wd, font1, 'center', color, bgColor);
+        if(wd.length === 2) 
+            printText(ctx, x + (dispModel ? 33 : 3), 168, 40, 16, wd, dispModel ? 14 : 18, 'center', color, bgColor);
     }
     
     /* Show max temperature */
     if(tMax !== prevForecast.tMax[num]) {
-        showTemperature(ctx, Math.round(tMax), x + 46, 183, font2, colorTempMax, bgColor);
+        showTemperature(ctx, Math.round(tMax), x + (dispModel ? 44 : 41), 183, dispModel ? 61 : 47, dispModel ? 21 : 17, colorTempMax, bgColor);
     }
 
     /* Show min temperature */
     if(tMin !== prevForecast.tMin[num]) {
-        showTemperature(ctx, Math.round(tMin), x + 46, 203, font2, colorTempMin, bgColor);
+        showTemperature(ctx, Math.round(tMin), x + (dispModel ? 44 : 41), 203, dispModel ? 61 : 47, dispModel ? 21 : 17, colorTempMin, bgColor);
     }
 
     /* Show wind speed */
     if(wind !== prevForecast.wSpeed[num]) {
         let w = vl.validateWindSpeed(wind) ? String(Math.round(wind)) : '--';
         w += units;
-        printText(ctx, x + 31, 224, 44, 15, w, font1, 'center', color, bgColor);
+        printText(ctx, x + (dispModel ? 31 : 22), 224, 44, 15, w, 14, 'center', color, bgColor);
     }
 
     prevForecast.icon[num] = icon;

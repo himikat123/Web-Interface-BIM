@@ -1,4 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
+import { iConfig } from "../redux/configTypes";
 import { iPrevForecast, iSequence } from '../interfaces';
 import lcdDrawSkeleton from '../atoms/canvas/lcdDrawSkeleton';
 import lcdShowTime from '../atoms/canvas/lcdShowTime';
@@ -20,6 +22,10 @@ import lcdShowVoltageOrPercentage from '../atoms/canvas/lcdShowVoltageOrPercenta
 import lcdGetSequence from '../atoms/lcdGetSequence';
 
 export default function DisplayViewLCD() {
+    const config = useSelector((state: iConfig) => state.config);
+    const model = config.display.model[0];
+    const dispModel = (model === 0 || model === 1) ? 0 : 1;
+
     const BG_COLOR          = '#000';
     const FRAME_COLOR       = '#00F';
     const TEXT_COLOR        = '#FFF';
@@ -29,10 +35,6 @@ export default function DisplayViewLCD() {
     const PRESSURE_COLOR    = '#F0F';
     const CLOCK_COLOR       = '#0F0';
     const BATTERY_COLOR     = '#0F0';
-
-    const FONT1 = 14;
-    const FONT2 = 21;
-    const FONT3 = 29;
 
     const [clockPointsState, setClockPointsState] = useState<boolean>(false);
     const [prevTime, setPrevTime] = useState<number>(-1);
@@ -77,7 +79,7 @@ export default function DisplayViewLCD() {
             lcdShowClockPoints(ctx, clockPointsState ? HUMIDITY_COLOR : BG_COLOR);
 
             /* Show weekday */
-            setPrevWeekday(lcdShowWeekday(ctx, prevWeekday, FONT2, CLOCK_COLOR, BG_COLOR));
+            setPrevWeekday(lcdShowWeekday(ctx, prevWeekday, CLOCK_COLOR, BG_COLOR));
 
             /* Show antenna */
             setPrevAnt(lcdShowAntenna(ctx, prevAnt));
@@ -86,52 +88,50 @@ export default function DisplayViewLCD() {
             setPrevBatLevel(lcdShowBatteryLevel(ctx, prevBatLevel, BG_COLOR));
 
             /* Show voltage or percentage */
-            setPrevVolt(lcdShowVoltageOrPercentage(ctx, prevVolt, FONT1, BATTERY_COLOR, TEMP_MIN_COLOR, BG_COLOR));
+            setPrevVolt(lcdShowVoltageOrPercentage(ctx, prevVolt, BATTERY_COLOR, TEMP_MIN_COLOR, BG_COLOR));
 
             /* Show comfort level */
-            setPrevComfort(lcdShowComfort(ctx, prevComfort, sequence.descript, FONT1, TEXT_COLOR, BG_COLOR));
+            setPrevComfort(lcdShowComfort(ctx, prevComfort, sequence.descript, TEXT_COLOR, BG_COLOR));
 
             /* Show weather icon */
             setPrevIcon(lcdShowWeatherIcon(ctx, prevIcon));
 
             /* Show weather description */
-            setPrevDescr(lcdShowDescription(ctx, prevDescr, FONT1, FONT2, TEXT_COLOR, BG_COLOR));
+            setPrevDescr(lcdShowDescription(ctx, prevDescr, TEXT_COLOR, BG_COLOR));
 
             /* Show temperature inside */
-            setPrevTempIn(lcdShowTemperatureInside(ctx, prevTempIn, sequence.temp, FONT3, TEMPERATURE_COLOR, BG_COLOR));
+            setPrevTempIn(lcdShowTemperatureInside(ctx, prevTempIn, sequence.temp, TEMPERATURE_COLOR, BG_COLOR));
         
             /* Show temperature outside */
-            setPrevTempOut(lcdShowTemperatureOutside(ctx, prevTempOut, FONT3, TEMPERATURE_COLOR, BG_COLOR));
+            setPrevTempOut(lcdShowTemperatureOutside(ctx, prevTempOut, TEMPERATURE_COLOR, BG_COLOR));
 
             /* Show humidity inside */
-            setPrevHumIn(lcdShowHumidityInside(ctx, prevHumIn, sequence.hum, FONT2, HUMIDITY_COLOR, BG_COLOR));
+            setPrevHumIn(lcdShowHumidityInside(ctx, prevHumIn, sequence.hum, HUMIDITY_COLOR, BG_COLOR));
 
             /* Show humidity outside */
-            setPrevHumOut(lcdShowHumidityOutside(ctx, prevHumOut, FONT2, HUMIDITY_COLOR, BG_COLOR));
+            setPrevHumOut(lcdShowHumidityOutside(ctx, prevHumOut, HUMIDITY_COLOR, BG_COLOR));
 
             /* Show pressure */
-            setPrevPresOut(lcdShowPressure(ctx, prevPresOut, FONT2, PRESSURE_COLOR, BG_COLOR));
+            setPrevPresOut(lcdShowPressure(ctx, prevPresOut, PRESSURE_COLOR, BG_COLOR));
 
             /* Show wind speed */
-            setPrevWindSpeed(lcdShowWindSpeed(ctx, prevWindSpeed, FONT1, TEXT_COLOR, BG_COLOR));
+            setPrevWindSpeed(lcdShowWindSpeed(ctx, prevWindSpeed, TEXT_COLOR, BG_COLOR));
 
             /* Show wind direction */
             setPrevWindDirection(lcdShowWindDirection(ctx, prevWindDirection, BG_COLOR));
 
             /* Show updated time */
-            setPrevUpdTime(lcdShowUpdTime(ctx, prevUpdTime, FONT1, TEXT_COLOR, BG_COLOR));
+            setPrevUpdTime(lcdShowUpdTime(ctx, prevUpdTime, TEXT_COLOR, BG_COLOR));
 
             /* Show forecast */
-            for(let i=0; i<3; i++) {
-                setPrevForecast(lcdShowForecast(ctx, i, prevForecast, FONT1, 
-                    FONT2, TEXT_COLOR, TEMPERATURE_COLOR, TEMP_MIN_COLOR, BG_COLOR
-                ));
+            for(let i=0; i<(dispModel === 0 ? 4 : 3); i++) {
+                setPrevForecast(lcdShowForecast(ctx, i, prevForecast, TEXT_COLOR, TEMPERATURE_COLOR, TEMP_MIN_COLOR, BG_COLOR));
             }
         }
     }, [
         clockPointsState, prevAnt, prevBatLevel, prevDescr, prevForecast, prevHumIn, 
         prevHumOut, prevIcon, prevPresOut, prevTempIn, prevTempOut, prevTime, prevUpdTime, 
-        prevVolt, prevWeekday, prevWindDirection, prevWindSpeed, prevComfort, sequence
+        prevVolt, prevWeekday, prevWindDirection, prevWindSpeed, prevComfort, sequence, dispModel
     ]);
 
     useEffect(() => {
@@ -149,9 +149,15 @@ export default function DisplayViewLCD() {
     }, [draw]);
 
     return <div className='w-fit mx-auto mt-4 p-2 bg-gray-400 dark:bg-gray-600'>
-        <canvas width="320" height="240" id="canvas" style={{
-                margin: 0, padding: 0, width: '320px', height: '240px', border: '4px solid black'
+        {/* NX4832K035 & NX4832T035 */}
+        {dispModel === 0 && <canvas width="362" height="241" id="canvas" style={{
+                margin: 0, padding: 0, width: '100%', maxWidth: '362px', maxHeight: '241px', border: '4px solid black'
             }}
-        />
+        />}
+        {/* ILI9341 */}
+        {dispModel === 1 && <canvas width="320" height="240" id="canvas" style={{
+                margin: 0, padding: 0, width: '100%', maxWidth: '320px', maxHeight: '240px', border: '4px solid black'
+            }}
+        />}
     </div>
 }

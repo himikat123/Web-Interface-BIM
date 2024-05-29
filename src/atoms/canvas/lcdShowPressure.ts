@@ -4,14 +4,18 @@ import { validatePressure } from "../validateValues";
 import lcdGetPres from "../lcdGetPres";
 
 export default function lcdShowPressure(ctx: CanvasRenderingContext2D, 
-    prevPres: number, font: number, color: string, bgColor: string
+    prevPres: number, color: string, bgColor: string
 ): number {
     const pres = lcdGetPres();
-    const units = store.getState().data.units.mm;
+
     if(pres !== prevPres) {
+        const model = store.getState().config.display.model[0];
+        const dispModel = (model === 0 || model === 1) ? 0 : 1;
+        const units = store.getState().data.units.mm;
         let p = validatePressure(pres) ? String(Math.round(pres * 0.75)) : '--';
         p += units;
-        printText(ctx, 250, 119, 70, 20, p, font, 'center', color, bgColor);
+        const x = dispModel ? 250 : 286; 
+        printText(ctx, x, 119, 70, 20, p, 21, 'center', color, bgColor);
     }
 
     return pres;

@@ -1,23 +1,31 @@
 import store from '../../redux/store';
-import { drawImage } from "./primitives";
-import * as icons from '../img/icons/big';
+import { drawScaledImage } from "./primitives";
+import * as icons from '../img/icons';
 
 export default function lcdShowWeatherIcon(ctx: CanvasRenderingContext2D, prevIcon: number): number {
     const icon = store.getState().data.weather.icon;
     const isDay = store.getState().data.weather.isDay;
+
     if(prevIcon !== (icon * 100 + isDay)) {
+        const model = store.getState().config.display.model[0];
+        const dispModel = (model === 0 || model === 1) ? 0 : 1;
+
+        const y = dispModel ? 104 : 88;
+        const size = dispModel ? 60 : 70;
+        let wIcon = icons.w_01_d();
         switch(icon) {
-            case 1: drawImage(ctx, isDay ? icons.big_01_d() : icons.big_01_n(), 0, 104); break;
-            case 2: drawImage(ctx, isDay ? icons.big_02_d() : icons.big_02_n(), 0, 104); break;
-            case 3: drawImage(ctx, isDay ? icons.big_02_d() : icons.big_02_n(), 0, 104); break;
-            case 4: drawImage(ctx, icons.big_04(), 0, 104); break;
-            case 9: drawImage(ctx, icons.big_09(), 0, 104); break;
-            case 10: drawImage(ctx, icons.big_10(), 0, 104); break;
-            case 11: drawImage(ctx, isDay ? icons.big_11_d() : icons.big_11_n(), 0, 104); break;
-            case 13: drawImage(ctx, icons.big_13(), 0, 104); break;
-            case 50: drawImage(ctx, icons.big_50(), 0, 104); break;
-            default: drawImage(ctx, icons.big_loading(), 0, 104); break;
+            case 1: wIcon = isDay ? icons.w_01_d() : icons.w_01_n(); break;
+            case 2: wIcon = isDay ? icons.w_02_d() : icons.w_02_n(); break;
+            case 3: wIcon = isDay ? icons.w_02_d() : icons.w_02_n(); break;
+            case 4: wIcon = icons.w_04(); break;
+            case 9: wIcon = icons.w_09(); break;
+            case 10: wIcon = icons.w_10(); break;
+            case 11: wIcon = isDay ? icons.w_11_d() : icons.w_11_n(); break;
+            case 13: wIcon = icons.w_13(); break;
+            case 50: wIcon = icons.w_50(); break;
+            default: wIcon = icons.w_loading(); break;
         }
+        drawScaledImage(ctx, wIcon, 0, y, size, size);
     }
     return icon * 100 + isDay;
 }

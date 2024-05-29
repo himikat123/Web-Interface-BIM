@@ -1,16 +1,23 @@
 import store from '../../redux/store';
-import { drawImage } from "./primitives";
+import { drawImage, drawScaledImage } from "./primitives";
 import { ant_1, ant_2, ant_3, ant_4, ant_AP} from '../img/ant';
 
 export default function lcdShowAntenna(ctx: CanvasRenderingContext2D, prevSignal: string): string {
     const signal = store.getState().data.network.sig;
+    
     if(signal !== prevSignal) {
+        const model = store.getState().config.display.model[0];
+        const dispModel = (model === 0 || model === 1) ? 0 : 1;
+        const x = dispModel ? 292: 330;
+        let ant = ant_4();
         let rssi = parseInt(signal, 10);
-        if(rssi > -51) drawImage(ctx, ant_4(), 292, 1);
-        if(rssi < -50 && rssi > -76) drawImage(ctx, ant_3(), 292, 1);
-        if(rssi <- 75 && rssi > -96) drawImage(ctx, ant_2(), 292, 1);
-        if(rssi < -95) drawImage(ctx, ant_1(), 292, 1);
-        if(rssi >= 0) drawImage(ctx, ant_AP(), 292, 1);
+        if(rssi < -50 && rssi > -76) ant = ant_3();
+        if(rssi <- 75 && rssi > -96) ant = ant_2();
+        if(rssi < -95) ant = ant_1();
+        if(rssi >= 0) ant = ant_AP();
+
+        if(dispModel) drawImage(ctx, ant, x, 1)
+        else drawScaledImage(ctx, ant_4(), x, 1, 32, 32);
     }
     return signal;
 }

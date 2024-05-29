@@ -31,12 +31,18 @@ export function drawImage(ctx: CanvasRenderingContext2D, image: string, x: numbe
     img.src = image;
 }
 
+export function drawScaledImage(ctx: CanvasRenderingContext2D, image: string, x: number, y: number, w: number, h: number) {
+    let img = new Image();
+    img.onload = () => ctx.drawImage(img, x, y, w, h);
+    img.src = image;
+}
+
 export function printText(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, text: string, font: number, align: CanvasTextAlign, color: string, bgColor: string) {
     fillRect(ctx, x, y, w, h, bgColor);
     ctx.font = `${font}px Ubuntu`;
     ctx.fillStyle = color;
     ctx.textAlign = align;
-    if(align == 'center') x += w / 2;
-    if(align == 'right') x += w;
+    if(align === 'center') x += w / 2;
+    if(align === 'right') x += w;
     ctx.fillText(text, x, y + font - font / 4);
 }

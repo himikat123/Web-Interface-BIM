@@ -162,7 +162,7 @@ const data = () => {
         weather: {
             icon: mainIcons[Math.round(random(0, 9))],
             isDay: Math.round(random(0, 1)),
-            temp: random(-10, 10),
+            temp: random(-30, 30),
             hum: random(90, 100),
             pres: random(800, 850),
             wind: {
