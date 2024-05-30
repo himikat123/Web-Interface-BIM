@@ -17,6 +17,7 @@ import lcdShowPressure from '../atoms/canvas/lcdShowPressure';
 import lcdShowWindSpeed from '../atoms/canvas/lcdShowWindSpeed';
 import lcdShowWindDirection from '../atoms/canvas/lcdShowWindDirection';
 import lcdShowUpdTime from '../atoms/canvas/lcdShowUpdTime';
+import lcdShowAlarmIcon from '../atoms/canvas/lcdShowAlarmIcon';
 import lcdShowForecast from '../atoms/canvas/lcdShowForecast';
 import lcdShowVoltageOrPercentage from '../atoms/canvas/lcdShowVoltageOrPercentage';
 import lcdGetSequence from '../atoms/lcdGetSequence';
@@ -50,6 +51,7 @@ export default function DisplayViewLCD() {
     const [prevWindSpeed, setPrevWindSpeed] = useState<number>(-1);
     const [prevWindDirection, setPrevWindDirection] = useState<number>(-1);
     const [prevUpdTime, setPrevUpdTime] = useState<number>(0);
+    const [prevAlarmState, setPrevAlarmState] = useState<boolean>(false);
     const [prevAnt, setPrevAnt] = useState<string>('');
     const [prevBatLevel, setPrevBatLevel] = useState<number>(-1);
     const [prevVolt, setPrevVolt] = useState<string>('');
@@ -122,6 +124,9 @@ export default function DisplayViewLCD() {
 
             /* Show updated time */
             setPrevUpdTime(lcdShowUpdTime(ctx, prevUpdTime, TEXT_COLOR, BG_COLOR));
+
+            /* Show alarm icon */
+            setPrevAlarmState(lcdShowAlarmIcon(ctx, prevAlarmState, BG_COLOR));
 
             /* Show forecast */
             for(let i=0; i<(dispModel === 0 ? 4 : 3); i++) {

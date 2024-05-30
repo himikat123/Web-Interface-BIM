@@ -1,6 +1,6 @@
 import store from '../../redux/store';
 import { drawImage, drawScaledImage } from "./primitives";
-import { ant_1, ant_2, ant_3, ant_4, ant_AP} from '../img/ant';
+import { ant_1, ant_2, ant_3, ant_4, ant_AP } from '../img/ant';
 
 export default function lcdShowAntenna(ctx: CanvasRenderingContext2D, prevSignal: string): string {
     const signal = store.getState().data.network.sig;

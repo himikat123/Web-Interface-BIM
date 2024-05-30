@@ -15,14 +15,12 @@ export default function lcdShowUpdTime(ctx: CanvasRenderingContext2D,
         const usa = 'YYYY-DD-MM hh:mm:ss';
         const others = 'DD.MM.YYYY hh:mm:ss';
         const upd = moment.unix(time).format(lang === 'en' ? usa : others);
-        const x = dispModel ? 184 : 194;
-        const font = dispModel ? 14 : 11;
-        const c = dispModel ? 300 : 312;
-        const imgSize = dispModel ? 12 : 10;
+        const x = dispModel ? 150 : 194;
+        const c = dispModel ? 270 : 312;
 
-        printText(ctx, x, 148, 133, 16, upd, font, 'right', color, bgColor);
+        printText(ctx, x, 148, 133, 16, upd, 11, 'right', color, bgColor);
         const w = ctx.measureText(upd).width;
-        if(w) drawScaledImage(ctx, symbols.upd(), c - w, 147, imgSize, imgSize);
+        if(w) drawScaledImage(ctx, symbols.upd(), c - w, 147, 10, 10);
     }
 
     return time;
