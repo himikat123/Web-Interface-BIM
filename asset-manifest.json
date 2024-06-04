@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/Web-Interface-BIM/static/css/main.c8fbb0c6.css",
+    "main.js": "/Web-Interface-BIM/static/js/main.5fddff2b.js",
+    "static/media/rubick.svg": "/Web-Interface-BIM/static/media/rubick.a3f9085134270e5aa88e34f609c48797.svg",
+    "static/media/json.svg": "/Web-Interface-BIM/static/media/json.0f3c0c1d946226f2ef555a469ca269ab.svg",
+    "index.html": "/Web-Interface-BIM/index.html",
+    "static/media/html.svg": "/Web-Interface-BIM/static/media/html.fb5f79ab08e193afd80393a5f8e83876.svg",
+    "static/media/folder.svg": "/Web-Interface-BIM/static/media/folder.615b3f6639d34e7c7dff55fa6906e83f.svg",
+    "static/media/spinner.svg": "/Web-Interface-BIM/static/media/spinner.f5bc39f33ca70a7249cc170cfee435f5.svg",
+    "static/media/flagEN.svg": "/Web-Interface-BIM/static/media/flagEN.11aee957207e4bb7b6da2bfc8588e052.svg",
+    "static/media/image.svg": "/Web-Interface-BIM/static/media/image.29ca93f6642b735c0f5882b88cc4abb4.svg",
+    "static/media/flagRU.svg": "/Web-Interface-BIM/static/media/flagRU.21f06c2d0e87f104f998e5f47f7f0b6e.svg",
+    "static/media/flagUA.svg": "/Web-Interface-BIM/static/media/flagUA.18e9f2450b0b232b56d453d5b28c9cde.svg",
+    "static/media/flagPL.svg": "/Web-Interface-BIM/static/media/flagPL.39a1e1d67e9af84fa61b3a6466890fc4.svg",
+    "static/media/flagDE.svg": "/Web-Interface-BIM/static/media/flagDE.c9c0f9b2a32cb8c03897515b06d1ed8f.svg",
+    "static/media/arrowWind.svg": "/Web-Interface-BIM/static/media/arrowWind.e9603a456fe8a098ecaa2812c32943c0.svg",
+    "main.c8fbb0c6.css.map": "/Web-Interface-BIM/static/css/main.c8fbb0c6.css.map",
+    "main.5fddff2b.js.map": "/Web-Interface-BIM/static/js/main.5fddff2b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c8fbb0c6.css",
+    "static/js/main.5fddff2b.js"
+  ]
+}
