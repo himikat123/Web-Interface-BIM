@@ -72,7 +72,7 @@ export default function DisplayViewLCD() {
 
     const draw = useCallback(() => {
         setSequence(lcdGetSequence(sequence));
-        const canvas = document.getElementById('canvas') as HTMLCanvasElement;
+        const canvas = document.getElementById('canvas1') as HTMLCanvasElement;
         const ctx = canvas.getContext('2d');
 
         if(ctx) {
@@ -140,7 +140,7 @@ export default function DisplayViewLCD() {
     ]);
 
     useEffect(() => {
-        const canvas = document.getElementById('canvas') as HTMLCanvasElement;
+        const canvas = document.getElementById('canvas1') as HTMLCanvasElement;
         const context = canvas.getContext('2d');
         lcdDrawSkeleton(context, FRAME_COLOR, BG_COLOR);
     }, []);
@@ -155,12 +155,12 @@ export default function DisplayViewLCD() {
 
     return <div className='w-fit mx-auto mt-4 p-2 bg-gray-400 dark:bg-gray-600'>
         {/* NX4832K035 & NX4832T035 */}
-        {dispModel === 0 && <canvas width="362" height="241" id="canvas" style={{
+        {dispModel === 0 && <canvas width="362" height="241" id="canvas1" style={{
                 margin: 0, padding: 0, width: '100%', maxWidth: '362px', maxHeight: '241px', border: '4px solid black'
             }}
         />}
         {/* ILI9341 */}
-        {dispModel === 1 && <canvas width="320" height="240" id="canvas" style={{
+        {dispModel === 1 && <canvas width="320" height="240" id="canvas1" style={{
                 margin: 0, padding: 0, width: '100%', maxWidth: '320px', maxHeight: '240px', border: '4px solid black'
             }}
         />}

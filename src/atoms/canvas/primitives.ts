@@ -25,6 +25,15 @@ export function fillRect(ctx: CanvasRenderingContext2D, x: number, y: number, w:
     ctx.fillRect(x, y, w, h);
 }
 
+export function fillTriangle(ctx: CanvasRenderingContext2D, x1: number, y1: number, x2: number, y2: number, x3: number, y3: number, color: string) {
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.lineTo(x3, y3);
+    ctx.fill();
+}
+
 export function drawImage(ctx: CanvasRenderingContext2D, image: string, x: number, y: number) {
     let img = new Image();
     img.onload = () => ctx.drawImage(img, x, y);
