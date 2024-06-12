@@ -126,9 +126,9 @@ export interface iData {
                 icon: [number],
             }
         },
-        thing?: {
-            time?: number,
-            data?: number[]
+        thing: {
+            time: number,
+            data: number[]
         },
         fs: { 
             total: number,
