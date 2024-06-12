@@ -4,11 +4,12 @@ import { iValid } from "../redux/validTypes";
 import MenuItem from "../atoms/menuItem";
 import i18n from '../i18n/main';
 import { Clock } from "@phosphor-icons/react";
+import relPath from "../atoms/relPath";
 
 export default function MenuClock(props: iMenuItems) {
     const validClock = useSelector((state: iValid) => state.valid.clock);
 
-    return <MenuItem link="/clock" 
+    return <MenuItem link={relPath() + "/clock"} 
         current={props.current} 
         title={i18n.t('clock')} 
         mobile={props.mobile} 

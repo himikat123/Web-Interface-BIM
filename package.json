@@ -1,6 +1,7 @@
 {
   "name": "web-interface-bim",
   "version": "1.0.0",
+  "homepage_": "https://himikat123.github.io/Web-Interface-BIM",
   "private": true,
   "dependencies": {
     "@phosphor-icons/react": "^2.1.4",
@@ -45,6 +46,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -72,6 +75,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "gh-pages": "^6.1.1",
     "tailwindcss": "^3.3.6"
   }
 }

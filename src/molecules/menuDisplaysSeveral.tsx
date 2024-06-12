@@ -5,6 +5,7 @@ import MenuItem from "../atoms/menuItem";
 import MenuSubItem from "../atoms/menuSubItem";
 import i18n from '../i18n/main';
 import { Monitor } from "@phosphor-icons/react";
+import relPath from "../atoms/relPath";
 
 export default function MenuDisplaysSeveral(props: iMenuItems) {
     const validDisplay1 = useSelector((state: iValid) => state.valid.display1);
@@ -17,12 +18,12 @@ export default function MenuDisplaysSeveral(props: iMenuItems) {
         icon={<Monitor />} 
         valid={validDisplay1}
     >
-        <MenuSubItem link="/display1" 
+        <MenuSubItem link={relPath() + "/display1"} 
             current={props.current} 
             title={`${i18n.t('display.singular')} 1`} 
             valid={validDisplay1 && validDisplay2} 
         />
-        <MenuSubItem link="/display2" 
+        <MenuSubItem link={relPath() + "/display2"} 
             current={props.current} 
             title={`${i18n.t('display.singular')} 2`} 
             valid={validDisplay2} 

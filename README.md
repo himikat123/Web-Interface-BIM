@@ -1,3 +1,5 @@
+Page preview: https://himikat123.github.io/Web-Interface-BIM/
+
 Start debugging
     `npm start`
 or
@@ -16,3 +18,8 @@ in file **/public/data.json** set
 ## To switch to other pages
 in file **/public/data.json** set
     "state": "OK"
+
+
+## Public to gihub-pages
+in file **/package.json** replace **homepage_** with **homepage**
+in file **/App.tsx** get data from file instead server

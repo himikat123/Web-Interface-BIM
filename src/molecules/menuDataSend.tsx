@@ -5,6 +5,7 @@ import MenuItem from "../atoms/menuItem";
 import MenuSubItem from "../atoms/menuSubItem";
 import i18n from '../i18n/main';
 import { CloudArrowUp } from "@phosphor-icons/react";
+import relPath from "../atoms/relPath";
 
 export default function MenuDataSend(props: iMenuItems) {
     const validSendThingspeak = useSelector((state: iValid) => state.valid.sendThingspeak);
@@ -17,13 +18,13 @@ export default function MenuDataSend(props: iMenuItems) {
         icon={<CloudArrowUp />}
         valid={validSendThingspeak && validSendNarodmon} 
     >
-        <MenuSubItem link="/sendthingspeak" 
+        <MenuSubItem link={relPath() + "/sendthingspeak"} 
             current={props.current} 
             title={i18n.t('sendToThingspeak')} 
             valid={validSendThingspeak} 
         />
 
-        <MenuSubItem link="/sendnarodmon" 
+        <MenuSubItem link={relPath() + "/sendnarodmon"} 
             current={props.current} 
             title={i18n.t('sendToNarodmon')} 
             valid={validSendNarodmon} 

@@ -6,6 +6,7 @@ import i18n from '../i18n/main';
 import { User } from "@phosphor-icons/react";
 import { iMenuUserDropdown } from "../interfaces";
 import { iValid } from "../redux/validTypes";
+import relPath from "../atoms/relPath";
 
 export default function MenuUserDropdown(props: iMenuUserDropdown) {
     function useOutsideAlerter(ref: React.RefObject<HTMLDivElement>) {
@@ -35,12 +36,12 @@ export default function MenuUserDropdown(props: iMenuUserDropdown) {
         </div>
 
         <DropdownBox className="right-0 mt-2" open={menuUserOpen}>
-            <MenuSubItem link="/username" 
+            <MenuSubItem link={relPath() + "/username"} 
                 current={props.current} 
                 title={i18n.t('username')}
                 valid={validAccount} 
             />
-            <MenuSubItem link="/userpass" 
+            <MenuSubItem link={relPath() + "/userpass"} 
                 current={props.current} 
                 title={i18n.t('password')} 
                 valid={true}
@@ -48,7 +49,7 @@ export default function MenuUserDropdown(props: iMenuUserDropdown) {
 
             <hr className="m-2" />
 
-            <MenuSubItem link="/login" 
+            <MenuSubItem link={relPath() + "/login"} 
                 current={props.current} 
                 title={i18n.t('logout')} 
                 valid={true} 
