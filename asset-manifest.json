@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Web-Interface-BIM/static/css/main.c8fbb0c6.css",
-    "main.js": "/Web-Interface-BIM/static/js/main.c1f2da86.js",
+    "main.js": "/Web-Interface-BIM/static/js/main.8f3f4432.js",
     "static/media/rubick.svg": "/Web-Interface-BIM/static/media/rubick.a3f9085134270e5aa88e34f609c48797.svg",
     "static/media/json.svg": "/Web-Interface-BIM/static/media/json.0f3c0c1d946226f2ef555a469ca269ab.svg",
     "index.html": "/Web-Interface-BIM/index.html",
@@ -16,10 +16,10 @@
     "static/media/flagDE.svg": "/Web-Interface-BIM/static/media/flagDE.c9c0f9b2a32cb8c03897515b06d1ed8f.svg",
     "static/media/arrowWind.svg": "/Web-Interface-BIM/static/media/arrowWind.e9603a456fe8a098ecaa2812c32943c0.svg",
     "main.c8fbb0c6.css.map": "/Web-Interface-BIM/static/css/main.c8fbb0c6.css.map",
-    "main.c1f2da86.js.map": "/Web-Interface-BIM/static/js/main.c1f2da86.js.map"
+    "main.8f3f4432.js.map": "/Web-Interface-BIM/static/js/main.8f3f4432.js.map"
   },
   "entrypoints": [
     "static/css/main.c8fbb0c6.css",
-    "static/js/main.c1f2da86.js"
+    "static/js/main.8f3f4432.js"
   ]
 }
