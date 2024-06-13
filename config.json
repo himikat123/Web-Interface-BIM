@@ -2,7 +2,7 @@
   "configState": "ok",
   "comfort": {
     "temp": {
-      "source": 0,
+      "source": 7,
       "wsensNum": 0,
       "sens": 0,
       "thing": 0,
@@ -17,7 +17,7 @@
       "sound": 0
     },
     "hum": {
-      "source": 0,
+      "source": 6,
       "wsensNum": 0,
       "thing": 0,
       "min": [
@@ -28,11 +28,11 @@
         60,
         6
       ],
-      "sound": 0
+      "sound": 1
     },
     "iaq": {
-      "source": 0,
-      "sound": 0
+      "source": 1,
+      "sound": 1
     },
     "co2": {
       "source": 0,
@@ -59,7 +59,7 @@
     "type": 1
   },
   "accessPoint": {
-    "ssid": "Weather monitor BIM32",
+    "ssid": "BIM32",
     "pass": "1234567890",
     "chnl": 1,
     "ip": "192.168.1.4",
@@ -78,9 +78,9 @@
     "citysearch": 0,
     "parsingServer": ""
   },
-  "lang": "ru",
+  "lang": "en",
   "clock": {
-    "format": 0,
+    "format": 1,
     "ntp": "time.nist.gov",
     "utc": 0,
     "dlst": 0,
@@ -208,13 +208,13 @@
       "descr": 2,
       "sequence": {
         "name": [
-          "aaavfgbdfvfdvfd",
-          "bbb",
-          "ccc",
-          "ddd"
+          "Cellar",
+          "Bathroom",
+          "Backyard",
+          "Living room"
         ],
         "temp": [
-          1,
+          2,
           2,
           3,
           7
@@ -244,7 +244,7 @@
           ]
         ],
         "hum": [
-          1,
+          2,
           2,
           3,
           7
@@ -632,16 +632,16 @@
     "bat": {
       "k": [
         125,
-        125
+        99.6
       ],
       "type": [
         0,
-        0
+        1
       ]
     },
     "expire": [
       10,
-      10
+      15
     ],
     "channel": 1
   },
@@ -692,9 +692,9 @@
     ]
   },
   "thingspeakReceive": {
-    "period": 0,
-    "channelID": "",
-    "rdkey": "",
+    "period": 5,
+    "channelID": "123456",
+    "rdkey": "123465ABC",
     "expire": 20
   },
   "narodmonSend": {
