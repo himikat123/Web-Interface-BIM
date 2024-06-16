@@ -365,3 +365,20 @@ export interface iSequence {
     slot: number,
     counter: number
 }
+
+export interface iSegment {
+    symb: number,
+    color: string,
+    point?: boolean,
+    dot?: boolean
+}
+
+export interface iSegState {
+    segments: number[],
+    colors: string[],
+    prevSlot: number,
+    points: boolean,
+    pointsColor: string,
+    slot: number,
+    prevSlotMillis: number
+}

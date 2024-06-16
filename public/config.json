@@ -2,7 +2,7 @@
   "configState": "ok",
   "comfort": {
     "temp": {
-      "source": 0,
+      "source": 7,
       "wsensNum": 0,
       "sens": 0,
       "thing": 0,
@@ -17,7 +17,7 @@
       "sound": 0
     },
     "hum": {
-      "source": 0,
+      "source": 6,
       "wsensNum": 0,
       "thing": 0,
       "min": [
@@ -28,11 +28,11 @@
         60,
         6
       ],
-      "sound": 0
+      "sound": 1
     },
     "iaq": {
-      "source": 0,
-      "sound": 0
+      "source": 1,
+      "sound": 1
     },
     "co2": {
       "source": 0,
@@ -59,7 +59,7 @@
     "type": 1
   },
   "accessPoint": {
-    "ssid": "Weather monitor BIM32",
+    "ssid": "BIM32",
     "pass": "1234567890",
     "chnl": 1,
     "ip": "192.168.1.4",
@@ -78,9 +78,9 @@
     "citysearch": 0,
     "parsingServer": ""
   },
-  "lang": "ru",
+  "lang": "en",
   "clock": {
-    "format": 0,
+    "format": 1,
     "ntp": "time.nist.gov",
     "utc": 0,
     "dlst": 0,
@@ -167,62 +167,62 @@
     },
     "source": {
       "tempOut": {
-        "sens": 0,
+        "sens": 1,
         "wsensNum": 0,
-        "temp": 0,
+        "temp": 4,
         "thing": 0
       },
       "humOut": {
-        "sens": 0,
+        "sens": 3,
         "wsensNum": 0,
-        "thing": 0
+        "thing": 1
       },
       "presOut": {
-        "sens": 0,
+        "sens": 2,
         "wsensNum": 0,
         "thing": 0
       },
       "tempIn": {
-        "sens": 3,
+        "sens": 4,
         "wsensNum": 0,
         "temp": 0,
         "thing": 0
       },
       "humIn": {
-        "sens": 0,
+        "sens": 4,
         "wsensNum": 0,
         "thing": 0
       },
       "volt": {
-        "sens": 0,
+        "sens": 1,
         "wsensNum": 0,
         "volt": 0,
         "thing": 0,
         "thingType": 0
       },
       "bat": {
-        "sens": 0,
+        "sens": 1,
         "wsensNum": 0,
         "thing": 0
       },
-      "descr": 0,
+      "descr": 2,
       "sequence": {
         "name": [
-          "",
-          "",
-          "",
-          ""
+          "Cellar",
+          "Bathroom",
+          "Backyard",
+          "Living room"
         ],
         "temp": [
-          0,
-          0,
-          0,
-          0
+          2,
+          2,
+          3,
+          7
         ],
         "thngtemp": [
           0,
           0,
-          0,
+          7,
           0
         ],
         "wsenstemp": [
@@ -232,7 +232,7 @@
           ],
           [
             0,
-            0
+            2
           ],
           [
             0,
@@ -244,15 +244,15 @@
           ]
         ],
         "hum": [
-          0,
-          0,
-          0,
-          0
+          2,
+          2,
+          3,
+          7
         ],
         "thnghum": [
           0,
           0,
-          0,
+          1,
           0
         ],
         "wsenshum": [
@@ -268,27 +268,27 @@
       "period": [
         [
           6,
-          0
+          4
         ],
         [
           2,
-          0
+          2
         ],
         [
           2,
-          0
+          2
         ],
         [
           0,
-          0
+          2
         ],
         [
           0,
-          0
+          2
         ],
         [
           0,
-          0
+          2
         ],
         [
           0,
@@ -306,23 +306,23 @@
         ],
         [
           9,
-          0
+          11
         ],
         [
           9,
-          0
+          11
         ],
         [
           0,
-          0
+          11
         ],
         [
           0,
-          0
+          10
         ],
         [
           0,
-          0
+          11
         ],
         [
           0,
@@ -344,7 +344,11 @@
         ],
         [
           1,
-          0
+          1
+        ],
+        [
+          0,
+          3
         ],
         [
           0,
@@ -352,11 +356,7 @@
         ],
         [
           0,
-          0
-        ],
-        [
-          0,
-          0
+          2
         ],
         [
           0,
@@ -455,7 +455,7 @@
           ],
           [
             0,
-            0
+            7
           ],
           [
             0,
@@ -486,15 +486,15 @@
         ],
         [
           "#FFFFFF",
-          "#FFFFFF"
+          "#ff8800"
         ],
         [
           "#FFFFFF",
-          "#FFFFFF"
+          "#0091ff"
         ],
         [
           "#FFFFFF",
-          "#FFFFFF"
+          "#ee00ff"
         ],
         [
           "#FFFFFF",
@@ -632,16 +632,16 @@
     "bat": {
       "k": [
         125,
-        125
+        99.6
       ],
       "type": [
         0,
-        0
+        1
       ]
     },
     "expire": [
       10,
-      10
+      15
     ],
     "channel": 1
   },
@@ -692,9 +692,9 @@
     ]
   },
   "thingspeakReceive": {
-    "period": 0,
-    "channelID": "",
-    "rdkey": "",
+    "period": 5,
+    "channelID": "123456",
+    "rdkey": "123465ABC",
     "expire": 20
   },
   "narodmonSend": {
