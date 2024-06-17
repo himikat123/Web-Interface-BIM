@@ -38,7 +38,7 @@ export default function WSensors() {
 
     const content = <>{[...Array(2)].map((c, wsensorNum: number) =>
         <Card key={'ws' + wsensorNum} header={`${i18n.t('wirelessSensor.singular')} ${wsensorNum}`}
-            content={<div className="h-full flex flex-col justify-between">
+            content={<div className="h-full flex flex-col justify-between pb-8">
                 <div>
                     <div className="text-center mb-4">
                         {i18n.t('dataFrom')}:
