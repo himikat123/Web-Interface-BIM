@@ -23,3 +23,4 @@ in file **/public/data.json** set
 ## Public to gihub-pages
 in file **/package.json** replace **homepage_** with **homepage**
 in file **/App.tsx** get data from file instead server
+`npm run deploy`
