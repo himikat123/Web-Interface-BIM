@@ -81,11 +81,6 @@ function App() {
         return () => clearInterval(dataFetchInterval);
     }, [configState, dispatch]);
 
-    let path = '';
-    const pth = window.location.pathname.split('/');
-    pth.pop();
-    if(pth.length) path = pth.join('/');
-
     return (
         <div className={"bg-page_light dark:bg-page_dark text-text_light dark:text-text_dark min-h-screen"}>
             {configState === 'error' ? <NoConfig /> :
