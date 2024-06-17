@@ -63,7 +63,6 @@ export default function Default() {
         fetch('./defaultConfig.json')
         .then(res => res.text())
         .then((result: string) => {
-            console.log(result);
             setDefaultConfig(JSON.parse(result))
         })
     }, []);

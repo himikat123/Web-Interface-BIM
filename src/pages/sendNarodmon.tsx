@@ -19,7 +19,7 @@ export default function SendNarodmon() {
             <CardNarodmonMac />
             <CardNarodmonSensName />
 
-            {[...Array(12)].map((x, i) => <CardNarodmonSendData num={i} />)}
+            {[...Array(12)].map((x, i) => <CardNarodmonSendData key={i} num={i} />)}
         </>}
     </>
 
