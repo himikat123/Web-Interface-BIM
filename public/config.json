@@ -154,11 +154,11 @@
     "animation": {
       "type": [
         0,
-        0
+        1
       ],
       "speed": [
         10,
-        10
+        5
       ],
       "points": [
         0,

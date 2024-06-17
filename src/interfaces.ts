@@ -377,8 +377,18 @@ export interface iSegState {
     segments: number[],
     colors: string[],
     prevSlot: number,
+    clockpoints: boolean,
     points: boolean,
     pointsColor: string,
     slot: number,
-    prevSlotMillis: number
+    prevSlotMillis: number,
+    animMillis: number,
+    animSlot: number
+}
+
+export interface iSegClockPoints {
+    clockpoints: boolean,
+    points: boolean, 
+    color: string, 
+    dispNum: number
 }

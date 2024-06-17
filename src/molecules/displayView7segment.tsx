@@ -8,17 +8,20 @@ export default function DisplayView7segment(props: any) {
     const [state, setState] = useState<iSegState>({
         segments: [0, 0, 0, 0, 0, 0, 0, 0],
         colors: ['', '', '', '', '', '', '', ''],
+        clockpoints: false,
         points: false,
         pointsColor: '',
         slot: 0,
         prevSlot: 0,
-        prevSlotMillis: 0
+        prevSlotMillis: 0,
+        animMillis: 0,
+        animSlot: 0
     });
     
     useEffect(() => {
         const int = setInterval(() => {
-            const st = slotTick(props.num, state.slot, state.prevSlot, state.prevSlotMillis);
-            if(JSON.stringify(st) !== JSON.stringify(state)) {setState(st); console.log(st);}
+            const st = slotTick(props.num, state);
+            if(JSON.stringify(st) !== JSON.stringify(state)) setState(st);
         }, 10);
         return () => clearInterval(int);
     }, [props.num, state]);
@@ -29,9 +32,9 @@ export default function DisplayView7segment(props: any) {
                 {[...Array(2)].map((i: number, x: number) => {
                     return <SegSegment key={x} symb={state.segments[x]} color={state.colors[x]} />
                 })}
-                <SegClockPoints points={state.points} color={state.pointsColor} />
+                <SegClockPoints clockpoints={state.clockpoints} points={state.points} color={state.pointsColor} dispNum={props.num} />
                 {[...Array(2)].map((i: number, x: number) => {
-                    return <SegSegment key={x + 2} symb={state.segments[x + 2]} color={state.colors[x]} />
+                    return <SegSegment key={x + 2} symb={state.segments[x + 2]} color={state.colors[x + 2]} />
                 })}
             </div>
         </div>
