@@ -75,7 +75,7 @@ export default function Navbar() {
             </div>
         </nav>
 
-        <div className={"fixed right-10 -bottom-20 cursor-pointer transition-all" + (upwardArrow ? " bottom-4 lg:bottom-10" : "")}
+        <div className={"fixed right-4 lg:right-10 -bottom-20 cursor-pointer transition-all" + (upwardArrow ? " bottom-4 lg:bottom-10" : "")}
             title={i18n.t('upward')}
             onClick={() => window.scrollTo({top: 0, left: 0, behavior: 'smooth'})}
         >
