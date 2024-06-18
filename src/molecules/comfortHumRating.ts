@@ -1,13 +1,9 @@
-import i18n from "../i18n/main";
-import { useSelector } from 'react-redux';
-import Indication from "../atoms/indication";
-import { iConfig } from "../redux/configTypes";
-import { iData } from "../redux/dataTypes";
+import store from '../redux/store';
 import * as vl from "../atoms/validateValues";
 
-export default function ComfortHumRating() {
-    const config = useSelector((state: iConfig) => state.config);
-    const data = useSelector((state: iData) => state.data);
+export default function comfortHumRating() {
+    const config = store.getState().config;
+    const data = store.getState().data;
 
     let hum = 40400;
     switch(config.comfort.hum.source) {
@@ -24,14 +20,12 @@ export default function ComfortHumRating() {
         case 7: hum = data.bme680.hum + config.sensors.bme680.h; break; // humidity from BME680
     }
 
-    let comfort = i18n.t('comfortable');
+    let comfort = 0;
     if(vl.validateHumidity(hum)) {
-        if(hum > ((config.comfort.hum.max[0] + config.comfort.hum.max[1]) / 2)) comfort = i18n.t('tooHumid');
-        if(hum < ((config.comfort.hum.min[0] + config.comfort.hum.min[1]) / 2)) comfort = i18n.t('tooDry');
+        if(hum > config.comfort.hum.max[0]) comfort = 1;
+        if(hum < config.comfort.hum.min[0]) comfort = 2;
     }
-    else comfort = '--';
+    else comfort = -1; //'--';
 
-    return <div className="mt-6">
-        <Indication error={false} value={comfort} />
-    </div>
+    return comfort;
 }

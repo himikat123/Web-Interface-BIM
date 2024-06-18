@@ -30,7 +30,7 @@ export default function ComfortTempMin() {
             limitMin={0}
             limitMax={10}
             step={0.1}
-            indication={`±${(config.comfort.temp.min[1] / 2).toFixed(1)}°C`}
+            indication={`±${(config.comfort.temp.min[1] / 2).toFixed(2)}°C`}
             onChange={val => dispatch(cf.comfortTempMinChange({ num: 1, val: val }))}
             className="mt-4"
         />

@@ -1,13 +1,9 @@
-import i18n from "../i18n/main";
-import { useSelector } from 'react-redux';
-import Indication from "../atoms/indication";
-import { iConfig } from "../redux/configTypes";
-import { iData } from "../redux/dataTypes";
+import store from '../redux/store';
 import * as vl from "../atoms/validateValues";
 
-export default function ComfortTempRating() {
-    const config = useSelector((state: iConfig) => state.config);
-    const data = useSelector((state: iData) => state.data);
+export default function comfortTempRating() {
+    const config = store.getState().config;
+    const data = store.getState().data;
 
     let temp = 40400;
     switch(config.comfort.temp.source) {
@@ -26,14 +22,12 @@ export default function ComfortTempRating() {
         case 9: temp = data.bme680.temp + config.sensors.bme680.t; break; // temperature from BME680
     }
 
-    let comfort = i18n.t('comfortable');
+    let comfort = 0;
     if(vl.validateTemperature(temp)) {
-        if(temp > config.comfort.temp.max[0]) comfort = i18n.t('tooHot');
-        if(temp < config.comfort.temp.min[0]) comfort = i18n.t('tooCold');
+        if(temp > config.comfort.temp.max[0]) comfort = 1;
+        if(temp < config.comfort.temp.min[0]) comfort = 2;
     }
-    else comfort = '--';
+    else comfort = -1;
 
-    return <div className="mt-6">
-        <Indication error={false} value={comfort} />
-    </div>
+    return comfort;
 }

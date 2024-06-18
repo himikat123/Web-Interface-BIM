@@ -1,15 +1,21 @@
 import i18n from "../i18n/main";
 import { useSelector } from 'react-redux';
 import Card from "../atoms/card";
-import { iConfig } from "../redux/configTypes";
 import ComfortCo2Source from "../molecules/comfortCo2Source";
-import ComfortCo2Rating from "../molecules/comfortCo2Rating";
+import comfortCo2Rating from "../molecules/comfortCo2Rating";
 import ComfortCo2Sound from "../molecules/comfortCo2Sound";
 import ComfortAirExplicationsTable from "../molecules/comfortAirExplicationTable";
+import Indication from "../atoms/indication";
+import { iConfig } from "../redux/configTypes";
 import "./cardComfort.scss";
 
 export default function CardComfortCo2() {
     const config = useSelector((state: iConfig) => state.config);
+    const comfRating = comfortCo2Rating();
+    let comfort = '--';
+    if(comfRating === 0) comfort = i18n.t('cleanAir');
+    if(comfRating === 1) comfort = i18n.t('polutedAir');
+    if(comfRating === 2) comfort = i18n.t('havilyPolutedAir');
 
     return <Card header={<div dangerouslySetInnerHTML={{ __html: i18n.t('CO2Level') }} />}
         content={<>
@@ -18,7 +24,9 @@ export default function CardComfortCo2() {
                 
             {<div className={'card-comfort ' + (config.comfort.co2.source > 0 ? 'show' : 'hide')}>
                 {/* Comfort rating */}
-                <ComfortCo2Rating />
+                <div className="mt-6">
+                    <Indication error={false} value={comfort} />
+                </div>
 
                 {/* Sound Notification */}
                 <ComfortCo2Sound />
