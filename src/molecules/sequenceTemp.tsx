@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { iConfig } from "../redux/configTypes";
 import * as cf from "../redux/slices/config";

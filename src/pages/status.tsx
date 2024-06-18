@@ -24,7 +24,7 @@ export default function Status() {
         const vg = parseFloat(gitFW.replace('v', ''));
         const vf = parseFloat(data.fw.replace('v', ''));
         setNewFwFound(vg > vf);
-    }, [gitFW]);
+    }, [gitFW, data.fw]);
 
     const content = <>
         <Card content={<CardStatusDisplay num={0} />} />
@@ -38,7 +38,7 @@ export default function Status() {
             {newFwFound && <div className='p-4'>
                 <p className='text-base card border-2 border-menu_light dark:border-menu_dark bg-card_light dark:bg-card_dark rounded-lg p-6'>
                     {i18n.t('firmwareUpdateAppeared').replace('XXX', gitFW)}:<br />
-                    <a href={gitLink} target="_blank" className="text-blue-700 dark:text-blue-400">
+                    <a href={gitLink} target="_blank" rel="noreferrer" className="text-blue-700 dark:text-blue-400">
                         <div dangerouslySetInnerHTML={{ __html: gitLink.replaceAll('/', '/&#173;') }} />
                     </a>
                 </p>

@@ -134,7 +134,7 @@ export default function DisplayViewLCD() {
             }
         }
     }, [
-        clockPointsState, prevAnt, prevBatLevel, prevDescr, prevForecast, prevHumIn, 
+        clockPointsState, prevAnt, prevBatLevel, prevDescr, prevForecast, prevHumIn, prevAlarmState,
         prevHumOut, prevIcon, prevPresOut, prevTempIn, prevTempOut, prevTime, prevUpdTime, 
         prevVolt, prevWeekday, prevWindDirection, prevWindSpeed, prevComfort, sequence, dispModel
     ]);
