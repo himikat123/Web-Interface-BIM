@@ -299,7 +299,7 @@
     "tempSource": "Temperature source",
     "humSource": "Humidity source",
     "historyRepository": "History repository",
-    "firmwareUpdateAppeared": "A firmware update has appeared, version XXX is available",
+    "firmwareUpdateAppeared": "A firmware update has appeared. Version XXX is available",
     "tips": {
         "tip0": "This field must not be empty",
         "tip1": "Only english letters, numbers and symbols *)_.@$%(",

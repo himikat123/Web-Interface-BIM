@@ -299,7 +299,7 @@
     "tempSource": "Temperaturquelle",
     "humSource": "Luftfeuchtigkeitsquelle",
     "historyRepository": "Historienspeicher",
-    "firmwareUpdateAppeared": "Firmware-Update erkannt, Version XXX verfügbar",
+    "firmwareUpdateAppeared": "Ein Firmware-Update ist erschienen. Version XXX ist verfügbar",
     "tips": {
         "tip0": "Dieses Feld darf nicht leer sein",
         "tip1": "Nur englische Buchstaben, Zahlen und Symbole *)_.@$%(",
