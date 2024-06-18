@@ -19,7 +19,7 @@
     "hum": {
       "source": 6,
       "wsensNum": 0,
-      "thing": 0,
+      "thing": 3,
       "min": [
         30,
         3
@@ -173,28 +173,28 @@
         "thing": 0
       },
       "humOut": {
-        "sens": 3,
+        "sens": 1,
         "wsensNum": 0,
         "thing": 1
       },
       "presOut": {
-        "sens": 2,
+        "sens": 1,
         "wsensNum": 0,
         "thing": 0
       },
       "tempIn": {
-        "sens": 4,
+        "sens": 8,
         "wsensNum": 0,
         "temp": 0,
         "thing": 0
       },
       "humIn": {
-        "sens": 4,
+        "sens": 7,
         "wsensNum": 0,
         "thing": 0
       },
       "volt": {
-        "sens": 1,
+        "sens": 3,
         "wsensNum": 0,
         "volt": 0,
         "thing": 0,
@@ -205,7 +205,7 @@
         "wsensNum": 0,
         "thing": 0
       },
-      "descr": 2,
+      "descr": 1,
       "sequence": {
         "name": [
           "Cellar",

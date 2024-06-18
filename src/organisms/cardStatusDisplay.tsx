@@ -11,7 +11,7 @@ export default function CardStatisDisplay(props: iDisplay) {
 
     function displayHeader(num: number) {
         return <div className='text-center'>
-            <Link to={'display' + num} className='text-lg'>
+            <Link to={'display' + num} className='text-xl'>
                 {i18n.t('display.singular')} {num}
             </Link>
         </div>
