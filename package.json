@@ -16,7 +16,7 @@
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "gulp": "^5.0.0",
-    "gulp-autoprefixer": "^9.0.0",
+    "gulp-autoprefixer": "^8.0.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-gzip": "^1.4.2",
     "gulp-inline": "^0.1.3",
