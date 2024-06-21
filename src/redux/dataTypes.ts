@@ -132,12 +132,7 @@ export interface iData {
         fs: { 
             total: number,
             free: number,
-            list: [
-                {
-                    name: string,
-                    size: string
-                }
-            ]
+            list: string
         }
     }
 }

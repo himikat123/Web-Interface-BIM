@@ -135,12 +135,7 @@ export const dataSlice = createSlice({
         fs: { 
             total: -1,
             free: -1,
-            list: [
-                {
-                    name: "",
-                    size: ""
-                }
-            ]
+            list: ""
         }
     },
     reducers: {

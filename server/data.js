@@ -14,12 +14,21 @@ const getFiles = (dir, files_) => {
         let name = dir + '/' + files[i];
         if(fs.statSync(name).isDirectory()) getFiles(name, files_);
         else {
-            if(files[i] !== 'user.us' && files[i] !== 'data.json_')
+            if(files[i] !== 'user.us' && files[i] !== 'data.json')
                 files_.push({name: name.split('public')[1], size: fs.statSync(name).size});
         }
     }
     return files_;
 };
+
+const filelist = () => {
+    const files = getFiles(path.join(__dirname, '../public'));
+    let list = '';
+    files.map(file => {
+        list += file.name + ':' + file.size + ','
+    });
+    return list;
+}
 
 const mainIcons = [0, 1, 2, 4, 9, 10, 11, 13, 50];
 
@@ -184,7 +193,7 @@ const data = () => {
         fs: { 
             total: 2056988,
             free: 563727,
-            list: getFiles(path.join(__dirname, '../public'))
+            list: filelist()
         }
     }
 

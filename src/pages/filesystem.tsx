@@ -16,6 +16,7 @@ import { ReactComponent as JsonSVG } from '../atoms/icons/json.svg';
 import { ReactComponent as ImageSVG } from '../atoms/icons/image.svg';
 import { ReactComponent as RubickSVG } from '../atoms/icons/rubick.svg';
 
+// TODO в просмотрщике json файлов сворачивается код каждые 10 секунд
 export default function Filesystem() {
     const data = useSelector((state: iData) => state.data);
     const [filelist, setFilelist] = useState<iFilelist>([]);
@@ -178,8 +179,14 @@ export default function Filesystem() {
 
     useEffect(() => {
         let list: iFilelist = [];
+        let flist = data.fs.list.split(',').map(file => {
+            return {
+                name: file.split(':')[0],
+                size: file.split(':')[1]
+            }
+        })
 
-        data.fs.list.forEach(file => {
+        flist.forEach(file => {
             let name = file.name.replace(new RegExp(`^${path}`), '');
             if(file.name.includes(path)) {
                 if(name.includes('/') && !name.startsWith('/')) {
