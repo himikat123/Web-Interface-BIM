@@ -23,9 +23,9 @@ app.get('/esp/restart', (req, res) => {
 });
 
 app.post("/esp/saveConfig", (req, res) => {
-    console.log('POST /esp/saveConfig', req.body);
+    const data = req.body.match(/{.+}/)[0];
+    console.log('POST /esp/saveConfig = ', data);
     res.set('Access-Control-Allow-Origin', '*');
-    let data = req.body.replace('config=', '');
     setTimeout(() => {
         if(data) {
             const configFile = path.join(__dirname, '..', 'public', 'config.json');

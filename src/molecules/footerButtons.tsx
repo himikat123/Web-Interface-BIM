@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import { useSelector } from 'react-redux';
-import axios from "axios";
 import i18n from '../i18n/main';
 import Button from "../atoms/button";
 import ModalRestart from "../pages/modalRestart";
@@ -19,46 +18,38 @@ export default function FooterButtons(props: iFooterButtons) {
     const config = useSelector((state: iConfig) => state.config);
     const timeout = useRef<ReturnType<typeof setInterval> | null>(null);
 
-    const Save_config = () => {
+    async function Save_config() {
         if(saveButton === 'save') {
             clearTimeout(timeout.current ?? undefined);
             setSaveColor('yellow');
             setSaveButton('saving');
             
-            const cfg = new URLSearchParams();
-            cfg.append('config', JSON.stringify(config).replace('"configState":"ok",', ''));
-
-            const pass = new URLSearchParams();
-            pass.append('oldPass', JSON.stringify(props.passChange?.old));
-            pass.append('newPass', JSON.stringify(props.passChange?.new));
-            
-            axios(`${hostUrl()}/esp/${props.passChange ? 'changePass' : 'saveConfig'}`, {
-                method: 'post',
-                headers: {
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Headers': '*',
-                    'Access-Control-Allow-Credentials': 'true'
-                },
-                data: props.passChange
-                    ? `oldPass=${props.passChange.old}&newPass=${props.passChange.new}` 
-                    : `config=${JSON.stringify(config, null, 2).replace('"configState":"ok",', '')}`
-            })
-            .then(res => {
-                if(res.data === 'OK') {
+            let data = new FormData();
+            if(props.passChange) {
+                data.append("oldPass", props.passChange.old);
+                data.append("newPass", props.passChange.new);
+            }
+            else data.append("config", JSON.stringify(config).replace('"configState":"ok",', ''));
+            try {
+                const response = await fetch(`${hostUrl()}/esp/${props.passChange ? 'changePass' : 'saveConfig'}`, {
+                  method: "POST",
+                  body: data
+                });
+                const result = await response.text();
+                if(result === 'OK') {
                     setSaveColor('green');
                     setSaveButton('saved');
                 }
                 else {
                     setSaveColor('red');
                     setSaveButton('notSaved');
-                    console.error(res.data);
+                    console.error(result);
                 }
-            })
-            .catch(err => {
+            } catch (error) {
                 setSaveColor('red');
                 setSaveButton('notSaved');
-                console.error(err);
-            });
+                console.error(error);
+            }
         }
     }
 
