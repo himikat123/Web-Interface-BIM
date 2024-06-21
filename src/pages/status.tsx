@@ -13,12 +13,15 @@ export default function Status() {
     const [gitFW, setGitFW] = useState<string>('');
     const [newFwFound, setNewFwFound] = useState<boolean>(false);
     const gitLink = 'https://github.com/himikat123/Weather-monitor-BIM32';
-    fetch("https://raw.githubusercontent.com/himikat123/Weather-monitor-BIM32/master/BIM32/globals.hpp")
-    .then(response => response.text())
-    .then(text => {
-        let regex = /] = "(v.+)"/gm;
-        setGitFW(regex.exec(text)![1]);
-    });
+    
+    useEffect(() => {
+        fetch("https://raw.githubusercontent.com/himikat123/Weather-monitor-BIM32/master/BIM32/globals.hpp")
+        .then(response => response.text())
+        .then(text => {
+            let regex = /] = "(v.+)"/gm;
+            setGitFW(regex.exec(text)![1]);
+        });
+    }, [])
 
     useEffect(() => {
         const vg = parseFloat(gitFW.replace('v', ''));
