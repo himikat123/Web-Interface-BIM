@@ -72,6 +72,7 @@ function App() {
         }
 
         if(configState === 'ok') {
+            // TODO не отправлять новый запрос если нет ответа от старого
             fetchData();
             dataFetchInterval = setInterval(() => {
                 fetchData();

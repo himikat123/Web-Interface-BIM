@@ -17,6 +17,8 @@ import { ReactComponent as ImageSVG } from '../atoms/icons/image.svg';
 import { ReactComponent as RubickSVG } from '../atoms/icons/rubick.svg';
 
 // TODO в просмотрщике json файлов сворачивается код каждые 10 секунд
+// TODO добавить спинер загрузки в просмотрщик файлов
+// TODO добавить имя upload файла куда-нибудь и не загружется он в папки 
 export default function Filesystem() {
     const data = useSelector((state: iData) => state.data);
     const [filelist, setFilelist] = useState<iFilelist>([]);

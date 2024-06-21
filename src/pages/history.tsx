@@ -4,6 +4,7 @@ import CardsHistorySensor from "../organisms/cardsHistorySensor";
 import TwoColumns from "../templates/twoColumns";
 
 export default function History() {
+    // TODO добавить возможность отключить ведение истории
     const content = <>
         <CardHistorySettings />
         <CardsHistorySensor />

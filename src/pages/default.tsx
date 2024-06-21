@@ -9,6 +9,7 @@ import hostUrl from "../atoms/hostUrl";
 import { ReactComponent as SpinnerSVG } from '../atoms/icons/spinner.svg';
 
 export default function Default() {
+    // TODO добавить спинер загрузки
     const [saveButton, setSaveButton] = useState<string>('resetToFactory');
     const [saveColor, setSaveColor] = useState<string>('blue');
     const [defaultConfig, setDefaultConfig] = useState<object>({});
