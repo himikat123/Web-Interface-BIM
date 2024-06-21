@@ -23,7 +23,7 @@ export default function ThingReceiveDataDate() {
             ? "text-blue-700 dark:text-blue-400" 
             : "text-red-700 dark:text-red-400"
         )}>
-            {(data.thing?.time && data.thing.time > 1700000000) ? <>
+            {(data.thing?.time && data.thing.time > 0) ? <>
                 <Moment unix format="HH:mm:ss DD.MM.YYYY">
                     {data.thing.time}
                 </Moment> (
@@ -31,7 +31,7 @@ export default function ThingReceiveDataDate() {
                     <Moment locale={locale} unix fromNow ago>{data.thing.time}</Moment>
                     {config.lang !== 'de' && ' ' + i18n.t('ago')}
                 ) {!vl.ThingspeakDataRelevance() && <> - {i18n.t('dataExpired')}</>}
-            </> : '???'}
+            </> : '--'}
         </div>
     </div>
 }

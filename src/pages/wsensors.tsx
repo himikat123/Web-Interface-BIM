@@ -44,7 +44,7 @@ export default function WSensors() {
                         {i18n.t('dataFrom')}:
                         <Indication error={dataRelevance(wsensorNum)} 
                             value={<>
-                                {data.wsensor.time[wsensorNum] === 0
+                                {data.wsensor.time[wsensorNum] <= 0
                                     ? <span>--</span>
                                     : <>
                                         <Moment unix format="HH:mm:ss DD.MM.YYYY">{data.wsensor.time[wsensorNum]}</Moment><br />
