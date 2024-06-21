@@ -20,16 +20,16 @@ export default function TimeSlotSensorType(props: iDisplayTimeSlot) {
     const types = [
         /* Time */ [],
         /* Data */ [],
-        /* BME280 */ [`${i18n.t('temperature')} - ${BME280().temp}`, `${i18n.t('humidity')} - ${BME280().hum}`, `${i18n.t('pressure')} - ${BME280().pres}` ],
-        /* BMP180 */ [`${i18n.t('temperature')} - ${BMP180().temp}`, `${i18n.t('pressure')} - ${BMP180().pres}`],
-        /* SHT21 */ [`${i18n.t('temperature')} - ${SHT21().temp}`, `${i18n.t('humidity')} - ${SHT21().hum}`],
-        /* DHT22 */ [`${i18n.t('temperature')} - ${DHT22().temp}`, `${i18n.t('humidity')} - ${DHT22().hum}`],
-        /* DS18B20 */ [`${i18n.t('temperature')} - ${DS18B20().temp}`],
-        /* ESP32 */ [`${i18n.t('temperature')} - ${ESP32().temp}`],
+        /* BME280 */ [`${i18n.t('temperature')} (${BME280().temp})`, `${i18n.t('humidity')} (${BME280().hum})`, `${i18n.t('pressure')} (${BME280().pres})` ],
+        /* BMP180 */ [`${i18n.t('temperature')} (${BMP180().temp})`, `${i18n.t('pressure')} (${BMP180().pres})`],
+        /* SHT21 */ [`${i18n.t('temperature')} (${SHT21().temp})`, `${i18n.t('humidity')} (${SHT21().hum})`],
+        /* DHT22 */ [`${i18n.t('temperature')} (${DHT22().temp})`, `${i18n.t('humidity')} (${DHT22().hum})`],
+        /* DS18B20 */ [`${i18n.t('temperature')} (${DS18B20().temp})`],
+        /* ESP32 */ [`${i18n.t('temperature')} (${ESP32().temp})`],
         /* Thingspeak */ [],
-        /* Forecast */ [`${i18n.t('temperature')} - ${Forecast().temp}`, `${i18n.t('humidity')} - ${Forecast().hum}`, `${i18n.t('pressure')} - ${Forecast().pres}`],
+        /* Forecast */ [`${i18n.t('temperature')} (${Forecast().temp})`, `${i18n.t('humidity')} (${Forecast().hum})`, `${i18n.t('pressure')} (${Forecast().pres})`],
         /* Wireless Sensor */ [],
-        /* BME680 */ [`${i18n.t('temperature')} - ${BME680().temp}`, `${i18n.t('humidity')} - ${BME680().hum}`, `${i18n.t('pressure')} - ${BME680().pres}`, `${i18n.t('indexForAirQuality')} - ${BME680().iaq}`]
+        /* BME680 */ [`${i18n.t('temperature')} (${BME680().temp})`, `${i18n.t('humidity')} (${BME680().hum})`, `${i18n.t('pressure')} (${BME680().pres})`, `${i18n.t('indexForAirQuality')} (${BME680().iaq})`]
     ];
 
     return <>

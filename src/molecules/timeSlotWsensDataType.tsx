@@ -14,9 +14,9 @@ export default function TimeSlotWsensDataType(props: iDisplayTimeSlot) {
     for(let i=0; i<2; i++) {
         wsensorTypes.push([
             ...([...Array(5)].map((x, n) => `${i18n.t('temperature')} ${n} (${Wsensor()[i].temp[n]})`)),
-            `${i18n.t('humidity')} ${Wsensor()[i].hum}`,
-            `${i18n.t('pressure')} ${Wsensor()[i].pres}`,
-            `CO2 ${Wsensor()[i].co2}`
+            `${i18n.t('humidity')} (${Wsensor()[i].hum})`,
+            `${i18n.t('pressure')} (${Wsensor()[i].pres})`,
+            `CO2 (${Wsensor()[i].co2})`
         ])
     }
 
