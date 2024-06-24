@@ -21,6 +21,7 @@ import * as cf from "../redux/slices/config";
 import * as vl from "../atoms/validateValues";
 
 export default function WSensors() {
+    // TODO нет показаний датчиков в реальном приборе, даже (--) не показывает
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
@@ -32,37 +33,37 @@ export default function WSensors() {
         dispatch(wsensorsValidChange(!isValid.includes(false)));
     });
 
-    const dataRelevance = (num: number) => {
-        return (Math.floor(Date.now() / 1000) - data.wsensor.time[num] > config.wsensor.expire[num] * 60) && data.wsensor.time[num] > 0;
-    }
-
     const content = <>{[...Array(2)].map((c, wsensorNum: number) =>
         <Card key={'ws' + wsensorNum} header={`${i18n.t('wirelessSensor.singular')} ${wsensorNum}`}
             content={<div className="h-full flex flex-col justify-between pb-8">
                 <div>
                     <div className="text-center mb-4">
                         {i18n.t('dataFrom')}:
-                        <Indication error={dataRelevance(wsensorNum)} 
+                        <Indication error={!vl.WsensorDataRelevance(wsensorNum)} 
                             value={<>
                                 {data.wsensor.time[wsensorNum] <= 0
                                     ? <span>--</span>
                                     : <>
-                                        <Moment unix format="HH:mm:ss DD.MM.YYYY">{data.wsensor.time[wsensorNum]}</Moment><br />
+                                        <Moment unix format="HH:mm:ss DD.MM.YYYY">
+                                            {data.wsensor.time[wsensorNum] + new Date().getTimezoneOffset() * 60}
+                                        </Moment><br />
                                         {config.lang === 'de' && i18n.t('ago') + ' '}
-                                        <Moment locale={locale} unix fromNow ago>{data.wsensor.time[wsensorNum]}</Moment>
+                                        <Moment locale={locale} unix fromNow ago>
+                                            {data.wsensor.time[wsensorNum] + new Date().getTimezoneOffset() * 60}
+                                        </Moment>
                                         {config.lang !== 'de' && ' ' + i18n.t('ago')}
                                     </>
                                 }
-                                { dataRelevance(wsensorNum) 
-                                    ? <div>{i18n.t("dataExpired")}</div>
-                                    : <div className="h-6"></div>
+                                {vl.WsensorDataRelevance(wsensorNum) 
+                                    ? <div className="h-6"></div>
+                                    : <div>{i18n.t("dataExpired")}</div>
                                 }
                             </>} 
                         />
                     </div>
 
                     {[...Array(5)].map((x, tempSensorNum: number) => <div key={'t' + tempSensorNum}>
-                        {sensorCorrection(dataRelevance(wsensorNum), "t", 
+                        {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "t", 
                             config.wsensor.temp.corr[wsensorNum][tempSensorNum], 
                             `${i18n.t('temperature')} ${tempSensorNum}`, 
                             data.wsensor.temp.data[tempSensorNum][wsensorNum], 
@@ -73,7 +74,7 @@ export default function WSensors() {
                         )}
                     </div>)}
 
-                    {sensorCorrection(dataRelevance(wsensorNum), "h", 
+                    {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "h", 
                         config.wsensor.hum.corr[wsensorNum], 
                         i18n.t('humidity'), 
                         data.wsensor.hum.data[wsensorNum], 
@@ -83,7 +84,7 @@ export default function WSensors() {
                         data.wsensor.hum.name[wsensorNum]
                     )}
 
-                    {sensorCorrection(dataRelevance(wsensorNum), "p", 
+                    {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "p", 
                         config.wsensor.pres.corr[wsensorNum], 
                         i18n.t('pressure'), 
                         data.wsensor.pres.data[wsensorNum], 
@@ -93,7 +94,7 @@ export default function WSensors() {
                         data.wsensor.pres.name[wsensorNum]
                     )}
 
-                    {sensorCorrection(dataRelevance(wsensorNum), "l", 
+                    {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "l", 
                         config.wsensor.light.corr[wsensorNum], 
                         i18n.t('ambientLight'), 
                         data.wsensor.light.data[wsensorNum], 
@@ -103,7 +104,7 @@ export default function WSensors() {
                         data.wsensor.light.name[wsensorNum]
                     )}
 
-                    {sensorCorrection(dataRelevance(wsensorNum), "co2", 
+                    {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "co2", 
                         config.wsensor.co2.corr[wsensorNum], 
                         <span dangerouslySetInnerHTML={{ __html: i18n.t('CO2Level') }} />, 
                         data.wsensor.co2.data[wsensorNum], 
@@ -113,7 +114,7 @@ export default function WSensors() {
                         data.wsensor.co2.name[wsensorNum]
                     )}
 
-                    {sensorCorrection(dataRelevance(wsensorNum), "hv", 
+                    {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "hv", 
                         config.wsensor.volt.corr[wsensorNum], 
                         i18n.t('voltage'), 
                         data.wsensor.voltage.data[wsensorNum], 
@@ -123,7 +124,7 @@ export default function WSensors() {
                         data.wsensor.voltage.name[wsensorNum]
                     )}
 
-                    {sensorCorrection(dataRelevance(wsensorNum), "cr", 
+                    {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "cr", 
                         config.wsensor.curr.corr[wsensorNum], 
                         i18n.t('current'), 
                         data.wsensor.current.data[wsensorNum], 
@@ -133,7 +134,7 @@ export default function WSensors() {
                         data.wsensor.current.name[wsensorNum]
                     )}
 
-                    {sensorCorrection(dataRelevance(wsensorNum), "pw", 
+                    {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "pw", 
                         config.wsensor.pow.corr[wsensorNum], 
                         i18n.t('power'), 
                         data.wsensor.power.data[wsensorNum], 
@@ -143,7 +144,7 @@ export default function WSensors() {
                         data.wsensor.power.name[wsensorNum]
                     )}
 
-                    {sensorCorrection(dataRelevance(wsensorNum), "eg", 
+                    {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "eg", 
                         config.wsensor.enrg.corr[wsensorNum], 
                         i18n.t('energy'), 
                         data.wsensor.energy.data[wsensorNum], 
@@ -153,7 +154,7 @@ export default function WSensors() {
                         data.wsensor.energy.name[wsensorNum]
                     )}
 
-                    {sensorCorrection(dataRelevance(wsensorNum), "fr", 
+                    {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "fr", 
                         config.wsensor.freq.corr[wsensorNum], 
                         i18n.t('frequency'), 
                         data.wsensor.freq.data[wsensorNum], 
@@ -168,7 +169,7 @@ export default function WSensors() {
                     <RangeInput value={config.wsensor.bat.k[wsensorNum]}
                         label={<div className="mt-4">
                             {i18n.t('batteryVoltage')}:
-                            <Indication error={dataRelevance(wsensorNum)} 
+                            <Indication error={!vl.WsensorDataRelevance(wsensorNum)} 
                                 value={<>
                                     {vl.validateBatteryADC(data.wsensor.bat[wsensorNum])
                                         ? (Math.round((data.wsensor.bat[wsensorNum] / (300 - config.wsensor.bat.k[wsensorNum])) * 1000) / 1000).toFixed(3)
