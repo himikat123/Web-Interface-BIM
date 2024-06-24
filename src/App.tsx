@@ -37,6 +37,7 @@ import { dataStateChange, setDataState } from './redux/slices/data';
 import relPath from "./atoms/relPath";
 
 function App() {
+    // TODO не обновлять если нет зрителя
     const dispatch = useDispatch();
     const configState = useSelector((stateConfig: iConfig) => stateConfig.config.configState);
     const dataState = useSelector((stateData: iData) => stateData.data.dataState);

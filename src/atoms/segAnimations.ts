@@ -14,6 +14,7 @@ export default function segAnimations(dispNum: number, state: iSegState) {
     let animIsRunnung = true;
     const millis = Date.now();
     const type = config.display.animation.type[dispNum];
+    // TODO первые 2 анимации неправильно работают, не сдвигают весь экран
     const frames = [1, 5, 5, 8, 8, 4, 4, 4]; // number of frames in effect
     const shifts = [ /* shifts[effect num][frame num][segment num] =0: blank, >0: new data, <0: old data. */
         [[1, 2, 3, 4],    [0, 0, 0, 0],   [0, 0, 0, 0],  [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]],

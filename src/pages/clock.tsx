@@ -5,6 +5,7 @@ import CardClockNtp from "../organisms/cardClockNtp";
 import CardClockSet from "../organisms/cardClockSet";
 
 export default function Clock() {
+    // TODO отключить запрос данных, чтоб диалог синхронизации был живее
     const content = <>
         <CardClockTime />
         <CardClockNtp />
