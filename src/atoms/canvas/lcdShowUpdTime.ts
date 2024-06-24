@@ -11,11 +11,8 @@ export default function lcdShowUpdTime(ctx: CanvasRenderingContext2D,
     if(time !== prevTime) {
         const model = store.getState().config.display.model[0];
         const dispModel = (model === 0 || model === 1) ? 0 : 1;
-        const lang = store.getState().config.lang;
-        const usa = 'YYYY-DD-MM hh:mm:ss';
-        const others = 'DD.MM.YYYY hh:mm:ss';
-        const upd = time > 1000
-            ? moment.unix(time).format(lang === 'en' ? usa : others)
+        const upd = time > 0
+            ? moment.unix(time).utc().format('DD.MM.YYYY HH:mm:ss')
             : '';
         const x = dispModel ? 150 : 194;
         const c = dispModel ? 270 : 312;

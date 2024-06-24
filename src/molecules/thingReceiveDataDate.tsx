@@ -24,11 +24,14 @@ export default function ThingReceiveDataDate() {
             : "text-red-700 dark:text-red-400"
         )}>
             {(data.thing?.time && data.thing.time > 0) ? <>
+            {}
                 <Moment unix format="HH:mm:ss DD.MM.YYYY">
-                    {data.thing.time}
+                    {data.thing.time + new Date().getTimezoneOffset() * 60}
                 </Moment> (
                     {config.lang === 'de' && i18n.t('ago') + ' '}
-                    <Moment locale={locale} unix fromNow ago>{data.thing.time}</Moment>
+                    <Moment locale={locale} unix fromNow ago>
+                        {data.thing.time + new Date().getTimezoneOffset() * 60}
+                    </Moment>
                     {config.lang !== 'de' && ' ' + i18n.t('ago')}
                 ) {!vl.ThingspeakDataRelevance() && <> - {i18n.t('dataExpired')}</>}
             </> : '--'}

@@ -13,8 +13,8 @@ export default function TimeSlotDataSource(props: iDisplayTimeSlot) {
     const data = useSelector((state: iData) => state.data);
 
     const sensors = [
-        `${i18n.t('time')} (${moment.unix(data.time).format('HH:mm:ss')})`,
-        `${i18n.t('date')} (${moment.unix(data.time).format('DD.MM.YYYY')})`,
+        `${i18n.t('time')} (${moment.unix(data.time).utc().format('HH:mm:ss')})`,
+        `${i18n.t('date')} (${moment.unix(data.time).utc().format('DD.MM.YYYY')})`,
         'BME280',
         'BMP180',
         'SHT21',

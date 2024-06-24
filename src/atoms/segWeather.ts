@@ -9,7 +9,7 @@ export default function segWeather(dispNum: number, slot: number): number[] {
     let dispImg = [0, 0, 0, 0];
     const type = config.display.timeSlot.data[slot][dispNum];
   
-    const wthrRelevant = Date.now() - data.weather.time < 1200;
+    const wthrRelevant = data.time - data.weather.time < 1200;
     if(type === 0) dispImg = temp(wthrRelevant ? data.weather.temp : 4040);
     if(type === 1) dispImg = hum(wthrRelevant ? data.weather.hum : 4040);
     if(type === 2) dispImg = pres(wthrRelevant ? data.weather.pres : 4040);

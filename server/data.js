@@ -33,6 +33,9 @@ const filelist = () => {
 const mainIcons = [0, 1, 2, 4, 9, 10, 11, 13, 50];
 
 const data = () => {
+    const dt = new Date();
+    const date = Math.floor(dt / 1000) - dt.getTimezoneOffset() * 60;
+
     obj = {
         state: "OK", // or "LOGIN",
         fw: "v300.4",
@@ -40,7 +43,7 @@ const data = () => {
             temp: random(50, 60)
         },
         runtime: Math.round(random(3, 3000)),
-        time: Math.floor(Date.now() / 1000),
+        time: date,
         wd: ['Mo', 'Tu', 'We', 'Th'],
         units: {
             v: "V",
@@ -110,8 +113,8 @@ const data = () => {
         },
         wsensor: {
             time: [
-                Math.floor(Date.now() / 1000) - random(300, 360), // 5 - 6 minutes ago
-                Math.floor(Date.now() / 1000) - 1000000 // 12 days ago
+                Math.floor(date - random(300, 360)), // 5 - 6 minutes ago
+                Math.floor(date - 1000000) // 12 days ago
             ],
             temp: {
                 data: [ 
@@ -178,7 +181,7 @@ const data = () => {
                 dir: random(0, 360)
             },
             descript: "rain mit снег",
-            time: Math.round(Math.floor(Date.now() / 1000) - random(600, 660)), // 10 - 11 minutes ago
+            time: Math.floor(date - random(600, 660)), // 10 - 11 minutes ago
             daily: {
                 tMax: [random(-25, 25), random(-25, 25), random(-25, 25), random(-25, 25)],
                 tMin: [random(-25, 25), random(-25, 25), random(-25, 25), random(-25, 25)],
@@ -187,7 +190,7 @@ const data = () => {
             }
         },
         thing: {
-            time: Math.round(Math.floor(Date.now() / 1000) - random(600, 660)), // 10 - 11 minutes ago
+            time: Math.floor(date - random(600, 660)), // 10 - 11 minutes ago
             data: [random(-5, -4), random(56, 59), random(768, 777), Math.round(random(2, 4)), -40400.0, random(99, 102), random(1359, 1362), random(-12, -10)]
         },
         fs: { 
