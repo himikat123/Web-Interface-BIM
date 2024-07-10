@@ -55,8 +55,10 @@ app.post("/esp/defaultConfig", (req, res) => {
 });
 
 app.get('/data.json', (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*');
-    res.send(JSON.stringify(data()));
+    setTimeout(() => {
+        res.set('Access-Control-Allow-Origin', '*');
+        res.send(JSON.stringify(data()));
+    }, 2000);
 });
 
 app.get('/esp/bright', (req, res) => {

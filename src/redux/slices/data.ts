@@ -4,6 +4,9 @@ export const dataSlice = createSlice({
     name: 'data',
     initialState: {
         dataState: 'default',
+        updateData: false,
+        dataFetching: false,
+
         state: "",
         fw: "",
         esp32: {
@@ -140,13 +143,17 @@ export const dataSlice = createSlice({
     },
     reducers: {
         dataStateChange: (state, action) => { state.dataState = action.payload },
-        setDataState: (state, action) => { Object.assign(state, action.payload) }
+        setDataState: (state, action) => { Object.assign(state, action.payload) },
+        updateDataChange: (state, action) => { state.updateData = action.payload },
+        dataFetchingChange: (state, action) => { state.dataFetching = action.payload }
     }
 });
 
 export const { 
     dataStateChange,
-    setDataState
+    setDataState,
+    updateDataChange,
+    dataFetchingChange,
 } = dataSlice.actions;
   
 export default dataSlice.reducer;

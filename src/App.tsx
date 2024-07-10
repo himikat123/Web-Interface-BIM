@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import axios from 'axios';
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes, useLocation } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux';
 import hostUrl from './atoms/hostUrl';
 import Loading from './pages/loading';
@@ -33,14 +33,17 @@ import { changeLanguage } from './i18n/main';
 import { iConfig } from './redux/configTypes';
 import { iData } from './redux/dataTypes';
 import { configStateChange, setConfigState } from './redux/slices/config';
-import { dataStateChange, setDataState } from './redux/slices/data';
+import { dataFetchingChange, dataStateChange, setDataState, updateDataChange } from './redux/slices/data';
 import relPath from "./atoms/relPath";
 
 function App() {
-    // TODO не обновлять если нет зрителя
     const dispatch = useDispatch();
     const configState = useSelector((stateConfig: iConfig) => stateConfig.config.configState);
     const dataState = useSelector((stateData: iData) => stateData.data.dataState);
+    const dataFetching = useSelector((stateData: iData) => stateData.data.dataFetching);
+    const updateData = useSelector((stateData: iData) => stateData.data.updateData);
+    const location = useLocation();
+    const path = location.pathname;
 
     useEffect(() => {
         axios("./config.json")
@@ -59,29 +62,36 @@ function App() {
     useEffect(() => {
         let dataFetchInterval: NodeJS.Timeout;
 
-        const fetchData = () => {
+        function fetchData() {
             axios(`${hostUrl()}/data.json`) /* from server */
             //axios(`./data.json`) /* from file */
             .then((res) => {
                 dispatch(dataStateChange('ok'));
                 dispatch(setDataState(res.data));
+                dispatch(dataFetchingChange(false));
+                dispatch(updateDataChange(false));
             })
             .catch(err => {
                 dispatch(dataStateChange('error'));
                 console.error(err);
+                dispatch(dataFetchingChange(false));
+                dispatch(updateDataChange(false));
             })
         }
 
         if(configState === 'ok') {
-            // TODO не отправлять новый запрос если нет ответа от старого
-            fetchData();
             dataFetchInterval = setInterval(() => {
-                fetchData();
-            }, 10000);
+                dispatch(updateDataChange(true));
+            }, 5000);
+
+            if(updateData && !dataFetching) {
+                dispatch(dataFetchingChange(true));
+                if(path !== relPath() + '/clock') fetchData();
+            }
         }
 
         return () => clearInterval(dataFetchInterval);
-    }, [configState, dispatch]);
+    }, [configState, dispatch, dataFetching, updateData, path]);
 
     return (
         <div className={"bg-page_light dark:bg-page_dark text-text_light dark:text-text_dark min-h-screen"}>
