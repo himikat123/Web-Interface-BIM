@@ -14,8 +14,8 @@ export default function SegClockPoints(props: iSegClockPoints) {
     }
     if(!props.clockpoints) point1 = point2 = false;
 
-    return <svg height="40" viewBox="0 0 4.2000017 19.200001" style={{marginTop: '15px'}}>
-        <g transform="translate(-45.399999,-20.400001)">
+    return <svg height="40" viewBox="0 0 4.42 19.2" style={{marginTop: '15px'}}>
+        <g transform="translate(-45.4,-20.4)">
             <circle fill={point1 ? props.color : '#222'} cx="48" cy="22" r="1.65"/>
             <circle fill={point2 ? props.color : '#222'} cx="47.4" cy="34" r="1.65"/>
         </g>
