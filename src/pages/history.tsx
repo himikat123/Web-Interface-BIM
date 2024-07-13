@@ -1,13 +1,16 @@
 import i18n from '../i18n/main';
+import { useSelector } from 'react-redux';
 import CardHistorySettings from "../organisms/cardHistorySettings";
 import CardsHistorySensor from "../organisms/cardsHistorySensor";
 import TwoColumns from "../templates/twoColumns";
+import { iConfig } from "../redux/configTypes";
 
 export default function History() {
-    // TODO добавить возможность отключить ведение истории
+    const config = useSelector((state: iConfig) => state.config);
+
     const content = <>
         <CardHistorySettings />
-        <CardsHistorySensor />
+        {config.history.period > 0 && <CardsHistorySensor />}
     </>;
 
     return <TwoColumns header={[i18n.t('weatherHistory')]} 

@@ -22,58 +22,60 @@ export default function CardHistorySettings() {
     return <Card content={<>
         {/* History Repository */}
         <SelectSwitch label={i18n.t('historyRepository')}
-            options={['thingspeak.com']}
-            value={0}
-            onChange={() => {}}
+            options={['--', 'thingspeak.com']}
+            value={config.history.period > 0 ? 1 : 0}
+            onChange={(val) => dispatch(cf.historyPriodChange(val === 0 ? 0 : 60))}
         />
 
-        {/* Update period */}
-        <div className="mt-8">
-            <NumberInput value={config.history.period}
-                min={1}
-                max={999}
-                label={i18n.t('periodMinutes')}
-                onChange={val => dispatch(cf.historyPriodChange(val))}
-                isValid={valid => {
-                    let nv = isValid;
-                    nv[0] = valid;
-                    setIsValid(nv);
-                }}
-            />
-        </div>
+        {config.history.period > 0 && <>
+            {/* Update period */}
+            <div className="mt-8">
+                <NumberInput value={config.history.period}
+                    min={0}
+                    max={999}
+                    label={i18n.t('periodMinutes')}
+                    onChange={val => dispatch(cf.historyPriodChange(val))}
+                    isValid={valid => {
+                        let nv = isValid;
+                        nv[0] = valid;
+                        setIsValid(nv);
+                    }}
+                />
+            </div>
 
-        {/* Channel ID */}
-        <div className="mt-8">
-            <TextInput label="Channel ID" 
-                value={config.history.channelID}
-                maxLength={20}
-                pattern={[new RegExp(config.thingspeakSend.channelID.length ? config.thingspeakSend.channelID : "-"), false]}
-                tip={i18n.t('tips.tip4')}
-                onChange={val => dispatch(cf.historyChannelIDChange(val.target.value))}
-                isValid={(valid: boolean) => {
-                    let nv = isValid;
-                    nv[1] = valid;
-                    setIsValid(nv);
-                }}
-            />
-        </div>
+            {/* Channel ID */}
+            <div className="mt-8">
+                <TextInput label="Channel ID" 
+                    value={config.history.channelID}
+                    maxLength={20}
+                    pattern={[new RegExp(config.thingspeakSend.channelID.length ? config.thingspeakSend.channelID : "-"), false]}
+                    tip={i18n.t('tips.tip4')}
+                    onChange={val => dispatch(cf.historyChannelIDChange(val.target.value))}
+                    isValid={(valid: boolean) => {
+                        let nv = isValid;
+                        nv[1] = valid;
+                        setIsValid(nv);
+                    }}
+                />
+            </div>
 
-        {/* Write API Key */}
-        <div className="mt-8">
-            <TextInput label="Write API Key" 
-                value={config.history.wrkey}
-                maxLength={32}
-                onChange={val => dispatch(cf.historyWrkeyChange(val.target.value))}
-            />
-        </div>
+            {/* Write API Key */}
+            <div className="mt-8">
+                <TextInput label="Write API Key" 
+                    value={config.history.wrkey}
+                    maxLength={32}
+                    onChange={val => dispatch(cf.historyWrkeyChange(val.target.value))}
+                />
+            </div>
 
-        {/* Read API Key */}
-        <div className="mt-8">
-            <TextInput label="Read API Key" 
-                value={config.history.rdkey}
-                maxLength={32}
-                onChange={val => dispatch(cf.historyRdkeyChange(val.target.value))}
-            />
-        </div>
+            {/* Read API Key */}
+            <div className="mt-8">
+                <TextInput label="Read API Key" 
+                    value={config.history.rdkey}
+                    maxLength={32}
+                    onChange={val => dispatch(cf.historyRdkeyChange(val.target.value))}
+                />
+            </div>
+        </>}
     </>} />
 }
