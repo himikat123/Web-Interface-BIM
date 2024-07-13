@@ -3,7 +3,6 @@ import i18n from '../i18n/main';
 import CardAlarm from "../organisms/cardAlarm";
 
 export default function Alarm() {
-    // TODO сворачивать выключенные будильники
     const content = <>
         {[...Array(12)].map((x, i) => <CardAlarm key={i} num={i} />)}
     </>
