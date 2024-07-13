@@ -18,12 +18,12 @@ import { ReactComponent as RubickSVG } from '../atoms/icons/rubick.svg';
 
 // TODO в просмотрщике json файлов сворачивается код каждые 10 секунд
 // TODO добавить спинер загрузки в просмотрщик файлов
-// TODO добавить имя upload файла куда-нибудь и не загружется он в папки 
 export default function Filesystem() {
     const data = useSelector((state: iData) => state.data);
     const [filelist, setFilelist] = useState<iFilelist>([]);
     const [selected, setSelected] = useState<string>('.');
     const [path, setPath] = useState<string>('/');
+    const [upFilename, setUpFilename] = useState<string>('');
     const [fileViewer, setFileViewer] = useState<boolean>(false);
     const [percentage, setPercentage] = useState<string>('');
     const [isDir, setIsDir] = useState<boolean>(true);
@@ -161,8 +161,10 @@ export default function Filesystem() {
     const upload = async() => {
         let formData = new FormData();
         const file = document.querySelector('#file') as HTMLInputElement;
-        formData.append("file", file.files ? file.files[0] : '');
-        formData.append("path", path);
+        if(file.files && file.files[0]) {
+            formData.append("file", file.files[0], path + upFilename);
+            formData.append("path", path);
+        }
     
         const onUploadProgress = (event: any) => {
             const percentage = Math.round((100 * event.loaded) / event.total);
@@ -237,6 +239,7 @@ export default function Filesystem() {
         />}
 
         {/* Upload section */}
+        {upFilename}
         <div className="flex flex-col sm:flex-row w-full flex">
             <label htmlFor="file" className="flex flex-col items-center justify-center mt-4 w-full sm:w-1/2 h-16 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                 <div className="flex items-center justify-center">
@@ -251,7 +254,7 @@ export default function Filesystem() {
                     type="file" 
                     name="upload"
                     className="hidden"
-                    onChange={e => {}}
+                    onChange={e => {setUpFilename(e.currentTarget.files?.item(0)?.name ?? '')}}
                 />
             </label>
             <div className="w-full sm:w-1/2 h-16 mt-4 flex justify-center">
