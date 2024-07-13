@@ -7,9 +7,11 @@ import Card from "../atoms/card";
 import Button from "../atoms/button";
 import hostUrl from "../atoms/hostUrl";
 import { ReactComponent as SpinnerSVG } from '../atoms/icons/spinner.svg';
+import { IsJsonString } from "./modalFileViewer";
+import StepsAnimation from "../atoms/stepsAnimation";
 
 export default function Default() {
-    // TODO добавить спинер загрузки
+    // TODO в просмотрщике json файлов сворачивается код каждые 10 секунд
     const [saveButton, setSaveButton] = useState<string>('resetToFactory');
     const [saveColor, setSaveColor] = useState<string>('blue');
     const [defaultConfig, setDefaultConfig] = useState<object>({});
@@ -64,7 +66,7 @@ export default function Default() {
         fetch('./defaultConfig.json')
         .then(res => res.text())
         .then((result: string) => {
-            setDefaultConfig(JSON.parse(result))
+            if(IsJsonString(result)) setDefaultConfig(JSON.parse(result))
         })
     }, []);
 
@@ -73,18 +75,15 @@ export default function Default() {
     const content = <>
         <Card header={i18n.t('fileContents')}
             content={<div className="max-h-96 overflow-y-scroll">
-                <JsonView data={defaultConfig} shouldExpandNode={(level) => level === 0} style={theme} />
+                {Object.keys(defaultConfig).length === 0
+                    ? <div className="flex justify-center items-center h-24"><StepsAnimation /></div>
+                    : <JsonView data={defaultConfig} shouldExpandNode={level => level === 0} style={theme} />
+                }
             </div>} 
         />
 
         <div className="mt-8 text-center">
-            <Button className={
-                    ('filenameOK' 
-                        ? `bg-${saveColor}-600 hover:bg-${saveColor}-700 text-text_dark` 
-                        : "bg-blue-200 dark:bg-blue-900 text-blue-100 dark:text-blue-600 cursor-not-allowed"
-                    )
-                }
-                disabled={!'filenameOK'}
+            <Button className={`bg-${saveColor}-600 hover:bg-${saveColor}-700 text-text_dark`}
                 label={<div className="flex justify-center">
                     {i18n.t(saveButton)}
                     {saveButton === "saving" && <div className="ms-4 w-6 h-6"><SpinnerSVG /></div>}

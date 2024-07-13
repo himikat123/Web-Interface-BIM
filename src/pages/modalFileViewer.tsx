@@ -5,7 +5,7 @@ import i18n from "../i18n/main";
 import { iModalFileViewer } from "../interfaces";
 import relPath from "../atoms/relPath";
 
-function IsJsonString(str: string) {
+export function IsJsonString(str: string): boolean {
     try {
         JSON.parse(str);
     } catch (e) {
@@ -37,7 +37,7 @@ export default function ModalFileViewer(props: iModalFileViewer) {
                 : (props.selected.split('.')[1] === 'json') 
                 ? <div className="w-full">
                     {fileContent && IsJsonString(fileContent) && 
-                        <JsonView data={JSON.parse(fileContent)} shouldExpandNode={(level) => level === 0} style={theme} />
+                        <JsonView data={JSON.parse(fileContent)} shouldExpandNode={level => level === 0} style={theme} />
                     }    
                 </div>
                 : (props.selected.split('.')[1] === 'html') 
