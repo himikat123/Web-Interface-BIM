@@ -5,6 +5,7 @@ import CardClockNtp from "../organisms/cardClockNtp";
 import CardClockSet from "../organisms/cardClockSet";
 
 export default function Clock() {
+    // TODO не работает 12 часовой формат
     const content = <>
         <CardClockTime />
         <CardClockNtp />

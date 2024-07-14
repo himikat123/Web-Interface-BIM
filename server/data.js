@@ -46,12 +46,6 @@ const data = (cookieCode) => {
         },
         runtime: Math.round(random(3, 3000)),
         time: date,
-        wd: ['Mo', 'Tu', 'We', 'Th'],
-        units: {
-            v: "V",
-            mm: "mm",
-            ms: "m/s"
-        },
         network: {
             ssid: "budulai",
             ch: 14,

@@ -1,3 +1,4 @@
+import i18n from '../../i18n/main';
 import store from '../../redux/store';
 import { printText } from "./primitives";
 import { validateWindSpeed } from "../validateValues";
@@ -10,7 +11,7 @@ export default function lcdShowWindSpeed(ctx: CanvasRenderingContext2D,
     if(speed !== prevSpeed) {
         const model = store.getState().config.display.model[0];
         const dispModel = (model === 0 || model === 1) ? 0 : 1;
-        const units = store.getState().data.units.ms;
+        const units = i18n.t('units.mps');
         const x = dispModel ? 95 : 125;
         let spd = validateWindSpeed(speed) ? String(Math.round(speed)) : '--';
         spd += units;

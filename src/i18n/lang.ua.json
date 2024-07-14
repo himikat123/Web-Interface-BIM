@@ -329,5 +329,6 @@
     "hysteresis": "Гістерезис",
     "soundNotification": "Звукове сповіщення",
     "receivedData": "Прийняті дані",
-    "unsupportedFormat": "Непідтримуваний формат"
+    "unsupportedFormat": "Непідтримуваний формат",
+    "weekday": ["Нд", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"]
 }

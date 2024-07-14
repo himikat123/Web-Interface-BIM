@@ -1,8 +1,10 @@
+import i18n from '../../i18n/main';
 import store from '../../redux/store';
 import { printText, drawScaledImage } from "./primitives";
 import * as icons from '../img/icons';
 import { iPrevForecast } from "../../interfaces";
 import * as vl from "../validateValues";
+import getWeekday from '../getWeekday';
 
 function showTemperature(ctx: CanvasRenderingContext2D, temp: number, 
     x: number, y: number, w: number, font: number, color: string, bgColor: string
@@ -17,8 +19,9 @@ export default function lcdShowForecast(ctx: CanvasRenderingContext2D, num: numb
     const tMin = store.getState().data.weather.daily.tMin[num];
     const wind = store.getState().data.weather.daily.wind[num];
     const icon = store.getState().data.weather.daily.icon[num];
-    const wd = store.getState().data.wd[num];
-    const units = store.getState().data.units.ms;
+    const time = store.getState().data.time;
+    const wd = getWeekday(time + (86400 * num));
+    const units = i18n.t('units.mps');
     const model = store.getState().config.display.model[0];
     const dispModel = (model === 0 || model === 1) ? 0 : 1;
     const x = num * (dispModel === 0 ? 90 : 106);

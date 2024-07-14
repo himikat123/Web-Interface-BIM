@@ -1,3 +1,4 @@
+import i18n from '../../i18n/main';
 import store from '../../redux/store';
 import { printText } from "./primitives";
 import { validatePressure } from "../validateValues";
@@ -11,7 +12,7 @@ export default function lcdShowPressure(ctx: CanvasRenderingContext2D,
     if(pres !== prevPres) {
         const model = store.getState().config.display.model[0];
         const dispModel = (model === 0 || model === 1) ? 0 : 1;
-        const units = store.getState().data.units.mm;
+        const units = i18n.t('units.mm');
         let p = validatePressure(pres) ? String(Math.round(pres * 0.75)) : '--';
         p += units;
         const x = dispModel ? 250 : 286; 

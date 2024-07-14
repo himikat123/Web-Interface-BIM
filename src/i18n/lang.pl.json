@@ -329,5 +329,6 @@
     "hysteresis": "Histereza",
     "soundNotification": "Powiadomienie dźwiękowe",
     "receivedData": "Otrzymane dane",
-    "unsupportedFormat": "Format nie jest obsługiwany"
+    "unsupportedFormat": "Format nie jest obsługiwany",
+    "weekday": ["Nd", "Pn", "Wt", "Śr", "Cz", "Pi", "So"]
 }

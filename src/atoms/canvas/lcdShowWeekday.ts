@@ -1,10 +1,11 @@
 import store from '../../redux/store';
 import { printText } from "./primitives";
+import getWeekday from '../getWeekday';
 
 export default function lcdShowWeekday(ctx: CanvasRenderingContext2D,
     prevWeekDay: string, color: string, bgColor: string
 ): string {
-    const weekDay = store.getState().data.wd[0];
+    const weekDay = getWeekday(store.getState().data.time);
 
     if(weekDay !== prevWeekDay) {
         const model = store.getState().config.display.model[0];

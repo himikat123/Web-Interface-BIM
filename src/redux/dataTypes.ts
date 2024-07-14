@@ -10,12 +10,6 @@ export interface iData {
         },
         runtime: number,
         time: number,
-        wd: [string],
-        units: {
-            v: string,
-            mm: string,
-            ms: string
-        },
         network: {
             ssid: string,
             ch: number,

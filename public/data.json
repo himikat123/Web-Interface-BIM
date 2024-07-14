@@ -6,17 +6,6 @@
    },
    "runtime":2289,
    "time":1717532251,
-   "wd":[
-      "Mo",
-      "Tu",
-      "We",
-      "Th"
-   ],
-   "units":{
-      "v":"V",
-      "mm":"mm",
-      "ms":"m/s"
-   },
    "network":{
       "ssid":"budulai",
       "ch":14,

@@ -329,5 +329,6 @@
     "hysteresis": "Hysteresis",
     "soundNotification": "Sound notification",
     "receivedData": "Received data",
-    "unsupportedFormat": "Unsupported format"
+    "unsupportedFormat": "Unsupported format",
+    "weekday": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
 }
