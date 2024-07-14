@@ -1,11 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const app = express();
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const data = require('./data');
 
+const app = express();
 app.use(bodyParser.text({ type: "*/*" }));
 
 const corsConf = {
@@ -57,7 +57,7 @@ app.post("/esp/defaultConfig", (req, res) => {
 app.get('/data.json', (req, res) => {
     setTimeout(() => {
         res.set('Access-Control-Allow-Origin', '*');
-        res.send(JSON.stringify(data()));
+        res.send(JSON.stringify(data(req.query.code)));
     }, 2000);
 });
 
@@ -146,11 +146,27 @@ app.post('/esp/fwUpdate', (req, res) => {
     res.send("OK");
 });
 
-app.get('/esp/login', (req, res) => {
-    console.log('GET /esp/login', req.query);
-    res.set('Access-Control-Allow-Origin', '*');
-    res.send("OK");
-    //res.send("error");
+app.post('/esp/login', (req, res) => {
+    const nm = req.body.match(/"name"\r\n\r\n(.+)/);
+    const name = nm ? nm[1] : null;
+    const ps = req.body.match(/"pass"\r\n\r\n(.+)/);
+    const pass = ps ? ps[1] : null;
+    console.log('POST /esp/login:', 'username =', name, '| password =', pass);
+    setTimeout(() => {
+        const userFile = path.join(__dirname, '..', 'public', 'user.us');
+        const configFile = path.join(__dirname, '..', 'public', 'config.json');
+        const codeFile = path.join(__dirname, '..', 'public', 'code.txt');
+        const user = JSON.parse(fs.readFileSync(userFile));
+        const config = JSON.parse(fs.readFileSync(configFile));
+        res.set('Access-Control-Allow-Origin', '*');
+        if(config.account.name === name && user.pass === pass) {
+            const code = Math.round(Math.random() * 10000000000);
+            fs.unlinkSync(codeFile);
+            fs.writeFileSync(codeFile, String(code));
+            res.send(`OK:${code}`);
+        }
+        else res.send("error:1");
+    }, 1000);
 });
 
 app.get('/esp/volume', (req, res) => {

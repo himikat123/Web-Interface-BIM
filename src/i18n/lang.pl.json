@@ -267,6 +267,7 @@
     "weatherMonitor": "Monitor pogody",
     "login": "Zaloguj",
     "wrongLoginOrPassword": "Nieprawidłowa nazwa użytkownika lub hasło",
+    "loginToSettings": "Przejdź do ustawień. Czekać...",
     "sensorMetric": "Metryka czujnika",
     "sensorName": "Nazwa czujnika",
     "sequence": "Sekwencja",

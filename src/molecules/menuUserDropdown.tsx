@@ -53,6 +53,7 @@ export default function MenuUserDropdown(props: iMenuUserDropdown) {
                 current={props.current} 
                 title={i18n.t('logout')} 
                 valid={true} 
+                onClick={() => localStorage.setItem('code', '0')}
             />
         </DropdownBox>
     </div>

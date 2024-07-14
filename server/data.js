@@ -32,12 +32,14 @@ const filelist = () => {
 
 const mainIcons = [0, 1, 2, 4, 9, 10, 11, 13, 50];
 
-const data = () => {
+const data = (cookieCode) => {
     const dt = new Date();
     const date = Math.floor(dt / 1000) - dt.getTimezoneOffset() * 60;
+    const codeFile = path.join(__dirname, '..', 'public', 'code.txt');
+    const code = fs.readFileSync(codeFile, 'utf8');
 
     obj = {
-        state: "OK", // or "LOGIN",
+        state: cookieCode === code ? "OK" : "LOGIN",
         fw: "v300.4",
         esp32: {
             temp: random(50, 60)

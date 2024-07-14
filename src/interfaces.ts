@@ -21,7 +21,8 @@ export interface iMenuUserItem {
     link: string,
     current: string,
     title: string | React.ReactNode,
-    valid: boolean
+    valid: boolean,
+    onClick?(): void
 }
 
 export interface iMenuUserDropdown {
@@ -83,7 +84,8 @@ export interface iTextInput {
     className?: string,
     onChange?(e: React.ChangeEvent<HTMLInputElement>): void,
     isValid?(v: boolean): void,
-    children?: React.ReactNode | undefined
+    children?: React.ReactNode | undefined,
+    autoFocus?: boolean
 }
 
 export interface iNumberInput {

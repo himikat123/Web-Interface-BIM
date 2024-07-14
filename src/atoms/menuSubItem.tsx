@@ -15,6 +15,7 @@ export default function MenuSubItem(props: iMenuUserItem) {
         } 
         role="menuitem" 
         tabIndex={-1} 
+        onClick={() => props.onClick ? props.onClick() : null}
     >
         {props.title}
     </Link>

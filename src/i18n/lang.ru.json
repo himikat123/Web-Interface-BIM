@@ -267,6 +267,7 @@
     "weatherMonitor": "Монитор погоды",
     "login": "Вход",
     "wrongLoginOrPassword": "Неверное имя пользователя или пароль",
+    "loginToSettings": "Вход в настройки. Подождите...",
     "sensorMetric": "Метрика датчика",
     "sensorName": "Название датчика",
     "sequence": "Очерёдность",

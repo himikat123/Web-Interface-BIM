@@ -267,6 +267,7 @@
     "weatherMonitor": "Weather monitor",
     "login": "Login",
     "wrongLoginOrPassword": "Wrong username or password",
+    "loginToSettings": "Login to settings. Wait...",
     "sensorMetric": "Sensor metric",
     "sensorName": "Sensor name",
     "sequence": "Sequence",

@@ -64,6 +64,7 @@ export default function TextInput(props: iTextInput) {
                 maxLength={props.maxLength} 
                 onChange={props.onChange} 
                 readOnly={props.readonly}
+                autoFocus={props.autoFocus ?? false}
             />
             {props.children}
         </div>

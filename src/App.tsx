@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import axios from 'axios';
-import { Route, Routes, useLocation } from "react-router-dom"
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux';
 import hostUrl from './atoms/hostUrl';
 import Loading from './pages/loading';
@@ -29,6 +29,7 @@ import Default from './pages/default';
 import Filesystem from './pages/filesystem';
 import Username from './pages/username';
 import Password from './pages/password';
+import Login from './pages/login';
 import { changeLanguage } from './i18n/main';
 import { iConfig } from './redux/configTypes';
 import { iData } from './redux/dataTypes';
@@ -44,9 +45,10 @@ function App() {
     const updateData = useSelector((stateData: iData) => stateData.data.updateData);
     const location = useLocation();
     const path = location.pathname;
+    const navigate = useNavigate();
 
     useEffect(() => {
-        axios("./config.json")
+        axios('./config.json')
         .then(res => {
             dispatch(configStateChange('ok'));
             dispatch(setConfigState(res.data));
@@ -63,13 +65,15 @@ function App() {
         let dataFetchInterval: NodeJS.Timeout;
 
         function fetchData() {
-            axios(`${hostUrl()}/data.json`) /* from server */
+            axios(`${hostUrl()}/data.json?code=${localStorage.getItem('code') || '0'}`) /* from server */
             //axios(`./data.json`) /* from file */
             .then((res) => {
                 dispatch(dataStateChange('ok'));
                 dispatch(setDataState(res.data));
                 dispatch(dataFetchingChange(false));
                 dispatch(updateDataChange(false));
+                if(res.data.state === 'OK') if(path === relPath() + '/login') navigate('/');
+                if(res.data.state === 'LOGIN') if(path !== relPath() + '/login') navigate('/login');
             })
             .catch(err => {
                 dispatch(dataStateChange('error'));
@@ -91,7 +95,7 @@ function App() {
         }
 
         return () => clearInterval(dataFetchInterval);
-    }, [configState, dispatch, dataFetching, updateData, path]);
+    }, [configState, dispatch, dataFetching, updateData, path, navigate]);
 
     return (
         <div className={"bg-page_light dark:bg-page_dark text-text_light dark:text-text_dark min-h-screen"}>
@@ -122,6 +126,7 @@ function App() {
                 <Route path={relPath() + '/filesystem'}     element={ <Filesystem /> }>        </Route> 
                 <Route path={relPath() + '/username'}       element={ <Username /> }>          </Route>
                 <Route path={relPath() + '/userpass'}       element={ <Password /> }>          </Route>
+                <Route path={relPath() + '/login'}          element={ <Login />}>              </Route>
                 <Route path={relPath() + '/*'}              element={ <PageNotFound /> }>      </Route>
             </Routes>}
         </div>
