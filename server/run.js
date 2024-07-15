@@ -38,9 +38,10 @@ app.post("/esp/saveConfig", (req, res) => {
 });
 
 app.post("/esp/defaultConfig", (req, res) => {
-    console.log('POST /esp/defaultConfig', req.query);
     res.set('Access-Control-Allow-Origin', '*');
-    let data = req.body.replace('config:', '');
+    const dt = req.body.match(/"config"\r\n\r\n(.+)/);
+    const data = dt ? dt[1] : null;
+    console.log('POST /esp/defaultConfig', data);
     setTimeout(() => {
         if(data == 'default') {
             const defaultConfigFile = path.join(__dirname, '..', 'public', 'defaultConfig.json');
@@ -104,11 +105,17 @@ app.get('/esp/syncdialog', (req, res) => {
 });
 
 app.post('/esp/changePass', (req, res) => {
-    console.log('POST /esp/changePass', req.body);
+    console.log('POST /esp/changePass');
     res.set('Access-Control-Allow-Origin', '*');
-    const pass = req.body.split('&');
-    const oldPass = pass[0].split('=')[1];
-    const newPass = pass[1].split('=')[1];
+    const op = req.body.match(/"oldPass"\r\n\r\n(.+)/);
+    const np = req.body.match(/"newPass"\r\n\r\n(.+)/);
+    const cd = req.body.match(/"code"\r\n\r\n(.+)/);
+    const oldPass = op ? op[1] : null;
+    const newPass = np ? np[1] : null;
+    const code = cd ? cd[1] : null;
+    console.log('old pass:', oldPass);
+    console.log('new pass:', newPass);
+    console.log('code:', code);
     const userFile = path.join(__dirname, '..', 'public', 'user.us');
     const user = JSON.parse(fs.readFileSync(userFile));
     setTimeout(() => {

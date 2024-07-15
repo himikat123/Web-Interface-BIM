@@ -48,7 +48,7 @@ function App() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios('./config.json')
+        axios(`./config.json?code=${localStorage.getItem('code') || '0'}`)
         .then(res => {
             dispatch(configStateChange('ok'));
             dispatch(setConfigState(res.data));
@@ -84,6 +84,7 @@ function App() {
         }
 
         if(configState === 'ok') {
+            fetchData();
             dataFetchInterval = setInterval(() => {
                 dispatch(updateDataChange(true));
             }, 5000);

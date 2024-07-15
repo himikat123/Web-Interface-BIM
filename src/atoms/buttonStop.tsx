@@ -3,7 +3,7 @@ import { StopCircle } from "@phosphor-icons/react";
 
 export default function ButtonStop() {
     const sendStop = () => {
-        let url = `${hostUrl()}/esp/mp3stop`;
+        let url = `${hostUrl()}/esp/mp3stop?code=${localStorage.getItem('code') || '0'}`;
         fetch(url);
     }
 

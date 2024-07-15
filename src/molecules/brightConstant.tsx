@@ -14,6 +14,7 @@ export default function BrightConstant(props: iDisplay) {
         let url = `${hostUrl()}/esp/bright`;
         url += `?bright=${String(bright)}`;
         url += `&num=${props.num}`;
+        url += `&code=${localStorage.getItem('code') || '0'}`;
         fetch(url);
     }
 

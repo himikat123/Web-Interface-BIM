@@ -28,6 +28,7 @@ export default function FooterButtons(props: iFooterButtons) {
             if(props.passChange) {
                 data.append("oldPass", props.passChange.old);
                 data.append("newPass", props.passChange.new);
+                data.append("code", localStorage.getItem('code') || '0');
             }
             else data.append("config", JSON.stringify(config).replace('"configState":"ok",', ''));
             try {

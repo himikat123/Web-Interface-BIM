@@ -19,7 +19,7 @@ export default function ModalFileViewer(props: iModalFileViewer) {
     const theme = window.document.documentElement.classList[0] === 'dark' ? darkStyles : defaultStyles;
 
     useEffect(() => {
-        fetch(relPath() + props.path + props.selected)
+        fetch(`${relPath()}${props.path}${props.selected}?code=${localStorage.getItem('code') || '0'}`)
         .then(res => res.text())
         .then((result: string) => {
             setFileContent(result)

@@ -24,6 +24,7 @@ export default function CardAlarm(props: iAlarm) {
     const sendPlay = (track: number) => {
         let url = `${hostUrl()}/esp/mp3play`;
         url += `?folder=2&track=${track}`;
+        url += `&code=${localStorage.getItem('code') || '0'}`;
         fetch(url);
     }
 

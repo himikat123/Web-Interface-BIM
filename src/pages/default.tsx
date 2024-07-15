@@ -17,21 +17,22 @@ export default function Default() {
     const [defaultConfig, setDefaultConfig] = useState<object>({});
     const timeout = useRef<ReturnType<typeof setInterval> | null>(null);
 
-    const restore = () => {
+    const restore = async() => {
         if(saveButton === 'resetToFactory') {
             clearTimeout(timeout.current ?? undefined);
             setSaveColor('yellow');
             setSaveButton('saving');
+
+            let data = new FormData();
+            data.append("config", "default");
+            data.append("code", localStorage.getItem('code') || '0');
             
-            fetch(`${hostUrl()}/esp/defaultConfig`, { 
-                method: 'post',
-                headers: {
-                    'Content-Type': 'text/plain'
-                },
-                body: 'config:default' 
-            })
-            .then(res => res.text())
-            .then((result) => {
+            try {
+                const response = await fetch(`${hostUrl()}/esp/defaultConfig`, {
+                    method: "POST",
+                    body: data
+                });
+                const result = await response.text();
                 if(result === 'OK') {
                     setSaveColor('green');
                     setSaveButton('saved');
@@ -42,12 +43,12 @@ export default function Default() {
                     setSaveButton('notSaved');
                     console.error(result);
                 }
-            }, 
-            (error) => {
+            } 
+            catch (error) {
                 setSaveColor('red');
                 setSaveButton('notSaved');
                 console.error(error);
-            })
+            }
         }
     }
 
@@ -63,7 +64,7 @@ export default function Default() {
     }, [saveButton]);
 
     useEffect(() => {
-        fetch('./defaultConfig.json')
+        fetch(`./defaultConfig.json?code=${localStorage.getItem('code') || '0'}`)
         .then(res => res.text())
         .then((result: string) => {
             if(IsJsonString(result)) setDefaultConfig(JSON.parse(result))

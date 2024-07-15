@@ -29,7 +29,7 @@ export default function CardClockSet() {
         setReceive(''); 
         
         // send NTP sync command to the host
-        fetch(`${hostUrl()}/esp/syncClock?ntp=1`);
+        fetch(`${hostUrl()}/esp/syncClock?ntp=1&code=${localStorage.getItem('code') || '0'}`);
 
         /*
         * checking the status of synchronization with NTP
@@ -42,19 +42,19 @@ export default function CardClockSet() {
             if(sync > 10){
                 setSpinnerNTP(false);
                 setReceive(i18n.t('ntpSyncError')); 
-                
+
                 clearInterval(syncdialog);
             }
 
             // requesting synchronization status
-            fetch(`${hostUrl()}/esp/syncdialog`)
+            fetch(`${hostUrl()}/esp/syncdialog&code=${localStorage.getItem('code') || '0'}`)
             .then(response => response.text())
             .then(result => {
                 if(result === '.') setSend(send + '.' );
                 else {
                     setSpinnerNTP(false);
                     setReceive(i18n.t('synchronized') + ' ' + result); 
-                    
+
                     clearInterval(syncdialog);
                 }
             });
@@ -69,9 +69,9 @@ export default function CardClockSet() {
         // show spinner and current time
         setSpinnerPC(true);
         setSend(moment().format("HH:mm:ss DD.MM.YYYY")); 
-        
+
         // send browser time to host 
-        fetch(`${hostUrl()}/esp/syncClock?y=${moment().year()}&m=${moment().month()+1}&d=${moment().date()}&h=${moment().hours()}&i=${moment().minutes()}&s=${moment().seconds()}`)
+        fetch(`${hostUrl()}/esp/syncClock?y=${moment().year()}&m=${moment().month()+1}&d=${moment().date()}&h=${moment().hours()}&i=${moment().minutes()}&s=${moment().seconds()}&code=${localStorage.getItem('code') || '0'}`)
         .then(response => response.text())
         .then(result => {
             setReceive(result); 
@@ -89,7 +89,7 @@ export default function CardClockSet() {
         setSend(moment(manualDateTime).format("HH:mm:ss DD.MM.YYYY"));
 
         // send desired time to host 
-        fetch(`${hostUrl()}/esp/syncClock?y=${moment(manualDateTime).year()}&m=${moment(manualDateTime).month()+1}&d=${moment(manualDateTime).date()}&h=${moment(manualDateTime).hours()}&i=${moment(manualDateTime).minutes()}&s=${moment(manualDateTime).seconds()}`)
+        fetch(`${hostUrl()}/esp/syncClock?y=${moment(manualDateTime).year()}&m=${moment(manualDateTime).month()+1}&d=${moment(manualDateTime).date()}&h=${moment(manualDateTime).hours()}&i=${moment(manualDateTime).minutes()}&s=${moment(manualDateTime).seconds()}&code=${localStorage.getItem('code') || '0'}`)
         .then(response => response.text())
         .then(result => {
             setReceive(result); 

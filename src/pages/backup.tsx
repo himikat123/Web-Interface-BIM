@@ -26,21 +26,21 @@ export default function Backup() {
         fileReader.readAsText(event.target.files[0]);
     }
 
-    const restore = () => {
+    const restore = async() => {
         if(saveButton === 'restore') {
             clearTimeout(timeout.current ?? undefined);
             setSaveColor('yellow');
             setSaveButton('saving');
-            
-            fetch(`${hostUrl()}/esp/saveConfig`, { 
-                method: 'post',
-                headers: {
-                    'Content-Type': 'text/plain'
-                },
-                body: 'config:' + file 
-            })
-            .then(res => res.text())
-            .then((result) => {
+
+            let data = new FormData();
+            data.append("config", file);
+            data.append("code", localStorage.getItem('code') || '0');
+            try {
+                const response = await fetch(`${hostUrl()}/esp/saveConfig`, {
+                    method: "POST",
+                    body: data
+                });
+                const result = await response.text();
                 if(result === 'OK') {
                     setSaveColor('green');
                     setSaveButton('saved');
@@ -51,12 +51,12 @@ export default function Backup() {
                     setSaveButton('notSaved');
                     console.error(result);
                 }
-            }, 
-            (error) => {
+            } 
+            catch (error) {
                 setSaveColor('red');
                 setSaveButton('notSaved');
                 console.error(error);
-            })
+            }
         }
     }
 

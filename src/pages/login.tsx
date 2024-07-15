@@ -23,6 +23,7 @@ export default function Login() {
         let data = new FormData();
         data.append("name", username);
         data.append("pass", sha512_224(password));
+        data.append("code", localStorage.getItem('code') || '0');
 
         try {
             const response = await fetch(`${hostUrl()}/esp/login`, {

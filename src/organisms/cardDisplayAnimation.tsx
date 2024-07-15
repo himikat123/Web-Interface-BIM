@@ -32,6 +32,7 @@ export default function CardDisplayAnimation(props: iDisplay) {
         let url = `${hostUrl()}/esp/animation`;
         url += `?type=${val}`;
         url += `&num=${props.num}`;
+        url += `&code=${localStorage.getItem('code') || '0'}`;
         fetch(url);
     }
 
@@ -39,6 +40,7 @@ export default function CardDisplayAnimation(props: iDisplay) {
         let url = `${hostUrl()}/esp/animation`;
         url += `?speed=${val}`;
         url += `&num=${props.num}`;
+        url += `&code=${localStorage.getItem('code') || '0'}`;
         fetch(url);
     }
 
@@ -46,6 +48,7 @@ export default function CardDisplayAnimation(props: iDisplay) {
         let url = `${hostUrl()}/esp/animation`;
         url += `?points=${val}`;
         url += `&num=${props.num}`;
+        url += `&code=${localStorage.getItem('code') || '0'}`;
         fetch(url);
     }
 

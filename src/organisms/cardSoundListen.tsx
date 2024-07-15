@@ -27,12 +27,14 @@ export default function CardSoundListen() {
     const sendPlayHourly = () => {
         let url = `${hostUrl()}/esp/mp3play`;
         url += `?folder=1&track=${String(hourly)}`;
+        url += `&code=${localStorage.getItem('code') || '0'}`;
         fetch(url);
     }
 
     const sendPlayMelody = () => {
         let url = `${hostUrl()}/esp/mp3play`;
         url += `?folder=2&track=${String(melody)}`;
+        url += `&code=${localStorage.getItem('code') || '0'}`;
         fetch(url);
     }
 

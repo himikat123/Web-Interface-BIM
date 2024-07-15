@@ -93,6 +93,7 @@ export default function CardDisplayType(props: iDisplay) {
         url += `?min=${config.display.brightness.min[props.num]}`;
         url += `&max=${config.display.brightness.max[props.num]}`;
         url += `&num=${props.num}`;
+        url += `&code=${localStorage.getItem('code') || '0'}`;
         fetch(url);
     }
 

@@ -5,7 +5,7 @@ import { iModalRestart } from "../interfaces";
 
 export default function ModalRestart(props: iModalRestart) {
     const handleRestart = () => {
-        fetch(`${hostUrl()}/esp/restart`);
+        fetch(`${hostUrl()}/esp/restart?code=${localStorage.getItem('code') || '0'}`);
     }
 
     return <Modal header={i18n.t('confirmation')}

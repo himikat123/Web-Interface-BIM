@@ -13,6 +13,7 @@ export default function CardSoundVolume() {
     const sendVolume = (vol: number) => {
         let url = `${hostUrl()}/esp/volume`;
         url += `?vol=${String(vol)}`;
+        url += `&code=${localStorage.getItem('code') || '0'}`;
         fetch(url);
     }
 

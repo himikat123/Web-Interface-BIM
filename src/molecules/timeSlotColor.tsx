@@ -15,6 +15,7 @@ export default function TimeSlotColor(props: iDisplayTimeSlot) {
         url += `?hex=${val.replace('#', '')}`;
         url += `&slot=${props.slot}`;
         url += `&num=${props.num}`;
+        url += `code=${localStorage.getItem('code') || '0'}`;
         fetch(url);
     }
 

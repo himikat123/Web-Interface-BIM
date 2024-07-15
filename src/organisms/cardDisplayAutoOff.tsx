@@ -31,7 +31,7 @@ export default function CardDisplayAutoOff(props: iDisplay) {
             <div className="text-center">
                 <Button className="bg-green-600 hover:bg-green-700 text-text_dark"
                     label={i18n.t('turnOnOffNow')}
-                    onClick={() => fetch(`${hostUrl()}/esp/dispToggle?num=${props.num}`)}
+                    onClick={() => fetch(`${hostUrl()}/esp/dispToggle?num=${props.num}&code=${localStorage.getItem('code') || '0'}`)}
                 />
             </div>
 

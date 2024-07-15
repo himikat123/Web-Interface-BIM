@@ -69,7 +69,7 @@ export default function Filesystem() {
             axios({ 
                 method: 'post',
                 url: `${hostUrl()}/esp/rename`,
-                data: `old=${path + renaming}&new=${path + newName}`
+                data: `old=${path + renaming}&new=${path + newName}&code=${localStorage.getItem('code') || '0'}`
             });
         }
         setRenaming('');
@@ -91,7 +91,7 @@ export default function Filesystem() {
                     axios({
                         method: 'post',
                         url: `${hostUrl()}/esp/delete`,
-                        data: `file=${path + selected}`
+                        data: `file=${path + selected}?code=${localStorage.getItem('code') || '0'}`
                     });
                 }
             }
@@ -164,6 +164,7 @@ export default function Filesystem() {
         if(file.files && file.files[0]) {
             formData.append("file", file.files[0], path + upFilename);
             formData.append("path", path);
+            formData.append("code", localStorage.getItem('code') || '0');
         }
     
         const onUploadProgress = (event: any) => {
@@ -331,7 +332,13 @@ export default function Filesystem() {
                     onClick={() => setSelected(file.name)}
                     onDoubleClick={() => fileOpen(file)}
                 >
-                    <a id={path + file.name} href={path + file.name} download className="hidden">{file.name}</a>
+                    <a id={path + file.name} 
+                        href={`${path}${file.name}?code=${localStorage.getItem('code') || '0'}`} 
+                        download 
+                        className="hidden"
+                    >
+                        {file.name}
+                    </a>
                     
                     <div className="my-1 flex">
                         <div className="w-6 h-6 me-2">

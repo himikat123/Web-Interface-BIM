@@ -19,6 +19,7 @@ export default function CardSoundEqualizer() {
         dispatch(cf.soundEqChange(eq));
         let url = `${hostUrl()}/esp/equalizer`;
         url += `?eq=${String(eq)}`;
+        url += `&code=${localStorage.getItem('code') || '0'}`;
         fetch(url);
     }
 
