@@ -9,7 +9,9 @@ export default function SelectSwitch(props: iSelectSwitch) {
             onChange={(event: React.ChangeEvent<HTMLSelectElement>) => props.onChange(Number(event.target.value))}
         >
             {props.options.map((option: string, i: number) => 
-                <option key={option} value={i}>{option}</option>
+                <option key={option} value={i} disabled={props.disabled ? props.disabled[i] : false}>
+                    {option}
+                </option>
             )}
         </select>
 

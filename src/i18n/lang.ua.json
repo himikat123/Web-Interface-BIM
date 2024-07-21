@@ -330,5 +330,21 @@
     "soundNotification": "Звукове сповіщення",
     "receivedData": "Прийняті дані",
     "unsupportedFormat": "Непідтримуваний формат",
-    "weekday": ["Нд", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"]
+    "weekday": ["Нд", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+    "clearSky": "Ясно",
+    "mainlyClear": "Переважно ясно",
+    "partlyCloudy": "Мінлива хмарність",
+    "overcast":	"Хмарно",
+    "fog": "Туман",
+    "deposRimeFog": "Туман з інеєм",
+    "drizzle": "Мряка",
+    "freezingDrizzle": "Ізморозь",
+    "rain": "Дощ",
+    "freezingRain": "Крижаний дощ",
+    "snowFall": "Снігопад",
+    "snowGrains": "Снігові зерна",
+    "rainShowers": "Злива",
+    "snowShowers": "Сильний снігопад",
+    "thunderstorm": "Гроза",
+    "thunderstormWithHail": "Гроза з градом"
 }

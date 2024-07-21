@@ -48,8 +48,9 @@ export default function NumberInput(props: iNumberInput) {
                 value={props.value ?? 0}
                 min={props.min}
                 max={props.max} 
-            
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => props.onChange(Math.round(Number(e.target.value)))} 
+                step={props.step ?? 1}
+
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => props.onChange(Number(e.target.value))} 
                 readOnly={props.readonly}
             />
             {props.children}

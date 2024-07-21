@@ -59,6 +59,7 @@ export interface iColumnsTemplate {
 export interface iSelectSwitch {
     label: string | React.ReactNode,
     options: Array<string>,
+    disabled?: Array<boolean>,
     value: number,
     onChange(i: number): void
 }
@@ -92,6 +93,7 @@ export interface iNumberInput {
     value: number,
     min: number,
     max: number,
+    step?: number,
     readonly?: boolean,
     className?: string,
     label: string | React.ReactNode,
@@ -221,7 +223,17 @@ export interface iWeather {
         country_code: string,
         lat: number,
         lon: number
-    }]
+    }],
+    current: {
+        relative_humidity_2m: number,
+        surface_pressure: number,
+        temperature_2m: number,
+        weather_code: number,
+        wind_direction_10m: number,
+        wind_speed_10m: number
+    },
+    latitude: number,
+    longitude: number
 }
 
 export interface iIndication {

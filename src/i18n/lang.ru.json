@@ -330,5 +330,21 @@
     "soundNotification": "Звуковое оповещение",
     "receivedData": "Принятые данные",
     "unsupportedFormat": "Неподдерживаемый формат",
-    "weekday": ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"]
+    "weekday": ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+    "clearSky": "Ясно",
+    "mainlyClear": "Преимущественно ясно",
+    "partlyCloudy": "Переменная облачность",
+    "overcast":	"Пасмурно",
+    "fog": "Туман",
+    "deposRimeFog": "Туман с инеем",
+    "drizzle": "Морось",
+    "freezingDrizzle": "Изморозь",
+    "rain": "Дождь",
+    "freezingRain": "Ледяной дождь",
+    "snowFall": "Снегопад",
+    "snowGrains": "Снежные зерна",
+    "rainShowers": "Ливень",
+    "snowShowers": "Сильный снегопад",
+    "thunderstorm": "Гроза",
+    "thunderstormWithHail": "Гроза с градом"
 }

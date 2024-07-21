@@ -23,6 +23,28 @@ export default function WeatherChecker() {
 
     const config = useSelector((state: iConfig) => state.config);
 
+    const openMeteoCode = (code: number) => {
+        switch(code) {
+            case 0: return i18n.t('clearSky');
+            case 1: return i18n.t('mainlyClear');
+            case 2: return i18n.t('partlyCloudy');
+            case 3:	return i18n.t('overcast');
+            case 45: return i18n.t('fog');
+            case 48: return i18n.t('deposRimeFog');
+            case 51: case 53: case 55: return i18n.t('drizzle');
+            case 56: case 57: return i18n.t('freezingDrizzle');
+            case 61: case 63: case 65: return i18n.t('rain');
+            case 66: case 67: return i18n.t('freezingRain');
+            case 71: case 73: case 75: return i18n.t('snowFall');
+            case 77: return i18n.t('snowGrains');
+            case 80: case 81: case 82: return i18n.t('rainShowers');
+            case 85: case 86: return i18n.t('snowShowers');
+            case 95: return i18n.t('thunderstorm');
+            case 96: case 99: return i18n.t('thunderstormWithHail');
+            default: return "---";
+        }
+    }
+
     const weatherCheck = () => {
         setLoading(true);
         let current = '', citysearch = '';
@@ -45,6 +67,15 @@ export default function WeatherChecker() {
             if(config.weather.citysearch === 2) citysearch = `&lat=${config.weather.lat}&lon=${config.weather.lon}`;
             current += `${citysearch}`;
             current += `&lang=${config.lang}`;
+        }
+
+        // from open-meteo.com
+        if(config.weather.provider === 2) {
+            current = 'https://api.open-meteo.com/v1/forecast';
+            current += `?latitude=${config.weather.lat}`;
+            current += `&longitude=${config.weather.lon}`;
+            current += '&current=temperature_2m,relative_humidity_2m,surface_pressure,wind_speed_10m,wind_direction_10m,weather_code';
+            current += '&wind_speed_unit=ms&timeformat=unixtime';
         }
         console.log(current);
         fetch(current).then((response) => {
@@ -77,6 +108,18 @@ export default function WeatherChecker() {
                     setCity(json.data[0].city_name + ', ' + json.data[0].country_code);
                     setLat(String(json.data[0].lat));
                     setLon(String(json.data[0].lon));
+                }
+                // get data from open-meteo.com
+                if(config.weather.provider === 2) {
+                    setWeatherColor('text-blue-700 dark:text-blue-400');
+                    setTemp(String(json.current.temperature_2m) + "°C");
+                    setHum(String(Math.round(json.current.relative_humidity_2m)) + "%");
+                    setPres(String(Math.round(json.current.surface_pressure * 0.75)) + i18n.t('units.mm'));
+                    setWind((json.current.wind_speed_10m).toFixed(1) + i18n.t('units.mps'));
+                    setWindDir(json.current.wind_direction_10m);
+                    setDescript(openMeteoCode(json.current.weather_code));
+                    setLat(String(json.latitude));
+                    setLon(String(json.longitude));
                 }
             }
             catch(e) {
@@ -119,10 +162,10 @@ export default function WeatherChecker() {
                         </div> : null}
                     </td>
                 </tr>
-                <tr>
+                {config.weather.provider < 2 && <tr>
                     <td className="text-end">{i18n.t('city')}:</td>
                     <td className={"ps-4 " + weatherColor}>{city}</td>  
-                </tr>
+                </tr>}
                 <tr>
                     <td className="text-end">{i18n.t('latitude')}:</td>
                     <td className={"ps-4 " + weatherColor}>{lat}</td>

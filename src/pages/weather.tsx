@@ -10,20 +10,29 @@ import WeatherChecker from "../molecules/weatherChecker";
 import { iConfig } from "../redux/configTypes";
 import * as cf from "../redux/slices/config";
 import device from "../device";
+import { useEffect, useState } from "react";
 
 export default function Weather() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
+    const [disabled, setDisabled] = useState([false, false, false]);
+
+    useEffect(() => {
+        setDisabled([config.weather.provider > 1, config.weather.provider > 0, false]);
+    }, [config.weather.provider]);
 
     const content = <>
         <Card content={<>
             <SelectSwitch label={i18n.t('weatherForecastSource')}
-                options={['openweathermap.org', 'weatherbit.io']}
+                options={['openweathermap.org', 'weatherbit.io', 'open-meteo.com']}
                 value={config.weather.provider}
-                onChange={val => dispatch(cf.weatherProwiderChange(val))}
+                onChange={val => {
+                    dispatch(cf.weatherProwiderChange(val));
+                    dispatch(cf.weatherCitySearchChange(2));
+                }}
             />
-            
-            <div className="my-8">
+
+            {config.weather.provider < 2 && <div className="my-8">
                 <TextInput label={"API KEY"} 
                     value={config.weather.appid[config.weather.provider]}
                     maxLength={32}
@@ -32,7 +41,7 @@ export default function Weather() {
                         num: config.weather.provider
                     }))}
                 />
-            </div>
+            </div>}
 
             {device() === 'WeatherMonitorBIM' && <div className="my-8">
                 <TextInput label={i18n.t('parsingServer')} 
@@ -46,6 +55,7 @@ export default function Weather() {
         <Card content={<>
             <SelectSwitch label={i18n.t('cityIdentification')}
                 options={[i18n.t('byCityName'), i18n.t('byCityId'), i18n.t('byCoordinates')]}
+                disabled={disabled}
                 value={config.weather.citysearch}
                 onChange={val => dispatch(cf.weatherCitySearchChange(val))}
             />
@@ -67,20 +77,23 @@ export default function Weather() {
                 />
 
                 <div className="my-8" />
-                <Button className="bg-green-600 hover:bg-green-700 text-text_dark"
-                    label={i18n.t('cityIdSearchProgram')}
-                    onClick={() => window.open(
-                        "https://himikat123.github.io/City_ID_Finder/", 
-                        "_blank", 
-                        "noreferrer"
-                    )}
-                />
+                <div className="text-center">
+                    <Button className="bg-green-600 hover:bg-green-700 text-text_dark"
+                        label={i18n.t('cityIdSearchProgram')}
+                        onClick={() => window.open(
+                            "https://himikat123.github.io/City_ID_Finder/", 
+                            "_blank", 
+                            "noreferrer"
+                        )}
+                    />
+                </div>
             </div>}
 
             {config.weather.citysearch === 2 && <div className="my-8">
                 <NumberInput value={config.weather.lat}
                     min={-90}
                     max={90}
+                    step={0.000001}
                     label={i18n.t('latitude')}
                     onChange={val => dispatch(cf.weatherLatChange(val))}
                 />
@@ -89,6 +102,7 @@ export default function Weather() {
                 <NumberInput value={config.weather.lon}
                     min={-180}
                     max={180}
+                    step={0.000001}
                     label={i18n.t('longitude')}
                     onChange={val => dispatch(cf.weatherLonChange(val))}
                 />

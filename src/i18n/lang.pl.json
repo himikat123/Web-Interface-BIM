@@ -330,5 +330,21 @@
     "soundNotification": "Powiadomienie dźwiękowe",
     "receivedData": "Otrzymane dane",
     "unsupportedFormat": "Format nie jest obsługiwany",
-    "weekday": ["Nd", "Pn", "Wt", "Śr", "Cz", "Pi", "So"]
+    "weekday": ["Nd", "Pn", "Wt", "Śr", "Cz", "Pi", "So"],
+    "clearSky": "Czyste Niebo",
+    "mainlyClear": "Głównie jasne",
+    "partlyCloudy": "Częściowe zachmurzenie",
+    "overcast":	"Pochmurny",
+    "fog": "Mgła",
+    "deposRimeFog": "Deponująca się mgła szronowa",
+    "drizzle": "Mżawka",
+    "freezingDrizzle": "Marznąca mżawka",
+    "rain": "Deszcz",
+    "freezingRain": "Marznący deszcz",
+    "snowFall": "Opady śniegu",
+    "snowGrains": "Ziarna śniegu",
+    "rainShowers": "Przelotne opady deszczu",
+    "snowShowers": "Opady śniegu",
+    "thunderstorm": "Burza z piorunami",
+    "thunderstormWithHail": "Burza z gradem"
 }

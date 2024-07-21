@@ -330,5 +330,21 @@
     "soundNotification": "Sound notification",
     "receivedData": "Received data",
     "unsupportedFormat": "Unsupported format",
-    "weekday": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
+    "weekday": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+    "clearSky": "Clear sky",
+    "mainlyClear": "Mainly clear",
+    "partlyCloudy": "Partly cloudy",
+    "overcast":	"Overcast",
+    "fog": "Fog",
+    "deposRimeFog": "Depositing rime fog",
+    "drizzle": "Drizzle",
+    "freezingDrizzle": "Freezing drizzle",
+    "rain": "Rain",
+    "freezingRain": "Freezing rain",
+    "snowFall": "Snowfall",
+    "snowGrains": "Snow grains",
+    "rainShowers": "Rain showers",
+    "snowShowers": "Snow showers",
+    "thunderstorm": "Thunderstorm",
+    "thunderstormWithHail": "Thunderstorm with hail"
 }
