@@ -55,10 +55,29 @@ app.post("/esp/defaultConfig", (req, res) => {
     }, 2000);
 });
 
-app.get('/data.json', (req, res) => {
+app.get('/config.json', (req, res) => {
+    const configFile = path.join(__dirname, '..', 'public', 'config.json');
+    const codeFile = path.join(__dirname, '..', 'public', 'code.txt');
+    const codeUser = req.query.code;
+    const code = JSON.parse(fs.readFileSync(codeFile));
+    const config = JSON.parse(fs.readFileSync(configFile));
+
     setTimeout(() => {
         res.set('Access-Control-Allow-Origin', '*');
-        res.send(JSON.stringify(data(req.query.code)));
+        if(codeUser === code) res.send(JSON.stringify(config));
+        else res.send(`{"lang":"${config.lang}", "state":"LOGIN"}`);
+    }, 2000);
+});
+
+app.get('/data.json', (req, res) => {
+    const codeFile = path.join(__dirname, '..', 'public', 'code.txt');
+    const codeUser = req.query.code;
+    const code = JSON.parse(fs.readFileSync(codeFile));
+
+    setTimeout(() => {
+        res.set('Access-Control-Allow-Origin', '*');
+        if(codeUser === code) res.send(JSON.stringify(data(req.query.code)));
+        else res.send("NOT LOGGED IN");
     }, 2000);
 });
 
