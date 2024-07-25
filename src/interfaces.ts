@@ -226,7 +226,7 @@ export interface iWeather {
     }],
     current: {
         relative_humidity_2m: number,
-        surface_pressure: number,
+        pressure_msl: number,
         temperature_2m: number,
         weather_code: number,
         wind_direction_10m: number,

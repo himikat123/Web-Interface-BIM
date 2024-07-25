@@ -74,13 +74,13 @@ export default function WeatherChecker() {
             current = 'https://api.open-meteo.com/v1/forecast';
             current += `?latitude=${config.weather.lat}`;
             current += `&longitude=${config.weather.lon}`;
-            current += '&current=temperature_2m,relative_humidity_2m,surface_pressure,wind_speed_10m,wind_direction_10m,weather_code';
+            current += '&current=temperature_2m,relative_humidity_2m,pressure_msl,wind_speed_10m,wind_direction_10m,weather_code';
             current += '&wind_speed_unit=ms&timeformat=unixtime';
         }
         console.log(current);
-        fetch(current).then((response) => {
-            return response.json();
-        }).then((json: iWeather) => {
+        fetch(current)
+        .then(response => response.json())
+        .then((json: iWeather) => {
             setLoading(false);
             try {
                 // get data from openweathermap.org
@@ -114,7 +114,7 @@ export default function WeatherChecker() {
                     setWeatherColor('text-blue-700 dark:text-blue-400');
                     setTemp(String(json.current.temperature_2m) + "°C");
                     setHum(String(Math.round(json.current.relative_humidity_2m)) + "%");
-                    setPres(String(Math.round(json.current.surface_pressure * 0.75)) + i18n.t('units.mm'));
+                    setPres(String(Math.round(json.current.pressure_msl * 0.75)) + i18n.t('units.mm'));
                     setWind((json.current.wind_speed_10m).toFixed(1) + i18n.t('units.mps'));
                     setWindDir(json.current.wind_direction_10m);
                     setDescript(openMeteoCode(json.current.weather_code));
@@ -134,7 +134,8 @@ export default function WeatherChecker() {
                 setLat('--');
                 setLon('--');
             }
-        });
+        })
+        .catch(err => console.error(err));
     }
 
     return <>
