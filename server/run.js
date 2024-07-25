@@ -166,12 +166,6 @@ app.post('/esp/delete', (req, res) => {
     res.send("OK");
 });
 
-app.post('/esp/fwUpdate', (req, res) => {
-    console.log('POST /esp/fwUpdate', req.query);
-    res.set('Access-Control-Allow-Origin', '*');
-    res.send("OK");
-});
-
 app.post('/esp/login', (req, res) => {
     const nm = req.body.match(/"name"\r\n\r\n(.+)/);
     const name = nm ? nm[1] : null;
