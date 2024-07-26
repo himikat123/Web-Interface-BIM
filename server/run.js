@@ -73,6 +73,16 @@ app.get('/config.json', (req, res) => {
     }, 2000);
 });
 
+app.get('/defaultConfig.json', (req, res) => {
+    const configFile = path.join(__dirname, '..', 'public', 'defaultConfig.json');
+    const config = JSON.parse(fs.readFileSync(configFile));
+
+    setTimeout(() => {
+        res.set('Access-Control-Allow-Origin', '*');
+        res.send(JSON.stringify(config));
+    }, 2000);
+});
+
 app.get('/data.json', (req, res) => {
     setTimeout(() => {
         res.set('Access-Control-Allow-Origin', '*');

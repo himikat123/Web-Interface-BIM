@@ -48,8 +48,7 @@ function App() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios(`${hostUrl()}/config.json?code=${localStorage.getItem('code') || '0'}`) /* from server */
-        //axios(`./config.json`) /* from file */
+        axios(`${hostUrl()}/config.json?code=${localStorage.getItem('code') || '0'}`)
         .then(res => {
             dispatch(configStateChange('ok'));
             dispatch(setConfigState(res.data));
@@ -66,8 +65,7 @@ function App() {
         let dataFetchInterval: NodeJS.Timeout;
 
         function fetchData() {
-            axios(`${hostUrl()}/data.json?code=${localStorage.getItem('code') || '0'}`) /* from server */
-            //axios(`./data.json`) /* from file */
+            axios(`${hostUrl()}/data.json?code=${localStorage.getItem('code') || '0'}`)
             .then((res) => {
                 dispatch(dataStateChange('ok'));
                 dispatch(setDataState(res.data));

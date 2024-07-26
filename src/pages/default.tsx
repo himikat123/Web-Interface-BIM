@@ -64,7 +64,7 @@ export default function Default() {
     }, [saveButton]);
 
     useEffect(() => {
-        fetch(`./defaultConfig.json?code=${localStorage.getItem('code') || '0'}`)
+        fetch(`${hostUrl()}/defaultConfig.json?code=${localStorage.getItem('code') || '0'}`)
         .then(res => res.text())
         .then((result: string) => {
             if(IsJsonString(result)) setDefaultConfig(JSON.parse(result))

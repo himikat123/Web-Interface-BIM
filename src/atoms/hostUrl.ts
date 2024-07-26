@@ -1,7 +1,7 @@
 const hostUrl = () => {
     const origin = window.location.origin;
-    const href = [origin.split(':')[0], origin.split(':')[1]].join(':');
-    
+    let href = [origin.split(':')[0], origin.split(':')[1]].join(':');
+    if(href !== 'http://localhost') href = '.';    
     return href;
 }
 
