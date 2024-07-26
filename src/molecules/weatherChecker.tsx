@@ -75,7 +75,7 @@ export default function WeatherChecker() {
             current += `?latitude=${config.weather.lat}`;
             current += `&longitude=${config.weather.lon}`;
             current += '&current=temperature_2m,relative_humidity_2m,pressure_msl,wind_speed_10m,wind_direction_10m,weather_code';
-            current += '&wind_speed_unit=ms&timeformat=unixtime';
+            current += '&wind_speed_unit=ms&timeformat=unixtime&timezone=auto';
         }
         console.log(current);
         fetch(current)
@@ -118,6 +118,7 @@ export default function WeatherChecker() {
                     setWind((json.current.wind_speed_10m).toFixed(1) + i18n.t('units.mps'));
                     setWindDir(json.current.wind_direction_10m);
                     setDescript(openMeteoCode(json.current.weather_code));
+                    setCity(json.timezone);
                     setLat(String(json.latitude));
                     setLon(String(json.longitude));
                 }
@@ -163,10 +164,15 @@ export default function WeatherChecker() {
                         </div> : null}
                     </td>
                 </tr>
-                {config.weather.provider < 2 && <tr>
-                    <td className="text-end">{i18n.t('city')}:</td>
+                <tr>
+                    <td className="text-end">
+                        {config.weather.provider < 2 
+                            ? i18n.t('city')
+                            : i18n.t('timezone')
+                        }:
+                    </td>
                     <td className={"ps-4 " + weatherColor}>{city}</td>  
-                </tr>}
+                </tr>
                 <tr>
                     <td className="text-end">{i18n.t('latitude')}:</td>
                     <td className={"ps-4 " + weatherColor}>{lat}</td>

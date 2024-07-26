@@ -232,6 +232,7 @@ export interface iWeather {
         wind_direction_10m: number,
         wind_speed_10m: number
     },
+    timezone: string,
     latitude: number,
     longitude: number
 }
