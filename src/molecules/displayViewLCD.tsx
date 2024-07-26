@@ -33,7 +33,7 @@ export default function DisplayViewLCD() {
     const TEMPERATURE_COLOR = '#FF0';
     const TEMP_MIN_COLOR    = '#F80';
     const HUMIDITY_COLOR    = '#0FF';
-    const PRESSURE_COLOR    = '#F0F';
+    const PRESSURE_COLOR    = '#F5F';
     const CLOCK_COLOR       = '#0F0';
     const BATTERY_COLOR     = '#0F0';
 
