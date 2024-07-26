@@ -23,8 +23,9 @@ app.get('/esp/restart', (req, res) => {
 });
 
 app.post("/esp/saveConfig", (req, res) => {
-    const data = req.body.match(/{.+}/)[0];
-    console.log('POST /esp/saveConfig = ', data);
+    const dt = req.body.match(/"config"\r\n\r\n(.+)/);
+    const data = dt ? dt[1] : null;
+    console.log('POST /esp/saveConfig', data);
     res.set('Access-Control-Allow-Origin', '*');
     setTimeout(() => {
         if(data) {
@@ -59,25 +60,23 @@ app.get('/config.json', (req, res) => {
     const configFile = path.join(__dirname, '..', 'public', 'config.json');
     const codeFile = path.join(__dirname, '..', 'public', 'code.txt');
     const codeUser = req.query.code;
-    const code = JSON.parse(fs.readFileSync(codeFile));
+    const code = String(JSON.parse(fs.readFileSync(codeFile)));
     const config = JSON.parse(fs.readFileSync(configFile));
 
     setTimeout(() => {
         res.set('Access-Control-Allow-Origin', '*');
-        if(codeUser === code) res.send(JSON.stringify(config));
-        else res.send(`{"lang":"${config.lang}", "state":"LOGIN"}`);
+        if(config.account.required > 0) {
+            if(codeUser === code) res.send(JSON.stringify(config));
+            else res.send(`{"lang":"${config.lang}", "state":"LOGIN"}`);
+        }
+        else res.send(JSON.stringify(config));
     }, 2000);
 });
 
 app.get('/data.json', (req, res) => {
-    const codeFile = path.join(__dirname, '..', 'public', 'code.txt');
-    const codeUser = req.query.code;
-    const code = JSON.parse(fs.readFileSync(codeFile));
-
     setTimeout(() => {
         res.set('Access-Control-Allow-Origin', '*');
-        if(codeUser === code) res.send(JSON.stringify(data(req.query.code)));
-        else res.send("NOT LOGGED IN");
+        res.send(JSON.stringify(data(req.query.code)));
     }, 2000);
 });
 
