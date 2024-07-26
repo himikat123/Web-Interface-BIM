@@ -48,7 +48,8 @@ function App() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios(`${hostUrl()}/config.json?code=${localStorage.getItem('code') || '0'}`)
+        axios(`${hostUrl()}/config.json?code=${localStorage.getItem('code') || '0'}`) /* from server */
+        //axios(`./config.json`) /* from file */
         .then(res => {
             dispatch(configStateChange('ok'));
             dispatch(setConfigState(res.data));
