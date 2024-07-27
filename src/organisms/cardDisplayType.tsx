@@ -116,21 +116,6 @@ export default function CardDisplayType(props: iDisplay) {
         </div>}
 
         {config.display.type[props.num] > 0 && <>
-            <RangeInput value={config.display.brightness.min[props.num]}
-                label={i18n.t('minimumBrightnessLimit')}
-                min={0}
-                max={255}
-                limitMin={0}
-                limitMax={config.display.brightness.max[props.num]}
-                step={1}
-                indication={String(config.display.brightness.min[props.num])}
-                onChange={val => {
-                    dispatch(cf.displayBrightMinChange({num: props.num, val: val}));
-                    sendLimits();
-                }}
-                className="mt-4"
-            />
-
             <RangeInput value={config.display.brightness.max[props.num]}
                 label={i18n.t('maximumBrightnessLimit')}
                 min={0}
@@ -144,6 +129,21 @@ export default function CardDisplayType(props: iDisplay) {
                     sendLimits();
                 }}
                 className="mt-2"
+            />
+
+            <RangeInput value={config.display.brightness.min[props.num]}
+                label={i18n.t('minimumBrightnessLimit')}
+                min={0}
+                max={255}
+                limitMin={0}
+                limitMax={config.display.brightness.max[props.num]}
+                step={1}
+                indication={String(config.display.brightness.min[props.num])}
+                onChange={val => {
+                    dispatch(cf.displayBrightMinChange({num: props.num, val: val}));
+                    sendLimits();
+                }}
+                className="mt-4"
             />
 
             <div className="mt-4 text-xs">
