@@ -83,7 +83,6 @@ function App() {
         }
 
         if(configState === 'ok') {
-            fetchData();
             dataFetchInterval = setInterval(() => {
                 dispatch(updateDataChange(true));
             }, 5000);
