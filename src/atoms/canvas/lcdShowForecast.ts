@@ -33,13 +33,12 @@ export default function lcdShowForecast(ctx: CanvasRenderingContext2D, num: numb
         switch(icon) { // png 40x40px
             case 1: wIcon = icons.w_01_d(); break;
             case 2: wIcon = icons.w_02_d(); break;
-            case 3: wIcon = icons.w_02_d(); break;
-            case 4: wIcon = icons.w_04(); break;
-            case 9: wIcon = icons.w_09(); break;
-            case 10: wIcon = icons.w_10(); break;
-            case 11: wIcon = icons.w_11_d(); break;
-            case 13: wIcon = icons.w_13(); break;
-            case 50: wIcon = icons.w_50(); break;
+            case 3: wIcon = icons.w_04(); break;
+            case 4: wIcon = icons.w_09(); break;
+            case 5: wIcon = icons.w_10(); break;
+            case 6: wIcon = icons.w_11_d(); break;
+            case 7: wIcon = icons.w_13(); break;
+            case 8: wIcon = icons.w_50(); break;
             default: wIcon = icons.w_loading(); break;
         }
         drawScaledImage(ctx, wIcon, x + imgShift, 184, 40, 40);

@@ -16,13 +16,12 @@ export default function lcdShowWeatherIcon(ctx: CanvasRenderingContext2D, prevIc
         switch(icon) {
             case 1: wIcon = isDay ? icons.w_01_d() : icons.w_01_n(); break;
             case 2: wIcon = isDay ? icons.w_02_d() : icons.w_02_n(); break;
-            case 3: wIcon = isDay ? icons.w_02_d() : icons.w_02_n(); break;
-            case 4: wIcon = icons.w_04(); break;
-            case 9: wIcon = icons.w_09(); break;
-            case 10: wIcon = icons.w_10(); break;
-            case 11: wIcon = isDay ? icons.w_11_d() : icons.w_11_n(); break;
-            case 13: wIcon = icons.w_13(); break;
-            case 50: wIcon = icons.w_50(); break;
+            case 3: wIcon = icons.w_04(); break;
+            case 4: wIcon = icons.w_09(); break;
+            case 5: wIcon = icons.w_10(); break;
+            case 6: wIcon = isDay ? icons.w_11_d() : icons.w_11_n(); break;
+            case 7: wIcon = icons.w_13(); break;
+            case 8: wIcon = icons.w_50(); break;
             default: wIcon = icons.w_loading(); break;
         }
         drawScaledImage(ctx, wIcon, 0, y, size, size);
