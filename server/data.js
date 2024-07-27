@@ -30,7 +30,7 @@ const filelist = () => {
     return list;
 }
 
-const mainIcons = [0, 1, 2, 4, 9, 10, 11, 13, 50];
+const mainIcons = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
 const data = (cookieCode) => {
     const dt = new Date();
