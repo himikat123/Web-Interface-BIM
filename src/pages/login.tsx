@@ -37,6 +37,9 @@ export default function Login() {
                     setResultTxt(i18n.t('loginToSettings'));
                     setResultType(false);
                     localStorage.setItem('code', result[1]);
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
                 }
                 else {
                     setResultTxt(i18n.t('wrongLoginOrPassword'));
