@@ -79,7 +79,7 @@ export default function Backup() {
                 </div>
 
                 <div className="mt-10 md:mt-28 flex justify-center">
-                    <a href="/config.json"
+                    <a href={`/config.json?code=${localStorage.getItem('code') || '0'}`}
                         className={'focus:ring-4 focus:ring-blue-300 py-2 px-4 my-2 sm:mx-4 rounded text-text_dark bg-green-600 hover:bg-green-700'}
                         download
                     >
