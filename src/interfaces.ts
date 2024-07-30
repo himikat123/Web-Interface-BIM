@@ -43,7 +43,11 @@ export interface iCard {
 
 export interface iFooterButtons {
     buttons: Array<string>,
-    passChange?: {old: string, new: string}
+    passChange?: {
+        old: string, 
+        new: string
+    },
+    alarms?: boolean
 }
 
 export interface iColumnsTemplate {
@@ -53,7 +57,11 @@ export interface iColumnsTemplate {
     buttons?: Array<string>,
     footer?: React.ReactNode,
     full?: boolean,
-    passChange?: {old: string, new: string}
+    passChange?: {
+        old: string, 
+        new: string
+    }
+    alarms?: boolean
 }
 
 export interface iSelectSwitch {

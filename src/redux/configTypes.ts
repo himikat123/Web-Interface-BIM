@@ -280,12 +280,6 @@ export interface iConfig {
         account: {
             name: string,
             required: number
-        },
-        alarm: {
-            time: number[][],
-            weekdays: number[][],
-            states: number[],
-            melodies: number[]
         }
     }
 }

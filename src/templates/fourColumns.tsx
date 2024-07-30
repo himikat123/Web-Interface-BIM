@@ -19,6 +19,6 @@ export default function FourColumns(props: iColumnsTemplate) {
 
         {props.footer}
 
-        {props.buttons && <FooterButtons buttons={props.buttons} />}
+        {props.buttons && <FooterButtons buttons={props.buttons} alarms={props.alarms} />}
     </div>
 }

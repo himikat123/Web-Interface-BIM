@@ -283,25 +283,6 @@ export const configSlice = createSlice({
         account: {
             name: "",
             required: 0
-        },
-        alarm: {
-            time: [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]],
-            weekdays: [
-                [0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0]
-            ], 
-            states: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            melodies: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         }
     },
     reducers: {
@@ -493,12 +474,7 @@ export const configSlice = createSlice({
         historyTfieldsChange: (state, action) => { state.history.tFields[action.payload.num] = action.payload.val },
 
         usernameChange: (state, action) => { state.account.name = action.payload },
-        passwordRequiredSwitch: (state, action) => { state.account.required = action.payload },
-
-        alarmTimeChange: (state, action) => { state.alarm.time[action.payload.num][action.payload.level] = action.payload.val },
-        alarmWeekdayChange: (state, action) => { state.alarm.weekdays[action.payload.num][action.payload.weekday] = action.payload.val },
-        alarmStateChange: (state, action) => { state.alarm.states[action.payload.num] = action.payload.val },
-        alarmMelodieChange: (state, action) => { state.alarm.melodies[action.payload.num] = action.payload.val }
+        passwordRequiredSwitch: (state, action) => { state.account.required = action.payload }
     }
 });
 
@@ -538,7 +514,6 @@ export const {
     displaySourceSequenceHumChange, displaySourceSequenceThngHumChange, displaySourceSequenceWsensHumChange,
     displaySourceVoltThingTypeChange, 
     soundVolChange, soundEqChange, soundHourlyChange, soundHourFromChange, soundHourToChange,
-    alarmTimeChange, alarmWeekdayChange, alarmStateChange, alarmMelodieChange,
     comfortTempSourceChange, comfortTempWsensNumChange, comfortTempSensChange, 
     comfortTempThingChange, comfortTempMinChange, comfortTempMaxChange, comfortTempSoundChange,
     comfortHumSourceChange, comfortHumWsensNumChange, comfortHumThingChange,

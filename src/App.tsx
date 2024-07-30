@@ -32,14 +32,17 @@ import Password from './pages/password';
 import Login from './pages/login';
 import { changeLanguage } from './i18n/main';
 import { iConfig } from './redux/configTypes';
+import { iAlarms } from './redux/alarmTypes';
 import { iData } from './redux/dataTypes';
 import { configStateChange, setConfigState } from './redux/slices/config';
+import { alarmsStateChange, setAlarmState } from './redux/slices/alarm';
 import { dataFetchingChange, dataStateChange, setDataState, updateDataChange } from './redux/slices/data';
 import relPath from "./atoms/relPath";
-
+// TODO последовательность тмператур, влажностей на экране показывет всегда все 4 слота 
 function App() {
     const dispatch = useDispatch();
     const configState = useSelector((stateConfig: iConfig) => stateConfig.config.configState);
+    const alarmsState = useSelector((stateAlarm: iAlarms) => stateAlarm.alarm.alarmState);
     const dataState = useSelector((stateData: iData) => stateData.data.dataState);
     const dataFetching = useSelector((stateData: iData) => stateData.data.dataFetching);
     const updateData = useSelector((stateData: iData) => stateData.data.updateData);
@@ -58,7 +61,16 @@ function App() {
         .catch(err => {
             dispatch(configStateChange('error'));
             console.error(err);
+        });
+        axios(`${hostUrl()}/alarm.json?code=${localStorage.getItem('code') || '0'}`)
+        .then(res => {
+            dispatch(alarmsStateChange('ok'));
+            dispatch(setAlarmState(res.data));
         })
+        .catch(err => {
+            dispatch(alarmsStateChange('error'));
+            console.error(err);
+        });
     }, [dispatch]);
     
     useEffect(() => {
@@ -82,7 +94,7 @@ function App() {
             })
         }
 
-        if(configState === 'ok') {
+        if(configState === 'ok' && alarmsState === 'ok') {
             dataFetchInterval = setInterval(() => {
                 dispatch(updateDataChange(true));
             }, 5000);
@@ -94,7 +106,7 @@ function App() {
         }
 
         return () => clearInterval(dataFetchInterval);
-    }, [configState, dispatch, dataFetching, updateData, path, navigate]);
+    }, [configState, alarmsState, dispatch, dataFetching, updateData, path, navigate]);
 
     return (
         <div className={"bg-page_light dark:bg-page_dark text-text_light dark:text-text_dark min-h-screen"}>

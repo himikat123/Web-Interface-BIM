@@ -38,6 +38,22 @@ app.post("/esp/saveConfig", (req, res) => {
     }, 2000);
 });
 
+app.post("/esp/saveAlarm", (req, res) => {
+    const dt = req.body.match(/"alarm"\r\n\r\n(.+)/);
+    const data = dt ? dt[1] : null;
+    console.log('POST /esp/saveAlarm', data);
+    res.set('Access-Control-Allow-Origin', '*');
+    setTimeout(() => {
+        if(data) {
+            const alarmFile = path.join(__dirname, '..', 'public', 'alarm.json');
+            fs.unlinkSync(alarmFile);
+            fs.writeFileSync(alarmFile, data);
+            res.send("OK");
+        }
+        else res.send("ERROR");
+    }, 2000);
+});
+
 app.post("/esp/defaultConfig", (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
     const dt = req.body.match(/"config"\r\n\r\n(.+)/);
@@ -71,6 +87,16 @@ app.get('/config.json', (req, res) => {
         }
         else res.send(JSON.stringify(config));
     }, 2000);
+});
+
+app.get('/alarm.json', (req, res) => {
+    const alarmFile = path.join(__dirname, '..', 'public', 'alarm.json');
+    const alarm = JSON.parse(fs.readFileSync(alarmFile));
+
+    setTimeout(() => {
+        res.set('Access-Control-Allow-Origin', '*');
+        res.send(JSON.stringify(alarm));
+    }, 2500);
 });
 
 app.get('/defaultConfig.json', (req, res) => {

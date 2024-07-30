@@ -11,5 +11,6 @@ export default function Alarm() {
         header={[i18n.t('alarm')]} 
         content={[content]} 
         buttons={['save', 'reset']} 
+        alarms={true}
     />
 }

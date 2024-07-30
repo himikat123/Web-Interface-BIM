@@ -5,7 +5,7 @@ import { alarm } from '../img/symbols';
 export default function lcdShowAlarmIcon(ctx: CanvasRenderingContext2D, 
     prevAlarmState: boolean, bgColor: string
 ): boolean {
-    const alarmStates = store.getState().config.alarm.states;
+    const alarmStates = store.getState().alarm.alarm.states;
     let alarmState = 0;
     alarmStates.map(state => alarmState += state);
     

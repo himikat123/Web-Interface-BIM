@@ -7,6 +7,7 @@ import hostUrl from "../atoms/hostUrl";
 import { iFooterButtons } from "../interfaces";
 import { iValid } from "../redux/validTypes";
 import { iConfig } from "../redux/configTypes";
+import { iAlarms } from "../redux/alarmTypes";
 import { ReactComponent as SpinnerSVG } from '../atoms/icons/spinner.svg';
 
 export default function FooterButtons(props: iFooterButtons) {
@@ -15,6 +16,7 @@ export default function FooterButtons(props: iFooterButtons) {
     const [modalOpen, setModalOpen] = useState<boolean>(false);
     const valid = useSelector((state: iValid) => state.valid);
     const areAllPagesValid = !Object.values(valid).includes(false);
+    const alarms = useSelector((state: iAlarms) => state.alarm);
     const config = useSelector((state: iConfig) => state.config);
     const timeout = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -29,12 +31,13 @@ export default function FooterButtons(props: iFooterButtons) {
                 data.append("oldPass", props.passChange.old);
                 data.append("newPass", props.passChange.new);
             }
+            else if(props.alarms) data.append("alarm", JSON.stringify(alarms).replace('"alarmState":"ok",', ''));
             else data.append("config", JSON.stringify(config).replace('"configState":"ok",', ''));
             data.append("code", localStorage.getItem('code') || '0');
             try {
-                const response = await fetch(`${hostUrl()}/esp/${props.passChange ? 'changePass' : 'saveConfig'}`, {
-                  method: "POST",
-                  body: data
+                const response = await fetch(`${hostUrl()}/esp/${props.passChange ? 'changePass' : props.alarms ? 'saveAlarm' : 'saveConfig'}`, {
+                    method: "POST",
+                    body: data
                 });
                 const result = await response.text();
                 if(result === 'OK') {
