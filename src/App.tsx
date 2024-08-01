@@ -77,6 +77,7 @@ function App() {
         let dataFetchInterval: NodeJS.Timeout;
 
         function fetchData() {
+            dispatch(dataFetchingChange(true));
             axios(`${hostUrl()}/data.json?code=${localStorage.getItem('code') || '0'}`)
             .then((res) => {
                 dispatch(dataStateChange('ok'));
@@ -100,7 +101,6 @@ function App() {
             }, 5000);
 
             if(updateData && !dataFetching) {
-                dispatch(dataFetchingChange(true));
                 if(path !== relPath() + '/clock') fetchData();
             }
         }
