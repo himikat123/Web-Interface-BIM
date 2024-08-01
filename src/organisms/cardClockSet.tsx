@@ -29,7 +29,7 @@ export default function CardClockSet() {
         setReceive(''); 
         
         // send NTP sync command to the host
-        fetch(`${hostUrl()}/esp/syncClock?ntp=1&code=${localStorage.getItem('code') || '0'}`);
+        fetch(`${hostUrl()}/esp/syncClock?ntp=1?code=${localStorage.getItem('code') || '0'}`);
 
         /*
         * checking the status of synchronization with NTP
