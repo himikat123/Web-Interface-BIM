@@ -58,7 +58,7 @@ export default function CardClockSet() {
                     clearInterval(syncdialog);
                 }
             });
-        }, 1000);
+        }, 2000);
     }
 
     /**
