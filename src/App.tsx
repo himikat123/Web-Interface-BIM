@@ -38,7 +38,7 @@ import { configStateChange, setConfigState } from './redux/slices/config';
 import { alarmsStateChange, setAlarmState } from './redux/slices/alarm';
 import { dataFetchingChange, dataStateChange, setDataState, updateDataChange } from './redux/slices/data';
 import relPath from "./atoms/relPath";
-// TODO последовательность тмператур, влажностей на экране показывет всегда все 4 слота 
+// TODO последовательность температур, влажностей на экране показывет всегда все 4 слота 
 function App() {
     const dispatch = useDispatch();
     const configState = useSelector((stateConfig: iConfig) => stateConfig.config.configState);
@@ -100,9 +100,7 @@ function App() {
                 dispatch(updateDataChange(true));
             }, 5000);
 
-            if(updateData && !dataFetching) {
-                if(path !== relPath() + '/clock') fetchData();
-            }
+            if(updateData && !dataFetching) fetchData();
         }
 
         return () => clearInterval(dataFetchInterval);
