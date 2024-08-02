@@ -14,7 +14,7 @@ export default function CardSoundListen() {
 
     const config = useSelector((state: iConfig) => state.config);
     
-    let clockSounds = [i18n.t('hourlySignal')];
+    let clockSounds = [];
     for(let i=0; i<24; i++) {
         if(config.lang === 'ru' || config.lang === 'pl' || config.lang === 'ua') {
             if(i === 1 || i === 21) clockSounds.push(`${i} ${i18n.t('hour.one')}`);
@@ -23,10 +23,11 @@ export default function CardSoundListen() {
         }
         else clockSounds.push(`${i} ${i18n.t('hour.many')}`);
     }
+    clockSounds.push(i18n.t('hourlySignal'));
 
     const sendPlayHourly = () => {
         let url = `${hostUrl()}/esp/mp3play`;
-        url += `?folder=1&track=${String(hourly)}`;
+        url += `?folder=1&track=${String(hourly === 24 ? 25 : hourly)}`;
         url += `&code=${localStorage.getItem('code') || '0'}`;
         fetch(url);
     }
