@@ -23,7 +23,6 @@ export default function CardSoundListen() {
         }
         else clockSounds.push(`${i} ${i18n.t('hour.many')}`);
     }
-    clockSounds.push(i18n.t('hourlySignal'));
 
     const sendPlayHourly = () => {
         let url = `${hostUrl()}/esp/mp3play`;
