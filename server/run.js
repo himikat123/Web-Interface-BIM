@@ -116,6 +116,12 @@ app.get('/data.json', (req, res) => {
     }, 2000);
 });
 
+app.get('/esp/changelang', (req, res) => {
+    console.log('GET /esp/changelang', req.query);
+    res.set('Access-Control-Allow-Origin', '*');
+    res.send("OK");
+});
+
 app.get('/esp/bright', (req, res) => {
     console.log('GET /esp/bright', req.query);
     res.set('Access-Control-Allow-Origin', '*');
