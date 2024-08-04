@@ -38,8 +38,8 @@ export default function ComfortHumMin() {
         {/* Explication */}
         <div className="mt-4 select-none text-green-500 dark:text-green-200">
             <div>{i18n.t('humidifier')}</div>
-            <div>{i18n.t('on')}: {(config.comfort.hum.min[0] - (config.comfort.hum.min[1] / 2)).toFixed(2)}%</div>
-            <div>{i18n.t('off')}: {(config.comfort.hum.min[0] + (config.comfort.hum.min[1] / 2)).toFixed(2)}%</div>
+            <div>{i18n.t('on')}: &lt; {(config.comfort.hum.min[0] - (config.comfort.hum.min[1] / 2)).toFixed(2)}%</div>
+            <div>{i18n.t('off')}: &gt; {(config.comfort.hum.min[0] + (config.comfort.hum.min[1] / 2)).toFixed(2)}%</div>
         </div>
     </>
 }

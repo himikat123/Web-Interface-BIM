@@ -38,8 +38,8 @@ export default function ComfortTempMin() {
         {/* Explication */}
         <div className="mt-4 select-none text-green-500 dark:text-green-200">
             <div>{i18n.t('heater')}</div>
-            <div>{i18n.t('on')}: {(config.comfort.temp.min[0] - (config.comfort.temp.min[1] / 2)).toFixed(2)}°C</div>
-            <div>{i18n.t('off')}: {(config.comfort.temp.min[0] + (config.comfort.temp.min[1] / 2)).toFixed(2)}°C</div>
+            <div>{i18n.t('on')}: &lt; {(config.comfort.temp.min[0] - (config.comfort.temp.min[1] / 2)).toFixed(2)}°C</div>
+            <div>{i18n.t('off')}: &gt; {(config.comfort.temp.min[0] + (config.comfort.temp.min[1] / 2)).toFixed(2)}°C</div>
         </div>
     </>
 }

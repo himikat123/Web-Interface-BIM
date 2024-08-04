@@ -38,8 +38,8 @@ export default function ComfortHumMax() {
         {/* Explication */}
         <div className="mt-4 select-none text-green-500 dark:text-green-200">
             <div>{i18n.t('dryer')}</div>
-            <div>{i18n.t('on')}: {(config.comfort.hum.max[0] + (config.comfort.hum.max[1] / 2)).toFixed(2)}%</div>
-            <div>{i18n.t('off')}: {(config.comfort.hum.max[0] - (config.comfort.hum.max[1] / 2)).toFixed(2)}%</div>
+            <div>{i18n.t('on')}: &gt; {(config.comfort.hum.max[0] + (config.comfort.hum.max[1] / 2)).toFixed(2)}%</div>
+            <div>{i18n.t('off')}: &lt; {(config.comfort.hum.max[0] - (config.comfort.hum.max[1] / 2)).toFixed(2)}%</div>
         </div>
     </>
 }

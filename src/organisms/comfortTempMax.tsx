@@ -38,8 +38,8 @@ export default function ComfortTempMax() {
         {/* Explication */}
         <div className="mt-4 select-none text-green-500 dark:text-green-200">
             <div>{i18n.t('conditioner')}</div>
-            <div>{i18n.t('on')}: {(config.comfort.temp.max[0] + (config.comfort.temp.max[1] / 2)).toFixed(2)}°C</div>
-            <div>{i18n.t('off')}: {(config.comfort.temp.max[0] - (config.comfort.temp.max[1] / 2)).toFixed(2)}°C</div>
+            <div>{i18n.t('on')}: &gt; {(config.comfort.temp.max[0] + (config.comfort.temp.max[1] / 2)).toFixed(2)}°C</div>
+            <div>{i18n.t('off')}: &lt; {(config.comfort.temp.max[0] - (config.comfort.temp.max[1] / 2)).toFixed(2)}°C</div>
         </div>
     </>
 }
