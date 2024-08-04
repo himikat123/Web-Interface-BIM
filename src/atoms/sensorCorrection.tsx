@@ -4,16 +4,16 @@ import i18n from "../i18n/main";
 import Indication from "./indication";
 import * as vl from "./validateValues";
 
-export default function sensorCorrection(color: boolean, type: string, val: number, lblType: string | React.ReactNode, lblData: number, onChange: any, min: number, max: number, step: number, hide?: boolean, lblName?: string) {
+export default function sensorCorrection(color: boolean, dataType: string, val: number, lblType: string | React.ReactNode, lblData: number, onChange: any, min: number, max: number, step: number, hide?: boolean, lblName?: string) {
     const countSymbolsAfterComma = () => ((step.toString().includes('.')) ? (step.toString().split('.').pop()?.length) : (0));
 
     const round = () => {
         return (Math.round((lblData + val) * (1 / step)) / (1 / step)).toFixed(countSymbolsAfterComma());
     }
 
-    let units: string = "";
+    let units: string = '';
     let labels: string[] = ['', ''];
-    switch(type) {
+    switch(dataType) {
         case 't': // Temperature
             units = "°C";
             labels[0] = (vl.validateTemperature(lblData) ? round() : "--");
@@ -23,11 +23,9 @@ export default function sensorCorrection(color: boolean, type: string, val: numb
             labels[0] = (vl.validateHumidity(lblData) ? round() : "--");
             break;
         case 'p': // Pressure
-            const hpa = round();
-            const mm = (Math.round((lblData + val) * 7.5) / 10).toFixed(1);
             units = i18n.t('units.hpa');
-            labels[0] = (vl.validatePressure(lblData) ? hpa : "--");
-            labels[1] = (vl.validatePressure(lblData) ? ` (~${mm}${i18n.t('units.mm')})` : '');
+            labels[0] = (vl.validatePressure(lblData) ? round() : "--");
+            labels[1] = (vl.validatePressure(lblData) ? ` (~${(Math.round((lblData + val) * 7.5) / 10).toFixed(1)}${i18n.t('units.mm')})` : '');
             break;
         case 'l': // Ambient light
             units = i18n.t('units.lux');
@@ -74,11 +72,12 @@ export default function sensorCorrection(color: boolean, type: string, val: numb
             labels[0] = (vl.validateFrequency(lblData) ? round() : "--");
             break;
 
-        default: break;
+        default: ; break;
     }
 
     return <RangeInput value={val}
-        label={<div className="mt-8">
+        label={
+            <div className="mt-8">
                 {lblType}: 
                 <Indication error={color} value={labels[0] + units + labels[1] + (lblName ? (', ' + lblName) : '')} />
             </div>} 

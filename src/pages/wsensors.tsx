@@ -21,7 +21,8 @@ import * as cf from "../redux/slices/config";
 import * as vl from "../atoms/validateValues";
 
 export default function WSensors() {
-    // TODO нет показаний датчиков в реальном приборе, даже (--) не показывает
+    // TODO уменьшить отступы вверху
+    // TODO убрать стандарный тип(имя) датчика где нет данных. Например: "--, DS18B20" или "--, PZEM-004"
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);

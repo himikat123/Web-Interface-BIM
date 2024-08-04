@@ -12,7 +12,6 @@ import * as cf from "../redux/slices/config";
 import * as vl from "../atoms/validateValues";
 
 export default function Sensors() {
-    // TODO нет показаний датчиков в реальном приборе, даже (--) не показывает
     const [hideUnnecessary, setHideUnnecessary] = useState<boolean>(true);
 
     const dispatch = useDispatch();
