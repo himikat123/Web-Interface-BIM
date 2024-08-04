@@ -4,6 +4,7 @@ import SegSegment from '../atoms/canvas/segSegment';
 import SegClockPoints from '../atoms/canvas/segClockPoints';
 import { iSegState } from '../interfaces';
 
+/* типизировать props */
 export default function DisplayView7segment(props: any) {
     const [state, setState] = useState<iSegState>({
         segments: [0, 0, 0, 0, 0, 0, 0, 0],
