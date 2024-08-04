@@ -2,9 +2,9 @@ const fs = require('fs');
 const path = require('path');
 
 const random = (min, max) => { 
-    max *= 100;
-    min *= 100;
-    return Math.floor(Math.random() * (max - min + 1) + min) / 100;
+    max *= 1000000;
+    min *= 1000000;
+    return Math.floor(Math.random() * (max - min + 1) + min) / 1000000;
 }
 
 const getFiles = (dir, files_) => {
