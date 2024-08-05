@@ -21,18 +21,20 @@ export default function ModalFileViewer(props: iModalFileViewer) {
     const theme = window.document.documentElement.classList[0] === 'dark' ? darkStyles : defaultStyles;
 
     useEffect(() => {
-        fetch(`${relPath()}${props.path}${props.selected}?code=${localStorage.getItem('code') || '0'}`)
-        .then(res => res.text())
-        .then((result: string) => {
-            setFileContent(result)
-        });
+        if(!props.selected.endsWith('png') && !props.selected.endsWith('jpg')) {
+            fetch(`${relPath()}${props.path}${props.selected}?code=${localStorage.getItem('code') || '0'}`)
+            .then(res => res.text())
+            .then((result: string) => {
+                setFileContent(result)
+            });
+        }
     }, [props.path, props.selected]);
 
     return <Modal header={props.selected}
         confirmBtn={() => {}}
         modalClose={() => props.modalClose()}
         content={<>
-            {(props.selected.split('.')[1] === 'png' || props.selected.split('.')[1] === 'jpg') 
+            {(props.selected.endsWith('png') || props.selected.endsWith('jpg')) 
                 ? <div className="w-full flex justify-center items-center">
                     {!imgLoaded && <div className="flex justify-center items-center h-24">
                         <StepsAnimation />
@@ -42,7 +44,7 @@ export default function ModalFileViewer(props: iModalFileViewer) {
                         onLoad={() => setImgLoaded(true)} 
                     />
                 </div>
-                : (props.selected.split('.')[1] === 'json') 
+                : (props.selected.endsWith('json')) 
                     ? <div className="w-full">
                         {fileContent && IsJsonString(fileContent)
                             ? <JsonView data={JSON.parse(fileContent)} 
@@ -54,7 +56,7 @@ export default function ModalFileViewer(props: iModalFileViewer) {
                               </div>
                         }    
                     </div>
-                    : (props.selected.split('.')[1] === 'html') 
+                    : (props.selected.endsWith('html')) 
                         ? <div className="w-full">
                             {fileContent 
                                 ? <div>{fileContent}</div>
