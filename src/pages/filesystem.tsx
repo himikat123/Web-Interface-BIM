@@ -91,7 +91,7 @@ export default function Filesystem() {
                     axios({
                         method: 'post',
                         url: `${hostUrl()}/esp/delete`,
-                        data: `file=${path + selected}?code=${localStorage.getItem('code') || '0'}`
+                        data: `file=${path + selected}&code=${localStorage.getItem('code') || '0'}`
                     });
                 }
             }
