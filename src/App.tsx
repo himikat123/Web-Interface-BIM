@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux';
@@ -46,6 +46,7 @@ function App() {
     const dataState = useSelector((stateData: iData) => stateData.data.dataState);
     const dataFetching = useSelector((stateData: iData) => stateData.data.dataFetching);
     const updateData = useSelector((stateData: iData) => stateData.data.updateData);
+    const [stopDataFetching, setStopDataFetching] = useState<boolean>(false);
     const location = useLocation();
     const path = location.pathname;
     const navigate = useNavigate();
@@ -100,11 +101,18 @@ function App() {
                 dispatch(updateDataChange(true));
             }, 5000);
 
-            if(updateData && !dataFetching) fetchData();
+            if(updateData && !dataFetching) {
+                if(path !== (relPath() + '/default')) {
+                    if(path === relPath() + '/filesystem') {
+                        if(!stopDataFetching) fetchData();
+                    }
+                    else fetchData();
+                }
+            }
         }
 
         return () => clearInterval(dataFetchInterval);
-    }, [configState, alarmsState, dispatch, dataFetching, updateData, path, navigate]);
+    }, [configState, alarmsState, dispatch, dataFetching, updateData, path, navigate, stopDataFetching]);
 
     return (
         <div className={"bg-page_light dark:bg-page_dark text-text_light dark:text-text_dark min-h-screen"}>
@@ -113,30 +121,31 @@ function App() {
             (configState === 'default' || dataState === 'default') && <Loading />}
             
             {configState === 'ok' && dataState === 'ok' && <Routes>
-                <Route path={relPath() + '/'}               element={ <Status /> }>            </Route>
-                <Route path={relPath() + '/connect'}        element={ <Connect /> }>           </Route>
-                <Route path={relPath() + '/accesspoint'}    element={ <AccessPoint /> }>       </Route>
-                <Route path={relPath() + '/sensors'}        element={ <Sensors /> }>           </Route>
-                <Route path={relPath() + '/wsensors'}       element={ <WSensors /> }>          </Route>
-                <Route path={relPath() + '/weather'}        element={ <Weather /> }>           </Route>
-                <Route path={relPath() + '/clock'}          element={ <Clock /> }>             </Route>
-                <Route path={relPath() + '/alarm'}          element={ <Alarm /> }>             </Route>
-                <Route path={relPath() + '/display1'}       element={ <Display1 /> }>          </Route>
-                <Route path={relPath() + '/display2'}       element={ <Display2 /> }>          </Route>
-                <Route path={relPath() + '/sound'}          element={ <Sound /> }>             </Route>
-                <Route path={relPath() + '/comfort'}        element={ <Comfort /> }>           </Route>
-                <Route path={relPath() + '/history'}        element={ <History /> }>           </Route>
-                <Route path={relPath() + '/receive'}        element={ <ReceiveThingspeak /> }> </Route>
-                <Route path={relPath() + '/sendthingspeak'} element={ <SendThingspeak /> }>    </Route>
-                <Route path={relPath() + '/sendnarodmon'}   element={ <SendNarodmon /> }>      </Route>
-                <Route path={relPath() + '/language'}       element={ <Language /> }>          </Route>
-                <Route path={relPath() + '/backup'}         element={ <Backup /> }>            </Route>
-                <Route path={relPath() + '/default'}        element={ <Default /> }>           </Route>
-                <Route path={relPath() + '/filesystem'}     element={ <Filesystem /> }>        </Route> 
-                <Route path={relPath() + '/username'}       element={ <Username /> }>          </Route>
-                <Route path={relPath() + '/userpass'}       element={ <Password /> }>          </Route>
-                <Route path={relPath() + '/login'}          element={ <Login />}>              </Route>
-                <Route path={relPath() + '/*'}              element={ <PageNotFound /> }>      </Route>
+                <Route path={relPath() + '/'}               element={ <Status /> } />
+                <Route path={relPath() + '/connect'}        element={ <Connect /> } />
+                <Route path={relPath() + '/accesspoint'}    element={ <AccessPoint /> } />
+                <Route path={relPath() + '/sensors'}        element={ <Sensors /> } />
+                <Route path={relPath() + '/wsensors'}       element={ <WSensors /> } />
+                <Route path={relPath() + '/weather'}        element={ <Weather /> } />
+                <Route path={relPath() + '/clock'}          element={ <Clock /> } />
+                <Route path={relPath() + '/alarm'}          element={ <Alarm /> } />
+                <Route path={relPath() + '/display1'}       element={ <Display1 /> } />
+                <Route path={relPath() + '/display2'}       element={ <Display2 /> } />
+                <Route path={relPath() + '/sound'}          element={ <Sound /> } />
+                <Route path={relPath() + '/comfort'}        element={ <Comfort /> } />
+                <Route path={relPath() + '/history'}        element={ <History /> } />
+                <Route path={relPath() + '/receive'}        element={ <ReceiveThingspeak /> } />
+                <Route path={relPath() + '/sendthingspeak'} element={ <SendThingspeak /> } />
+                <Route path={relPath() + '/sendnarodmon'}   element={ <SendNarodmon /> } />
+                <Route path={relPath() + '/language'}       element={ <Language /> } />
+                <Route path={relPath() + '/backup'}         element={ <Backup /> } />
+                <Route path={relPath() + '/default'}        element={ <Default /> } /> 
+                <Route path={relPath() + '/username'}       element={ <Username /> } />
+                <Route path={relPath() + '/userpass'}       element={ <Password /> } />
+                <Route path={relPath() + '/login'}          element={ <Login />} />
+                <Route path={relPath() + '/*'}              element={ <PageNotFound /> } />
+                <Route path={relPath() + '/filesystem'}
+                    element={ <Filesystem stopDataFetching={val => setStopDataFetching(val)} /> } />
             </Routes>}
         </div>
     );

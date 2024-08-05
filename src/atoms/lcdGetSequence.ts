@@ -9,7 +9,7 @@ export default function lcdGetSequence(sequence: iSequence): iSequence {
     if(sequence.counter <= (config.display.source.sequence.dur - 1) * 2) sequence.counter++;
     else {
         for(let i=0; i<4; i++) {
-            if(config.display.source.sequence.name[sequence.slot] == "") {
+            if(config.display.source.sequence.name[sequence.slot] === "") {
                 if(sequence.slot < 3) sequence.slot++;
                 else sequence.slot = 0;
             }

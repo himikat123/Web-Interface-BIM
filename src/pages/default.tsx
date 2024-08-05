@@ -11,7 +11,6 @@ import { IsJsonString } from "./modalFileViewer";
 import StepsAnimation from "../atoms/stepsAnimation";
 
 export default function Default() {
-    // TODO в просмотрщике json файлов сворачивается код каждые 10 секунд
     const [saveButton, setSaveButton] = useState<string>('resetToFactory');
     const [saveColor, setSaveColor] = useState<string>('blue');
     const [defaultConfig, setDefaultConfig] = useState<object>({});

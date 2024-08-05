@@ -16,9 +16,8 @@ import { ReactComponent as JsonSVG } from '../atoms/icons/json.svg';
 import { ReactComponent as ImageSVG } from '../atoms/icons/image.svg';
 import { ReactComponent as RubickSVG } from '../atoms/icons/rubick.svg';
 
-// TODO в просмотрщике json файлов сворачивается код каждые 10 секунд
 // TODO добавить спинер загрузки в просмотрщик файлов
-export default function Filesystem() {
+export default function Filesystem(props: {stopDataFetching(val: boolean): void}) {
     const data = useSelector((state: iData) => state.data);
     const [filelist, setFilelist] = useState<iFilelist>([]);
     const [selected, setSelected] = useState<string>('.');
@@ -232,6 +231,10 @@ export default function Filesystem() {
     useEffect(() => {
         setRenaming('');
     }, [selected]);
+
+    useEffect(() => {
+        props.stopDataFetching(fileViewer && selected.endsWith('.json'));
+    }, [fileViewer, selected, props]);
 
     const content = <Card content={<>
         {fileViewer && <ModalFileViewer path={path}
