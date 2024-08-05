@@ -79,7 +79,9 @@ export default function sensorCorrection(color: boolean, dataType: string, val: 
         label={
             <div className="mt-8">
                 {lblType}: 
-                <Indication error={color} value={labels[0] + units + labels[1] + (lblName ? (', ' + lblName) : '')} />
+                <Indication error={color} 
+                    value={labels[0] + units + labels[1] + (lblName ? labels[0] !== '--' ? (', ' + lblName) : '' : '')} 
+                />
             </div>} 
         min={min}
         max={max}

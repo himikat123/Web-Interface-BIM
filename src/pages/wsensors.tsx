@@ -21,8 +21,6 @@ import * as cf from "../redux/slices/config";
 import * as vl from "../atoms/validateValues";
 
 export default function WSensors() {
-    // TODO уменьшить отступы вверху
-    // TODO убрать стандарный тип(имя) датчика где нет данных. Например: "--, DS18B20" или "--, PZEM-004"
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
@@ -36,9 +34,9 @@ export default function WSensors() {
 
     const content = <>{[...Array(2)].map((c, wsensorNum: number) =>
         <Card key={'ws' + wsensorNum} header={`${i18n.t('wirelessSensor.singular')} ${wsensorNum}`}
-            content={<div className="h-full flex flex-col justify-between pb-8">
+            content={<div className="h-full flex flex-col justify-between pb-2">
                 <div>
-                    <div className="text-center mb-4">
+                    <div className="text-center mb-1">
                         {i18n.t('dataFrom')}:
                         <Indication error={!vl.WsensorDataRelevance(wsensorNum)} 
                             value={<>
