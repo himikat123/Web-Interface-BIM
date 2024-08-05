@@ -16,7 +16,6 @@ import { ReactComponent as JsonSVG } from '../atoms/icons/json.svg';
 import { ReactComponent as ImageSVG } from '../atoms/icons/image.svg';
 import { ReactComponent as RubickSVG } from '../atoms/icons/rubick.svg';
 
-// TODO добавить спинер загрузки в просмотрщик файлов
 export default function Filesystem(props: {stopDataFetching(val: boolean): void}) {
     const data = useSelector((state: iData) => state.data);
     const [filelist, setFilelist] = useState<iFilelist>([]);
