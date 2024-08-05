@@ -39,7 +39,6 @@ import { alarmsStateChange, setAlarmState } from './redux/slices/alarm';
 import { dataFetchingChange, dataStateChange, setDataState, updateDataChange } from './redux/slices/data';
 import relPath from "./atoms/relPath";
 // TODO последовательность температур, влажностей на экране показывет всегда все 4 слота 
-// TODO округлять данные c thingspeak до сотых  
 function App() {
     const dispatch = useDispatch();
     const configState = useSelector((stateConfig: iConfig) => stateConfig.config.configState);

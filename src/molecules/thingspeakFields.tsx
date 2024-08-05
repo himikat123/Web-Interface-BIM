@@ -10,7 +10,7 @@ export default function ThingspeakFields(props: iSelectSensor) {
 
     let fields: string[] = [];
     for(let i=0; i<8; i++) fields.push(`${i18n.t('field')} ${i + 1} (${vl.ThingspeakDataRelevance() 
-        ? vl.validateThingspeak(data.thing?.data ? data.thing?.data[i] : -40400) ? data.thing?.data ? data.thing?.data[i] : '--' : '--'
+        ? vl.validateThingspeak(data.thing?.data ? data.thing?.data[i] : -40400) ? data.thing?.data ? data.thing?.data[i].toFixed(2) : '--' : '--'
         : i18n.t('dataExpired')})`
     );
 

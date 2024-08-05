@@ -15,7 +15,7 @@ export default function ThingReceiveDataTable() {
             </div>
 
             <div className={"table-cell ps-1 " + (vl.ThingspeakDataRelevance() ? "text-blue-700 dark:text-blue-400" : "text-red-700 dark:text-red-400")}>
-                {vl.validateThingspeak(data.thing?.data ? data.thing.data[i] : -40400) ? data.thing?.data ? data.thing?.data[i] : '--' : '--'}
+                {vl.validateThingspeak(data.thing?.data ? data.thing.data[i] : -40400) ? data.thing?.data ? data.thing?.data[i].toFixed(2) : '--' : '--'}
             </div>
         </div>)}
     </>
