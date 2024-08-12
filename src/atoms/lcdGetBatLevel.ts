@@ -21,6 +21,7 @@ export default function lcdGetBatteryLevel() {
     if(config.display.source.bat.sens === 2) { // Thingspeak
         if(vl.ThingspeakDataRelevance()) {
             level = data.thing.data ? data.thing.data[config.display.source.bat.thing] : -1;
+            if(level == 5) level = 4;
         }
     }
     return level;
