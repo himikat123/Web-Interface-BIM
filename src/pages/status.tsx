@@ -15,11 +15,14 @@ export default function Status() {
     const gitLink = 'https://github.com/himikat123/Weather-monitor-BIM32';
     
     useEffect(() => {
-        fetch("https://raw.githubusercontent.com/himikat123/Weather-monitor-BIM32/master/BIM32/globals.hpp")
+        fetch("https://raw.githubusercontent.com/himikat123/Weather-monitor-BIM32/master/BIM32_Arduino/src/globals.hpp")
         .then(response => response.text())
         .then(text => {
             let regex = /] = "(v.+)"/gm;
             setGitFW(regex.exec(text)![1]);
+        })
+        .catch(err => {
+            console.error(err);
         });
     }, [])
 
