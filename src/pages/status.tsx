@@ -18,8 +18,11 @@ export default function Status() {
         fetch("https://raw.githubusercontent.com/himikat123/Weather-monitor-BIM32/master/BIM32_Arduino/src/globals.hpp")
         .then(response => response.text())
         .then(text => {
-            let regex = /] = "(v.+)"/gm;
-            setGitFW(regex.exec(text)![1]);
+            try {
+                let regex = /FW "(v.+)"/gm;
+                setGitFW(regex.exec(text)![1]);
+            }
+            catch(err) {console.log(err)}
         })
         .catch(err => {
             console.error(err);
