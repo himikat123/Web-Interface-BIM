@@ -1,4 +1,6 @@
-Page preview: https://himikat123.github.io/Web-Interface-BIM/
+# Web interface of weather monitor settings
+
+Page live preview: https://himikat123.github.io/Web-Interface-BIM/
 
 Start debugging
     `npm start`
@@ -9,15 +11,6 @@ then in file **/build/index.html** move the ***<script>...</script>*** tag along
 
 and then run
     `gulp`
-
-
-## To swith to login page
-in file **/public/data.json** set 
-    "state": "LOGIN"
-
-## To switch to other pages
-in file **/public/data.json** set
-    "state": "OK"
 
 
 ## Public to gihub-pages
