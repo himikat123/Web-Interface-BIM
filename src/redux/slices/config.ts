@@ -270,6 +270,18 @@ export const configSlice = createSlice({
             wtypes: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             metrics: ["", "", "", "", "", "", "", "", "", "", "", ""]
         },
+        mqttSend: {
+            period: 0,
+            broker: "",
+            port: 1883,
+            user: "",
+            pass: "",
+            sensors: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            types: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            wsensors: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            wtypes: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            topics: ["", "", "", "", "", "", "", "", "", "", "", ""]
+        },
         history: {
             period: 0,
             channelID: "",
@@ -464,6 +476,17 @@ export const configSlice = createSlice({
         narodmonSendWtypesChange: (state, action) => { state.narodmonSend.wtypes[action.payload.num] = action.payload.val },
         narodmonSendMetricsChange: (state, action) => { state.narodmonSend.metrics[action.payload.num] = action.payload.val },
 
+        mqttSendPeriodChange: (state, action) => { state.mqttSend.period = action.payload },
+        mqttSendBrokerChange: (state, action) => { state.mqttSend.broker = action.payload },
+        mqttSendPortChange: (state, action) => { state.mqttSend.port = action.payload },
+        mqttSendUserChange: (state, action) => { state.mqttSend.user = action.payload },
+        mqttSendPassChange: (state, action) => { state.mqttSend.pass = action.payload },
+        mqttSendSensorsChange: (state, action) => { state.mqttSend.sensors[action.payload.num] = action.payload.val },
+        mqttSendTypesChange: (state, action) => { state.mqttSend.types[action.payload.num] = action.payload.val },
+        mqttSendWsensorsChange: (state, action) => { state.mqttSend.wsensors[action.payload.num] = action.payload.val },
+        mqttSendWtypesChange: (state, action) => { state.mqttSend.wtypes[action.payload.num] = action.payload.val },
+        mqttSendTopicsChange: (state, action) => { state.mqttSend.topics[action.payload.num] = action.payload.val },
+
         historyPriodChange: (state, action) => { state.history.period = action.payload },
         historyChannelIDChange: (state, action) => { state.history.channelID = action.payload },
         historyWrkeyChange: (state, action) => { state.history.wrkey = action.payload },
@@ -526,7 +549,9 @@ export const {
     thingspeakSendPeriodChange, thingspeakSendChannelIdChange, thingspeakSendWrkeyChange, thingspeakSendRdkeyChange,
     thingspeakSendFieldsChange, thingspeakSendTypesChange, thingspeakSendWsensorsChange, thingspeakSendWtypesChange,
     narodmonSendPeriodChange, narodmonSendLatChange, narodmonSendLonChange, narodmonSendNameChange, narodmonSendSensorsChange,
-    narodmonSendTypesChange, narodmonSendWsensorsChange, narodmonSendWtypesChange, narodmonSendMetricsChange
+    narodmonSendTypesChange, narodmonSendWsensorsChange, narodmonSendWtypesChange, narodmonSendMetricsChange,
+    mqttSendPeriodChange, mqttSendBrokerChange, mqttSendPortChange, mqttSendUserChange, mqttSendPassChange,
+    mqttSendSensorsChange, mqttSendTypesChange, mqttSendWsensorsChange, mqttSendWtypesChange, mqttSendTopicsChange
 } = configSlice.actions;
   
 export default configSlice.reducer;

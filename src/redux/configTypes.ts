@@ -267,6 +267,18 @@ export interface iConfig {
             wtypes: number[],
             metrics: string[]
         },
+        mqttSend: {
+            period: number,
+            broker: string,
+            port: number,
+            user: string,
+            pass: string,
+            sensors: number[],
+            types: number[],
+            wsensors: number[],
+            wtypes: number[],
+            topics: string[]
+        },
         history: {
             period: number,
             channelID: string,

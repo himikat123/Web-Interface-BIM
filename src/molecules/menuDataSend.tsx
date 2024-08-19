@@ -10,13 +10,14 @@ import relPath from "../atoms/relPath";
 export default function MenuDataSend(props: iMenuItems) {
     const validSendThingspeak = useSelector((state: iValid) => state.valid.sendThingspeak);
     const validSendNarodmon = useSelector((state: iValid) => state.valid.sendNarodmon);
+    const validSendMqtt = useSelector((state: iValid) => state.valid.sendMqtt);
 
     return <MenuItem link="#" 
         current={props.current} 
         title={i18n.t('dataSend')} 
         mobile={props.mobile} 
         icon={<CloudArrowUp />}
-        valid={validSendThingspeak && validSendNarodmon} 
+        valid={validSendThingspeak && validSendNarodmon && validSendMqtt} 
     >
         <MenuSubItem link={relPath() + "/sendthingspeak"} 
             current={props.current} 
@@ -28,6 +29,12 @@ export default function MenuDataSend(props: iMenuItems) {
             current={props.current} 
             title={i18n.t('sendToNarodmon')} 
             valid={validSendNarodmon} 
+        />
+
+        <MenuSubItem link={relPath() + "/sendmqtt"} 
+            current={props.current} 
+            title={i18n.t('sendViaMqtt')} 
+            valid={validSendMqtt} 
         />
     </MenuItem>
 }

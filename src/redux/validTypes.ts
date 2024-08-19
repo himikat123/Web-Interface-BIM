@@ -10,6 +10,7 @@ export interface iValid {
         receive: boolean,
         sendThingspeak: boolean,
         sendNarodmon: boolean,
+        sendMqtt: boolean,
         account: boolean
     }
 }

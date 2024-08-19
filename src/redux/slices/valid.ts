@@ -13,6 +13,7 @@ export const validSlice = createSlice({
         receive: true,
         sendThingspeak: true,
         sendNarodmon: true,
+        sendMqtt: true,
         account: true
     },
     reducers: {
@@ -26,6 +27,7 @@ export const validSlice = createSlice({
         receiveValidChange: (state, action) => { state.receive = action.payload },
         sendThingspeakValidChange: (state, action) => { state.sendThingspeak = action.payload },
         sendNarodmonValidChange: (state, action) => { state.sendNarodmon = action.payload },
+        sendMqttValidChange: (state, action) => { state.sendMqtt = action.payload },
         accountValidChange: (state, action) => { state.account = action.payload },
     }
 });
@@ -41,6 +43,7 @@ export const {
     receiveValidChange,
     sendThingspeakValidChange,
     sendNarodmonValidChange,
+    sendMqttValidChange,
     accountValidChange
 } = validSlice.actions;
   

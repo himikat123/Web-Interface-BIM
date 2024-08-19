@@ -23,6 +23,7 @@ import History from './pages/history';
 import ReceiveThingspeak from './pages/receiveThingspeak';
 import SendThingspeak from './pages/sendThingspeak';
 import SendNarodmon from './pages/sendNarodmon';
+import SendMqtt from './pages/sendMqtt';
 import Language from './pages/language';
 import Backup from './pages/backup';
 import Default from './pages/default';
@@ -137,6 +138,7 @@ function App() {
                 <Route path={relPath() + '/receive'}        element={ <ReceiveThingspeak /> } />
                 <Route path={relPath() + '/sendthingspeak'} element={ <SendThingspeak /> } />
                 <Route path={relPath() + '/sendnarodmon'}   element={ <SendNarodmon /> } />
+                <Route path={relPath() + '/sendmqtt'}       element={ <SendMqtt /> } />
                 <Route path={relPath() + '/language'}       element={ <Language /> } />
                 <Route path={relPath() + '/backup'}         element={ <Backup /> } />
                 <Route path={relPath() + '/default'}        element={ <Default /> } /> 
