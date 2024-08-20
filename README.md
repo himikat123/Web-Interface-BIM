@@ -1,5 +1,7 @@
 # Web interface of weather monitor settings
 
+This web interface is designed to work together with the weather monitor https://github.com/himikat123/Weather-monitor-BIM32
+
 Page live preview: https://himikat123.github.io/Web-Interface-BIM/
 
 Start debugging
