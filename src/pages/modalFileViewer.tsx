@@ -34,7 +34,7 @@ export default function ModalFileViewer(props: iModalFileViewer) {
         confirmBtn={() => {}}
         modalClose={() => props.modalClose()}
         content={<>
-            {(props.selected.endsWith('png') || props.selected.endsWith('jpg')) 
+            {(props.selected.endsWith('.png') || props.selected.endsWith('.jpg')) 
                 ? <div className="w-full flex justify-center items-center">
                     {!imgLoaded && <div className="flex justify-center items-center h-24">
                         <StepsAnimation />
@@ -44,7 +44,7 @@ export default function ModalFileViewer(props: iModalFileViewer) {
                         onLoad={() => setImgLoaded(true)} 
                     />
                 </div>
-                : (props.selected.endsWith('json')) 
+                : (props.selected.endsWith('.json')) 
                     ? <div className="w-full">
                         {fileContent && IsJsonString(fileContent)
                             ? <JsonView data={JSON.parse(fileContent)} 
@@ -56,7 +56,7 @@ export default function ModalFileViewer(props: iModalFileViewer) {
                               </div>
                         }    
                     </div>
-                    : (props.selected.endsWith('html')) 
+                    : (props.selected.endsWith('.html') || props.selected.endsWith('.html.gz')) 
                         ? <div className="w-full">
                             {fileContent 
                                 ? <div>{fileContent}</div>
