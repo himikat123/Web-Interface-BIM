@@ -12,7 +12,7 @@ export default function CardSendMqttPeriod() {
 
     return <Card content={<NumberInput label={i18n.t('periodSeconds')}
         value={config.mqttSend.period}
-        min={1}
+        min={10}
         max={999}
         onChange={val => dispatch(cf.mqttSendPeriodChange(val))}
         isValid={valid => dispatch(sendMqttValidChange(valid))}
