@@ -14,7 +14,7 @@ export default function SendMqtt() {
     const content = <>
         <CardSendMqttOnOff />
         
-        {config.mqttSend.period >= 10 && <>
+        {config.mqttSend.period >= 30 && <>
             <CardSendMqttPeriod />
             <CardSendMqttBroker />
             <CardSendMqttUser />
