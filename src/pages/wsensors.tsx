@@ -14,6 +14,7 @@ import SelectSwitch from "../atoms/selectSwitch";
 import NumberInput from "../atoms/numberInput";
 import sensorCorrection from "../atoms/sensorCorrection";
 import Indication from "../atoms/indication";
+import { BatPercent } from "../atoms/indications/battery";
 import { iConfig } from "../redux/configTypes";
 import { iData } from "../redux/dataTypes";
 import { wsensorsValidChange } from "../redux/slices/valid";
@@ -171,10 +172,13 @@ export default function WSensors() {
                             <Indication error={!vl.WsensorDataRelevance(wsensorNum)} 
                                 value={<>
                                     {vl.validateBatteryADC(data.wsensor.bat[wsensorNum])
-                                        ? (Math.round((data.wsensor.bat[wsensorNum] / (300 - config.wsensor.bat.k[wsensorNum])) * 1000) / 1000).toFixed(3)
+                                        ? (Math.round(
+                                            (
+                                                data.wsensor.bat[wsensorNum] / (300 - config.wsensor.bat.k[wsensorNum])
+                                            ) * 1000) / 1000).toFixed(3) 
+                                            + i18n.t('units.v') + " " + BatPercent(wsensorNum)
                                         : "--"
                                     }
-                                    {i18n.t('units.v')}
                                 </>} 
                             />
                         </div>} 
