@@ -141,6 +141,7 @@ function App() {
                 <Route path={relPath() + '/weather'}        element={ <Weather /> } />
                 <Route path={relPath() + '/clock'}          element={ <Clock /> } />
                 <Route path={relPath() + '/alarm'}          element={ <Alarm /> } />
+                <Route path={relPath() + '/display'}        element={ <Display1 /> } />
                 <Route path={relPath() + '/display1'}       element={ <Display1 /> } />
                 <Route path={relPath() + '/display2'}       element={ <Display2 /> } />
                 <Route path={relPath() + '/sound'}          element={ <Sound /> } />

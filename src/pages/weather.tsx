@@ -16,6 +16,9 @@ export default function Weather() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const [disabled, setDisabled] = useState([false, false, false]);
+    let providers: string[] = [];
+    if(device() === 'WeatherMonitorBIM') providers = ['open-meteo.com', 'weatherbit.io'];
+    if(device() === 'WeatherMonitorBIM32') providers = ['openweathermap.org', 'weatherbit.io', 'open-meteo.com'];
 
     useEffect(() => {
         setDisabled([config.weather.provider > 1, config.weather.provider > 0, false]);
@@ -24,7 +27,7 @@ export default function Weather() {
     const content = <>
         <Card content={<>
             <SelectSwitch label={i18n.t('weatherForecastSource')}
-                options={['openweathermap.org', 'weatherbit.io', 'open-meteo.com']}
+                options={providers}
                 value={config.weather.provider}
                 onChange={val => {
                     dispatch(cf.weatherProwiderChange(val));
@@ -40,14 +43,6 @@ export default function Weather() {
                         val: val.target.value.trim(), 
                         num: config.weather.provider
                     }))}
-                />
-            </div>}
-
-            {device() === 'WeatherMonitorBIM' && <div className="my-8">
-                <TextInput label={i18n.t('parsingServer')} 
-                    value={config.weather.parsingServer}
-                    maxLength={127}
-                    onChange={val => dispatch(cf.weatherParsingServerChange(val.target.value.trim()))}
                 />
             </div>}
         </>} />

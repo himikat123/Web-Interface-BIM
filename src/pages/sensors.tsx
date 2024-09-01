@@ -19,7 +19,7 @@ export default function Sensors() {
     const data = useSelector((state: iData) => state.data);
 
     let content = [];
-    content.push(<Card header="BME680" key="BME680"
+    if(device() === 'WeatherMonitorBIM32') content.push(<Card header="BME680" key="BME680"
         content={<>
             {sensorCorrection(false, "t", 
                 config.sensors.bme680.t, 
