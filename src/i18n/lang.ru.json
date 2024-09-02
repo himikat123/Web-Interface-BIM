@@ -243,7 +243,7 @@
     "nightMode": "Время начала ночи",
     "brightness": "Яркость",
     "timeSlot": "Временной слот",
-    "displayDuration": "Длительность отображения (секунд)",
+    "displayDuration": "Длительность (секунд)",
     "displayColor": "Цвет отображения",
     "firmwareVersion": "Версия прошивки",
     "esp32Temp": "Температура ESP32",

@@ -4,6 +4,7 @@ import 'moment/locale/de';
 import 'moment/locale/ru';
 import 'moment/locale/pl';
 import 'moment/locale/uk';
+import 'moment/locale/bg';
 import { useSelector } from 'react-redux';
 import { iConfig } from "../redux/configTypes";
 import { iData } from "../redux/dataTypes";
@@ -28,11 +29,11 @@ export default function ThingReceiveDataDate() {
                 <Moment unix format="HH:mm:ss DD.MM.YYYY">
                     {data.thing.time + new Date().getTimezoneOffset() * 60}
                 </Moment> (
-                    {config.lang === 'de' && i18n.t('ago') + ' '}
+                    {(config.lang === 'de' || config.lang === 'bg') && i18n.t('ago') + ' '}
                     <Moment locale={locale} unix fromNow ago>
                         {data.thing.time + new Date().getTimezoneOffset() * 60}
                     </Moment>
-                    {config.lang !== 'de' && ' ' + i18n.t('ago')}
+                    {(config.lang !== 'de' && config.lang !== 'bg') && ' ' + i18n.t('ago')}
                 ) {!vl.ThingspeakDataRelevance() && <> - {i18n.t('dataExpired')}</>}
             </> : '--'}
         </div>

@@ -10,6 +10,8 @@ import { ReactComponent as FlagDE } from '../atoms/icons/flagDE.svg';
 import { ReactComponent as FlagRU } from '../atoms/icons/flagRU.svg';
 import { ReactComponent as FlagPL } from '../atoms/icons/flagPL.svg';
 import { ReactComponent as FlagUA } from '../atoms/icons/flagUA.svg';
+import { ReactComponent as FlagBG } from '../atoms/icons/flagBG.svg';
+
 import relPath from "../atoms/relPath";
 
 export default function MenuSystem(props: iMenuItems) {
@@ -33,6 +35,7 @@ export default function MenuSystem(props: iMenuItems) {
                         {config.lang === 'ru' && <FlagRU />}
                         {config.lang === 'pl' && <FlagPL />}
                         {config.lang === 'ua' && <FlagUA />}
+                        {config.lang === 'bg' && <FlagBG />}
                     </div>
                 </div>} 
             valid={true} 

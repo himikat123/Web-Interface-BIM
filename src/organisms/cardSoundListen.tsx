@@ -21,6 +21,10 @@ export default function CardSoundListen() {
             if((i >= 2 && i <= 4) || (i >= 22 && i <= 23)) clockSounds.push(`${i} ${i18n.t('hour.few')}`);
             if(i === 0 || (i >= 5 && i <= 20)) clockSounds.push(`${i} ${i18n.t('hour.many')}`);
         }
+        if(config.lang === 'bg') {
+            if(i === 1) clockSounds.push(`${i} ${i18n.t('hour.one')}`);
+            else clockSounds.push(`${i} ${i18n.t('hour.many')}`);
+        }
         else clockSounds.push(`${i} ${i18n.t('hour.many')}`);
     }
 

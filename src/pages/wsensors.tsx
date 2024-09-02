@@ -6,6 +6,7 @@ import 'moment/locale/de';
 import 'moment/locale/ru';
 import 'moment/locale/pl';
 import 'moment/locale/uk';
+import 'moment/locale/bg';
 import i18n from '../i18n/main';
 import Card from "../atoms/card";
 import Button from "../atoms/button";
@@ -47,11 +48,11 @@ export default function WSensors() {
                                         <Moment unix format="HH:mm:ss DD.MM.YYYY">
                                             {data.wsensor.time[wsensorNum] + new Date().getTimezoneOffset() * 60}
                                         </Moment><br />
-                                        {config.lang === 'de' && i18n.t('ago') + ' '}
+                                        {(config.lang === 'de' || config.lang === 'bg') && i18n.t('ago') + ' '}
                                         <Moment locale={locale} unix fromNow ago>
                                             {data.wsensor.time[wsensorNum] + new Date().getTimezoneOffset() * 60}
                                         </Moment>
-                                        {config.lang !== 'de' && ' ' + i18n.t('ago')}
+                                        {(config.lang !== 'de' && config.lang !== 'bg') && ' ' + i18n.t('ago')}
                                     </>
                                 }
                                 {vl.WsensorDataRelevance(wsensorNum) 

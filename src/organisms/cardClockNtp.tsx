@@ -5,6 +5,7 @@ import 'moment/locale/de';
 import 'moment/locale/ru';
 import 'moment/locale/pl';
 import 'moment/locale/uk';
+import 'moment/locale/bg';
 import Card from "../atoms/card";
 import TextInput from "../atoms/textInput";
 import NumberInput from "../atoms/numberInput";
