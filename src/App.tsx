@@ -126,6 +126,10 @@ function App() {
         return () => clearInterval(dataFetchInterval);
     }, [configState, alarmsState, dispatch, dataFetching, updateData, path, navigate, stopDataFetching]);
 
+    useEffect(() => {
+        dispatch(updateDataChange(true));
+    }, []);
+
     return (
         <div className={"bg-page_light dark:bg-page_dark text-text_light dark:text-text_dark min-h-screen"}>
             {configState === 'error' ? <NoConfig /> :
