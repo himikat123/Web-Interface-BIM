@@ -17,7 +17,7 @@ export default function lcdShowAntenna(ctx: CanvasRenderingContext2D, prevSignal
         if(rssi >= 0) ant = ant_AP();
 
         if(dispModel) drawImage(ctx, ant, x, 0)
-        else drawScaledImage(ctx, ant_4(), x, 0, 32, 32);
+        else drawScaledImage(ctx, ant, x, 0, 32, 32);
     }
     return signal;
 }
