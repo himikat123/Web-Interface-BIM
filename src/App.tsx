@@ -128,7 +128,7 @@ function App() {
 
     useEffect(() => {
         dispatch(updateDataChange(true));
-    }, []);
+    }, [dispatch]);
 
     return (
         <div className={"bg-page_light dark:bg-page_dark text-text_light dark:text-text_dark min-h-screen"}>
