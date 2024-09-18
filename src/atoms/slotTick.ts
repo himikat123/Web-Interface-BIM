@@ -31,6 +31,7 @@ export default function slotTick(dispNum: number, state: iSegState): iSegState {
 
     const segData = segAnimations(dispNum, state);
     const date = new Date();
+
     return {
         segments: segData.dispImg,
         colors: segData.colors,

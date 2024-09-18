@@ -246,6 +246,7 @@
     "displayDuration": "Czas wyświetlania (sekundy)",
     "displayColor": "Kolor wyświetlania",
     "firmwareVersion": "Wersja oprogramowania układowego",
+    "webInterfaceVersion": "Wersja web-interfejsu",
     "esp32Temp": "Temperatura ESP32",
     "runtime": "Czas pracy",
     "systemTimeAndDate": "Czas i data systemu",
@@ -351,5 +352,10 @@
     "rainShowers": "Przelotne opady deszczu",
     "snowShowers": "Opady śniegu",
     "thunderstorm": "Burza z piorunami",
-    "thunderstormWithHail": "Burza z gradem"
+    "thunderstormWithHail": "Burza z gradem",
+    "day": "dzień",
+    "month": "miesiąc",
+    "year": "rok",
+    "twoDigits": "2 cyfry",
+    "fourDigits": "4 cyfry"
 }

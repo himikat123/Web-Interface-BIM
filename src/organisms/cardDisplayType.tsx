@@ -26,32 +26,25 @@ export default function CardDisplayType(props: iDisplay) {
         { 'ILI9341': 100 }
     ];
     const segment = [
-        { [`TM1637 (4${i18n.t('digits')}, ${i18n.t('withoutSeconds')}, ${i18n.t('points')})`]: 90 },
-        { [`TM1637 (6${i18n.t('digits')}, ${i18n.t('withoutSeconds')}, ${i18n.t('points')})`]: 130 },
-        { [`TM1637 (6${i18n.t('digits')}, ${i18n.t('withSeconds')}, ${i18n.t('points')})`]: 130 },
-        { [`MAX7219 (4${i18n.t('digits')}, ${i18n.t('withoutSeconds')}, ${i18n.t('points')})`]: 90 },
-        { [`MAX7219 (6${i18n.t('digits')}, ${i18n.t('withoutSeconds')}, ${i18n.t('points')})`]: 130 },
-        { [`MAX7219 (6${i18n.t('digits')}, ${i18n.t('withoutSeconds')}, ${i18n.t('dashes')})`]: 130 },
-        { [`MAX7219 (6${i18n.t('digits')}, ${i18n.t('withSeconds')}, ${i18n.t('points')})`]: 130 },
-        { [`MAX7219 (8${i18n.t('digits')}, ${i18n.t('withoutSeconds')}, ${i18n.t('points')})`]: 170 },
-        { [`MAX7219 (8${i18n.t('digits')}, ${i18n.t('withoutSeconds')}, ${i18n.t('dashes')})`]: 170 },
-        { [`MAX7219 (8${i18n.t('digits')}, ${i18n.t('withSeconds')}, ${i18n.t('points')})`]: 170 },
-        { [`MAX7219 (8${i18n.t('digits')}, ${i18n.t('withSeconds')}, ${i18n.t('dashes')})`]: 170 },
-        { [`MAX7219 (8${i18n.t('digits')}, ${i18n.t('withMilliSeconds')}, ${i18n.t('points')})`]: 170 }
+        { [`TM1637 (4${i18n.t('digits')})`]: 90 },
+        { [`TM1637 (6${i18n.t('digits')})`]: 130 },
+        { [`MAX7219 (4${i18n.t('digits')})`]: 90 },
+        { [`MAX7219 (6${i18n.t('digits')})`]: 130 },
+        { [`MAX7219 (8${i18n.t('digits')})`]: 170 }
     ];
     const matrix = [
-        { [`MAX7219 (${i18n.t('matrices4')}, ${i18n.t('withoutSeconds')}, ${i18n.t('points')})`]: 680 }
+        { [`MAX7219 (${i18n.t('matrices4')})`]: 680 }
     ];
     const neopixel = [
-        { [`WS2812b (4${i18n.t('digits')}, ${i18n.t('withoutSeconds')}, 1 ${i18n.t('ledPerSegment')})`]: 1800 },
-        { [`WS2812b (4${i18n.t('digits')}, ${i18n.t('withoutSeconds')}, 2 ${i18n.t('ledsPerSegment')})`]: 3480 },
-        { [`WS2812b (4${i18n.t('digits')}, ${i18n.t('withoutSeconds')}, 3 ${i18n.t('ledsPerSegment')})`]: 5160 },
-        //{ [`WS2812b (6${i18n.t('digits')}, ${i18n.t('withSeconds')}, 1 ${i18n.t('ledPerSegment')})`]: 2760 },
-        //{ [`WS2812b (6${i18n.t('digits')}, ${i18n.t('withSeconds')}, 2 ${i18n.t('ledsPerSegment')})`]: 5280 },
-        //{ [`WS2812b (6${i18n.t('digits')}, ${i18n.t('withSeconds')}, 3 ${i18n.t('ledsPerSegment')})`]: 7800 },
-        //{ [`WS2812b (8${i18n.t('digits')}, ${i18n.t('withMilliSeconds')}, 1 ${i18n.t('ledPerSegment')})`]: 3720 },
-        //{ [`WS2812b (8${i18n.t('digits')}, ${i18n.t('withMilliSeconds')}, 2 ${i18n.t('ledsPerSegment')})`]: 7080 },
-        //{ [`WS2812b (8${i18n.t('digits')}, ${i18n.t('withMilliSeconds')}, 3 ${i18n.t('ledsPerSegment')})`]: 10440 }
+        { [`WS2812b (4${i18n.t('digits')}, 1 ${i18n.t('ledPerSegment')})`]: 1800 },
+        { [`WS2812b (4${i18n.t('digits')}, 2 ${i18n.t('ledsPerSegment')})`]: 3480 },
+        { [`WS2812b (4${i18n.t('digits')}, 3 ${i18n.t('ledsPerSegment')})`]: 5160 },
+        { [`WS2812b (6${i18n.t('digits')}, 1 ${i18n.t('ledPerSegment')})`]: 2760 },
+        { [`WS2812b (6${i18n.t('digits')}, 2 ${i18n.t('ledsPerSegment')})`]: 5280 },
+        { [`WS2812b (6${i18n.t('digits')}, 3 ${i18n.t('ledsPerSegment')})`]: 7800 },
+        //{ [`WS2812b (8${i18n.t('digits')}, 1 ${i18n.t('ledPerSegment')})`]: 3720 },
+        //{ [`WS2812b (8${i18n.t('digits')}, 2 ${i18n.t('ledsPerSegment')})`]: 7080 },
+        //{ [`WS2812b (8${i18n.t('digits')}, 3 ${i18n.t('ledsPerSegment')})`]: 10440 }
     ];
     const nixie = [
         { [`Nixie (4${i18n.t('tubes')})`]: 1000 },
@@ -111,7 +104,12 @@ export default function CardDisplayType(props: iDisplay) {
             <SelectSwitch label={i18n.t('displayModel')}
                 options={models}
                 value={config.display.model[props.num]}
-                onChange={val => dispatch(cf.displayModelChange({num: props.num, val: val}))}
+                onChange={val => {
+                    dispatch(cf.displayModelChange({num: props.num, val: val}));
+                    for(let i=0; i<8; i++) {
+                        dispatch(cf.displayTimeslotDataChange({slot: i, num: props.num, val: 0}));
+                    }
+                }}
             />
         </div>}
 

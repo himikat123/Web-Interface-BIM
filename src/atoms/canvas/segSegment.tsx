@@ -19,6 +19,7 @@ export default function SegSegment(props: iSegment) {
         [0, 1, 1, 0, 1, 1, 1], /* H */
         [0, 0, 0, 0, 0, 0, 0], /* space */
         [0, 0, 0, 0, 0, 0, 1], /* - */
+        [0, 0, 1, 1, 1, 0, 1] /* o */
     ];
 
     return <svg height="60" className={props.point ? 'm-0.5' : 'ms-0.5'} viewBox="0 0 3.1101497 5.3307571">

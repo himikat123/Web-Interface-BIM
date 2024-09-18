@@ -75,7 +75,7 @@ const data = (cookieCode) => {
             temp: random(20, 25), // obviously correct values
             hum: random(50, 55),
             pres: random(900, 950),
-            iaq: random(80, 235),
+            iaq: random(0, 210),
             iaqAccr: Math.round(random(0, 3))
         },
         bme280: {

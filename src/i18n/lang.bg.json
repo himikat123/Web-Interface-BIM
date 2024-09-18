@@ -246,6 +246,7 @@
     "displayDuration": "Продължителност (секунди)",
     "displayColor": "Цвят на дисплея",
     "firmwareVersion": "Версия на фърмуера",
+    "webInterfaceVersion": "Версия на уеб интерфейса",
     "esp32Temp": "Температура ESP32",
     "runtime": "Продължителност на работа",
     "systemTimeAndDate": "Системно време и дата",
@@ -351,5 +352,10 @@
     "rainShowers": "Ръмеж",
     "snowShowers": "Обилен снеговалеж",
     "thunderstorm": "Буря",
-    "thunderstormWithHail": "Градушка"
+    "thunderstormWithHail": "Градушка",
+    "day": "ден",
+    "month": "месец",
+    "year": "година",
+    "twoDigits": "2 цифри",
+    "fourDigits": "4 цифри"
 }

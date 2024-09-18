@@ -6,6 +6,7 @@ export default function segSymbCodes() {
         SYMB_P: 13,
         SYMB_H: 14,
         SYMB_SPACE: 15,
-        SYMB_MINUS: 16
+        SYMB_MINUS: 16,
+        SYMB_o: 17
     };
 }

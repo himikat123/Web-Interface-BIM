@@ -85,20 +85,20 @@ function App() {
                 dispatch(dataStateChange('ok'));
                 dispatch(dataFetchingChange(false));
                 dispatch(updateDataChange(false));
-                let data = res.data;
+                let resData = { ...res.data };
                 if(res.data.state === 'DEMO') {
                     const date = new Date();
                     const timezoneOffset = date.getTimezoneOffset();
-                    data.time = Math.round(Date.now() / 1000 - timezoneOffset * 60);
-                    data.runtime = Math.round(Date.now() / 1000 - 1724076829);
-                    data.wsensor.time[0] = Math.round(data.time - 8 * 60);
-                    data.wsensor.time[1] = Math.round(data.time - 12 * 60);
-                    data.weather.time = Math.round(data.time - 15 * 60);
-                    data.thing.time = Math.round(data.time - 7 * 60);
+                    resData.time = Math.round(Date.now() / 1000 - timezoneOffset * 60);
+                    resData.runtime = Math.round(Date.now() / 1000 - 1726673014);
+                    resData.wsensor.time[0] = Math.round(resData.time - 8 * 60);
+                    resData.wsensor.time[1] = Math.round(resData.time - 12 * 60);
+                    resData.weather.time = Math.round(resData.time - 15 * 60);
+                    resData.thing.time = Math.round(resData.time - 7 * 60);
                 }
                 if(res.data.state === 'OK') if(path === relPath() + '/login') navigate('/');
                 if(res.data.state === 'LOGIN') if(path !== relPath() + '/login') navigate('/login');
-                dispatch(setDataState(data));
+                dispatch(setDataState(resData));
             })
             .catch(err => {
                 dispatch(dataStateChange('error'));

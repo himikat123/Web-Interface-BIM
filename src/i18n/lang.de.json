@@ -246,6 +246,7 @@
     "displayDuration": "Anzeigedauer (Sekunden)",
     "displayColor": "Anzeigefarbe",
     "firmwareVersion": "Firmware-Version",
+    "webInterfaceVersion": "Webinterface-Version",
     "esp32Temp": "ESP32-Temperatur",
     "runtime": "Laufzeit",
     "systemTimeAndDate": "Systemzeit und -datum",
@@ -351,5 +352,10 @@
     "rainShowers": "Regenschauer",
     "snowShowers": "Schneeschauer",
     "thunderstorm": "Gewitter",
-    "thunderstormWithHail": "Gewitter mit Hagel"
+    "thunderstormWithHail": "Gewitter mit Hagel",
+    "day": "Datum",
+    "month": "Monat",
+    "year": "Jahr",
+    "twoDigits": "2 Ziffern",
+    "fourDigits": "4 Ziffern"
 }

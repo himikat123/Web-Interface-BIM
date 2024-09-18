@@ -410,6 +410,7 @@ export interface iSegState {
 }
 
 export interface iSegClockPoints {
+    slot: number,
     clockpoints: boolean,
     points: boolean, 
     color: string, 

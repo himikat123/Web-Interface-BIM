@@ -246,6 +246,7 @@
     "displayDuration": "Display duration (seconds)",
     "displayColor": "Display color",
     "firmwareVersion": "Firmware version",
+    "webInterfaceVersion": "Web interface version",
     "esp32Temp": "ESP32 temperature",
     "runtime": "Runtime",
     "systemTimeAndDate": "System time and date",
@@ -351,5 +352,10 @@
     "rainShowers": "Rain showers",
     "snowShowers": "Snow showers",
     "thunderstorm": "Thunderstorm",
-    "thunderstormWithHail": "Thunderstorm with hail"
+    "thunderstormWithHail": "Thunderstorm with hail",
+    "day": "date",
+    "month": "month",
+    "year": "year",
+    "twoDigits": "2 digits",
+    "fourDigits": "4 digits"
 }

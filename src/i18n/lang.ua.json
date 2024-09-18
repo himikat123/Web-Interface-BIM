@@ -246,6 +246,7 @@
     "displayDuration": "Тривалість (секунди)",
     "displayColor": "Колір відображення",
     "firmwareVersion": "Версія прошивки",
+    "webInterfaceVersion": "Версія веб-інтерфейсу",
     "esp32Temp": "Температура ESP32",
     "runtime": "Час виконання",
     "systemTimeAndDate": "Системний час та дата",
@@ -351,5 +352,10 @@
     "rainShowers": "Злива",
     "snowShowers": "Сильний снігопад",
     "thunderstorm": "Гроза",
-    "thunderstormWithHail": "Гроза з градом"
+    "thunderstormWithHail": "Гроза з градом",
+    "day": "число",
+    "month": "місяць",
+    "year": "рік",
+    "twoDigits": "2 цифри",
+    "fourDigits": "4 цифри"
 }

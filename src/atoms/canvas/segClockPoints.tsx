@@ -13,6 +13,10 @@ export default function SegClockPoints(props: iSegClockPoints) {
         default: ; break;
     }
     if(!props.clockpoints) point1 = point2 = false;
+    if(config.display.timeSlot.sensor[props.slot][props.dispNum] === 1) {
+        point1 = false;
+        point2 = config.display.model[props.dispNum] < 3 ? true : props.points
+    }
 
     return <svg height="40" viewBox="0 0 4.42 19.2" style={{marginTop: '15px'}}>
         <g transform="translate(-45.4,-20.4)">
