@@ -14,6 +14,10 @@ export default function CardStatusSystem() {
     return <div className='text-center'>
         <h2 className='text-xl'>{i18n.t('system')}</h2>
         <div className='mt-4'>
+            <p>{i18n.t('webInterfaceVersion')}</p>
+            <p className='text-blue-700 dark:text-blue-400'>v{process.env.REACT_APP_VERSION}</p>
+        </div>
+        <div className='mt-4'>
             <p>{i18n.t('firmwareVersion')}</p>
             <p className='text-blue-700 dark:text-blue-400'>{data.fw}</p>
         </div>
