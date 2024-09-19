@@ -176,7 +176,7 @@ const data = (cookieCode) => {
                 speed: random(1, 7),
                 dir: random(0, 360)
             },
-            descript: "rain mit снег",
+            descript: "Regen rain дождь deszcz дощ",
             time: Math.floor(date - random(600, 660)), // 10 - 11 minutes ago
             daily: {
                 tMax: [random(-25, 25), random(-25, 25), random(-25, 25), random(-25, 25)],

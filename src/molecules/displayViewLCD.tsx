@@ -40,7 +40,8 @@ export default function DisplayViewLCD() {
     const [clockPointsState, setClockPointsState] = useState<boolean>(false);
     const [prevTime, setPrevTime] = useState<number>(-1);
     const [prevWeekday, setPrevWeekday] = useState<string>('');
-    const [prevComfort, setPrevComfort] = useState<string>(''); 
+    const [prevComfort, setPrevComfort] = useState<string>('');
+    const [comfortShift, setComfortShift] = useState<number>(0); 
     const [prevTempIn, setPrevTempIn] = useState<number>(-40400);
     const [prevTempOut, setPrevTempOut] = useState<number>(-40400);
     const [prevHumIn, setPrevHumIn] = useState<number>(-40400);
@@ -48,6 +49,7 @@ export default function DisplayViewLCD() {
     const [prevPresOut, setPrevPresOut] = useState<number>(-40400);
     const [prevIcon, setPrevIcon] = useState<number>(404);
     const [prevDescr, setPrevDescr] = useState<string>('');
+    const [descriptShift, setDescriptShift] = useState<number>(0);
     const [prevWindSpeed, setPrevWindSpeed] = useState<number>(-1);
     const [prevWindDirection, setPrevWindDirection] = useState<number>(-1);
     const [prevUpdTime, setPrevUpdTime] = useState<number>(0);
@@ -93,13 +95,17 @@ export default function DisplayViewLCD() {
             setPrevVolt(lcdShowVoltageOrPercentage(ctx, prevVolt, BATTERY_COLOR, TEMP_MIN_COLOR, BG_COLOR));
 
             /* Show comfort level */
-            setPrevComfort(lcdShowComfort(ctx, prevComfort, sequence.descript, TEXT_COLOR, BG_COLOR));
+            const comfort = lcdShowComfort(ctx, prevComfort, comfortShift, sequence.descript, TEXT_COLOR, BG_COLOR)
+            setPrevComfort(comfort[0]);
+            setComfortShift(comfort[1]);
 
             /* Show weather icon */
             setPrevIcon(lcdShowWeatherIcon(ctx, prevIcon));
 
             /* Show weather description */
-            setPrevDescr(lcdShowDescription(ctx, prevDescr, TEXT_COLOR, BG_COLOR));
+            const descript = lcdShowDescription(ctx, prevDescr, descriptShift, TEXT_COLOR, BG_COLOR);
+            setPrevDescr(descript[0]);
+            setDescriptShift(descript[1]);
 
             /* Show temperature inside */
             setPrevTempIn(lcdShowTemperatureInside(ctx, prevTempIn, sequence.temp, TEMPERATURE_COLOR, BG_COLOR));
@@ -135,7 +141,7 @@ export default function DisplayViewLCD() {
         }
     }, [
         clockPointsState, prevAnt, prevBatLevel, prevDescr, prevForecast, prevHumIn, prevAlarmState,
-        prevHumOut, prevIcon, prevPresOut, prevTempIn, prevTempOut, prevTime, prevUpdTime, 
+        prevHumOut, prevIcon, prevPresOut, prevTempIn, prevTempOut, prevTime, prevUpdTime, comfortShift,
         prevVolt, prevWeekday, prevWindDirection, prevWindSpeed, prevComfort, sequence, dispModel
     ]);
 
@@ -147,9 +153,10 @@ export default function DisplayViewLCD() {
   
     useEffect(() => {
         const int = setInterval(() => {
-            setClockPointsState((clockPointsState) => !clockPointsState);
+            const date = new Date();
+            setClockPointsState((date.getMilliseconds() % 1000) > 500);
             draw();
-        }, 500);
+        }, 30);
         return () => clearInterval(int);
     }, [draw]);
 

@@ -55,3 +55,21 @@ export function printText(ctx: CanvasRenderingContext2D, x: number, y: number, w
     if(align === 'right') x += w;
     ctx.fillText(text, x, y + font - font / 4);
 }
+
+export function printScrollText(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, l: number, shift: number, text: string, font: number, color: string, bgColor: string): number {
+    const canv = document.createElement('canvas');
+    canv.width = l + w;
+    canv.height = h;
+    let cnv = canv.getContext('2d');
+    if(cnv) {
+        fillRect(cnv, 0, 0, l + w, h, bgColor);
+        cnv.font = `${font}px Ubuntu`;
+        cnv.fillStyle = color;
+        cnv.textAlign = 'left';
+        cnv.fillText(text, 0, 0 + font - font / 4);
+        ctx.drawImage(canv, shift++, 0, w, h, x, y, w, h);
+    }
+    if(shift > (l + 1)) shift = 0 - w;
+
+    return shift;
+}
