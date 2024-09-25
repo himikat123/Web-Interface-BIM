@@ -142,7 +142,7 @@ export default function DisplayViewLCD() {
     }, [
         clockPointsState, prevAnt, prevBatLevel, prevDescr, prevForecast, prevHumIn, prevAlarmState,
         prevHumOut, prevIcon, prevPresOut, prevTempIn, prevTempOut, prevTime, prevUpdTime, comfortShift,
-        prevVolt, prevWeekday, prevWindDirection, prevWindSpeed, prevComfort, sequence, dispModel
+        prevVolt, prevWeekday, prevWindDirection, prevWindSpeed, prevComfort, sequence, dispModel, descriptShift
     ]);
 
     useEffect(() => {
