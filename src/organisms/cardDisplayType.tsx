@@ -81,10 +81,10 @@ export default function CardDisplayType(props: iDisplay) {
             break;
     }
     
-    const sendLimits = () => {
+    const sendLimits = (newVal: number, type: string) => {
         let url = `${hostUrl()}/esp/brightLimit`;
-        url += `?min=${config.display.brightness.min[props.num]}`;
-        url += `&max=${config.display.brightness.max[props.num]}`;
+        url += `?min=${type === 'min' ? newVal : config.display.brightness.min[props.num]}`;
+        url += `&max=${type === 'max' ? newVal : config.display.brightness.max[props.num]}`;
         url += `&num=${props.num}`;
         url += `&code=${localStorage.getItem('code') || '0'}`;
         fetch(url);
@@ -124,7 +124,7 @@ export default function CardDisplayType(props: iDisplay) {
                 indication={String(config.display.brightness.max[props.num])}
                 onChange={val => {
                     dispatch(cf.displayBrightMaxChange({num: props.num, val: val}));
-                    sendLimits();
+                    sendLimits(val, 'max');
                 }}
                 className="mt-2"
             />
@@ -139,7 +139,7 @@ export default function CardDisplayType(props: iDisplay) {
                 indication={String(config.display.brightness.min[props.num])}
                 onChange={val => {
                     dispatch(cf.displayBrightMinChange({num: props.num, val: val}));
-                    sendLimits();
+                    sendLimits(val, 'min');
                 }}
                 className="mt-4"
             />
