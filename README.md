@@ -25,4 +25,5 @@ and then run `gulp`
 
 
 ## Public to gihub-pages
-`npm run deploy`
+in file **/package.json** replace **homepage_** with **homepage**
+then `npm run deploy`
