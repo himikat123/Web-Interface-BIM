@@ -1,7 +1,7 @@
 {
   "name": "web-interface-bim",
-  "version": "1.4.1",
-  "homepage_": "https://himikat123.github.io/Web-Interface-BIM",
+  "version": "1.5.0",
+  "homepage": "https://himikat123.github.io/Web-Interface-BIM/",
   "private": true,
   "dependencies": {
     "@phosphor-icons/react": "^2.1.4",

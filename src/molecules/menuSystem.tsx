@@ -12,8 +12,6 @@ import { ReactComponent as FlagPL } from '../atoms/icons/flagPL.svg';
 import { ReactComponent as FlagUA } from '../atoms/icons/flagUA.svg';
 import { ReactComponent as FlagBG } from '../atoms/icons/flagBG.svg';
 
-import relPath from "../atoms/relPath";
-
 export default function MenuSystem(props: iMenuItems) {
     const config = useSelector((state: iConfig) => state.config);
         
@@ -24,7 +22,7 @@ export default function MenuSystem(props: iMenuItems) {
         icon={<Gear />} 
         valid={true}
     >
-        <MenuSubItem link={relPath() + "/language"} 
+        <MenuSubItem link={"/language"} 
             current={props.current} 
             title={
                 <div className="flex items-center">
@@ -43,19 +41,19 @@ export default function MenuSystem(props: iMenuItems) {
             
         <hr className="m-2" />
         
-        <MenuSubItem link={relPath() + "/backup"} 
+        <MenuSubItem link={"/backup"} 
             current={props.current} 
             title={i18n.t('backup')} 
             valid={true} 
         />
 
-        <MenuSubItem link={relPath() + "/default"} 
+        <MenuSubItem link={"/default"} 
             current={props.current} 
             title={i18n.t('defaultSettings')} 
             valid={true} 
         />
         
-        <MenuSubItem link={relPath() + "/filesystem"} 
+        <MenuSubItem link={"/filesystem"} 
             current={props.current} 
             title={i18n.t('fileSystem')} 
             valid={true} 

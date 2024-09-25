@@ -3,7 +3,6 @@ import { JsonView, darkStyles, defaultStyles } from 'react-json-view-lite';
 import Modal from "../templates/modal";
 import i18n from "../i18n/main";
 import { iModalFileViewer } from "../interfaces";
-import relPath from "../atoms/relPath";
 import StepsAnimation from "../atoms/stepsAnimation";
 
 export function IsJsonString(str: string): boolean {
@@ -22,7 +21,7 @@ export default function ModalFileViewer(props: iModalFileViewer) {
 
     useEffect(() => {
         if(!props.selected.endsWith('png') && !props.selected.endsWith('jpg')) {
-            fetch(`${relPath()}${props.path}${props.selected}?code=${localStorage.getItem('code') || '0'}`)
+            fetch(`${props.path}${props.selected}?code=${localStorage.getItem('code') || '0'}`)
             .then(res => res.text())
             .then((result: string) => {
                 setFileContent(result)
@@ -39,7 +38,7 @@ export default function ModalFileViewer(props: iModalFileViewer) {
                     {!imgLoaded && <div className="flex justify-center items-center h-24">
                         <StepsAnimation />
                     </div>}
-                    <img src={relPath() + props.path + props.selected} 
+                    <img src={props.path + props.selected} 
                         alt={props.selected} 
                         onLoad={() => setImgLoaded(true)} 
                     />

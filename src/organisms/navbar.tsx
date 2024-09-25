@@ -40,7 +40,7 @@ export default function Navbar() {
     useOutsideAlerter(wrapperRef);
 
     /* url pathname */
-    const currentPath = window.location.pathname;
+    const currentPath = window.location.hash.replace('#', '');
     
     return <> 
         <nav ref={wrapperRef} className="bg-menu_light dark:bg-menu_dark navbar fixed z-40 w-full">

@@ -5,7 +5,6 @@ import MenuItem from "../atoms/menuItem";
 import MenuSubItem from "../atoms/menuSubItem";
 import i18n from '../i18n/main';
 import { WifiHigh } from "@phosphor-icons/react";
-import relPath from "../atoms/relPath";
 
 export default function MenuNetwork(props: iMenuItems) {
     const validConnect = useSelector((state: iValid) => state.valid.connect);
@@ -18,12 +17,12 @@ export default function MenuNetwork(props: iMenuItems) {
         icon={<WifiHigh />} 
         valid={validConnect && validAccesspoint}
     >
-        <MenuSubItem link={relPath() + "/connect"} 
+        <MenuSubItem link={"/connect"} 
             current={props.current} 
             title={i18n.t('connections')} 
             valid={validConnect} 
         />
-        <MenuSubItem link={relPath() + "/accesspoint"} 
+        <MenuSubItem link={"/accesspoint"} 
             current={props.current} 
             title={i18n.t('accessPoint')} 
             valid={validAccesspoint} 
