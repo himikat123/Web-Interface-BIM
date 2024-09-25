@@ -161,8 +161,10 @@ function App() {
                 <Route path={'/userpass'}       element={ <Password /> } />
                 <Route path={'/login'}          element={ <Login />} />
                 <Route path={'/*'}              element={ <PageNotFound /> } />
-                <Route path={'/filesystem'}
-                    element={ <Filesystem stopDataFetching={val => setStopDataFetching(val)} /> } />
+                <Route path={'/filesystem'}     element={ <Filesystem
+                    dataFetching={dataFetching} 
+                    stopDataFetching={val => setStopDataFetching(val)} 
+                /> } />
             </Routes>}
         </div>
     );

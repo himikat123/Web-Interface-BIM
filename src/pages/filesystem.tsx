@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useSelector } from 'react-redux';
 import i18n from "../i18n/main";
 import axios from "axios";
@@ -16,7 +16,7 @@ import { ReactComponent as JsonSVG } from '../atoms/icons/json.svg';
 import { ReactComponent as ImageSVG } from '../atoms/icons/image.svg';
 import { ReactComponent as RubickSVG } from '../atoms/icons/rubick.svg';
 
-export default function Filesystem(props: {stopDataFetching(val: boolean): void}) {
+export default function Filesystem(props: {stopDataFetching(val: boolean): void, dataFetching: boolean}) {
     const data = useSelector((state: iData) => state.data);
     const [filelist, setFilelist] = useState<iFilelist>([]);
     const [selected, setSelected] = useState<string>('.');
@@ -27,6 +27,8 @@ export default function Filesystem(props: {stopDataFetching(val: boolean): void}
     const [isDir, setIsDir] = useState<boolean>(true);
     const [renaming, setRenaming] = useState<string>('');
     const [newName, setNewName] = useState<string>('');
+    const [disableUploadBtn, setDisableUploadBtn] = useState<boolean>(true);
+    const inputFile = useRef<HTMLInputElement>(null);
 
     const style1 = 'pt-1 px-1 flex items-center justify-between cursor-pointer ';
     const style2 = 'bg-blue-200 dark:bg-cyan-950';
@@ -168,6 +170,12 @@ export default function Filesystem(props: {stopDataFetching(val: boolean): void}
         const onUploadProgress = (event: any) => {
             const percentage = Math.round((100 * event.loaded) / event.total);
             setPercentage(String(percentage) + '%');
+            if(percentage === 100) {
+                setUpFilename('');
+                setDisableUploadBtn(true);
+                if(inputFile.current) inputFile.current.value = '';
+                props.stopDataFetching(false);
+            }
         };
 
         try {
@@ -235,6 +243,13 @@ export default function Filesystem(props: {stopDataFetching(val: boolean): void}
         props.stopDataFetching(fileViewer && selected.endsWith('.json'));
     }, [fileViewer, selected, props]);
 
+    useEffect(() => {
+        if(upFilename) {
+            props.stopDataFetching(true);
+            if(!props.dataFetching) setDisableUploadBtn(false);
+        }
+    }, [upFilename, props])
+
     const content = <Card content={<>
         {fileViewer && <ModalFileViewer path={path}
             selected={selected}
@@ -253,7 +268,8 @@ export default function Filesystem(props: {stopDataFetching(val: boolean): void}
                         <span className="font-semibold">{i18n.t('clickToSelectFile')}</span> {i18n.t('orDragAndDrop')}
                     </p>
                 </div>
-                <input id="file" 
+                <input ref={inputFile}
+                    id="file" 
                     type="file" 
                     name="upload"
                     className="hidden"
@@ -264,6 +280,7 @@ export default function Filesystem(props: {stopDataFetching(val: boolean): void}
                 <Button className="w-full bg-cyan-600 hover:bg-cyan-700 text-text_dark"
                     label={i18n.t('upload') + ' ' + percentage}
                     onClick={() => upload()}
+                    disabled={disableUploadBtn}
                 />
             </div>
         </div>
