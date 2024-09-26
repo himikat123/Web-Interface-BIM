@@ -2,7 +2,7 @@ import store from '../../redux/store';
 import { fillRect, drawLine, drawRoundRect, drawImage, drawScaledImage } from "./primitives";
 import * as symb from '../img/symbols';
 
-export default function lcdDrawSkeleton(ctx: CanvasRenderingContext2D | null, frameColor: string, bgColor: string) {
+export default function lcdDrawSkeleton(ctx: CanvasRenderingContext2D | null | undefined, frameColor: string, bgColor: string) {
     if(ctx) {
         const model = store.getState().config.display.model[0];
         const dispModel = (model === 0 || model === 1) ? 0 : 1;

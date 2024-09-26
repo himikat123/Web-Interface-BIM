@@ -3,7 +3,7 @@ import { printText } from "./primitives";
 import getWeekday from '../getWeekday';
 
 export default function lcdShowWeekday(ctx: CanvasRenderingContext2D,
-    prevWeekDay: string, color: string, bgColor: string
+    prevWeekDay: string | undefined, color: string, bgColor: string
 ): string {
     const weekDay = getWeekday(store.getState().data.time);
 

@@ -2,7 +2,7 @@ import store from '../../redux/store';
 import { drawScaledImage } from "./primitives";
 import * as icons from '../img/icons';
 
-export default function lcdShowWeatherIcon(ctx: CanvasRenderingContext2D, prevIcon: number): number {
+export default function lcdShowWeatherIcon(ctx: CanvasRenderingContext2D, prevIcon: number | undefined): number {
     const icon = store.getState().data.weather.icon;
     const isDay = store.getState().data.weather.isDay;
 

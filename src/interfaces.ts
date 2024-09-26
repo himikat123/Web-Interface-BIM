@@ -416,3 +416,36 @@ export interface iSegClockPoints {
     color: string, 
     dispNum: number
 }
+
+export interface iLcdMainState {
+    skeleton: boolean,
+    sequence: iSequence,
+    time: number,
+    weekday: string,
+    ant: string,
+    bat: number,
+    volt: string,
+    comfort: [string, number],
+    icon: number,
+    descript: [string, number],
+    tempIn: number,
+    tempOut: number,
+    humIn: number,
+    humOut: number,
+    presOut: number,
+    windSpeed: number,
+    windDirection: number,
+    updTime: number,
+    alarmState: boolean
+    forecast: iPrevForecast
+}
+
+export interface iLcdNetworkState {
+    skeleton: boolean,
+    ssid: string,
+    rssi: string,
+    ip: string,
+    mac: string,
+    tempESP32: number,
+    fw: string
+}

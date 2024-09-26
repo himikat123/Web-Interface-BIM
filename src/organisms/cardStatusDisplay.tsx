@@ -6,7 +6,7 @@ import { iDisplay } from '../interfaces';
 import DisplayViewLCD from '../molecules/displayViewLCD';
 import DisplayView7segment from '../molecules/displayView7segment';
 
-export default function CardStatisDisplay(props: iDisplay) {
+export default function CardStatusDisplay(props: iDisplay) {
     const config = useSelector((state: iConfig) => state.config);
 
     function displayHeader(num: number) {

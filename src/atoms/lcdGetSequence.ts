@@ -3,8 +3,15 @@ import { iSequence } from "../interfaces";
 import { lcdGetTempSequence } from './lcdGetTemp';
 import { lcdGetHumSequence } from './lcdGetHum';
 
-export default function lcdGetSequence(sequence: iSequence): iSequence {
+export default function lcdGetSequence(prevSequence: iSequence | undefined): iSequence {
     const config = store.getState().config;
+    const sequence: iSequence = {
+        descript: prevSequence?.descript ?? '',
+        temp: prevSequence?.temp ?? 0,
+        hum: prevSequence?.hum ?? 0,
+        slot: prevSequence?.slot ?? 0,
+        counter: prevSequence?.counter ?? 0
+    }
 
     if(sequence.counter <= (config.display.source.sequence.dur - 1) * 2) sequence.counter++;
     else {

@@ -4,7 +4,7 @@ import { printText } from "./primitives";
 import { validateWindSpeed } from "../validateValues";
 
 export default function lcdShowWindSpeed(ctx: CanvasRenderingContext2D, 
-    prevSpeed: number, color: string, bgColor: string
+    prevSpeed: number | undefined, color: string, bgColor: string
 ): number {
     const speed = store.getState().data.weather.wind.speed;
 

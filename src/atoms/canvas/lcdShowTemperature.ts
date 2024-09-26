@@ -18,9 +18,9 @@ function showTemperature(ctx: CanvasRenderingContext2D, temp: number,
 }
 
 export function lcdShowTemperatureInside(ctx: CanvasRenderingContext2D, 
-    prevTemp: number, sequence: number, color: string, bgColor: string
+    prevTemp: number | undefined, sequence: number | undefined, color: string, bgColor: string
 ): number {
-    const temp = lcdGetTempIn(sequence);
+    const temp = lcdGetTempIn(sequence ?? 0);
 
     if(temp !== prevTemp) {
         const model = store.getState().config.display.model[0];
@@ -33,7 +33,7 @@ export function lcdShowTemperatureInside(ctx: CanvasRenderingContext2D,
 }
 
 export function lcdShowTemperatureOutside(ctx: CanvasRenderingContext2D, 
-    prevTemp: number, color: string, bgColor: string
+    prevTemp: number | undefined, color: string, bgColor: string
 ): number {
     const temp = lcdGetTempOut();
 

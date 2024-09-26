@@ -2,8 +2,10 @@ import store from '../../redux/store';
 import { printText, printScrollText } from "./primitives";
 import lcdGetComfort from "../lcdGetComfort";
 
-export default function lcdShowComfort(ctx: CanvasRenderingContext2D, prevComfort: string, shift: number, sequence: string, color: string, bgColor: string): [string, number] {
-    const comfort = lcdGetComfort(sequence);
+export default function lcdShowComfort(ctx: CanvasRenderingContext2D, prevComfort: string | undefined, 
+    shift: number | undefined, sequence: string | undefined, color: string, bgColor: string
+): [string, number] {
+    const comfort = lcdGetComfort(sequence ?? '');
     const model = store.getState().config.display.model[0];
     const dispModel = (model === 0 || model === 1) ? 0 : 1;
     const font = dispModel ? 14 : 18;
@@ -14,7 +16,7 @@ export default function lcdShowComfort(ctx: CanvasRenderingContext2D, prevComfor
     const w = dispModel ? 175 : 130;
 
     if(l > w) {
-        shift = printScrollText(ctx, x, y, w, 18, l, shift, comfort, font, color, bgColor);
+        shift = printScrollText(ctx, x, y, w, 18, l, shift ?? 0, comfort, font, color, bgColor);
     }
     else if(comfort !== prevComfort) {
         printText(ctx, x, y, w, 18, comfort, font, 'center', color, bgColor);
@@ -22,6 +24,6 @@ export default function lcdShowComfort(ctx: CanvasRenderingContext2D, prevComfor
 
     return [
         comfort,
-        shift
+        shift ?? 0
     ];
 }

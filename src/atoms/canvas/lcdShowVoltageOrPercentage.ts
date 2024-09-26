@@ -3,7 +3,7 @@ import { printText } from "./primitives";
 import lcdGetVoltage from "../lcdGetVoltage";
 
 export default function lcdShowVoltageOrPercentage(ctx: CanvasRenderingContext2D, 
-    prevValue: string, color: string, colorAir: string, bgColor: string
+    prevValue: string | undefined, color: string, colorAir: string, bgColor: string
 ): string {
     const v = lcdGetVoltage();
 

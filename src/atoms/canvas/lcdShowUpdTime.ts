@@ -4,7 +4,7 @@ import { printText, drawScaledImage } from "./primitives";
 import * as symbols from "../img/symbols";
 
 export default function lcdShowUpdTime(ctx: CanvasRenderingContext2D, 
-    prevTime: number, color: string, bgColor: string
+    prevTime: number | undefined, color: string, bgColor: string
 ): number {
     const time = store.getState().data.weather.time;
 

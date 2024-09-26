@@ -1,7 +1,10 @@
 import store from '../../redux/store';
 import { printText, printScrollText } from "./primitives";
 
-export default function lcdShowDescription(ctx: CanvasRenderingContext2D, prevDescript: string, shift: number, color: string, bgColor: string): [string, number] {
+export default function lcdShowDescription(ctx: CanvasRenderingContext2D, 
+    prevDescript: string | undefined, shift: number | undefined, 
+    color: string, bgColor: string
+): [string, number] {
     const description = store.getState().data.weather.descript;
     const model = store.getState().config.display.model[0];
     const dispModel = (model === 0 || model === 1) ? 0 : 1;
@@ -12,7 +15,7 @@ export default function lcdShowDescription(ctx: CanvasRenderingContext2D, prevDe
     const font = l > 316 ? 14 : 21;
 
     if(l > w) {
-        shift = printScrollText(ctx, x, 84, w, 20, l, shift, description, font, color, bgColor);
+        shift = printScrollText(ctx, x, 84, w, 20, l, shift ?? 0, description, font, color, bgColor);
     }
     else if(description !== prevDescript) {
         printText(ctx, x, 84, w, 20, description, font, 'center', color, bgColor);
@@ -20,6 +23,6 @@ export default function lcdShowDescription(ctx: CanvasRenderingContext2D, prevDe
 
     return [
         description,
-        shift
+        shift ?? 0
     ];
 }

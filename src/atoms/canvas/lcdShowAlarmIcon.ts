@@ -3,7 +3,7 @@ import { fillRect, drawScaledImage } from "./primitives";
 import { alarm } from '../img/symbols';
 
 export default function lcdShowAlarmIcon(ctx: CanvasRenderingContext2D, 
-    prevAlarmState: boolean, bgColor: string
+    prevAlarmState: boolean | undefined, bgColor: string
 ): boolean {
     const alarmStates = store.getState().alarm.alarm.states;
     let alarmState = 0;

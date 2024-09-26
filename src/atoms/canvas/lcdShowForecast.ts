@@ -13,7 +13,7 @@ function showTemperature(ctx: CanvasRenderingContext2D, temp: number,
 }
 
 export default function lcdShowForecast(ctx: CanvasRenderingContext2D, num: number, 
-    prevForecast: iPrevForecast, color: string, colorTempMax: string, colorTempMin: string, bgColor: string
+    prevForecast: iPrevForecast | undefined, color: string, colorTempMax: string, colorTempMin: string, bgColor: string
 ): iPrevForecast {
     const tMax = store.getState().data.weather.daily.tMax[num];
     const tMin = store.getState().data.weather.daily.tMin[num];
@@ -28,7 +28,7 @@ export default function lcdShowForecast(ctx: CanvasRenderingContext2D, num: numb
     const imgShift = dispModel === 0 ? 1 : 4;
 
     /* Show icon */
-    if(icon !== prevForecast.icon[num]) {
+    if(icon !== prevForecast?.icon[num]) {
         let wIcon = icons.w_01_d();
         switch(icon) { // png 40x40px
             case 1: wIcon = icons.w_01_d(); break;
@@ -45,33 +45,42 @@ export default function lcdShowForecast(ctx: CanvasRenderingContext2D, num: numb
     }
     
     /* Show weekday */
-    if(wd !== prevForecast.wd[num]) {
+    if(wd !== prevForecast?.wd[num]) {
         if(wd.length === 2) 
             printText(ctx, x + (dispModel ? 33 : 3), 168, 40, 16, wd, dispModel ? 14 : 18, 'center', color, bgColor);
     }
     
     /* Show max temperature */
-    if(tMax !== prevForecast.tMax[num]) {
+    if(tMax !== prevForecast?.tMax[num]) {
         showTemperature(ctx, Math.round(tMax), x + (dispModel ? 44 : 41), 183, dispModel ? 61 : 47, dispModel ? 21 : 17, colorTempMax, bgColor);
     }
 
     /* Show min temperature */
-    if(tMin !== prevForecast.tMin[num]) {
+    if(tMin !== prevForecast?.tMin[num]) {
         showTemperature(ctx, Math.round(tMin), x + (dispModel ? 44 : 41), 203, dispModel ? 61 : 47, dispModel ? 21 : 17, colorTempMin, bgColor);
     }
 
     /* Show wind speed */
-    if(wind !== prevForecast.wSpeed[num]) {
+    if(wind !== prevForecast?.wSpeed[num]) {
         let w = vl.validateWindSpeed(wind) ? String(Math.round(wind)) : '--';
         w += units;
         printText(ctx, x + (dispModel ? 31 : 22), 224, 44, 15, w, 14, 'center', color, bgColor);
     }
 
-    prevForecast.icon[num] = icon;
-    prevForecast.tMax[num] = tMax;
-    prevForecast.tMin[num] = tMin;
-    prevForecast.wSpeed[num] = wind;
-    prevForecast.wd[num] = wd;
-    
-    return prevForecast;
+    const dummyForecast = {
+        icon: [],
+        tMax: [],
+        tMin: [],
+        wSpeed: [],
+        wd: []
+    }
+    if(prevForecast) {
+        prevForecast.icon[num] = icon;
+        prevForecast.tMax[num] = tMax;
+        prevForecast.tMin[num] = tMin;
+        prevForecast.wSpeed[num] = wind;
+        prevForecast.wd[num] = wd;
+    }
+
+    return prevForecast ?? dummyForecast;
 }

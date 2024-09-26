@@ -5,7 +5,7 @@ import { validatePressure } from "../validateValues";
 import lcdGetPres from "../lcdGetPres";
 
 export default function lcdShowPressure(ctx: CanvasRenderingContext2D, 
-    prevPres: number, color: string, bgColor: string
+    prevPres: number | undefined, color: string, bgColor: string
 ): number {
     const pres = lcdGetPres();
 

@@ -19,7 +19,7 @@ function showDigit(ctx: CanvasRenderingContext2D, dig: number, x: number, bgColo
     }
 }
 
-export default function lcdShowTime(ctx: CanvasRenderingContext2D, prevTime: number, bgColor: string): number {
+export default function lcdShowTime(ctx: CanvasRenderingContext2D, prevTime: number | undefined, bgColor: string): number {
     const time = store.getState().data.time;
     if(time !== prevTime) {
         const hr = moment.unix(time).utc().hour();
