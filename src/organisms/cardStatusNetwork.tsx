@@ -17,7 +17,7 @@ export default function CardStatusNetwork() {
         </div>
         <div className='mt-4'>
             <p>{i18n.t('signalStrength')}</p>
-            <p className='text-blue-700 dark:text-blue-400'>{data.network.sig}dB</p>
+            <p className='text-blue-700 dark:text-blue-400'>{data.network.sig}dBm</p>
         </div>
         <div className='mt-4'>
             <p>{i18n.t('macAddress')}</p>
