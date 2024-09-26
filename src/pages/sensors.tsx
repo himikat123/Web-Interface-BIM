@@ -216,7 +216,7 @@ export default function Sensors() {
                 i18n.t('voltage'), 
                 data.analog.volt, 
                 (val: number) => dispatch(cf.analogCorrChange(val)), 
-                -10, 10, 0.1
+                -10, 10, 0.01
             )}
         </>}
         className={!vl.validateAnalogVoltage(data.analog.volt)
