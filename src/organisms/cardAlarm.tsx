@@ -4,6 +4,7 @@ import 'moment/locale/de';
 import 'moment/locale/ru';
 import 'moment/locale/pl';
 import 'moment/locale/uk';
+import 'moment/locale/bg';
 import { useSelector, useDispatch } from 'react-redux';
 import hostUrl from "../atoms/hostUrl";
 import Card from "../atoms/card";

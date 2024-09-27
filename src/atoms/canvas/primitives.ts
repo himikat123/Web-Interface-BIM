@@ -6,6 +6,14 @@ export function drawLine(ctx: CanvasRenderingContext2D, x: number, y: number, w:
     ctx.stroke();
 }
 
+export function line(ctx: CanvasRenderingContext2D, x1: number, y1: number, x2: number, y2: number, color: string) {
+    ctx.strokeStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+}
+
 export function fillCircle(ctx: CanvasRenderingContext2D, x: number, y: number, r: number, color: string) {
     ctx.beginPath();
     ctx.arc(x, y, r, 0, 2 * Math.PI);
@@ -72,4 +80,12 @@ export function printScrollText(ctx: CanvasRenderingContext2D, x: number, y: num
     if(shift > (l + 1)) shift = 0 - w;
 
     return shift;
+}
+
+export function printSegment(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, text: string, font: number, color: string, bgColor: string) {
+    fillRect(ctx, x - 1, y - 1, w + 2, h + 2, bgColor);
+    ctx.font = `${font}px Segment7`;
+    ctx.fillStyle = color;
+    ctx.textAlign = 'left';
+    ctx.fillText(text, x, y + font - font / 4);
 }

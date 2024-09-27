@@ -393,7 +393,8 @@ export interface iSegment {
     symb: number,
     color: string,
     point?: boolean,
-    dot?: boolean
+    dot?: boolean,
+    bg: string
 }
 
 export interface iSegState {
@@ -448,4 +449,10 @@ export interface iLcdNetworkState {
     mac: string,
     tempESP32: number,
     fw: string
+}
+
+export interface iLcdClockState {
+    skeleton: boolean,
+    points: boolean,
+    clockType: string | undefined
 }

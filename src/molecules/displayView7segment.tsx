@@ -36,7 +36,8 @@ export default function DisplayView7segment(props: {num: number}) {
                 {[...Array(2)].map((i: number, x: number) => {
                     return <SegSegment key={x} 
                         symb={state.segments[x]} 
-                        color={state.colors[x]} 
+                        color={state.colors[x]}
+                        bg="#222"
                     />
                 })}
                 <SegClockPoints clockpoints={state.clockpoints} 
@@ -58,7 +59,8 @@ export default function DisplayView7segment(props: {num: number}) {
                 {[...Array(2)].map((i: number, x: number) => {
                     return <SegSegment key={x + 2} 
                         symb={state.segments[x + 2]} 
-                        color={state.colors[x + 2]} 
+                        color={state.colors[x + 2]}
+                        bg="#222" 
                     />
                 })}
                 {config.display.model[props.num] > 2 && <>
@@ -76,7 +78,8 @@ export default function DisplayView7segment(props: {num: number}) {
                     {[...Array(2)].map((i: number, x: number) => {
                         return <SegSegment key={x + 4} 
                             symb={state.segments[x + 4]} 
-                            color={state.colors[x + 4]} 
+                            color={state.colors[x + 4]}
+                            bg="#222" 
                         />
                     })}
                 </>}

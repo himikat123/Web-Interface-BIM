@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux';
 import { iConfig } from "../redux/configTypes";
 import { displayLcdMainScreen } from './displayLcdMainScreen';
 import { displayLcdNetworkScreen } from './displayLcdNetworkScreen';
-import { iLcdMainState, iLcdNetworkState } from '../interfaces';
+import { displayLcdClockScreen } from './displayLcdClockScreen';
+import { iLcdMainState, iLcdNetworkState, iLcdClockState } from '../interfaces';
 
 export default function DisplayViewLCD() {
     const config = useSelector((state: iConfig) => state.config);
@@ -16,6 +17,8 @@ export default function DisplayViewLCD() {
     const [clockPointsState, setClockPointsState] = useState<boolean>(false);
     const [mainState, setMainState] = useState<iLcdMainState>();
     const [networkState, setNetworkState] = useState<iLcdNetworkState>();
+    const [clockState, setClockState] = useState<iLcdClockState>();
+    const [clockType, setClockType] = useState<string>('big');
 
     const dispNextion = useRef<HTMLCanvasElement>(null);
     const dispILI9341 = useRef<HTMLCanvasElement>(null);
@@ -28,8 +31,11 @@ export default function DisplayViewLCD() {
             if(page === 'network') {
                 setNetworkState(displayLcdNetworkScreen(ctx, dispModel, networkState));
             }
+            if(page === 'clock') {
+                setClockState(displayLcdClockScreen(ctx, model, dispModel, clockState, clockType));
+            }
         }
-    }, [ctx, clockPointsState, dispModel, page, mainState, networkState]);
+    }, [ctx, clockPointsState, dispModel, page, mainState, networkState, clockState, clockType]);
 
     useEffect(() => {
         setCanvas(dispModel === 0 ? dispNextion.current : dispILI9341.current);
@@ -56,9 +62,25 @@ export default function DisplayViewLCD() {
                 setNetworkState(undefined);
                 setPage('network');
             }
-            if(page === 'network') {
+            if(page === 'network' || page === 'clock') {
                 setMainState(undefined);
+                setClockType('big');
                 setPage('main');
+            }
+        }
+        if(x < 140 && y < 80) {
+            if(page === 'main') {
+                setClockState(undefined);
+                setPage('clock');
+            }
+        }
+        if(y > 55 && y < 185) {
+            if(page === 'clock') {
+                switch(clockType) {
+                    case 'small': setClockType('analog'); break;
+                    case 'analog': setClockType('big'); break;
+                    default: setClockType(model === 1 ? 'analog' : 'small'); break;
+                }
             }
         }
     }
