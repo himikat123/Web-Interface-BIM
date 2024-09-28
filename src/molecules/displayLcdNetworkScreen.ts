@@ -1,6 +1,6 @@
 import store from '../redux/store';
-import { printText, fillRect, drawScaledImage } from '../atoms/canvas/primitives';
-import * as symb from '../atoms/img/symbols';
+import { printText, fillRect } from '../atoms/canvas/primitives';
+import lcdCloseButton from '../atoms/canvas/lcdCloseButton';
 import i18n from '../i18n/main';
 import { iLcdNetworkState } from '../interfaces';
 
@@ -22,8 +22,7 @@ export function displayLcdNetworkScreen(ctx: CanvasRenderingContext2D,
 
     if(!state?.skeleton) {
         fillRect(ctx, 0, 0, ctx.canvas.width, ctx.canvas.height, BG_COLOR);
-        if(dispModel) drawScaledImage(ctx, symb.close(), 290, 0, 30, 30);
-        else drawScaledImage(ctx, symb.close(), 326, 0, 36, 36);
+        lcdCloseButton(ctx, dispModel);
         fillRect(ctx, dispModel ? 48 : 65, 10, 226, 39, FRAME_COLOR);
         fillRect(ctx, dispModel ? 50 : 67, 12, 222, 35, GROUND_COLOR);
         printText(ctx, dispModel ? 50 : 67, 17, 222, 28, 'WiFi', 32, 'center', TEXT_COLOR, GROUND_COLOR);

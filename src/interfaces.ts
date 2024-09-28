@@ -456,3 +456,9 @@ export interface iLcdClockState {
     points: boolean,
     clockType: string | undefined
 }
+
+export interface iLcdCalendarState {
+    skeleton: boolean,
+    shift: number,
+    date: number
+}

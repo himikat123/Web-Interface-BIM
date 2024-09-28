@@ -1,7 +1,7 @@
 import store from '../redux/store';
-import { printText, printSegment, fillRect, fillCircle, line, drawScaledImage } from '../atoms/canvas/primitives';
+import { printText, printSegment, fillRect, fillCircle, drawScaledImage } from '../atoms/canvas/primitives';
 import * as symb from '../atoms/img/symbols';
-import i18n from '../i18n/main';
+import lcdCloseButton from '../atoms/canvas/lcdCloseButton';
 import moment from 'moment';
 import 'moment/locale/de';
 import 'moment/locale/ru';
@@ -25,8 +25,7 @@ export function displayLcdClockScreen(ctx: CanvasRenderingContext2D,
 
     if(!state?.skeleton || clockType !== state?.clockType) {
         fillRect(ctx, 0, 0, ctx.canvas.width, ctx.canvas.height, BG_COLOR);
-        if(dispModel) drawScaledImage(ctx, symb.close(), 290, 0, 30, 30);
-        else drawScaledImage(ctx, symb.close(), 326, 0, 36, 36);
+        lcdCloseButton(ctx, dispModel);
     }
 
     const hour = moment().hour();

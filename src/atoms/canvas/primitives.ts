@@ -54,14 +54,17 @@ export function drawScaledImage(ctx: CanvasRenderingContext2D, image: string, x:
     img.src = image;
 }
 
-export function printText(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, text: string, font: number, align: CanvasTextAlign, color: string, bgColor: string) {
+export function printText(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, text: string, font: number, align: CanvasTextAlign, color: string, bgColor: string, valign=false) {
     fillRect(ctx, x, y, w, h, bgColor);
     ctx.font = `${font}px Ubuntu`;
     ctx.fillStyle = color;
     ctx.textAlign = align;
     if(align === 'center') x += w / 2;
     if(align === 'right') x += w;
+    ctx.save();
+    if(valign) ctx.textBaseline = 'middle';
     ctx.fillText(text, x, y + font - font / 4);
+    ctx.restore();
 }
 
 export function printScrollText(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, l: number, shift: number, text: string, font: number, color: string, bgColor: string): number {

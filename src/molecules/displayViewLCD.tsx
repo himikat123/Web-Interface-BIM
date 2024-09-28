@@ -4,7 +4,8 @@ import { iConfig } from "../redux/configTypes";
 import { displayLcdMainScreen } from './displayLcdMainScreen';
 import { displayLcdNetworkScreen } from './displayLcdNetworkScreen';
 import { displayLcdClockScreen } from './displayLcdClockScreen';
-import { iLcdMainState, iLcdNetworkState, iLcdClockState } from '../interfaces';
+import { displayLcdCalendarScreen } from './displayLcdCalendarScreen';
+import { iLcdMainState, iLcdNetworkState, iLcdClockState, iLcdCalendarState } from '../interfaces';
 
 export default function DisplayViewLCD() {
     const config = useSelector((state: iConfig) => state.config);
@@ -18,7 +19,9 @@ export default function DisplayViewLCD() {
     const [mainState, setMainState] = useState<iLcdMainState>();
     const [networkState, setNetworkState] = useState<iLcdNetworkState>();
     const [clockState, setClockState] = useState<iLcdClockState>();
+    const [calendarState, setCalendarState] = useState<iLcdCalendarState>();
     const [clockType, setClockType] = useState<string>('big');
+    const [calendarShift, setCalendarShift] = useState<number>(0);
 
     const dispNextion = useRef<HTMLCanvasElement>(null);
     const dispILI9341 = useRef<HTMLCanvasElement>(null);
@@ -34,8 +37,13 @@ export default function DisplayViewLCD() {
             if(page === 'clock') {
                 setClockState(displayLcdClockScreen(ctx, model, dispModel, clockState, clockType));
             }
+            if(page === 'calendar') {
+                setCalendarState(displayLcdCalendarScreen(ctx, dispModel, calendarState, calendarShift));
+            }
         }
-    }, [ctx, clockPointsState, dispModel, page, mainState, networkState, clockState, clockType]);
+    }, [ctx, clockPointsState, model, dispModel, page, mainState, 
+        networkState, clockState, clockType, calendarShift, calendarState
+    ]);
 
     useEffect(() => {
         setCanvas(dispModel === 0 ? dispNextion.current : dispILI9341.current);
@@ -62,26 +70,36 @@ export default function DisplayViewLCD() {
                 setNetworkState(undefined);
                 setPage('network');
             }
-            if(page === 'network' || page === 'clock') {
+            else {
                 setMainState(undefined);
                 setClockType('big');
+                setCalendarShift(0);
                 setPage('main');
             }
         }
-        if(x < 140 && y < 80) {
-            if(page === 'main') {
-                setClockState(undefined);
-                setPage('clock');
+        if(x < 140 && y < 80 && page === 'main') {
+            setClockState(undefined);
+            setPage('clock');
+        }
+        if(y > 55 && y < 185 && page === 'clock') {
+            switch(clockType) {
+                case 'small': setClockType('analog'); break;
+                case 'analog': setClockType('big'); break;
+                default: setClockType(model === 1 ? 'analog' : 'small'); break;
             }
         }
-        if(y > 55 && y < 185) {
-            if(page === 'clock') {
-                switch(clockType) {
-                    case 'small': setClockType('analog'); break;
-                    case 'analog': setClockType('big'); break;
-                    default: setClockType(model === 1 ? 'analog' : 'small'); break;
-                }
-            }
+        if((x > 145 && x < 180 && y < 33 && page === 'main')
+            || (x > 40 && x < (dispModel ? 250 : 300) && y < 36 && page === 'clock' && clockType !== 'analog')
+            || (y > 188 && page === 'clock' && clockType !== 'analog')
+        ) {
+            setCalendarState(undefined);
+            setPage('calendar');
+        }
+        if(x < 32 && y > 100 && y < 136) {
+            if(page === 'calendar') setCalendarShift(calendarShift - 1);
+        }
+        if(x > (dispModel ? 286 : 320) && y > 100 && y < 136) {
+            if(page === 'calendar') setCalendarShift(calendarShift + 1);
         }
     }
 
