@@ -58,10 +58,14 @@ export function displayLcdClockScreen(ctx: CanvasRenderingContext2D,
             const y = dispModel ? 82 : 74;
             const p = dispModel ? 4 : 5;
             printSegment(ctx, 4, y, w, font, hour.toString().padStart(2, ' '), font, CLOCK_COLOR, BG_COLOR);
+            fillCircle(ctx, dispModel ? 107 : 121, 100, p + 1, BG_COLOR);
             fillCircle(ctx, dispModel ? 107 : 121, 100, p, CLOCK_COLOR);
+            fillCircle(ctx, dispModel ? 105 : 119, 134, p + 1, BG_COLOR);
             fillCircle(ctx, dispModel ? 105 : 119, 134, p, CLOCK_COLOR);
             printSegment(ctx, x1, y, w, font, minute.toString().padStart(2, '0'), font, CLOCK_COLOR, BG_COLOR);
+            fillCircle(ctx, dispModel ? 216 : 244, 100, p + 1, BG_COLOR);
             fillCircle(ctx, dispModel ? 216 : 244, 100, p, CLOCK_COLOR);
+            fillCircle(ctx, dispModel ? 214 : 242, 134, p + 1, BG_COLOR);
             fillCircle(ctx, dispModel ? 214 : 242, 134, p, CLOCK_COLOR);
             printSegment(ctx, x2, y, w, font, second.toString().padStart(2, '0'), font, CLOCK_COLOR, BG_COLOR);
         }
