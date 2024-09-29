@@ -71,9 +71,15 @@ export default function DisplayViewLCD() {
     /* touchscreen events */
     const handleClick = (e: React.MouseEvent<HTMLElement>) => {
         const rect = canvas?.getBoundingClientRect();
-        const x = Math.round(e.clientX - (rect ? rect.left : 0));
-        const y = Math.round(e.clientY - (rect ? rect.top : 0));
-        console.log(x, y, rect);
+        const rectWidth = rect?.width ?? 0;
+        const displayWidth = canvas?.width ?? 0;
+        const kx = rectWidth / displayWidth;
+        const rectHeight = rect?.height ?? 0;
+        const displayHeight = canvas?.height ?? 0;
+        const ky = rectHeight / displayHeight;
+        const x = Math.round(e.clientX - (rect ? rect.left : 0)) / (kx ?? 1);
+        const y = Math.round(e.clientY - (rect ? rect.top : 0)) / (ky ?? 1);
+        console.log(x, y);
 
         /* wifi antenna or close button */
         if(x > (dispModel ? 284 : 320) && y < (dispModel ? 25 : 36)) {
