@@ -168,6 +168,5 @@ export default function DisplayViewLCD() {
                 margin: 0, padding: 0, width: '100%', maxWidth: '320px', maxHeight: '240px', border: '4px solid black'
             }}
         />}
-        <div style={{fontFamily: 'segment7'}}>1234567890</div>
     </div>
 }
