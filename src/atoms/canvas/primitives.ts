@@ -55,7 +55,7 @@ export function drawScaledImage(ctx: CanvasRenderingContext2D, image: string, x:
 }
 
 export function printText(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, text: string, font: number, align: CanvasTextAlign, color: string, bgColor: string, valign=false) {
-    fillRect(ctx, x - 1, y - 1, w + 2, h + 2, bgColor);
+    fillRect(ctx, x, y - 2, w, h + 2, bgColor);
     ctx.font = `${font}px Ubuntu`;
     ctx.fillStyle = color;
     ctx.textAlign = align;
