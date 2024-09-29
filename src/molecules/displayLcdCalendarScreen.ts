@@ -35,8 +35,8 @@ export function displayLcdCalendarScreen(ctx: CanvasRenderingContext2D,
             printText(ctx, i * x + x, 40, 36, 26, wd, font, 'center', i < 6 ? WEEKDAY_COLOR : WEEKEND_COLOR, BG_COLOR);
         }
         lcdCloseButton(ctx, dispModel);
-        lcdForwardButton(ctx, dispModel);
-        lcdBackButton(ctx, dispModel);
+        lcdForwardButton(ctx, dispModel, true);
+        lcdBackButton(ctx, dispModel, true);
     }
 
     const date = moment().date();

@@ -462,3 +462,56 @@ export interface iLcdCalendarState {
     shift: number,
     date: number
 }
+
+export interface iHourlyWeather {
+    updated: number,
+    date: number[],
+    icon: number[],
+    temp: number[],
+    pres: number[],
+    windSpeed: number[],
+    windDir: number[],
+    prec: number[]
+}
+
+export interface iLcdHourlyState {
+    skeleton: boolean,
+    weather: iHourlyWeather | undefined,
+    shift: number
+}
+
+export interface iOpenweathermapHourly {
+    list: {
+        dt: number,
+        weather: [{
+            icon: string
+        }],
+        main: {
+            temp: number,
+            pressure: number
+        },
+        wind: {
+            speed: number,
+            deg: number
+        },
+        rain: {
+            [key: string]: number
+        },
+        snow: {
+            [key: string]: number
+        }
+    }[]
+}
+
+export interface iOpenMeteoHourly {
+    utc_offset_seconds: number,
+    hourly: {
+        time: number[],
+        temperature_2m: number[],
+        surface_pressure: number[],
+        wind_speed_10m: number[],
+        wind_direction_10m: number[],
+        precipitation_probability: number[],
+        weather_code: number[]
+    }
+}
