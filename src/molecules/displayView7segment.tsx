@@ -31,7 +31,9 @@ export default function DisplayView7segment(props: {num: number}) {
     }, [props.num, state]);
 
     return <div className='h-full flex items-center'> 
-        <div className='w-fit mx-auto mt-4 p-2 bg-gray-400 dark:bg-gray-600'>
+        <div className='w-full mx-auto mt-4 p-2 bg-gray-400 dark:bg-gray-600' 
+            style={{maxWidth: config.display.model[props.num] > 2 ? 274 : 190}}
+        >
             <div className='bg-black flex p-1.5 ps-[8px]'>
                 {[...Array(2)].map((i: number, x: number) => {
                     return <SegSegment key={x} 
