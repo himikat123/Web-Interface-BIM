@@ -464,7 +464,6 @@ export interface iLcdCalendarState {
 }
 
 export interface iHourlyWeather {
-    updated: number,
     date: number[],
     icon: number[],
     temp: number[],
@@ -477,7 +476,7 @@ export interface iHourlyWeather {
 
 export interface iLcdHourlyState {
     skeleton: boolean,
-    weather: iHourlyWeather | undefined,
+    weather: string,
     shift: number
 }
 
@@ -515,15 +514,4 @@ export interface iOpenMeteoHourly {
         precipitation_probability: number[],
         weather_code: number[]
     }
-}
-
-export interface iHistoryOut {
-    feeds: {
-        created_at: string,
-        field1: string,
-        field2: string,
-        field3: string,
-        field4: string,
-        field5: string
-    }[]
 }

@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom"
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-import hostUrl from './atoms/hostUrl';
 import Loading from './pages/loading';
 import NoConfig from './pages/noConfig';
 import NoData from './pages/noData';
@@ -31,13 +29,17 @@ import Filesystem from './pages/filesystem';
 import Username from './pages/username';
 import Password from './pages/password';
 import Login from './pages/login';
-import { changeLanguage } from './i18n/main';
 import { iConfig } from './redux/configTypes';
 import { iAlarms } from './redux/alarmTypes';
 import { iData } from './redux/dataTypes';
-import { configStateChange, setConfigState } from './redux/slices/config';
-import { alarmsStateChange, setAlarmState } from './redux/slices/alarm';
-import { dataFetchingChange, dataStateChange, setDataState, updateDataChange } from './redux/slices/data';
+import { updateDataChange } from './redux/slices/data';
+import configFetch from './configFetch';
+import dataFetch from './dataFetch';
+import { historyFetch } from './historyFetch';
+import { hourlyFetch } from './hourlyFetch';
+import { iHistory } from './redux/historyTypes';
+import { iHourly } from './redux/hourlyTypes';
+import moment from 'moment';
 
 function App() {
     const dispatch = useDispatch();
@@ -50,61 +52,22 @@ function App() {
     const location = useLocation();
     const path = location.pathname;
     const navigate = useNavigate();
+    const history = useSelector((state: iHistory) => state.history);
+    const hourly = useSelector((state: iHourly) => state.hourly); 
 
     useEffect(() => {
-        axios(`${hostUrl()}/config.json?code=${localStorage.getItem('code') || '0'}`)
-        .then(res => {
-            dispatch(configStateChange('ok'));
-            dispatch(setConfigState(res.data));
-            changeLanguage(res.data.lang);
-            localStorage.setItem('lang', res.data.lang);
-        })
-        .catch(err => {
-            dispatch(configStateChange('error'));
-            console.error(err);
-        });
-        axios(`${hostUrl()}/alarm.json?code=${localStorage.getItem('code') || '0'}`)
-        .then(res => {
-            dispatch(alarmsStateChange('ok'));
-            dispatch(setAlarmState(res.data));
-        })
-        .catch(err => {
-            dispatch(alarmsStateChange('error'));
-            console.error(err);
-        });
-    }, [dispatch]);
+        configFetch();
+    }, []);
     
     useEffect(() => {
         let dataFetchInterval: NodeJS.Timeout;
 
         function fetchData() {
-            dispatch(dataFetchingChange(true));
-            axios(`${hostUrl()}/data.json?code=${localStorage.getItem('code') || '0'}`)
-            .then(res => {
-                dispatch(dataStateChange('ok'));
-                dispatch(dataFetchingChange(false));
-                dispatch(updateDataChange(false));
-                let resData = { ...res.data };
-                if(res.data.state === 'DEMO') {
-                    const date = new Date();
-                    const timezoneOffset = date.getTimezoneOffset();
-                    resData.time = Math.round(Date.now() / 1000 - timezoneOffset * 60);
-                    resData.runtime = Math.round(Date.now() / 1000 - 1726673014);
-                    resData.wsensor.time[0] = Math.round(resData.time - 8 * 60);
-                    resData.wsensor.time[1] = Math.round(resData.time - 12 * 60);
-                    resData.weather.time = Math.round(resData.time - 15 * 60);
-                    resData.thing.time = Math.round(resData.time - 7 * 60);
-                }
-                if(res.data.state === 'OK') if(path === '/login') navigate('/');
-                if(res.data.state === 'LOGIN') if(path !== '/login') navigate('/login');
-                dispatch(setDataState(resData));
-            })
-            .catch(err => {
-                dispatch(dataStateChange('error'));
-                console.error(err);
-                dispatch(dataFetchingChange(false));
-                dispatch(updateDataChange(false));
-            })
+            const nav = dataFetch(path);
+            if(nav) navigate(nav);
+
+            if(moment().unix() - history.updated > 600) historyFetch();
+            if(moment().unix() - hourly.updated > 600) hourlyFetch();
         }
 
         if(configState === 'ok' && alarmsState === 'ok') {
@@ -123,7 +86,10 @@ function App() {
         }
 
         return () => clearInterval(dataFetchInterval);
-    }, [configState, alarmsState, dispatch, dataFetching, updateData, path, navigate, stopDataFetching]);
+    }, [
+        configState, alarmsState, dispatch, dataFetching, updateData, 
+        path, navigate, stopDataFetching, history.updated, hourly.updated
+    ]);
 
     useEffect(() => {
         dispatch(updateDataChange(true));

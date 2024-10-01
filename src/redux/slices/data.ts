@@ -4,7 +4,7 @@ export const dataSlice = createSlice({
     name: 'data',
     initialState: {
         dataState: 'default',
-        updateData: false,
+        updateData: true,
         dataFetching: false,
 
         state: "",

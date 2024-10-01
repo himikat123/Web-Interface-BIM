@@ -6,13 +6,11 @@ import { displayLcdNetworkScreen } from './displayLcdNetworkScreen';
 import { displayLcdClockScreen } from './displayLcdClockScreen';
 import { displayLcdCalendarScreen } from './displayLcdCalendarScreen';
 import { displayLcdHourlyScreen } from './displayLcdHourlyScreen';
-import { displayLcdGetHourlyWeather } from './displayLcdGetHourlyWeather';
 import { displayLcdHistoryInScreen } from './displayLcdHistoryInScreen';
 import { displayLcdHistoryOutScreen } from './displayLcdHistoryOutScreen';
-import { displayLcdGetHistoryOut } from './displayLcdGetHistoryOut';
-import { displayLcdGetHistoryIn } from './displayLcdGetHistoryIn';
 import * as types from '../interfaces';
 import moment from 'moment';
+import { iHourly } from '../redux/hourlyTypes';
 
 export default function DisplayViewLCD() {
     const config = useSelector((state: iConfig) => state.config);
@@ -35,12 +33,11 @@ export default function DisplayViewLCD() {
     const [hourlyShift, setHourlyShift] = useState<number>(0);
     const [historyInShift, setHistoryInShift] = useState<number>(16);
     const [historyOutShift, setHistoryOutShift] = useState<number>(16);
-    const [hourlyWeather, setHourlyWeather] = useState<types.iHourlyWeather>();
-    const [historyInWeather, setHistoryInWeather] = useState<types.iHourlyWeather>();
-    const [historyOutWeather, setHistoryOutWeather] = useState<types.iHourlyWeather>();
+
 
     const dispNextion = useRef<HTMLCanvasElement>(null);
     const dispILI9341 = useRef<HTMLCanvasElement>(null);
+    const hourly = useSelector((state: iHourly) => state.hourly);
 
     const draw = useCallback(() => {
         if(ctx) { // Display pages switch
@@ -57,18 +54,18 @@ export default function DisplayViewLCD() {
                 setCalendarState(displayLcdCalendarScreen(ctx, dispModel, calendarState, calendarShift));
             }
             if(page === 'hourly') {
-                setHourlyState(displayLcdHourlyScreen(ctx, dispModel, hourlyWeather, hourlyState, hourlyShift));
+                setHourlyState(displayLcdHourlyScreen(ctx, dispModel, hourlyState, hourlyShift));
             }
             if(page === 'historyIn') {
-                setHistoryInState(displayLcdHistoryInScreen(ctx, dispModel, historyInWeather, historyInState, historyInShift));
+                setHistoryInState(displayLcdHistoryInScreen(ctx, dispModel, historyInState, historyInShift));
             }
             if(page === 'historyOut') {
-                setHistoryOutState(displayLcdHistoryOutScreen(ctx, dispModel, historyOutWeather, historyOutState, historyOutShift));
+                setHistoryOutState(displayLcdHistoryOutScreen(ctx, dispModel, historyOutState, historyOutShift));
             }
         }
-    }, [ctx, clockPointsState, model, dispModel, page, mainState, networkState, clockState, clockType, 
-        calendarShift, calendarState, hourlyShift, hourlyState, hourlyWeather, historyInShift, 
-        historyInState, historyInWeather, historyOutShift, historyOutState, historyOutWeather
+    }, [ctx, clockPointsState, model, dispModel, page, mainState, networkState, clockState, 
+        clockType, calendarShift, calendarState, hourlyShift, hourlyState, 
+        historyInShift, historyInState, historyOutShift, historyOutState
     ]);
 
     useEffect(() => {
@@ -180,12 +177,9 @@ export default function DisplayViewLCD() {
         /* hourly forecast */
         if(y > 162 && page === 'main' && model !== 1) {
             setHourlyState(undefined);
-            if(moment().unix() - (hourlyWeather?.updated ?? 0) > 600) {
-                setHourlyWeather(displayLcdGetHourlyWeather());
-            }
             let dayLinks = [];
             for(let i=0; i<40; i++) {
-                if(moment.unix(hourlyWeather?.date[i] ?? 0).hour() === 0) {
+                if(moment.unix(hourly.date[i] ?? 0).hour() === 0) {
                     if(i !== 0) dayLinks.push(i);
                 }
             }
@@ -202,18 +196,12 @@ export default function DisplayViewLCD() {
         /* history inside */
         if(x > 145 && y > 33 && y < 80 && page === 'main' && model !== 1) {
             setHistoryInState(undefined);
-            if(moment().unix() - (historyInWeather?.updated ?? 0) > 600) {
-                setHistoryInWeather(displayLcdGetHistoryIn());
-            }
             setPage('historyIn');
         }
 
         /* history outside */
         if(x < (dispModel ? 284 : 320) && y > 81 && y < 160 && page === 'main' && model !== 1) {
             setHistoryOutState(undefined);
-            if(moment().unix() - (historyOutWeather?.updated ?? 0) > 600) {
-                setHistoryOutWeather(displayLcdGetHistoryOut());
-            }
             setPage('historyOut');
         }
     }
