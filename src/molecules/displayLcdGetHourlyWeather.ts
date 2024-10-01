@@ -9,6 +9,7 @@ export function displayLcdGetHourlyWeather(): iHourlyWeather {
         date: [],
         icon: [],
         temp: [],
+        hum: [],
         pres: [],
         windSpeed: [],
         windDir: [],
@@ -66,6 +67,7 @@ function openweathermap(lat: number, lon: number, appid: string, hourly: iHourly
         catch(e) { console.error(e); }
     })
     .catch(err => console.error(err));
+
     return hourly;
 }
 

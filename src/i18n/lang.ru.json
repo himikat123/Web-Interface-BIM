@@ -37,6 +37,8 @@
     "sound": "Звук",
     "comfort": "Комфорт",
     "weatherHistory": "История погоды",
+    "indoorHistory": "История погоды в доме",
+    "outdoorHistory": "История погоды на улице",
     "dataSend": "Отправка данных",
     "sendToThingspeak": "Отправка на thingspeak",
     "sendToNarodmon": "Отправка на narodmon",

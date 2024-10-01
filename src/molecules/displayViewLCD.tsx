@@ -7,6 +7,10 @@ import { displayLcdClockScreen } from './displayLcdClockScreen';
 import { displayLcdCalendarScreen } from './displayLcdCalendarScreen';
 import { displayLcdHourlyScreen } from './displayLcdHourlyScreen';
 import { displayLcdGetHourlyWeather } from './displayLcdGetHourlyWeather';
+import { displayLcdHistoryInScreen } from './displayLcdHistoryInScreen';
+import { displayLcdHistoryOutScreen } from './displayLcdHistoryOutScreen';
+import { displayLcdGetHistoryOut } from './displayLcdGetHistoryOut';
+import { displayLcdGetHistoryIn } from './displayLcdGetHistoryIn';
 import * as types from '../interfaces';
 import moment from 'moment';
 
@@ -24,10 +28,16 @@ export default function DisplayViewLCD() {
     const [clockState, setClockState] = useState<types.iLcdClockState>();
     const [calendarState, setCalendarState] = useState<types.iLcdCalendarState>();
     const [hourlyState, setHourlyState] = useState<types.iLcdHourlyState>();
+    const [historyInState, setHistoryInState] = useState<types.iLcdHourlyState>();
+    const [historyOutState, setHistoryOutState] = useState<types.iLcdHourlyState>();
     const [clockType, setClockType] = useState<string>('big');
     const [calendarShift, setCalendarShift] = useState<number>(0);
     const [hourlyShift, setHourlyShift] = useState<number>(0);
+    const [historyInShift, setHistoryInShift] = useState<number>(16);
+    const [historyOutShift, setHistoryOutShift] = useState<number>(16);
     const [hourlyWeather, setHourlyWeather] = useState<types.iHourlyWeather>();
+    const [historyInWeather, setHistoryInWeather] = useState<types.iHourlyWeather>();
+    const [historyOutWeather, setHistoryOutWeather] = useState<types.iHourlyWeather>();
 
     const dispNextion = useRef<HTMLCanvasElement>(null);
     const dispILI9341 = useRef<HTMLCanvasElement>(null);
@@ -49,9 +59,16 @@ export default function DisplayViewLCD() {
             if(page === 'hourly') {
                 setHourlyState(displayLcdHourlyScreen(ctx, dispModel, hourlyWeather, hourlyState, hourlyShift));
             }
+            if(page === 'historyIn') {
+                setHistoryInState(displayLcdHistoryInScreen(ctx, dispModel, historyInWeather, historyInState, historyInShift));
+            }
+            if(page === 'historyOut') {
+                setHistoryOutState(displayLcdHistoryOutScreen(ctx, dispModel, historyOutWeather, historyOutState, historyOutShift));
+            }
         }
-    }, [ctx, clockPointsState, model, dispModel, page, mainState, networkState, clockState, 
-        clockType, calendarShift, calendarState, hourlyShift, hourlyState, hourlyWeather
+    }, [ctx, clockPointsState, model, dispModel, page, mainState, networkState, clockState, clockType, 
+        calendarShift, calendarState, hourlyShift, hourlyState, hourlyWeather, historyInShift, 
+        historyInState, historyInWeather, historyOutShift, historyOutState, historyOutWeather
     ]);
 
     useEffect(() => {
@@ -128,6 +145,16 @@ export default function DisplayViewLCD() {
                 if(shift < 0) shift = 0;
                 setHourlyShift(shift);
             }
+            if(page === 'historyIn') {
+                let shift = historyInShift - 4;
+                if(shift < 0) shift = 0;
+                setHistoryInShift(shift);
+            }
+            if(page === 'historyOut') {
+                let shift = historyOutShift - 4;
+                if(shift < 0) shift = 0;
+                setHistoryOutShift(shift);
+            }
         }
 
         /* forward button */
@@ -137,6 +164,16 @@ export default function DisplayViewLCD() {
                 let shift = hourlyShift + 4;
                 if(shift > 32) shift = 32;
                 setHourlyShift(shift);      
+            }
+            if(page === 'historyIn') {
+                let shift = historyInShift + 4;
+                if(shift > 16) shift = 16;
+                setHistoryInShift(shift);      
+            }
+            if(page === 'historyOut') {
+                let shift = historyOutShift + 4;
+                if(shift > 16) shift = 16;
+                setHistoryOutShift(shift);      
             }
         }
 
@@ -160,6 +197,24 @@ export default function DisplayViewLCD() {
             if(x > day2 && x < day3) setHourlyShift(dayLinks[1]);
             if(x > day3) setHourlyShift(dayLinks[2]);
             setPage('hourly');
+        }
+
+        /* history inside */
+        if(x > 145 && y > 33 && y < 80 && page === 'main' && model !== 1) {
+            setHistoryInState(undefined);
+            if(moment().unix() - (historyInWeather?.updated ?? 0) > 600) {
+                setHistoryInWeather(displayLcdGetHistoryIn());
+            }
+            setPage('historyIn');
+        }
+
+        /* history outside */
+        if(x < (dispModel ? 284 : 320) && y > 81 && y < 160 && page === 'main' && model !== 1) {
+            setHistoryOutState(undefined);
+            if(moment().unix() - (historyOutWeather?.updated ?? 0) > 600) {
+                setHistoryOutWeather(displayLcdGetHistoryOut());
+            }
+            setPage('historyOut');
         }
     }
 

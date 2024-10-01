@@ -37,6 +37,8 @@
     "sound": "Dźwięk",
     "comfort": "Komfort",
     "weatherHistory": "Historia pogody",
+    "indoorHistory": "Historia pomiarów w pomieszczeniach",
+    "outdoorHistory": "Historia pogody na zewnątrz",
     "dataSend": "Wysyłanie danych",
     "sendToThingspeak": "Wysyłanie do thingspeak",
     "sendToNarodmon": "Wysyłanie do narodmon",
