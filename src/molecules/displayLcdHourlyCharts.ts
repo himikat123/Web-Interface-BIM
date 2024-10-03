@@ -1,23 +1,20 @@
 import { line, drawLine, fillRect } from "../atoms/canvas/primitives";
+import lcdColors from "../atoms/canvas/lcdColors";
 import { iHourlyWeather } from "../interfaces";
 
 export default function displayLcdHourlyCharts(ctx: CanvasRenderingContext2D, 
     dispModel: number, weather: iHourlyWeather | undefined, shift: number, type: string
 ) {
-    const BG_COLOR   = '#000';
-    const GRID_COLOR = '#484C48';
-    const TEMP_COLOR = '#F8FC00';
-    const PRES_COLOR = '#F800F8';
-    const PREC_COLOR = '#00FCF8';
+    const color = lcdColors();
     const step = dispModel ? 32 : 36;
     const grid = dispModel ? 31 : 35;
 
-    fillRect(ctx, 42, 0, grid * 8, 72, BG_COLOR);
+    fillRect(ctx, 42, 0, grid * 8, 72, color.BG);
     for(let i=0; i<10; i++) {
-        drawLine(ctx, 42, i * 8, grid * 8, 0, GRID_COLOR);
+        drawLine(ctx, 42, i * 8, grid * 8, 0, color.GRID);
     }
     for(let i=0; i<grid + 1; i++) {
-        drawLine(ctx, i * 8 + 42, 0, 0, 72, GRID_COLOR);
+        drawLine(ctx, i * 8 + 42, 0, 0, 72, color.GRID);
     }
 
     for(let cht=0; cht<4; cht++) {
@@ -48,16 +45,16 @@ export default function displayLcdHourlyCharts(ctx: CanvasRenderingContext2D,
         const offset = dispModel ? 50 : 56;
         for(let i=0; i<7; i++) {
             if(cht === 0) { // temperature
-                line(ctx, i * step + offset, 68 - ch[i], i * step + step + offset, 68 - ch[i + 1], TEMP_COLOR);
+                line(ctx, i * step + offset, 68 - ch[i], i * step + step + offset, 68 - ch[i + 1], color.TEMP);
             }
             if(cht === 1 && (type === 'hourly' || type === 'historyOut')) { // pressure
-                line(ctx, i * step + offset, 70 - ch[i], i * step + step + offset, 70 - ch[i + 1], PRES_COLOR);
+                line(ctx, i * step + offset, 70 - ch[i], i * step + step + offset, 70 - ch[i + 1], color.PRES);
             }
             if(cht === 2 && type === 'hourly') { // precipitation
-                line(ctx, i * step + offset, 72 - ch[i], i * step + step + offset, 72 - ch[i + 1], PREC_COLOR);
+                line(ctx, i * step + offset, 72 - ch[i], i * step + step + offset, 72 - ch[i + 1], color.PREC);
             }
             if(cht === 3 && (type === 'historyOut' || type === 'historyIn')) { // humidity
-                line(ctx, i * step + offset, 72 - ch[i], i * step + step + offset, 72 - ch[i + 1], PREC_COLOR);
+                line(ctx, i * step + offset, 72 - ch[i], i * step + step + offset, 72 - ch[i + 1], color.PREC);
             }
         }
     }    

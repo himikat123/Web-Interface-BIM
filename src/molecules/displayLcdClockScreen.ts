@@ -3,20 +3,16 @@ import * as symb from '../atoms/img/symbols';
 import lcdCloseButton from '../atoms/canvas/lcdCloseButton';
 import moment from 'moment';
 import { getLocale } from '../atoms/getLocale';
+import lcdColors from '../atoms/canvas/lcdColors';
 import { iLcdClockState } from '../interfaces';
 
 export function displayLcdClockScreen(ctx: CanvasRenderingContext2D, 
     model: number, dispModel: number, state: iLcdClockState | undefined, clockType: string
 ): iLcdClockState {
-    const BG_COLOR    = '#000';
-    const CLOCK_COLOR = '#0F0';
-    const ARROW1_COLOR = '#00FC00';
-    const ARROW2_COLOR = '#F80000';
-    const WEEKDAY_COLOR = '#F8FC00';
-    const DATE_COLOR = '#F88000';
+    const color = lcdColors();
 
     if(!state?.skeleton || clockType !== state?.clockType) {
-        fillRect(ctx, 0, 0, ctx.canvas.width, ctx.canvas.height, BG_COLOR);
+        fillRect(ctx, 0, 0, ctx.canvas.width, ctx.canvas.height, color.BG);
         lcdCloseButton(ctx, dispModel);
     }
 
@@ -37,10 +33,10 @@ export function displayLcdClockScreen(ctx: CanvasRenderingContext2D,
             const x = dispModel ? 178 : 200;
             const y = dispModel ? 68 : 64;
             const p = dispModel ? 6 : 8;
-            printSegment(ctx, 4, y, w, font, hour.toString().padStart(2, ' '), font, CLOCK_COLOR, BG_COLOR);
-            fillCircle(ctx, dispModel ? 160 : 182, 100, p + (points ? 0 : 1), points ? CLOCK_COLOR : BG_COLOR);
-            fillCircle(ctx, dispModel ? 158 : 177, 150, p + (points ? 0 : 1), points ? CLOCK_COLOR : BG_COLOR);
-            printSegment(ctx, x, y, w, font, minute.toString().padStart(2, '0'), font, CLOCK_COLOR, BG_COLOR);
+            printSegment(ctx, 4, y, w, font, hour.toString().padStart(2, ' '), font, color.CLOCK, color.BG);
+            fillCircle(ctx, dispModel ? 160 : 182, 100, p + (points ? 0 : 1), points ? color.CLOCK : color.BG);
+            fillCircle(ctx, dispModel ? 158 : 177, 150, p + (points ? 0 : 1), points ? color.CLOCK : color.BG);
+            printSegment(ctx, x, y, w, font, minute.toString().padStart(2, '0'), font, color.CLOCK, color.BG);
         }
         if(clockType === 'small') { // Small clock
             const font = dispModel ? 96 : 110;
@@ -49,29 +45,29 @@ export function displayLcdClockScreen(ctx: CanvasRenderingContext2D,
             const x2 = dispModel ? 222 : 250;
             const y = dispModel ? 82 : 74;
             const p = dispModel ? 4 : 5;
-            printSegment(ctx, 4, y, w, font, hour.toString().padStart(2, ' '), font, CLOCK_COLOR, BG_COLOR);
-            fillCircle(ctx, dispModel ? 107 : 121, 100, p + 1, BG_COLOR);
-            fillCircle(ctx, dispModel ? 107 : 121, 100, p, CLOCK_COLOR);
-            fillCircle(ctx, dispModel ? 105 : 119, 134, p + 1, BG_COLOR);
-            fillCircle(ctx, dispModel ? 105 : 119, 134, p, CLOCK_COLOR);
-            printSegment(ctx, x1, y, w, font, minute.toString().padStart(2, '0'), font, CLOCK_COLOR, BG_COLOR);
-            fillCircle(ctx, dispModel ? 216 : 244, 100, p + 1, BG_COLOR);
-            fillCircle(ctx, dispModel ? 216 : 244, 100, p, CLOCK_COLOR);
-            fillCircle(ctx, dispModel ? 214 : 242, 134, p + 1, BG_COLOR);
-            fillCircle(ctx, dispModel ? 214 : 242, 134, p, CLOCK_COLOR);
-            printSegment(ctx, x2, y, w, font, second.toString().padStart(2, '0'), font, CLOCK_COLOR, BG_COLOR);
+            printSegment(ctx, 4, y, w, font, hour.toString().padStart(2, ' '), font, color.CLOCK, color.BG);
+            fillCircle(ctx, dispModel ? 107 : 121, 100, p + 1, color.BG);
+            fillCircle(ctx, dispModel ? 107 : 121, 100, p, color.CLOCK);
+            fillCircle(ctx, dispModel ? 105 : 119, 134, p + 1, color.BG);
+            fillCircle(ctx, dispModel ? 105 : 119, 134, p, color.CLOCK);
+            printSegment(ctx, x1, y, w, font, minute.toString().padStart(2, '0'), font, color.CLOCK, color.BG);
+            fillCircle(ctx, dispModel ? 216 : 244, 100, p + 1, color.BG);
+            fillCircle(ctx, dispModel ? 216 : 244, 100, p, color.CLOCK);
+            fillCircle(ctx, dispModel ? 214 : 242, 134, p + 1, color.BG);
+            fillCircle(ctx, dispModel ? 214 : 242, 134, p, color.CLOCK);
+            printSegment(ctx, x2, y, w, font, second.toString().padStart(2, '0'), font, color.CLOCK, color.BG);
         }
         if(clockType === 'analog') { // Analog clock
             drawScaledImage(ctx, symb.clockFace(), dispModel ? 40 : 61, 0, 240, 240);
             setTimeout(() => {
-                drawHand(ctx, 70, hour * 30 + minute / 2, 4, ARROW1_COLOR, dispModel);
-                drawHand(ctx, 100, minute * 6 + second / 10, 2, ARROW1_COLOR, dispModel);
-                if(model !== 1) drawHand(ctx, 110, second * 6, 1, ARROW2_COLOR, dispModel);
+                drawHand(ctx, 70, hour * 30 + minute / 2, 4, color.ARROW1, dispModel);
+                drawHand(ctx, 100, minute * 6 + second / 10, 2, color.ARROW1, dispModel);
+                if(model !== 1) drawHand(ctx, 110, second * 6, 1, color.ARROW2, dispModel);
             }, 1);
         }
         else { // Weekday and date
-            printText(ctx, dispModel ? 30 : 36, 8, dispModel ? 260 : 290, 30, weekday, 28, 'center', WEEKDAY_COLOR, BG_COLOR);
-            printText(ctx, dispModel ? 30 : 36, 200, dispModel ? 260 : 290, 30, date, 28, 'center', DATE_COLOR, BG_COLOR);
+            printText(ctx, dispModel ? 30 : 36, 8, dispModel ? 260 : 290, 30, weekday, 28, 'center', color.WEEKDAY, color.BG);
+            printText(ctx, dispModel ? 30 : 36, 200, dispModel ? 260 : 290, 30, date, 28, 'center', color.DATE, color.BG);
         }
     }
 

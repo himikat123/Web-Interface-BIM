@@ -17,50 +17,42 @@ import lcdShowAlarmIcon from '../atoms/canvas/lcdShowAlarmIcon';
 import lcdShowForecast from '../atoms/canvas/lcdShowForecast';
 import lcdShowVoltageOrPercentage from '../atoms/canvas/lcdShowVoltageOrPercentage';
 import lcdGetSequence from '../atoms/lcdGetSequence';
+import lcdColors from '../atoms/canvas/lcdColors';
 import { iLcdMainState } from '../interfaces';
 
 export function displayLcdMainScreen(ctx: CanvasRenderingContext2D, 
     dispModel: number, state: iLcdMainState | undefined, points: boolean
 ): iLcdMainState {
+    const color = lcdColors();
 
-    const BG_COLOR          = '#000';
-    const TEXT_COLOR        = '#FFF';
-    const TEMPERATURE_COLOR = '#FF0';
-    const TEMP_MIN_COLOR    = '#F80';
-    const HUMIDITY_COLOR    = '#0FF';
-    const PRESSURE_COLOR    = '#F5F';
-    const CLOCK_COLOR       = '#0F0';
-    const BATTERY_COLOR     = '#0F0';
-    const FRAME_COLOR       = '#00F';
-
-    if(!state?.skeleton) lcdDrawSkeleton(ctx, FRAME_COLOR, BG_COLOR);
-    lcdShowClockPoints(ctx, points ? HUMIDITY_COLOR : BG_COLOR);
+    if(!state?.skeleton) lcdDrawSkeleton(ctx, color.FRAME, color.BG);
+    lcdShowClockPoints(ctx, points ? color.HUM : color.BG);
 
     const prevState: iLcdMainState = {
         skeleton: true,
         sequence: lcdGetSequence(state?.sequence),
-        time: lcdShowTime(ctx, state?.time, BG_COLOR),
-        weekday: lcdShowWeekday(ctx, state?.weekday, CLOCK_COLOR, BG_COLOR),
+        time: lcdShowTime(ctx, state?.time, color.BG),
+        weekday: lcdShowWeekday(ctx, state?.weekday, color.CLOCK, color.BG),
         ant: lcdShowAntenna(ctx, state?.ant),
-        bat: lcdShowBatteryLevel(ctx, state?.bat, BG_COLOR),
-        volt: lcdShowVoltageOrPercentage(ctx, state?.volt, BATTERY_COLOR, TEMP_MIN_COLOR, BG_COLOR),
-        comfort: lcdShowComfort(ctx, state?.comfort[0], state?.comfort[1], state?.sequence.descript, TEXT_COLOR, BG_COLOR),
+        bat: lcdShowBatteryLevel(ctx, state?.bat, color.BG),
+        volt: lcdShowVoltageOrPercentage(ctx, state?.volt, color.BATTERY, color.TEMP_MIN, color.BG),
+        comfort: lcdShowComfort(ctx, state?.comfort[0], state?.comfort[1], state?.sequence.descript, color.TEXT, color.BG),
         icon: lcdShowWeatherIcon(ctx, state?.icon),
-        descript: lcdShowDescription(ctx, state?.descript[0], state?.descript[1], TEXT_COLOR, BG_COLOR),
-        tempIn: lcdShowTemperatureInside(ctx, state?.tempIn, state?.sequence.temp, TEMPERATURE_COLOR, BG_COLOR),
-        tempOut: lcdShowTemperatureOutside(ctx, state?.tempOut, TEMPERATURE_COLOR, BG_COLOR),
-        humIn: lcdShowHumidityInside(ctx, state?.humIn, state?.sequence.hum, HUMIDITY_COLOR, BG_COLOR),
-        humOut: lcdShowHumidityOutside(ctx, state?.humOut, HUMIDITY_COLOR, BG_COLOR),
-        presOut: lcdShowPressure(ctx, state?.presOut, PRESSURE_COLOR, BG_COLOR),
-        windSpeed: lcdShowWindSpeed(ctx, state?.windSpeed, TEXT_COLOR, BG_COLOR),
-        windDirection: lcdShowWindDirection(ctx, state?.windDirection, BG_COLOR),
-        updTime: lcdShowUpdTime(ctx, state?.updTime, TEXT_COLOR, BG_COLOR),
-        alarmState: lcdShowAlarmIcon(ctx, state?.alarmState, BG_COLOR),
+        descript: lcdShowDescription(ctx, state?.descript[0], state?.descript[1], color.TEXT, color.BG),
+        tempIn: lcdShowTemperatureInside(ctx, state?.tempIn, state?.sequence.temp, color.TEMP, color.BG),
+        tempOut: lcdShowTemperatureOutside(ctx, state?.tempOut, color.TEMP, color.BG),
+        humIn: lcdShowHumidityInside(ctx, state?.humIn, state?.sequence.hum, color.HUM, color.BG),
+        humOut: lcdShowHumidityOutside(ctx, state?.humOut, color.HUM, color.BG),
+        presOut: lcdShowPressure(ctx, state?.presOut, color.PRES, color.BG),
+        windSpeed: lcdShowWindSpeed(ctx, state?.windSpeed, color.TEXT, color.BG),
+        windDirection: lcdShowWindDirection(ctx, state?.windDirection, color.BG),
+        updTime: lcdShowUpdTime(ctx, state?.updTime, color.TEXT, color.BG),
+        alarmState: lcdShowAlarmIcon(ctx, state?.alarmState, color.BG),
         forecast: { wd: [], tMax: [], tMin: [], wSpeed: [], icon: [] }
     };
 
     for(let i=0; i<(dispModel === 0 ? 4 : 3); i++) {
-        prevState.forecast = lcdShowForecast(ctx, i, state?.forecast, TEXT_COLOR, TEMPERATURE_COLOR, TEMP_MIN_COLOR, BG_COLOR);
+        prevState.forecast = lcdShowForecast(ctx, i, state?.forecast, color.TEXT, color.TEMP, color.TEMP_MIN, color.BG);
     }
 
     return prevState;

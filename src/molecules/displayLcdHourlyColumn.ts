@@ -7,35 +7,32 @@ import * as symb from "../atoms/img/symbols";
 import i18n from "../i18n/main";
 import moment from 'moment';
 import { getLocale } from "../atoms/getLocale";
+import lcdColors from "../atoms/canvas/lcdColors";
 
 export default function displayLcdHourlyColumn(ctx: CanvasRenderingContext2D, 
     dispModel: number, weather: iHourlyWeather | undefined, num: number, shift: number, type: string
 ) {
     const config = store.getState().config;
-    const BG_COLOR   = '#000';
-    const TEXT_COLOR = '#FFF';
-    const TEMP_COLOR = '#F8FC00';
-    const HUM_COLOR = '#00FCF8';
-    const PRES_COLOR = '#F800F8';
+    const color = lcdColors();
     const x = num * (dispModel ? 32 : 36) + (dispModel ? 30 : 38);
     let y = 86;
     const s = num + shift;
     const font = dispModel ? 9 : 11;
 
     const temp = weather?.temp[s] !== undefined ? (weather?.temp[s].toFixed(1) + '°') : '--°';
-    printText(ctx, x + 2, y, 36, font + 1, temp, font + 1, 'center', TEMP_COLOR, BG_COLOR);
+    printText(ctx, x + 2, y, 36, font + 1, temp, font + 1, 'center', color.TEMP, color.BG);
     y += 16;
 
     if(type === 'historyIn' || type === 'historyOut') {
         const hum = weather?.hum[s] !== undefined ? (Math.round(weather?.hum[s]) + '%') : '--%';
-        printText(ctx, x + 2, y, 36, font, hum, font + 1, 'center', HUM_COLOR, BG_COLOR);
+        printText(ctx, x + 2, y, 36, font, hum, font + 1, 'center', color.HUM, color.BG);
         y += 14;
     }
 
     if(type === 'hourly' || type === 'historyOut') {
         const mm = i18n.t('units.mm');
         const pres = weather?.pres[s] !== undefined ? (Math.round(weather.pres[s] * 0.75) + mm) : ('--' + mm);
-        printText(ctx, x + 2, y, 36, font, pres, font, 'center', PRES_COLOR, BG_COLOR);
+        printText(ctx, x + 2, y, 36, font, pres, font, 'center', color.PRES, color.BG);
         y += 14;
     }
 
@@ -59,23 +56,23 @@ export default function displayLcdHourlyColumn(ctx: CanvasRenderingContext2D,
 
         let wd = moment.unix(weather?.date[s] ?? 0).locale(getLocale()).format('dd');
         wd = wd.charAt(0).toUpperCase() + wd.slice(1);
-        printText(ctx, x + 2, y, 36, 18, wd, 18, 'center', TEXT_COLOR, BG_COLOR);
+        printText(ctx, x + 2, y, 36, 18, wd, 18, 'center', color.TEXT, color.BG);
         y += 20;
     }
 
     const dt = moment.unix(weather?.date[s] ?? 0).format('DD');
     const mo = moment.unix(weather?.date[s] ?? 0).locale(getLocale()).format('MMM').substring(0, 3);
-    printText(ctx, x + 2, y, 36, font, dt + mo, font, 'center', TEXT_COLOR, BG_COLOR);
+    printText(ctx, x + 2, y, 36, font, dt + mo, font, 'center', color.TEXT, color.BG);
     y += 14;
 
     const tm = moment.unix(weather?.date[s] ?? 0).format('HH:mm');
-    printText(ctx, x + 2, y, 36, font, tm, font, 'center', TEXT_COLOR, BG_COLOR);
+    printText(ctx, x + 2, y, 36, font, tm, font, 'center', color.TEXT, color.BG);
     y += 14;
 
     if(type === 'hourly') {
         const ms = i18n.t('units.mps');
         const ws = weather?.windSpeed[s] !== undefined ? (Math.round(weather.windSpeed[s]) + ms) : ('--' + ms);
-        printText(ctx, x + 2, y, 36, font, ws, font, 'center', TEXT_COLOR, BG_COLOR);
+        printText(ctx, x + 2, y, 36, font, ws, font, 'center', color.TEXT, color.BG);
         y += 14;
 
         const dir = weather?.windDir[s] !== undefined ? weather?.windDir[s] : 0;
@@ -91,13 +88,13 @@ export default function displayLcdHourlyColumn(ctx: CanvasRenderingContext2D,
             else if(dir >= 292 && dir < 338) img = wind.north_west();
             drawScaledImage(ctx, img, x + 12, y, 12, 12);
         }
-        else fillRect(ctx, x + 12, y, 12, 12, BG_COLOR);
+        else fillRect(ctx, x + 12, y, 12, 12, color.BG);
         y += 14;
 
         drawScaledImage(ctx, symb.hum(), x + (dispModel ? 4 : 0), y, 8, 10);
         let pr = weather?.prec[s] ? weather.prec[s].toString() : '0';
         if(config.weather.provider === 0) pr += (pr === '0' ? i18n.t('units.mm') : '');
         if(config.weather.provider === 2) pr += '%';
-        printText(ctx, x + 8, y + 2, 28, font, pr, font, 'center', TEXT_COLOR, BG_COLOR);
+        printText(ctx, x + 8, y + 2, 28, font, pr, font, 'center', color.TEXT, color.BG);
     }
 }
