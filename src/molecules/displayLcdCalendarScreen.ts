@@ -16,7 +16,7 @@ export function displayLcdCalendarScreen(ctx: CanvasRenderingContext2D,
 ): iLcdCalendarState {
     const config = store.getState().config;
     const locale = config.lang === 'ua' ? 'uk' : config.lang;
-    const font = dispModel ? 20 : 20;
+    const font = 20;
 
     const BG_COLOR      = '#000';
     const MONTH_COLOR   = '#F88000';
