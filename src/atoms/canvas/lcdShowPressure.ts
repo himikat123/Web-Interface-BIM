@@ -16,7 +16,7 @@ export default function lcdShowPressure(ctx: CanvasRenderingContext2D,
         let p = validatePressure(pres) ? String(Math.round(pres * 0.75)) : '--';
         p += units;
         const x = dispModel ? 250 : 286; 
-        printText(ctx, x, 119, 70, 20, p, 21, 'center', color, bgColor);
+        printText(ctx, x, 118, 70, 20, p, 21, 'center', color, bgColor);
     }
 
     return pres;

@@ -29,7 +29,7 @@ export function lcdShowHumidityOutside(ctx: CanvasRenderingContext2D,
     if(hum !== prevHum) {
         const model = store.getState().config.display.model[0];
         const dispModel = (model === 0 || model === 1) ? 0 : 1;
-        showHumidity(ctx, hum, dispModel ? 164 : 190, 119, color, bgColor);
+        showHumidity(ctx, hum, dispModel ? 164 : 190, 118, color, bgColor);
     }
     return hum;
 }

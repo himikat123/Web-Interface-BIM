@@ -43,7 +43,7 @@ export function lcdShowTemperatureOutside(ctx: CanvasRenderingContext2D,
         const xi = dispModel ? 62 : 72;
         const yi = dispModel ? 104 : 101;
         const xt = dispModel ? 71 : 78;
-        const yt = dispModel ? 113 : 111;
+        const yt = dispModel ? 113 : 110;
         const w = dispModel ? 9 : 10;
         const h = dispModel ? 33 : 38;
         let icon = temp_plus();
