@@ -1,6 +1,6 @@
 import store from '../redux/store';
 import { iSegState } from "../interfaces";
-import segAnimations from './segAnimations';
+import segAnimations from './segmentsDisplay/segAnimations';
 
 export default function slotTick(dispNum: number, state: iSegState): iSegState {
     const config = store.getState().config;

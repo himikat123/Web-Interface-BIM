@@ -1,6 +1,6 @@
 import store from '../../redux/store';
 import { printText, printScrollText } from "./primitives";
-import lcdGetComfort from "../lcdGetComfort";
+import lcdGetComfort from "../lcdGetData/lcdGetComfort";
 
 export default function lcdShowComfort(ctx: CanvasRenderingContext2D, prevComfort: string | undefined, 
     shift: number | undefined, sequence: string | undefined, color: string, bgColor: string

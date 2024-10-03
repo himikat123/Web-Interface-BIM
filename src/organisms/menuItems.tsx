@@ -1,18 +1,18 @@
 import { iMenuItems } from "../interfaces";
 import device from '../device';
-import MenuStatus from "../molecules/menuStatus";
-import MenuNetwork from "../molecules/menuNetwork";
-import MenuSource from "../molecules/menuSource";
-import MenuClock from "../molecules/menuClock";
-import MenuAlarm from "../molecules/menuAlarm";
-import MenuDisplaySingle from "../molecules/menuDisplaySingle";
-import MenuDisplaysSeveral from "../molecules/menuDisplaysSeveral";
-import MenuSound from "../molecules/menuSound";
-import MenuComfort from "../molecules/menuComfort";
-import MenuHistory from "../molecules/menuHistory";
-import MenuDataSend from "../molecules/menuDataSend";
-import MenuDataReceive from "../molecules/menuDataReceive";
-import MenuSystem from '../molecules/menuSystem';
+import MenuStatus from "../molecules/menu/menuStatus";
+import MenuNetwork from "../molecules/menu/menuNetwork";
+import MenuSource from "../molecules/menu/menuSource";
+import MenuClock from "../molecules/menu/menuClock";
+import MenuAlarm from "../molecules/menu/menuAlarm";
+import MenuDisplaySingle from "../molecules/menu/menuDisplaySingle";
+import MenuDisplaysSeveral from "../molecules/menu/menuDisplaysSeveral";
+import MenuSound from "../molecules/menu/menuSound";
+import MenuComfort from "../molecules/menu/menuComfort";
+import MenuHistory from "../molecules/menu/menuHistory";
+import MenuDataSend from "../molecules/menu/menuDataSend";
+import MenuDataReceive from "../molecules/menu/menuDataReceive";
+import MenuSystem from '../molecules/menu/menuSystem';
 
 export default function MenuItems(props: iMenuItems) {
     return <>

@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux';
 import FourColumns from "../templates/fourColumns";
 import i18n from '../i18n/main';
-import CardDisplayType from "../organisms/cardDisplayType";
-import CardDisplayBrightness from "../organisms/cardDisplayBrightness";
-import CardDisplayAutoOff from "../organisms/cardDisplayAutoOff";
-import CardDisplayAnimation from "../organisms/cardDisplayAnimation";
-import CardDisplayTimeSlot from "../organisms/cardDisplayTimeSlot";
+import CardDisplayType from "../organisms/display/cardDisplayType";
+import CardDisplayBrightness from "../organisms/display/cardDisplayBrightness";
+import CardDisplayAutoOff from "../organisms/display/cardDisplayAutoOff";
+import CardDisplayAnimation from "../organisms/display/cardDisplayAnimation";
+import CardDisplayTimeSlot from "../organisms/display/cardDisplayTimeSlot";
 import { iConfig } from "../redux/configTypes";
 
 export default function Display2() {

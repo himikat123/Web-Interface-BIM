@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import i18n from '../i18n/main';
 import TwoColumns from "../templates/twoColumns";
 import Card from "../atoms/card";
-import CardStatusDisplay from '../organisms/cardStatusDisplay';
-import CardStatusSystem from '../organisms/cardStatusSystem';
-import CardStatusNetwork from '../organisms/cardStatusNetwork';
+import CardStatusDisplay from '../organisms/status/cardStatusDisplay';
+import CardStatusSystem from '../organisms/status/cardStatusSystem';
+import CardStatusNetwork from '../organisms/status/cardStatusNetwork';
 import { iData } from '../redux/dataTypes';
 
 export default function Status() {

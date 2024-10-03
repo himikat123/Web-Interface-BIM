@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
-import MenuMobileButton from "../molecules/menuMobileButton";
+import MenuMobileButton from "../molecules/menu/menuMobileButton";
 import MenuItems from "./menuItems";
 import MenuThemeSwitch from "../atoms/menuThemeSwitch";
-import MenuUserDropdown from "../molecules/menuUserDropdown";
+import MenuUserDropdown from "../molecules/menu/menuUserDropdown";
 import { List, X, ArrowCircleUp } from "@phosphor-icons/react";
 import "./navbar.scss";
 import i18n from "../i18n/main";

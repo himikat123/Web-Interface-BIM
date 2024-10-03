@@ -2,11 +2,11 @@ import i18n from '../i18n/main';
 import { useSelector } from 'react-redux';
 import FourColumns from "../templates/fourColumns";
 import { iConfig } from "../redux/configTypes";
-import CardSendMqttOnOff from '../organisms/cardSendMqttOnOff';
-import CardSendMqttPeriod from '../organisms/cardSendMqttPeriod';
-import CardSendMqttBroker from '../organisms/cardSendMqttBroker';
-import CardSendMqttUser from '../organisms/cardSendMqttUser';
-import CardSendMqttData from "../organisms/cardSendMqttData";
+import CardSendMqttOnOff from '../organisms/mqtt/cardSendMqttOnOff';
+import CardSendMqttPeriod from '../organisms/mqtt/cardSendMqttPeriod';
+import CardSendMqttBroker from '../organisms/mqtt/cardSendMqttBroker';
+import CardSendMqttUser from '../organisms/mqtt/cardSendMqttUser';
+import CardSendMqttData from "../organisms/mqtt/cardSendMqttData";
 
 export default function SendMqtt() {
     const config = useSelector((state: iConfig) => state.config);

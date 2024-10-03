@@ -1,9 +1,9 @@
 import i18n from '../i18n/main';
 import TwoColumns from "../templates/twoColumns";
-import CardComfortTemp from "../organisms/cardComfortTemp";
-import CardComfortHum from "../organisms/cardComfortHum";
-import CardComfortIaq from "../organisms/cardComfortIaq";
-import CardComfortCo2 from "../organisms/cardComfortCo2";
+import CardComfortTemp from "../organisms/comfort/cardComfortTemp";
+import CardComfortHum from "../organisms/comfort/cardComfortHum";
+import CardComfortIaq from "../organisms/comfort/cardComfortIaq";
+import CardComfortCo2 from "../organisms/comfort/cardComfortCo2";
 
 export default function Comfort() {
     const content = <>

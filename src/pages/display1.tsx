@@ -1,19 +1,19 @@
 import FourColumns from "../templates/fourColumns";
 import { useSelector } from 'react-redux';
 import i18n from '../i18n/main';
-import CardDisplayType from "../organisms/cardDisplayType";
-import CardDisplayBrightness from "../organisms/cardDisplayBrightness";
-import CardDisplayAutoOff from "../organisms/cardDisplayAutoOff";
-import CardDisplayAnimation from "../organisms/cardDisplayAnimation";
-import CardDisplayTemperatureIn from "../organisms/cardDisplayTemperatureIn";
-import CardDisplayHumidityIn from "../organisms/cardDisplayHumidityIn";
-import CardDisplayVoltage from "../organisms/cardDisplayVoltage";
-import CardDisplayBatLevel from "../organisms/cardDisplayBatLevel";
-import CardDisplayTemperatureOut from "../organisms/cardDisplayTemperatureOut";
-import CardDisplayHumidityOut from "../organisms/cardDisplayHumidityOut";
-import CardDisplayPressureOut from "../organisms/cardDisplayPressureOut";
-import CardDisplayComfort from "../organisms/cardDisplayComfort";
-import CardDisplayTimeSlot from "../organisms/cardDisplayTimeSlot";
+import CardDisplayType from "../organisms/display/cardDisplayType";
+import CardDisplayBrightness from "../organisms/display/cardDisplayBrightness";
+import CardDisplayAutoOff from "../organisms/display/cardDisplayAutoOff";
+import CardDisplayAnimation from "../organisms/display/cardDisplayAnimation";
+import CardDisplayTemperatureIn from "../organisms/display/cardDisplayTemperatureIn";
+import CardDisplayHumidityIn from "../organisms/display/cardDisplayHumidityIn";
+import CardDisplayVoltage from "../organisms/display/cardDisplayVoltage";
+import CardDisplayBatLevel from "../organisms/display/cardDisplayBatLevel";
+import CardDisplayTemperatureOut from "../organisms/display/cardDisplayTemperatureOut";
+import CardDisplayHumidityOut from "../organisms/display/cardDisplayHumidityOut";
+import CardDisplayPressureOut from "../organisms/display/cardDisplayPressureOut";
+import CardDisplayComfort from "../organisms/display/cardDisplayComfort";
+import CardDisplayTimeSlot from "../organisms/display/cardDisplayTimeSlot";
 import { iConfig } from "../redux/configTypes";
 
 export default function Display1() {

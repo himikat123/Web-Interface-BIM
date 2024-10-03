@@ -6,7 +6,7 @@ import Button from "../atoms/button";
 import SelectSwitch from "../atoms/selectSwitch";
 import TextInput from "../atoms/textInput";
 import NumberInput from "../atoms/numberInput";
-import WeatherChecker from "../molecules/weatherChecker";
+import WeatherChecker from "../molecules/weather/weatherChecker";
 import { iConfig } from "../redux/configTypes";
 import * as cf from "../redux/slices/config";
 import device from "../device";

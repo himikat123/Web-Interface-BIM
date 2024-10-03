@@ -2,7 +2,7 @@ import i18n from '../../i18n/main';
 import store from '../../redux/store';
 import { printText } from "./primitives";
 import { validatePressure } from "../validateValues";
-import lcdGetPres from "../lcdGetPres";
+import lcdGetPres from "../lcdGetData/lcdGetPres";
 
 export default function lcdShowPressure(ctx: CanvasRenderingContext2D, 
     prevPres: number | undefined, color: string, bgColor: string

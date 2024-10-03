@@ -2,10 +2,10 @@ import i18n from '../i18n/main';
 import { useSelector } from 'react-redux';
 import TwoColumns from "../templates/twoColumns";
 import { iConfig } from "../redux/configTypes";
-import CardThingReceiveOnOff from "../organisms/cardThingReceiveOnOff";
-import CardThingReceivePeriodExpire from "../organisms/cardThingReseivePeriodExpire";
-import CardThingReceiveCHID from "../organisms/cardThingReceiveCHID";
-import CardThingReceiveRdKey from "../organisms/cardThingReceiveRdKey";
+import CardThingReceiveOnOff from "../organisms/thingspeak/cardThingReceiveOnOff";
+import CardThingReceivePeriodExpire from "../organisms/thingspeak/cardThingReceivePeriodExpire";
+import CardThingReceiveCHID from "../organisms/thingspeak/cardThingReceiveCHID";
+import CardThingReceiveRdKey from "../organisms/thingspeak/cardThingReceiveRdKey";
 
 export default function ReceiveThingspeak() {
     const config = useSelector((state: iConfig) => state.config);

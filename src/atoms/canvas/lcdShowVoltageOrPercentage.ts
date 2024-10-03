@@ -1,6 +1,6 @@
 import store from '../../redux/store';
 import { printText } from "./primitives";
-import lcdGetVoltage from "../lcdGetVoltage";
+import lcdGetVoltage from "../lcdGetData/lcdGetVoltage";
 
 export default function lcdShowVoltageOrPercentage(ctx: CanvasRenderingContext2D, 
     prevValue: string | undefined, color: string, colorAir: string, bgColor: string

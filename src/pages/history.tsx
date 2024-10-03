@@ -1,7 +1,7 @@
 import i18n from '../i18n/main';
 import { useSelector } from 'react-redux';
-import CardHistorySettings from "../organisms/cardHistorySettings";
-import CardsHistorySensor from "../organisms/cardsHistorySensor";
+import CardHistorySettings from "../organisms/history/cardHistorySettings";
+import CardsHistorySensor from "../organisms/history/cardsHistorySensor";
 import TwoColumns from "../templates/twoColumns";
 import { iConfig } from "../redux/configTypes";
 

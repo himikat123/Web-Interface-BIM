@@ -2,8 +2,8 @@ import store from '../../redux/store';
 import { printText, drawScaledImage, fillRect } from "./primitives";
 import { temp_minus, temp_plus } from "../img/symbols";
 import { validateTemperature } from "../validateValues";
-import lcdGetTempIn from "../lcdGetTempIn";
-import { lcdGetTempOut } from "../lcdGetTemp";
+import lcdGetTempIn from "../lcdGetData/lcdGetTempIn";
+import { lcdGetTempOut } from "../lcdGetData/lcdGetTemp";
 
 function showTemperature(ctx: CanvasRenderingContext2D, temp: number, 
     x: number, y: number, color: string, bgColor: string

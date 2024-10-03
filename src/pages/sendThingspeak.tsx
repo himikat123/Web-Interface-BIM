@@ -4,11 +4,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import FourColumns from "../templates/fourColumns";
 import { iConfig } from "../redux/configTypes";
 import { sendThingspeakValidChange } from "../redux/slices/valid";
-import CardThingSendOnOff from "../organisms/cardThingSendOnOff";
-import CardThingSendPeriod from "../organisms/cardThingSendPeriod";
-import CardThingSendCHID from "../organisms/cardThingSendCHID";
-import CardThingWrKey from "../organisms/cardThingWrKey";
-import CardThingSendData from "../organisms/cardThingSendData";
+import CardThingSendOnOff from "../organisms/thingspeak/cardThingSendOnOff";
+import CardThingSendPeriod from "../organisms/thingspeak/cardThingSendPeriod";
+import CardThingSendCHID from "../organisms/thingspeak/cardThingSendCHID";
+import CardThingWrKey from "../organisms/thingspeak/cardThingWrKey";
+import CardThingSendData from "../organisms/thingspeak/cardThingSendData";
 
 export default function SendThingspeak() {
     const dispatch = useDispatch();

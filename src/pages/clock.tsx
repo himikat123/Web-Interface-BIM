@@ -1,8 +1,8 @@
 import i18n from '../i18n/main';
 import ThreeColumns from "../templates/threeColumns";
-import CardClockTime from "../organisms/cardClockTime";
-import CardClockNtp from "../organisms/cardClockNtp";
-import CardClockSet from "../organisms/cardClockSet";
+import CardClockTime from "../organisms/clock/cardClockTime";
+import CardClockNtp from "../organisms/clock/cardClockNtp";
+import CardClockSet from "../organisms/clock/cardClockSet";
 
 export default function Clock() {
     const content = <>

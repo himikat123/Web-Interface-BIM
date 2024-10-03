@@ -1,6 +1,6 @@
 import FourColumns from "../templates/fourColumns";
 import i18n from '../i18n/main';
-import CardAlarm from "../organisms/cardAlarm";
+import CardAlarm from "../organisms/alarm/cardAlarm";
 
 export default function Alarm() {
     const content = <>

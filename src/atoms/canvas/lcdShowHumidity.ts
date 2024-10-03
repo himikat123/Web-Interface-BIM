@@ -1,8 +1,8 @@
 import store from '../../redux/store';
 import { printText } from "./primitives";
 import { validateHumidity } from "../validateValues";
-import lcdGetHumIn from "../lcdGetHumIn";
-import { lcdGetHumOut } from "../lcdGetHum";
+import lcdGetHumIn from "../lcdGetData/lcdGetHumIn";
+import { lcdGetHumOut } from "../lcdGetData/lcdGetHum";
 
 function showHumidity(ctx: CanvasRenderingContext2D, hum: number, 
     x: number, y: number, color: string, bgColor: string
