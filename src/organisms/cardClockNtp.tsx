@@ -1,11 +1,7 @@
 import i18n from "../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
-import 'moment/locale/de';
-import 'moment/locale/ru';
-import 'moment/locale/pl';
-import 'moment/locale/uk';
-import 'moment/locale/bg';
+import { getLocale } from "../atoms/getLocale";
 import Card from "../atoms/card";
 import TextInput from "../atoms/textInput";
 import NumberInput from "../atoms/numberInput";
@@ -17,7 +13,6 @@ import { clockValidChange } from "../redux/slices/valid";
 export default function CardClockNtp() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
-    const locale = config.lang === 'ua' ? 'uk' : config.lang;
     
     return <Card content={<>
         <TextInput label={i18n.t('ntpServerAddress')}
@@ -33,7 +28,7 @@ export default function CardClockNtp() {
                 label={<>{i18n.t('ntpUpdatePeriod')} (<Indication 
                     error={false} 
                     value={config.clock.ntp_period === 0 ? i18n.t('never') : ((config.clock.ntp_period > 44 ? '~' : '')
-                        + moment.duration(config.clock.ntp_period, 'minutes').locale(locale).humanize())} 
+                        + moment.duration(config.clock.ntp_period, 'minutes').locale(getLocale()).humanize())} 
                 /> )</>}
                 onChange={val => dispatch(cf.clockNtpPeriodChange(val))}
                 isValid={valid => dispatch(clockValidChange(valid))}

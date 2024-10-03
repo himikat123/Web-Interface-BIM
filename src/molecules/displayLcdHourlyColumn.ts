@@ -6,17 +6,12 @@ import * as wind from "../atoms/img/wind";
 import * as symb from "../atoms/img/symbols";
 import i18n from "../i18n/main";
 import moment from 'moment';
-import 'moment/locale/de';
-import 'moment/locale/ru';
-import 'moment/locale/pl';
-import 'moment/locale/uk';
-import 'moment/locale/bg';
+import { getLocale } from "../atoms/getLocale";
 
 export default function displayLcdHourlyColumn(ctx: CanvasRenderingContext2D, 
     dispModel: number, weather: iHourlyWeather | undefined, num: number, shift: number, type: string
 ) {
     const config = store.getState().config;
-    const locale = config.lang === 'ua' ? 'uk' : config.lang;
     const BG_COLOR   = '#000';
     const TEXT_COLOR = '#FFF';
     const TEMP_COLOR = '#F8FC00';
@@ -62,14 +57,14 @@ export default function displayLcdHourlyColumn(ctx: CanvasRenderingContext2D,
         drawScaledImage(ctx, wIcon, x, y, size, size);
         y += 40;
 
-        let wd = moment.unix(weather?.date[s] ?? 0).locale(locale).format('dd');
+        let wd = moment.unix(weather?.date[s] ?? 0).locale(getLocale()).format('dd');
         wd = wd.charAt(0).toUpperCase() + wd.slice(1);
         printText(ctx, x + 2, y, 36, 18, wd, 18, 'center', TEXT_COLOR, BG_COLOR);
         y += 20;
     }
 
     const dt = moment.unix(weather?.date[s] ?? 0).format('DD');
-    const mo = moment.unix(weather?.date[s] ?? 0).locale(locale).format('MMM').substring(0, 3);
+    const mo = moment.unix(weather?.date[s] ?? 0).locale(getLocale()).format('MMM').substring(0, 3);
     printText(ctx, x + 2, y, 36, font, dt + mo, font, 'center', TEXT_COLOR, BG_COLOR);
     y += 14;
 

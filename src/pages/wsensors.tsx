@@ -2,11 +2,7 @@ import { useEffect, useState} from "react";
 import TwoColumns from "../templates/twoColumns";
 import { useSelector, useDispatch } from 'react-redux';
 import Moment from 'react-moment';
-import 'moment/locale/de';
-import 'moment/locale/ru';
-import 'moment/locale/pl';
-import 'moment/locale/uk';
-import 'moment/locale/bg';
+import { getLocale } from "../atoms/getLocale";
 import i18n from '../i18n/main';
 import Card from "../atoms/card";
 import Button from "../atoms/button";
@@ -28,7 +24,6 @@ export default function WSensors() {
     const data = useSelector((state: iData) => state.data);
     const [hideUnnecessary, setHideUnnecessary] = useState<boolean>(true);
     const [isValid, setIsValid] = useState<boolean[]>([]);
-    const locale = config.lang === 'ua' ? 'uk' : config.lang;
     
     useEffect(() => {
         dispatch(wsensorsValidChange(!isValid.includes(false)));
@@ -49,7 +44,7 @@ export default function WSensors() {
                                             {data.wsensor.time[wsensorNum] + new Date().getTimezoneOffset() * 60}
                                         </Moment><br />
                                         {(config.lang === 'de' || config.lang === 'bg') && i18n.t('ago') + ' '}
-                                        <Moment locale={locale} unix fromNow ago>
+                                        <Moment locale={getLocale()} unix fromNow ago>
                                             {data.wsensor.time[wsensorNum] + new Date().getTimezoneOffset() * 60}
                                         </Moment>
                                         {(config.lang !== 'de' && config.lang !== 'bg') && ' ' + i18n.t('ago')}

@@ -1,21 +1,14 @@
-import store from '../redux/store';
 import { printText, fillRect } from '../atoms/canvas/primitives';
 import lcdCloseButton from '../atoms/canvas/lcdCloseButton';
 import lcdForwardButton from '../atoms/canvas/lcdForwardButton';
 import lcdBackButton from '../atoms/canvas/lcdBackButton';
 import moment from 'moment';
-import 'moment/locale/de';
-import 'moment/locale/ru';
-import 'moment/locale/pl';
-import 'moment/locale/uk';
-import 'moment/locale/bg';
+import { getLocale } from '../atoms/getLocale';
 import { iLcdCalendarState } from '../interfaces';
 
 export function displayLcdCalendarScreen(ctx: CanvasRenderingContext2D, 
     dispModel: number, state: iLcdCalendarState | undefined, shift: number
 ): iLcdCalendarState {
-    const config = store.getState().config;
-    const locale = config.lang === 'ua' ? 'uk' : config.lang;
     const font = 20;
 
     const BG_COLOR      = '#000';
@@ -30,7 +23,7 @@ export function displayLcdCalendarScreen(ctx: CanvasRenderingContext2D,
         fillRect(ctx, 0, 0, ctx.canvas.width, ctx.canvas.height, BG_COLOR);
         const x = dispModel ? 36 : 40;
         for(let i=0; i<7; i++) {
-            let wd = moment(i, 'e').locale(locale).startOf('week').isoWeekday(i + 1).format('dd');
+            let wd = moment(i, 'e').locale(getLocale()).startOf('week').isoWeekday(i + 1).format('dd');
             wd = wd.charAt(0).toUpperCase() + wd.slice(1);
             printText(ctx, i * x + x, 40, 36, 26, wd, font, 'center', i < 6 ? WEEKDAY_COLOR : WEEKEND_COLOR, BG_COLOR);
         }
@@ -46,7 +39,7 @@ export function displayLcdCalendarScreen(ctx: CanvasRenderingContext2D,
     if(firstWeekday < 0) firstWeekday = 6;
 
     if(state?.shift !== shift || state?.date !== date) {
-        let month = moment().locale(locale).add(shift, 'month').format('MMMM YYYY');
+        let month = moment().locale(getLocale()).add(shift, 'month').format('MMMM YYYY');
         month = month.charAt(0).toUpperCase() + month.slice(1);
         printText(ctx, dispModel ? 30 : 36, 8, dispModel ? 260 : 290, font, month, font, 'center', MONTH_COLOR, BG_COLOR);
 
@@ -60,8 +53,8 @@ export function displayLcdCalendarScreen(ctx: CanvasRenderingContext2D,
         for(let w=0; w<6; w++) {
             for(let d=0; d<7; d++) {
                 const today = moment().date() === day 
-                    && moment().month() === moment().locale(locale).add(shift, 'month').month()
-                    && moment().year() === moment().locale(locale).add(shift, 'month').year();
+                    && moment().month() === moment().locale(getLocale()).add(shift, 'month').month()
+                    && moment().year() === moment().locale(getLocale()).add(shift, 'month').year();
                 const color = today ? TODAY_COLOR : TEXT_COLOR;
                 const bgColor = today ? TODAY_BGCOLOR : BG_COLOR;
                 if(firstWeekday === d) clndRun = true;

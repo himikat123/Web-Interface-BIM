@@ -1,21 +1,13 @@
-import store from '../redux/store';
 import { printText, printSegment, fillRect, fillCircle, drawScaledImage } from '../atoms/canvas/primitives';
 import * as symb from '../atoms/img/symbols';
 import lcdCloseButton from '../atoms/canvas/lcdCloseButton';
 import moment from 'moment';
-import 'moment/locale/de';
-import 'moment/locale/ru';
-import 'moment/locale/pl';
-import 'moment/locale/uk';
-import 'moment/locale/bg';
+import { getLocale } from '../atoms/getLocale';
 import { iLcdClockState } from '../interfaces';
 
 export function displayLcdClockScreen(ctx: CanvasRenderingContext2D, 
     model: number, dispModel: number, state: iLcdClockState | undefined, clockType: string
 ): iLcdClockState {
-    const config = store.getState().config;
-    const locale = config.lang === 'ua' ? 'uk' : config.lang;
-
     const BG_COLOR    = '#000';
     const CLOCK_COLOR = '#0F0';
     const ARROW1_COLOR = '#00FC00';
@@ -33,9 +25,9 @@ export function displayLcdClockScreen(ctx: CanvasRenderingContext2D,
     const second = moment().second();
     const dt = new Date();
     const points = (dt.getMilliseconds() % 1000) > 500;
-    const ll = moment().locale(locale).format('LL').match(/^.+\d{4}/gm);
+    const ll = moment().locale(getLocale()).format('LL').match(/^.+\d{4}/gm);
     const date = ll ? ll[0] : '';
-    const wd = moment().locale(locale).format('dddd');
+    const wd = moment().locale(getLocale()).format('dddd');
     const weekday = wd.charAt(0).toUpperCase() + wd.slice(1);
 
     if(points !== state?.points) {

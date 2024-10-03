@@ -1,10 +1,6 @@
 import i18n from "../i18n/main";
 import moment from "moment";
-import 'moment/locale/de';
-import 'moment/locale/ru';
-import 'moment/locale/pl';
-import 'moment/locale/uk';
-import 'moment/locale/bg';
+import { getLocale } from "../atoms/getLocale";
 import { useSelector, useDispatch } from 'react-redux';
 import hostUrl from "../atoms/hostUrl";
 import Card from "../atoms/card";
@@ -13,7 +9,6 @@ import TimeInput from "../atoms/timeInput";
 import Toggle from "../atoms/toggle";
 import ButtonPlay from "../atoms/buttonPlay";
 import ButtonStop from "../atoms/buttonStop";
-import { iConfig } from "../redux/configTypes";
 import { iAlarms } from "../redux/alarmTypes";
 import { iAlarm } from "../interfaces";
 import * as cf from "../redux/slices/alarm";
@@ -21,8 +16,6 @@ import * as cf from "../redux/slices/alarm";
 export default function CardAlarm(props: iAlarm) {
     const dispatch = useDispatch();
     const al = useSelector((state: iAlarms) => state.alarm);
-    const config = useSelector((state: iConfig) => state.config);
-    const locale = config.lang === 'ua' ? 'uk' : config.lang;
 
     const sendPlay = (track: number) => {
         let url = `${hostUrl()}/esp/mp3play`;
@@ -53,7 +46,7 @@ export default function CardAlarm(props: iAlarm) {
 
             <div className="mt-8 w-full flex justify-around">
                 {[...Array(7)].map((x, i) => <div key={'a' + i} className={i > 5 ? 'text-red-500' : ''}>
-                    {moment(`${i+1}-01-24`, 'DD-MM-YY').locale(locale).format('dd')}<br />
+                    {moment().locale(getLocale()).isoWeekday(i + 1).format('dd')}<br />
                     <input type="checkbox" 
                         checked={al.alarm.weekdays[props.num][i] === 1}
                         onChange={() => dispatch(cf.alarmWeekdayChange({num: props.num, weekday: i, val: al.alarm.weekdays[props.num][i] ? 0 : 1}))}
