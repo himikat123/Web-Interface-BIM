@@ -12,7 +12,7 @@ export function hourlyFetch() {
     /* openweathermap */
     if(config.weather.provider === 0) {
         if(config.weather.citysearch < 2) {
-            let url = "http://api.openweathermap.org/data/2.5/weather?appid=" + config.weather.appid[0];
+            let url = "https://api.openweathermap.org/data/2.5/weather?appid=" + config.weather.appid[0];
             if(config.weather.citysearch === 0) url += "&q=" + config.weather.city;
             if(config.weather.citysearch === 1) url += "&id=" + config.weather.cityid;
             axios(url).then(res => {
@@ -77,7 +77,7 @@ function openweathermap(lat: number, lon: number, appid: string) {
 }
 
 function openmeteo(lat: number, lon: number) {
-    let url = `http://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}`;
+    let url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}`;
     url += '&hourly=temperature_2m,precipitation_probability,weather_code,surface_pressure,wind_speed_10m,';
     url += 'wind_direction_10m&wind_speed_unit=ms&timeformat=unixtime&timezone=auto&forecast_days=6';
     axios(url).then(res => {
