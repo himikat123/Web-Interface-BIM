@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { iConfig } from "../redux/configTypes";
+import moment from 'moment';
 import { displayLcdMainScreen } from './displayLcdMainScreen';
 import { displayLcdNetworkScreen } from './displayLcdNetworkScreen';
 import { displayLcdClockScreen } from './displayLcdClockScreen';
@@ -8,8 +8,9 @@ import { displayLcdCalendarScreen } from './displayLcdCalendarScreen';
 import { displayLcdHourlyScreen } from './displayLcdHourlyScreen';
 import { displayLcdHistoryInScreen } from './displayLcdHistoryInScreen';
 import { displayLcdHistoryOutScreen } from './displayLcdHistoryOutScreen';
+import { displayLcdAlarmScreen } from './displayLcdAlarmScreen';
 import * as types from '../interfaces';
-import moment from 'moment';
+import { iConfig } from "../redux/configTypes";
 import { iHourly } from '../redux/hourlyTypes';
 
 export default function DisplayViewLCD() {
@@ -33,6 +34,7 @@ export default function DisplayViewLCD() {
     const [hourlyShift, setHourlyShift] = useState<number>(0);
     const [historyInShift, setHistoryInShift] = useState<number>(16);
     const [historyOutShift, setHistoryOutShift] = useState<number>(16);
+    const [alarmState, setAlarmState] = useState<types.iAlarmScreen>();
 
 
     const dispNextion = useRef<HTMLCanvasElement>(null);
@@ -62,9 +64,12 @@ export default function DisplayViewLCD() {
             if(page === 'historyOut') {
                 setHistoryOutState(displayLcdHistoryOutScreen(ctx, dispModel, historyOutState, historyOutShift));
             }
+            if(page === 'alarm') {
+                setAlarmState(displayLcdAlarmScreen(ctx, dispModel, alarmState));
+            }
         }
     }, [ctx, clockPointsState, model, dispModel, page, mainState, networkState, clockState, 
-        clockType, calendarShift, calendarState, hourlyShift, hourlyState, 
+        clockType, calendarShift, calendarState, hourlyShift, hourlyState, alarmState, 
         historyInShift, historyInState, historyOutShift, historyOutState
     ]);
 
@@ -93,7 +98,13 @@ export default function DisplayViewLCD() {
         const ky = rectHeight / displayHeight;
         const x = Math.round(e.clientX - (rect ? rect.left : 0)) / (kx ?? 1);
         const y = Math.round(e.clientY - (rect ? rect.top : 0)) / (ky ?? 1);
-        console.log(x, y);
+        setAlarmState({
+            x: x,
+            y: y,
+            click: true,
+            skeleton: alarmState?.skeleton ?? false,
+            alarm: alarmState?.alarm ?? ''
+        });
 
         /* wifi antenna or close button */
         if(x > (dispModel ? 284 : 320) && y < (dispModel ? 25 : 36)) {
@@ -203,6 +214,12 @@ export default function DisplayViewLCD() {
         if(x < (dispModel ? 284 : 320) && y > 81 && y < 160 && page === 'main' && model !== 1) {
             setHistoryOutState(undefined);
             setPage('historyOut');
+        }
+
+        /* alarm */
+        if(x > (dispModel ? 284 : 328) && y > 130 && y < 162 && page === 'main' && model !== 1) {
+            setAlarmState(undefined);
+            setPage('alarm');
         }
     }
 

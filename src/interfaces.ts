@@ -515,3 +515,11 @@ export interface iOpenMeteoHourly {
         weather_code: number[]
     }
 }
+
+export interface iAlarmScreen {
+    x: number,
+    y: number,
+    click: boolean,
+    skeleton: boolean,
+    alarm: string
+}

@@ -1,6 +1,6 @@
 import store from '../../redux/store';
-import { fillRect, drawScaledImage } from "./primitives";
-import { alarm } from '../img/symbols';
+import { drawScaledImage } from "./primitives";
+import { alarm, alarmOff } from '../img/symbols';
 
 export default function lcdShowAlarmIcon(ctx: CanvasRenderingContext2D, 
     prevAlarmState: boolean | undefined, bgColor: string
@@ -14,7 +14,7 @@ export default function lcdShowAlarmIcon(ctx: CanvasRenderingContext2D,
         const dispModel = (model === 0 || model === 1) ? 0 : 1;
         const x = dispModel ? 296 : 338;
         if(alarmState) drawScaledImage(ctx, alarm(), x, 138, 24, 24);
-        else fillRect(ctx, x, 138, 24, 24, bgColor);
+        else drawScaledImage(ctx, alarmOff(), x, 138, 24, 24);
     }
 
     return !!alarmState;
