@@ -25,8 +25,10 @@ export default function lcdGetComfort(sequence: string): string {
         }
         if(co2Rating >= 0 || iaqRating >= 0) {
             const air = airs[Math.max(co2Rating, iaqRating)];
-            if(descr === '--') descr = air;
-            else descr = descr + '. ' + air;
+            if(config.display.model[0] < 2) {
+                if(descr === '--') descr = air;
+                else descr = descr + '. ' + air;
+            }
         }
     }
     if(config.display.source.descr === 2) { // Sequence

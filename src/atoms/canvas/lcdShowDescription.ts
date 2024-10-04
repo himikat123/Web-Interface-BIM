@@ -12,12 +12,12 @@ export default function lcdShowDescription(ctx: CanvasRenderingContext2D,
     const l = ctx.measureText(description).width ?? 0;
     const x = dispModel ? 0 : 82;
     const w = dispModel ? 319 : 279;
-    const font = l > 316 ? 14 : 21;
 
-    if(l > w) {
-        shift = printScrollText(ctx, x, 84, w, 20, l, shift ?? 0, description, font, color, bgColor);
+    if(l > w && dispModel == 0) {
+        shift = printScrollText(ctx, x, 84, w, 20, l, shift ?? 0, description, 21, color, bgColor);
     }
     else if(description !== prevDescript) {
+        const font = dispModel ? l > w ? 14 : 21 : 21;
         printText(ctx, x, 84, w, 20, description, font, 'center', color, bgColor);
     }
 
