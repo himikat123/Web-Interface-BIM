@@ -95,7 +95,7 @@ function openmeteo(lat: number, lon: number) {
             const time = json.hourly.time[i];
             const utc = json.utc_offset_seconds;
             const hr = moment.unix(time + utc).hour();
-            if(hr % 3 === 0) {
+            if(hr % 3 === 0 && (time + utc) > moment().unix()) {
                 dates.push(json.hourly.time[i] + utc);
                 temps.push(json.hourly.temperature_2m[i]);
                 press.push(json.hourly.surface_pressure[i]);
