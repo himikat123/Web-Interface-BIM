@@ -19,9 +19,9 @@ Start debugging
 
 or
 
-Build project `npm run build` then in file **/build/index.html** move the `<script>...</script>` tag along with its contents between tags `</body>` and `</html>`
+Build project `npm run build`
 
-and then run `gulp`
+and then run `node compress`
 
 
 ## Public to gihub-pages
