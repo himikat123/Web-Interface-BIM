@@ -174,7 +174,9 @@ export default function Filesystem(props: {stopDataFetching(val: boolean): void,
                 setUpFilename('');
                 setDisableUploadBtn(true);
                 if(inputFile.current) inputFile.current.value = '';
-                props.stopDataFetching(false);
+                setTimeout(() => {
+                    props.stopDataFetching(false);
+                }, 5000);
             }
         };
 
