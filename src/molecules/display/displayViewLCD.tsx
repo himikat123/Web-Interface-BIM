@@ -130,7 +130,7 @@ export default function DisplayViewLCD() {
         /* clock type */
         if(y > 55 && y < 185 && page === 'clock') {
             switch(clockType) {
-                case 'small': setClockType('analog'); break;
+                case 'small': setClockType(model === 2 ? 'big' : 'analog'); break;
                 case 'analog': setClockType('big'); break;
                 default: setClockType(model === 1 ? 'analog' : 'small'); break;
             }

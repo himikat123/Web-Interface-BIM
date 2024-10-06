@@ -25,7 +25,7 @@ export default function lcdShowForecast(ctx: CanvasRenderingContext2D, num: numb
     const model = store.getState().config.display.model[0];
     const dispModel = (model === 0 || model === 1) ? 0 : 1;
     const x = num * (dispModel === 0 ? 90 : 106);
-    const imgShift = dispModel === 0 ? 1 : 4;
+    const imgShift = dispModel === 0 ? 1 : 7;
 
     /* Show icon */
     if(icon !== prevForecast?.icon[num]) {
@@ -41,7 +41,7 @@ export default function lcdShowForecast(ctx: CanvasRenderingContext2D, num: numb
             case 8: wIcon = icons.w_50(); break;
             default: wIcon = icons.w_loading(); break;
         }
-        drawScaledImage(ctx, wIcon, x + imgShift, 184, 40, 40);
+        drawScaledImage(ctx, wIcon, x + imgShift, 183, 40, 40);
     }
     
     /* Show weekday */

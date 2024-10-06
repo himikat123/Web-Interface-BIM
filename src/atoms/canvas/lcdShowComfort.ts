@@ -15,7 +15,7 @@ export default function lcdShowComfort(ctx: CanvasRenderingContext2D, prevComfor
     const y = dispModel ? 29 : 27;
     const w = dispModel ? 175 : 130;
 
-    if(l > w && dispModel == 0) {
+    if(l > w && dispModel === 0) {
         shift = printScrollText(ctx, x, y, w, 18, l, shift ?? 0, comfort, font, color, bgColor);
     }
     else if(comfort !== prevComfort) {

@@ -46,14 +46,10 @@ export function displayLcdClockScreen(ctx: CanvasRenderingContext2D,
             const y = dispModel ? 82 : 74;
             const p = dispModel ? 4 : 5;
             printSegment(ctx, 4, y, w, font, hour.toString().padStart(2, ' '), font, color.CLOCK, color.BG);
-            fillCircle(ctx, dispModel ? 107 : 121, 100, p + 1, color.BG);
             fillCircle(ctx, dispModel ? 107 : 121, 100, p, color.CLOCK);
-            fillCircle(ctx, dispModel ? 105 : 119, 134, p + 1, color.BG);
             fillCircle(ctx, dispModel ? 105 : 119, 134, p, color.CLOCK);
             printSegment(ctx, x1, y, w, font, minute.toString().padStart(2, '0'), font, color.CLOCK, color.BG);
-            fillCircle(ctx, dispModel ? 216 : 244, 100, p + 1, color.BG);
             fillCircle(ctx, dispModel ? 216 : 244, 100, p, color.CLOCK);
-            fillCircle(ctx, dispModel ? 214 : 242, 134, p + 1, color.BG);
             fillCircle(ctx, dispModel ? 214 : 242, 134, p, color.CLOCK);
             printSegment(ctx, x2, y, w, font, second.toString().padStart(2, '0'), font, color.CLOCK, color.BG);
         }
@@ -66,8 +62,8 @@ export function displayLcdClockScreen(ctx: CanvasRenderingContext2D,
             }, 1);
         }
         else { // Weekday and date
-            printText(ctx, dispModel ? 30 : 36, 8, dispModel ? 260 : 290, 30, weekday, 28, 'center', color.WEEKDAY, color.BG);
-            printText(ctx, dispModel ? 30 : 36, 200, dispModel ? 260 : 290, 30, date, 28, 'center', color.DATE, color.BG);
+            printText(ctx, dispModel ? 30 : 36, 8, dispModel ? 260 : 290, 30, weekday, 29, 'center', color.WEEKDAY, color.BG);
+            printText(ctx, 0, 200, dispModel ? 319 : 361, 30, date, 29, 'center', color.DATE, color.BG);
         }
     }
 
