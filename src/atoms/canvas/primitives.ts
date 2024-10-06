@@ -62,8 +62,7 @@ export function printText(ctx: CanvasRenderingContext2D, x: number, y: number, w
     if(align === 'center') x += w / 2;
     if(align === 'right') x += w;
     ctx.save();
-    if(valign) ctx.textBaseline = 'middle';
-    ctx.fillText(text, x, y + font - font / 4);
+    ctx.fillText(text, x, y + font - font / 4 + (valign ? (h / 2 - font / 2) : 0));
     ctx.restore();
 }
 

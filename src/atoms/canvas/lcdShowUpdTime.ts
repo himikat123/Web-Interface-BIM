@@ -13,9 +13,9 @@ export default function lcdShowUpdTime(ctx: CanvasRenderingContext2D,
         const upd = time > 0
             ? moment.unix(time).utc().format(dispModel ? '⭮ DD.MM.YYYY HH:mm' : '⭮ DD.MM.YYYY HH:mm :ss')
             : '';
-        const x = dispModel ? 150 : 194;
+        const x = dispModel ? 150 : 188;
 
-        printText(ctx, x, 148, 146, 16, upd, 14, 'center', color, bgColor);
+        printText(ctx, x, 146, 146, 16, upd, 14, 'center', color, bgColor);
     }
 
     return time;
