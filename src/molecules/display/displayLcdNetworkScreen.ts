@@ -14,14 +14,14 @@ export function displayLcdNetworkScreen(ctx: CanvasRenderingContext2D,
     const sl = dispModel ? 6 : 12;
     const sr = x + sl;
     const w = dispModel ? 150 : 164;
-    const font = dispModel ? 16 : 18;
+    const font = dispModel ? 14 : 18;
 
     if(!state?.skeleton) {
         fillRect(ctx, 0, 0, ctx.canvas.width, ctx.canvas.height, color.BG);
         lcdCloseButton(ctx, dispModel);
         fillRect(ctx, dispModel ? 48 : 65, 10, 226, 39, color.FRAME1);
         fillRect(ctx, dispModel ? 50 : 67, 12, 222, 35, color.GROUND);
-        printText(ctx, dispModel ? 50 : 67, 17, 222, 28, 'WiFi', 32, 'center', color.TEXT, color.GROUND);
+        printText(ctx, dispModel ? 50 : 67, 17, 222, 28, 'WiFi', 29, 'center', color.TEXT, color.GROUND);
 
         for(let i=0; i<2; i++) {
             for(let k=0; k<6; k++) {
