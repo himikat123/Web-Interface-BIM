@@ -483,6 +483,7 @@ export interface iLcdHourlyState {
 export interface iOpenweathermapHourly {
     list: {
         dt: number,
+        dt_txt: string,
         weather: [{
             icon: string
         }],

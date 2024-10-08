@@ -49,7 +49,7 @@ function openweathermap(lat: number, lon: number, appid: string) {
         const precs: number[] = [];
 
         for(let i=0; i<40; i++) {
-            dates.push(json.list[i].dt);
+            dates.push(moment(json.list[i].dt_txt, 'YYYY-MM-DD hh:mm:ss').utc().unix());
             icons.push(parseInt(json.list[i].weather[0].icon));
             temps.push(json.list[i].main.temp);
             press.push(json.list[i].main.pressure);
