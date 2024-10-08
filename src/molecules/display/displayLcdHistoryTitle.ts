@@ -1,6 +1,7 @@
 import { fillRect, drawLine, printText } from "../../atoms/canvas/primitives";
-export function displayLcdHistoryTitle(ctx: CanvasRenderingContext2D, title: string) {
-    const x = 64;
+
+export function displayLcdHistoryTitle(ctx: CanvasRenderingContext2D, title: string, dispModel: number) {
+    const x = dispModel ? 38 : 64;
     const w = 248;
     fillRect(ctx, x, 190, w, 26, '#202420');
     drawLine(ctx, x, 191, w - 1, 0, '#777');

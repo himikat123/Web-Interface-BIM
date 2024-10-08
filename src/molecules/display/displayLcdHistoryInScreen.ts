@@ -16,7 +16,7 @@ export function displayLcdHistoryInScreen(ctx: CanvasRenderingContext2D,
     if(!state?.skeleton) {
         fillRect(ctx, 0, 0, ctx.canvas.width, ctx.canvas.height, '#000');
         lcdCloseButton(ctx, dispModel);
-        displayLcdHistoryTitle(ctx, i18n.t('indoorHistory'));
+        displayLcdHistoryTitle(ctx, i18n.t('indoorHistory'), dispModel);
     }
 
     const weather = store.getState().history;
