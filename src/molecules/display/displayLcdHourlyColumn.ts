@@ -42,6 +42,7 @@ export default function displayLcdHourlyColumn(ctx: CanvasRenderingContext2D,
         switch(weather?.icon[s]) {
             case 1: wIcon = icons.w_01_d(); break;
             case 2: wIcon = icons.w_02_d(); break;
+            case 3: wIcon = icons.w_02_d(); break;
             case 4: wIcon = icons.w_04(); break;
             case 9: wIcon = icons.w_09(); break;
             case 10: wIcon = icons.w_10(); break;
