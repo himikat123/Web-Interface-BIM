@@ -45,16 +45,16 @@ export default function displayLcdHourlyCharts(ctx: CanvasRenderingContext2D,
         const offset = dispModel ? 50 : 56;
         for(let i=0; i<7; i++) {
             if(cht === 0) { // temperature
-                line(ctx, i * step + offset, 68 - ch[i], i * step + step + offset, 68 - ch[i + 1], color.TEMP);
+                line(ctx, i * step + offset, 67 - ch[i], i * step + step + offset, 67 - ch[i + 1], color.TEMP);
             }
             if(cht === 1 && (type === 'hourly' || type === 'historyOut')) { // pressure
-                line(ctx, i * step + offset, 70 - ch[i], i * step + step + offset, 70 - ch[i + 1], color.PRES);
+                line(ctx, i * step + offset, 69 - ch[i], i * step + step + offset, 69 - ch[i + 1], color.PRES);
             }
             if(cht === 2 && type === 'hourly') { // precipitation
-                line(ctx, i * step + offset, 72 - ch[i], i * step + step + offset, 72 - ch[i + 1], color.PREC);
+                line(ctx, i * step + offset, 71 - ch[i], i * step + step + offset, 71 - ch[i + 1], color.PREC);
             }
             if(cht === 3 && (type === 'historyOut' || type === 'historyIn')) { // humidity
-                line(ctx, i * step + offset, 72 - ch[i], i * step + step + offset, 72 - ch[i + 1], color.PREC);
+                line(ctx, i * step + offset, 71 - ch[i], i * step + step + offset, 71 - ch[i + 1], color.PREC);
             }
         }
     }    
