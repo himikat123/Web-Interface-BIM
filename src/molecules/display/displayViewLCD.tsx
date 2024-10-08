@@ -186,7 +186,7 @@ export default function DisplayViewLCD() {
         }
 
         /* hourly forecast */
-        if(y > 162 && page === 'main' && model !== 1) {
+        if(y > 162 && page === 'main' && model !== 1 && config.weather.provider !== 1) {
             setHourlyState(undefined);
             let dayLinks = [];
             for(let i=0; i<40; i++) {
