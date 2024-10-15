@@ -33,7 +33,7 @@ export const BatPercent = (num: number) => {
 
     if(vl.WsensorDataRelevance(num)) {
         if(vl.validateBatteryADC(data.wsensor.bat[num])) {
-            return `(${percentage(config.wsensor.bat.type[num], data.wsensor.bat[num], config.wsensor.bat.k[num]).toFixed(2)} %)`;
+            return `(${percentage(config.wsensor.bat.type[num], data.wsensor.bat[num], config.wsensor.bat.k[num]).toFixed(2)}%)`;
         }
         else return '(--)';
     }
