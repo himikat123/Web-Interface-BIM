@@ -1,6 +1,6 @@
 {
   "name": "web-interface-bim",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "homepage_": "https://himikat123.github.io/Web-Interface-BIM/",
   "private": true,
   "dependencies": {
