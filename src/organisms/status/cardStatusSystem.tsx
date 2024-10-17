@@ -10,6 +10,9 @@ export default function CardStatusSystem() {
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
     const locale = config.lang === 'ua' ? 'uk' : config.lang;
+    const runtime = data.runtime > 86400
+        ? data.runtime - moment.unix(data.runtime).utc().seconds()
+        : data.runtime;
 
     return <div className='text-center'>
         <h2 className='text-xl'>{i18n.t('system')}</h2>
@@ -33,7 +36,7 @@ export default function CardStatusSystem() {
         <div className='mt-4'>
             <p>{i18n.t('runtime')}</p>
             <p className='text-blue-700 dark:text-blue-400'>
-                {humanizeDuration(data.runtime * 1000, {
+                {humanizeDuration(runtime * 1000, {
                     language: locale, 
                     units: ["y", "mo", "d", "h", "m", "s"]
                 })}
