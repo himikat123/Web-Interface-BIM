@@ -23,12 +23,14 @@ export default function CardStatusDisplay(props: iDisplay) {
                 switch(config.display.type[props.num]) {
                     case 1: return <DisplayViewLCD />;
                     case 2: return <DisplayView7segment num={0} />;
+                    case 3: return <DisplayView7segment num={0} />;
                     default: return <></>;
                 }
             }
             case 1: { /* Display 2 */
                 switch(config.display.type[props.num]) {
                     case 1: return <DisplayView7segment num={1} />;
+                    case 2: return <DisplayView7segment num={1} />;
                     default: return <></>;
                 }
             }

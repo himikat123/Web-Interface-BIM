@@ -23,7 +23,7 @@ export default function SegSegment(props: iSegment) {
     ];
     const symb = props.symb < code.length ? props.symb : 15;
 
-    return <svg height="60" className={props.point ? 'm-0.5' : 'ms-0.5'} viewBox="0 0 3.1101497 5.3307571">
+    return <svg height="60" className={props.point ? 'm-0.5' : 'ms-0.5'} viewBox={'0 0 3.' + (props.point ? '68' : '11') + '01497 5.3307571'}>
         <g transform="translate(-53.363748,-23.256833)">
             <path fill={code[symb][0] ? props.color : '#222'} d="m 55.578195,23.918293 h -1.212674 l -0.482314,-0.509875 q 0.192926,-0.151584 0.434083,-0.151584 h 1.405599 l 0.130914,0.01378 z"/>
             <path fill={code[symb][1] ? props.color : '#222'} d="m 55.674655,24.021645 0.303169,-0.70969 q 0.385851,0.172255 0.36518,0.606338 l -0.110243,1.722548 -0.234267,0.172255 -0.420302,-0.330729 z"/>

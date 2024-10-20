@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import slotTick from '../../atoms/slotTick';
-import SegSegment from '../../atoms/canvas/segSegment';
-import SegClockPoints from '../../atoms/canvas/segClockPoints';
+import SegDoubleDigit from '../../atoms/canvas/segDoubleDigit';
 import { iSegState } from '../../interfaces';
 import { iConfig } from "../../redux/configTypes";
 
 export default function DisplayView7segment(props: {num: number}) {
     const config = useSelector((state: iConfig) => state.config);
+    const dType = config.display.type[props.num];
+    const dModel = config.display.model[props.num];
+    const colorsTM1637 = ['#0F0', '#0F0', '#0F0', '#0F0', '#0F0', '#0F0', '#0F0', '#0F0'];
+    const colorsMAX7219 = ['#F00', '#F00', '#F00', '#F00', '#F00', '#F00', '#F00', '#F00'];
 
     const [state, setState] = useState<iSegState>({
         segments: [0, 0, 0, 0, 0, 0, 0, 0],
@@ -30,61 +33,44 @@ export default function DisplayView7segment(props: {num: number}) {
         return () => clearInterval(int);
     }, [props.num, state]);
 
+    const bottomDots = dType === 2 && dModel > 1;
+    const displayLength = dType === 1
+        ? dModel < 3
+            ? 4
+            : 6
+        : (dModel === 0 ||dModel === 1 || dModel === 3)
+            ? 4
+            : (dModel === 2 ||dModel === 4)
+                ? 6
+                : 8;
+
     return <div className='h-full flex items-center'> 
-        <div className='w-full mx-auto mt-4 p-2 bg-gray-400 dark:bg-gray-600' 
-            style={{maxWidth: config.display.model[props.num] > 2 ? 274 : 190}}
-        >
+        <div className='w-full mx-auto mt-4 p-2 bg-gray-400 dark:bg-gray-600 max-w-fit'>
             <div className='bg-black flex p-1.5 ps-[8px]'>
-                {[...Array(2)].map((i: number, x: number) => {
-                    return <SegSegment key={x} 
-                        symb={state.segments[x]} 
-                        color={state.colors[x]}
-                        bg="#222"
-                    />
-                })}
-                <SegClockPoints clockpoints={state.clockpoints} 
-                    slot={state.slot}
-                    points={
-                        config.display.model[props.num] < 3
-                            ? state.points
-                            : config.display.timeSlot.data[state.slot][props.num] === 0 
-                                ? false
-                                : config.display.timeSlot.sensor[state.slot][props.num] === 0
-                                    ? state.points
-                                    : config.display.timeSlot.sensor[state.slot][props.num] === 1
-                                        ? true
-                                        : state.points
-                    }
-                    color={state.pointsColor} 
-                    dispNum={props.num} 
+                <SegDoubleDigit shift={0}
+                    segments={state.segments}
+                    colors={dType === 1 ? state.colors : dModel < 3 ? colorsTM1637 : colorsMAX7219}
+                    withDoubleDots={true}
+                    bottomDots={bottomDots}
                 />
-                {[...Array(2)].map((i: number, x: number) => {
-                    return <SegSegment key={x + 2} 
-                        symb={state.segments[x + 2]} 
-                        color={state.colors[x + 2]}
-                        bg="#222" 
-                    />
-                })}
-                {config.display.model[props.num] > 2 && <>
-                    <SegClockPoints clockpoints={state.clockpoints}
-                        slot={state.slot} 
-                        points={config.display.model[props.num] < 3
-                            ? state.points
-                            : config.display.timeSlot.sensor[state.slot][props.num] === 1
-                                ? true
-                                : state.points
-                        } 
-                        color={state.pointsColor} 
-                        dispNum={props.num}
-                    />
-                    {[...Array(2)].map((i: number, x: number) => {
-                        return <SegSegment key={x + 4} 
-                            symb={state.segments[x + 4]} 
-                            color={state.colors[x + 4]}
-                            bg="#222" 
-                        />
-                    })}
-                </>}
+                <SegDoubleDigit shift={2}
+                    segments={state.segments}
+                    colors={dType === 1 ? state.colors : dModel < 3 ? colorsTM1637 : colorsMAX7219}
+                    withDoubleDots={dModel > 2}
+                    bottomDots={bottomDots}
+                />
+                {displayLength > 4 && <SegDoubleDigit shift={4}
+                    segments={state.segments}
+                    colors={dType === 1 ? state.colors : dModel < 3 ? colorsTM1637 : colorsMAX7219}
+                    withDoubleDots={false}
+                    bottomDots={bottomDots}
+                />}
+                {displayLength > 6 && <SegDoubleDigit shift={6}
+                    segments={state.segments}
+                    colors={dType === 1 ? state.colors : dModel < 3 ? colorsTM1637 : colorsMAX7219}
+                    withDoubleDots={false}
+                    bottomDots={bottomDots}
+                />}
             </div>
         </div>
     </div>

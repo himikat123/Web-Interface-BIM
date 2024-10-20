@@ -13,7 +13,7 @@ export default function lcdShowDescription(ctx: CanvasRenderingContext2D,
     const x = dispModel ? 0 : 82;
     const w = dispModel ? 319 : 279;
 
-    if(l > w && dispModel == 0) {
+    if(l > w && dispModel === 0) {
         shift = printScrollText(ctx, x, 84, w, 20, l, shift ?? 0, description, 21, color, bgColor);
     }
     else if(description !== prevDescript) {

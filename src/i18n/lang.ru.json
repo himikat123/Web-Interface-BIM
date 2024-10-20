@@ -208,6 +208,7 @@
     "neopixel": "Светодиоды Neopixel",
     "nixie": "Лампы Nixie",
     "digits": "-разрядый",
+    "version": "версия",
     "matrices4": "4 матрицы 8x8",
     "tubes": "-ламповый",
     "withSeconds": "с секундами",

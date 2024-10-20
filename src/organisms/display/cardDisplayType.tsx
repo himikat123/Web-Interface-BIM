@@ -16,7 +16,7 @@ export default function CardDisplayType(props: iDisplay) {
         "--",
         "LCD/TFT",
         i18n.t('neopixel'),
-        //i18n.t('segment7'),
+        i18n.t('segment7'),
         //i18n.t('matrix'),
         //i18n.t('nixie')
     ];
@@ -26,14 +26,15 @@ export default function CardDisplayType(props: iDisplay) {
         { 'ILI9341': 100 }
     ];
     const segment = [
-        { [`TM1637 (4${i18n.t('digits')})`]: 90 },
-        { [`TM1637 (6${i18n.t('digits')})`]: 130 },
-        { [`MAX7219 (4${i18n.t('digits')})`]: 90 },
-        { [`MAX7219 (6${i18n.t('digits')})`]: 130 },
-        { [`MAX7219 (8${i18n.t('digits')})`]: 170 }
+        { [`TM1637 (4${i18n.t('digits')}, ${i18n.t('version')} 1)`]: 160 },
+        { [`TM1637 (4${i18n.t('digits')}, ${i18n.t('version')} 2)`]: 160 },
+        { [`TM1637 (6${i18n.t('digits')})`]: 240 },
+        { [`MAX7219 (4${i18n.t('digits')})`]: 160 },
+        { [`MAX7219 (6${i18n.t('digits')})`]: 240 },
+        { [`MAX7219 (8${i18n.t('digits')})`]: 320 }
     ];
     const matrix = [
-        { [`MAX7219 (${i18n.t('matrices4')})`]: 680 }
+        { [`MAX7219 (${i18n.t('matrices4')})`]: 1280 }
     ];
     const neopixel = [
         { [`WS2812b (4${i18n.t('digits')}, 1 ${i18n.t('ledPerSegment')})`]: 1800 },
@@ -97,6 +98,7 @@ export default function CardDisplayType(props: iDisplay) {
             onChange={val => {
                 dispatch(cf.displayTypeChange({num: props.num, val: val}));
                 dispatch(cf.displayModelChange({num: props.num, val: 0}));
+                dispatch(cf.displayAnimationPointsChange({num: props.num, val: 0}));
             }}
         />
 
@@ -106,6 +108,7 @@ export default function CardDisplayType(props: iDisplay) {
                 value={config.display.model[props.num]}
                 onChange={val => {
                     dispatch(cf.displayModelChange({num: props.num, val: val}));
+                    dispatch(cf.displayAnimationPointsChange({num: props.num, val: 0}));
                     for(let i=0; i<8; i++) {
                         dispatch(cf.displayTimeslotDataChange({slot: i, num: props.num, val: 0}));
                     }

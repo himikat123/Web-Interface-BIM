@@ -24,11 +24,15 @@ export default function TimeSlotSensorType(props: iDisplayTimeSlot) {
     const types = [
         /* Time */ [
             `${i18n.t('withoutSeconds')} (${moment.unix(data.time).utc().format('HH:mm')})`,
-            `${i18n.t('withSeconds')} (${moment.unix(data.time).utc().format('HH:mm:ss')})`
+            `${i18n.t('withSeconds')} (${moment.unix(data.time).utc().format('HH:mm:ss')})`,
+            `${i18n.t('withoutSeconds')} (${moment.unix(data.time).utc().format('HH-mm')})`,
+            `${i18n.t('withSeconds')} (${moment.unix(data.time).utc().format('HH-mm-ss')})`,
+            `${i18n.t('withMilliSeconds')} (${moment.unix(data.time).utc().format('HH:mm:ss:88')})`
         ],
         /* Data */ [
             `${i18n.t('day')}, ${i18n.t('month')} (${moment.unix(data.time).utc().format('DD.MM')})`,
-            `${i18n.t('day')}, ${i18n.t('month')}, ${i18n.t('year')} (${moment.unix(data.time).utc().format('DD.MM.YY')})`
+            `${i18n.t('day')}, ${i18n.t('month')}, ${i18n.t('year')} (${moment.unix(data.time).utc().format('DD.MM.YY')})`,
+            `${i18n.t('day')}, ${i18n.t('month')}, ${i18n.t('year')} (${moment.unix(data.time).utc().format('DD.MM.YYYY')})`
         ],
         /* BME280 */ [
             `${i18n.t('temperature')} (${BME280().temp})`, 
@@ -68,16 +72,35 @@ export default function TimeSlotSensorType(props: iDisplayTimeSlot) {
         ]
     ];
 
+    const disabled = [
+        [ /* clock */ [],
+            [ // type neopixel
+                [0, 1, 1, 1, 1], [0, 1, 1, 1, 1], [0, 1, 1, 1, 1], [0, 0, 1, 1, 1], [0, 0, 1, 1, 1], [0, 0, 1, 1, 1]
+            ],
+            [ // type 7 segment
+                [0, 1, 1, 1, 1], [0, 1, 1, 1, 1], [0, 0, 0, 1, 1], [0, 1, 1, 1, 1], [0, 0, 0, 1, 1], [0, 0, 0, 0, 0]
+            ]
+        ],
+        [ /* date */ [],
+            [ // type neopixel
+                [0, 1, 1], [0, 1, 1], [0, 1, 1], [0, 0, 1], [0, 0, 1], [0, 0, 1]
+            ],
+            [ // type 7 segment
+                [0, 1, 1], [0, 1, 1], [0, 0, 1], [0, 1, 1], [0, 0, 1], [0, 0, 0]
+            ]
+        ]
+    ];
+
     return <>
         {types[sensor].length > 0 && <div className="mt-8">
             <SelectSwitch label={i18n.t('sensorType')}
                 options={types[sensor]}
                 value={config.display.timeSlot.data[props.slot][props.num]}
                 onChange={val => dispatch(cf.displayTimeslotDataChange({slot: props.slot, num: props.num, val: val}))}
-                disabled={[
-                    false, 
-                    config.display.model[props.num] < 3 && sensor <= 1
-                ]}
+                disabled={sensor < 2
+                    ? disabled[sensor][config.display.type[props.num]][config.display.model[props.num]]
+                    : []
+                }
             />
         </div>}
     </> 

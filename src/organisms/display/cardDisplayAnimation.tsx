@@ -27,6 +27,9 @@ export default function CardDisplayAnimation(props: iDisplay) {
         i18n.t('pointsAlwaysOn'),
         i18n.t('pointsAlwaysOff'),
     ];
+    const pointsDisabled = [
+        [], [0,0,0,0], [0,1,0,0]
+    ];
 
     const sendAnimationType = (val: number) => {
         let url = `${hostUrl()}/esp/animation`;
@@ -86,6 +89,7 @@ export default function CardDisplayAnimation(props: iDisplay) {
                         dispatch(cf.displayAnimationPointsChange({num: props.num, val: val}));
                         sendAnimationPoints(val);
                     }}
+                    disabled={pointsDisabled[config.display.type[props.num]]}
                 />
             </div>}
         </>} /> : <Card className="invisible lg:visible" content={<></>} />}
