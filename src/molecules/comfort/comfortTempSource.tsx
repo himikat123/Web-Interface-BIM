@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import device from '../../device';
 import { iConfig } from "../../redux/configTypes";
 import * as cf from "../../redux/slices/config";
 import ComfortTempSensorType from "./comfortTempSensorType";
@@ -14,7 +15,7 @@ export default function ComfortTempSource() {
         {/* Sensor type */}
         <ComfortTempSensorType />
 
-        {config.comfort.temp.source === 2 && <div className="mt-8">
+        {config.comfort.temp.source === (device() === 'WeatherMonitorBIM32' ? 2 : 400) && <div className="mt-8">
             {/* Wireless sensor number */}
             <WsensorNumber value={config.comfort.temp.wsensNum}
                 changeValue={val => dispatch(cf.comfortTempWsensNumChange(val))}
@@ -29,7 +30,7 @@ export default function ComfortTempSource() {
             </div>
         </div>}
 
-        {config.comfort.temp.source === 3 && <div className="mt-8">
+        {config.comfort.temp.source === (device() === 'WeatherMonitorBIM32' ? 3 : 2) && <div className="mt-8">
             {/* Thingspeak */}
             <ThingspeakFields value={config.comfort.temp.thing}
                 changeValue={val => dispatch(cf.comfortTempThingChange(val))}

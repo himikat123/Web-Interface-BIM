@@ -24,7 +24,7 @@ export default function MenuItems(props: iMenuItems) {
         {device() === 'WeatherMonitorBIM' && <MenuDisplaySingle current={props.current} mobile={props.mobile} />}
         {device() === 'WeatherMonitorBIM32' && <MenuDisplaysSeveral current={props.current} mobile={props.mobile} />}
         {device() === 'WeatherMonitorBIM32' && <MenuSound current={props.current} mobile={props.mobile} />}
-        {device() === 'WeatherMonitorBIM32' && <MenuComfort current={props.current} mobile={props.mobile} />}
+        <MenuComfort current={props.current} mobile={props.mobile} />
         {device() === 'WeatherMonitorBIM32' && <MenuHistory current={props.current} mobile={props.mobile} />}
         <MenuDataSend current={props.current} mobile={props.mobile} />
         <MenuDataReceive current={props.current} mobile={props.mobile} />

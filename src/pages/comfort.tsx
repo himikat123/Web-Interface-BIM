@@ -1,4 +1,5 @@
 import i18n from '../i18n/main';
+import device from '../device';
 import TwoColumns from "../templates/twoColumns";
 import CardComfortTemp from "../organisms/comfort/cardComfortTemp";
 import CardComfortHum from "../organisms/comfort/cardComfortHum";
@@ -9,8 +10,8 @@ export default function Comfort() {
     const content = <>
         <CardComfortTemp />
         <CardComfortHum />
-        <CardComfortIaq />
-        <CardComfortCo2 />
+        {device() === 'WeatherMonitorBIM32' && <CardComfortIaq />}
+        {device() === 'WeatherMonitorBIM32' && <CardComfortCo2 />}
     </>;
 
     return <TwoColumns navbar={true}
