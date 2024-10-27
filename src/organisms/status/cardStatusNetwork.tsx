@@ -24,5 +24,10 @@ export default function CardStatusNetwork() {
             <p className='text-blue-700 dark:text-blue-400'>{data.network.mac}
             </p>
         </div>
+        <div className='mt-4'>
+            <p>{i18n.t('ipAddress')}</p>
+            <p className='text-blue-700 dark:text-blue-400'>{data.network.ip}
+            </p>
+        </div>
     </div>
 }
