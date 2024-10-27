@@ -53,7 +53,8 @@ function App() {
     const path = location.pathname;
     const navigate = useNavigate();
     const history = useSelector((state: iHistory) => state.history);
-    const hourly = useSelector((state: iHourly) => state.hourly); 
+    const hourly = useSelector((state: iHourly) => state.hourly);
+    const apMode = window.location.origin.toString().includes('192.168.4.1');
 
     useEffect(() => {
         configFetch();
@@ -66,8 +67,8 @@ function App() {
             const nav = dataFetch(path);
             if(nav) navigate(nav);
 
-            if(moment().unix() - history.updated > 600) historyFetch();
-            if(moment().unix() - hourly.updated > 600) hourlyFetch();
+            if(moment().unix() - history.updated > 600) historyFetch(apMode);
+            if(moment().unix() - hourly.updated > 600) hourlyFetch(apMode);
         }
 
         if(configState === 'ok' && alarmsState === 'ok') {
