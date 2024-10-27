@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import i18n from '../../i18n/main';
 import { useSelector } from 'react-redux';
+import device from '../../device';
 import { iConfig } from "../../redux/configTypes";
 import { iDisplay } from '../../interfaces';
 import DisplayViewLCD from '../../molecules/display/displayViewLCD';
@@ -11,9 +12,14 @@ export default function CardStatusDisplay(props: iDisplay) {
 
     function displayHeader(num: number) {
         return <div className='text-center'>
-            <Link to={'display' + num} className='text-xl'>
-                {i18n.t('display.singular')} {num}
-            </Link>
+            {device() === 'WeatherMonitorBIM32' 
+                ? <Link to={'display' + num} className='text-xl'>
+                    {i18n.t('display.singular')} {num}
+                </Link>
+                : <Link to={'display'} className='text-xl'>
+                    {i18n.t('display.singular')}
+                </Link>
+            }
         </div>
     }
     

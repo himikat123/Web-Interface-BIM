@@ -1,5 +1,6 @@
 import i18n from "../../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
+import device from "../../device";
 import { BatLevel } from "../../atoms/indications/battery";
 import Card from "../../atoms/card";
 import { iConfig } from "../../redux/configTypes";
@@ -19,15 +20,19 @@ export default function CardDisplayBatLevel() {
             <SensorTypeBatLevel />
 
             {/* Wireless sensor number */}
-            {config.display.source.bat.sens === 1 && <WsensorNumber value={config.display.source.bat.wsensNum} 
-                changeValue={val => dispatch(cf.displaySourceBatWsensNumChange(val))}
-                indications={indications}
-            />}
+            {config.display.source.bat.sens === (device() === 'WeatherMonitorBIM32' ? 1 : 400) && <>
+                <WsensorNumber value={config.display.source.bat.wsensNum} 
+                    changeValue={val => dispatch(cf.displaySourceBatWsensNumChange(val))}
+                    indications={indications}
+                />
+            </>}
 
             {/* Thingspeak */}
-            {config.display.source.bat.sens === 2 && <ThingspeakField value={config.display.source.bat.thing}
-                changeValue={val => dispatch(cf.displaySourceBatThingChange(val))} 
-            />}
+            {config.display.source.bat.sens === (device() === 'WeatherMonitorBIM32' ? 2 : 1) && <>
+                <ThingspeakField value={config.display.source.bat.thing}
+                    changeValue={val => dispatch(cf.displaySourceBatThingChange(val))} 
+                />
+            </>}
         </>} 
     />
 }

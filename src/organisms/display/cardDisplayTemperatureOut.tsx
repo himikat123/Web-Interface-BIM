@@ -1,5 +1,6 @@
 import i18n from "../../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
+import device from "../../device";
 import Card from "../../atoms/card";
 import { iConfig } from "../../redux/configTypes";
 import * as cf from "../../redux/slices/config";
@@ -17,7 +18,7 @@ export default function CardDisplayTemperatureOut() {
         <SensorTypeTempOut />
 
         {/* Wireless Sensor */}
-        {config.display.source.tempOut.sens === 2 && <>
+        {config.display.source.tempOut.sens === (device() === 'WeatherMonitorBIM32' ? 2 : 400) && <>
             <WsensorNumber value={config.display.source.tempOut.wsensNum} 
                 changeValue={val => dispatch(cf.displaySourceTempOutWsensNumChange(val))}
             />
@@ -28,8 +29,10 @@ export default function CardDisplayTemperatureOut() {
         </>}
 
         {/* Thingspeak */}
-        {config.display.source.tempOut.sens === 3 && <ThingspeakField value={config.display.source.tempOut.thing}
-            changeValue={val => dispatch(cf.displaySourceTempOutThingChange(val))} 
-        />}
+        {config.display.source.tempOut.sens === (device() === 'WeatherMonitorBIM32' ? 3 : 2) && <>
+            <ThingspeakField value={config.display.source.tempOut.thing}
+                changeValue={val => dispatch(cf.displaySourceTempOutThingChange(val))} 
+            />
+        </>}
     </>} />
 }

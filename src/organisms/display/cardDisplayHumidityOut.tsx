@@ -1,5 +1,6 @@
 import i18n from "../../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
+import device from "../../device";
 import Card from "../../atoms/card";
 import { iConfig } from "../../redux/configTypes";
 import * as cf from "../../redux/slices/config";
@@ -19,15 +20,19 @@ export default function CardDisplayHumidityOut() {
             <SensorTypeHumOut />
             
             {/* Wireless sensor number */}
-            {config.display.source.humOut.sens === 2 && <WsensorNumber value={config.display.source.humOut.wsensNum} 
-                changeValue={val => dispatch(cf.displaySourceHumOutWsensNumChange(val))}
-                indications={indications}
-            />}
+            {config.display.source.humOut.sens === (device() === 'WeatherMonitorBIM32' ? 2 : 400) && <>
+                <WsensorNumber value={config.display.source.humOut.wsensNum} 
+                    changeValue={val => dispatch(cf.displaySourceHumOutWsensNumChange(val))}
+                    indications={indications}
+                />
+            </>}
 
             {/* Thingspeak */}
-            {config.display.source.humOut.sens === 3 && <ThingspeakField value={config.display.source.humOut.thing}
-                changeValue={val => dispatch(cf.displaySourceHumOutThingChange(val))} 
-            />}
+            {config.display.source.humOut.sens === (device() === 'WeatherMonitorBIM32' ? 3 : 2) && <>
+                <ThingspeakField value={config.display.source.humOut.thing}
+                    changeValue={val => dispatch(cf.displaySourceHumOutThingChange(val))} 
+                />
+            </>}
         </>} 
     />
 }

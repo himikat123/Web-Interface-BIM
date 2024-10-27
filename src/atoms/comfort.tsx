@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import i18n from '../i18n/main';
+import device from '../device';
 import { iConfig } from "../redux/configTypes";
 import { iData } from "../redux/dataTypes";
 import * as vl from "./validateValues";
@@ -71,25 +72,29 @@ export default function Comfort() {
     if(tempLevel === 2 && humLevel === 2) comfort = i18n.t('coldAndDry');
 
     if(config.comfort.iaq.source === 1) {
-        const iaq = data.bme680.iaq + config.sensors.bme680.i;
-        if(vl.validateIaq(iaq)) {
-            let iaqLevel = i18n.t('cleanAir');
-            if(iaq > 100.0) iaqLevel = i18n.t('polutedAir');
-            if(iaq > 200.0) iaqLevel = i18n.t('havilyPolutedAir');
-            if(comfort.length) comfort += ". ";
-            comfort += iaqLevel;
+        if(device() === 'WeatherMonitorBIM32') {
+            const iaq = data.bme680.iaq + config.sensors.bme680.i;
+            if(vl.validateIaq(iaq)) {
+                let iaqLevel = i18n.t('cleanAir');
+                if(iaq > 100.0) iaqLevel = i18n.t('polutedAir');
+                if(iaq > 200.0) iaqLevel = i18n.t('havilyPolutedAir');
+                if(comfort.length) comfort += ". ";
+                comfort += iaqLevel;
+            }
         } 
     }
 
     else if(config.comfort.co2.source === 1) {
-        if(vl.WsensorDataRelevance(config.comfort.co2.wsensNum)) {
-            const co2 = data.wsensor.co2.data[config.comfort.co2.wsensNum] + config.wsensor.co2.corr[config.comfort.co2.wsensNum];
-            if(vl.validateCO2(co2)) {
-                let co2Level = i18n.t('cleanAir');
-                if(co2 > 800.0) co2Level = i18n.t('polutedAir');
-                if(co2 > 1400.0) co2Level = i18n.t('havilyPolutedAir');
-                if(comfort.length) comfort += ". ";
-                comfort += co2Level;
+        if(device() === 'WeatherMonitorBIM32') {
+            if(vl.WsensorDataRelevance(config.comfort.co2.wsensNum)) {
+                const co2 = data.wsensor.co2.data[config.comfort.co2.wsensNum] + config.wsensor.co2.corr[config.comfort.co2.wsensNum];
+                if(vl.validateCO2(co2)) {
+                    let co2Level = i18n.t('cleanAir');
+                    if(co2 > 800.0) co2Level = i18n.t('polutedAir');
+                    if(co2 > 1400.0) co2Level = i18n.t('havilyPolutedAir');
+                    if(comfort.length) comfort += ". ";
+                    comfort += co2Level;
+                }
             }
         } 
     }
