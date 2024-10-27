@@ -20,7 +20,6 @@ Start debugging
 or
 
 Build project `npm run build`
-
 and then run `node compress`
 
 
