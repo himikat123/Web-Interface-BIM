@@ -1,5 +1,6 @@
 import i18n from "../../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
+import device from "../../device";
 import Card from "../../atoms/card";
 import { iConfig } from "../../redux/configTypes";
 import { iCardSend } from "../../interfaces";
@@ -32,7 +33,7 @@ export default function CardNarodmonSendData(props: iCardSend) {
                 sens={config.narodmonSend.sensors[props.num]}
             />
 
-            {config.narodmonSend.sensors[props.num] === 2 && <div className="mt-8">
+            {config.narodmonSend.sensors[props.num] === (device() === 'WeatherMonitorBIM32' ? 2 : 400) && <div className="mt-8">
                 {/* Wireless sensor number */}
                 <WsensorNumber value={config.narodmonSend.wsensors[props.num]}
                     changeValue={val => dispatch(cf.narodmonSendWsensorsChange({ num: props.num, val: val }))}

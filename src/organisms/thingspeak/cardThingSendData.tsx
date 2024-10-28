@@ -8,6 +8,7 @@ import CloudSourceSensor from "../../molecules/cloud/cloudSourceSensor";
 import CloudSensorType from "../../molecules/cloud/cloudSensorType";
 import CloudWsensDataType from "../../molecules/cloud/cloudWsensDataType";
 import WsensorNumber from "../../molecules/wsensor/wsensorNumber";
+import device from "../../device";
 
 export default function CardThingpeakSendData(props: iCardSend) {
     const dispatch = useDispatch();
@@ -31,7 +32,7 @@ export default function CardThingpeakSendData(props: iCardSend) {
                 sens={config.thingspeakSend.fields[props.num]}
             />
 
-            {config.thingspeakSend.fields[props.num] === 2 && <div className="mt-8">
+            {config.thingspeakSend.fields[props.num] === (device() === 'WeatherMonitorBIM32' ? 2 : 400) && <div className="mt-8">
                 {/* Wireless sensor number */}
                 <WsensorNumber value={config.thingspeakSend.wsensors[props.num]}
                     changeValue={val => dispatch(cf.thingspeakSendWsensorsChange({ num: props.num, val: val }))}
