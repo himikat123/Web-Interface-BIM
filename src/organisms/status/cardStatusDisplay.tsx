@@ -46,6 +46,7 @@ export default function CardStatusDisplay(props: iDisplay) {
 
     return <>
         {displayHeader(props.num + 1)}
-        {displayView()}
+        {device() === 'WeatherMonitorBIM32' && displayView()}
+        {device() === 'WeatherMonitorBIM' && <DisplayViewLCD />}
     </>
 }

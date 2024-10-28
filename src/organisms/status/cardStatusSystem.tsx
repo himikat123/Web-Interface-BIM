@@ -49,5 +49,12 @@ export default function CardStatusSystem() {
                 {moment(data.time * 1000).utc().format('HH:mm:ss DD.MM.YYYY')}
             </p>
         </div>
+
+        {device() === 'WeatherMonitorBIM' && <div className='mt-4'>
+            <p>{i18n.t('fileSystem')}</p>
+            <p className='text-blue-700 dark:text-blue-400'>
+                {i18n.numberToHumanSize(data.fs.free)} {i18n.t('freeOf')} {i18n.numberToHumanSize(data.fs.total)}
+            </p>
+        </div>}
     </div>
 }

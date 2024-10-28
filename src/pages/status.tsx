@@ -42,9 +42,8 @@ export default function Status() {
 
     const content = <>
         <Card content={<CardStatusDisplay num={0} />} />
-        {device() === 'WeatherMonitorBIM32'
-            ? <Card content={<CardStatusDisplay num={1} />} />
-            : <Card content={<CardStatusSensors />} />}
+        {device() === 'WeatherMonitorBIM32' && <Card content={<CardStatusDisplay num={1} />} />}
+        {device() === 'WeatherMonitorBIM' && <Card content={<CardStatusSensors />} />}
         <Card content={<CardStatusSystem />} />
         <Card content={<CardStatusNetwork />} />
     </>;
