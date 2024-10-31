@@ -1,5 +1,6 @@
 import i18n from "../../i18n/main";
 import { useSelector } from 'react-redux';
+import device from "../../device";
 import Card from "../../atoms/card";
 import ComfortTempSource from "../../molecules/comfort/comfortTempSource";
 import comfortTempRating from "../../molecules/comfort/comfortTempRating";
@@ -30,12 +31,12 @@ export default function CardComfortTemp() {
                 </div>
 
                 {/* Sound Notification */}
-                <ComfortTempSound />
+                {device() === 'WeatherMonitorBIM32' && <ComfortTempSound />}
 
                 {/* Max temperature */}
                 <ComfortTempMax />
 
-                <hr className="mt-8 mb-6 border-menu_light dark:border-menu_dark" />
+                {device() === 'WeatherMonitorBIM32' && <hr className="mt-8 mb-6 border-menu_light dark:border-menu_dark" />}
 
                 {/* Min temperature */}
                 <ComfortTempMin />

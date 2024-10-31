@@ -1,21 +1,42 @@
 import segSymbCodes from './segSymbCodes';
 import { validateTemperature } from '../validateValues';
 
-export default function temp(temp: number, dispModel: string) {
-    let dispImg = [0, 0, 0, 0, 0, 0, 0, 0];
-    const c = segSymbCodes();
+export default function temp(temp: number, dispLength: string) {
     const valid = validateTemperature(temp);
     const tmp = Math.round(temp);
     let th = Math.floor(Math.abs(tmp) / 10);
     const tl = Math.abs(tmp) % 10;
-    if(th === 0) th = c.SYMB_SPACE;
+    const space = segSymbCodes().SYMB_SPACE;
+    const minus = segSymbCodes().SYMB_MINUS;
+    const degree = segSymbCodes().SYMB_DEGREE;
+    const c = segSymbCodes().SYMB_C;
+    if(th === 0) th = space;
 
-    dispImg[0] = dispModel === '4-dig' ? valid ? (tmp < 0 ? c.SYMB_MINUS : tmp > 9 ? th : c.SYMB_SPACE) : c.SYMB_MINUS : c.SYMB_SPACE;
-    dispImg[1] = dispModel === '4-dig' ? valid ? (tmp < 0 ? tmp < -9 ? th : tl : tl) : c.SYMB_MINUS : ((tmp < 0 && tmp < -9) ? c.SYMB_MINUS : c.SYMB_SPACE);
-    dispImg[2] = dispModel === '4-dig' ? valid ? (tmp < 0 ? tmp < -9 ? tl : c.SYMB_DEGREE : c.SYMB_DEGREE) : c.SYMB_MINUS : (tmp < 0 ? tmp < -9 ? th : c.SYMB_MINUS : th);
-    dispImg[3] = dispModel === '4-dig' ? valid ? (tmp < 0 ? tmp < -9 ? c.SYMB_DEGREE : c.SYMB_C : c.SYMB_C) : c.SYMB_C : tl;
-    dispImg[4] = c.SYMB_DEGREE;
-    dispImg[5] = c.SYMB_C;
+    const disp4Img = [
+        valid ? (tmp < 0 ? minus : tmp > 9 ? th : space) : minus,
+        valid ? (tmp < 0 ? tmp < -9 ? th : tl : tl) : minus,
+        valid ? (tmp < 0 ? tmp < -9 ? tl : degree : degree) : degree,
+        valid ? (tmp < 0 ? tmp < -9 ? degree : c : c) : c,
+        space, space, space, space
+    ];
+    const disp6Img = [
+        space,
+        valid ? (tmp < 0 ? minus : tmp > 9 ? th : space) : minus,
+        valid ? (tmp < 0 ? tmp < -9 ? th : tl : tl) : minus,
+        valid ? (tmp < 0 ? tmp < -9 ? tl : degree : degree) : degree,
+        valid ? (tmp <-9 ? degree : c) : c,
+        valid ? (tmp <-9 ? c : space) : space,
+        space, space
+    ];
+    const disp8Img = [
+        space, space,
+        valid ? (tmp < 0 ? minus : tmp > 9 ? th : space) : minus,
+        valid ? (tmp < 0 ? tmp < -9 ? th : tl : tl) : minus,
+        valid ? (tmp < 0 ? tmp < -9 ? tl : degree : degree) : degree,
+        valid ? (tmp <-9 ? degree : c) : c,
+        valid ? (tmp <-9 ? c : space) : space,
+        space
+    ];
 
-    return dispImg;
+    return dispLength === '4-dig' ? disp4Img : dispLength === '6-dig' ? disp6Img : disp8Img;
 }

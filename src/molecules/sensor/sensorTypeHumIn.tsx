@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import i18n from "../../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
+import device from "../../device";
 import SelectSwitch from "../../atoms/selectSwitch";
 import { iConfig } from "../../redux/configTypes";
 import * as cf from "../../redux/slices/config";
@@ -15,17 +16,16 @@ export default function SensorTypeHumIn() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
 
-    const sensors = [
-        '--', 
-        `${i18n.t('forecast')} (${Forecast().hum})`,
-        i18n.t('wirelessSensor.singular'), 
-        'Thingspeak', 
-        i18n.t('sequence'),
-        `BME280 (${BME280().hum})`, 
-        `SHT21 (${SHT21().hum})`, 
-        `DHT22 (${DHT22().hum})`, 
-        `BME680 (${BME680().hum})`
-    ];
+    const sensors = [];
+    sensors.push('--');
+    sensors.push(`${i18n.t('forecast')} (${Forecast().hum})`);
+    if(device() === 'WeatherMonitorBIM32') sensors.push(i18n.t('wirelessSensor.singular'));
+    sensors.push('Thingspeak');
+    if(device() === 'WeatherMonitorBIM32') sensors.push(i18n.t('sequence'));
+    sensors.push(`BME280 (${BME280().hum})`);
+    sensors.push(`SHT21 (${SHT21().hum})`);
+    sensors.push(`DHT22 (${DHT22().hum})`);
+    if(device() === 'WeatherMonitorBIM32') sensors.push(`BME680 (${BME680().hum})`);
 
     useEffect(() => {
         setPrevSens(config.display.source.humIn.sens);
@@ -36,8 +36,10 @@ export default function SensorTypeHumIn() {
         value={config.display.source.humIn.sens}
         onChange={val => {
             dispatch(cf.displaySourceHumInSensChange(val));
-            if(val === 4) dispatch(cf.displaySourceTempInSensChange(val));
-            if(prevSens === 4) dispatch(cf.displaySourceTempInSensChange(0));
+            if(device() === 'WeatherMonitorBIM32') {
+                if(val === 4) dispatch(cf.displaySourceTempInSensChange(val));
+                if(prevSens === 4) dispatch(cf.displaySourceTempInSensChange(0));
+            }
         }}
     />
 }

@@ -1,5 +1,6 @@
 import i18n from "../../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
+import device from "../../device";
 import Card from "../../atoms/card";
 import { iConfig } from "../../redux/configTypes";
 import * as cf from "../../redux/slices/config";
@@ -19,7 +20,7 @@ export default function CardDisplayVoltage() {
             <SensorTypeVoltage />
 
             {/* Wireless sensor number */}
-            {config.display.source.volt.sens === 1 && <div className="mt-8">
+            {config.display.source.volt.sens === (device() === 'WeatherMonitorBIM32' ? 1 : 400) && <div className="mt-8">
                 <WsensorNumber value={config.display.source.volt.wsensNum} 
                     changeValue={val => dispatch(cf.displaySourceVoltWsensNumChange(val))}
                 />
@@ -29,7 +30,7 @@ export default function CardDisplayVoltage() {
             </div>}
 
             {/* Thingspeak */}
-            {config.display.source.volt.sens === 2 && <div className="mt-8">
+            {config.display.source.volt.sens === (device() === 'WeatherMonitorBIM32' ? 2 : 1) && <div className="mt-8">
                 <ThingVoltType />
                 <ThingspeakField value={config.display.source.volt.thing}
                     changeValue={val => dispatch(cf.displaySourceVoltThingChange(val))} 

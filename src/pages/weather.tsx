@@ -16,9 +16,8 @@ export default function Weather() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const [disabled, setDisabled] = useState([false, false, false]);
-    let providers: string[] = [];
-    if(device() === 'WeatherMonitorBIM') providers = ['open-meteo.com', 'weatherbit.io'];
-    if(device() === 'WeatherMonitorBIM32') providers = ['openweathermap.org', 'weatherbit.io', 'open-meteo.com'];
+    const providers = ['openweathermap.org', 'weatherbit.io', 'open-meteo.com'];
+    const providersDisabled = device() === 'WeatherMonitorBIM' ? [1, 0, 0] : [0, 0, 0];
 
     useEffect(() => {
         setDisabled([config.weather.provider > 1, config.weather.provider > 0, false]);
@@ -33,6 +32,7 @@ export default function Weather() {
                     dispatch(cf.weatherProwiderChange(val));
                     dispatch(cf.weatherCitySearchChange(2));
                 }}
+                disabled={providersDisabled}
             />
 
             {config.weather.provider < 2 && <div className="my-8">

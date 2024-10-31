@@ -1,4 +1,5 @@
 import i18n from "../../i18n/main";
+import device from "../../device";
 import SelectSwitch from "../../atoms/selectSwitch";
 import Forecast from "../../atoms/indications/forecast";
 import BME280 from "../../atoms/indications/BME280";
@@ -22,21 +23,23 @@ export default function CloudSensorType(props: iCloudSensorType) {
     const a = i18n.t('voltage');
     const r = i18n.t('runtime');
     
-    const sensors = [
-        [], /* -- */
-        [`${t} (${Forecast().temp})`, `${h} (${Forecast().hum})`, `${p} (${Forecast().pres})`],
-        [], /* Wireless sensor */
-        [`${t} (${BME280().temp})`, `${h} (${BME280().hum})`, `${p} (${BME280().pres})`],
-        [`${t} (${BMP180().temp})`, `${p} (${BMP180().pres})`],
-        [`${t} (${SHT21().temp})`, `${h} (${SHT21().hum})`],
-        [`${t} (${DHT22().temp})`, `${h} (${DHT22().hum})`],
-        [`${t} (${DS18B20().temp})`],
-        [`${l} (${MAX44009().light})`],
-        [`${l} (${BH1750().light})`],
-        [`${a} (${Analog().volt})`],
-        [`${t} (${ESP32().temp})`, `${r} (${ESP32().runtime})`],
-        [`${t} (${BME680().temp})`, `${h} (${BME680().hum})`, `${p} (${BME680().pres})`, `${i} (${BME680().iaq})`]
-    ];
+    const sensors = [];
+    sensors.push([]); /* -- */
+    sensors.push([`${t} (${Forecast().temp})`, `${h} (${Forecast().hum})`, `${p} (${Forecast().pres})`]);
+    if(device() === 'WeatherMonitorBIM32') sensors.push([]); /* Wireless sensor */
+    sensors.push([`${t} (${BME280().temp})`, `${h} (${BME280().hum})`, `${p} (${BME280().pres})`]);
+    sensors.push([`${t} (${BMP180().temp})`, `${p} (${BMP180().pres})`]);
+    sensors.push([`${t} (${SHT21().temp})`, `${h} (${SHT21().hum})`]);
+    sensors.push([`${t} (${DHT22().temp})`, `${h} (${DHT22().hum})`]);
+    sensors.push([`${t} (${DS18B20().temp})`]);
+    sensors.push([`${l} (${MAX44009().light})`]);
+    sensors.push([`${l} (${BH1750().light})`]);
+    if(device() === 'WeatherMonitorBIM') sensors.push([`${r} (${ESP32().runtime})`]);
+    if(device() === 'WeatherMonitorBIM32') {
+        sensors.push([`${a} (${Analog().volt})`]);
+        sensors.push([`${t} (${ESP32().temp})`, `${r} (${ESP32().runtime})`]);
+        sensors.push([`${t} (${BME680().temp})`, `${h} (${BME680().hum})`, `${p} (${BME680().pres})`, `${i} (${BME680().iaq})`]);
+    }
 
     return <>
         {sensors[props.sens].length > 0 && <div className="mt-8">

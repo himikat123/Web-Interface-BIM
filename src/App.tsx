@@ -29,6 +29,7 @@ import Filesystem from './pages/filesystem';
 import Username from './pages/username';
 import Password from './pages/password';
 import Login from './pages/login';
+import hostUrl from './atoms/hostUrl';
 import { iConfig } from './redux/configTypes';
 import { iAlarms } from './redux/alarmTypes';
 import { iData } from './redux/dataTypes';
@@ -48,12 +49,27 @@ function App() {
     const dataState = useSelector((stateData: iData) => stateData.data.dataState);
     const dataFetching = useSelector((stateData: iData) => stateData.data.dataFetching);
     const updateData = useSelector((stateData: iData) => stateData.data.updateData);
+    const ipAddress = useSelector((stateData: iData) => stateData.data.network.ip);
+
     const [stopDataFetching, setStopDataFetching] = useState<boolean>(false);
+    const [prevIpAddress, setPrevIpAddress] = useState<string>('');
+
     const location = useLocation();
     const path = location.pathname;
     const navigate = useNavigate();
     const history = useSelector((state: iHistory) => state.history);
-    const hourly = useSelector((state: iHourly) => state.hourly); 
+    const hourly = useSelector((state: iHourly) => state.hourly);
+    const apMode = window.location.origin.toString().includes('192.168.4.1');
+
+    useEffect(() => {
+        if(prevIpAddress === '0.0.0.0' && prevIpAddress !== ipAddress) {
+            fetch(`${hostUrl()}/esp/restart?code=${localStorage.getItem('code') || '0'}`);
+            setTimeout(() => {
+                window.location.replace(`http://${ipAddress}`);
+            }, 15000);
+        }
+        setPrevIpAddress(ipAddress);
+    }, [ipAddress])
 
     useEffect(() => {
         configFetch();
@@ -66,8 +82,8 @@ function App() {
             const nav = dataFetch(path);
             if(nav) navigate(nav);
 
-            if(moment().unix() - history.updated > 600) historyFetch();
-            if(moment().unix() - hourly.updated > 600) hourlyFetch();
+            if(moment().unix() - history.updated > 600) historyFetch(apMode);
+            if(moment().unix() - hourly.updated > 600) hourlyFetch(apMode);
         }
 
         if(configState === 'ok' && alarmsState === 'ok') {

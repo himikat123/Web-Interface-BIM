@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import i18n from "../../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
+import device from "../../device";
 import SelectSwitch from "../../atoms/selectSwitch";
 import { iConfig } from "../../redux/configTypes";
 import * as cf from "../../redux/slices/config";
@@ -17,19 +18,18 @@ export default function SensorTypeTempIn() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
 
-    const sensors = [
-        '--', 
-        `${i18n.t('forecast')} (${Forecast().temp})`, 
-        i18n.t('wirelessSensor.singular'), 
-        'Thingspeak', 
-        i18n.t('sequence'),
-        `BME280 (${BME280().temp})`, 
-        `BMP180 (${BMP180().temp})`, 
-        `SHT21 (${SHT21().temp})`, 
-        `DHT22 (${DHT22().temp})`, 
-        `DS18B20 (${DS18B20().temp})`, 
-        `BME680 (${BME680().temp})`
-    ];
+    const sensors = [];
+    sensors.push('--');
+    sensors.push(`${i18n.t('forecast')} (${Forecast().temp})`);
+    if(device() === 'WeatherMonitorBIM32') sensors.push(i18n.t('wirelessSensor.singular'));
+    sensors.push('Thingspeak');
+    if(device() === 'WeatherMonitorBIM32') sensors.push(i18n.t('sequence'));
+    sensors.push(`BME280 (${BME280().temp})`);
+    sensors.push(`BMP180 (${BMP180().temp})`);
+    sensors.push(`SHT21 (${SHT21().temp})`);
+    sensors.push(`DHT22 (${DHT22().temp})`);
+    sensors.push(`DS18B20 (${DS18B20().temp})`);
+    if(device() === 'WeatherMonitorBIM32') sensors.push(`BME680 (${BME680().temp})`);
 
     useEffect(() => {
         setPrevSens(config.display.source.tempIn.sens);
@@ -40,8 +40,10 @@ export default function SensorTypeTempIn() {
         value={config.display.source.tempIn.sens}
         onChange={val => {
             dispatch(cf.displaySourceTempInSensChange(val));
-            if(val === 4) dispatch(cf.displaySourceHumInSensChange(val));
-            if(prevSens === 4) dispatch(cf.displaySourceHumInSensChange(0));
+            if(device() === 'WeatherMonitorBIM32') {
+                if(val === 4) dispatch(cf.displaySourceHumInSensChange(val));
+                if(prevSens === 4) dispatch(cf.displaySourceHumInSensChange(0));
+            }
         }}
     />
 }

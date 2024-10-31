@@ -208,6 +208,7 @@
     "nixie": "Nixie-Röhren",
     "neopixel": "Neopixel-LEDs",
     "digits": " Ziffern",
+    "version": "Version",
     "matrices4": "4 8x8-Matrizen",
     "tubes": " Röhren",
     "withSeconds": "mit Sekunden",

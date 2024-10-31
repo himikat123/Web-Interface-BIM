@@ -1,5 +1,6 @@
 import i18n from "../../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
+import device from "../../device";
 import SelectSwitch from "../../atoms/selectSwitch";
 import { iConfig } from "../../redux/configTypes";
 import * as cf from "../../redux/slices/config";
@@ -15,18 +16,17 @@ export default function SensorTypeTempOut() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
 
-    const sensors = [
-        '--', 
-        `${i18n.t('forecast')} (${Forecast().temp})`, 
-        i18n.t('wirelessSensor.singular'), 
-        'Thingspeak',
-        `BME280 (${BME280().temp})`, 
-        `BMP180 (${BMP180().temp})`, 
-        `SHT21 (${SHT21().temp})`, 
-        `DHT22 (${DHT22().temp})`, 
-        `DS18B20 (${DS18B20().temp})`, 
-        `BME680 (${BME680().temp})`
-    ];
+    const sensors = [];
+    sensors.push('--');
+    sensors.push(`${i18n.t('forecast')} (${Forecast().temp})`);
+    if(device() === 'WeatherMonitorBIM32') sensors.push(i18n.t('wirelessSensor.singular'));
+    sensors.push('Thingspeak');
+    sensors.push(`BME280 (${BME280().temp})`);
+    sensors.push(`BMP180 (${BMP180().temp})`);
+    sensors.push(`SHT21 (${SHT21().temp})`);
+    sensors.push(`DHT22 (${DHT22().temp})`);
+    sensors.push(`DS18B20 (${DS18B20().temp})`);
+    if(device() === 'WeatherMonitorBIM32') sensors.push(`BME680 (${BME680().temp})`);
 
     return <SelectSwitch label={i18n.t('dataSource.singular')}
         options={sensors}

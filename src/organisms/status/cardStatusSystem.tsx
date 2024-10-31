@@ -2,6 +2,7 @@ import moment from 'moment';
 import humanizeDuration from 'humanize-duration';
 import i18n from '../../i18n/main';
 import { useSelector } from 'react-redux';
+import device from '../../device';
 import { validateTemperature } from '../../atoms/validateValues';
 import { iConfig } from "../../redux/configTypes";
 import { iData } from '../../redux/dataTypes';
@@ -24,7 +25,7 @@ export default function CardStatusSystem() {
             <p>{i18n.t('firmwareVersion')}</p>
             <p className='text-blue-700 dark:text-blue-400'>{data.fw}</p>
         </div>
-        <div className='mt-4'>
+        {device() === 'WeatherMonitorBIM32' && <div className='mt-4'>
             <p>{i18n.t('esp32Temp')}</p>
             <p className='text-blue-700 dark:text-blue-400'>
                 {validateTemperature(data.esp32.temp) 
@@ -32,7 +33,7 @@ export default function CardStatusSystem() {
                     : '--'
                 }°C
             </p>
-        </div>
+        </div>}
         <div className='mt-4'>
             <p>{i18n.t('runtime')}</p>
             <p className='text-blue-700 dark:text-blue-400'>
@@ -48,5 +49,12 @@ export default function CardStatusSystem() {
                 {moment(data.time * 1000).utc().format('HH:mm:ss DD.MM.YYYY')}
             </p>
         </div>
+
+        {device() === 'WeatherMonitorBIM' && <div className='mt-4'>
+            <p>{i18n.t('fileSystem')}</p>
+            <p className='text-blue-700 dark:text-blue-400'>
+                {i18n.numberToHumanSize(data.fs.free)} {i18n.t('freeOf')} {i18n.numberToHumanSize(data.fs.total)}
+            </p>
+        </div>}
     </div>
 }

@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import i18n from '../i18n/main';
+import device from '../device';
 import TwoColumns from "../templates/twoColumns";
 import Card from "../atoms/card";
 import CardStatusDisplay from '../organisms/status/cardStatusDisplay';
+import CardStatusSensors from '../organisms/status/cardStatusSensors';
 import CardStatusSystem from '../organisms/status/cardStatusSystem';
 import CardStatusNetwork from '../organisms/status/cardStatusNetwork';
 import { iData } from '../redux/dataTypes';
@@ -15,7 +17,10 @@ export default function Status() {
     const gitLink = 'https://github.com/himikat123/Weather-monitor-BIM32';
     
     useEffect(() => {
-        fetch("https://raw.githubusercontent.com/himikat123/Weather-monitor-BIM32/master/BIM32_Arduino/src/globals.hpp")
+        const versionFile = device() === 'WeatherMonitorBIM32'
+            ? "https://raw.githubusercontent.com/himikat123/Weather-monitor-BIM32/master/BIM32_Arduino/src/globals.hpp"
+            : "https://raw.githubusercontent.com/himikat123/Weather-Monitor-BIM/master/BIM_Arduino/globals.hpp"
+        fetch(versionFile)
         .then(response => response.text())
         .then(text => {
             try {
@@ -37,7 +42,8 @@ export default function Status() {
 
     const content = <>
         <Card content={<CardStatusDisplay num={0} />} />
-        <Card content={<CardStatusDisplay num={1} />} />
+        {device() === 'WeatherMonitorBIM32' && <Card content={<CardStatusDisplay num={1} />} />}
+        {device() === 'WeatherMonitorBIM' && <Card content={<CardStatusSensors />} />}
         <Card content={<CardStatusSystem />} />
         <Card content={<CardStatusNetwork />} />
     </>;

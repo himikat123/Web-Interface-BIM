@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import device from '../../device';
 import { iMenuItems } from "../../interfaces";
 import { iValid } from "../../redux/validTypes";
 import MenuItem from "../../atoms/menuItem";
@@ -30,10 +31,10 @@ export default function MenuDataSend(props: iMenuItems) {
             valid={validSendNarodmon} 
         />
 
-        <MenuSubItem link={"/sendmqtt"} 
+        {device() === 'WeatherMonitorBIM32' && <MenuSubItem link={"/sendmqtt"} 
             current={props.current} 
             title={i18n.t('sendViaMqtt')} 
             valid={validSendMqtt} 
-        />
+        />}
     </MenuItem>
 }

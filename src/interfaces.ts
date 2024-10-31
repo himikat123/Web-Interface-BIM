@@ -67,7 +67,7 @@ export interface iColumnsTemplate {
 export interface iSelectSwitch {
     label: string | React.ReactNode,
     options: Array<string>,
-    disabled?: Array<boolean>,
+    disabled?: Array<boolean | number>,
     value: number,
     onChange(i: number): void
 }
@@ -411,11 +411,7 @@ export interface iSegState {
 }
 
 export interface iSegClockPoints {
-    slot: number,
-    clockpoints: boolean,
-    points: boolean, 
-    color: string, 
-    dispNum: number
+    point: string[]
 }
 
 export interface iLcdMainState {
@@ -523,4 +519,12 @@ export interface iAlarmScreen {
     click: boolean,
     skeleton: boolean,
     alarm: string
+}
+
+export interface iSegDoubleDigit {
+    shift: number,
+    segments: number[],
+    colors: string[],
+    withDoubleDots: boolean,
+    bottomDots: boolean
 }

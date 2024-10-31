@@ -6,8 +6,8 @@ import { iSegState } from '../../interfaces';
  
 export default function segAnimations(dispNum: number, state: iSegState) {
     const config = store.getState().config;
-    const segData = segGetData(dispNum, state.slot);
-    const segPrevData = segGetData(dispNum, state.prevSlot);
+    const segData = segGetData(dispNum, state.slot, state.points);
+    const segPrevData = segGetData(dispNum, state.prevSlot, state.points);
     const color = config.display.timeSlot.color[state.slot][dispNum];
     const prevColor = config.display.timeSlot.color[state.prevSlot][dispNum];
     let dispImg = [0, 0, 0, 0, 0, 0, 0, 0];
@@ -15,8 +15,17 @@ export default function segAnimations(dispNum: number, state: iSegState) {
     let animIsRunnung = true;
     const millis = Date.now();
     const type = config.display.animation.type[dispNum];
-    const dispModel = config.display.model[dispNum] > 2 ? 1 : 0;
-    const shift = shifts[dispModel][type][state.animSlot];
+    const dModel = config.display.model[dispNum];
+    const displayLength = config.display.type[dispNum] === 1
+        ? dModel < 3
+            ? 0
+            : 1
+        : (dModel === 0 ||dModel === 1 || dModel === 3)
+            ? 0
+            : (dModel === 2 ||dModel === 4)
+                ? 1
+                : 2;
+    const shift = shifts[displayLength][type][state.animSlot];
 
     const getImg = (n: number) => {
         const shf = Math.abs(shift[n]) - 1;
@@ -37,10 +46,10 @@ export default function segAnimations(dispNum: number, state: iSegState) {
 
     if(millis - state.animMillis > 1000 / config.display.animation.speed[dispNum]) {
         state.animMillis = millis;
-        if(state.animSlot < frames[dispModel][type] - 1) state.animSlot++;
+        if(state.animSlot < frames[displayLength][type] - 1) state.animSlot++;
     }
 
-    if(state.animSlot >= frames[dispModel][type] - 1) animIsRunnung = false;
+    if(state.animSlot >= frames[displayLength][type] - 1) animIsRunnung = false;
 
     return {
         dispImg: dispImg,

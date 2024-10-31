@@ -208,6 +208,7 @@
     "neopixel": "Neopixel LEDs",
     "nixie": "Nixie tubes",
     "digits": " digits",
+    "version": "version",
     "matrices4": "4 matrices 8x8",
     "tubes": " tubes",
     "withSeconds": "with seconds",

@@ -1,8 +1,9 @@
 import store from "./redux/store";
 import axios from "axios";
+import device from "./device";
 import hostUrl from "./atoms/hostUrl";
 import { changeLanguage } from "./i18n/main";
-import { configStateChange, setConfigState } from "./redux/slices/config";
+import { configStateChange, setConfigState, displayModelChange } from "./redux/slices/config";
 import { alarmsStateChange, setAlarmState } from "./redux/slices/alarm";
 
 export default function configFetch() {
@@ -10,6 +11,7 @@ export default function configFetch() {
     .then(res => {
         store.dispatch(configStateChange('ok'));
         store.dispatch(setConfigState(res.data));
+        if(device() === 'WeatherMonitorBIM') store.dispatch(displayModelChange({num: 0, val: 2}));
         changeLanguage(res.data.lang);
         localStorage.setItem('lang', res.data.lang);
     })

@@ -1,5 +1,6 @@
 import i18n from "../../i18n/main";
 import { useSelector } from 'react-redux';
+import device from "../../device";
 import Card from "../../atoms/card";
 import ComfortHumSource from "../../molecules/comfort/comfortHumSource";
 import comfortHumRating from "../../molecules/comfort/comfortHumRating";
@@ -30,12 +31,12 @@ export default function CardComfortHum() {
                 </div>
 
                 {/* Sound Notification */}
-                <ComfortHumSound />
+                {device() === 'WeatherMonitorBIM32' && <ComfortHumSound />}
 
                 {/* Max humidity */}
                 <ComfortHumMax />
 
-                <hr className="mt-8 mb-6 border-menu_light dark:border-menu_dark" />
+                {device() === 'WeatherMonitorBIM32' && <hr className="mt-8 mb-6 border-menu_light dark:border-menu_dark" />}
 
                 {/* Min Humidity */}
                 <ComfortHumMin />

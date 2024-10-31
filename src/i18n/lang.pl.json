@@ -208,6 +208,7 @@
     "neopixel": "Neopikselowe diody LED",
     "nixie": "Lampy Nixie",
     "digits": " cyfry",
+    "version": "wersja",
     "matrices4": "4 matryce 8x8",
     "tubes": " lampy",
     "withSeconds": "z sekundami",
