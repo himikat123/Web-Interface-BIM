@@ -31,17 +31,17 @@ export default function clock(sens: number, dispLength: string, pointsState: boo
     }
 
     const disp4Img = [
-        (config.display.type[dispNum] === 1 || config.display.model[dispNum] < 2) && point1 ? hrH + dot : hrH, 
+        (config.display.type[dispNum] === 2 || config.display.model[dispNum] < 2) && point1 ? hrH + dot : hrH, 
         point2 ? hrL + dot : hrL, 
         mnH, mnL, 
         space, space, space, space
     ];
     const disp6Img = [
-        [space, space, config.display.type[dispNum] === 1 && point1 ? hrH + dot : hrH, 
+        [space, space, config.display.type[dispNum] === 2 && point1 ? hrH + dot : hrH, 
             point2 ? hrL + dot : hrL, mnH, mnL, space, space
         ],
-        [config.display.type[dispNum] === 1 && point1 ? hrH + dot : hrH, point2 ? hrL + dot : hrL, 
-            config.display.type[dispNum] === 1 && point1 ? mnH + dot : mnH, point2 ? mnL + dot : mnL, scH, scL, space, space
+        [config.display.type[dispNum] === 2 && point1 ? hrH + dot : hrH, point2 ? hrL + dot : hrL, 
+            config.display.type[dispNum] === 2 && point1 ? mnH + dot : mnH, point2 ? mnL + dot : mnL, scH, scL, space, space
         ],
         [space, hrH, hrL, point1 ? dash : space, mnH, mnL]
     ];

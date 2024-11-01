@@ -12,13 +12,17 @@ import Indication from "../../atoms/indication";
 export default function CardDisplayType(props: iDisplay) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
-    let types = [
+    const types = [
         "--",
         "LCD/TFT",
         i18n.t('neopixel'),
-        i18n.t('segment7'),
+        //i18n.t('segment7'),
         //i18n.t('matrix'),
         //i18n.t('nixie')
+    ];
+    const disableTypes = [
+        [0, 0, 0, 0, 0, 0],
+        [0, 1, 0, 0, 0, 0]
     ];
     const lcd = [
         { 'NX4832K035': 140 }, 
@@ -52,17 +56,14 @@ export default function CardDisplayType(props: iDisplay) {
         { [`Nixie (6${i18n.t('tubes')})`]: 1000 },
         { [`Nixie (8${i18n.t('tubes')})`]: 1000 }
     ];
-    if(props.num === 1) types.splice(1, 1);
 
     let models: string[] = [];
     let consums: number[] = [];
 
-    switch(config.display.type[props.num] + props.num) {
+    switch(config.display.type[props.num]) {
         case 1: 
-            if(props.num === 0) {
-                models = lcd.map(d => Object.keys(d)[0]);
-                consums = lcd.map(d => Object.values(d)[0]);
-            }
+            models = lcd.map(d => Object.keys(d)[0]);
+            consums = lcd.map(d => Object.values(d)[0]);
             break;
         case 2: 
             models = neopixel.map(d => Object.keys(d)[0]);
@@ -100,6 +101,7 @@ export default function CardDisplayType(props: iDisplay) {
                 dispatch(cf.displayModelChange({num: props.num, val: 0}));
                 dispatch(cf.displayAnimationPointsChange({num: props.num, val: 0}));
             }}
+            disabled={disableTypes[props.num]}
         />
 
         {models.length > 0 && <div className="mt-8">
@@ -151,7 +153,7 @@ export default function CardDisplayType(props: iDisplay) {
                 {i18n.t('maximumDisplayCurrent')}:
                 <Indication error={false} 
                     value={String(
-                        config.display.type[props.num] + props.num === 2 
+                        config.display.type[props.num] === 2 
                             ? (Math.round(consums[config.display.model[props.num]] 
                                 * config.display.brightness.max[props.num] 
                                 / 255
