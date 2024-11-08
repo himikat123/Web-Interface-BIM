@@ -20,9 +20,9 @@ export default function segAnimations(dispNum: number, state: iSegState) {
         ? dModel < 3
             ? 0
             : 1
-        : (dModel === 0 ||dModel === 1 || dModel === 3)
+        : (dModel === 0 || dModel === 2)
             ? 0
-            : (dModel === 2 ||dModel === 4)
+            : (dModel === 1 || dModel === 3)
                 ? 1
                 : 2;
     const shift = shifts[displayLength][type][state.animSlot];

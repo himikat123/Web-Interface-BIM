@@ -22,9 +22,9 @@ export default function segGetData(dispNum: number, slot: number, pointsState: b
         ? dModel < 3
             ? '4-dig'
             : '6-dig'
-        : (dModel === 0 ||dModel === 1 || dModel === 3)
+        : (dModel === 0 || dModel === 2)
             ? '4-dig'
-            : (dModel === 2 ||dModel === 4)
+            : (dModel === 1 ||dModel === 3)
                 ? '6-dig'
                 : '8-dig';
 
