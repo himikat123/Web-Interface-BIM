@@ -360,5 +360,6 @@
     "month": "month",
     "year": "year",
     "twoDigits": "2 digits",
-    "fourDigits": "4 digits"
+    "fourDigits": "4 digits",
+    "orderOfDigits": "Order of digits"
 }

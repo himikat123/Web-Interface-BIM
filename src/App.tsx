@@ -69,7 +69,7 @@ function App() {
             }, 15000);
         }
         setPrevIpAddress(ipAddress);
-    }, [ipAddress])
+    }, [ipAddress, prevIpAddress])
 
     useEffect(() => {
         configFetch();
@@ -103,8 +103,8 @@ function App() {
 
         return () => clearInterval(dataFetchInterval);
     }, [
-        configState, alarmsState, dispatch, dataFetching, updateData, 
-        path, navigate, stopDataFetching, history.updated, hourly.updated
+        configState, alarmsState, dispatch, dataFetching, updateData, path, 
+        navigate, stopDataFetching, history.updated, hourly.updated, apMode
     ]);
 
     useEffect(() => {

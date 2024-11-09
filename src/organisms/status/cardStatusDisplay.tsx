@@ -35,8 +35,9 @@ export default function CardStatusDisplay(props: iDisplay) {
             }
             case 1: { /* Display 2 */
                 switch(config.display.type[props.num]) {
-                    case 1: return <DisplayView7segment num={1} />;
+                    case 1: return <></>;
                     case 2: return <DisplayView7segment num={1} />;
+                    case 3: return <DisplayView7segment num={1} />;
                     default: return <></>;
                 }
             }

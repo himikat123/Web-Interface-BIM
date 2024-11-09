@@ -16,13 +16,13 @@ export default function segAnimations(dispNum: number, state: iSegState) {
     const millis = Date.now();
     const type = config.display.animation.type[dispNum];
     const dModel = config.display.model[dispNum];
-    const displayLength = config.display.type[dispNum] === 1
+    const displayLength = config.display.type[dispNum] === 2
         ? dModel < 3
             ? 0
             : 1
-        : (dModel === 0 ||dModel === 1 || dModel === 3)
+        : (dModel === 0 || dModel === 2)
             ? 0
-            : (dModel === 2 ||dModel === 4)
+            : (dModel === 1 || dModel === 3)
                 ? 1
                 : 2;
     const shift = shifts[displayLength][type][state.animSlot];

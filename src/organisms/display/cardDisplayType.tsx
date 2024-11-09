@@ -1,9 +1,9 @@
 import i18n from "../../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
-import hostUrl from "../../atoms/hostUrl";
 import Card from "../../atoms/card";
 import SelectSwitch from "../../atoms/selectSwitch";
-import RangeInput from "../../atoms/rangeInput";
+import DisplayBrightLimit from "../../molecules/display/displayBrightLimit";
+import DisplayDigitsReassignment from "../../molecules/display/displayDigitsReassignment";
 import { iConfig } from "../../redux/configTypes";
 import { iDisplay } from "../../interfaces";
 import * as cf from "../../redux/slices/config";
@@ -12,7 +12,7 @@ import Indication from "../../atoms/indication";
 export default function CardDisplayType(props: iDisplay) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
-    let types = [
+    const types = [
         "--",
         "LCD/TFT",
         i18n.t('neopixel'),
@@ -20,14 +20,17 @@ export default function CardDisplayType(props: iDisplay) {
         //i18n.t('matrix'),
         //i18n.t('nixie')
     ];
+    const disableTypes = [
+        [0, 0, 0, 0, 0, 0],
+        [0, 1, 0, 0, 0, 0]
+    ];
     const lcd = [
         { 'NX4832K035': 140 }, 
         { 'NX4832T035': 140 },
         { 'ILI9341': 100 }
     ];
     const segment = [
-        { [`TM1637 (4${i18n.t('digits')}, ${i18n.t('version')} 1)`]: 160 },
-        { [`TM1637 (4${i18n.t('digits')}, ${i18n.t('version')} 2)`]: 160 },
+        { [`TM1637 (4${i18n.t('digits')})`]: 160 },
         { [`TM1637 (6${i18n.t('digits')})`]: 240 },
         { [`MAX7219 (4${i18n.t('digits')})`]: 160 },
         { [`MAX7219 (6${i18n.t('digits')})`]: 240 },
@@ -52,17 +55,14 @@ export default function CardDisplayType(props: iDisplay) {
         { [`Nixie (6${i18n.t('tubes')})`]: 1000 },
         { [`Nixie (8${i18n.t('tubes')})`]: 1000 }
     ];
-    if(props.num === 1) types.splice(1, 1);
 
     let models: string[] = [];
     let consums: number[] = [];
 
-    switch(config.display.type[props.num] + props.num) {
+    switch(config.display.type[props.num]) {
         case 1: 
-            if(props.num === 0) {
-                models = lcd.map(d => Object.keys(d)[0]);
-                consums = lcd.map(d => Object.values(d)[0]);
-            }
+            models = lcd.map(d => Object.keys(d)[0]);
+            consums = lcd.map(d => Object.values(d)[0]);
             break;
         case 2: 
             models = neopixel.map(d => Object.keys(d)[0]);
@@ -82,15 +82,6 @@ export default function CardDisplayType(props: iDisplay) {
             break;
     }
     
-    const sendLimits = (newVal: number, type: string) => {
-        let url = `${hostUrl()}/esp/brightLimit`;
-        url += `?min=${type === 'min' ? newVal : config.display.brightness.min[props.num]}`;
-        url += `&max=${type === 'max' ? newVal : config.display.brightness.max[props.num]}`;
-        url += `&num=${props.num}`;
-        url += `&code=${localStorage.getItem('code') || '0'}`;
-        fetch(url);
-    }
-
     return <Card content={<>
         <SelectSwitch label={i18n.t('displayType')}
             options={types}
@@ -100,6 +91,7 @@ export default function CardDisplayType(props: iDisplay) {
                 dispatch(cf.displayModelChange({num: props.num, val: 0}));
                 dispatch(cf.displayAnimationPointsChange({num: props.num, val: 0}));
             }}
+            disabled={disableTypes[props.num]}
         />
 
         {models.length > 0 && <div className="mt-8">
@@ -117,41 +109,13 @@ export default function CardDisplayType(props: iDisplay) {
         </div>}
 
         {config.display.type[props.num] > 0 && <>
-            <RangeInput value={config.display.brightness.max[props.num]}
-                label={i18n.t('maximumBrightnessLimit')}
-                min={0}
-                max={255}
-                limitMin={config.display.brightness.min[props.num]}
-                limitMax={255}
-                step={1}
-                indication={String(config.display.brightness.max[props.num])}
-                onChange={val => {
-                    dispatch(cf.displayBrightMaxChange({num: props.num, val: val}));
-                    sendLimits(val, 'max');
-                }}
-                className="mt-2"
-            />
-
-            <RangeInput value={config.display.brightness.min[props.num]}
-                label={i18n.t('minimumBrightnessLimit')}
-                min={0}
-                max={255}
-                limitMin={0}
-                limitMax={config.display.brightness.max[props.num]}
-                step={1}
-                indication={String(config.display.brightness.min[props.num])}
-                onChange={val => {
-                    dispatch(cf.displayBrightMinChange({num: props.num, val: val}));
-                    sendLimits(val, 'min');
-                }}
-                className="mt-4"
-            />
+            {config.display.type[props.num] <= 2 && <DisplayBrightLimit num={props.num} />}
 
             <div className="mt-4 text-xs">
                 {i18n.t('maximumDisplayCurrent')}:
                 <Indication error={false} 
                     value={String(
-                        config.display.type[props.num] + props.num === 2 
+                        config.display.type[props.num] === 2 
                             ? (Math.round(consums[config.display.model[props.num]] 
                                 * config.display.brightness.max[props.num] 
                                 / 255
@@ -160,6 +124,8 @@ export default function CardDisplayType(props: iDisplay) {
                     ) + i18n.t('units.ma')} 
                 />
             </div>
+
+            {config.display.type[props.num] === 3 && <DisplayDigitsReassignment num={props.num} />}
         </>}
     </>} />
 }

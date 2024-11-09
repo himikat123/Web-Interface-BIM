@@ -73,20 +73,20 @@ export default function TimeSlotSensorType(props: iDisplayTimeSlot) {
     ];
 
     const disabled = [
-        [ /* clock */ [],
+        [ /* clock */ [], [],
             [ // type neopixel
                 [0, 1, 1, 1, 1], [0, 1, 1, 1, 1], [0, 1, 1, 1, 1], [0, 0, 1, 1, 1], [0, 0, 1, 1, 1], [0, 0, 1, 1, 1]
             ],
             [ // type 7 segment
-                [0, 1, 1, 1, 1], [0, 1, 1, 1, 1], [0, 0, 0, 1, 1], [0, 1, 1, 1, 1], [0, 0, 0, 1, 1], [0, 0, 0, 0, 0]
+                [0, 1, 1, 1, 1], [0, 0, 0, 1, 1], [0, 1, 1, 1, 1], [0, 0, 0, 1, 1], [0, 0, 0, 0, 0]
             ]
         ],
-        [ /* date */ [],
+        [ /* date */ [], [],
             [ // type neopixel
                 [0, 1, 1], [0, 1, 1], [0, 1, 1], [0, 0, 1], [0, 0, 1], [0, 0, 1]
             ],
             [ // type 7 segment
-                [0, 1, 1], [0, 1, 1], [0, 0, 1], [0, 1, 1], [0, 0, 1], [0, 0, 0]
+                [0, 1, 1], [0, 0, 1], [0, 1, 1], [0, 0, 1], [0, 0, 0]
             ]
         ]
     ];
@@ -98,7 +98,7 @@ export default function TimeSlotSensorType(props: iDisplayTimeSlot) {
                 value={config.display.timeSlot.data[props.slot][props.num]}
                 onChange={val => dispatch(cf.displayTimeslotDataChange({slot: props.slot, num: props.num, val: val}))}
                 disabled={sensor < 2
-                    ? disabled[sensor][config.display.type[props.num] - (1 - props.num)][config.display.model[props.num]]
+                    ? disabled[sensor][config.display.type[props.num]][config.display.model[props.num]]
                     : []
                 }
             />

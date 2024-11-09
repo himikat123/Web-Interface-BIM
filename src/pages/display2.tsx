@@ -19,11 +19,11 @@ export default function Display2() {
     </>
 
     const row2 = <>
-        {config.display.type[1] > 0 && [...Array(4)].map((x, i) => <CardDisplayTimeSlot key={i} slot={i} num={1} />)}
+        {config.display.type[1] >= 2 && [...Array(4)].map((x, i) => <CardDisplayTimeSlot key={i} slot={i} num={1} />)}
     </>
 
     const row3 = <>
-        {config.display.type[1] > 0 && [...Array(4)].map((x, i) => <CardDisplayTimeSlot key={i} slot={i + 4} num={1} />)}
+        {config.display.type[1] >= 2 && [...Array(4)].map((x, i) => <CardDisplayTimeSlot key={i} slot={i + 4} num={1} />)}
     </>
 
     return <FourColumns navbar={true}

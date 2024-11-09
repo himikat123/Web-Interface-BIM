@@ -360,5 +360,6 @@
     "month": "месяц",
     "year": "год",
     "twoDigits": "2 цифры",
-    "fourDigits": "4 цифры"
+    "fourDigits": "4 цифры",
+    "orderOfDigits": "Порядок разрядов"
 }

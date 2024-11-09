@@ -33,14 +33,14 @@ export default function DisplayView7segment(props: {num: number}) {
         return () => clearInterval(int);
     }, [props.num, state]);
 
-    const bottomDots = dType === 2 && dModel > 1;
-    const displayLength = dType === 1
+    const bottomDots = dType === 3 && dModel > 1;
+    const displayLength = dType === 2
         ? dModel < 3
             ? 4
             : 6
-        : (dModel === 0 ||dModel === 1 || dModel === 3)
+        : (dModel === 0 || dModel === 2)
             ? 4
-            : (dModel === 2 ||dModel === 4)
+            : (dModel === 1 || dModel === 3)
                 ? 6
                 : 8;
 
@@ -49,25 +49,25 @@ export default function DisplayView7segment(props: {num: number}) {
             <div className='bg-black flex p-1.5 ps-[8px]'>
                 <SegDoubleDigit shift={0}
                     segments={state.segments}
-                    colors={dType === 1 ? state.colors : dModel < 3 ? colorsTM1637 : colorsMAX7219}
+                    colors={dType === 2 ? state.colors : dModel < 2 ? colorsTM1637 : colorsMAX7219}
                     withDoubleDots={true}
                     bottomDots={bottomDots}
                 />
                 <SegDoubleDigit shift={2}
                     segments={state.segments}
-                    colors={dType === 1 ? state.colors : dModel < 3 ? colorsTM1637 : colorsMAX7219}
-                    withDoubleDots={dModel > 2}
+                    colors={dType === 2 ? state.colors : dModel < 2 ? colorsTM1637 : colorsMAX7219}
+                    withDoubleDots={dType === 2 ? dModel > 2 : dModel === 1}
                     bottomDots={bottomDots}
                 />
                 {displayLength > 4 && <SegDoubleDigit shift={4}
                     segments={state.segments}
-                    colors={dType === 1 ? state.colors : dModel < 3 ? colorsTM1637 : colorsMAX7219}
+                    colors={dType === 2 ? state.colors : dModel < 2 ? colorsTM1637 : colorsMAX7219}
                     withDoubleDots={false}
                     bottomDots={bottomDots}
                 />}
                 {displayLength > 6 && <SegDoubleDigit shift={6}
                     segments={state.segments}
-                    colors={dType === 1 ? state.colors : dModel < 3 ? colorsTM1637 : colorsMAX7219}
+                    colors={dType === 2 ? state.colors : dModel < 2 ? colorsTM1637 : colorsMAX7219}
                     withDoubleDots={false}
                     bottomDots={bottomDots}
                 />}

@@ -360,5 +360,6 @@
     "month": "miesiąc",
     "year": "rok",
     "twoDigits": "2 cyfry",
-    "fourDigits": "4 cyfry"
+    "fourDigits": "4 cyfry",
+    "orderOfDigits": "Kolejność cyfr"
 }

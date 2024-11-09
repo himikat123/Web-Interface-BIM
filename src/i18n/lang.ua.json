@@ -360,5 +360,6 @@
     "month": "місяць",
     "year": "рік",
     "twoDigits": "2 цифри",
-    "fourDigits": "4 цифри"
+    "fourDigits": "4 цифри",
+    "orderOfDigits": "Порядок розрядів"
 }
