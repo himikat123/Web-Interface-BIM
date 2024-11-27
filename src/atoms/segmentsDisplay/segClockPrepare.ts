@@ -4,6 +4,8 @@ import segSymbCodes from './segSymbCodes';
 
 export default function clock(sens: number, dispLength: string, pointsState: boolean, dispNum: number): number[] {
     const config = store.getState().config;
+    const type = config.display.type[dispNum];
+    const model = config.display.model[dispNum];
     const hour = moment().hours();
     const hr = config.clock.format ? hour : hour % 12 || 12;
     const hrH = Math.floor(hr < 10 ? segSymbCodes().SYMB_SPACE : hr / 10);
@@ -31,17 +33,17 @@ export default function clock(sens: number, dispLength: string, pointsState: boo
     }
 
     const disp4Img = [
-        (config.display.type[dispNum] === 2 || config.display.model[dispNum] < 2) && point1 ? hrH + dot : hrH, 
+        ((type === 2 && model < 2) || (type === 3 && model === 0)) && point1 ? hrH + dot : hrH, 
         point2 ? hrL + dot : hrL, 
         mnH, mnL, 
         space, space, space, space
     ];
     const disp6Img = [
-        [space, space, config.display.type[dispNum] === 2 && point1 ? hrH + dot : hrH, 
+        [space, space, type === 2 && point1 ? hrH + dot : hrH, 
             point2 ? hrL + dot : hrL, mnH, mnL, space, space
         ],
-        [config.display.type[dispNum] === 2 && point1 ? hrH + dot : hrH, point2 ? hrL + dot : hrL, 
-            config.display.type[dispNum] === 2 && point1 ? mnH + dot : mnH, point2 ? mnL + dot : mnL, scH, scL, space, space
+        [type === 2 && point1 ? hrH + dot : hrH, point2 ? hrL + dot : hrL, 
+            type === 2 && point1 ? mnH + dot : mnH, point2 ? mnL + dot : mnL, scH, scL, space, space
         ],
         [space, hrH, hrL, point1 ? dash : space, mnH, mnL]
     ];
