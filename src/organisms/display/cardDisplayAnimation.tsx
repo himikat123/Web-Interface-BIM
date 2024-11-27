@@ -28,7 +28,7 @@ export default function CardDisplayAnimation(props: iDisplay) {
         i18n.t('pointsAlwaysOff'),
     ];
     const pointsDisabled = [
-        [], [0,0,0,0], [0,1,0,0]
+        [], [0,0,0,0], [0,0,0,0], [0,1,0,0], [0,1,0,0]
     ];
 
     const sendAnimationType = (val: number) => {
@@ -81,7 +81,7 @@ export default function CardDisplayAnimation(props: iDisplay) {
                 className="mt-4"
             />
 
-            {config.display.type[props.num] + props.num < 5 && <div className="mt-12">
+            <div className="mt-12">
                 <SelectSwitch label={i18n.t('clockPoints')}
                     options={clockPoints}
                     value={config.display.animation.points[props.num]}
@@ -91,7 +91,7 @@ export default function CardDisplayAnimation(props: iDisplay) {
                     }}
                     disabled={pointsDisabled[config.display.type[props.num]]}
                 />
-            </div>}
+            </div>
         </>} /> : <Card className="invisible lg:visible" content={<></>} />}
     </>
 }

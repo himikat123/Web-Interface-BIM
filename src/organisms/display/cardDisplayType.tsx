@@ -12,23 +12,28 @@ import Indication from "../../atoms/indication";
 export default function CardDisplayType(props: iDisplay) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
+
     const types = [
         "--",
         "LCD/TFT",
         i18n.t('neopixel'),
         i18n.t('segment7'),
+        i18n.t('numitron'),
         //i18n.t('matrix'),
         //i18n.t('nixie')
     ];
+
     const disableTypes = [
         [0, 0, 0, 0, 0, 0],
         [0, 1, 0, 0, 0, 0]
     ];
+
     const lcd = [
         { 'NX4832K035': 140 }, 
         { 'NX4832T035': 140 },
         { 'ILI9341': 100 }
     ];
+
     const segment = [
         { [`TM1637 (4${i18n.t('digits')})`]: 160 },
         { [`TM1637 (6${i18n.t('digits')})`]: 240 },
@@ -36,9 +41,13 @@ export default function CardDisplayType(props: iDisplay) {
         { [`MAX7219 (6${i18n.t('digits')})`]: 240 },
         { [`MAX7219 (8${i18n.t('digits')})`]: 320 }
     ];
-    const matrix = [
-        { [`MAX7219 (${i18n.t('matrices4')})`]: 1280 }
+
+    const numitron = [
+        { [`4${i18n.t('digits')}`]: 640 },
+        { [`6${i18n.t('digits')}`]: 960 },
+        { [`8${i18n.t('digits')}`]: 1280 }
     ];
+
     const neopixel = [
         { [`WS2812b (4${i18n.t('digits')}, 1 ${i18n.t('ledPerSegment')})`]: 1800 },
         { [`WS2812b (4${i18n.t('digits')}, 2 ${i18n.t('ledsPerSegment')})`]: 3480 },
@@ -50,11 +59,16 @@ export default function CardDisplayType(props: iDisplay) {
         //{ [`WS2812b (8${i18n.t('digits')}, 2 ${i18n.t('ledsPerSegment')})`]: 7080 },
         //{ [`WS2812b (8${i18n.t('digits')}, 3 ${i18n.t('ledsPerSegment')})`]: 10440 }
     ];
-    const nixie = [
-        { [`Nixie (4${i18n.t('tubes')})`]: 1000 },
-        { [`Nixie (6${i18n.t('tubes')})`]: 1000 },
-        { [`Nixie (8${i18n.t('tubes')})`]: 1000 }
-    ];
+
+    //const matrix = [
+    //    { [`MAX7219 (${i18n.t('matrices4')})`]: 1280 }
+    //];
+
+    //const nixie = [
+    //    { [`Nixie (4${i18n.t('tubes')})`]: 1000 },
+    //    { [`Nixie (6${i18n.t('tubes')})`]: 1000 },
+    //    { [`Nixie (8${i18n.t('tubes')})`]: 1000 }
+    //];
 
     let models: string[] = [];
     let consums: number[] = [];
@@ -73,13 +87,20 @@ export default function CardDisplayType(props: iDisplay) {
             consums = segment.map(d => Object.values(d)[0]);
             break;
         case 4: 
-            models = matrix.map(d => Object.keys(d)[0]);
-            consums = matrix.map(d => Object.values(d)[0]);
+            models = numitron.map(d => Object.keys(d)[0]);
+            consums = numitron.map(d => Object.values(d)[0]);
             break;
-        case 5: 
-            models = nixie.map(d => Object.keys(d)[0]);
-            consums = nixie.map(d => Object.values(d)[0]);
-            break;
+        //case 5: 
+        //    models = matrix.map(d => Object.keys(d)[0]);
+        //    consums = matrix.map(d => Object.values(d)[0]);
+        //    break;
+        //case 6: 
+        //    models = nixie.map(d => Object.keys(d)[0]);
+        //    consums = nixie.map(d => Object.values(d)[0]);
+        //    break;
+        default:
+            models = [];
+            consums = [];
     }
     
     return <Card content={<>

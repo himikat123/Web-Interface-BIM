@@ -1,0 +1,8 @@
+.filament {
+    fill: #0000;
+    transition: fill .3s ease-in-out;
+
+    &.on {
+        fill: #F70F;
+    }
+}

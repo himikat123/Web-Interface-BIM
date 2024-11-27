@@ -20,7 +20,7 @@ export default function TimeSlotColor(props: iDisplayTimeSlot) {
     }
 
     return <ColorInput value={config.display.timeSlot.color[props.slot][props.num]}
-        label={i18n.t('displayColor')} 
+        label={config.display.type[props.num] === 2 ? i18n.t('displayColor') : i18n.t('backlightColor')}
         onChange={val => {
             dispatch(cf.displayTimeslotColorChange({slot: props.slot, num: props.num, val: val}));
             sendSlotColor(val);

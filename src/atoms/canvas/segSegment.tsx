@@ -1,26 +1,8 @@
+import segmentFont from "./segmentFont";
 import { iSegment } from "../../interfaces";
 
 export default function SegSegment(props: iSegment) {
-    const code = [
-        [1, 1, 1, 1, 1, 1, 0], /* 0 */
-        [0, 1, 1, 0, 0, 0, 0], /* 1 */
-        [1, 1, 0, 1, 1, 0, 1], /* 2 */
-        [1, 1, 1, 1, 0, 0, 1], /* 3 */
-        [0, 1, 1, 0, 0, 1, 1], /* 4 */
-        [1, 0, 1, 1, 0, 1, 1], /* 5 */
-        [1, 0, 1, 1, 1, 1, 1], /* 6 */
-        [1, 1, 1, 0, 0, 0, 0], /* 7 */
-        [1, 1, 1, 1, 1, 1, 1], /* 8 */
-        [1, 1, 1, 1, 0, 1, 1], /* 9 */
-        [1, 1, 0, 0, 0, 1, 1], /* ° */
-        [1, 1, 1, 0, 1, 1, 1], /* A */
-        [1, 0, 0, 1, 1, 1, 0], /* C */
-        [1, 1, 0, 0, 1, 1, 1], /* P */
-        [0, 1, 1, 0, 1, 1, 1], /* H */
-        [0, 0, 0, 0, 0, 0, 0], /* space */
-        [0, 0, 0, 0, 0, 0, 1], /* - */
-        [0, 0, 1, 1, 1, 0, 1]  /* o */
-    ];
+    const code = segmentFont();
     const symb = props.symb < code.length ? props.symb : 15;
 
     return <svg height="60" className={props.point ? 'm-0.5' : 'ms-0.5'} viewBox={'0 0 3.' + (props.point ? '68' : '11') + '01497 5.3307571'}>
