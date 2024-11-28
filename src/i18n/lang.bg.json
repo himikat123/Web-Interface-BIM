@@ -222,6 +222,8 @@
     "animation": "Анимация",
     "animationSpeed": "Скорост анимации",
     "clockPoints": "Час точки",
+    "blink": "Мигат",
+    "pendulum": "Махало",
     "blinkTogether": "Мигат заедно",
     "blinkInTurn": "Мига на свой ред",
     "pointsAlwaysOn": "Винаги включен",

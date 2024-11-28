@@ -222,6 +222,8 @@
     "animation": "Animacja",
     "animationSpeed": "Prędkość animacji",
     "clockPoints": "Punkty zegara",
+    "blink": "Migają",
+    "pendulum": "Wahadło",
     "blinkTogether": "Migają razem",
     "blinkInTurn": "Migają na zmianę",
     "pointsAlwaysOn": "Punkty zawsze włączone",
