@@ -206,6 +206,8 @@
     "segment7": "7 segment",
     "matrix": "Matrix",
     "neopixel": "Neopixel LEDs",
+    "vfd": "VFD tubes",
+    "segment7withDot": "7 segments + dot",
     "nixie": "Nixie tubes",
     "numitron": "Numitron tubes",
     "digits": " digits",

@@ -205,6 +205,8 @@
     "displayModel": "Anzeigemodel",
     "segment7": "7 Segment",
     "matrix": "Matrix",
+    "vfd": "VFD-Röhren",
+    "segment7withDot": "7 Segmente + Punkt",
     "nixie": "Nixie-Röhren",
     "numitron": "Numitron-Röhren",
     "neopixel": "Neopixel-LEDs",
