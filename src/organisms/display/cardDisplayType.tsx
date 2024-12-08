@@ -18,8 +18,8 @@ export default function CardDisplayType(props: iDisplay) {
         "LCD/TFT",
         i18n.t('neopixel'),
         i18n.t('segment7'),
-        i18n.t('numitron'),
-        i18n.t('vfd'),
+        //i18n.t('numitron'),
+        //i18n.t('vfd'),
         //i18n.t('nixie'),
         //i18n.t('matrix'),
         
