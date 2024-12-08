@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import humanizeDuration from 'humanize-duration';
 import i18n from '../../i18n/main';
 import hostUrl from "../../atoms/hostUrl";
 import { iConfig } from "../../redux/configTypes";
@@ -13,19 +14,11 @@ export default function CardSoundListen() {
     const [melody, setMelody] = useState<number>(0);
 
     const config = useSelector((state: iConfig) => state.config);
+    const locale = config.lang === 'ua' ? 'uk' : config.lang;
     
     let clockSounds = [];
     for(let i=0; i<24; i++) {
-        if(config.lang === 'ru' || config.lang === 'pl' || config.lang === 'ua') {
-            if(i === 1 || i === 21) clockSounds.push(`${i} ${i18n.t('hour.one')}`);
-            if((i >= 2 && i <= 4) || (i >= 22 && i <= 23)) clockSounds.push(`${i} ${i18n.t('hour.few')}`);
-            if(i === 0 || (i >= 5 && i <= 20)) clockSounds.push(`${i} ${i18n.t('hour.many')}`);
-        }
-        if(config.lang === 'bg') {
-            if(i === 1) clockSounds.push(`${i} ${i18n.t('hour.one')}`);
-            else clockSounds.push(`${i} ${i18n.t('hour.many')}`);
-        }
-        else clockSounds.push(`${i} ${i18n.t('hour.many')}`);
+        clockSounds.push(humanizeDuration(i * 3600000, { language: locale, units: ["h"]}));
     }
 
     const sendPlayHourly = () => {

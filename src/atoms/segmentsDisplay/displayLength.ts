@@ -12,6 +12,8 @@ export default function displayLength(dispNum: number, leng = 1) {
         lg = (dModel === 0 || dModel === 2) ? 0 : (dModel === 1 || dModel === 3) ? 1 : 2;
     if(config.display.type[dispNum] === 4) // Numitron
         lg = dModel === 0 ? 0 : dModel === 1 ? 1 : 2;
+    if(config.display.type[dispNum] === 5) // VFD
+        lg = dModel === 0 ? 0 : dModel === 1 ? 1 : 2;
 
     if(leng) return length[lg];
     else return lg;

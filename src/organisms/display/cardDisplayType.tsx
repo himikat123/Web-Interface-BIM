@@ -18,9 +18,11 @@ export default function CardDisplayType(props: iDisplay) {
         "LCD/TFT",
         i18n.t('neopixel'),
         i18n.t('segment7'),
-        i18n.t('numitron'),
+        //i18n.t('numitron'),
+        //i18n.t('vfd'),
+        //i18n.t('nixie'),
         //i18n.t('matrix'),
-        //i18n.t('nixie')
+        
     ];
 
     const disableTypes = [
@@ -43,9 +45,9 @@ export default function CardDisplayType(props: iDisplay) {
     ];
 
     const numitron = [
-        { [`4${i18n.t('digits')}`]: 640 },
-        { [`6${i18n.t('digits')}`]: 960 },
-        { [`8${i18n.t('digits')}`]: 1280 }
+        { [`4${i18n.t('tubes')}`]: 640 },
+        { [`6${i18n.t('tubes')}`]: 960 },
+        { [`8${i18n.t('tubes')}`]: 1280 }
     ];
 
     const neopixel = [
@@ -60,15 +62,21 @@ export default function CardDisplayType(props: iDisplay) {
         //{ [`WS2812b (8${i18n.t('digits')}, 3 ${i18n.t('ledsPerSegment')})`]: 10440 }
     ];
 
-    //const matrix = [
-    //    { [`MAX7219 (${i18n.t('matrices4')})`]: 1280 }
-    //];
+    const vfd = [
+        { [`${i18n.t('segment7withDot')} (4${i18n.t('digits')})`]: 1000 },
+        { [`${i18n.t('segment7withDot')} (6${i18n.t('digits')})`]: 1000 },
+        { [`${i18n.t('segment7withDot')} (8${i18n.t('digits')})`]: 1000 }
+    ];
 
-    //const nixie = [
-    //    { [`Nixie (4${i18n.t('tubes')})`]: 1000 },
-    //    { [`Nixie (6${i18n.t('tubes')})`]: 1000 },
-    //    { [`Nixie (8${i18n.t('tubes')})`]: 1000 }
-    //];
+    const matrix = [
+        { [`MAX7219 (${i18n.t('matrices4')})`]: 1280 }
+    ];
+
+    const nixie = [
+        { [`Nixie (4${i18n.t('tubes')})`]: 1000 },
+        { [`Nixie (6${i18n.t('tubes')})`]: 1000 },
+        { [`Nixie (8${i18n.t('tubes')})`]: 1000 }
+    ];
 
     let models: string[] = [];
     let consums: number[] = [];
@@ -90,14 +98,18 @@ export default function CardDisplayType(props: iDisplay) {
             models = numitron.map(d => Object.keys(d)[0]);
             consums = numitron.map(d => Object.values(d)[0]);
             break;
-        //case 5: 
-        //    models = matrix.map(d => Object.keys(d)[0]);
-        //    consums = matrix.map(d => Object.values(d)[0]);
-        //    break;
-        //case 6: 
-        //    models = nixie.map(d => Object.keys(d)[0]);
-        //    consums = nixie.map(d => Object.values(d)[0]);
-        //    break;
+        case 5: 
+            models = vfd.map(d => Object.keys(d)[0]);
+            consums = vfd.map(d => Object.values(d)[0]);
+            break;
+        case 6: 
+            models = nixie.map(d => Object.keys(d)[0]);
+            consums = nixie.map(d => Object.values(d)[0]);
+            break;
+        case 7: 
+            models = matrix.map(d => Object.keys(d)[0]);
+            consums = matrix.map(d => Object.values(d)[0]);
+            break;
         default:
             models = [];
             consums = [];

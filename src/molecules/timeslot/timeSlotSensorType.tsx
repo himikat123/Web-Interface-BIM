@@ -82,6 +82,15 @@ export default function TimeSlotSensorType(props: iDisplayTimeSlot) {
             ],
             [ // type: Numitron
                 [0, 1, 1, 1, 1], [0, 0, 0, 1, 1], [0, 0, 0, 0, 0]
+            ],
+            [ // type: VFD
+                [0, 1, 1, 1, 1], [0, 0, 0, 1, 1], [0, 0, 0, 0, 0]
+            ],
+            [ // type: Nixie
+                [0, 1, 1, 1, 1], [0, 0, 0, 1, 1], [0, 0, 0, 0, 0]
+            ],
+            [ // type: Matrix
+                [0, 1, 1, 1, 1], [0, 0, 0, 1, 1], [0, 0, 0, 0, 0]
             ]
         ],
         [ /* date */ [], [],
@@ -92,6 +101,15 @@ export default function TimeSlotSensorType(props: iDisplayTimeSlot) {
                 [0, 1, 1], [0, 0, 1], [0, 1, 1], [0, 0, 1], [0, 0, 0]
             ],
             [ // type: Numitron
+                [0, 1, 1], [0, 0, 1], [0, 0, 0]
+            ],
+            [ // type: VFD
+                [0, 1, 1], [0, 0, 1], [0, 0, 0]
+            ],
+            [ // type: Nixie
+                [0, 1, 1], [0, 0, 1], [0, 0, 0]
+            ],
+            [ // type: Matrix
                 [0, 1, 1], [0, 0, 1], [0, 0, 0]
             ]
         ]
