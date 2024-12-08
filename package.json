@@ -14,7 +14,7 @@
     "classnames": "^2.5.1",
     "concurrently": "^8.2.2",
     "cors": "^2.8.5",
-    "express": "^4.19.2",
+   ess": "^4.19.2",
     "humanize-duration": "^3.32.1",
     "i18n-js": "^4.4.3",
     "js-sha512": "^0.9.0",
