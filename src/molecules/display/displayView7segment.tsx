@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import slotTick from '../../atoms/slotTick';
 import SegDoubleDigit from '../../atoms/canvas/segDoubleDigit';
+import displayLength from '../../atoms/segmentsDisplay/displayLength';
 import { iSegState } from '../../interfaces';
 import { iConfig } from "../../redux/configTypes";
 
@@ -33,16 +34,8 @@ export default function DisplayView7segment(props: {num: number}) {
         return () => clearInterval(int);
     }, [props.num, state]);
 
-    const bottomDots = dType === 3 && dModel > 1;
-    const displayLength = dType === 2
-        ? dModel < 3
-            ? 4
-            : 6
-        : (dModel === 0 || dModel === 2)
-            ? 4
-            : (dModel === 1 || dModel === 3)
-                ? 6
-                : 8;
+    const bottomDots = dType === 3 && dModel > 0;
+    const dispLength = displayLength(props.num);
 
     return <div className='h-full flex items-center'> 
         <div className='w-full mx-auto mt-4 p-2 bg-gray-400 dark:bg-gray-600 max-w-fit'>
@@ -59,13 +52,13 @@ export default function DisplayView7segment(props: {num: number}) {
                     withDoubleDots={dType === 2 ? dModel > 2 : dModel === 1}
                     bottomDots={bottomDots}
                 />
-                {displayLength > 4 && <SegDoubleDigit shift={4}
+                {dispLength > 4 && <SegDoubleDigit shift={4}
                     segments={state.segments}
                     colors={dType === 2 ? state.colors : dModel < 2 ? colorsTM1637 : colorsMAX7219}
                     withDoubleDots={false}
                     bottomDots={bottomDots}
                 />}
-                {displayLength > 6 && <SegDoubleDigit shift={6}
+                {dispLength > 6 && <SegDoubleDigit shift={6}
                     segments={state.segments}
                     colors={dType === 2 ? state.colors : dModel < 2 ? colorsTM1637 : colorsMAX7219}
                     withDoubleDots={false}

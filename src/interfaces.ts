@@ -528,3 +528,10 @@ export interface iSegDoubleDigit {
     withDoubleDots: boolean,
     bottomDots: boolean
 }
+
+export interface iNumitron {
+    num: number,
+    symb: number,
+    dot: boolean,
+    color: string
+}

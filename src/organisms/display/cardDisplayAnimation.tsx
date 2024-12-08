@@ -11,6 +11,7 @@ import * as cf from "../../redux/slices/config";
 export default function CardDisplayAnimation(props: iDisplay) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
+    const type = config.display.type[props.num];
     const animations = [
         '--',
         i18n.t('toTheRight'), 
@@ -21,15 +22,11 @@ export default function CardDisplayAnimation(props: iDisplay) {
         i18n.t('layeringFromTheRight'),
         i18n.t('layeringFromTheLeft')
     ];
-    const clockPoints = [
-        i18n.t('blinkTogether'),
-        i18n.t('blinkInTurn'),
-        i18n.t('pointsAlwaysOn'),
-        i18n.t('pointsAlwaysOff'),
-    ];
-    const pointsDisabled = [
-        [], [0,0,0,0], [0,1,0,0]
-    ];
+    const clockPoints = [];
+    clockPoints.push(i18n.t(type === 2 ? 'blinkTogether' : 'blink'));
+    clockPoints.push(i18n.t(type === 2 ? 'blinkInTurn' : 'pendulum'));
+    clockPoints.push(i18n.t('pointsAlwaysOn'));
+    clockPoints.push(i18n.t('pointsAlwaysOff'));
 
     const sendAnimationType = (val: number) => {
         let url = `${hostUrl()}/esp/animation`;
@@ -56,7 +53,7 @@ export default function CardDisplayAnimation(props: iDisplay) {
     }
 
     return <>
-        {config.display.type[props.num] + props.num >= 2 ? <Card content={<>
+        {type + props.num >= 2 ? <Card content={<>
             <SelectSwitch label={i18n.t('animation')}
                 options={animations}
                 value={config.display.animation.type[props.num]}
@@ -81,7 +78,7 @@ export default function CardDisplayAnimation(props: iDisplay) {
                 className="mt-4"
             />
 
-            {config.display.type[props.num] + props.num < 5 && <div className="mt-12">
+            <div className="mt-12">
                 <SelectSwitch label={i18n.t('clockPoints')}
                     options={clockPoints}
                     value={config.display.animation.points[props.num]}
@@ -89,9 +86,9 @@ export default function CardDisplayAnimation(props: iDisplay) {
                         dispatch(cf.displayAnimationPointsChange({num: props.num, val: val}));
                         sendAnimationPoints(val);
                     }}
-                    disabled={pointsDisabled[config.display.type[props.num]]}
+                    disabled={(type === 3 && config.display.model[props.num] === 0) ? [0, 1, 0, 0] : []}
                 />
-            </div>}
+            </div>
         </>} /> : <Card className="invisible lg:visible" content={<></>} />}
     </>
 }

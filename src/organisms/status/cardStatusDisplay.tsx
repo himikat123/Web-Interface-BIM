@@ -6,6 +6,7 @@ import { iConfig } from "../../redux/configTypes";
 import { iDisplay } from '../../interfaces';
 import DisplayViewLCD from '../../molecules/display/displayViewLCD';
 import DisplayView7segment from '../../molecules/display/displayView7segment';
+import DisplayView7SegmentTubes from '../../molecules/display/DisplayView7SegmentTubes';
 
 export default function CardStatusDisplay(props: iDisplay) {
     const config = useSelector((state: iConfig) => state.config);
@@ -30,14 +31,17 @@ export default function CardStatusDisplay(props: iDisplay) {
                     case 1: return <DisplayViewLCD />;
                     case 2: return <DisplayView7segment num={0} />;
                     case 3: return <DisplayView7segment num={0} />;
+                    case 4: return <DisplayView7SegmentTubes num={0} type="numitron" />;
+                    case 5: return <DisplayView7SegmentTubes num={0} type="vfd" />;
                     default: return <></>;
                 }
             }
             case 1: { /* Display 2 */
                 switch(config.display.type[props.num]) {
-                    case 1: return <></>;
                     case 2: return <DisplayView7segment num={1} />;
                     case 3: return <DisplayView7segment num={1} />;
+                    case 4: return <DisplayView7SegmentTubes num={1} type="numitron" />;
+                    case 5: return <DisplayView7SegmentTubes num={1} type="vfd" />;
                     default: return <></>;
                 }
             }

@@ -2,6 +2,7 @@ import store from '../../redux/store';
 import segGetData from "./segGetData";
 import segSymbCodes from './segSymbCodes';
 import { frames, shifts } from './segAnimationsShifts';
+import displayLength from './displayLength';
 import { iSegState } from '../../interfaces';
  
 export default function segAnimations(dispNum: number, state: iSegState) {
@@ -15,17 +16,8 @@ export default function segAnimations(dispNum: number, state: iSegState) {
     let animIsRunnung = true;
     const millis = Date.now();
     const type = config.display.animation.type[dispNum];
-    const dModel = config.display.model[dispNum];
-    const displayLength = config.display.type[dispNum] === 2
-        ? dModel < 3
-            ? 0
-            : 1
-        : (dModel === 0 || dModel === 2)
-            ? 0
-            : (dModel === 1 || dModel === 3)
-                ? 1
-                : 2;
-    const shift = shifts[displayLength][type][state.animSlot];
+    const dispLength = displayLength(dispNum, 0);
+    const shift = shifts[dispLength][type][state.animSlot];
 
     const getImg = (n: number) => {
         const shf = Math.abs(shift[n]) - 1;
@@ -36,7 +28,7 @@ export default function segAnimations(dispNum: number, state: iSegState) {
                 : segData.dispImg[shf]
     }
     const getColor = (n: number) => {
-        return shift[n] < 0 ? prevColor : color;
+        return shift[n] === 0 ? '#222' : shift[n] < 0 ? prevColor : color;
     }
 
     for(let i=0; i<8; i++) {
@@ -46,10 +38,10 @@ export default function segAnimations(dispNum: number, state: iSegState) {
 
     if(millis - state.animMillis > 1000 / config.display.animation.speed[dispNum]) {
         state.animMillis = millis;
-        if(state.animSlot < frames[displayLength][type] - 1) state.animSlot++;
+        if(state.animSlot < frames[dispLength][type] - 1) state.animSlot++;
     }
 
-    if(state.animSlot >= frames[displayLength][type] - 1) animIsRunnung = false;
+    if(state.animSlot >= frames[dispLength][type] - 1) animIsRunnung = false;
 
     return {
         dispImg: dispImg,

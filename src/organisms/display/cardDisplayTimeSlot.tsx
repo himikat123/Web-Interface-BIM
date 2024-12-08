@@ -24,7 +24,7 @@ export default function CardDisplayTimeSlot(props: iDisplayTimeSlot) {
             
             {config.display.timeSlot.period[props.slot][props.num] > 0 && <>
                 {/* Color */}
-                {config.display.type[props.num] === 2 && <div className="mt-8">
+                {(config.display.type[props.num] === 2 || config.display.type[props.num] >= 4) && <div className="mt-8">
                     <TimeSlotColor slot={props.slot} num={props.num} />
                 </div>}
 

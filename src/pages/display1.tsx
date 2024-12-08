@@ -21,6 +21,7 @@ import { iConfig } from "../redux/configTypes";
 export default function Display1() {
     const config = useSelector((state: iConfig) => state.config);
 
+    /********* BIM ESP8266 **********/
     const row1_3 = <>
         <CardDisplayBrightness num={0} />
         <CardDisplayTemperatureIn />
@@ -39,6 +40,7 @@ export default function Display1() {
         <CardDisplayPressureOut />
     </>
 
+    /************ BIM32 ************/
     const row1_4 = <>
         <CardDisplayType num={0} />
         <CardDisplayBrightness num={0} />
