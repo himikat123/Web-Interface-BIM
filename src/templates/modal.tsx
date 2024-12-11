@@ -28,10 +28,7 @@ export default function Modal(props: iModal) {
             <div className="flex flex-col sm:flex-row justify-center w-full p-4">
                 {props.labelConfirm && <Button className="bg-red-600 hover:bg-red-700 text-text_dark"
                     label={props.labelConfirm}
-                    onClick={() => {
-                        props.modalClose();
-                        props.confirmBtn();
-                    }}
+                    onClick={() => props.confirmBtn()}
                 />}
 
                 <Button className="bg-gray-500 hover:bg-gray-700 text-text_dark"

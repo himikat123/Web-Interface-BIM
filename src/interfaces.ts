@@ -181,7 +181,7 @@ export interface iButton {
 export interface iModal {
     header?: string,
     content: React.ReactNode,
-    labelConfirm?: string,
+    labelConfirm?: string | React.ReactNode,
     labelCancel: string,
     modalClose(): void,
     confirmBtn(): void

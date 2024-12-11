@@ -62,6 +62,7 @@
     "name": "Name",
     "leaveTheNameBlankToNotDisplayThisTimeslot": "Leave the name blank to not display this timeslot",
     "listOfAvailableNetworks": "List of available networks",
+    "refresh": "Refresh",
     "connectionOptions": "Connection options",
     "connectionType": "Connection type",
     "dynamicIp": "Dynamic IP",

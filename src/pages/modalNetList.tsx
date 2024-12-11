@@ -1,10 +1,15 @@
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import Modal from "../templates/modal";
+import hostUrl from '../atoms/hostUrl';
+import axios from 'axios';
 import i18n from "../i18n/main";
 import { iData } from "../redux/dataTypes";
 import { iModalNetList } from "../interfaces";
+import { ReactComponent as SpinnerSVG } from '../atoms/icons/spinner.svg';
 
 export default function ModalNetList(props: iModalNetList) {
+    const [updState, setUpdState] = useState<boolean>(false);
     let ssids = Object.values(useSelector((state: iData) => state.data.ssids)).sort(function(a, b) {
         return a[1] - b[1];
     });
@@ -33,10 +38,28 @@ export default function ModalNetList(props: iModalNetList) {
         })}
     </div>;
 
+    function refresh() {
+        setUpdState(true);
+        axios(`${hostUrl()}/esp/netlist?code=${localStorage.getItem('code') || '0'}`)
+        .then(() => {
+            setUpdState(false);
+        })
+        .catch(err => {
+            setUpdState(false);
+            console.error(err);
+        });
+    }
+
     return <Modal header={i18n.t('listOfAvailableNetworks')}
-        confirmBtn={() => {}}
+        confirmBtn={() => refresh()}
         modalClose={() => props.modalClose()}
         content={list}
+        labelConfirm={<div className='flex items-center'>
+            {i18n.t('refresh')} 
+            {updState && <div className='w-4 ms-2'>
+                <SpinnerSVG />
+            </div>}
+        </div>}
         labelCancel={i18n.t('close')}
     />
 }

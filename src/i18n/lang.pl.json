@@ -62,6 +62,7 @@
     "name": "Nazwa",
     "leaveTheNameBlankToNotDisplayThisTimeslot": "Zostaw pole nazwy puste, aby nie wyświetlać tego przedziału czasu",
     "listOfAvailableNetworks": "Lista dostępnych sieci",
+    "refresh": "Aktualizacja",
     "connectionOptions": "Opcje połączenia",
     "connectionType": "Typ połączenia",
     "dynamicIp": "Dynamiczne IP",

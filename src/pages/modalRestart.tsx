@@ -12,7 +12,7 @@ export default function ModalRestart(props: iModalRestart) {
     }
 
     return <Modal header={i18n.t('confirmation')}
-        confirmBtn={() => handleRestart()}
+        confirmBtn={() => {handleRestart(); props.modalClose()}}
         modalClose={() => props.modalClose()}
         content={i18n.t('restartConfirmation')}
         labelConfirm={i18n.t('restart')}

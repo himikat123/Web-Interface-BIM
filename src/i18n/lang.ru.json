@@ -62,6 +62,7 @@
     "name": "Имя",
     "leaveTheNameBlankToNotDisplayThisTimeslot": "Оставьте имя пустым, чтоб не отображать данный временной слот",
     "listOfAvailableNetworks": "Список доступных сетей",
+    "refresh": "Обновить",
     "connectionOptions": "Параметры соединения",
     "connectionType": "Тип соединения",
     "dynamicIp": "Динамический IP",

@@ -62,6 +62,7 @@
     "name": "Ім'я",
     "leaveTheNameBlankToNotDisplayThisTimeslot": "Залиште ім'я порожнім, щоб не відображати цей часовий слот",
     "listOfAvailableNetworks": "Список доступних мереж",
+    "refresh": "Оновити",
     "connectionOptions": "Параметри з'єднання",
     "connectionType": "Тип з'єднання",
     "dynamicIp": "Динамічний IP",

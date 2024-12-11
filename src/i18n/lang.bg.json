@@ -62,6 +62,7 @@
     "name": "Име",
     "leaveTheNameBlankToNotDisplayThisTimeslot": "Оставете името празно, за да не се показва този времеви интервал",
     "listOfAvailableNetworks": "Списък на наличните мрежи",
+    "refresh": "Актуализация",
     "connectionOptions": "Параметри на връзката",
     "connectionType": "Тип връзка",
     "dynamicIp": "Динамичен IP",

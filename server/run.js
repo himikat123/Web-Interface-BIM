@@ -260,6 +260,13 @@ app.get('/esp/animation', (req, res) => {
     res.send("OK");
 });
 
+app.get('/netlist', (req, res) => {
+    setTimeout(() => {
+        res.set('Access-Control-Allow-Origin', '*');
+        res.send("OK");
+    }, 8000);
+});
+
 app.listen(80, () => {
     console.log('listening on port 80')
 });
