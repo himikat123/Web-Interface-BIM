@@ -9,7 +9,7 @@ export default function OneColumn(props: iColumnsTemplate) {
 
         <>{props.content.map((c: React.ReactNode, i: number) => {
             return <div key={"cl" + i} className={(props.navbar ? "pt-16 " : "") + "flex flex-col items-center flex-grow"}>
-                {props.header[i] && <h1 className="text-2xl mt-8 mb-4">{props.header[i]}</h1>}
+                {props.header[i] && <h1 className="text-2xl mt-8 mb-4 whitespace-nowrap">{props.header[i]}</h1>}
 
                 <div className={(props.full ? "max-w-7xl" : "max-w-xl") + " w-full grid grid-cols-1 gap-4 p-4"}>
                     {props.content[i]}
