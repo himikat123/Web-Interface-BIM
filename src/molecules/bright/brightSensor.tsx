@@ -32,9 +32,9 @@ export default function BrightSensor(props: iDisplay) {
     brightness = Math.round(brightness);
 
     const lightSensors = [
-        `${i18n.t('analogInput')} (${analogData ? (analogData.toFixed(2) + i18n.t('units.v')) : '--'})`,
-        `MAX44009 (${max44009Data ? (max44009Data.toFixed(2) + i18n.t('units.lux')) : '--'})`,
-        `BH1750 (${bh1750Data ? (bh1750Data.toFixed(2) + i18n.t('units.lux')) : '--'})`
+        `${i18n.t('analogInput')} (${analogData !== null ? (analogData.toFixed(2) + i18n.t('units.v')) : '--'})`,
+        `MAX44009 (${max44009Data !== null ? (max44009Data.toFixed(2) + i18n.t('units.lux')) : '--'})`,
+        `BH1750 (${bh1750Data !== null ? (bh1750Data.toFixed(2) + i18n.t('units.lux')) : '--'})`
     ];
 
     const sendSensitivity = (bright: number) => {

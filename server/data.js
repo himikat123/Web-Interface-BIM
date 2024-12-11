@@ -105,7 +105,7 @@ const data = (cookieCode) => {
             light: random(-120, -150) // obviously incorrect values
         },
         analog: {
-            volt: random(1, 2)
+            volt: random(0, 2)
         },
         wsensor: {
             time: [
