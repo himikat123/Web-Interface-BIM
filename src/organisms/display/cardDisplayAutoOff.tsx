@@ -16,7 +16,7 @@ export default function CardDisplayAutoOff(props: iDisplay) {
     const config = useSelector((state: iConfig) => state.config);
 
     return <>
-        {config.display.type ? (config.display.type[props.num] > 0) : 0 ? <Card content={<>
+        {(config.display.type ? (config.display.type[props.num] > 0) : 0) ? <Card content={<>
             <NumberInput value={config.display.autoOff ? config.display.autoOff[props.num] : 0}
                 min={0}
                 max={1440}

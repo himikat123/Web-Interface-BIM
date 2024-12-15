@@ -27,7 +27,7 @@ export default function CardDisplayBrightness(props: iDisplay) {
         : config.display.brightMethod;
 
     return <>
-        {config.display.type ? config.display.type[props.num] > 0 : true 
+        {(config.display.type ? config.display.type[props.num] > 0 : true) 
             ? <Card header={device() === 'WeatherMonitorBIM' ? i18n.t('displayBrightness') : ''}
                 content={ <>
                     <SelectSwitch label={i18n.t('displayBrightness')}
