@@ -16,7 +16,7 @@ export default function ComfortIaqSource() {
 
     return <SelectSwitch label={i18n.t('dataSource.singular')}
         options={sensors}
-        value={config.comfort.iaq.source}
+        value={config.comfort.iaq?.source ?? 0}
         onChange={val => dispatch(cf.comfortIaqSourceChange(val))}
     />
 }

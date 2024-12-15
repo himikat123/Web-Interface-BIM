@@ -1,3 +1,4 @@
+import device from '../../device';
 import { createSlice } from '@reduxjs/toolkit';
 
 export const configSlice = createSlice({
@@ -7,30 +8,51 @@ export const configSlice = createSlice({
         comfort: {
             temp: {
                 source: 0,
-                wsensNum: 0,
-                sens: 0,
                 thing: 0,
-                min: [0, 0],
-                max: [0, 0],
-                sound: 0
+                ...(device() === 'WeatherMonitorBIM' 
+                    ? { 
+                        min: 0,
+                        max: 0
+                    } 
+                    : {
+                        min: [0, 0],
+                        max: [0, 0],
+                        wsensNum: 0,
+                        sens: 0,
+                        sound: 0
+                    }
+                )
             },
             hum: {
                 source: 0,
-                wsensNum: 0,
                 thing: 0,
-                min: [0, 0],
-                max: [0, 0],
-                sound: 0
+                ...(device() === 'WeatherMonitorBIM' 
+                    ? {
+                        min: 0,
+                        max: 0
+                    }
+                    : {
+                        min: [0, 0],
+                        max: [0, 0],
+                        wsensNum: 0,
+                        sound: 0
+                    } 
+                )
             },
-            iaq: {
-                source: 0,
-                sound: 0
-            },
-            co2: {
-                source: 0,
-                wsensNum: 0,
-                sound: 0
-            }
+            ...(device() === 'WeatherMonitorBIM'
+                ? {} 
+                : {
+                    iaq: {
+                        source: 0,
+                        sound: 0
+                    },
+                    co2: {
+                        source: 0,
+                        wsensNum: 0,
+                        sound: 0
+                    }
+                }
+            ),
         },
         network: {
             ssid: ["", "", ""],
@@ -42,7 +64,7 @@ export const configSlice = createSlice({
             dns2: "",
             type: 0
         },
-        accessPoint:{
+        accessPoint: {
             ssid: "",
             pass: "",
             chnl: 0,
@@ -56,8 +78,7 @@ export const configSlice = createSlice({
             lat: 0,
             lon: 0,
             provider: 0,
-            citysearch: 0,
-            parsingServer: ""
+            citysearch: 0
         },
         lang: "en",
         clock: {
@@ -68,93 +89,115 @@ export const configSlice = createSlice({
             ntp_period: 0
         },
         display: {
-            type: [0, 0],
+            ...(device() === 'WeatherMonitorBIM32'
+                ? {
+                    type: [0, 0],
+                    order: [[1, 2, 3, 4, 5, 6, 7, 8], [1, 2, 3, 4, 5, 6, 7, 8]],
+                    autoOff: [0, 0],
+                    nightOff: {
+                        need: [0, 0],
+                        from: [0, 0],
+                        to: [0, 0]
+                    },
+                    animation: {
+                        type: [0, 0],
+                        speed: [0, 0],
+                        points: [0, 0]
+                    },
+                    timeSlot: {
+                        period: [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]],
+                        sensor: [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]],
+                        data: [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]],
+                        thing: [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]],
+                        wsensor: {
+                            num: [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]],
+                            type: [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
+                        },
+                        color: [["", ""], ["", ""], ["", ""], ["", ""], ["", ""], ["", ""], ["", ""], ["", ""]]
+                    }
+                }
+                : {}
+            ),
             model: [0, 0],
-            order: [[1, 2, 3, 4, 5, 6, 7, 8], [1, 2, 3, 4, 5, 6, 7, 8]],
-            dayTime: ["", ""],
-            nightTime: ["", ""],
-            brightMethod: [0, 0],
-            autoOff: [0, 0],
-            nightOff: {
-                need: [0, 0],
-                from: [0, 0],
-                to: [0, 0]
-            },
-            brightness: {
-                day: [0, 0],
-                night: [0, 0],
-                min: [0, 0],
-                max: [0, 0]
-            },
-            lightSensor: [0, 0],
-            sensitivity: [0, 0],
-            animation: {
-                type: [0, 0],
-                speed: [0, 0],
-                points: [0, 0]
-            },
+            ...(device() === 'WeatherMonitorBIM' ? { dayTime: "" } : { dayTime: ["", ""] }),
+            ...(device() === 'WeatherMonitorBIM' ? { nightTime: "" } : { nightTime: ["", ""] }),
+            ...(device() === 'WeatherMonitorBIM' ? { brightMethod: 0 } : { brightMethod: [0, 0] }),
+            ...(device() === 'WeatherMonitorBIM'
+                ? { 
+                    brightness: {
+                        day: 0,
+                        night: 0,
+                        min: 0,
+                        max: 0
+                    }
+                }
+                : { 
+                    brightness: {
+                        day: [0, 0],
+                        night: [0, 0],
+                        min: [0, 0],
+                        max: [0, 0]
+                    }
+                }
+            ),
+            ...(device() === 'WeatherMonitorBIM' ? { lightSensor: 0 } : { lightSensor: [0, 0] }),
+            ...(device() === 'WeatherMonitorBIM' ? { sensitivity: 0 } : { sensitivity: [0, 0] }),
             source: {
                 tempOut: {
                     sens: 0,
-                    wsensNum: 0,
-                    temp: 0,
+                    ...(device() === 'WeatherMonitorBIM32' ? { wsensNum: 0 } : {}),
+                    ...(device() === 'WeatherMonitorBIM32' ? { temp: 0 } : {}),
                     thing: 0
                 },
                 humOut: {
                     sens: 0,
-                    wsensNum: 0,
+                    ...(device() === 'WeatherMonitorBIM32' ? { wsensNum: 0 } : {}),
                     thing: 0
                 },
                 presOut: {
                     sens: 0,
-                    wsensNum: 0,
+                    ...(device() === 'WeatherMonitorBIM32' ? { wsensNum: 0 } : {}),
                     thing: 0
                 },
                 tempIn: {
                     sens: 0,
-                    wsensNum: 0,
-                    temp: 0,
+                    ...(device() === 'WeatherMonitorBIM32' ? { wsensNum: 0 } : {}),
+                    ...(device() === 'WeatherMonitorBIM32' ? { temp: 0 } : {}),
                     thing: 0
                 },
                 humIn: {
                     sens: 0,
-                    wsensNum: 0,
+                    ...(device() === 'WeatherMonitorBIM32' ? { wsensNum: 0 } : {}),
                     thing: 0
                 },
                 volt: {
                     sens: 0,
-                    wsensNum: 0,
-                    volt: 0,
+                    ...(device() === 'WeatherMonitorBIM32' ? { wsensNum: 0 } : {}),
+                    ...(device() === 'WeatherMonitorBIM32' ? { volt: 0 } : {}),
                     thing: 0,
                     thingType: 0
                 },
                 bat: {
                     sens: 0,
-                    wsensNum: 0,
+                    ...(device() === 'WeatherMonitorBIM32' ? { wsensNum: 0 } : {}),
                     thing: 0
                 },
                 descr: 0,
-                sequence: {
-                    name: ["", "", "", ""],
-                    temp: [0, 0, 0, 0],
-                    thngtemp: [0, 0, 0, 0],
-                    wsenstemp: [[0, 0], [0, 0], [0, 0], [0, 0]],
-                    hum: [0, 0, 0, 0],
-                    thnghum: [0, 0, 0, 0],
-                    wsenshum: [0, 0, 0, 0],
-                    dur: 5
-                }
-            },
-            timeSlot: {
-                period: [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]],
-                sensor: [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]],
-                data: [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]],
-                thing: [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]],
-                wsensor: {
-                    num: [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]],
-                    type: [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
-                },
-                color: [["", ""], ["", ""], ["", ""], ["", ""], ["", ""], ["", ""], ["", ""], ["", ""]]
+                ...(device() === 'WeatherMonitorBIM32' 
+                    ? { 
+                        sequence: {
+                            name: ["", "", "", ""],
+                            temp: [0, 0, 0, 0],
+                            thngtemp: [0, 0, 0, 0],
+                            wsenstemp: [[0, 0], [0, 0], [0, 0], [0, 0]],
+                            hum: [0, 0, 0, 0],
+                            thnghum: [0, 0, 0, 0],
+                            wsenshum: [0, 0, 0, 0],
+                            dur: 5
+                        } 
+                    } 
+                    : {}
+                )
             }
         },
         sound: {
@@ -303,23 +346,55 @@ export const configSlice = createSlice({
         setConfigState: (state, action) => { Object.assign(state, action.payload) },
 
         comfortTempSourceChange: (state, action) => { state.comfort.temp.source = action.payload },
-        comfortTempWsensNumChange: (state, action) => { state.comfort.temp.wsensNum = action.payload },
-        comfortTempSensChange: (state, action) => { state.comfort.temp.sens = action.payload },
+        comfortTempWsensNumChange: (state, action) => { 
+            if('wsensNum' in state.comfort.temp) state.comfort.temp.wsensNum = action.payload 
+        },
+        comfortTempSensChange: (state, action) => { 
+            if('sens' in state.comfort.temp) state.comfort.temp.sens = action.payload 
+        },
         comfortTempThingChange: (state, action) => { state.comfort.temp.thing = action.payload },
-        comfortTempMinChange: (state, action) => { state.comfort.temp.min[action.payload.num] = action.payload.val },
-        comfortTempMaxChange: (state, action) => { state.comfort.temp.max[action.payload.num] = action.payload.val },
-        comfortTempSoundChange: (state, action) => { state.comfort.temp.sound = action.payload },
+        comfortTempMinChange: (state, action) => { Array.isArray(state.comfort.temp.min) 
+            ? state.comfort.temp.min[action.payload.num] = action.payload.val
+            : state.comfort.temp.min = action.payload.val 
+        },
+        comfortTempMaxChange: (state, action) => { Array.isArray(state.comfort.temp.max)
+            ? state.comfort.temp.max[action.payload.num] = action.payload.val
+            : state.comfort.temp.max = action.payload.val
+        },
+        comfortTempSoundChange: (state, action) => { 
+            if('sound' in state.comfort.temp) state.comfort.temp.sound = action.payload 
+        },
         comfortHumSourceChange: (state, action) => { state.comfort.hum.source = action.payload },
-        comfortHumWsensNumChange: (state, action) => { state.comfort.hum.wsensNum = action.payload },
+        comfortHumWsensNumChange: (state, action) => { 
+            if('wsensNum' in state.comfort.hum) state.comfort.hum.wsensNum = action.payload 
+        },
         comfortHumThingChange: (state, action) => { state.comfort.hum.thing = action.payload },
-        comfortHumMinChange: (state, action) => { state.comfort.hum.min[action.payload.num] = action.payload.val },
-        comfortHumMaxChange: (state, action) => { state.comfort.hum.max[action.payload.num] = action.payload.val },
-        comfortHumSoundChange: (state, action) => { state.comfort.hum.sound = action.payload },
-        comfortIaqSourceChange: (state, action) => { state.comfort.iaq.source = action.payload },
-        comfortIaqSoundChange: (state, action) => { state.comfort.iaq.sound = action.payload },
-        comfortCo2SourceChange: (state, action) => { state.comfort.co2.source = action.payload },
-        comfortCo2WsensNumChange: (state, action) => { state.comfort.co2.wsensNum = action.payload },
-        comfortCo2SoundChange: (state, action) => { state.comfort.co2.sound = action.payload },
+        comfortHumMinChange: (state, action) => { Array.isArray(state.comfort.hum.min) 
+            ? state.comfort.hum.min[action.payload.num] = action.payload.val
+            : state.comfort.hum.min = action.payload.val
+        },
+        comfortHumMaxChange: (state, action) => { Array.isArray(state.comfort.hum.max) 
+            ? state.comfort.hum.max[action.payload.num] = action.payload.val 
+            : state.comfort.hum.max = action.payload.val
+        },
+        comfortHumSoundChange: (state, action) => { 
+            if('sound' in state.comfort.hum) state.comfort.hum.sound = action.payload 
+        },
+        comfortIaqSourceChange: (state, action) => { 
+            if(state.comfort.iaq) state.comfort.iaq.source = action.payload
+        },
+        comfortIaqSoundChange: (state, action) => { 
+            if(state.comfort.iaq) state.comfort.iaq.sound = action.payload 
+        },
+        comfortCo2SourceChange: (state, action) => {
+            if(state.comfort.co2) state.comfort.co2.source = action.payload 
+        },
+        comfortCo2WsensNumChange: (state, action) => { 
+            if(state.comfort.co2) state.comfort.co2.wsensNum = action.payload 
+        },
+        comfortCo2SoundChange: (state, action) => { 
+            if(state.comfort.co2) state.comfort.co2.sound = action.payload 
+        },
 
         netSsidChange: (state, action) => { state.network.ssid[action.payload.num] = action.payload.val },
         netPassChange: (state, action) => { state.network.pass[action.payload.num] = action.payload.val },
@@ -343,7 +418,6 @@ export const configSlice = createSlice({
         weatherLonChange: (state, action) => { state.weather.lon = Number(action.payload.toFixed(6)) },
         weatherProwiderChange: (state, action) => { state.weather.provider = action.payload },
         weatherCitySearchChange: (state, action) => { state.weather.citysearch = action.payload },
-        weatherParsingServerChange: (state, action) => { state.weather.parsingServer = action.payload },
 
         languageSwitch: (state, action) => { state.lang = action.payload },
 
@@ -353,25 +427,73 @@ export const configSlice = createSlice({
         clockDlstChange: (state, action) => { state.clock.dlst = action.payload },
         clockNtpPeriodChange: (state, action) => { state.clock.ntp_period = action.payload },
 
-        displayTypeChange: (state, action) => { state.display.type[action.payload.num] = action.payload.val },
-        displayModelChange: (state, action) => { state.display.model[action.payload.num] = action.payload.val },
-        displayOrderChange: (state, action) => { state.display.order[action.payload.num][action.payload.dig] = action.payload.val },
-        displayDayTimeChange: (state, action) => { state.display.dayTime[action.payload.num] = action.payload.val },
-        displayNightTimeChange: (state, action) => { state.display.nightTime[action.payload.num] = action.payload.val },
-        displayBrightMethodChange: (state, action) => { state.display.brightMethod[action.payload.num] = action.payload.val },
-        displayAutoOffChange: (state, action) => { state.display.autoOff[action.payload.num] = action.payload.val },
-        displayNightOffNeedChange: (state, action) => { state.display.nightOff.need[action.payload.num] = action.payload.val },
-        displayNightOffFromChange: (state, action) => { state.display.nightOff.from[action.payload.num] = action.payload.val },
-        displayNightOffToChange: (state, action) => { state.display.nightOff.to[action.payload.num] = action.payload.val },
-        displayBrightDayChange: (state, action) => { state.display.brightness.day[action.payload.num] = action.payload.val },
-        displayBrightNightChange: (state, action) => { state.display.brightness.night[action.payload.num] = action.payload.val },
-        displayBrightMinChange: (state, action) => { state.display.brightness.min[action.payload.num] = action.payload.val },
-        displayBrightMaxChange: (state, action) => { state.display.brightness.max[action.payload.num] = action.payload.val },
-        displayLightSensorChange: (state, action) => { state.display.lightSensor[action.payload.num] = action.payload.val },
-        displaySensitivityChange: (state, action) => { state.display.sensitivity[action.payload.num] = action.payload.val },
-        displayAnimationTypeChange: (state, action) => { state.display.animation.type[action.payload.num] = action.payload.val },
-        displayAnimationSpeedChange: (state, action) => { state.display.animation.speed[action.payload.num] = action.payload.val },
-        displayAnimationPointsChange: (state, action) => { state.display.animation.points[action.payload.num] = action.payload.val },
+        displayTypeChange: (state, action) => { 
+            if(state.display.type) state.display.type[action.payload.num] = action.payload.val 
+        },
+        displayModelChange: (state, action) => {
+            if(!state.display.hasOwnProperty('model')) state.display.model = []; 
+            state.display.model[action.payload.num] = action.payload.val; 
+        },
+        displayOrderChange: (state, action) => { 
+            if(state.display.order) state.display.order[action.payload.num][action.payload.dig] = action.payload.val 
+        },
+        displayDayTimeChange: (state, action) => { Array.isArray(state.display.dayTime)
+            ? state.display.dayTime[action.payload.num] = action.payload.val
+            : state.display.dayTime = action.payload.val
+        },
+        displayNightTimeChange: (state, action) => { Array.isArray(state.display.nightTime)
+            ? state.display.nightTime[action.payload.num] = action.payload.val
+            : state.display.nightTime = action.payload.val
+        },
+        displayBrightMethodChange: (state, action) => { Array.isArray(state.display.brightMethod)
+            ? state.display.brightMethod[action.payload.num] = action.payload.val
+            : state.display.brightMethod = action.payload.val
+        },
+        displayAutoOffChange: (state, action) => { 
+            if(state.display.autoOff) state.display.autoOff[action.payload.num] = action.payload.val 
+        },
+        displayNightOffNeedChange: (state, action) => { 
+            if(state.display.nightOff) state.display.nightOff.need[action.payload.num] = action.payload.val 
+        },
+        displayNightOffFromChange: (state, action) => { 
+            if(state.display.nightOff) state.display.nightOff.from[action.payload.num] = action.payload.val 
+        },
+        displayNightOffToChange: (state, action) => { 
+            if(state.display.nightOff) state.display.nightOff.to[action.payload.num] = action.payload.val 
+        },
+        displayBrightDayChange: (state, action) => { Array.isArray(state.display.brightness.day)
+            ? state.display.brightness.day[action.payload.num] = action.payload.val
+            : state.display.brightness.day = action.payload.val
+        },
+        displayBrightNightChange: (state, action) => { Array.isArray(state.display.brightness.night)
+            ? state.display.brightness.night[action.payload.num] = action.payload.val
+            : state.display.brightness.night = action.payload.val
+        },
+        displayBrightMinChange: (state, action) => { Array.isArray(state.display.brightness.min)
+            ? state.display.brightness.min[action.payload.num] = action.payload.val
+            : state.display.brightness.min = action.payload.val 
+        },
+        displayBrightMaxChange: (state, action) => { Array.isArray(state.display.brightness.max)
+            ? state.display.brightness.max[action.payload.num] = action.payload.val
+            : state.display.brightness.max = action.payload.val
+        },
+        displayLightSensorChange: (state, action) => { Array.isArray(state.display.lightSensor)
+            ? state.display.lightSensor[action.payload.num] = action.payload.val
+            : state.display.lightSensor = action.payload.val
+        },
+        displaySensitivityChange: (state, action) => { Array.isArray(state.display.sensitivity) 
+            ? state.display.sensitivity[action.payload.num] = action.payload.val
+            : state.display.sensitivity = action.payload.val
+        },
+        displayAnimationTypeChange: (state, action) => { 
+            if(state.display.animation) state.display.animation.type[action.payload.num] = action.payload.val 
+        },
+        displayAnimationSpeedChange: (state, action) => { 
+            if(state.display.animation) state.display.animation.speed[action.payload.num] = action.payload.val 
+        },
+        displayAnimationPointsChange: (state, action) => { 
+            if(state.display.animation) state.display.animation.points[action.payload.num] = action.payload.val 
+        },
         displaySourceTempOutSensChange: (state, action) => { state.display.source.tempOut.sens = action.payload },
         displaySourceTempOutWsensNumChange: (state, action) => { state.display.source.tempOut.wsensNum = action.payload },
         displaySourceTempOutTempChange: (state, action) => { state.display.source.tempOut.temp = action.payload },
@@ -398,21 +520,51 @@ export const configSlice = createSlice({
         displaySourceBatWsensNumChange: (state, action) => { state.display.source.bat.wsensNum = action.payload },
         displaySourceBatThingChange: (state, action) => { state.display.source.bat.thing = action.payload },
         displaySourceDescrChange: (state, action) => { state.display.source.descr = action.payload },
-        displaySourceSequenceNameChange: (state, action) => { state.display.source.sequence.name[action.payload.num] = action.payload.val },
-        displaySourceSequenceTempChange: (state, action) => { state.display.source.sequence.temp[action.payload.num] = action.payload.val },
-        displaySourceSequenceThngTempChange: (state, action) => { state.display.source.sequence.thngtemp[action.payload.num] = action.payload.val },
-        displaySourceSequenceWsensTempChange: (state, action) => { state.display.source.sequence.wsenstemp[action.payload.num][action.payload.wsens] = action.payload.val },
-        displaySourceSequenceHumChange: (state, action) => { state.display.source.sequence.hum[action.payload.num] = action.payload.val },
-        displaySourceSequenceThngHumChange: (state, action) => { state.display.source.sequence.thnghum[action.payload.num] = action.payload.val },
-        displaySourceSequenceWsensHumChange: (state, action) => { state.display.source.sequence.wsenshum[action.payload.num] = action.payload.val },
-        displaySourceSequenceDurChange: (state, action) => { state.display.source.sequence.dur = action.payload },
-        displayTimeslotPeriodChange: (state, action) => { state.display.timeSlot.period[action.payload.slot][action.payload.num] = action.payload.val },
-        displayTimeslotSensorChange: (state, action) => { state.display.timeSlot.sensor[action.payload.slot][action.payload.num] = action.payload.val },
-        displayTimeslotDataChange: (state, action) => { state.display.timeSlot.data[action.payload.slot][action.payload.num] = action.payload.val },
-        displayTimeslotThingChange: (state, action) => { state.display.timeSlot.thing[action.payload.slot][action.payload.num] = action.payload.val },
-        displayTimeslotWsensorNumChange: (state, action) => { state.display.timeSlot.wsensor.num[action.payload.slot][action.payload.num] = action.payload.val },
-        displayTimeslotWsensorTypeChange: (state, action) => { state.display.timeSlot.wsensor.type[action.payload.slot][action.payload.num] = action.payload.val },
-        displayTimeslotColorChange: (state, action) => { state.display.timeSlot.color[action.payload.slot][action.payload.num] = action.payload.val },
+        displaySourceSequenceNameChange: (state, action) => { 
+            if(state.display.source.sequence) state.display.source.sequence.name[action.payload.num] = action.payload.val 
+        },
+        displaySourceSequenceTempChange: (state, action) => { 
+            if(state.display.source.sequence) state.display.source.sequence.temp[action.payload.num] = action.payload.val 
+        },
+        displaySourceSequenceThngTempChange: (state, action) => { 
+            if(state.display.source.sequence) state.display.source.sequence.thngtemp[action.payload.num] = action.payload.val 
+        },
+        displaySourceSequenceWsensTempChange: (state, action) => { 
+            if(state.display.source.sequence) state.display.source.sequence.wsenstemp[action.payload.num][action.payload.wsens] = action.payload.val 
+        },
+        displaySourceSequenceHumChange: (state, action) => { 
+            if(state.display.source.sequence) state.display.source.sequence.hum[action.payload.num] = action.payload.val 
+        },
+        displaySourceSequenceThngHumChange: (state, action) => { 
+            if(state.display.source.sequence) state.display.source.sequence.thnghum[action.payload.num] = action.payload.val 
+        },
+        displaySourceSequenceWsensHumChange: (state, action) => { 
+            if(state.display.source.sequence) state.display.source.sequence.wsenshum[action.payload.num] = action.payload.val 
+        },
+        displaySourceSequenceDurChange: (state, action) => { 
+            if(state.display.source.sequence) state.display.source.sequence.dur = action.payload 
+        },
+        displayTimeslotPeriodChange: (state, action) => { 
+            if(state.display.timeSlot) state.display.timeSlot.period[action.payload.slot][action.payload.num] = action.payload.val 
+        },
+        displayTimeslotSensorChange: (state, action) => { 
+            if(state.display.timeSlot) state.display.timeSlot.sensor[action.payload.slot][action.payload.num] = action.payload.val 
+        },
+        displayTimeslotDataChange: (state, action) => { 
+            if(state.display.timeSlot) state.display.timeSlot.data[action.payload.slot][action.payload.num] = action.payload.val 
+        },
+        displayTimeslotThingChange: (state, action) => { 
+            if(state.display.timeSlot) state.display.timeSlot.thing[action.payload.slot][action.payload.num] = action.payload.val 
+        },
+        displayTimeslotWsensorNumChange: (state, action) => { 
+            if(state.display.timeSlot) state.display.timeSlot.wsensor.num[action.payload.slot][action.payload.num] = action.payload.val 
+        },
+        displayTimeslotWsensorTypeChange: (state, action) => { 
+            if(state.display.timeSlot) state.display.timeSlot.wsensor.type[action.payload.slot][action.payload.num] = action.payload.val 
+        },
+        displayTimeslotColorChange: (state, action) => { 
+            if(state.display.timeSlot) state.display.timeSlot.color[action.payload.slot][action.payload.num] = action.payload.val 
+        },
 
         soundVolChange: (state, action) => { state.sound.vol = action.payload },
         soundEqChange: (state, action) => { state.sound.eq = action.payload },
@@ -518,7 +670,7 @@ export const {
     wSensHighVoltChange, wSensCurrentChange, wSensPowerChange, wSensEnergyChange, wSensFreqChange,
     wSensBatKChange, wSensBatTypeChange, wSensExpireChange, wSensChannelChange,
     weatherAppIdChange, weatherCityChange, weatherCityIdChange, weatherLatChange, 
-    weatherLonChange, weatherProwiderChange, weatherCitySearchChange, weatherParsingServerChange,
+    weatherLonChange, weatherProwiderChange, weatherCitySearchChange,
     clockFormatChange, clockNtpChange, clockUtcChange, clockDlstChange, clockNtpPeriodChange,
     displayTypeChange, displayModelChange, displayOrderChange, displayBrightMinChange, displayBrightMaxChange,
     displayBrightMethodChange, displayBrightDayChange, displayBrightNightChange, displayLightSensorChange, 

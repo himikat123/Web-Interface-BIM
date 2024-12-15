@@ -9,8 +9,8 @@ export default function segWsensor(dispNum: number, slot: number, dispModel: str
     const config = store.getState().config;
     const data = store.getState().data;
     let dispImg = [0, 0, 0, 0, 0, 0, 0, 0];
-    const wsensNum = config.display.timeSlot.wsensor.num[slot][dispNum];
-    const wsensType = config.display.timeSlot.wsensor.type[slot][dispNum];
+    const wsensNum = config.display.timeSlot ? config.display.timeSlot.wsensor.num[slot][dispNum] : 0;
+    const wsensType = config.display.timeSlot ? config.display.timeSlot.wsensor.type[slot][dispNum] : 0;
     const wsnsRelevant = WsensorDataRelevance(wsensNum);
 
     if(wsensType >= 0 && wsensType <= 4) dispImg = temp(wsnsRelevant ? data.wsensor.temp.data[wsensType][wsensNum] + config.wsensor.temp.corr[wsensNum][wsensType] : 4040, dispModel);

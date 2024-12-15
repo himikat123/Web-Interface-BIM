@@ -11,7 +11,7 @@ import * as cf from "../../redux/slices/config";
 export default function CardDisplayAnimation(props: iDisplay) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
-    const type = config.display.type[props.num];
+    const type = config.display.type ? config.display.type[props.num] : 0;
     const animations = [
         '--',
         i18n.t('toTheRight'), 
@@ -56,21 +56,21 @@ export default function CardDisplayAnimation(props: iDisplay) {
         {type + props.num >= 2 ? <Card content={<>
             <SelectSwitch label={i18n.t('animation')}
                 options={animations}
-                value={config.display.animation.type[props.num]}
+                value={config.display.animation ? config.display.animation.type[props.num] : 0}
                 onChange={val => {
                     dispatch(cf.displayAnimationTypeChange({num: props.num, val: val}));
                     sendAnimationType(val);
                 }}
             />
 
-            <RangeInput value={config.display.animation.speed[props.num]}
+            <RangeInput value={config.display.animation ? config.display.animation.speed[props.num] : 0}
                 label={i18n.t('animationSpeed')}
                 min={1}
                 max={30}
                 limitMin={1}
                 limitMax={30}
                 step={1}
-                indication={String(config.display.animation.speed[props.num])}
+                indication={String(config.display.animation ? config.display.animation.speed[props.num] : 0)}
                 onChange={val => {
                     dispatch(cf.displayAnimationSpeedChange({num: props.num, val: val}));
                     sendAnimationSpeed(val);
@@ -81,7 +81,7 @@ export default function CardDisplayAnimation(props: iDisplay) {
             <div className="mt-12">
                 <SelectSwitch label={i18n.t('clockPoints')}
                     options={clockPoints}
-                    value={config.display.animation.points[props.num]}
+                    value={config.display.animation ? config.display.animation.points[props.num] : 0}
                     onChange={val => {
                         dispatch(cf.displayAnimationPointsChange({num: props.num, val: val}));
                         sendAnimationPoints(val);

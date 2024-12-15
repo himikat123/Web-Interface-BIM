@@ -29,7 +29,7 @@ export default function DisplayDigitsReassignment(props: any) {
                                 {n + 1}
                             </span>}
                             {i > 0 && <input type="radio"
-                                checked={config.display.order[props.num][n] === i} 
+                                checked={config.display.order ? config.display.order[props.num][n] === i : false} 
                                 name={"digit" + n} 
                                 value={i}
                                 onChange={() => orderChange(n, i)}

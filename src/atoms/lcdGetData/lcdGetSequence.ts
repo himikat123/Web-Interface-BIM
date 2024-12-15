@@ -13,10 +13,10 @@ export default function lcdGetSequence(prevSequence: iSequence | undefined): iSe
         counter: prevSequence?.counter ?? 0
     }
 
-    if(sequence.counter <= (config.display.source.sequence.dur - 1) * 2) sequence.counter++;
+    if(sequence.counter <= ((config.display.source.sequence?.dur ?? 0) - 1) * 2) sequence.counter++;
     else {
         for(let i=0; i<4; i++) {
-            if(config.display.source.sequence.name[sequence.slot] === "") {
+            if(config.display.source.sequence?.name[sequence.slot] === "") {
                 if(sequence.slot < 3) sequence.slot++;
                 else sequence.slot = 0;
             }
@@ -25,7 +25,7 @@ export default function lcdGetSequence(prevSequence: iSequence | undefined): iSe
         sequence.counter = 0;
         sequence.temp = lcdGetTempSequence(sequence.slot);
         sequence.hum = lcdGetHumSequence(sequence.slot);
-        sequence.descript = config.display.source.sequence.name[sequence.slot];
+        sequence.descript = config.display.source.sequence?.name[sequence.slot] ?? '';
         if(sequence.slot < 3) sequence.slot++;
         else sequence.slot = 0;
     }

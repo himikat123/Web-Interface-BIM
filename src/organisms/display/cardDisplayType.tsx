@@ -81,7 +81,7 @@ export default function CardDisplayType(props: iDisplay) {
     let models: string[] = [];
     let consums: number[] = [];
 
-    switch(config.display.type[props.num]) {
+    switch(config.display.type ? config.display.type[props.num] : 0) {
         case 1: 
             models = lcd.map(d => Object.keys(d)[0]);
             consums = lcd.map(d => Object.values(d)[0]);
@@ -118,7 +118,7 @@ export default function CardDisplayType(props: iDisplay) {
     return <Card content={<>
         <SelectSwitch label={i18n.t('displayType')}
             options={types}
-            value={config.display.type[props.num]}
+            value={config.display.type ? config.display.type[props.num] : 0}
             onChange={val => {
                 dispatch(cf.displayTypeChange({num: props.num, val: val}));
                 dispatch(cf.displayModelChange({num: props.num, val: 0}));
@@ -141,7 +141,7 @@ export default function CardDisplayType(props: iDisplay) {
             />
         </div>}
 
-        {config.display.type[props.num] > 0 && <>
+        {config.display.type && config.display.type[props.num] > 0 && <>
             {config.display.type[props.num] <= 2 && <DisplayBrightLimit num={props.num} />}
 
             <div className="mt-4 text-xs">
@@ -150,7 +150,7 @@ export default function CardDisplayType(props: iDisplay) {
                     value={String(
                         config.display.type[props.num] === 2 
                             ? (Math.round(consums[config.display.model[props.num]] 
-                                * config.display.brightness.max[props.num] 
+                                * (config.display.brightness.max ? config.display.brightness.max[props.num] : 1) 
                                 / 255
                             ) + 1)
                             : consums[config.display.model[props.num]]

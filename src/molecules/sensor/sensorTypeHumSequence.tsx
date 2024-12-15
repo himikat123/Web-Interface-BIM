@@ -27,7 +27,7 @@ export default function SensorTypeHumSequence(props: iSensorTypeSequence) {
 
     return <SelectSwitch label={i18n.t('timeSlot') + ' ' + String(props.num + 1)}
         options={sensors}
-        value={config.display.source.sequence.hum[props.num]}
+        value={config.display.source.sequence ? config.display.source.sequence.hum[props.num] : 0}
         onChange={val => dispatch(cf.displaySourceSequenceHumChange({ num: props.num, val: val }))}
     />
 }

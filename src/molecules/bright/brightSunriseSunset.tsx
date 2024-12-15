@@ -18,15 +18,23 @@ export default function BrightSunriseSunset(props: iDisplay) {
         fetch(url);
     }
 
+    const brDay = Array.isArray(config.display.brightness.day)
+        ? config.display.brightness.day[props.num]
+        : config.display.brightness.day;
+
+    const brNight = Array.isArray(config.display.brightness.night)
+        ? config.display.brightness.night[props.num]
+        : config.display.brightness.night;
+
     return <>
-        <RangeInput value={config.display.brightness.day[props.num]}
+        <RangeInput value={brDay} 
             label={i18n.t('daytimeBrightness')}
             min={1}
             max={100}
             limitMin={1}
             limitMax={100}
             step={1}
-            indication={String(config.display.brightness.day[props.num])}
+            indication={String(brDay)}
             onChange={val => {
                 dispatch(cf.displayBrightDayChange({num: props.num, val: val}));
                 sendBright(val);
@@ -34,14 +42,14 @@ export default function BrightSunriseSunset(props: iDisplay) {
             className="mt-4"
         />
 
-        <RangeInput value={config.display.brightness.night[props.num]}
+        <RangeInput value={brNight}
             label={i18n.t('nightBrightness')}
             min={1}
             max={100}
             limitMin={1}
             limitMax={100}
             step={1}
-            indication={String(config.display.brightness.night[props.num])}
+            indication={String(brNight)}
             onChange={val => {
                 dispatch(cf.displayBrightNightChange({num: props.num, val: val}));
                 sendBright(val);

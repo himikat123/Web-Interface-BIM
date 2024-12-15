@@ -11,7 +11,7 @@ export default function TimeSlotThingSensType(props: iDisplayTimeSlot) {
 
     return <SelectSwitch label={i18n.t('sensorType')}
         options={[i18n.t('temperature'), i18n.t('humidity'), i18n.t('pressure')]}
-        value={config.display.timeSlot.data[props.slot][props.num]}
+        value={config.display.timeSlot ? config.display.timeSlot.data[props.slot][props.num] : 0}
         onChange={val => dispatch(cf.displayTimeslotDataChange({slot: props.slot, num: props.num, val: val}))}
     />
 }

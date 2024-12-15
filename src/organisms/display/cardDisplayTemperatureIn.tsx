@@ -20,17 +20,17 @@ export default function CardDisplayTemperatureIn() {
 
         {/* Wireless Sensor */}
         {config.display.source.tempIn.sens === (device() === 'WeatherMonitorBIM32' ? 2 : 400) && <>
-            <WsensorNumber value={config.display.source.tempIn.wsensNum} 
+            <WsensorNumber value={config.display.source.tempIn.wsensNum ?? 0} 
                 changeValue={val => dispatch(cf.displaySourceTempInWsensNumChange(val))}
             />
-            <WsensorTempNumber wSensNum={config.display.source.tempIn.wsensNum}
-                value={config.display.source.tempIn.temp}
+            <WsensorTempNumber wSensNum={config.display.source.tempIn.wsensNum ?? 0}
+                value={config.display.source.tempIn.temp ?? 0}
                 changeValue={val => dispatch(cf.displaySourceTempInTempChange(val))}
             />
         </>}
 
         {/* Thingspeak */}
-        {config.display.source.tempIn.sens === (device() === 'WeatherMonitorBIM32' ? 3 : 400) && <>
+        {config.display.source.tempIn.sens === (device() === 'WeatherMonitorBIM32' ? 3 : 2) && <>
             <ThingspeakField value={config.display.source.tempIn.thing}
                 changeValue={val => dispatch(cf.displaySourceTempInThingChange(val))} 
             />

@@ -21,8 +21,8 @@ export default function TimeSlotWsensDataType(props: iDisplayTimeSlot) {
     }
 
     return <SelectSwitch label={i18n.t('sensorType')}
-        options={wsensorTypes[config.display.timeSlot.wsensor.num[props.slot][props.num]]}
-        value={config.display.timeSlot.wsensor.type[props.slot][props.num]}
+        options={wsensorTypes[config.display.timeSlot ? config.display.timeSlot.wsensor.num[props.slot][props.num] : 0]}
+        value={config.display.timeSlot ? config.display.timeSlot.wsensor.type[props.slot][props.num] : 0}
         onChange={val => dispatch(cf.displayTimeslotWsensorTypeChange({slot: props.slot, num: props.num, val: val}))}
     />
 }

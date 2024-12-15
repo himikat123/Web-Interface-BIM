@@ -10,7 +10,7 @@ export default function ComfortTempSound() {
 
     return <div className="mt-8">
         <Toggle label={i18n.t('soundNotification')}
-            checked={config.comfort.temp.sound}
+            checked={config.comfort.temp.sound ?? 0}
             onChange={() => dispatch(cf.comfortTempSoundChange(config.comfort.temp.sound ? 0 : 1))}
         />
     </div>

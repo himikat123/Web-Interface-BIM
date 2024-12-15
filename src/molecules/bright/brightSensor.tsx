@@ -19,14 +19,23 @@ export default function BrightSensor(props: iDisplay) {
     const max44009Data = vl.validateLight(data.max44009.light) ? (data.max44009.light + config.sensors.max44009.l) : null; 
     const bh1750Data = vl.validateLight(data.bh1750.light) ? (data.bh1750.light + config.sensors.bh1750.l) : null;
 
+    const lightSensor = Array.isArray(config.display.lightSensor)
+        ? config.display.lightSensor[props.num]
+        : config.display.lightSensor;
+
+    const sensitivity = Array.isArray(config.display.sensitivity)
+        ? config.display.sensitivity[props.num]
+        : config.display.sensitivity;
+
     let sensorData = null;
-    switch(config.display.lightSensor[props.num]) {
+    switch(lightSensor) {
         case 0: sensorData = analogData; break;
         case 1: sensorData = max44009Data; break; 
         case 2: sensorData = bh1750Data; break;
+        default: sensorData = -1; break;
     }
-    let brightness = config.display.lightSensor[props.num] === 0 ? (sensorData ?? 0) * 30 : sensorData ?? 0;
-    brightness *= config.display.sensitivity[props.num] / 20;
+    let brightness = lightSensor === 0 ? (sensorData ?? 0) * 30 : sensorData ?? 0;
+    brightness *= sensitivity / 20;
     if(brightness < 1) brightness = 1;
     if(brightness > 100) brightness = 100;
     brightness = Math.round(brightness);
@@ -48,18 +57,18 @@ export default function BrightSensor(props: iDisplay) {
     return <div className="my-8">
         <SelectSwitch label={i18n.t('sensorType')}
             options={lightSensors}
-            value={config.display.lightSensor[props.num]}
+            value={lightSensor}
             onChange={(val: number) => dispatch(cf.displayLightSensorChange({num: props.num, val: val}))}
         />
         
-        <RangeInput value={config.display.sensitivity[props.num]}
+        <RangeInput value={sensitivity}
             label={i18n.t('sensorSensitivity')}
             min={1}
             max={100}
             limitMin={1}
             limitMax={100}
             step={1}
-            indication={String(config.display.sensitivity[props.num])}
+            indication={String(sensitivity)}
             onChange={val => {
                 dispatch(cf.displaySensitivityChange({num: props.num, val: val}));
                 sendSensitivity(val);

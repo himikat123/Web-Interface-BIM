@@ -19,8 +19,11 @@ export default function TimeSlotColor(props: iDisplayTimeSlot) {
         fetch(url);
     }
 
-    return <ColorInput value={config.display.timeSlot.color[props.slot][props.num]}
-        label={config.display.type[props.num] === 2 ? i18n.t('displayColor') : i18n.t('backlightColor')}
+    return <ColorInput value={config.display.timeSlot ? config.display.timeSlot.color[props.slot][props.num] : ''}
+        label={(config.display.type ? config.display.type[props.num] === 2 : 0) 
+            ? i18n.t('displayColor') 
+            : i18n.t('backlightColor')
+        }
         onChange={val => {
             dispatch(cf.displayTimeslotColorChange({slot: props.slot, num: props.num, val: val}));
             sendSlotColor(val);

@@ -21,7 +21,7 @@ export default function CardDisplayBatLevel() {
 
             {/* Wireless sensor number */}
             {config.display.source.bat.sens === (device() === 'WeatherMonitorBIM32' ? 1 : 400) && <>
-                <WsensorNumber value={config.display.source.bat.wsensNum} 
+                <WsensorNumber value={config.display.source.bat.wsensNum ?? 0} 
                     changeValue={val => dispatch(cf.displaySourceBatWsensNumChange(val))}
                     indications={indications}
                 />

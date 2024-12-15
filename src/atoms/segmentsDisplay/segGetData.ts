@@ -17,10 +17,10 @@ export default function segGetData(dispNum: number, slot: number, pointsState: b
     const data = store.getState().data;
     let dispImg = [0, 0, 0, 0, 0, 0, 0, 0];
     let clockpoints = false;
-    const sens = config.display.timeSlot.data[slot][dispNum];
+    const sens = config.display.timeSlot ? config.display.timeSlot.data[slot][dispNum] : 0;
     const dispLength = displayLength(dispNum) + '-dig';
 
-    switch(config.display.timeSlot.sensor[slot][dispNum]) {
+    switch(config.display.timeSlot ? config.display.timeSlot.sensor[slot][dispNum] : 0) {
         case 0: clockpoints = true; dispImg = clock(sens, dispLength, pointsState, dispNum); break;
         case 1: dispImg = cdate(sens, dispLength); break;
         case 2: dispImg = segBME280(dispNum, slot, dispLength); break;

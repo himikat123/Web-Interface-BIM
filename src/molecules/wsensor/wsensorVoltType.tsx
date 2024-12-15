@@ -11,10 +11,10 @@ export default function WsensorType() {
     const config = useSelector((state: iConfig) => state.config);
 
     let wsensTypes = [
-        `${i18n.t('batteryVoltage')} ${BatVoltage(config.display.source.volt.wsensNum)}`,
-        `${i18n.t('batteryPercentage')} ${BatPercent(config.display.source.volt.wsensNum)}`,
-        `${i18n.t('voltage')} ${Wsensor()[config.display.source.volt.wsensNum].volt}`,
-        `CO2 ${Wsensor()[config.display.source.volt.wsensNum].co2}`,
+        `${i18n.t('batteryVoltage')} ${BatVoltage(config.display.source.volt.wsensNum ?? 0)}`,
+        `${i18n.t('batteryPercentage')} ${BatPercent(config.display.source.volt.wsensNum ?? 0)}`,
+        `${i18n.t('voltage')} ${Wsensor()[config.display.source.volt.wsensNum ?? 0].volt}`,
+        `CO2 ${Wsensor()[config.display.source.volt.wsensNum ?? 0].co2}`,
     ];
 
     return <SelectSwitch label={i18n.t('sensor.singular')}

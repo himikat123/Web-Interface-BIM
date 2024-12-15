@@ -10,7 +10,9 @@ import * as cf from "../../redux/slices/config";
 export default function CardDisplayComfort() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
-    const names = config.display.source.sequence.name.filter(name => name !== '').join(', ');
+    const names = config.display.source.sequence 
+        ? config.display.source.sequence.name.filter(name => name !== '').join(', ') 
+        : '';
     
     const comforts = [];
     comforts.push("--");

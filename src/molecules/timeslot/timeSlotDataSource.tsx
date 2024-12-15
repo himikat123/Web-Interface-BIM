@@ -26,7 +26,7 @@ export default function TimeSlotDataSource(props: iDisplayTimeSlot) {
 
     return <SelectSwitch label={i18n.t('dataSource.singular')}
         options={sensors}
-        value={config.display.timeSlot.sensor[props.slot][props.num]}
+        value={config.display.timeSlot ? config.display.timeSlot.sensor[props.slot][props.num] : 0}
         onChange={val => {
             dispatch(cf.displayTimeslotSensorChange({slot: props.slot, num: props.num, val: val}));
             dispatch(cf.displayTimeslotDataChange({slot: props.slot, num: props.num, val: 0}))

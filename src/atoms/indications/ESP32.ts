@@ -11,7 +11,7 @@ export default function ESP32() {
 
     return {
         temp: vl.validateTemperature(data.esp32.temp) 
-            ? ((data.esp32.temp + config.sensors.esp32.t).toFixed(2) + '°C') 
+            ? ((data.esp32?.temp + config.sensors.esp32?.t).toFixed(2) + '°C') 
             : '--',
 
         runtime: humanizeDuration(data.runtime * 1000, {

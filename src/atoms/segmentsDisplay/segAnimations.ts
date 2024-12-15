@@ -9,13 +9,13 @@ export default function segAnimations(dispNum: number, state: iSegState) {
     const config = store.getState().config;
     const segData = segGetData(dispNum, state.slot, state.points);
     const segPrevData = segGetData(dispNum, state.prevSlot, state.points);
-    const color = config.display.timeSlot.color[state.slot][dispNum];
-    const prevColor = config.display.timeSlot.color[state.prevSlot][dispNum];
+    const color = config.display.timeSlot ? config.display.timeSlot.color[state.slot][dispNum] : '';
+    const prevColor = config.display.timeSlot ? config.display.timeSlot.color[state.prevSlot][dispNum] : '';
     let dispImg = [0, 0, 0, 0, 0, 0, 0, 0];
     let colors = ['', '', '', '', '', '', '', ''];
     let animIsRunnung = true;
     const millis = Date.now();
-    const type = config.display.animation.type[dispNum];
+    const type = config.display.animation ? config.display.animation.type[dispNum] : 0;
     const dispLength = displayLength(dispNum, 0);
     const shift = shifts[dispLength][type][state.animSlot];
 
@@ -36,7 +36,7 @@ export default function segAnimations(dispNum: number, state: iSegState) {
         colors[i] = getColor(i);
     }
 
-    if(millis - state.animMillis > 1000 / config.display.animation.speed[dispNum]) {
+    if(millis - state.animMillis > 1000 / (config.display.animation ? config.display.animation.speed[dispNum] : 1)) {
         state.animMillis = millis;
         if(state.animSlot < frames[dispLength][type] - 1) state.animSlot++;
     }

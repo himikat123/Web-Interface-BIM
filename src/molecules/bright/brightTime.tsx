@@ -19,22 +19,38 @@ export default function BrightTime(props: iDisplay) {
         fetch(url);
     }
 
+    const dayTime = Array.isArray(config.display.dayTime)
+        ? config.display.dayTime[props.num]
+        : config.display.dayTime;
+
+    const brDay = Array.isArray(config.display.brightness.day)
+        ? config.display.brightness.day[props.num]
+        : config.display.brightness.day;
+
+    const nightTime = Array.isArray(config.display.nightTime)
+        ? config.display.nightTime[props.num]
+        : config.display.nightTime;
+
+    const brNight = Array.isArray(config.display.brightness.night)
+        ? config.display.brightness.night[props.num]
+        : config.display.brightness.night;
+
     return <>
         <div className="mt-8">
-            <TimeInput value={config.display.dayTime[props.num]}
+            <TimeInput value={dayTime}
                 step={60} 
                 label={i18n.t('dayMode')} 
                 onChange={val => dispatch(cf.displayDayTimeChange({num: props.num, val: val}))} 
             />
         </div>
-        <RangeInput value={config.display.brightness.day[props.num]}
+        <RangeInput value={brDay}
             label={i18n.t('daytimeBrightness')}
             min={1}
             max={100}
             limitMin={1}
             limitMax={100}
             step={1}
-            indication={String(config.display.brightness.day[props.num])}
+            indication={String(brDay)}
             onChange={val => {
                 dispatch(cf.displayBrightDayChange({num: props.num, val: val}));
                 sendBright(val);
@@ -43,20 +59,20 @@ export default function BrightTime(props: iDisplay) {
         />
 
         <div className="mt-14">
-            <TimeInput value={config.display.nightTime[props.num]} 
+            <TimeInput value={nightTime} 
                 step={60}
                 label={i18n.t('nightMode')} 
                 onChange={val => dispatch(cf.displayNightTimeChange({num: props.num, val: val}))} 
             />
         </div>
-        <RangeInput value={config.display.brightness.night[props.num]}
+        <RangeInput value={brNight}
             label={i18n.t('nightBrightness')}
             min={1}
             max={100}
             limitMin={1}
             limitMax={100}
             step={1}
-            indication={String(config.display.brightness.night[props.num])}
+            indication={String(brNight)}
             onChange={val => {
                 dispatch(cf.displayBrightNightChange({num: props.num, val: val}));
                 sendBright(val);
