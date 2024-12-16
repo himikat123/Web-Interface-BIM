@@ -13,8 +13,8 @@ function lcdGetTemp(wsensNum: number, wsensTempNum: number, thingNum: number, so
     switch(source) {
         case cs[0]: temp = data.weather.temp; break;
         case cs[1]: if(vl.WsensorDataRelevance(wsensNum)) {
-            temp = vl.validateTemperature(data.wsensor.temp.data[wsensTempNum][wsensNum]) 
-                ? data.wsensor.temp.data[wsensTempNum][wsensNum] + config.wsensor.temp.corr[wsensNum][wsensTempNum] 
+            temp = vl.validateTemperature(data.wsensor?.temp.data[wsensTempNum][wsensNum] ?? 0) 
+                ? (data.wsensor?.temp.data[wsensTempNum][wsensNum] ?? 0) + (config.wsensor?.temp.corr[wsensNum][wsensTempNum] ?? 0) 
                 : 40400
         }; break;
         case cs[2]: if(vl.ThingspeakDataRelevance()) {
@@ -33,7 +33,7 @@ function lcdGetTemp(wsensNum: number, wsensTempNum: number, thingNum: number, so
         case cs[5]: temp = data.sht21.temp + config.sensors.sht21.t; break;
         case cs[6]: temp = data.dht22.temp + config.sensors.dht22.t; break;
         case cs[7]: temp = data.ds18b20.temp + config.sensors.ds18b20.t; break;
-        case cs[8]: temp = data.bme680.temp + config.sensors.bme680.t; break;
+        case cs[8]: temp = (data.bme680?.temp ?? 0) + (config.sensors.bme680?.t ?? 0); break;
         default: ; break;
     }
     return Math.round(temp);

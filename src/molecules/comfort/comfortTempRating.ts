@@ -14,14 +14,14 @@ export default function comfortTempRating() {
     let temp = 40400;
     switch(config.comfort.temp.source) {
         case cs[0]: temp = data.weather.temp; break; // temperature from weather forecast
-        case cs[1]: temp = data.wsensor.temp.data[sens][wsensNum] + config.wsensor.temp.corr[wsensNum][sens]; break; // temperature from wireless sensor
+        case cs[1]: temp = (data.wsensor?.temp.data[sens][wsensNum] ?? 0) + (config.wsensor?.temp.corr[wsensNum][sens] ?? 0); break; // temperature from wireless sensor
         case cs[2]: temp = data.thing?.data ? data.thing?.data[config.comfort.temp.thing] : -40400; break; // temperature from thingspeak
         case cs[3]: temp = data.bme280.temp + config.sensors.bme280.t; break; // temperature from BME280
         case cs[4]: temp = data.bmp180.temp + config.sensors.bmp180.t; break; // temperature from BMP180
         case cs[5]: temp = data.sht21.temp + config.sensors.sht21.t; break; // temperature from SHT21
         case cs[6]: temp = data.dht22.temp + config.sensors.dht22.t; break; // temperature from DHT22
         case cs[7]: temp = data.ds18b20.temp + config.sensors.ds18b20.t; break; // temperature from DS18B20
-        case cs[8]: temp = data.bme680.temp + config.sensors.bme680.t; break; // temperature from BME680
+        case cs[8]: temp = (data.bme680?.temp ?? 0) + (config.sensors.bme680?.t ?? 0); break; // temperature from BME680
         default: ; break;
     }
 

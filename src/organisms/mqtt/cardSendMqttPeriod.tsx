@@ -11,7 +11,7 @@ export default function CardSendMqttPeriod() {
     const config = useSelector((state: iConfig) => state.config);
 
     return <Card content={<NumberInput label={i18n.t('periodSeconds')}
-        value={config.mqttSend.period}
+        value={config.mqttSend?.period ?? 0}
         min={30}
         max={999}
         onChange={val => dispatch(cf.mqttSendPeriodChange(val))}

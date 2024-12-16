@@ -16,8 +16,8 @@ export default function lcdGetPres() {
     switch(config.display.source.presOut.sens) {
         case cs[0]: pres = data.weather.pres; break;
         case cs[1]: if(vl.WsensorDataRelevance(wsensNum)) {
-            pres = vl.validatePressure(data.wsensor.pres.data[wsensNum]) 
-                ? data.wsensor.pres.data[wsensNum] + config.wsensor.pres.corr[wsensNum] 
+            pres = vl.validatePressure(data.wsensor?.pres.data[wsensNum] ?? 0) 
+                ? (data.wsensor?.pres.data[wsensNum] ?? 0) + (config.wsensor?.pres.corr[wsensNum] ?? 0) 
                 : 40400
         }; break;
         case cs[2]: if(vl.ThingspeakDataRelevance()) {
@@ -33,7 +33,7 @@ export default function lcdGetPres() {
         }; break;
         case cs[3]: pres = data.bme280.pres + config.sensors.bme280.p; break;
         case cs[4]: pres = data.bmp180.pres + config.sensors.bmp180.p; break;
-        case cs[5]: pres = data.bme680.pres + config.sensors.bme680.p; break;
+        case cs[5]: pres = (data.bme680?.pres ?? 0) + (config.sensors.bme680?.p ?? 0); break;
         default: ; break;
     }
 

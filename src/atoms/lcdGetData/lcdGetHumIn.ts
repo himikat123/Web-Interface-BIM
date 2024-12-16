@@ -16,8 +16,8 @@ export default function lcdGetHumIn(sequenceHum: number) {
     switch(config.display.source.humIn.sens) {
         case cs[0]: hum = data.weather.hum; break;
         case cs[1]: if(vl.WsensorDataRelevance(wsensNum)) {
-            hum = vl.validateHumidity(data.wsensor.hum.data[wsensNum]) 
-                ? data.wsensor.hum.data[wsensNum] + config.wsensor.hum.corr[wsensNum] 
+            hum = vl.validateHumidity(data.wsensor?.hum.data[wsensNum] ?? 0) 
+                ? (data.wsensor?.hum.data[wsensNum] ?? 0) + (config.wsensor?.hum.corr[wsensNum] ?? 0) 
                 : 40400
         }; break;
         case cs[2]: if(vl.ThingspeakDataRelevance()) {
@@ -35,7 +35,7 @@ export default function lcdGetHumIn(sequenceHum: number) {
         case cs[4]: hum = data.bme280.hum + config.sensors.bme280.h; break;
         case cs[5]: hum = data.sht21.hum + config.sensors.sht21.h; break;
         case cs[6]: hum = data.dht22.hum + config.sensors.dht22.h; break;
-        case cs[7]: hum = data.bme680.hum + config.sensors.bme680.h; break;
+        case cs[7]: hum = (data.bme680?.hum ?? 0) + (config.sensors.bme680?.h ?? 0); break;
         default: ; break;
     }
     return Math.round(hum);

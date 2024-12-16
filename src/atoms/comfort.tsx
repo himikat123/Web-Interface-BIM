@@ -25,7 +25,7 @@ export default function Comfort() {
         case tcs[0]: temp = data.weather.temp; break; // temperature from weather forecast
         case tcs[1]: // temperature from wireless sensor
             if(vl.WsensorDataRelevance(tWsensNum))
-                temp = data.wsensor.temp.data[tSens][tWsensNum] + config.wsensor.temp.corr[tWsensNum][tSens];
+                temp = (data.wsensor?.temp.data[tSens][tWsensNum] ?? 0) + (config.wsensor?.temp.corr[tWsensNum][tSens] ?? 0);
             break;
         case tcs[2]: // temperature from thingspeak
             if(vl.ThingspeakDataRelevance())
@@ -47,31 +47,34 @@ export default function Comfort() {
             temp = data.ds18b20.temp + config.sensors.ds18b20.t; 
             break;
         case tcs[8]: // temperature from BME680
-            temp = data.bme680.temp + config.sensors.bme680.t; 
+            temp = (data.bme680?.temp ?? 0) + (config.sensors.bme680?.t ?? 0); 
             break;
     }
 
+    const hcs = device() === 'WeatherMonitorBIM'
+        ? [1, -1, 2, 3, 4, 5, -2]
+        : [1, 2, 3, 4, 5, 6, 7];
     switch(config.comfort.hum.source) {
-        case 1: hum = data.weather.hum; break; // humidity from weather forecast
-        case (device() === 'WeatherMonitorBIM32' ? 2 : 400): // humidity from wireless sensor
+        case hcs[0]: hum = data.weather.hum; break; // humidity from weather forecast
+        case hcs[1]: // humidity from wireless sensor
             if(vl.WsensorDataRelevance(hWsensNum))
-                hum = data.wsensor.hum.data[hWsensNum] + config.wsensor.hum.corr[hWsensNum];
+                hum = (data.wsensor?.hum.data[hWsensNum] ?? 0) + (config.wsensor?.hum.corr[hWsensNum] ?? 0);
             break;
-        case (device() === 'WeatherMonitorBIM32' ? 3 : 2): // humidity from thingspeak
+        case hcs[2]: // humidity from thingspeak
             if(vl.ThingspeakDataRelevance())
                 hum = data.thing?.data ? data.thing.data[config.comfort.hum.thing] : -40400;
             break;
-        case (device() === 'WeatherMonitorBIM32' ? 4 : 3): // humidity from BME280 
+        case hcs[3]: // humidity from BME280 
             hum = data.bme280.hum + config.sensors.bme280.h; 
             break;
-        case (device() === 'WeatherMonitorBIM32' ? 5 : 4): // humidity from SHT21 
+        case hcs[4]: // humidity from SHT21 
             hum = data.sht21.hum + config.sensors.sht21.h; 
             break;
-        case (device() === 'WeatherMonitorBIM32' ? 6 : 5): // humidity from DHT22 
+        case hcs[5]: // humidity from DHT22 
             hum = data.dht22.hum + config.sensors.dht22.h; 
             break;
-        case (device() === 'WeatherMonitorBIM32' ? 7 : 401): // humidity from BME680 
-            hum = data.bme680.hum + config.sensors.bme680.h; 
+        case hcs[6]: // humidity from BME680 
+            hum = (data.bme680?.hum ?? 0) + (config.sensors.bme680?.h ?? 0); 
             break;
     }
   
@@ -112,7 +115,7 @@ export default function Comfort() {
 
     if(config.comfort.iaq?.source === 1) {
         if(device() === 'WeatherMonitorBIM32') {
-            const iaq = data.bme680.iaq + config.sensors.bme680.i;
+            const iaq = (data.bme680?.iaq ?? 0) + (config.sensors.bme680?.i ?? 0);
             if(vl.validateIaq(iaq)) {
                 let iaqLevel = i18n.t('cleanAir');
                 if(iaq > 100.0) iaqLevel = i18n.t('polutedAir');
@@ -126,7 +129,8 @@ export default function Comfort() {
     else if(config.comfort.co2?.source === 1) {
         if(device() === 'WeatherMonitorBIM32') {
             if(vl.WsensorDataRelevance(config.comfort.co2.wsensNum)) {
-                const co2 = data.wsensor.co2.data[config.comfort.co2.wsensNum] + config.wsensor.co2.corr[config.comfort.co2.wsensNum];
+                const co2 = (data.wsensor?.co2.data[config.comfort.co2.wsensNum] ?? 0) 
+                    + (config.wsensor?.co2.corr[config.comfort.co2.wsensNum] ?? 0);
                 if(vl.validateCO2(co2)) {
                     let co2Level = i18n.t('cleanAir');
                     if(co2 > 800.0) co2Level = i18n.t('polutedAir');

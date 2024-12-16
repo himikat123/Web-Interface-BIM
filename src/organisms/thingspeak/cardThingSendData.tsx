@@ -34,16 +34,16 @@ export default function CardThingpeakSendData(props: iCardSend) {
 
             {config.thingspeakSend.fields[props.num] === (device() === 'WeatherMonitorBIM32' ? 2 : 400) && <div className="mt-8">
                 {/* Wireless sensor number */}
-                <WsensorNumber value={config.thingspeakSend.wsensors[props.num]}
+                <WsensorNumber value={config.thingspeakSend?.wsensors ? config.thingspeakSend.wsensors[props.num] : 0}
                     changeValue={val => dispatch(cf.thingspeakSendWsensorsChange({ num: props.num, val: val }))}
                 />
 
                 {/* Wireless sensor type of sensor */}
                 <div className="mt-8">
                     <CloudWsensDataType num={props.num} 
-                        value={config.thingspeakSend.wtypes[props.num]}
+                        value={config.thingspeakSend?.wtypes ? config.thingspeakSend.wtypes[props.num] : 0}
                         onChange={(val: number) => dispatch(cf.thingspeakSendWtypesChange({ num: props.num, val: val }))}
-                        sens={config.thingspeakSend.wsensors[props.num]}
+                        sens={config.thingspeakSend?.wsensors ? config.thingspeakSend.wsensors[props.num] : 0}
                     />
                 </div>
             </div>}

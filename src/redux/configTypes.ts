@@ -150,10 +150,10 @@ export interface iConfig {
                     num: number[][],
                     type: number[][]
                 },
-                    color: string[][]
+                color: string[][]
             }
         },
-        sound: {
+        sound?: {
             vol: number,
             eq: number,
             hourly: number,
@@ -163,7 +163,7 @@ export interface iConfig {
             }
         },
         sensors: {
-            bme680: {
+            bme680?: {
                 t: number,
                 h: number,
                 p: number,
@@ -189,7 +189,7 @@ export interface iConfig {
             ds18b20: {
                 t: number
             },
-            esp32: {
+            esp32?: {
                 t: number
             },
             max44009: {
@@ -202,7 +202,7 @@ export interface iConfig {
                 v: number
             }
         },
-        wsensor: {
+        wsensor?: {
             temp: {
                 corr: number[][]
             },
@@ -247,8 +247,8 @@ export interface iConfig {
             rdkey: string,
             fields: number[],
             types: number[],
-            wsensors: number[],
-            wtypes: number[]
+            wsensors?: number[],
+            wtypes?: number[]
         },
         thingspeakReceive: {
             period: number,
@@ -263,11 +263,11 @@ export interface iConfig {
             name: string,
             sensors: number[],
             types: number[],
-            wsensors: number[],
-            wtypes: number[],
+            wsensors?: number[],
+            wtypes?: number[],
             metrics: string[]
         },
-        mqttSend: {
+        mqttSend?: {
             period: number,
             broker: string,
             port: number,
@@ -279,7 +279,7 @@ export interface iConfig {
             wtypes: number[],
             topics: string[]
         },
-        history: {
+        history?: {
             period: number,
             channelID: string,
             wrkey: string,

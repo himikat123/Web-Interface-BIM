@@ -13,12 +13,12 @@ export default function comfortHumRating() {
     let hum = 40400;
     switch(config.comfort.hum.source) {
         case cs[0]: hum = data.weather.hum; break; // humidity from weather forecast
-        case cs[1]: hum = data.wsensor.hum.data[wsensNum] + config.wsensor.hum.corr[wsensNum]; break; // humidity from wireless sensor
+        case cs[1]: hum = (data.wsensor?.hum.data[wsensNum] ?? 0) + (config.wsensor?.hum.corr[wsensNum] ?? 0); break; // humidity from wireless sensor
         case cs[2]: hum = data.thing?.data ? data.thing?.data[config.comfort.hum.thing] : -40400; break; // humidity from thingspeak
         case cs[3]: hum = data.bme280.hum + config.sensors.bme280.h; break; // humidity from BME280
         case cs[4]: hum = data.sht21.hum + config.sensors.sht21.h; break; // humidity from SHT21
         case cs[5]: hum = data.dht22.hum + config.sensors.dht22.h; break; // humidity from DHT22
-        case cs[6]: hum = data.bme680.hum + config.sensors.bme680.h; break; // humidity from BME680
+        case cs[6]: hum = (data.bme680?.hum ?? 0) + (config.sensors.bme680?.h ?? 0); break; // humidity from BME680
         default: ; break;
     }
 

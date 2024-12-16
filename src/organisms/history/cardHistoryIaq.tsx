@@ -21,7 +21,7 @@ export default function CardHistoryIaq(props: iCardHistory) {
         <div className="mt-8">
             <HistorySensorIaq num={props.type}
                 label={props.title}
-                value={config.history.fields[props.type]}
+                value={config.history?.fields ? config.history.fields[props.type] : 0}
                 onChange={val => dispatch(cf.historyFieldsChange({ num: props.type, val: val }))}
             />
         </div>

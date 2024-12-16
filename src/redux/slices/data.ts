@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import device from '../../device';
 
 export const dataSlice = createSlice({
     name: 'data',
@@ -9,9 +10,14 @@ export const dataSlice = createSlice({
 
         state: "",
         fw: "",
-        esp32: {
-            temp: 0
-        },
+        ...(device() === 'WeatherMonitorBIM32'
+            ? {
+                esp32: {
+                    temp: 0
+                }
+            }
+            : {}
+        ),
         runtime: "",
         time: 0,
         network: {
@@ -26,13 +32,18 @@ export const dataSlice = createSlice({
             dns2: ""
         },    
         ssids: [],
-        bme680: {
-            temp: 4040,
-            hum: 4040,
-            pres: 4040,
-            iaq: 4040,
-            iaqAccr: 4040
-        },
+        ...(device() === 'WeatherMonitorBIM32'
+            ? {
+                bme680: {
+                    temp: 4040,
+                    hum: 4040,
+                    pres: 4040,
+                    iaq: 4040,
+                    iaqAccr: 4040
+                }
+            }
+            : {}
+        ),
         bme280: {
             temp: 4040,
             hum: 4040,
@@ -62,50 +73,55 @@ export const dataSlice = createSlice({
         analog: {
             volt: -1
         },
-        wsensor: {
-            time: [],
-            temp: {
-                data: [[404, 404], [404, 404], [404, 404], [404, 404], [404, 404]],
-                name: [['', ''], ['', ''], ['', ''], ['', ''], ['', '']]
-            },
-            hum: {
-                data: [404, 404],
-                name: ['', '']
-            },
-            pres: {
-                data: [4040, 4040],
-                name: ['', '']
-            },
-            light: {
-                data: [-1, -1],
-                name: ['', '']
-            },
-            co2: {
-                data: [-1, -1],
-                name: ['', '']
-            },
-            voltage: {
-                data: [-1, -1],
-                name: ['', '']
-            },
-            current: {
-                data: [-1, -1],
-                name: ['', '']
-            },
-            power: {
-                data: [-1, -1],
-                name: ['', '']
-            },
-            energy: {
-                data: [-1, -1],
-                name: ['', '']
-            },
-            freq: {
-                data: [-1, -1],
-                name: ['', '']
-            },
-            bat: [-1, -1]
-        },
+        ...(device() === 'WeatherMonitorBIM32'
+            ? {
+                wsensor: {
+                    time: [],
+                    temp: {
+                        data: [[404, 404], [404, 404], [404, 404], [404, 404], [404, 404]],
+                        name: [['', ''], ['', ''], ['', ''], ['', ''], ['', '']]
+                    },
+                    hum: {
+                        data: [404, 404],
+                        name: ['', '']
+                    },
+                    pres: {
+                        data: [4040, 4040],
+                        name: ['', '']
+                    },
+                    light: {
+                        data: [-1, -1],
+                        name: ['', '']
+                    },
+                    co2: {
+                        data: [-1, -1],
+                        name: ['', '']
+                    },
+                    voltage: {
+                        data: [-1, -1],
+                        name: ['', '']
+                    },
+                    current: {
+                        data: [-1, -1],
+                        name: ['', '']
+                    },
+                    power: {
+                        data: [-1, -1],
+                        name: ['', '']
+                    },
+                    energy: {
+                        data: [-1, -1],
+                        name: ['', '']
+                    },
+                    freq: {
+                        data: [-1, -1],
+                        name: ['', '']
+                    },
+                    bat: [-1, -1]
+                }
+            }
+            : {}
+        ),
         weather: {
             temp: 4040,
             hum: 4040,

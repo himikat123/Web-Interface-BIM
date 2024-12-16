@@ -27,7 +27,7 @@ export default function CardSoundEqualizer() {
         content={<div className="grid grid-cols-2 gap-2">
             {equalizers.map((eq, i) => <Button key={eq}
                 label={eq}
-                className={'text-text_dark ' + (config.sound.eq === i ? btnActive : btnPassive)}
+                className={'text-text_dark ' + (config.sound?.eq === i ? btnActive : btnPassive)}
                 onClick={() => changeEQ(i)}
             />)}
         </div>} 

@@ -36,17 +36,17 @@ export default function lcdGetVoltage(): iReturn {
     else {
         switch(config.display.source.volt.sens) {
             case 1: if(vl.WsensorDataRelevance(wsensNum)) switch(config.display.source.volt.volt) { // Wireless sensor
-                case 0: value = vl.validateBatteryADC(data.wsensor.bat[wsensNum]) // Battery voltage
-                    ? voltage(data.wsensor.bat[wsensNum], config.wsensor.bat.k[wsensNum]).toFixed(2) + i18n.t('units.v')
+                case 0: value = vl.validateBatteryADC(data.wsensor?.bat[wsensNum] ?? 0) // Battery voltage
+                    ? voltage(data.wsensor?.bat[wsensNum] ?? 0, config.wsensor?.bat.k[wsensNum] ?? 0).toFixed(2) + i18n.t('units.v')
                     : ''; break;
-                case 1: value = vl.validateBatteryADC(data.wsensor.bat[wsensNum]) // Battery percentage
-                    ? Math.round(percentage(config.wsensor.bat.type[wsensNum], data.wsensor.bat[wsensNum], config.wsensor.bat.k[wsensNum])) + '%'
+                case 1: value = vl.validateBatteryADC(data.wsensor?.bat[wsensNum] ?? 0) // Battery percentage
+                    ? Math.round(percentage(config.wsensor?.bat.type[wsensNum] ?? 0, data.wsensor?.bat[wsensNum] ?? 0, config.wsensor?.bat.k[wsensNum] ?? 0)) + '%'
                     : ''; break;
-                case 2: value = vl.validateHighVoltage(data.wsensor.voltage.data[wsensNum]) // High voltage
-                    ? (data.wsensor.voltage.data[wsensNum]).toFixed(2) + i18n.t('units.v')
+                case 2: value = vl.validateHighVoltage(data.wsensor?.voltage.data[wsensNum] ?? 0) // High voltage
+                    ? (data.wsensor?.voltage.data[wsensNum] ?? 0).toFixed(2) + i18n.t('units.v')
                     : ''; break;
-                case 3: value = vl.validateCO2(data.wsensor.co2.data[wsensNum]) // CO2
-                    ? Math.round(data.wsensor.co2.data[wsensNum]) + 'ppm'
+                case 3: value = vl.validateCO2(data.wsensor?.co2.data[wsensNum] ?? 0) // CO2
+                    ? Math.round(data.wsensor?.co2.data[wsensNum] ?? 0) + 'ppm'
                     : ''; 
                     type = 1; break;
             }; break;
@@ -63,8 +63,8 @@ export default function lcdGetVoltage(): iReturn {
                     : ''
                 : ''
             }; break;
-            case 3: value = vl.validateIaq(data.bme680.iaq) // BME680 IAQ
-                ? 'IAQ ' + Math.round(data.bme680.iaq)
+            case 3: value = vl.validateIaq(data.bme680?.iaq ?? 0) // BME680 IAQ
+                ? 'IAQ ' + Math.round(data.bme680?.iaq ?? 0)
                 : ''
             ; 
             type = 1; break; 

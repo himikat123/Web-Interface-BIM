@@ -7,7 +7,7 @@ export default function comfortCo2Rating() {
 
     let co2 = -40400;
     if(config.comfort.co2?.source === 1) { // CO2 from Wireless sensor
-        co2 = data.wsensor.co2.data[config.comfort.co2.wsensNum] + config.wsensor.co2.corr[config.comfort.co2.wsensNum];
+        co2 = (data.wsensor?.co2.data[config.comfort.co2.wsensNum] ?? 0) + (config.wsensor?.co2.corr[config.comfort.co2.wsensNum] ?? 0);
     }
 
     let comfort = 0;

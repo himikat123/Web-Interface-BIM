@@ -11,8 +11,8 @@ export default function lcdGetBatteryLevel() {
     if(config.display.source.bat.sens === 1 && device() === 'WeatherMonitorBIM32') { // Wsensor
         const wSensNum = config.display.source.bat.wsensNum ?? 0;
         if(vl.WsensorDataRelevance(wSensNum)) {
-            if(vl.validateBatteryADC(data.wsensor.bat[wSensNum])) {
-                const percent = percentage(config.wsensor.bat.type[wSensNum], data.wsensor.bat[wSensNum], config.wsensor.bat.k[wSensNum]);
+            if(vl.validateBatteryADC(data.wsensor?.bat[wSensNum] ?? 0)) {
+                const percent = percentage(config.wsensor?.bat.type[wSensNum] ?? 0, data.wsensor?.bat[wSensNum] ?? 0, config.wsensor?.bat.k[wSensNum] ?? 0);
                 level = Math.round(percent / 25);
                 if(level < 1) level = 1;
                 if(level > 4) level = 4;

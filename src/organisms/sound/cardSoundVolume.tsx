@@ -17,14 +17,14 @@ export default function CardSoundVolume() {
         fetch(url);
     }
 
-    return <Card content={<RangeInput value={config.sound.vol}
+    return <Card content={<RangeInput value={config.sound?.vol ?? 0}
         label={i18n.t('volume')}
         min={1}
         max={30}
         limitMin={1}
         limitMax={30}
         step={1}
-        indication={String(config.sound.vol)}
+        indication={String(config.sound?.vol)}
         onChange={val => {
             dispatch(cf.soundVolChange(val));
             sendVolume(val);

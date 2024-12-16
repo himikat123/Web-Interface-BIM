@@ -12,14 +12,14 @@ export default function CardSendMqttUser() {
 
     return <Card content={<>
         <TextInput label={i18n.t('username')}
-            value={config.mqttSend.user}
+            value={config.mqttSend?.user ?? ''}
             maxLength={32}
             onChange={val => dispatch(cf.mqttSendUserChange(val.target.value))}
         />
 
         <div className='mt-8'>
             <PasswordInput label={i18n.t('password')}
-                value={config.mqttSend.pass}
+                value={config.mqttSend?.pass ?? ''}
                 maxLength={32}
                 onChange={val => dispatch(cf.mqttSendPassChange(val.target.value))}
             />
