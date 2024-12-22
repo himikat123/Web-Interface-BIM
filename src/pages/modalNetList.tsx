@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import Modal from "../templates/modal";
 import hostUrl from '../atoms/hostUrl';
+import device from '../device';
 import axios from 'axios';
 import i18n from "../i18n/main";
 import { iData } from "../redux/dataTypes";
@@ -50,16 +51,25 @@ export default function ModalNetList(props: iModalNetList) {
         });
     }
 
-    return <Modal header={i18n.t('listOfAvailableNetworks')}
-        confirmBtn={() => refresh()}
-        modalClose={() => props.modalClose()}
-        content={list}
-        labelConfirm={<div className='flex items-center'>
-            {i18n.t('refresh')} 
-            {updState && <div className='w-4 ms-2'>
-                <SpinnerSVG />
-            </div>}
-        </div>}
-        labelCancel={i18n.t('close')}
-    />
+    return <>
+        {device() === 'WeatherMonitorBIM32'
+            ? <Modal header={i18n.t('listOfAvailableNetworks')}
+                confirmBtn={() => refresh()}
+                modalClose={() => props.modalClose()}
+                content={list}
+                labelConfirm={<div className='flex items-center'>
+                    {i18n.t('refresh')} 
+                    {updState && <div className='w-4 ms-2'>
+                        <SpinnerSVG />
+                    </div>}
+                </div>}
+                labelCancel={i18n.t('close')}
+            />
+            :  <Modal header={i18n.t('listOfAvailableNetworks')}
+                    modalClose={() => props.modalClose()}
+                    content={list}
+                    labelCancel={i18n.t('close')}
+            />
+        }
+    </>
 }

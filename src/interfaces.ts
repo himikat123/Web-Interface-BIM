@@ -184,7 +184,7 @@ export interface iModal {
     labelConfirm?: string | React.ReactNode,
     labelCancel: string,
     modalClose(): void,
-    confirmBtn(): void
+    confirmBtn?(): void
 }
 
 export interface iModalRestart {
