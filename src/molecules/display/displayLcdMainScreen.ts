@@ -47,7 +47,7 @@ export function displayLcdMainScreen(ctx: CanvasRenderingContext2D,
         windSpeed: lcdShowWindSpeed(ctx, state?.windSpeed, color.TEXT, color.BG),
         windDirection: lcdShowWindDirection(ctx, state?.windDirection, color.BG),
         updTime: lcdShowUpdTime(ctx, state?.updTime, color.TEXT, color.BG),
-        alarmState: lcdShowAlarmIcon(ctx, state?.alarmState, color.BG),
+        alarmState: lcdShowAlarmIcon(ctx, state?.alarmState),
         forecast: { wd: [], tMax: [], tMin: [], wSpeed: [], icon: [] }
     };
 
