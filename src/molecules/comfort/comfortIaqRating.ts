@@ -6,7 +6,7 @@ export default function comfortIaqRating() {
     const data = store.getState().data;
 
     let iaq = -40400;
-    if(config.comfort.iaq.source === 1) iaq = data.bme680.iaq + config.sensors.bme680.i; // IAQ from BME680
+    if(config.comfort.iaq?.source === 1) iaq = (data.bme680?.iaq ?? 0) + (config.sensors.bme680?.i ?? 0); // IAQ from BME680
 
     let comfort = 0;
     if(vl.validateIaq(iaq)) {

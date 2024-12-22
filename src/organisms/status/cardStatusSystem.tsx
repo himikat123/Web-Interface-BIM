@@ -28,8 +28,8 @@ export default function CardStatusSystem() {
         {device() === 'WeatherMonitorBIM32' && <div className='mt-4'>
             <p>{i18n.t('esp32Temp')}</p>
             <p className='text-blue-700 dark:text-blue-400'>
-                {validateTemperature(data.esp32.temp) 
-                    ? (data.esp32.temp + config.sensors.esp32.t).toFixed(1) 
+                {validateTemperature(data.esp32?.temp ?? 0) 
+                    ? ((data.esp32?.temp ?? 0) + (config.sensors.esp32?.t ?? 0)).toFixed(1) 
                     : '--'
                 }°C
             </p>

@@ -21,7 +21,7 @@ export default function CardDisplayVoltage() {
 
             {/* Wireless sensor number */}
             {config.display.source.volt.sens === (device() === 'WeatherMonitorBIM32' ? 1 : 400) && <div className="mt-8">
-                <WsensorNumber value={config.display.source.volt.wsensNum} 
+                <WsensorNumber value={config.display.source.volt.wsensNum ?? 0} 
                     changeValue={val => dispatch(cf.displaySourceVoltWsensNumChange(val))}
                 />
 

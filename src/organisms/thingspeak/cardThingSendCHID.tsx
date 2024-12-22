@@ -14,7 +14,7 @@ export default function CardThingSendCHID(props: iCardThingSend) {
     return <Card content={<TextInput label="Channel ID"
         value={config.thingspeakSend.channelID}
         maxLength={20}
-        pattern={[new RegExp(config.history.channelID.length ? config.history.channelID : "-"), false]}
+        pattern={[new RegExp(config.history?.channelID.length ? config.history.channelID : "-"), false]}
         tip={i18n.t('tips.tip4')}
         onChange={val => dispatch(cf.thingspeakSendChannelIdChange(val.target.value))}
         isValid={(valid: boolean) => {

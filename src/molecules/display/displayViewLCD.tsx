@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
+import device from '../../device';
 import { displayLcdMainScreen } from './displayLcdMainScreen';
 import { displayLcdNetworkScreen } from './displayLcdNetworkScreen';
 import { displayLcdClockScreen } from './displayLcdClockScreen';
@@ -89,137 +90,139 @@ export default function DisplayViewLCD() {
 
     /* touchscreen events */
     const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-        const rect = canvas?.getBoundingClientRect();
-        const rectWidth = rect?.width ?? 0;
-        const displayWidth = canvas?.width ?? 0;
-        const kx = rectWidth / displayWidth;
-        const rectHeight = rect?.height ?? 0;
-        const displayHeight = canvas?.height ?? 0;
-        const ky = rectHeight / displayHeight;
-        const x = Math.round(e.clientX - (rect ? rect.left : 0)) / (kx ?? 1);
-        const y = Math.round(e.clientY - (rect ? rect.top : 0)) / (ky ?? 1);
-        setAlarmState({
-            x: x,
-            y: y,
-            click: true,
-            skeleton: alarmState?.skeleton ?? false,
-            alarm: alarmState?.alarm ?? ''
-        });
+        if(device() === 'WeatherMonitorBIM32') {
+            const rect = canvas?.getBoundingClientRect();
+            const rectWidth = rect?.width ?? 0;
+            const displayWidth = canvas?.width ?? 0;
+            const kx = rectWidth / displayWidth;
+            const rectHeight = rect?.height ?? 0;
+            const displayHeight = canvas?.height ?? 0;
+            const ky = rectHeight / displayHeight;
+            const x = Math.round(e.clientX - (rect ? rect.left : 0)) / (kx ?? 1);
+            const y = Math.round(e.clientY - (rect ? rect.top : 0)) / (ky ?? 1);
+            setAlarmState({
+                x: x,
+                y: y,
+                click: true,
+                skeleton: alarmState?.skeleton ?? false,
+                alarm: alarmState?.alarm ?? ''
+            });
 
-        /* wifi antenna or close button */
-        if(x > (dispModel ? 284 : 320) && y < (dispModel ? 25 : 36)) {
-            if(page === 'main') {
-                setNetworkState(undefined);
-                setPage('network');
-            }
-            else {
-                setMainState(undefined);
-                setClockType('big');
-                setCalendarShift(0);
-                setHourlyShift(0);
-                setPage('main');
-            }
-        }
-
-        /* clock */
-        if(x < 140 && y < 80 && page === 'main') {
-            setClockState(undefined);
-            setPage('clock');
-        }
-
-        /* clock type */
-        if(y > 55 && y < 185 && page === 'clock') {
-            switch(clockType) {
-                case 'small': setClockType(model === 2 ? 'big' : 'analog'); break;
-                case 'analog': setClockType('big'); break;
-                default: setClockType(model === 1 ? 'analog' : 'small'); break;
-            }
-        }
-
-        /* calendar */
-        if((x > 145 && x < 180 && y < 33 && page === 'main')
-            || (x > 40 && x < (dispModel ? 250 : 300) && y < 36 && page === 'clock' && clockType !== 'analog')
-            || (y > 188 && page === 'clock' && clockType !== 'analog')
-        ) {
-            setCalendarState(undefined);
-            if(model !== 1) setPage('calendar');
-        }
-
-        /* back button */
-        if(x < 32 && y > 100 && y < 136) {
-            if(page === 'calendar') setCalendarShift(calendarShift - 1);
-            if(page === 'hourly') {
-                let shift = hourlyShift - 4;
-                if(shift < 0) shift = 0;
-                setHourlyShift(shift);
-            }
-            if(page === 'historyIn') {
-                let shift = historyInShift - 4;
-                if(shift < 0) shift = 0;
-                setHistoryInShift(shift);
-            }
-            if(page === 'historyOut') {
-                let shift = historyOutShift - 4;
-                if(shift < 0) shift = 0;
-                setHistoryOutShift(shift);
-            }
-        }
-
-        /* forward button */
-        if(x > (dispModel ? 286 : 320) && y > 100 && y < 136) {
-            if(page === 'calendar') setCalendarShift(calendarShift + 1);
-            if(page === 'hourly') {
-                let shift = hourlyShift + 4;
-                if(shift > 32) shift = 32;
-                setHourlyShift(shift);      
-            }
-            if(page === 'historyIn') {
-                let shift = historyInShift + 4;
-                if(shift > 16) shift = 16;
-                setHistoryInShift(shift);      
-            }
-            if(page === 'historyOut') {
-                let shift = historyOutShift + 4;
-                if(shift > 16) shift = 16;
-                setHistoryOutShift(shift);      
-            }
-        }
-
-        /* hourly forecast */
-        if(y > 162 && page === 'main' && model !== 1 && config.weather.provider !== 1) {
-            setHourlyState(undefined);
-            let dayLinks = [];
-            for(let i=0; i<40; i++) {
-                if(moment.unix(hourly.date[i] ?? 0).hour() === 0) {
-                    if(i !== 0) dayLinks.push(i);
+            /* wifi antenna or close button */
+            if(x > (dispModel ? 284 : 320) && y < (dispModel ? 25 : 36)) {
+                if(page === 'main') {
+                    setNetworkState(undefined);
+                    setPage('network');
+                }
+                else {
+                    setMainState(undefined);
+                    setClockType('big');
+                    setCalendarShift(0);
+                    setHourlyShift(0);
+                    setPage('main');
                 }
             }
-            const day1 = dispModel ? 106 : 90;
-            const day2 = dispModel ? 208 : 176;
-            const day3 = dispModel ? 320 : 264;
-            if(x < day1) setHourlyShift(0);
-            if(x > day1 && x < day2) setHourlyShift(dayLinks[0]);
-            if(x > day2 && x < day3) setHourlyShift(dayLinks[1]);
-            if(x > day3) setHourlyShift(dayLinks[2]);
-            setPage('hourly');
-        }
 
-        /* history inside */
-        if(x > 145 && y > 33 && y < 80 && page === 'main' && model !== 1) {
-            setHistoryInState(undefined);
-            setPage('historyIn');
-        }
+            /* clock */
+            if(x < 140 && y < 80 && page === 'main') {
+                setClockState(undefined);
+                setPage('clock');
+            }
 
-        /* history outside */
-        if(x < (dispModel ? 284 : 320) && y > 81 && y < 160 && page === 'main' && model !== 1) {
-            setHistoryOutState(undefined);
-            setPage('historyOut');
-        }
+            /* clock type */
+            if(y > 55 && y < 185 && page === 'clock') {
+                switch(clockType) {
+                    case 'small': setClockType(model === 2 ? 'big' : 'analog'); break;
+                    case 'analog': setClockType('big'); break;
+                    default: setClockType(model === 1 ? 'analog' : 'small'); break;
+                }
+            }
 
-        /* alarm */
-        if(x > (dispModel ? 284 : 328) && y > 130 && y < 162 && page === 'main' && model !== 1) {
-            setAlarmState(undefined);
-            setPage('alarm');
+            /* calendar */
+            if((x > 145 && x < 180 && y < 33 && page === 'main')
+                || (x > 40 && x < (dispModel ? 250 : 300) && y < 36 && page === 'clock' && clockType !== 'analog')
+                || (y > 188 && page === 'clock' && clockType !== 'analog')
+            ) {
+                setCalendarState(undefined);
+                if(model !== 1) setPage('calendar');
+            }
+
+            /* back button */
+            if(x < 32 && y > 100 && y < 136) {
+                if(page === 'calendar') setCalendarShift(calendarShift - 1);
+                if(page === 'hourly') {
+                    let shift = hourlyShift - 4;
+                    if(shift < 0) shift = 0;
+                    setHourlyShift(shift);
+                }
+                if(page === 'historyIn') {
+                    let shift = historyInShift - 4;
+                    if(shift < 0) shift = 0;
+                    setHistoryInShift(shift);
+                }
+                if(page === 'historyOut') {
+                    let shift = historyOutShift - 4;
+                    if(shift < 0) shift = 0;
+                    setHistoryOutShift(shift);
+                }
+            }
+
+            /* forward button */
+            if(x > (dispModel ? 286 : 320) && y > 100 && y < 136) {
+                if(page === 'calendar') setCalendarShift(calendarShift + 1);
+                if(page === 'hourly') {
+                    let shift = hourlyShift + 4;
+                    if(shift > 32) shift = 32;
+                    setHourlyShift(shift);      
+                }
+                if(page === 'historyIn') {
+                    let shift = historyInShift + 4;
+                    if(shift > 16) shift = 16;
+                    setHistoryInShift(shift);      
+                }
+                if(page === 'historyOut') {
+                    let shift = historyOutShift + 4;
+                    if(shift > 16) shift = 16;
+                    setHistoryOutShift(shift);      
+                }
+            }
+
+            /* hourly forecast */
+            if(y > 162 && page === 'main' && model !== 1 && config.weather.provider !== 1) {
+                setHourlyState(undefined);
+                let dayLinks = [];
+                for(let i=0; i<40; i++) {
+                    if(moment.unix(hourly.date[i] ?? 0).hour() === 0) {
+                        if(i !== 0) dayLinks.push(i);
+                    }
+                }
+                const day1 = dispModel ? 106 : 90;
+                const day2 = dispModel ? 208 : 176;
+                const day3 = dispModel ? 320 : 264;
+                if(x < day1) setHourlyShift(0);
+                if(x > day1 && x < day2) setHourlyShift(dayLinks[0]);
+                if(x > day2 && x < day3) setHourlyShift(dayLinks[1]);
+                if(x > day3) setHourlyShift(dayLinks[2]);
+                setPage('hourly');
+            }
+
+            /* history inside */
+            if(x > 145 && y > 33 && y < 80 && page === 'main' && model !== 1) {
+                setHistoryInState(undefined);
+                setPage('historyIn');
+            }
+
+            /* history outside */
+            if(x < (dispModel ? 284 : 320) && y > 81 && y < 160 && page === 'main' && model !== 1) {
+                setHistoryOutState(undefined);
+                setPage('historyOut');
+            }
+
+            /* alarm */
+            if(x > (dispModel ? 284 : 328) && y > 130 && y < 162 && page === 'main' && model !== 1) {
+                setAlarmState(undefined);
+                setPage('alarm');
+            }
         }
     }
 

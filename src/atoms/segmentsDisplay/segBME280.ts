@@ -7,7 +7,7 @@ export default function segBME280(dispNum: number, slot: number, dispModel: stri
     const config = store.getState().config;
     const data = store.getState().data;
     let dispImg = [0, 0, 0, 0, 0, 0, 0, 0];
-    const type = config.display.timeSlot.data[slot][dispNum];
+    const type = config.display.timeSlot ? config.display.timeSlot.data[slot][dispNum] : 0;
   
     if(type === 0) dispImg = temp(data.bme280.temp + config.sensors.bme280.t, dispModel);
     if(type === 1) dispImg = hum(data.bme280.hum + config.sensors.bme280.h, dispModel);

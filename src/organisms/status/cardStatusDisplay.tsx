@@ -27,7 +27,7 @@ export default function CardStatusDisplay(props: iDisplay) {
     function displayView() {
         switch(props.num) {
             case 0: { /* Display 1 */
-                switch(config.display.type[props.num]) {
+                switch(config.display.type ? config.display.type[props.num] : 0) {
                     case 1: return <DisplayViewLCD />;
                     case 2: return <DisplayView7segment num={0} />;
                     case 3: return <DisplayView7segment num={0} />;
@@ -37,7 +37,7 @@ export default function CardStatusDisplay(props: iDisplay) {
                 }
             }
             case 1: { /* Display 2 */
-                switch(config.display.type[props.num]) {
+                switch(config.display.type ? config.display.type[props.num] : 0) {
                     case 2: return <DisplayView7segment num={1} />;
                     case 3: return <DisplayView7segment num={1} />;
                     case 4: return <DisplayView7SegmentTubes num={1} type="numitron" />;

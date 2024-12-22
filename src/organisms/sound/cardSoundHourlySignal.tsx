@@ -15,11 +15,11 @@ export default function CardSoundHourlySignal() {
     return <Card content={<>
         <SelectSwitch label={i18n.t('hourlySignal')}
             options={hourlySignal}
-            value={config.sound.hourly}
+            value={config.sound?.hourly ?? 0}
             onChange={val => dispatch(cf.soundHourlyChange(val))}
         />
 
-        {config.sound.hourly === 3 && <div className="mt-8 flex">
+        {config.sound?.hourly === 3 && <div className="mt-8 flex">
             <TimeInput value={('0' + String(config.sound.hour.from)).slice(-2) + ':00'} 
                 step={3600}
                 label={i18n.t('from')} 

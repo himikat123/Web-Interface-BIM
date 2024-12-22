@@ -1,6 +1,7 @@
 import store from "./redux/store";
 import axios from "axios";
 import moment from "moment";
+import device from "./device";
 import { setHistoryState, setHistoryUpdated } from "./redux/slices/history";
 import { iOpenweathermapHourly } from "./interfaces";
 import { iOpenMeteoHourly } from "./interfaces";
@@ -9,10 +10,10 @@ import { setHourlyState, setHourlyUpdated } from "./redux/slices/hourly";
 export function hourlyFetch(apMode: boolean) {
     const config = store.getState().config;
 
-    if(!apMode) {
+    if(!apMode && device() === 'WeatherMonitorBIM32') {
         /* openweathermap */
         if(config.weather.provider === 0) {
-            if(config.weather.citysearch < 2 && config.display.type[0] === 1) {
+            if(config.weather.citysearch < 2 && config.display.type && config.display.type[0] === 1) {
                 let url = "https://api.openweathermap.org/data/2.5/weather?appid=" + config.weather.appid[0];
                 if(config.weather.citysearch === 0) url += "&q=" + config.weather.city;
                 if(config.weather.citysearch === 1) url += "&id=" + config.weather.cityid;

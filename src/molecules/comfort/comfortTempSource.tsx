@@ -17,14 +17,14 @@ export default function ComfortTempSource() {
 
         {config.comfort.temp.source === (device() === 'WeatherMonitorBIM32' ? 2 : 400) && <div className="mt-8">
             {/* Wireless sensor number */}
-            <WsensorNumber value={config.comfort.temp.wsensNum}
+            <WsensorNumber value={config.comfort.temp.wsensNum ?? 0}
                 changeValue={val => dispatch(cf.comfortTempWsensNumChange(val))}
             />
 
             {/* Wireless sensor temperature sensor number */}
             <div className="mt-8">
-                <WsensorTempNumber wSensNum={config.comfort.temp.wsensNum}
-                    value={config.comfort.temp.sens}
+                <WsensorTempNumber wSensNum={config.comfort.temp.wsensNum ?? 0}
+                    value={config.comfort.temp.sens ?? 0}
                     changeValue={val => dispatch(cf.comfortTempSensChange(val))}
                 />
             </div>

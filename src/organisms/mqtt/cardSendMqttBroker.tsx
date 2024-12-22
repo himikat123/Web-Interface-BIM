@@ -13,14 +13,14 @@ export default function CardSendMqttBroker() {
 
     return <Card content={<>
         <TextInput label={i18n.t('broker')}
-            value={config.mqttSend.broker}
+            value={config.mqttSend?.broker ?? ''}
             maxLength={32}
             onChange={val => dispatch(cf.mqttSendBrokerChange(val.target.value))}
         />
 
         <div className='mt-8'>
             <NumberInput label={i18n.t('port')}
-                value={config.mqttSend.port}
+                value={config.mqttSend?.port ?? 0}
                 min={1}
                 max={65535}
                 onChange={val => dispatch(cf.mqttSendPortChange(val))}

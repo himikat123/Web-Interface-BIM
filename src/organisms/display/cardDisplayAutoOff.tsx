@@ -14,10 +14,10 @@ import * as cf from "../../redux/slices/config";
 export default function CardDisplayAutoOff(props: iDisplay) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
-       
+
     return <>
-        {config.display.type[props.num] > 0 ? <Card content={<>
-            <NumberInput value={config.display.autoOff[props.num]}
+        {(config.display.type ? (config.display.type[props.num] > 0) : 0) ? <Card content={<>
+            <NumberInput value={config.display.autoOff ? config.display.autoOff[props.num] : 0}
                 min={0}
                 max={1440}
                 label={i18n.t('turnOffDisplayWhenIdle')}
@@ -38,19 +38,22 @@ export default function CardDisplayAutoOff(props: iDisplay) {
             <hr className="mt-4 mb-12 border-menu_light dark:border-menu_dark" />
 
             <Toggle label={i18n.t('turnOffDisplayAtNight')}
-                checked={config.display.nightOff.need[props.num]}
-                onChange={() => dispatch(cf.displayNightOffNeedChange({num: props.num, val: config.display.nightOff.need[props.num] ? 0 : 1}))} 
+                checked={config.display.nightOff ? config.display.nightOff.need[props.num] : 0}
+                onChange={() => dispatch(cf.displayNightOffNeedChange({
+                    num: props.num, 
+                    val: config.display.nightOff ? config.display.nightOff.need[props.num] ? 0 : 1 : 0
+                }))} 
             />
 
             <div className="mt-4">
-                <TimeInput value={('0' + String(config.display.nightOff.from[props.num])).slice(-2) + ':00'} 
+                <TimeInput value={('0' + String(config.display.nightOff ? config.display.nightOff.from[props.num] : 0)).slice(-2) + ':00'} 
                     step={3600}
                     label={i18n.t('from')} 
                     onChange={val => dispatch(cf.displayNightOffFromChange({num: props.num, val: Number(val.split(':')[0])}))} 
                 />
             </div>
             <div className="mt-4">
-                <TimeInput value={('0' + String(config.display.nightOff.to[props.num])).slice(-2) + ':00'} 
+                <TimeInput value={('0' + String(config.display.nightOff ? config.display.nightOff.to[props.num] : 0)).slice(-2) + ':00'} 
                     step={3600}
                     label={i18n.t('to')} 
                     onChange={val => dispatch(cf.displayNightOffToChange({num: props.num, val: Number(val.split(':')[0])}))} 

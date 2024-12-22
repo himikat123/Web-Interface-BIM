@@ -25,22 +25,22 @@ export default function CardHistoryPres(props: iCardHistory) {
         <div className="mt-8">
             <HistorySensorPres num={props.type}
                 label={props.title}
-                value={config.history.fields[props.type]}
+                value={config.history?.fields ? config.history.fields[props.type] : 0}
                 onChange={val => dispatch(cf.historyFieldsChange({ num: props.type, val: val }))}
             />
         </div>
 
         {/* Wireless Sensor Number */}
-        {config.history.fields[props.type] === 2 && <div className="mt-8">
+        {(config.history?.fields ? config.history.fields[props.type] : 0) === 2 && <div className="mt-8">
             <WsensorNumber indications={wsensorIndications}
-                value={config.history.wSensors[props.type]}
+                value={config.history?.wSensors ? config.history.wSensors[props.type] : 0}
                 changeValue={val => dispatch(cf.historyWsensorsChange({ num: props.type, val: val }))}
             />
         </div>}
 
         {/* Thingspeak */}
-        {config.history.fields[props.type] === 3 && <div className="mt-8">
-            <ThingspeakFields value={config.history.tFields[props.type]}
+        {(config.history?.fields ? config.history.fields[props.type] : 0) === 3 && <div className="mt-8">
+            <ThingspeakFields value={config.history?.tFields ? config.history.tFields[props.type] : 0}
                 changeValue={val => dispatch(cf.historyTfieldsChange({ num: props.type, val: val }))}
             />
         </div>}

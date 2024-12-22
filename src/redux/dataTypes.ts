@@ -5,7 +5,7 @@ export interface iData {
         dataFetching: boolean,
         logged: string,
         fw: string,
-        esp32: {
+        esp32?: {
             temp: number
         },
         runtime: number,
@@ -22,7 +22,7 @@ export interface iData {
             dns2: string
         },    
         ssids: [ [string, number] ],
-        bme680: {
+        bme680?: {
             temp: number,
             hum: number,
             pres: number,
@@ -58,7 +58,7 @@ export interface iData {
         analog: {
             volt: number
         },
-        wsensor: {
+        wsensor?: {
             time: [number, number],
             temp: {
                 data: number[][],

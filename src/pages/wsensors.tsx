@@ -37,15 +37,15 @@ export default function WSensors() {
                         {i18n.t('dataFrom')}:
                         <Indication error={!vl.WsensorDataRelevance(wsensorNum)} 
                             value={<>
-                                {data.wsensor.time[wsensorNum] <= 0
+                                {(data.wsensor?.time[wsensorNum] ?? 0) <= 0
                                     ? <span>--</span>
                                     : <>
                                         <Moment unix format="HH:mm:ss DD.MM.YYYY">
-                                            {data.wsensor.time[wsensorNum] + new Date().getTimezoneOffset() * 60}
+                                            {(data.wsensor?.time[wsensorNum] ?? 0) + new Date().getTimezoneOffset() * 60}
                                         </Moment><br />
                                         {(config.lang === 'de' || config.lang === 'bg') && i18n.t('ago') + ' '}
                                         <Moment locale={getLocale()} unix fromNow ago>
-                                            {data.wsensor.time[wsensorNum] + new Date().getTimezoneOffset() * 60}
+                                            {(data.wsensor?.time[wsensorNum] ?? 0) + new Date().getTimezoneOffset() * 60}
                                         </Moment>
                                         {(config.lang !== 'de' && config.lang !== 'bg') && ' ' + i18n.t('ago')}
                                     </>
@@ -60,117 +60,117 @@ export default function WSensors() {
 
                     {[...Array(5)].map((x, tempSensorNum: number) => <div key={'t' + tempSensorNum}>
                         {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "t", 
-                            config.wsensor.temp.corr[wsensorNum][tempSensorNum], 
+                            config.wsensor?.temp.corr[wsensorNum][tempSensorNum] ?? 0, 
                             `${i18n.t('temperature')} ${tempSensorNum}`, 
-                            data.wsensor.temp.data[tempSensorNum][wsensorNum], 
+                            data.wsensor?.temp.data[tempSensorNum][wsensorNum] ?? 0, 
                             (val: number) => dispatch(cf.wSensTempChange({val: val, sens: wsensorNum, num: tempSensorNum})), 
                             -10, 10, 0.1,
                             hideUnnecessary,
-                            data.wsensor.temp.name[tempSensorNum][wsensorNum]
+                            data.wsensor?.temp.name[tempSensorNum][wsensorNum] ?? ''
                         )}
                     </div>)}
 
                     {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "h", 
-                        config.wsensor.hum.corr[wsensorNum], 
+                        config.wsensor?.hum.corr[wsensorNum] ?? 0, 
                         i18n.t('humidity'), 
-                        data.wsensor.hum.data[wsensorNum], 
+                        data.wsensor?.hum.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensHumChange({val: val, num: wsensorNum})),
                         -10, 10, 0.1, 
                         hideUnnecessary,
-                        data.wsensor.hum.name[wsensorNum]
+                        data.wsensor?.hum.name[wsensorNum] ?? ''
                     )}
 
                     {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "p", 
-                        config.wsensor.pres.corr[wsensorNum], 
+                        config.wsensor?.pres.corr[wsensorNum] ?? 0, 
                         i18n.t('pressure'), 
-                        data.wsensor.pres.data[wsensorNum], 
+                        data.wsensor?.pres.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensPresChange({val: val, num: wsensorNum})),
                         -10, 10, 0.1, 
                         hideUnnecessary,
-                        data.wsensor.pres.name[wsensorNum]
+                        data.wsensor?.pres.name[wsensorNum] ?? ''
                     )}
 
                     {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "l", 
-                        config.wsensor.light.corr[wsensorNum], 
+                        config.wsensor?.light.corr[wsensorNum] ?? 0, 
                         i18n.t('ambientLight'), 
-                        data.wsensor.light.data[wsensorNum], 
+                        data.wsensor?.light.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensLightChange({val: val, num: wsensorNum})),
                         -10, 10, 0.1, 
                         hideUnnecessary,
-                        data.wsensor.light.name[wsensorNum]
+                        data.wsensor?.light.name[wsensorNum] ?? ''
                     )}
 
                     {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "co2", 
-                        config.wsensor.co2.corr[wsensorNum], 
+                        config.wsensor?.co2.corr[wsensorNum] ?? 0, 
                         <span dangerouslySetInnerHTML={{ __html: i18n.t('CO2Level') }} />, 
-                        data.wsensor.co2.data[wsensorNum], 
+                        data.wsensor?.co2.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensCO2Change({val: val, num: wsensorNum})),
                         -10, 10, 0.1, 
                         hideUnnecessary,
-                        data.wsensor.co2.name[wsensorNum]
+                        data.wsensor?.co2.name[wsensorNum] ?? ''
                     )}
 
                     {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "hv", 
-                        config.wsensor.volt.corr[wsensorNum], 
+                        config.wsensor?.volt.corr[wsensorNum] ?? 0, 
                         i18n.t('voltage'), 
-                        data.wsensor.voltage.data[wsensorNum], 
+                        data.wsensor?.voltage.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensHighVoltChange({val: val, num: wsensorNum})),
                         -10, 10, 0.1, 
                         hideUnnecessary,
-                        data.wsensor.voltage.name[wsensorNum]
+                        data.wsensor?.voltage.name[wsensorNum] ?? ''
                     )}
 
                     {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "cr", 
-                        config.wsensor.curr.corr[wsensorNum], 
+                        config.wsensor?.curr.corr[wsensorNum] ?? 0, 
                         i18n.t('current'), 
-                        data.wsensor.current.data[wsensorNum], 
+                        data.wsensor?.current.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensCurrentChange({val: val, num: wsensorNum})),
                         -1, 1, 0.001,
                         hideUnnecessary,
-                        data.wsensor.current.name[wsensorNum]
+                        data.wsensor?.current.name[wsensorNum] ?? ''
                     )}
 
                     {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "pw", 
-                        config.wsensor.pow.corr[wsensorNum], 
+                        config.wsensor?.pow.corr[wsensorNum] ?? 0, 
                         i18n.t('power'), 
-                        data.wsensor.power.data[wsensorNum], 
+                        data.wsensor?.power.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensPowerChange({val: val, num: wsensorNum})),
                         -10, 10, 0.1,
                         hideUnnecessary,
-                        data.wsensor.power.name[wsensorNum]
+                        data.wsensor?.power.name[wsensorNum] ?? ''
                     )}
 
                     {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "eg", 
-                        config.wsensor.enrg.corr[wsensorNum], 
+                        config.wsensor?.enrg.corr[wsensorNum] ?? 0, 
                         i18n.t('energy'), 
-                        data.wsensor.energy.data[wsensorNum], 
+                        data.wsensor?.energy.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensEnergyChange({val: val, num: wsensorNum})),
                         -10, 10, 0.1,
                         hideUnnecessary,
-                        data.wsensor.energy.name[wsensorNum]
+                        data.wsensor?.energy.name[wsensorNum] ?? ''
                     )}
 
                     {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "fr", 
-                        config.wsensor.freq.corr[wsensorNum], 
+                        config.wsensor?.freq.corr[wsensorNum] ?? 0, 
                         i18n.t('frequency'), 
-                        data.wsensor.freq.data[wsensorNum], 
+                        data.wsensor?.freq.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensFreqChange({val: val, num: wsensorNum})),
                         -10, 10, 0.1,
                         hideUnnecessary,
-                        data.wsensor.power.name[wsensorNum]
+                        data.wsensor?.power.name[wsensorNum] ?? ''
                     )}
                 </div>
 
                 <div>
-                    <RangeInput value={config.wsensor.bat.k[wsensorNum]}
+                    <RangeInput value={config.wsensor?.bat.k[wsensorNum] ?? 0}
                         label={<div className="mt-4">
                             {i18n.t('batteryVoltage')}:
                             <Indication error={!vl.WsensorDataRelevance(wsensorNum)} 
                                 value={<>
-                                    {vl.validateBatteryADC(data.wsensor.bat[wsensorNum])
+                                    {vl.validateBatteryADC(data.wsensor?.bat[wsensorNum] ?? 0)
                                         ? (Math.round(
                                             (
-                                                data.wsensor.bat[wsensorNum] / (300 - config.wsensor.bat.k[wsensorNum])
+                                                (data.wsensor?.bat[wsensorNum] ?? 0) / (300 - (config.wsensor?.bat.k[wsensorNum] ?? 0))
                                             ) * 1000) / 1000).toFixed(3) 
                                             + i18n.t('units.v') + " " + BatPercent(wsensorNum)
                                         : "--"
@@ -183,7 +183,7 @@ export default function WSensors() {
                         limitMin={10}
                         limitMax={250}
                         step={0.2}
-                        indication={config.wsensor.bat.k[wsensorNum].toFixed(1)}
+                        indication={config.wsensor?.bat.k[wsensorNum].toFixed(1) ?? ''}
                         onChange={(val: number) => dispatch(cf.wSensBatKChange({val: val, num: wsensorNum}))}
                     />
 
@@ -193,13 +193,13 @@ export default function WSensors() {
                                 i18n.t('threeBatteries'), 
                                 i18n.t('liIonBattery')
                             ]}
-                            value={config.wsensor.bat.type[wsensorNum]}
+                            value={config.wsensor?.bat.type[wsensorNum] ?? 0}
                             onChange={(val: number) => dispatch(cf.wSensBatTypeChange({val: val, num: wsensorNum}))}
                         />
                     </div>
 
                     <div className="my-8">
-                        <NumberInput value={config.wsensor.channel}
+                        <NumberInput value={config.wsensor?.channel ?? 0}
                             min={1}
                             max={100}
                             label={i18n.t('channelNumber')}
@@ -213,7 +213,7 @@ export default function WSensors() {
                     </div>
 
                     <div className="mt-8 mb-16">
-                        <NumberInput value={config.wsensor.expire[wsensorNum]}
+                        <NumberInput value={config.wsensor?.expire[wsensorNum] ?? 0}
                             min={1}
                             max={100}
                             label={i18n.t('dataExpirationTime')}

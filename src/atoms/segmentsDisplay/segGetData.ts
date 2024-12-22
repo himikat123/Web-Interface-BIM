@@ -17,10 +17,10 @@ export default function segGetData(dispNum: number, slot: number, pointsState: b
     const data = store.getState().data;
     let dispImg = [0, 0, 0, 0, 0, 0, 0, 0];
     let clockpoints = false;
-    const sens = config.display.timeSlot.data[slot][dispNum];
+    const sens = config.display.timeSlot ? config.display.timeSlot.data[slot][dispNum] : 0;
     const dispLength = displayLength(dispNum) + '-dig';
 
-    switch(config.display.timeSlot.sensor[slot][dispNum]) {
+    switch(config.display.timeSlot ? config.display.timeSlot.sensor[slot][dispNum] : 0) {
         case 0: clockpoints = true; dispImg = clock(sens, dispLength, pointsState, dispNum); break;
         case 1: dispImg = cdate(sens, dispLength); break;
         case 2: dispImg = segBME280(dispNum, slot, dispLength); break;
@@ -28,7 +28,7 @@ export default function segGetData(dispNum: number, slot: number, pointsState: b
         case 4: dispImg = segSHT21(dispNum, slot, dispLength); break;
         case 5: dispImg = segDHT22(dispNum, slot, dispLength); break;
         case 6: dispImg = temp(data.ds18b20.temp + config.sensors.ds18b20.t, dispLength); break;
-        case 7: dispImg = temp(data.esp32.temp + config.sensors.esp32.t, dispLength); break;
+        case 7: dispImg = temp((data.esp32?.temp ?? 0) + (config.sensors.esp32?.t ?? 0), dispLength); break;
         case 8: dispImg = segThingspeak(dispNum, slot, dispLength); break;
         case 9: dispImg = segWeather(dispNum, slot, dispLength); break;
         case 10: dispImg = segWsensor(dispNum, slot, dispLength); break;

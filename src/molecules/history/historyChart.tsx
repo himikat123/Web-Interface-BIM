@@ -23,7 +23,7 @@ export default function HistoryChart(props: iHistoryChart) {
         }
     }, []);
 
-    let src = `https://thingspeak.com/channels/${config.history.channelID}/`;
+    let src = `https://thingspeak.com/channels/${config.history?.channelID ?? ''}/`;
     src += `charts/${props.num + 1}`;
     src += `?bgcolor=%23${bgColor}`;
     src += `&color=%23${props.chartColor}`;
@@ -32,7 +32,7 @@ export default function HistoryChart(props: iHistoryChart) {
     src += '&round=2';
     src += `&title=${props.title}`;
     src += '&type=line';
-    src += `&api_key=${config.history.rdkey}`;
+    src += `&api_key=${config.history?.rdkey ?? ''}`;
     src += `&width=${chartWidth}`;
 
     return <div className="w-100 text-center">

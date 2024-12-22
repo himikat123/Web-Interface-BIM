@@ -6,7 +6,7 @@ export default function segBMP180(dispNum: number, slot: number, dispModel: stri
     const config = store.getState().config;
     const data = store.getState().data;
     let dispImg = [0, 0, 0, 0, 0, 0, 0, 0];
-    const type = config.display.timeSlot.data[slot][dispNum];
+    const type = config.display.timeSlot ? config.display.timeSlot.data[slot][dispNum] : 0;
   
     if(type === 0) dispImg = temp(data.bmp180.temp + config.sensors.bmp180.t, dispModel);
     if(type === 1) dispImg = pres(data.bmp180.pres + config.sensors.bmp180.p, dispModel);

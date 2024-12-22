@@ -35,16 +35,16 @@ export default function CardNarodmonSendData(props: iCardSend) {
 
             {config.narodmonSend.sensors[props.num] === (device() === 'WeatherMonitorBIM32' ? 2 : 400) && <div className="mt-8">
                 {/* Wireless sensor number */}
-                <WsensorNumber value={config.narodmonSend.wsensors[props.num]}
+                <WsensorNumber value={config.narodmonSend?.wsensors ? config.narodmonSend.wsensors[props.num] : 0}
                     changeValue={val => dispatch(cf.narodmonSendWsensorsChange({ num: props.num, val: val }))}
                 />
 
                 {/* Wireless sensor type of sensor */}
                 <div className="mt-8">
                     <CloudWsensDataType num={props.num} 
-                        value={config.narodmonSend.wtypes[props.num]}
+                        value={config.narodmonSend?.wtypes ? config.narodmonSend.wtypes[props.num] : 0}
                         onChange={(val: number) => dispatch(cf.narodmonSendWtypesChange({ num: props.num, val: val }))}
-                        sens={config.narodmonSend.wsensors[props.num]}
+                        sens={config.narodmonSend?.wsensors ? config.narodmonSend.wsensors[props.num] : 0}
                     />
                 </div>
             </div>}

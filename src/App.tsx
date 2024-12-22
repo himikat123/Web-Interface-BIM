@@ -78,8 +78,8 @@ function App() {
     useEffect(() => {
         let dataFetchInterval: NodeJS.Timeout;
 
-        function fetchData() {
-            const nav = dataFetch(path);
+        async function fetchData() {
+            const nav = await dataFetch(path);
             if(nav) navigate(nav);
 
             if(moment().unix() - history.updated > 600) historyFetch(apMode);

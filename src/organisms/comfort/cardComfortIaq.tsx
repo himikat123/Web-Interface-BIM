@@ -12,6 +12,7 @@ import "./cardComfort.scss";
 export default function CardComfortAirQuality() {
     const config = useSelector((state: iConfig) => state.config);
     const comfRating = comfortIaqRating();
+    const source = config.comfort.iaq?.source ?? 0;
     let comfort = '--';
     if(comfRating === 0) comfort = i18n.t('cleanAir');
     if(comfRating === 1) comfort = i18n.t('polutedAir');
@@ -22,7 +23,7 @@ export default function CardComfortAirQuality() {
             {/* Sensor type */}
             <ComfortIaqSource />
 
-            {<div className={'card-comfort ' + (config.comfort.iaq.source > 0 ? 'show' : 'hide')}>
+            {<div className={'card-comfort ' + (source > 0 ? 'show' : 'hide')}>
                 {/* Comfort rating */}
                 <div className="mt-6">
                     <Indication error={false} value={comfort} />

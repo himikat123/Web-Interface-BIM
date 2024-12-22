@@ -18,14 +18,18 @@ export default function BrightConstant(props: iDisplay) {
         fetch(url);
     }
 
-    return <RangeInput value={config.display.brightness.day[props.num]}
+    const br = Array.isArray(config.display.brightness.day)
+        ? config.display.brightness.day[props.num]
+        : config.display.brightness.day;
+
+    return <RangeInput value={br}
         label={i18n.t('brightness')}
         min={1}
         max={100}
         limitMin={1}
         limitMax={100}
         step={1}
-        indication={String(config.display.brightness.day[props.num])}
+        indication={String(br)}
         onChange={val => {
             dispatch(cf.displayBrightDayChange({num: props.num, val: val}));
             sendBright(val);

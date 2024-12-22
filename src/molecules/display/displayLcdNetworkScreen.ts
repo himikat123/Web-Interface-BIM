@@ -37,11 +37,12 @@ export function displayLcdNetworkScreen(ctx: CanvasRenderingContext2D,
         printText(ctx, sl, 214 + y, w, font, i18n.t('firmware').substring(0, 15), font, 'center', color.TEXT, color.GROUND);
     }
 
-    const ssid = store.getState().data.network.ssid;
-    const rssi = store.getState().data.network.sig;
-    const ip = store.getState().data.network.ip;
-    const mac = store.getState().data.network.mac;
-    const esp32Temp = store.getState().data.esp32.temp;
+    const data = store.getState().data;
+    const ssid = data.network.ssid;
+    const rssi = data.network.sig;
+    const ip = data.network.ip;
+    const mac = data.network.mac;
+    const esp32Temp = data.esp32?.temp ?? 404;
     const fw = store.getState().data.fw;
 
     if(ssid !== state?.ssid) printText(ctx, sr, 64 + y, w, font, ssid.substring(0, 16), font, 'center', color.TEXT, color.GROUND);

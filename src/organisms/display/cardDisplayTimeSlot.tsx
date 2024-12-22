@@ -21,10 +21,11 @@ export default function CardDisplayTimeSlot(props: iDisplayTimeSlot) {
         content={<>
             {/* Duration */}
             <TimeSlotDuration slot={props.slot} num={props.num} />
-            
-            {config.display.timeSlot.period[props.slot][props.num] > 0 && <>
+
+            {config.display.timeSlot && config.display.timeSlot.period[props.slot][props.num] > 0 && <>
                 {/* Color */}
-                {(config.display.type[props.num] === 2 || config.display.type[props.num] >= 4) && <div className="mt-8">
+                {((config.display.type ? config.display.type[props.num] === 2 : 0) 
+                    || (config.display.type ? config.display.type[props.num] >= 4 : 0)) && <div className="mt-8">
                     <TimeSlotColor slot={props.slot} num={props.num} />
                 </div>}
 

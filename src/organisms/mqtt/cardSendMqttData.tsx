@@ -18,7 +18,7 @@ export default function CardSendMqttData(props: iCardSend) {
         content={<>
             {/* Data source */}
             <CloudSourceSensor num={props.num}
-                value={config.mqttSend.sensors[props.num]}
+                value={config.mqttSend?.sensors ? config.mqttSend.sensors[props.num] : 0}
                 onChange={(val: number) => {
                     dispatch(cf.mqttSendSensorsChange({ num: props.num, val: val }));
                     dispatch(cf.mqttSendTypesChange({ num: props.num, val: 0 }))
@@ -27,29 +27,29 @@ export default function CardSendMqttData(props: iCardSend) {
 
             {/* Sensor type */}
             <CloudSensorType num={props.num}
-                value={config.mqttSend.types[props.num]}
+                value={config.mqttSend?.types ? config.mqttSend.types[props.num] : 0}
                 onChange={(val: number) => dispatch(cf.mqttSendTypesChange({ num: props.num, val: val }))}
-                sens={config.mqttSend.sensors[props.num]}
+                sens={config.mqttSend?.sensors ? config.mqttSend.sensors[props.num] : 0}
             />
 
-            {config.mqttSend.sensors[props.num] === 2 && <div className="mt-8">
+            {(config.mqttSend?.sensors ? config.mqttSend.sensors[props.num] : 0) === 2 && <div className="mt-8">
                 {/* Wireless sensor number */}
-                <WsensorNumber value={config.mqttSend.wsensors[props.num]}
+                <WsensorNumber value={config.mqttSend?.wsensors ? config.mqttSend.wsensors[props.num] : 0}
                     changeValue={val => dispatch(cf.mqttSendWsensorsChange({ num: props.num, val: val }))}
                 />
 
                 {/* Wireless sensor type of sensor */}
                 <div className="mt-8">
                     <CloudWsensDataType num={props.num} 
-                        value={config.mqttSend.wtypes[props.num]}
+                        value={config.mqttSend?.wtypes ? config.mqttSend.wtypes[props.num] : 0}
                         onChange={(val: number) => dispatch(cf.mqttSendWtypesChange({ num: props.num, val: val }))}
-                        sens={config.mqttSend.wsensors[props.num]}
+                        sens={config.mqttSend?.wsensors ? config.mqttSend.wsensors[props.num] : 0}
                     />
                 </div>
             </div>}
 
             {/* Topic */}
-            {config.mqttSend.sensors[props.num] > 0 && <MqttTopic num={props.num} />}
+            {(config.mqttSend?.sensors ? config.mqttSend.sensors[props.num] : 0) > 0 && <MqttTopic num={props.num} />}
         </>} 
     />
 }

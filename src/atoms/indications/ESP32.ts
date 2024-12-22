@@ -10,8 +10,8 @@ export default function ESP32() {
     const locale = config.lang === 'ua' ? 'uk' : config.lang;
 
     return {
-        temp: vl.validateTemperature(data.esp32.temp) 
-            ? ((data.esp32.temp + config.sensors.esp32.t).toFixed(2) + '°C') 
+        temp: vl.validateTemperature(data.esp32?.temp ?? 0) 
+            ? (((data.esp32?.temp ?? 0) + (config.sensors.esp32?.t ?? 0)).toFixed(2) + '°C') 
             : '--',
 
         runtime: humanizeDuration(data.runtime * 1000, {

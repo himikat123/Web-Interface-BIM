@@ -7,7 +7,7 @@ export default function clock(sens: number, dispLength: string, pointsState: boo
     const DASH = segSymbCodes().SYMB_MINUS;
     const DOT = 100;
     const config = store.getState().config;
-    const type = config.display.type[dispNum];
+    const type = config.display.type ? config.display.type[dispNum] : 0;
     const model = config.display.model[dispNum];
     const hour = moment().hours();
     const hr = config.clock.format ? hour : hour % 12 || 12;
@@ -32,7 +32,7 @@ export default function clock(sens: number, dispLength: string, pointsState: boo
     let point1 = false;
     let point2 = false;
 
-    switch(config.display.animation.points[dispNum]) {
+    switch(config.display.animation ? config.display.animation.points[dispNum] : 0) {
         case 0: point1 = point2 = pointsState; break;
         case 1: point1 = type === 2 ? pointsState : false; point2 = type === 2 ? !point1 : false; break;
         case 2: point1 = point2 = true; break;
@@ -61,7 +61,7 @@ export default function clock(sens: number, dispLength: string, pointsState: boo
 
     let disp = dispLength === '4-dig' ? disp4Img : dispLength === '6-dig' ? disp6Img[sens] : disp8Img[sens];
    
-    if(config.display.animation.points[dispNum] === 1 && type !== 2) {
+    if((config.display.animation ? config.display.animation.points[dispNum] : 0) === 1 && type !== 2) {
         disp = disp.map((dig, i) => pendulum === i ? dig + DOT : dig);
     }
 

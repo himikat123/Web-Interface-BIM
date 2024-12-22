@@ -21,7 +21,7 @@ export default function CardDisplayPressureOut() {
 
             {/* Wireless sensor number */}
             {config.display.source.presOut.sens === (device() === 'WeatherMonitorBIM32' ? 2 : 400) && <>
-                <WsensorNumber value={config.display.source.presOut.wsensNum} 
+                <WsensorNumber value={config.display.source.presOut.wsensNum ?? 0} 
                     changeValue={val => dispatch(cf.displaySourcePresOutWsensNumChange(val))}
                     indications={indications}
                 />

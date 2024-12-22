@@ -8,7 +8,7 @@ import { iConfig } from "../../redux/configTypes";
 
 export default function DisplayView7segment(props: {num: number}) {
     const config = useSelector((state: iConfig) => state.config);
-    const dType = config.display.type[props.num];
+    const dType = config.display.type ? config.display.type[props.num] : 0;
     const dModel = config.display.model[props.num];
     const colorsTM1637 = ['#0F0', '#0F0', '#0F0', '#0F0', '#0F0', '#0F0', '#0F0', '#0F0'];
     const colorsMAX7219 = ['#F00', '#F00', '#F00', '#F00', '#F00', '#F00', '#F00', '#F00'];

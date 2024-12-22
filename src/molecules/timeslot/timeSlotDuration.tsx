@@ -10,7 +10,7 @@ export default function TimeSlotDuration(props: iDisplayTimeSlot) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
 
-    return <NumberInput value={config.display.timeSlot.period[props.slot][props.num]}
+    return <NumberInput value={config.display.timeSlot ? config.display.timeSlot.period[props.slot][props.num] : 0}
         min={0}
         max={99}
         label={i18n.t('displayDuration')}

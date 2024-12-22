@@ -24,7 +24,7 @@ export default function Status() {
         .then(response => response.text())
         .then(text => {
             try {
-                let regex = /FW "(v.+)"/gm;
+                let regex = device() === 'WeatherMonitorBIM' ? /fw\[7\] = "(v.+)"/gm : /FW "(v.+)"/gm;
                 setGitFW(regex.exec(text)![1]);
             }
             catch(err) {console.log(err)}
@@ -51,12 +51,12 @@ export default function Status() {
     return <TwoColumns header={[<>
             <p className='text-center'>{i18n.t('status')}</p>
             {newFwFound && <div className='p-4'>
-                <p className='text-base card border-2 border-menu_light dark:border-menu_dark bg-card_light dark:bg-card_dark rounded-lg p-6'>
+                <div className='text-base card border-2 border-menu_light dark:border-menu_dark bg-card_light dark:bg-card_dark rounded-lg p-6'>
                     {i18n.t('firmwareUpdateAppeared').replace('XXX', gitFW)}:<br />
                     <a href={gitLink} target="_blank" rel="noreferrer" className="text-blue-700 dark:text-blue-400">
                         <div dangerouslySetInnerHTML={{ __html: gitLink.replaceAll('/', '/&#173;') }} />
                     </a>
-                </p>
+                </div>
             </div>}
         </>]} 
         content={[content]} 

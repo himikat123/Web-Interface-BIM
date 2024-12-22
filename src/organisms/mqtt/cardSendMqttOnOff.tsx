@@ -11,8 +11,8 @@ export default function CardSendMqttOnOff() {
 
     return <Card content={<>
         <Toggle label={i18n.t('sendViaMqtt')}
-            checked={config.mqttSend.period >= 30 ? 1 : 0}
-            onChange={() => dispatch(cf.mqttSendPeriodChange(config.mqttSend.period >= 30 ? 0 : 60))}
+            checked={(config.mqttSend?.period ?? 0) >= 30 ? 1 : 0}
+            onChange={() => dispatch(cf.mqttSendPeriodChange((config.mqttSend?.period ?? 0) >= 30 ? 0 : 60))}
         />
     </>} />
 }

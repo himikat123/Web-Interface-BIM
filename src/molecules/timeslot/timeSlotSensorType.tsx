@@ -19,7 +19,7 @@ export default function TimeSlotSensorType(props: iDisplayTimeSlot) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
-    const sensor = config.display.timeSlot.sensor[props.slot][props.num];
+    const sensor = config.display.timeSlot ? config.display.timeSlot.sensor[props.slot][props.num] : 0;
 
     const types = [
         /* Time */ [
@@ -119,10 +119,10 @@ export default function TimeSlotSensorType(props: iDisplayTimeSlot) {
         {types[sensor].length > 0 && <div className="mt-8">
             <SelectSwitch label={i18n.t('sensorType')}
                 options={types[sensor]}
-                value={config.display.timeSlot.data[props.slot][props.num]}
+                value={config.display.timeSlot ? config.display.timeSlot.data[props.slot][props.num] : 0}
                 onChange={val => dispatch(cf.displayTimeslotDataChange({slot: props.slot, num: props.num, val: val}))}
                 disabled={sensor < 2
-                    ? disabled[sensor][config.display.type[props.num]][config.display.model[props.num]]
+                    ? disabled[sensor][config.display.type ? config.display.type[props.num] : 0][config.display.model[props.num]]
                     : []
                 }
             />

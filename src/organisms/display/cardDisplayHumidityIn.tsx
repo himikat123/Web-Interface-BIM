@@ -22,14 +22,14 @@ export default function CardDisplayHumidityIn() {
             
             {/* Wireless sensor number */}
             {config.display.source.humIn.sens === (device() === 'WeatherMonitorBIM32' ? 2 : 400) && <>
-                <WsensorNumber value={config.display.source.humIn.wsensNum} 
+                <WsensorNumber value={config.display.source.humIn.wsensNum ?? 0} 
                     changeValue={val => dispatch(cf.displaySourceHumInWsensNumChange(val))}
                     indications={indications}
                 />
             </>}
 
             {/* Thingspeak */}
-            {config.display.source.humIn.sens === (device() === 'WeatherMonitorBIM32' ? 3 : 400) && <>
+            {config.display.source.humIn.sens === (device() === 'WeatherMonitorBIM32' ? 3 : 2) && <>
                 <ThingspeakField value={config.display.source.humIn.thing}
                     changeValue={val => dispatch(cf.displaySourceHumInThingChange(val))} 
                 />

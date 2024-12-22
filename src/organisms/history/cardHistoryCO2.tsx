@@ -24,15 +24,15 @@ export default function CardHistoryCo2(props: iCardHistory) {
         <div className="mt-8">
             <HistorySensorCo2 num={props.type}
                 label={<div dangerouslySetInnerHTML={{ __html: props.title }} />}
-                value={config.history.fields[props.type]}
+                value={config.history?.fields ? config.history.fields[props.type] : 0}
                 onChange={val => dispatch(cf.historyFieldsChange({ num: props.type, val: val }))}
             />
         </div>
 
         {/* Wireless Sensor Number */}
-        {config.history.fields[props.type] === 1 && <div className="mt-8">
+        {(config.history?.fields ? config.history.fields[props.type] : 0) === 1 && <div className="mt-8">
             <WsensorNumber indications={wsensorIndications} 
-                value={config.history.wSensors[props.type]}
+                value={config.history?.wSensors ? config.history.wSensors[props.type] : 0}
                 changeValue={val => dispatch(cf.historyWsensorsChange({ num: props.type, val: val }))}
             />
         </div>}

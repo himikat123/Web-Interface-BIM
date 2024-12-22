@@ -20,63 +20,73 @@ import { iConfig } from "../redux/configTypes";
 
 export default function Display1() {
     const config = useSelector((state: iConfig) => state.config);
+    const rows = [];
 
-    /********* BIM ESP8266 **********/
-    const row1_3 = <>
-        <CardDisplayBrightness num={0} />
-        <CardDisplayTemperatureIn />
-        <CardDisplayHumidityIn />
-    </>
-
-    const row2_3 = <>
-        <CardDisplayVoltage />
-        <CardDisplayBatLevel />
-        <CardDisplayComfort />
-    </>
-
-    const row3_3 = <>
-        <CardDisplayTemperatureOut />
-        <CardDisplayHumidityOut />
-        <CardDisplayPressureOut />
-    </>
-
-    /************ BIM32 ************/
-    const row1_4 = <>
-        <CardDisplayType num={0} />
-        <CardDisplayBrightness num={0} />
-        <CardDisplayAutoOff num={0} />
-        <CardDisplayAnimation num={0} />
-    </>
-
-    const row2_4 = <>
-        {config.display.type[0] === 1 && <>
+    if(device() === 'WeatherMonitorBIM') { 
+        
+        /********* BIM ESP8266 **********/
+        rows.push(<>
+            <CardDisplayBrightness num={0} />
             <CardDisplayTemperatureIn />
             <CardDisplayHumidityIn />
+        </>);
+
+        rows.push(<>
             <CardDisplayVoltage />
             <CardDisplayBatLevel />
-        </>}
-        {config.display.type[0] >= 2 && [...Array(4)].map((x, i) => <CardDisplayTimeSlot key={i} slot={i} num={0} />)}
-    </>
+            <CardDisplayComfort />
+        </>);
 
-    const row3_4 = <>
-        {config.display.type[0] === 1 && <>
+        rows.push(<>
             <CardDisplayTemperatureOut />
             <CardDisplayHumidityOut />
             <CardDisplayPressureOut />
-            <CardDisplayComfort />
-        </>}
-        {config.display.type[0] >= 2 && [...Array(4)].map((x, i) => <CardDisplayTimeSlot key={i} slot={i + 4} num={0} />)}
-    </>
+        </>);
+    }
+
+    else {
+        /************ BIM32 ************/
+        rows.push(<>
+            <CardDisplayType num={0} />
+            <CardDisplayBrightness num={0} />
+            <CardDisplayAutoOff num={0} />
+            <CardDisplayAnimation num={0} />
+        </>);
+
+        rows.push(<>
+            {config.display.type && config.display.type[0] === 1 && <>
+                <CardDisplayTemperatureIn />
+                <CardDisplayHumidityIn />
+                <CardDisplayVoltage />
+                <CardDisplayBatLevel />
+            </>}
+            {config.display.type && config.display.type[0] >= 2 && 
+                [...Array(4)].map((x, i) => <CardDisplayTimeSlot key={i} slot={i} num={0} />)
+            }
+        </>);
+
+        rows.push(<>
+            {config.display.type && config.display.type[0] === 1 && <>
+                <CardDisplayTemperatureOut />
+                <CardDisplayHumidityOut />
+                <CardDisplayPressureOut />
+                <CardDisplayComfort />
+            </>}
+            {config.display.type && config.display.type[0] >= 2 && 
+                [...Array(4)].map((x, i) => <CardDisplayTimeSlot key={i} slot={i + 4} num={0} />)
+            }
+        </>);
+    }
 
     return device() === 'WeatherMonitorBIM' 
         ? <ThreeColumns navbar={true}
             header={[i18n.t('display.singular')]}
-            content={[row1_3, row2_3, row3_3]}
+            content={rows}
             buttons={['save', 'reset']}
         />
         : <FourColumns navbar={true}
             header={[i18n.t('display.singular') + ' 1']} 
-            content={[row1_4, row2_4, row3_4]}
+            content={rows}
             buttons={['save', 'reset']} 
         />
 }

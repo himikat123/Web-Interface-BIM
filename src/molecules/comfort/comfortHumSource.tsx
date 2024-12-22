@@ -18,7 +18,7 @@ export default function ComfortHumSource() {
 
         {/* Wireless sensor number */}
         {config.comfort.hum.source === (device() === 'WeatherMonitorBIM32' ? 2 : 400) && <div className="mt-8">
-            <WsensorNumber value={config.comfort.hum.wsensNum}
+            <WsensorNumber value={config.comfort.hum.wsensNum ?? 0}
                 changeValue={val => dispatch(cf.comfortHumWsensNumChange(val))}
                 indications={indications}
             />

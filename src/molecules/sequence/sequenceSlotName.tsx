@@ -11,7 +11,7 @@ export default function SequenceSlotName(props: iSensorTypeSequence) {
 
     return <div className="mt-8">
         <TextInput label={i18n.t('name')} 
-            value={config.display.source.sequence.name[props.num]}
+            value={config.display.source.sequence ? config.display.source.sequence.name[props.num] : ''}
             maxLength={15}
             onChange={val => dispatch(cf.displaySourceSequenceNameChange({ num: props.num, val: val.target.value})) }
         />

@@ -21,7 +21,7 @@ export default function CardDisplayHumidityOut() {
             
             {/* Wireless sensor number */}
             {config.display.source.humOut.sens === (device() === 'WeatherMonitorBIM32' ? 2 : 400) && <>
-                <WsensorNumber value={config.display.source.humOut.wsensNum} 
+                <WsensorNumber value={config.display.source.humOut.wsensNum ?? 0} 
                     changeValue={val => dispatch(cf.displaySourceHumOutWsensNumChange(val))}
                     indications={indications}
                 />

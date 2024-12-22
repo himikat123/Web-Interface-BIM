@@ -113,7 +113,7 @@ app.get('/data.json', (req, res) => {
     setTimeout(() => {
         res.set('Access-Control-Allow-Origin', '*');
         res.send(JSON.stringify(data(req.query.code)));
-    }, 2000);
+    }, 500);
 });
 
 app.get('/esp/changelang', (req, res) => {

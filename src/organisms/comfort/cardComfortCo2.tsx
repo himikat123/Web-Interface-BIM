@@ -12,6 +12,7 @@ import "./cardComfort.scss";
 export default function CardComfortCo2() {
     const config = useSelector((state: iConfig) => state.config);
     const comfRating = comfortCo2Rating();
+    const source = config.comfort.co2?.source ?? 0;
     let comfort = '--';
     if(comfRating === 0) comfort = i18n.t('cleanAir');
     if(comfRating === 1) comfort = i18n.t('polutedAir');
@@ -21,8 +22,8 @@ export default function CardComfortCo2() {
         content={<>
             {/* Sensor type */}
             <ComfortCo2Source />
-                
-            {<div className={'card-comfort ' + (config.comfort.co2.source > 0 ? 'show' : 'hide')}>
+
+            {<div className={'card-comfort ' + (source > 0 ? 'show' : 'hide')}>
                 {/* Comfort rating */}
                 <div className="mt-6">
                     <Indication error={false} value={comfort} />

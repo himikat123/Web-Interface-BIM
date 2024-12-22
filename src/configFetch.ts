@@ -19,13 +19,16 @@ export default function configFetch() {
         store.dispatch(configStateChange('error'));
         console.error(err);
     });
-    axios(`${hostUrl()}/alarm.json?code=${localStorage.getItem('code') || '0'}`)
-    .then(res => {
-        store.dispatch(alarmsStateChange('ok'));
-        store.dispatch(setAlarmState(res.data));
-    })
-    .catch(err => {
-        store.dispatch(alarmsStateChange('error'));
-        console.error(err);
-    });
+    if(device() === 'WeatherMonitorBIM32') { 
+        axios(`${hostUrl()}/alarm.json?code=${localStorage.getItem('code') || '0'}`)
+        .then(res => {
+            store.dispatch(alarmsStateChange('ok'));
+            store.dispatch(setAlarmState(res.data));
+        })
+        .catch(err => {
+            store.dispatch(alarmsStateChange('error'));
+            console.error(err);
+        });
+    }
+    else store.dispatch(alarmsStateChange('ok')); 
 }

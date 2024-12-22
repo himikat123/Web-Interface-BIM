@@ -24,7 +24,7 @@ export default function SequenceTemp() {
             </div>
 
             {/* Wireless sensor */}
-            {config.display.source.sequence.temp[num] === 2 && <>
+            {config.display.source.sequence && config.display.source.sequence.temp[num] === 2 && <>
                 <WsensorNumber value={config.display.source.sequence.wsenstemp[num][0]}
                     changeValue={val => dispatch(cf.displaySourceSequenceWsensTempChange({ num: num, wsens: 0, val: val }))}
                 />
@@ -35,7 +35,7 @@ export default function SequenceTemp() {
             </>}
 
             {/* Thingspeak */}
-            {config.display.source.sequence.temp[num] === 3 && <ThingspeakField value={config.display.source.sequence.thngtemp[num]}
+            {config.display.source.sequence && config.display.source.sequence.temp[num] === 3 && <ThingspeakField value={config.display.source.sequence.thngtemp[num]}
                 changeValue={(val: number) => dispatch(cf.displaySourceSequenceThngTempChange({ num: num, val: val }))}
             />}
 

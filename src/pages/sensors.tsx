@@ -22,41 +22,41 @@ export default function Sensors() {
     if(device() === 'WeatherMonitorBIM32') content.push(<Card header="BME680" key="BME680"
         content={<>
             {sensorCorrection(false, "t", 
-                config.sensors.bme680.t, 
+                config.sensors.bme680?.t ?? 0, 
                 i18n.t('temperature'), 
-                data.bme680.temp, 
+                data.bme680?.temp ?? 0, 
                 (val: number) => dispatch(cf.BME680TempCorrChange(val)), 
                 -10, 10, 0.1
             )}
             {sensorCorrection(false, "h", 
-                config.sensors.bme680.h, 
+                config.sensors.bme680?.h ?? 0, 
                 i18n.t('humidity'), 
-                data.bme680.hum, 
+                data.bme680?.hum ?? 0, 
                 (val: number) => dispatch(cf.BME680HumCorrChange(val)), 
                 -10, 10, 0.1
             )}
             {sensorCorrection(false, "p", 
-                config.sensors.bme680.p, 
+                config.sensors.bme680?.p ?? 0, 
                 i18n.t('pressure'), 
-                data.bme680.pres, 
+                data.bme680?.pres ?? 0, 
                 (val: number) => dispatch(cf.BME680PresCorrChange(val)), 
                 -10, 10, 0.1
             )}
             {sensorCorrection(false, "i", 
-                config.sensors.bme680.i,
+                config.sensors.bme680?.i ?? 0,
                 i18n.t('indexForAirQuality'), 
-                data.bme680.iaq, 
+                data.bme680?.iaq ?? 0, 
                 (val: number) => dispatch(cf.BME680IaqCorrChange(val)), 
                 -10, 10, 0.1
             )}
             <div className="mt-2 text-center">
                 {i18n.t('sensorAccuracy')}:
                 <span className="ms-1 text-blue-700 dark:text-blue-400">
-                    {vl.validateIaqArrc(data.bme680.iaqAccr) ? data.bme680.iaqAccr : '--'}
+                    {vl.validateIaqArrc(data.bme680?.iaqAccr ?? 0) ? data.bme680?.iaqAccr : '--'}
                 </span>
             </div>
         </>}
-        className={!vl.validateTemperature(data.bme680.temp) && !vl.validateHumidity(data.bme680.hum) && !vl.validatePressure(data.bme680.pres) && !vl.validateIaq(data.bme680.iaq)
+        className={!vl.validateTemperature(data.bme680?.temp ?? 0) && !vl.validateHumidity(data.bme680?.hum ?? 0) && !vl.validatePressure(data.bme680?.pres ?? 0) && !vl.validateIaq(data.bme680?.iaq ?? 0)
             ? 'invalid' + (hideUnnecessary ? ' hide' : '')
             : ''
         }
@@ -228,14 +228,14 @@ export default function Sensors() {
     if(device() === 'WeatherMonitorBIM32') content.push(<Card header="ESP32" key="ESP32"
         content={<>
             {sensorCorrection(false, "t", 
-                config.sensors.esp32.t, 
+                config.sensors.esp32?.t ?? 0, 
                 i18n.t('temperature'), 
-                data.esp32.temp, 
+                data.esp32?.temp ?? 0, 
                 (val: number) => dispatch(cf.ESP32TempCorrChange(val)), 
                 -10, 10, 0.1
             )}
         </>}
-        className={!vl.validateTemperature(data.esp32.temp)
+        className={!vl.validateTemperature(data.esp32?.temp ?? 0)
             ? 'invalid' + (hideUnnecessary ? ' hide' : '')
             : ''
         }

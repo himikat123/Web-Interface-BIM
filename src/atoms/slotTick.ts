@@ -7,14 +7,14 @@ export default function slotTick(dispNum: number, state: iSegState): iSegState {
 
     /* Slot switch */
     const millis = Date.now();
-    const period = config.display.timeSlot.period[state.slot][dispNum];
+    const period = config.display.timeSlot ? config.display.timeSlot.period[state.slot][dispNum] : 0;
     if((millis - state.prevSlotMillis) > (period * 1000) || period === 0) {
         state.prevSlot = state.slot;
         state.slot++;
         state.animSlot = 0;
         state.animMillis = millis;
         for(let i=state.slot; i<8; i++) {
-            if(config.display.timeSlot.period[state.slot][dispNum] === 0) {
+            if(config.display.timeSlot && config.display.timeSlot.period[state.slot][dispNum] === 0) {
                 state.slot++;
                 state.animSlot = 0;
                 state.animMillis = millis;
@@ -37,7 +37,7 @@ export default function slotTick(dispNum: number, state: iSegState): iSegState {
         colors: segData.colors,
         clockpoints: segData.clockpoints,
         points: date.getMilliseconds() < 500,
-        pointsColor: config.display.timeSlot.color[state.slot][dispNum],
+        pointsColor: config.display.timeSlot ? config.display.timeSlot.color[state.slot][dispNum] : '',
         slot: state.slot,
         prevSlot: state.prevSlot,
         prevSlotMillis: state.prevSlotMillis,

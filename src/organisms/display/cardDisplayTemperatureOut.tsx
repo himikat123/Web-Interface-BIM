@@ -19,11 +19,11 @@ export default function CardDisplayTemperatureOut() {
 
         {/* Wireless Sensor */}
         {config.display.source.tempOut.sens === (device() === 'WeatherMonitorBIM32' ? 2 : 400) && <>
-            <WsensorNumber value={config.display.source.tempOut.wsensNum} 
+            <WsensorNumber value={config.display.source.tempOut.wsensNum ?? 0} 
                 changeValue={val => dispatch(cf.displaySourceTempOutWsensNumChange(val))}
             />
-            <WsensorTempNumber wSensNum={config.display.source.tempOut.wsensNum}
-                value={config.display.source.tempOut.temp}
+            <WsensorTempNumber wSensNum={config.display.source.tempOut.wsensNum ?? 0}
+                value={config.display.source.tempOut.temp ?? 0}
                 changeValue={val => dispatch(cf.displaySourceTempOutTempChange(val))}
             />
         </>}

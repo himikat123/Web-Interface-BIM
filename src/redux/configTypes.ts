@@ -4,26 +4,26 @@ export interface iConfig {
         comfort: {
             temp: {
                 source: number,
-                wsensNum: number,
-                sens: number,
+                wsensNum?: number,
+                sens?: number,
                 thing: number,
-                min: number[],
-                max: number[],
-                sound: number
+                min: number[] | number,
+                max: number[] | number,
+                sound?: number
             },
             hum: {
                 source: number,
-                wsensNum: number,
+                wsensNum?: number,
                 thing: number,
-                min: number[],
-                max: number[],
-                sound: number
+                min: number[] | number,
+                max: number[] | number,
+                sound?: number
             },
-            iaq: {
+            iaq?: {
                 source: number,
                 sound: number
             },
-            co2: {
+            co2?: {
                 source: number,
                 wsensNum: number,
                 sound: number
@@ -53,8 +53,7 @@ export interface iConfig {
             lat: number,
             lon: number,
             provider: number,
-            citysearch: number,
-            parsingServer: string
+            citysearch: number
         },
         lang: string,
         clock: {
@@ -65,27 +64,27 @@ export interface iConfig {
             ntp_period: number
         },
         display: {
-            type: number[],
+            type?: number[],
             model: number[],
-            order: number[][],
-            dayTime: string[],
-            nightTime: string[],
-            brightMethod: number[],
-            autoOff: number[],
-            nightOff: {
+            order?: number[][],
+            dayTime: string[] | string,
+            nightTime: string[] | string,
+            brightMethod: number[] | number,
+            autoOff?: number[],
+            nightOff?: {
                 need: number[],
                 from: number[],
                 to: number[]
             },
             brightness: {
-                day: number[],
-                night: number[],
-                min: number[],
-                max: number[]
+                day: number[] | number,
+                night: number[] | number,
+                min?: number[],
+                max?: number[]
             },
-            lightSensor: number[],
-            sensitivity: number[],
-            animation: {
+            lightSensor: number[] | number,
+            sensitivity: number[] | number,
+            animation?: {
                 type: number[],
                 speed: number[],
                 points: number[]
@@ -93,45 +92,45 @@ export interface iConfig {
             source: {
                 tempOut: {
                     sens: number,
-                    wsensNum: number,
-                    temp: number,
+                    wsensNum?: number,
+                    temp?: number,
                     thing: number
                 },
                 humOut: {
                     sens: number,
-                    wsensNum: number,
+                    wsensNum?: number,
                     thing: number
                 },
                 presOut: {
                     sens: number,
-                    wsensNum: number,
+                    wsensNum?: number,
                     thing: number
                 },
                 tempIn: {
                     sens: number,
-                    wsensNum: number,
-                    temp: number,
+                    wsensNum?: number,
+                    temp?: number,
                     thing: number
                 },
                 humIn: {
                     sens: number,
-                    wsensNum: number,
+                    wsensNum?: number,
                     thing: number
                 },
                 volt: {
                     sens: number,
-                    wsensNum: number,
+                    wsensNum?: number,
                     volt: number,
                     thing: number,
                     thingType: number
                 },
                 bat: {
                     sens: number,
-                    wsensNum: number,
+                    wsensNum?: number,
                     thing: number
                 },
                 descr: number,
-                sequence: {
+                sequence?: {
                     name: string[],
                     temp: number[],
                     thngtemp: number[],
@@ -142,7 +141,7 @@ export interface iConfig {
                     dur: number
                 }
             },
-            timeSlot: {
+            timeSlot?: {
                 period: number[][],
                 sensor: number[][],
                 data: number[][],
@@ -151,10 +150,10 @@ export interface iConfig {
                     num: number[][],
                     type: number[][]
                 },
-                    color: string[][]
+                color: string[][]
             }
         },
-        sound: {
+        sound?: {
             vol: number,
             eq: number,
             hourly: number,
@@ -164,7 +163,7 @@ export interface iConfig {
             }
         },
         sensors: {
-            bme680: {
+            bme680?: {
                 t: number,
                 h: number,
                 p: number,
@@ -190,7 +189,7 @@ export interface iConfig {
             ds18b20: {
                 t: number
             },
-            esp32: {
+            esp32?: {
                 t: number
             },
             max44009: {
@@ -203,7 +202,7 @@ export interface iConfig {
                 v: number
             }
         },
-        wsensor: {
+        wsensor?: {
             temp: {
                 corr: number[][]
             },
@@ -248,8 +247,8 @@ export interface iConfig {
             rdkey: string,
             fields: number[],
             types: number[],
-            wsensors: number[],
-            wtypes: number[]
+            wsensors?: number[],
+            wtypes?: number[]
         },
         thingspeakReceive: {
             period: number,
@@ -264,11 +263,11 @@ export interface iConfig {
             name: string,
             sensors: number[],
             types: number[],
-            wsensors: number[],
-            wtypes: number[],
+            wsensors?: number[],
+            wtypes?: number[],
             metrics: string[]
         },
-        mqttSend: {
+        mqttSend?: {
             period: number,
             broker: string,
             port: number,
@@ -280,7 +279,7 @@ export interface iConfig {
             wtypes: number[],
             topics: string[]
         },
-        history: {
+        history?: {
             period: number,
             channelID: string,
             wrkey: string,

@@ -72,7 +72,7 @@ export const validateThingspeak = (thng: number): boolean => {
 export const WsensorDataRelevance = (num: number) => {
     const config = store.getState().config;
     const data = store.getState().data;
-    return !((data.time - data.wsensor.time[num] > config.wsensor.expire[num] * 60) && data.wsensor.time[num] > 0);
+    return !((data.time - (data.wsensor?.time[num] ?? 0) > ((config.wsensor?.expire[num] ?? 0) * 60)) && (data.wsensor?.time[num] ?? 0) > 0);
 }
 
 export const ThingspeakDataRelevance = () => {

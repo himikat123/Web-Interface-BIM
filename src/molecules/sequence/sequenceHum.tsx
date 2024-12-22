@@ -27,19 +27,20 @@ export default function SequenceHum() {
             </div>
 
             {/* Wireless sensor */}
-            {config.display.source.sequence.hum[num] === 2 && <>
+            {config.display.source.sequence && config.display.source.sequence.hum[num] === 2 && <>
                 <WsensorNumber value={humWsensNum}
                     changeValue={(val: number) => {
                         setHumWsensNum(val);
                         dispatch(cf.displaySourceSequenceWsensHumChange({ num: num, wsens: 0, val: 0 }));
-                        dispatch(cf.displaySourceSequenceWsensHumChange({ num: num, wsens: 1, val: 0 }))
+                        dispatch(cf.displaySourceSequenceWsensHumChange({ num: num, wsens: 1, val: 0 }));
                     }}
                     indications={indications}
                 />
             </>}
 
             {/* Thingspeak */}
-            {config.display.source.sequence.hum[num] === 3 && <ThingspeakField value={config.display.source.sequence.thnghum[num]}
+            {config.display.source.sequence && config.display.source.sequence.hum[num] === 3 && <ThingspeakField 
+                value={config.display.source.sequence.thnghum[num]}
                 changeValue={(val: number) => dispatch(cf.displaySourceSequenceThngHumChange({ num: num, val: val }))}
             />}
 

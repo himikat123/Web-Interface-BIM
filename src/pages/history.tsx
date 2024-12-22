@@ -10,7 +10,7 @@ export default function History() {
 
     const content = <>
         <CardHistorySettings />
-        {config.history.period > 0 && <CardsHistorySensor />}
+        {(config.history?.period ?? 0) > 0 && <CardsHistorySensor />}
     </>;
 
     return <TwoColumns header={[i18n.t('weatherHistory')]} 
