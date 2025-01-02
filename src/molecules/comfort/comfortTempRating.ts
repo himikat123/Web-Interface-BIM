@@ -13,7 +13,7 @@ export default function comfortTempRating() {
 
     let temp = 40400;
     switch(config.comfort.temp.source) {
-        case cs[0]: temp = data.weather.temp; break; // temperature from weather forecast
+        case cs[0]: temp = data.weather.temp + config.weather.corr.t; break; // temperature from weather forecast
         case cs[1]: temp = (data.wsensor?.temp.data[sens][wsensNum] ?? 0) + (config.wsensor?.temp.corr[wsensNum][sens] ?? 0); break; // temperature from wireless sensor
         case cs[2]: temp = data.thing?.data ? data.thing?.data[config.comfort.temp.thing] : -40400; break; // temperature from thingspeak
         case cs[3]: temp = data.bme280.temp + config.sensors.bme280.t; break; // temperature from BME280

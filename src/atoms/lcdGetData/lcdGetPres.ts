@@ -14,7 +14,7 @@ export default function lcdGetPres() {
         : [1, 2, 3, 4, 5, 6];
 
     switch(config.display.source.presOut.sens) {
-        case cs[0]: pres = data.weather.pres; break;
+        case cs[0]: pres = data.weather.pres + config.weather.corr.p; break;
         case cs[1]: if(vl.WsensorDataRelevance(wsensNum)) {
             pres = vl.validatePressure(data.wsensor?.pres.data[wsensNum] ?? 0) 
                 ? (data.wsensor?.pres.data[wsensNum] ?? 0) + (config.wsensor?.pres.corr[wsensNum] ?? 0) 
