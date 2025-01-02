@@ -14,6 +14,13 @@ export default function CardStatusSystem() {
     const runtime = data.runtime > 86400
         ? data.runtime - moment.unix(data.runtime).utc().seconds()
         : data.runtime;
+    let hourFormat;
+    switch(config.clock.format) {
+        case 0: hourFormat = 'h'; break;
+        case 1: hourFormat = 'hh'; break;
+        case 2: hourFormat = 'H'; break;
+        default: hourFormat = 'HH'; break;
+    }
 
     return <div className='text-center'>
         <h2 className='text-xl'>{i18n.t('system')}</h2>
@@ -46,7 +53,7 @@ export default function CardStatusSystem() {
         <div className='mt-4'>
             <p>{i18n.t('systemTimeAndDate')}</p>
             <p className='text-blue-700 dark:text-blue-400'>
-                {moment(data.time * 1000).utc().format('HH:mm:ss DD.MM.YYYY')}
+                {moment(data.time * 1000).utc().format(`${hourFormat}:mm:ss DD.MM.YYYY`)}
             </p>
         </div>
 

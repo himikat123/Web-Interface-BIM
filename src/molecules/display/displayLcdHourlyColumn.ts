@@ -66,7 +66,14 @@ export default function displayLcdHourlyColumn(ctx: CanvasRenderingContext2D,
     printText(ctx, x + 2, y, 36, font, dt + mo, font, 'center', color.TEXT, color.BG);
     y += 14;
 
-    const tm = moment.unix(weather?.date[s] ?? 0).format('HH:mm');
+    let hourFormat;
+    switch(config.clock.format) {
+        case 0: hourFormat = 'h'; break;
+        case 1: hourFormat = 'hh'; break;
+        case 2: hourFormat = 'H'; break;
+        default: hourFormat = 'HH'; break;
+    }
+    const tm = moment.unix(weather?.date[s] ?? 0).format(`${hourFormat}:mm`);
     printText(ctx, x + 2, y, 36, font, tm, font, 'center', color.TEXT, color.BG);
     y += 14;
 

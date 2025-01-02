@@ -145,6 +145,8 @@
     "clockFormat": "Формат годин",
     "format12": "12-годинний",
     "format24": "24-годинний",
+    "woLeadingZero": "без провідного нуля",
+    "withLeadingZero": "з провідним нулем",
     "timezone": "Часовий пояс",
     "daylightSavingTime": "Перехід на літній час",
     "ntpServerAddress": "Адреса NTP-сервера",

@@ -1,3 +1,4 @@
+import store from '../../redux/store';
 import { printText, printSegment, fillRect, fillCircle, drawScaledImage } from '../../atoms/canvas/primitives';
 import * as symb from '../../atoms/img/symbols';
 import lcdCloseButton from '../../atoms/canvas/lcdCloseButton';
@@ -16,7 +17,15 @@ export function displayLcdClockScreen(ctx: CanvasRenderingContext2D,
         lcdCloseButton(ctx, dispModel);
     }
 
-    const hour = moment().hour();
+    let hourFormat;
+    switch(store.getState().config.clock.format) {
+        case 0: hourFormat = 'h'; break;
+        case 1: hourFormat = 'hh'; break;
+        case 2: hourFormat = 'H'; break;
+        default: hourFormat = 'HH'; break;
+    }
+
+    const hour = moment().format(hourFormat);
     const minute = moment().minute();
     const second = moment().second();
     const dt = new Date();
@@ -56,7 +65,7 @@ export function displayLcdClockScreen(ctx: CanvasRenderingContext2D,
         if(clockType === 'analog') { // Analog clock
             drawScaledImage(ctx, symb.clockFace(), dispModel ? 40 : 61, 0, 240, 240);
             setTimeout(() => {
-                drawHand(ctx, 70, hour * 30 + minute / 2, 4, color.ARROW1, dispModel);
+                drawHand(ctx, 70, +hour * 30 + minute / 2, 4, color.ARROW1, dispModel);
                 drawHand(ctx, 100, minute * 6 + second / 10, 2, color.ARROW1, dispModel);
                 if(model !== 1) drawHand(ctx, 110, second * 6, 1, color.ARROW2, dispModel);
             }, 1);

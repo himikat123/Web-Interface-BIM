@@ -145,6 +145,8 @@
     "clockFormat": "Формат час",
     "format12": "12-часов",
     "format24": "24-часов",
+    "woLeadingZero": "без водеща нула",
+    "withLeadingZero": "с водеща нула",
     "timezone": "Часова зона",
     "daylightSavingTime": "Лятно часово време",
     "ntpServerAddress": "Адрес NTP сървъри",

@@ -145,6 +145,8 @@
     "clockFormat": "Format zegara",
     "format12": "12-godzinny",
     "format24": "24-godzinny",
+    "woLeadingZero": "bez wiodącego zera",
+    "withLeadingZero": "z wiodącym zerem",
     "timezone": "Strefa czasowa",
     "daylightSavingTime": "Czas letni",
     "ntpServerAddress": "Adres serwera NTP",

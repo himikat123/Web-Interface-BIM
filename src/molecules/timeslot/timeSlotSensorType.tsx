@@ -20,14 +20,21 @@ export default function TimeSlotSensorType(props: iDisplayTimeSlot) {
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
     const sensor = config.display.timeSlot ? config.display.timeSlot.sensor[props.slot][props.num] : 0;
+    let hourFormat;
+    switch(config.clock.format) {
+        case 0: hourFormat = 'h'; break;
+        case 1: hourFormat = 'hh'; break;
+        case 2: hourFormat = 'H'; break;
+        default: hourFormat = 'HH'; break;
+    }
 
     const types = [
         /* Time */ [
-            `${i18n.t('withoutSeconds')} (${moment.unix(data.time).utc().format('HH:mm')})`,
-            `${i18n.t('withSeconds')} (${moment.unix(data.time).utc().format('HH:mm:ss')})`,
-            `${i18n.t('withoutSeconds')} (${moment.unix(data.time).utc().format('HH-mm')})`,
-            `${i18n.t('withSeconds')} (${moment.unix(data.time).utc().format('HH-mm-ss')})`,
-            `${i18n.t('withMilliSeconds')} (${moment.unix(data.time).utc().format('HH:mm:ss:88')})`
+            `${i18n.t('withoutSeconds')} (${moment.unix(data.time).utc().format(`${hourFormat}:mm`)})`,
+            `${i18n.t('withSeconds')} (${moment.unix(data.time).utc().format(`${hourFormat}:mm:ss`)})`,
+            `${i18n.t('withoutSeconds')} (${moment.unix(data.time).utc().format(`${hourFormat}-mm`)})`,
+            `${i18n.t('withSeconds')} (${moment.unix(data.time).utc().format(`${hourFormat}-mm-ss`)})`,
+            `${i18n.t('withMilliSeconds')} (${moment.unix(data.time).utc().format(`${hourFormat}:mm:ss:88`)})`
         ],
         /* Data */ [
             `${i18n.t('day')}, ${i18n.t('month')} (${moment.unix(data.time).utc().format('DD.MM')})`,
