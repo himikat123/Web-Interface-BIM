@@ -25,4 +25,25 @@ const cssInputStream = fs.createReadStream(cssFile);
 const cssOutputStream = fs.createWriteStream(cssOutputFilePath);
 cssInputStream.pipe(cssGzip).pipe(cssOutputStream);
 
+let modifiedData = html;
+const scriptRegex2 = /<script defer="defer" src="(\/static\/js\/main[^"]*)"><\/script>/;
+modifiedData = modifiedData.replace(scriptRegex2, '<script defer="defer" async="false" src="$1"></script>');
+const linkRegex = /<link href="(\/static\/css\/main[^"]*)" rel="stylesheet">/;
+const scriptTagRegex = /<script defer="defer".*?><\/script>/;
+const linkMatch = modifiedData.match(linkRegex);
+if(linkMatch) {
+    const linkTag = linkMatch[0];
+    modifiedData = modifiedData.replace(linkRegex, '');
+    const scriptMatch = modifiedData.match(scriptTagRegex);
+    if(scriptMatch) modifiedData = modifiedData.replace(scriptTagRegex, linkTag + scriptMatch[0]);
+}
+fs.writeFile(indexFile, modifiedData, 'utf8', (err) => {
+    if(err) console.error('Error writing the file:', err);
+});
+const gzip = zlib.createGzip();
+const input = fs.createReadStream(indexFile);
+const output = fs.createWriteStream(`${indexFile}.gz`);
+input.pipe(gzip).pipe(output);
+
+
 console.log('done');
