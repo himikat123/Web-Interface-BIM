@@ -5,7 +5,7 @@ const zlib = require('zlib');
 const indexFile = path.join(__dirname, 'build', 'index.html');
 const html = String(fs.readFileSync(indexFile));
 
-const scriptRegex = /<script defer.+<\/script>/g;
+const scriptRegex = /<script defer.+?<\/script>/g;
 const script = html.match(scriptRegex)[0];
 const scriptSrcRegex = /src="(.+)"/;
 const scriptSrc = script.match(scriptSrcRegex)[1];
@@ -27,16 +27,12 @@ cssInputStream.pipe(cssGzip).pipe(cssOutputStream);
 
 let modifiedData = html;
 const scriptRegex2 = /<script defer="defer" src="(\/static\/js\/main[^"]*)"><\/script>/;
-modifiedData = modifiedData.replace(scriptRegex2, '<script defer="defer" async="false" src="$1"></script>');
+modifiedData = modifiedData.replace(scriptRegex2, '');
 const linkRegex = /<link href="(\/static\/css\/main[^"]*)" rel="stylesheet">/;
-const scriptTagRegex = /<script defer="defer".*?><\/script>/;
-const linkMatch = modifiedData.match(linkRegex);
-if(linkMatch) {
-    const linkTag = linkMatch[0];
-    modifiedData = modifiedData.replace(linkRegex, '');
-    const scriptMatch = modifiedData.match(scriptTagRegex);
-    if(scriptMatch) modifiedData = modifiedData.replace(scriptTagRegex, linkTag + scriptMatch[0]);
-}
+modifiedData = modifiedData.replace(linkRegex, '');
+modifiedData = modifiedData.replace('styles.css', cssSrc);
+modifiedData = modifiedData.replace('script.js', scriptSrc);
+
 fs.writeFile(indexFile, modifiedData, 'utf8', (err) => {
     if(err) console.error('Error writing the file:', err);
 });

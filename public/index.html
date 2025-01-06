@@ -33,8 +33,57 @@
     <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
         <div id="root">
+            <div id="status">Loading HTML...</div>
             <div class="load">
                 <span class="loader"></span>
             </div>
+        </div>
+
+        <script>
+            (function sequentialLoad() {
+                const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+                const loadCSS = (url) => new Promise((resolve, reject) => {
+                    const link = document.createElement('link');
+                    link.rel = 'stylesheet';
+                    link.href = url;
+                    link.onload = () => {
+                        document.getElementById('status').textContent = 'CSS Loaded';
+                        resolve();
+                    };
+                    link.onerror = reject;
+                    document.head.appendChild(link);
+                });
+
+                const loadJS = (url) => new Promise((resolve, reject) => {
+                    const script = document.createElement('script');
+                    script.src = url;
+                    script.onload = () => {
+                        document.getElementById('status').textContent = 'JavaScript Loaded';
+                        resolve();
+                    };
+                    script.onerror = reject;
+                    document.body.appendChild(script);
+                });
+
+                (async () => {
+                    try {
+                        const href = window.location.origin;
+                        if(!href.includes('himikat123.github.io') && !href.includes('localhost')) {
+                            document.getElementById('status').textContent = 'HTML Loaded';
+                            await pause(200);
+                            await loadCSS('styles.css');
+                            await pause(200);
+                            await loadJS('script.js');
+                        }
+                    } 
+                    catch (error) {
+                        console.error('Error loading resources:', error);
+                        await pause(2000);
+                        location.reload();
+                    }
+                })();
+            })();
+        </script>
     </body>
 </html>
