@@ -21,11 +21,13 @@ function showDigit(ctx: CanvasRenderingContext2D, dig: number, x: number, bgColo
 
 export default function lcdShowTime(ctx: CanvasRenderingContext2D, prevTime: number | undefined, bgColor: string): number {
     const time = store.getState().data.time;
+    const format = store.getState().config.clock.format;
+
     if(time !== prevTime) {
-        const hr = moment.unix(time).utc().hour();
+        const hr = +moment.unix(time).utc().format(format > 1 ? 'H' : 'h');
         const mn = moment.unix(time).utc().minute();
     
-        if(hr < 10) showDigit(ctx, 10, 0, bgColor);
+        if(format % 2 === 0 && hr < 10) showDigit(ctx, 10, 0, bgColor);
         else showDigit(ctx, Math.floor(hr / 10), 0, bgColor);
         showDigit(ctx, hr % 10, 33, bgColor);
         showDigit(ctx, Math.floor(mn / 10), 77, bgColor);

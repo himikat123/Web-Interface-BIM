@@ -78,7 +78,12 @@ export const configSlice = createSlice({
             lat: 0,
             lon: 0,
             provider: 0,
-            citysearch: 0
+            citysearch: 0,
+            corr: {
+                t: 0,
+                h: 0,
+                p: 0
+            }
         },
         lang: "en",
         clock: {
@@ -433,6 +438,9 @@ export const configSlice = createSlice({
         weatherLonChange: (state, action) => { state.weather.lon = Number(action.payload.toFixed(6)) },
         weatherProwiderChange: (state, action) => { state.weather.provider = action.payload },
         weatherCitySearchChange: (state, action) => { state.weather.citysearch = action.payload },
+        weatherCorrTemp: (state, action) => { state.weather.corr.t = action.payload},
+        weatherCorrHum: (state, action) => { state.weather.corr.h = action.payload},
+        weatherCorrPres: (state, action) => { state.weather.corr.p = action.payload},
 
         languageSwitch: (state, action) => { state.lang = action.payload },
 
@@ -638,6 +646,7 @@ export const {
     wSensBatKChange, wSensBatTypeChange, wSensExpireChange, wSensChannelChange,
     weatherAppIdChange, weatherCityChange, weatherCityIdChange, weatherLatChange, 
     weatherLonChange, weatherProwiderChange, weatherCitySearchChange,
+    weatherCorrTemp, weatherCorrHum, weatherCorrPres,
     clockFormatChange, clockNtpChange, clockUtcChange, clockDlstChange, clockNtpPeriodChange,
     displayTypeChange, displayModelChange, displayOrderChange, displayBrightMinChange, displayBrightMaxChange,
     displayBrightMethodChange, displayBrightDayChange, displayBrightNightChange, displayLightSensorChange, 

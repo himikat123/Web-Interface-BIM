@@ -53,7 +53,12 @@ export interface iConfig {
             lat: number,
             lon: number,
             provider: number,
-            citysearch: number
+            citysearch: number,
+            corr: {
+                t: number,
+                h: number,
+                p: number
+            }
         },
         lang: string,
         clock: {

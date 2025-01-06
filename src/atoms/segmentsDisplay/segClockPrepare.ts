@@ -9,9 +9,8 @@ export default function clock(sens: number, dispLength: string, pointsState: boo
     const config = store.getState().config;
     const type = config.display.type ? config.display.type[dispNum] : 0;
     const model = config.display.model[dispNum];
-    const hour = moment().hours();
-    const hr = config.clock.format ? hour : hour % 12 || 12;
-    const hrH = Math.floor(hr < 10 ? SPACE : hr / 10);
+    const hr = +moment().format(config.clock.format > 1 ? 'H' : 'h');
+    const hrH = Math.floor((config.clock.format % 2 === 0 && hr < 10) ? SPACE : hr / 10);
     const hrL = hr % 10;
     const mn = moment().minutes();
     const mnH = Math.floor(mn / 10);

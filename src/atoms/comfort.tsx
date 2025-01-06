@@ -22,7 +22,9 @@ export default function Comfort() {
         : [1, 2, 3, 4, 5, 6, 7, 8, 9]; 
 
     switch(config.comfort.temp.source) {
-        case tcs[0]: temp = data.weather.temp; break; // temperature from weather forecast
+        case tcs[0]: // temperature from weather forecast
+            temp = data.weather.temp + config.weather.corr.t; 
+            break; 
         case tcs[1]: // temperature from wireless sensor
             if(vl.WsensorDataRelevance(tWsensNum))
                 temp = (data.wsensor?.temp.data[tSens][tWsensNum] ?? 0) + (config.wsensor?.temp.corr[tWsensNum][tSens] ?? 0);
@@ -55,7 +57,9 @@ export default function Comfort() {
         ? [1, -1, 2, 3, 4, 5, -2]
         : [1, 2, 3, 4, 5, 6, 7];
     switch(config.comfort.hum.source) {
-        case hcs[0]: hum = data.weather.hum; break; // humidity from weather forecast
+        case hcs[0]: // humidity from weather forecast
+            hum = data.weather.hum + config.weather.corr.h; 
+            break; 
         case hcs[1]: // humidity from wireless sensor
             if(vl.WsensorDataRelevance(hWsensNum))
                 hum = (data.wsensor?.hum.data[hWsensNum] ?? 0) + (config.wsensor?.hum.corr[hWsensNum] ?? 0);

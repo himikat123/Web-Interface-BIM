@@ -6,6 +6,7 @@ import Button from "../atoms/button";
 import SelectSwitch from "../atoms/selectSwitch";
 import TextInput from "../atoms/textInput";
 import NumberInput from "../atoms/numberInput";
+import WeatherCorrection from "../molecules/weather/weatherCorrection";
 import WeatherChecker from "../molecules/weather/weatherChecker";
 import { iConfig } from "../redux/configTypes";
 import * as cf from "../redux/slices/config";
@@ -45,6 +46,8 @@ export default function Weather() {
                     }))}
                 />
             </div>}
+
+            <WeatherCorrection />
         </>} />
 
         <Card content={<>

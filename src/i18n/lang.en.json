@@ -145,6 +145,8 @@
     "clockFormat": "Clock format",
     "format12": "12-hour",
     "format24": "24-hour",
+    "woLeadingZero": "without leading zero",
+    "withLeadingZero": "with leading zero",
     "timezone": "Timezone",
     "daylightSavingTime": "Switch to daylight saving time",
     "ntpServerAddress": "NTP Server address",

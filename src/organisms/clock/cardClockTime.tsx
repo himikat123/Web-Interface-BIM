@@ -10,22 +10,24 @@ export default function CardClockTime() {
     const config = useSelector((state: iConfig) => state.config);
     
     return <Card content={<>
-        {/* <SelectSwitch label={i18n.t('clockFormat')}
+        <SelectSwitch label={i18n.t('clockFormat')}
             options={[
-                i18n.t('format12'), 
-                i18n.t('format24')
+                `${i18n.t('format12')}, ${i18n.t('woLeadingZero')}`,
+                `${i18n.t('format12')}, ${i18n.t('withLeadingZero')}`,
+                `${i18n.t('format24')}, ${i18n.t('woLeadingZero')}`,
+                `${i18n.t('format24')}, ${i18n.t('withLeadingZero')}`
             ]}
             value={config.clock.format}
             onChange={val => dispatch(cf.clockFormatChange(val))}
-        /> */}
+        />
 
-        {/* <div className="mt-8"> */}
+        <div className="mt-8">
             <SelectSwitch label={i18n.t('timezone')}
                 options={[...Array(26)].map((x, i) => `GMT ${i > 12 ? '+' : ''}${i - 12}`)}
                 value={config.clock.utc + 12}
                 onChange={val => dispatch(cf.clockUtcChange(val - 12))}
             />
-        {/* </div> */}
+        </div>
 
         <div className="mt-8">
             <SelectSwitch label={i18n.t('daylightSavingTime')}

@@ -11,7 +11,7 @@ function lcdGetTemp(wsensNum: number, wsensTempNum: number, thingNum: number, so
         : [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
     switch(source) {
-        case cs[0]: temp = data.weather.temp; break;
+        case cs[0]: temp = data.weather.temp + config.weather.corr.t; break;
         case cs[1]: if(vl.WsensorDataRelevance(wsensNum)) {
             temp = vl.validateTemperature(data.wsensor?.temp.data[wsensTempNum][wsensNum] ?? 0) 
                 ? (data.wsensor?.temp.data[wsensTempNum][wsensNum] ?? 0) + (config.wsensor?.temp.corr[wsensNum][wsensTempNum] ?? 0) 

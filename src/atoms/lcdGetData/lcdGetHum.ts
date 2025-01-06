@@ -11,7 +11,7 @@ function lcdGetHum(wsensNum: number, thingNum: number, source: number) {
         : [1, 2, 3, 4, 5, 6, 7];
 
     switch(source) {
-        case cs[0]: hum = data.weather.hum; break;
+        case cs[0]: hum = data.weather.hum + config.weather.corr.h; break;
         case cs[1]: if(vl.WsensorDataRelevance(wsensNum)) {
             hum = vl.validateHumidity(data.wsensor?.hum.data[wsensNum] ?? 0) 
                 ? (data.wsensor?.hum.data[wsensNum] ?? 0) + (config.wsensor?.hum.corr[wsensNum] ?? 0) 
