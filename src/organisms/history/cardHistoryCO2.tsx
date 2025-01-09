@@ -17,7 +17,7 @@ export default function CardHistoryCo2(props: iCardHistory) {
         {/* History Chart */}
         <HistoryChart num={props.type}
             chartColor={'0000FF'}
-            title={props.title}
+            title={props.title.replace(/<[^>]+>/gm, '')}
         />
     
         {/* Sensor type */}
