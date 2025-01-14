@@ -1,11 +1,11 @@
 {
    "state":"DEMO",
-   "fw":"v5.2",
+   "fw":"v5.4",
    "esp32":{
       "temp":51.67
    },
    "runtime":2289,
-   "time":1733674696,
+   "time":1736864436,
    "network":{
       "ssid":"budulai",
       "ch":14,
