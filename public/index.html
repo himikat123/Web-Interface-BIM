@@ -48,7 +48,7 @@
                     link.rel = 'stylesheet';
                     link.href = url;
                     link.onload = () => {
-                        document.getElementById('status').textContent = 'CSS Loaded';
+                        document.getElementById('status').textContent = 'Loading JS...';
                         resolve();
                     };
                     link.onerror = reject;
@@ -59,7 +59,7 @@
                     const script = document.createElement('script');
                     script.src = url;
                     script.onload = () => {
-                        document.getElementById('status').textContent = 'JavaScript Loaded';
+                        document.getElementById('status').textContent = 'JS Loaded';
                         resolve();
                     };
                     script.onerror = reject;
@@ -70,7 +70,7 @@
                     try {
                         const href = window.location.origin;
                         if(!href.includes('himikat123.github.io') && !href.includes('localhost')) {
-                            document.getElementById('status').textContent = 'HTML Loaded';
+                            document.getElementById('status').textContent = 'Loading CSS...';
                             await pause(200);
                             await loadCSS('styles.css');
                             await pause(200);

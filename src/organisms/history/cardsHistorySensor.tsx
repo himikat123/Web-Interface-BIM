@@ -12,7 +12,7 @@ export default function CardsHistorySensor() {
         <CardHistoryPres type={2} title={i18n.t('pressure')} />
         <CardHistoryTemp type={3} title={i18n.t('temperatureIn')} />
         <CardHistoryHum type={4} title={i18n.t('humidityIn')} />
-        <CardHistoryIaq type={5} title={i18n.t('airQuality')} />
+        <CardHistoryIaq type={5} title={i18n.t('indexForAirQuality')} />
         <CardHistoryCO2 type={6} title={i18n.t('CO2Level')} />
     </>
 }

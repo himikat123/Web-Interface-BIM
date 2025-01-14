@@ -2,6 +2,7 @@ import i18n from "../../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import hostUrl from "../../atoms/hostUrl";
 import Card from "../../atoms/card";
+import Button from "../../atoms/button";
 import SelectSwitch from "../../atoms/selectSwitch";
 import RangeInput from "../../atoms/rangeInput";
 import { iConfig } from "../../redux/configTypes";
@@ -12,6 +13,7 @@ export default function CardDisplayAnimation(props: iDisplay) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const type = config.display.type ? config.display.type[props.num] : 0;
+    const model = config.display.model ? config.display.model[props.num] : 0;
     const animations = [
         '--',
         i18n.t('toTheRight'), 
@@ -52,8 +54,8 @@ export default function CardDisplayAnimation(props: iDisplay) {
         fetch(url);
     }
 
-    return <>
-        {type + props.num >= 2 ? <Card content={<>
+    return <>{(type + props.num) >= 2 
+        ? <Card content={<>
             <SelectSwitch label={i18n.t('animation')}
                 options={animations}
                 value={config.display.animation ? config.display.animation.type[props.num] : 0}
@@ -89,6 +91,14 @@ export default function CardDisplayAnimation(props: iDisplay) {
                     disabled={(type === 3 && config.display.model[props.num] === 0) ? [0, 1, 0, 0] : []}
                 />
             </div>
-        </>} /> : <Card className="invisible lg:visible" content={<></>} />}
+        </>} /> 
+        : (props.num === 0 && type === 1 && model === 2) 
+            ? <Card className="text-center" content={<>
+                <Button className="bg-green-600 hover:bg-green-700 text-text_dark"
+                    label={i18n.t('calibrate')}
+                    onClick={() => fetch(`${hostUrl()}/esp/calibrate?code=${localStorage.getItem('code') || '0'}`)}
+                />
+            </>} />
+            : <Card className="invisible lg:visible" content={<></>} />}
     </>
 }

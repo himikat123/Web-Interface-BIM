@@ -14,7 +14,9 @@ export default function CardDisplayVoltage() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
 
-    return <Card header={<div>{`${i18n.t('voltage')} / ${i18n.t('air')}`}</div>}
+    return <Card header={<div>
+        {device() === 'WeatherMonitorBIM32' ? (i18n.t('voltage') + ' / ' + i18n.t('air')) : i18n.t('batteryVoltage')}
+    </div>}
         content={<>
             {/* Sensor type */}
             <SensorTypeVoltage />
@@ -31,7 +33,7 @@ export default function CardDisplayVoltage() {
 
             {/* Thingspeak */}
             {config.display.source.volt.sens === (device() === 'WeatherMonitorBIM32' ? 2 : 1) && <div className="mt-8">
-                <ThingVoltType />
+                {device() === 'WeatherMonitorBIM32' && <ThingVoltType />}
                 <ThingspeakField value={config.display.source.volt.thing}
                     changeValue={val => dispatch(cf.displaySourceVoltThingChange(val))} 
                 />

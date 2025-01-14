@@ -370,5 +370,6 @@
     "year": "Jahr",
     "twoDigits": "2 Ziffern",
     "fourDigits": "4 Ziffern",
-    "orderOfDigits": "Reihenfolge der Ziffern"
+    "orderOfDigits": "Reihenfolge der Ziffern",
+    "calibrate": "Touchscreen-Kalibrierung"
 }
