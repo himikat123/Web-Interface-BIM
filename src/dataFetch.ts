@@ -20,7 +20,7 @@ export default async function dataFetch(path: string): Promise<string> {
             const date = new Date();
             const timezoneOffset = date.getTimezoneOffset();
             resData.time = Math.round(Date.now() / 1000 - timezoneOffset * 60);
-            resData.runtime = Math.round(Date.now() / 1000 - 1733674696);
+            resData.runtime = Math.round(Date.now() / 1000 - 1736864436);
             resData.wsensor.time[0] = Math.round(resData.time - 8 * 60);
             resData.wsensor.time[1] = Math.round(resData.time - 12 * 60);
             resData.weather.time = Math.round(resData.time - 15 * 60);
