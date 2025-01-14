@@ -370,5 +370,6 @@
     "year": "год",
     "twoDigits": "2 цифры",
     "fourDigits": "4 цифры",
-    "orderOfDigits": "Порядок разрядов"
+    "orderOfDigits": "Порядок разрядов",
+    "calibrate": "Калибровка тачскрина"
 }

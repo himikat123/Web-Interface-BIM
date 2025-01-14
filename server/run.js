@@ -267,6 +267,12 @@ app.get('/netlist', (req, res) => {
     }, 8000);
 });
 
+app.get('/esp/calibrate', (req, res) => {
+    console.log('GET /esp/calibrate', req.query);
+    res.set('Access-Control-Allow-Origin', '*');
+    res.send("OK");
+});
+
 app.listen(80, () => {
     console.log('listening on port 80')
 });

@@ -370,5 +370,6 @@
     "year": "година",
     "twoDigits": "2 цифри",
     "fourDigits": "4 цифри",
-    "orderOfDigits": "Ред на цифрите"
+    "orderOfDigits": "Ред на цифрите",
+    "calibrate": "Калибриране на сензорен екран"
 }
