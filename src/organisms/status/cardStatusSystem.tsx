@@ -45,6 +45,7 @@ export default function CardStatusSystem() {
             <p>{i18n.t('runtime')}</p>
             <p className='text-blue-700 dark:text-blue-400'>
                 {humanizeDuration(runtime * 1000, {
+                    conjunction: ` ${i18n.t('and')} `,
                     language: locale, 
                     units: ["y", "mo", "d", "h", "m", "s"]
                 })}
