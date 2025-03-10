@@ -14,15 +14,15 @@ export default function CardDisplayType(props: iDisplay) {
     const config = useSelector((state: iConfig) => state.config);
 
     const types = [
-        "--",
-        "LCD/TFT",
-        i18n.t('neopixel'),
-        i18n.t('segment7'),
-        //i18n.t('numitron'),
-        //i18n.t('vfd'),
-        //i18n.t('nixie'),
-        //i18n.t('matrix'),
-        
+        {num: 0, title: "--"},
+        {num: 1, title: "LCD/TFT"},
+        {num: 2, title: i18n.t('neopixel')},
+        {num: 3, title: i18n.t('segment7')},
+        //{num: 7, title: i18n.t('matrix')},
+        //{num: 4, title: i18n.t('numitron')},
+        //{num: 5, title: i18n.t('vfd')},
+        //{num: 6, title: i18n.t('nixie')}
+        // TODO отображать IP, отправлять в веб что пришло с беспров. датчиков, в сыром виде
     ];
 
     const disableTypes = [

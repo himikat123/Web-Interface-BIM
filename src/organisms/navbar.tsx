@@ -66,8 +66,8 @@ export default function Navbar() {
             </div>
 
             <div className={"mobile-menu md:hidden" + (mobileMenuOpen ? "" : " hide")} 
-            id="mobile-menu"
-            style={{overflow: mobileMenuOpen ? "scroll" : "hidden"}}  
+                id="mobile-menu"
+                style={{overflow: mobileMenuOpen ? "scroll" : "hidden"}}  
             >
                 <div className="space-y-1 px-2 pb-3 pt-2">
                     <MenuItems current={currentPath} mobile={true} />

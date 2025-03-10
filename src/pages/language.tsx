@@ -2,7 +2,6 @@ import OneColumn from "../templates/oneColumn";
 import { useSelector, useDispatch } from 'react-redux';
 import { languageSwitch } from '../redux/slices/config';
 import i18n, { changeLanguage } from '../i18n/main';
-import device from "../device";
 import Card from "../atoms/card";
 import RadioSwitch from "../atoms/radioSwitch";
 import { ReactComponent as FlagEN } from '../atoms/icons/flagEN.svg';
@@ -29,7 +28,7 @@ export default function Language() {
             icon={<FlagEN />}
         />
 
-        {device() === 'WeatherMonitorBIM32' && <RadioSwitch id="de" 
+        <RadioSwitch id="de" 
             name="language" 
             checked={language === 'de'} 
             onChange={() => {
@@ -38,7 +37,7 @@ export default function Language() {
             }} 
             label="Deutsch"
             icon={<FlagDE />}
-        />}
+        />
 
         <RadioSwitch id="ru" 
             name="language" 
@@ -51,7 +50,7 @@ export default function Language() {
             icon={<FlagRU />}
         />
 
-        {device() === 'WeatherMonitorBIM32' && <RadioSwitch id="pl" 
+        <RadioSwitch id="pl" 
             name="language" 
             checked={language === 'pl'} 
             onChange={() => {
@@ -60,9 +59,9 @@ export default function Language() {
             }} 
             label="Polski"
             icon={<FlagPL />}
-        />}
+        />
 
-        {device() === 'WeatherMonitorBIM32' && <RadioSwitch id="ua" 
+        <RadioSwitch id="ua" 
             name="language" 
             checked={language === 'ua'} 
             onChange={() => {
@@ -71,7 +70,7 @@ export default function Language() {
             }} 
             label="Українська"
             icon={<FlagUA />}
-        />}
+        />
 
         <RadioSwitch id="bg" 
             name="language" 
