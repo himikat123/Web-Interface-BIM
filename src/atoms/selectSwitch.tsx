@@ -1,5 +1,5 @@
 import React from 'react';
-import { iSelectSwitch } from '../interfaces';
+import { iSelectSwitch, iSelectOptions } from '../interfaces';
 import "./selectSwitch.scss";
 
 export default function SelectSwitch(props: iSelectSwitch) {
@@ -8,8 +8,11 @@ export default function SelectSwitch(props: iSelectSwitch) {
             value={props.value ?? 0} 
             onChange={(event: React.ChangeEvent<HTMLSelectElement>) => props.onChange(Number(event.target.value))}
         >
-            {props.options.map((option: string, i: number) => 
-                <option key={option} value={i} disabled={props.disabled ? Boolean(props.disabled[i]) : false}>
+            {props.options.map((option: string | iSelectOptions, i: number) => (option instanceof Object) 
+                ? <option key={option.title} value={option.num} disabled={props.disabled ? Boolean(props.disabled[i]) : false}>
+                    {option.title}
+                </option> 
+                : <option key={option} value={i} disabled={props.disabled ? Boolean(props.disabled[i]) : false}>
                     {option}
                 </option>
             )}

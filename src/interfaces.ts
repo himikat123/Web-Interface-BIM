@@ -64,9 +64,14 @@ export interface iColumnsTemplate {
     alarms?: boolean
 }
 
+export interface iSelectOptions {
+    num: number,
+    title: string
+}
+
 export interface iSelectSwitch {
     label: string | React.ReactNode,
-    options: Array<string>,
+    options: Array<string | iSelectOptions>,
     disabled?: Array<boolean | number>,
     value: number,
     onChange(i: number): void
