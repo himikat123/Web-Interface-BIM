@@ -25,6 +25,10 @@ export const validateAnalogVoltage = (volt: number): boolean => {
     return (volt >= 0 && volt <= 5);
 }
 
+export const validatePercentage = (prc: number): boolean => {
+    return (prc >= 0 && prc <= 100); 
+}
+
 export const validateBatteryVoltage = (volt: number): boolean => {
     return (volt >= 0.6 && volt <= 20); 
 }
