@@ -10,7 +10,7 @@ export default function MenuDisplaySingle(props: iMenuItems) {
 
     return <MenuItem link={"/display"} 
         current={props.current} 
-        title={i18n.t('display.one')} 
+        title={i18n.t('display.singular')} 
         mobile={props.mobile} 
         icon={<Monitor />} 
         valid={validDisplay1} 
