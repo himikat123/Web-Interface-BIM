@@ -260,7 +260,7 @@ app.get('/esp/animation', (req, res) => {
     res.send("OK");
 });
 
-app.get('/netlist', (req, res) => {
+app.get('/esp/netlist', (req, res) => {
     setTimeout(() => {
         res.set('Access-Control-Allow-Origin', '*');
         res.send("OK");
