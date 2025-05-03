@@ -13,7 +13,14 @@ export default function lcdShowVoltageOrPercentage(ctx: CanvasRenderingContext2D
         const dispModel = (model === 0 || model === 1) ? 0 : 1;
         const x = dispModel ? 198 : 220;
         const font = dispModel ? 14 : 11;
-        const dataValid = (vl.validateAnalogVoltage(Number(v.val)) || vl.validateHighVoltage(Number(v.val)) || vl.validatePercentage(Number(v.val)))
+        const match = v.val.match(/[\d.]+/);
+        const val = match ? parseFloat(match[0]) : -1;
+        const dataValid = (
+            vl.validateAnalogVoltage(val) || 
+            vl.validateHighVoltage(val) || 
+            vl.validatePercentage(val) ||
+            vl.validateCO2(val)
+        )
         printText(ctx, x, 7, 58, 16, dataValid ? v.val : '--', font, 'center', v.type ? colorAir : color, bgColor);
     }
 
