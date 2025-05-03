@@ -57,7 +57,7 @@ export default function ModalNetList(props: iModalNetList) {
                 confirmBtn={() => refresh()}
                 modalClose={() => props.modalClose()}
                 content={list}
-                labelConfirm={<div className='flex items-center'>
+                labelConfirm={<div className='flex items-center justify-center'>
                     {i18n.t('refresh')} 
                     {updState && <div className='w-4 ms-2'>
                         <SpinnerSVG />
@@ -65,7 +65,7 @@ export default function ModalNetList(props: iModalNetList) {
                 </div>}
                 labelCancel={i18n.t('close')}
             />
-            :  <Modal header={i18n.t('listOfAvailableNetworks')}
+            : <Modal header={i18n.t('listOfAvailableNetworks')}
                     modalClose={() => props.modalClose()}
                     content={list}
                     labelCancel={i18n.t('close')}
