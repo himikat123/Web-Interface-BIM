@@ -46,6 +46,7 @@ export default function CardStatusSystem() {
             <p className='text-blue-700 dark:text-blue-400'>
                 {humanizeDuration(runtime * 1000, {
                     conjunction: ` ${i18n.t('and')} `,
+                    serialComma : false,
                     language: locale, 
                     units: ["y", "mo", "d", "h", "m", "s"]
                 })}
