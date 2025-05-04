@@ -82,8 +82,10 @@ function App() {
             const nav = await dataFetch(path);
             if(nav) navigate(nav);
 
-            if(moment().unix() - history.updated > 600) historyFetch(apMode);
-            if(moment().unix() - hourly.updated > 600) hourlyFetch(apMode);
+            if(path !== '/login') {
+                if(moment().unix() - history.updated > 600) historyFetch(apMode);
+                if(moment().unix() - hourly.updated > 600) hourlyFetch(apMode);
+            }
         }
 
         if(configState === 'ok' && alarmsState === 'ok') {
@@ -110,7 +112,7 @@ function App() {
     useEffect(() => {
         dispatch(updateDataChange(true));
     }, [dispatch]);
-//TODO отключить запросы погоды на странице логин
+
     return (
         <div className={"bg-page_light dark:bg-page_dark text-text_light dark:text-text_dark min-h-screen"}>
             {configState === 'error' ? <NoConfig /> :
