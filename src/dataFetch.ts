@@ -1,7 +1,9 @@
 import axios from "axios";
+import { displayModelChange, displayTypeChange } from "./redux/slices/config";
 import { dataFetchingChange, dataStateChange, setDataState, updateDataChange } from "./redux/slices/data";
 import store from "./redux/store";
 import hostUrl from "./atoms/hostUrl";
+
 
 export default async function dataFetch(path: string): Promise<string> {
     let navigate = '';
@@ -16,7 +18,7 @@ export default async function dataFetch(path: string): Promise<string> {
 
         let resData = { ...res.data };
 
-        if (res.data.state === 'DEMO') {
+        if(res.data.state === 'DEMO') {
             const date = new Date();
             const timezoneOffset = date.getTimezoneOffset();
             resData.time = Math.round(Date.now() / 1000 - timezoneOffset * 60);
@@ -27,11 +29,17 @@ export default async function dataFetch(path: string): Promise<string> {
             resData.thing.time = Math.round(resData.time - 7 * 60);
         }
 
-        if (res.data.state === 'OK' && path === '/login') navigate = '/';
-        if (res.data.state === 'LOGIN' && path !== '/login') navigate = '/login';
+        if(resData.hasOwnProperty('cyd') && resData.cyd === 1) {
+            store.dispatch(displayTypeChange({num: 0, val: 1}));
+            store.dispatch(displayModelChange({num: 0, val: 2}));
+        }
+
+        if(res.data.state === 'OK' && path === '/login') navigate = '/';
+        if(res.data.state === 'LOGIN' && path !== '/login') navigate = '/login';
 
         store.dispatch(setDataState(resData));
-    } catch (err) {
+    } 
+    catch(err) {
         store.dispatch(dataStateChange('error'));
         console.error(err);
         store.dispatch(dataFetchingChange(false));

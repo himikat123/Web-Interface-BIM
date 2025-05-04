@@ -10,6 +10,7 @@ export interface iData {
         },
         runtime: number,
         time: number,
+        cyd?: number,
         network: {
             ssid: string,
             ch: number,

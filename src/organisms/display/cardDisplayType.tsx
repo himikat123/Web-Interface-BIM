@@ -5,6 +5,7 @@ import SelectSwitch from "../../atoms/selectSwitch";
 import DisplayBrightLimit from "../../molecules/display/displayBrightLimit";
 import DisplayDigitsReassignment from "../../molecules/display/displayDigitsReassignment";
 import { iConfig } from "../../redux/configTypes";
+import { iData } from "../../redux/dataTypes";
 import { iDisplay } from "../../interfaces";
 import * as cf from "../../redux/slices/config";
 import Indication from "../../atoms/indication";
@@ -12,6 +13,7 @@ import Indication from "../../atoms/indication";
 export default function CardDisplayType(props: iDisplay) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
+    const data = useSelector((state: iData) => state.data)
 
     const types = [
         {num: 0, title: "--"},
@@ -114,16 +116,30 @@ export default function CardDisplayType(props: iDisplay) {
             models = [];
             consums = [];
     }
-    
+
+    function typeChange(val: number) {
+        if(data.cyd !== 1) {
+            dispatch(cf.displayTypeChange({num: props.num, val: val}));
+            dispatch(cf.displayModelChange({num: props.num, val: 0}));
+            dispatch(cf.displayAnimationPointsChange({num: props.num, val: 0}));
+        }
+    }
+
+    function modelChange(val: number) {
+        if(data.cyd !== 1) {
+            dispatch(cf.displayModelChange({num: props.num, val: val}));
+            dispatch(cf.displayAnimationPointsChange({num: props.num, val: 0}));
+            for(let i=0; i<8; i++) {
+                dispatch(cf.displayTimeslotDataChange({slot: i, num: props.num, val: 0}));
+            }
+        }
+    }
+
     return <Card content={<>
         <SelectSwitch label={i18n.t('displayType')}
             options={types}
             value={config.display.type ? config.display.type[props.num] : 0}
-            onChange={val => {
-                dispatch(cf.displayTypeChange({num: props.num, val: val}));
-                dispatch(cf.displayModelChange({num: props.num, val: 0}));
-                dispatch(cf.displayAnimationPointsChange({num: props.num, val: 0}));
-            }}
+            onChange={val => typeChange(val)}
             disabled={disableTypes[props.num]}
         />
 
@@ -131,13 +147,7 @@ export default function CardDisplayType(props: iDisplay) {
             <SelectSwitch label={i18n.t('displayModel')}
                 options={models}
                 value={config.display.model[props.num]}
-                onChange={val => {
-                    dispatch(cf.displayModelChange({num: props.num, val: val}));
-                    dispatch(cf.displayAnimationPointsChange({num: props.num, val: 0}));
-                    for(let i=0; i<8; i++) {
-                        dispatch(cf.displayTimeslotDataChange({slot: i, num: props.num, val: 0}));
-                    }
-                }}
+                onChange={val => modelChange(val)}
             />
         </div>}
 

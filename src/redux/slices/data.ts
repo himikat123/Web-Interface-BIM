@@ -20,6 +20,7 @@ export const dataSlice = createSlice({
         ),
         runtime: "",
         time: 0,
+        cyd: 0,
         network: {
             ssid: "",
             ch: 0,
