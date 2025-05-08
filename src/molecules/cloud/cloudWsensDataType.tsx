@@ -20,7 +20,9 @@ export default function CloudWsensDataType(props: iCloudSensorType) {
             `${i18n.t('batteryVoltage')} ${BatVoltage(i)}`,
             `${i18n.t('batteryPercentage')} ${BatPercent(i)}`,
             `${i18n.t('batteryLevel')} ${BatLevel(i)}`,
-            `CO2 (${Wsensor()[i].co2})`
+            `CO2 (${Wsensor()[i].co2})`,
+            `${i18n.t('absHumidity')} (${Wsensor()[i].ahum})`,
+            `${i18n.t('dewPoint')} (${Wsensor()[i].dp})`
         ])
     }
 

@@ -77,7 +77,7 @@ export default function sensorCorrection(color: boolean, dataType: string, val: 
 
     return <RangeInput value={val}
         label={
-            <div className="mt-8">
+            <div className="mt-4 sm:mt-8">
                 {lblType}: 
                 <Indication error={color} 
                     value={labels[0] + units + labels[1] + (lblName ? labels[0] !== '--' ? (', ' + lblName) : '' : '')} 

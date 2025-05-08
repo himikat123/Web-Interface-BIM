@@ -4,11 +4,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { iConfig } from "../../redux/configTypes";
 import { iData } from "../../redux/dataTypes";
 import * as cf from "../../redux/slices/config";
+import * as calculate from "../../atoms/calculate";
 
 export default function WeatherCorrection() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
+    const temp = data.weather.temp + config.weather.corr.t;
+    const hum = data.weather.hum + config.weather.corr.h;
+
+    function extraData(type: string, val: string) {
+        return <div className="mt-2 text-center">
+            {type}:
+            <span className="ms-1 text-blue-700 dark:text-blue-400">
+                {val}
+            </span>
+        </div>
+    }
 
     return <>
         {sensorCorrection(false, "t", 
@@ -32,5 +44,8 @@ export default function WeatherCorrection() {
             (val: number) => dispatch(cf.weatherCorrPres(val)), 
             -20, 20, 0.1
         )}
+        <hr className="mt-6 mb-4" />
+        {extraData(i18n.t('absHumidity'), calculate.absoluteHum(temp, hum))}
+        {extraData(i18n.t('dewPoint'), calculate.dewPoint(temp, hum))}
     </>
 }

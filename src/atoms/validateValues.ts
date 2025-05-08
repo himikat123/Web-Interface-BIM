@@ -13,6 +13,14 @@ export const validatePressure = (pres: number): boolean => {
     return (pres >= 800 && pres <= 1200); 
 }
 
+export const vaidateAbsHum = (ah: number | undefined): boolean => {
+    return ah !== undefined && ah >= 0.0 && ah <= 60.0;
+}
+
+export const validateDewPoint = (dp: number | undefined, temp: number | undefined): boolean => {
+    return dp !== undefined && temp != undefined && dp >= -60.0 && dp <= 60.0 && dp <= temp;
+}
+
 export const validateWindSpeed = (speed: number): boolean => {
     return (speed >= 0 && speed <= 100)
 }

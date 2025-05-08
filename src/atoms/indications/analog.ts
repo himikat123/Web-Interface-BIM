@@ -10,7 +10,7 @@ export default function Analog() {
 
     return {
         volt: vl.validateAnalogVoltage(data.analog.volt) 
-            ? ((data.analog.volt + config.sensors.analog.v).toFixed(2) + i18n.t('units.v')) 
+            ? ((data.analog.volt + config.sensors.analog.v).toFixed(1) + i18n.t('units.v')) 
             : '--'
     }
 }

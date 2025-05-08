@@ -2,6 +2,7 @@ import i18n from "../../i18n/main";
 import { iConfig } from "../../redux/configTypes";
 import { iData } from "../../redux/dataTypes";
 import * as vl from "../validateValues";
+import * as calculate from "../calculate";
 import { useSelector } from 'react-redux';
 
 export default function Forecast() {
@@ -13,16 +14,16 @@ export default function Forecast() {
 
     return {
         temp: vl.validateTemperature(temp) 
-            ? (temp.toFixed(2) + '°C') 
+            ? (temp.toFixed(1) + '°C') 
             : '--',
-
         hum: vl.validateHumidity(hum) 
-            ? (hum.toFixed(2) + '%') 
+            ? (hum.toFixed(1) + '%') 
             : '--',
-
         pres: vl.validatePressure(pres) 
-            ? (pres.toFixed(2) + i18n.t('units.hpa') + ' / ' 
-                + (pres * 0.75).toFixed(2) + i18n.t('units.mm')) 
-            : '--'
+            ? (pres.toFixed(1) + i18n.t('units.hpa') + ' / ' 
+                + (pres * 0.75).toFixed(1) + i18n.t('units.mm')) 
+            : '--',
+        aHum: calculate.absoluteHum(temp, hum),
+        dp: calculate.dewPoint(temp, hum)
     }
 }

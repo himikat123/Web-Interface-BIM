@@ -22,15 +22,17 @@ export default function CloudSensorType(props: iCloudSensorType) {
     const l = i18n.t('ambientLight');
     const a = i18n.t('voltage');
     const r = i18n.t('runtime');
+    const ah = i18n.t('absHumidity');
+    const dp = i18n.t('dewPoint');
     
     const sensors = [];
     sensors.push([]); /* -- */
-    sensors.push([`${t} (${Forecast().temp})`, `${h} (${Forecast().hum})`, `${p} (${Forecast().pres})`]);
+    sensors.push([`${t} (${Forecast().temp})`, `${h} (${Forecast().hum})`, `${p} (${Forecast().pres})`, `${ah} (${Forecast().aHum})`, `${dp} (${Forecast().dp})`]);
     if(device() === 'WeatherMonitorBIM32') sensors.push([]); /* Wireless sensor */
-    sensors.push([`${t} (${BME280().temp})`, `${h} (${BME280().hum})`, `${p} (${BME280().pres})`]);
+    sensors.push([`${t} (${BME280().temp})`, `${h} (${BME280().hum})`, `${p} (${BME280().pres})`, `${ah} (${BME280().aHum})`, `${dp} (${BME280().dp})`]);
     sensors.push([`${t} (${BMP180().temp})`, `${p} (${BMP180().pres})`]);
-    sensors.push([`${t} (${SHT21().temp})`, `${h} (${SHT21().hum})`]);
-    sensors.push([`${t} (${DHT22().temp})`, `${h} (${DHT22().hum})`]);
+    sensors.push([`${t} (${SHT21().temp})`, `${h} (${SHT21().hum})`, `${ah} (${SHT21().aHum})`, `${dp} (${SHT21().dp})`]);
+    sensors.push([`${t} (${DHT22().temp})`, `${h} (${DHT22().hum})`, `${ah} (${DHT22().aHum})`, `${dp} (${DHT22().dp})`]);
     sensors.push([`${t} (${DS18B20().temp})`]);
     sensors.push([`${l} (${MAX44009().light})`]);
     sensors.push([`${l} (${BH1750().light})`]);
@@ -38,7 +40,7 @@ export default function CloudSensorType(props: iCloudSensorType) {
     if(device() === 'WeatherMonitorBIM32') {
         sensors.push([`${a} (${Analog().volt})`]);
         sensors.push([`${t} (${ESP32().temp})`, `${r} (${ESP32().runtime})`]);
-        sensors.push([`${t} (${BME680().temp})`, `${h} (${BME680().hum})`, `${p} (${BME680().pres})`, `${i} (${BME680().iaq})`]);
+        sensors.push([`${t} (${BME680().temp})`, `${h} (${BME680().hum})`, `${p} (${BME680().pres})`, `${i} (${BME680().iaq})`, `${ah} (${BME680().aHum})`, `${dp} (${BME680().dp})`]);
     }
 
     return <>

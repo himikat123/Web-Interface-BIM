@@ -10,6 +10,7 @@ import { iData } from "../redux/dataTypes";
 import device from '../device';
 import * as cf from "../redux/slices/config";
 import * as vl from "../atoms/validateValues";
+import * as calculate from "../atoms/calculate";
 
 export default function Sensors() {
     const [hideUnnecessary, setHideUnnecessary] = useState<boolean>(true);
@@ -17,8 +18,26 @@ export default function Sensors() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
+    const bme680temp = (data.bme680?.temp ?? -4040) + (config.sensors.bme680?.t ?? 0);
+    const bme680hum = (data.bme680?.hum ?? -4040) + (config.sensors.bme680?.h ?? 0);
+    const bme280temp = data.bme280.temp + config.sensors.bme280.t;
+    const bme280hum = data.bme280.hum + config.sensors.bme280.h;
+    const dht22temp = data.dht22.temp + config.sensors.dht22.t;
+    const dht22hum = data.dht22.hum + config.sensors.dht22.h;
+    const sht21temp = data.sht21.temp + config.sensors.sht21.t;
+    const sht21hum = data.sht21.hum + config.sensors.sht21.h;
 
     let content = [];
+
+    function extraData(type: string, val: string) {
+        return <div className="mt-2 text-center">
+            {type}:
+            <span className="ms-1 text-blue-700 dark:text-blue-400">
+                {val}
+            </span>
+        </div>
+    }
+
     if(device() === 'WeatherMonitorBIM32') content.push(<Card header="BME680" key="BME680"
         content={<>
             {sensorCorrection(false, "t", 
@@ -49,12 +68,10 @@ export default function Sensors() {
                 (val: number) => dispatch(cf.BME680IaqCorrChange(val)), 
                 -10, 10, 0.1
             )}
-            <div className="mt-2 text-center">
-                {i18n.t('sensorAccuracy')}:
-                <span className="ms-1 text-blue-700 dark:text-blue-400">
-                    {vl.validateIaqArrc(data.bme680?.iaqAccr ?? 0) ? data.bme680?.iaqAccr : '--'}
-                </span>
-            </div>
+            {extraData(i18n.t('sensorAccuracy'), vl.validateIaqArrc(data.bme680?.iaqAccr ?? 0) ? String(data.bme680?.iaqAccr) : '--')}
+            <hr className="mt-6 mb-4" />
+            {extraData(i18n.t('absHumidity'), calculate.absoluteHum(bme680temp, bme680hum))}
+            {extraData(i18n.t('dewPoint'), calculate.dewPoint(bme680temp, bme680hum))}
         </>}
         className={!vl.validateTemperature(data.bme680?.temp ?? 0) && !vl.validateHumidity(data.bme680?.hum ?? 0) && !vl.validatePressure(data.bme680?.pres ?? 0) && !vl.validateIaq(data.bme680?.iaq ?? 0)
             ? 'invalid' + (hideUnnecessary ? ' hide' : '')
@@ -85,6 +102,9 @@ export default function Sensors() {
                 (val: number) => dispatch(cf.BME280PresCorrChange(val)), 
                 -10, 10, 0.1
             )}
+            <hr className="mt-6 mb-4" />
+            {extraData(i18n.t('absHumidity'), calculate.absoluteHum(bme280temp, bme280hum))}
+            {extraData(i18n.t('dewPoint'), calculate.dewPoint(bme280temp, bme280hum))}
         </>}
         className={!vl.validateTemperature(data.bme280.temp) && !vl.validateHumidity(data.bme280.hum) && !vl.validatePressure(data.bme280.pres)
             ? 'invalid' + (hideUnnecessary ? ' hide' : '')
@@ -131,6 +151,9 @@ export default function Sensors() {
                 (val: number) => dispatch(cf.SHT21HumCorrChange(val)), 
                 -10, 10, 0.1
             )}
+            <hr className="mt-6 mb-4" />
+            {extraData(i18n.t('absHumidity'), calculate.absoluteHum(sht21temp, sht21hum))}
+            {extraData(i18n.t('dewPoint'), calculate.dewPoint(sht21temp, sht21hum))}
         </>}
         className={!vl.validateTemperature(data.sht21.temp) && !vl.validateHumidity(data.sht21.hum)
             ? 'invalid' + (hideUnnecessary ? ' hide' : '')
@@ -154,6 +177,9 @@ export default function Sensors() {
                 (val: number) => dispatch(cf.DHT22HumCorrChange(val)), 
                 -10, 10, 0.1
             )}
+            <hr className="mt-6 mb-4" />
+            {extraData(i18n.t('absHumidity'), calculate.absoluteHum(dht22temp, dht22hum))}
+            {extraData(i18n.t('dewPoint'), calculate.dewPoint(dht22temp, dht22hum))}
         </>}
         className={!vl.validateTemperature(data.dht22.temp) && !vl.validateHumidity(data.dht22.hum)
             ? 'invalid' + (hideUnnecessary ? ' hide' : '')

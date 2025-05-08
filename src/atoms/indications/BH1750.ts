@@ -10,7 +10,7 @@ export default function BH1750() {
 
     return {
         light: vl.validateLight(data.bh1750.light) 
-            ? ((data.bh1750.light + config.sensors.bh1750.l).toFixed(2) + i18n.t('units.lux')) 
+            ? ((data.bh1750.light + config.sensors.bh1750.l).toFixed(1) + i18n.t('units.lux')) 
             : '--'
     }
 }

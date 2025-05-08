@@ -10,12 +10,11 @@ export default function BMP180() {
 
     return {
         temp: vl.validateTemperature(data.bmp180.temp) 
-            ? ((data.bmp180.temp + config.sensors.bmp180.t).toFixed(2) + '°C') 
+            ? ((data.bmp180.temp + config.sensors.bmp180.t).toFixed(1) + '°C') 
             : '--',
-
         pres: vl.validatePressure(data.bmp180.pres) 
             ? ((data.bmp180.pres + config.sensors.bmp180.p).toFixed(2) + i18n.t('units.hpa') + ' / ' 
-                + ((data.bmp180.pres + config.sensors.bmp180.p) * 0.75).toFixed(2) + i18n.t('units.mm')) 
+                + ((data.bmp180.pres + config.sensors.bmp180.p) * 0.75).toFixed(1) + i18n.t('units.mm')) 
             : '--'
     }
 }

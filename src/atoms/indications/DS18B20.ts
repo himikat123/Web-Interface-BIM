@@ -9,7 +9,7 @@ export default function DS18B20() {
 
     return {
         temp: vl.validateTemperature(data.ds18b20.temp) 
-            ? ((data.ds18b20.temp + config.sensors.ds18b20.t).toFixed(2) + '°C') 
+            ? ((data.ds18b20.temp + config.sensors.ds18b20.t).toFixed(1) + '°C') 
             : '--'
     }
 }

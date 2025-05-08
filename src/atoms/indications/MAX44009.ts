@@ -10,7 +10,7 @@ export default function MAX44009() {
 
     return {
         light: vl.validateLight(data.max44009.light) 
-            ? ((data.max44009.light + config.sensors.max44009.l).toFixed(2) + i18n.t('units.lux')) 
+            ? ((data.max44009.light + config.sensors.max44009.l).toFixed(1) + i18n.t('units.lux')) 
             : '--'
     }
 }

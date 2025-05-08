@@ -90,7 +90,7 @@ const data = (cookieCode) => {
         },
         sht21: {
             temp: random(-200, -100), // obviously incorrect values
-            hum: random(100, 200)
+            hum: random(101, 200)
         },
         dht22: {
             temp: random(20, 25), // obviously correct values

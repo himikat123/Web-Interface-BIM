@@ -2,28 +2,31 @@ import i18n from "../../i18n/main";
 import { iConfig } from "../../redux/configTypes";
 import { iData } from "../../redux/dataTypes";
 import * as vl from "../validateValues";
+import * as calculate from "../calculate";
 import { useSelector } from 'react-redux';
 
 export default function BME680() {
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
+    const temp = (data.bme680?.temp ?? 0) + (config.sensors.bme680?.t ?? 0);
+    const hum = (data.bme680?.hum ?? 0) + (config.sensors.bme680?.h ?? 0);
+    const pres = (data.bme680?.pres ?? 0) + (config.sensors.bme680?.p ?? 0);
+    const iaq = (data.bme680?.iaq ?? 0) + (config.sensors.bme680?.i ?? 0);
 
     return {
         temp: vl.validateTemperature(data.bme680?.temp ?? 0) 
-            ? (((data.bme680?.temp ?? 0) + (config.sensors.bme680?.t ?? 0)).toFixed(2) + '°C') 
+            ? temp.toFixed(1) + '°C'
             : '--',
-
         hum: vl.validateHumidity(data.bme680?.hum ?? 0) 
-            ? (((data.bme680?.hum ?? 0) + (config.sensors.bme680?.h ?? 0)).toFixed(2) + '%') 
+            ? hum.toFixed(1) + '%'
             : '--',
-
         pres: vl.validatePressure(data.bme680?.pres ?? 0) 
-            ? (((data.bme680?.pres ?? 0) + (config.sensors.bme680?.p ?? 0)).toFixed(2) + i18n.t('units.hpa') + ' / ' 
-                + (((data.bme680?.pres ?? 0) + (config.sensors.bme680?.p ?? 0)) * 0.75).toFixed(2) + i18n.t('units.mm')) 
+            ? pres.toFixed(1) + i18n.t('units.hpa') + ' / ' + (pres * 0.75).toFixed(1) + i18n.t('units.mm') 
             : '--',
-
         iaq: vl.validateIaq(data.bme680?.iaq ?? 0) 
-            ? ('IAQ ' + ((data.bme680?.iaq ?? 0) + (config.sensors.bme680?.i ?? 0)).toFixed(2)) 
-            : '--'
+            ? 'IAQ ' + iaq.toFixed(1) 
+            : '--',
+        aHum: calculate.absoluteHum(temp, hum),
+        dp: calculate.dewPoint(temp, hum)
     }
 }

@@ -3,6 +3,7 @@ import { iConfig } from "../../redux/configTypes";
 import { iData } from "../../redux/dataTypes";
 import { iWsensIndications } from "../../interfaces";
 import * as vl from "../validateValues";
+import * as calculate from "../calculate";
 import { useSelector } from 'react-redux';
 
 export default function Wsensor() {
@@ -14,36 +15,38 @@ export default function Wsensor() {
         const sens: iWsensIndications = {
             temp: [],
             hum: vl.validateHumidity(data.wsensor?.hum.data[num] ?? 0) 
-                ? (((data.wsensor?.hum.data[num] ?? 0) + (config.wsensor?.hum.corr[num] ?? 0)).toFixed(2) + '%') 
+                ? (((data.wsensor?.hum.data[num] ?? 0) + (config.wsensor?.hum.corr[num] ?? 0)).toFixed(1) + '%') 
                 : '--',
             pres: vl.validatePressure(data.wsensor?.pres.data[num] ?? 0) 
-                ? (((data.wsensor?.pres.data[num] ?? 0) + (config.wsensor?.pres.corr[num] ?? 0)).toFixed(2) + i18n.t('units.hpa') + ' / ' 
-                    + (((data.wsensor?.pres.data[num] ?? 0) + (config.wsensor?.pres.corr[num] ?? 0)) * 0.75).toFixed(2) + i18n.t('units.mm')) 
+                ? (((data.wsensor?.pres.data[num] ?? 0) + (config.wsensor?.pres.corr[num] ?? 0)).toFixed(1) + i18n.t('units.hpa') + ' / ' 
+                    + (((data.wsensor?.pres.data[num] ?? 0) + (config.wsensor?.pres.corr[num] ?? 0)) * 0.75).toFixed(1) + i18n.t('units.mm')) 
                 : '--',
             volt: vl.validateHighVoltage(data.wsensor?.voltage.data[num] ?? 0) 
-                ? (((data.wsensor?.voltage.data[num] ?? 0) + (config.wsensor?.volt.corr[num] ?? 0)).toFixed(2) + i18n.t('units.v')) 
+                ? (((data.wsensor?.voltage.data[num] ?? 0) + (config.wsensor?.volt.corr[num] ?? 0)).toFixed(1) + i18n.t('units.v')) 
                 : '--',
             light: vl.validateLight(data.wsensor?.light.data[num] ?? 0)
-                ? (((data.wsensor?.light.data[num] ?? 0) + (config.wsensor?.light.corr[num] ?? 0)).toFixed(2) + i18n.t('units.lux'))
+                ? (((data.wsensor?.light.data[num] ?? 0) + (config.wsensor?.light.corr[num] ?? 0)).toFixed(1) + i18n.t('units.lux'))
                 : '--',
             hiVoltage: vl.validateHighVoltage(data.wsensor?.voltage.data[num] ?? 0)
-                ? (((data.wsensor?.voltage.data[num] ?? 0) + (config.wsensor?.volt.corr[num] ?? 0)).toFixed(2) + i18n.t('units.v'))
+                ? (((data.wsensor?.voltage.data[num] ?? 0) + (config.wsensor?.volt.corr[num] ?? 0)).toFixed(1) + i18n.t('units.v'))
                 : '--',
             current: vl.validateCurrent(data.wsensor?.current.data[num] ?? 0)
                 ? (((data.wsensor?.current.data[num] ?? 0) + (config.wsensor?.curr.corr[num] ?? 0)).toFixed(2) + i18n.t('units.a'))
                 : '--',
             power: vl.validatePower(data.wsensor?.power.data[num] ?? 0)
-                ? (((data.wsensor?.power.data[num] ?? 0) + (config.wsensor?.pow.corr[num] ?? 0)).toFixed(2) + i18n.t('units.w'))
+                ? (((data.wsensor?.power.data[num] ?? 0) + (config.wsensor?.pow.corr[num] ?? 0)).toFixed(1) + i18n.t('units.w'))
                 : '--',
             energy: vl.validateEnergy(data.wsensor?.energy.data[num] ?? 0)
-                ? (((data.wsensor?.energy.data[num] ?? 0) + (config.wsensor?.enrg.corr[num] ?? 0)).toFixed(2) + i18n.t('units.wh'))
+                ? (((data.wsensor?.energy.data[num] ?? 0) + (config.wsensor?.enrg.corr[num] ?? 0)).toFixed(1) + i18n.t('units.wh'))
                 : '--',
             frequency: vl.validateFrequency(data.wsensor?.freq.data[num] ?? 0)
-                ? (((data.wsensor?.freq.data[num] ?? 0) + (config.wsensor?.freq.corr[num] ?? 0)).toFixed(2) + i18n.t('units.hz'))
+                ? (((data.wsensor?.freq.data[num] ?? 0) + (config.wsensor?.freq.corr[num] ?? 0)).toFixed(1) + i18n.t('units.hz'))
                 : '--',
             co2: vl.validateCO2(data.wsensor?.co2.data[num] ?? 0) 
-                ? (((data.wsensor?.co2.data[num] ?? 0) + (config.wsensor?.co2.corr[num] ?? 0)).toFixed(2) + 'ppm') 
-                : '--' 
+                ? (((data.wsensor?.co2.data[num] ?? 0) + (config.wsensor?.co2.corr[num] ?? 0)).toFixed(1) + 'ppm') 
+                : '--',
+            ahum: calculate.absoluteHum(data.wsensor?.temp?.data[0][num], data.wsensor?.hum?.data[num]),
+            dp: calculate.dewPoint(data.wsensor?.temp?.data[0][num], data.wsensor?.hum?.data[num])
         };
 
         for(let i=0; i<5; i++) {
@@ -67,7 +70,9 @@ export default function Wsensor() {
                 power: exp,
                 energy: exp,
                 frequency: exp,
-                co2: exp
+                co2: exp,
+                ahum: exp,
+                dp: exp
             }
     }
 

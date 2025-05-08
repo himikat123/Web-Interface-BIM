@@ -17,6 +17,7 @@ import { iData } from "../redux/dataTypes";
 import { wsensorsValidChange } from "../redux/slices/valid";
 import * as cf from "../redux/slices/config";
 import * as vl from "../atoms/validateValues";
+import * as calculate from "../atoms/calculate";
 
 export default function WSensors() {
     const dispatch = useDispatch();
@@ -24,6 +25,23 @@ export default function WSensors() {
     const data = useSelector((state: iData) => state.data);
     const [hideUnnecessary, setHideUnnecessary] = useState<boolean>(true);
     const [isValid, setIsValid] = useState<boolean[]>([]);
+
+    function extraData(type: string, val: string, expired: boolean, name: string) {
+        const color = expired ? "text-red-500 dark:text-red-600" : "text-blue-700 dark:text-blue-400";
+        return <div className="mt-2 text-center">{type}
+            : <span className={"ms-1 " + color}>
+                {val}{name !== '--' ? (', ' + name) : ''}
+            </span>
+        </div>;
+    }
+
+    function temp(wNum: number) {
+        return (data.wsensor?.temp?.data[0][wNum] ?? -4040) + (config.wsensor?.temp.corr[wNum][0] ?? 0);
+    }
+
+    function hum(wNum: number) {
+        return (data.wsensor?.hum?.data[wNum] ?? -4040) + (config.wsensor?.hum.corr[wNum] ?? 0);
+    }
     
     useEffect(() => {
         dispatch(wsensorsValidChange(!isValid.includes(false)));
@@ -158,6 +176,19 @@ export default function WSensors() {
                         -10, 10, 0.1,
                         hideUnnecessary,
                         data.wsensor?.power.name[wsensorNum] ?? ''
+                    )}
+                    <hr className="mt-6 mb-4" />
+                    {extraData(
+                        i18n.t('absHumidity'),
+                        calculate.absoluteHum(temp(wsensorNum), hum(wsensorNum)),
+                        !vl.WsensorDataRelevance(wsensorNum),
+                        data.wsensor?.temp.name[0][wsensorNum] ?? ''
+                    )}
+                    {extraData(
+                        i18n.t('dewPoint'), 
+                        calculate.dewPoint(temp(wsensorNum), hum(wsensorNum)),
+                        !vl.WsensorDataRelevance(wsensorNum),
+                        data.wsensor?.temp.name[0][wsensorNum] ?? ''
                     )}
                 </div>
 

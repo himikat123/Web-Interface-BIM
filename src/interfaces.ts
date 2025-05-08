@@ -329,7 +329,9 @@ export interface iWsensIndications {
     power: string,
     energy: string,
     frequency: string,
-    co2: string
+    co2: string,
+    ahum: string,
+    dp: string
 }
 
 export interface iCardThingSend {

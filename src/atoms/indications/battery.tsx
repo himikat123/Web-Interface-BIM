@@ -21,7 +21,7 @@ export const BatVoltage = (num: number) => {
 
     if(vl.WsensorDataRelevance(num)) {
         if(vl.validateBatteryADC(data.wsensor?.bat[num] ?? 0))
-            return `(${voltage(data.wsensor?.bat[num] ?? 0, (config.wsensor?.bat.k[num] ?? 0)).toFixed(2)} ${i18n.t('units.v')})`;
+            return '(' + voltage(data.wsensor?.bat[num] ?? 0, (config.wsensor?.bat.k[num] ?? 0)).toFixed(2) + i18n.t('units.v') + ')';
         else return '(--)';
     }
     else return `(${i18n.t('dataExpired')})`;
