@@ -18,7 +18,7 @@ export const vaidateAbsHum = (ah: number | undefined): boolean => {
 }
 
 export const validateDewPoint = (dp: number | undefined, temp: number | undefined): boolean => {
-    return dp !== undefined && temp != undefined && dp >= -60.0 && dp <= 60.0 && dp <= temp;
+    return dp !== undefined && temp !== undefined && dp >= -60.0 && dp <= 60.0 && dp <= temp;
 }
 
 export const validateWindSpeed = (speed: number): boolean => {
