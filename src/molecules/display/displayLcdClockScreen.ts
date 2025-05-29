@@ -30,8 +30,14 @@ export function displayLcdClockScreen(ctx: CanvasRenderingContext2D,
     const second = moment().second();
     const dt = new Date();
     const points = (dt.getMilliseconds() % 1000) > 500;
-    const ll = moment().locale(getLocale()).format('LL').match(/^.+\d{4}/gm);
-    const date = ll ? ll[0] : '';
+    const dd = moment().locale(getLocale());
+    let date = '';
+    if(getLocale() === 'es' && dispModel) {
+        const monthName = dd.format('MMMM');
+        if(monthName.length > 7) date = `${dd.date()} de ${dd.format('MMM')} de ${dd.year()}`;
+        else date = dd.format('LL');
+    } 
+    else date = dd.format('LL');
     const wd = moment().locale(getLocale()).format('dddd');
     const weekday = wd.charAt(0).toUpperCase() + wd.slice(1);
 
