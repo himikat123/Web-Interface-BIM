@@ -74,7 +74,7 @@ export const validateIaqArrc = (accr: number): boolean => {
 }
 
 export const validateCO2 = (co2: number): boolean => {
-    return (co2 >= 400 && co2 <= 2000); 
+    return (co2 >= 400 && co2 <= 10000); 
 }
 
 export const validateThingspeak = (thng: number): boolean => {

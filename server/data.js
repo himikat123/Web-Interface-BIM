@@ -142,7 +142,7 @@ const data = (cookieCode) => {
                 name: ["MAX44009", "BH1750"]
             },
             co2: {
-                data: [random(400, 450), random(450, 470)],
+                data: [random(9000, 9500), random(450, 470)],
                 name: ["Senseair S8", "Senseair S8"]
             },
             voltage: {
