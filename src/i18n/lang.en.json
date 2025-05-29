@@ -31,6 +31,7 @@
         "singular": "Display",
         "plural": "Displays"
     },
+    "sleep": "Sleep mode",
     "weatherForecast": "Weather forecast",
     "clock": "Clock",
     "alarm": "Alarm",    

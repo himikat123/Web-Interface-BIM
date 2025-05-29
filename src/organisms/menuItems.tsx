@@ -7,6 +7,7 @@ import MenuClock from "../molecules/menu/menuClock";
 import MenuAlarm from "../molecules/menu/menuAlarm";
 import MenuDisplaySingle from "../molecules/menu/menuDisplaySingle";
 import MenuDisplaysSeveral from "../molecules/menu/menuDisplaysSeveral";
+import MenuSleep from "../molecules/menu/menuSleep";
 import MenuSound from "../molecules/menu/menuSound";
 import MenuComfort from "../molecules/menu/menuComfort";
 import MenuHistory from "../molecules/menu/menuHistory";
@@ -23,6 +24,7 @@ export default function MenuItems(props: iMenuItems) {
         {device() === 'WeatherMonitorBIM32' && <MenuAlarm current={props.current} mobile={props.mobile} />}
         {device() === 'WeatherMonitorBIM' && <MenuDisplaySingle current={props.current} mobile={props.mobile} />}
         {device() === 'WeatherMonitorBIM32' && <MenuDisplaysSeveral current={props.current} mobile={props.mobile} />}
+        {device() === 'WeatherMonitorBIM' && <MenuSleep current={props.current} mobile={props.mobile} />}
         {device() === 'WeatherMonitorBIM32' && <MenuSound current={props.current} mobile={props.mobile} />}
         <MenuComfort current={props.current} mobile={props.mobile} />
         {device() === 'WeatherMonitorBIM32' && <MenuHistory current={props.current} mobile={props.mobile} />}

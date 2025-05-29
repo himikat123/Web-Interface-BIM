@@ -15,6 +15,7 @@ import Clock from './pages/clock';
 import Alarm from './pages/alarm';
 import Display1 from './pages/display1';
 import Display2 from './pages/display2';
+import Sleep from './pages/sleep';
 import Sound from './pages/sound';
 import Comfort from './pages/comfort';
 import History from './pages/history';
@@ -131,6 +132,7 @@ function App() {
                 <Route path={'/display'}        element={ <Display1 /> } />
                 <Route path={'/display1'}       element={ <Display1 /> } />
                 <Route path={'/display2'}       element={ <Display2 /> } />
+                <Route path={'/sleep'}          element={ <Sleep /> } />
                 <Route path={'/sound'}          element={ <Sound /> } />
                 <Route path={'/comfort'}        element={ <Comfort /> } />
                 <Route path={'/history'}        element={ <History /> } />
