@@ -11,6 +11,7 @@ import { ReactComponent as FlagRU } from '../../atoms/icons/flagRU.svg';
 import { ReactComponent as FlagPL } from '../../atoms/icons/flagPL.svg';
 import { ReactComponent as FlagUA } from '../../atoms/icons/flagUA.svg';
 import { ReactComponent as FlagBG } from '../../atoms/icons/flagBG.svg';
+import { ReactComponent as FlagES } from '../../atoms/icons/flagES.svg';
 
 export default function MenuSystem(props: iMenuItems) {
     const config = useSelector((state: iConfig) => state.config);
@@ -34,6 +35,7 @@ export default function MenuSystem(props: iMenuItems) {
                         {config.lang === 'pl' && <FlagPL />}
                         {config.lang === 'ua' && <FlagUA />}
                         {config.lang === 'bg' && <FlagBG />}
+                        {config.lang === 'es' && <FlagES />}
                     </div>
                 </div>} 
             valid={true} 

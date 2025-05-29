@@ -10,6 +10,7 @@ import { ReactComponent as FlagRU } from '../atoms/icons/flagRU.svg';
 import { ReactComponent as FlagPL } from '../atoms/icons/flagPL.svg';
 import { ReactComponent as FlagUA } from '../atoms/icons/flagUA.svg';
 import { ReactComponent as FlagBG } from '../atoms/icons/flagBG.svg';
+import { ReactComponent as FlagES } from '../atoms/icons/flagES.svg';
 import { iConfig } from "../redux/configTypes";
 
 export default function Language() {
@@ -81,6 +82,17 @@ export default function Language() {
             }} 
             label="Български"
             icon={<FlagBG />}
+        />
+
+        <RadioSwitch id="es" 
+            name="language" 
+            checked={language === 'es'} 
+            onChange={() => {
+                changeLanguage('es');
+                dispatch(languageSwitch('es')); 
+            }} 
+            label="Español"
+            icon={<FlagES />}
         />
     </>} />;
 

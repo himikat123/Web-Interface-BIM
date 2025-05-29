@@ -5,6 +5,7 @@ import ru from './lang.ru.json';
 import pl from './lang.pl.json';
 import ua from './lang.ua.json';
 import bg from './lang.bg.json';
+import es from './lang.es.json';
 import hostUrl from '../atoms/hostUrl';
 
 const i18n = new I18n();
@@ -12,7 +13,7 @@ const i18n = new I18n();
 i18n.defaultLocale = 'en';
 i18n.locale = 'en';
 i18n.enableFallback = true;
-i18n.translations = { en, de, ru, pl, ua, bg };
+i18n.translations = { en, de, ru, pl, ua, bg, es };
 
 export function changeLanguage(lang: string) {
     i18n.locale = lang;

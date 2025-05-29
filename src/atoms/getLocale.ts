@@ -4,6 +4,7 @@ import 'moment/locale/ru';
 import 'moment/locale/pl';
 import 'moment/locale/uk';
 import 'moment/locale/bg';
+import 'moment/locale/es';
 
 export function getLocale(): string {
     const config = store.getState().config;
