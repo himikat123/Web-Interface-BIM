@@ -33,7 +33,7 @@ export default function CardDisplayType(props: iDisplay) {
     ];
 
     const lcd = [
-        { 'NX4832K035': 140 }, 
+        { 'NX4832K035 / NX4827K043': 200 }, 
         { 'NX4832T035': 140 },
         { 'ILI9341': 100 }
     ];
