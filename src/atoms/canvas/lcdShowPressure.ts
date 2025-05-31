@@ -17,7 +17,7 @@ export default function lcdShowPressure(ctx: CanvasRenderingContext2D, prevPres:
         let p = validatePressure(pres) 
             ? local 
                 ? String(Math.round(pres))
-                : String(hPaToMM(pres)) 
+                : String(Math.round(hPaToMM(pres))) 
             : '--';
         p += units;
         const x = dispModel ? 250 : 286; 
