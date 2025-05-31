@@ -45,10 +45,10 @@ export default function DisplayViewLCD() {
     const draw = useCallback(() => {
         if(ctx) { // Display pages switch
             if(page === 'main') {
-                setMainState(displayLcdMainScreen(ctx, dispModel, mainState, clockPointsState));
+                setMainState(displayLcdMainScreen(ctx, dispModel, mainState, clockPointsState, config.units.temp, config.units.pres));
             }
             if(page === 'network') {
-                setNetworkState(displayLcdNetworkScreen(ctx, dispModel, networkState));
+                setNetworkState(displayLcdNetworkScreen(ctx, dispModel, networkState, config.units.temp));
             }
             if(page === 'clock') {
                 setClockState(displayLcdClockScreen(ctx, model, dispModel, clockState, clockType));
@@ -57,13 +57,13 @@ export default function DisplayViewLCD() {
                 setCalendarState(displayLcdCalendarScreen(ctx, dispModel, calendarState, calendarShift));
             }
             if(page === 'hourly') {
-                setHourlyState(displayLcdHourlyScreen(ctx, dispModel, hourlyState, hourlyShift));
+                setHourlyState(displayLcdHourlyScreen(ctx, dispModel, hourlyState, hourlyShift, config.units.temp, config.units.pres));
             }
             if(page === 'historyIn') {
-                setHistoryInState(displayLcdHistoryInScreen(ctx, dispModel, historyInState, historyInShift));
+                setHistoryInState(displayLcdHistoryInScreen(ctx, dispModel, historyInState, historyInShift, config.units.temp, config.units.pres));
             }
             if(page === 'historyOut') {
-                setHistoryOutState(displayLcdHistoryOutScreen(ctx, dispModel, historyOutState, historyOutShift));
+                setHistoryOutState(displayLcdHistoryOutScreen(ctx, dispModel, historyOutState, historyOutShift, config.units.temp, config.units.pres));
             }
             if(page === 'alarm') {
                 setAlarmState(displayLcdAlarmScreen(ctx, dispModel, alarmState));

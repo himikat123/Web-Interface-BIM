@@ -4,9 +4,11 @@ import lcdCloseButton from '../../atoms/canvas/lcdCloseButton';
 import lcdColors from '../../atoms/canvas/lcdColors';
 import i18n from '../../i18n/main';
 import { iLcdNetworkState } from '../../interfaces';
+import { celsiusToFahrenheit } from '../../atoms/indications/celsiusToFahrenheit';
+import { validateTemperature } from '../../atoms/validateValues';
 
 export function displayLcdNetworkScreen(ctx: CanvasRenderingContext2D, 
-    dispModel: number, state: iLcdNetworkState | undefined
+    dispModel: number, state: iLcdNetworkState | undefined, localTemp: number
 ): iLcdNetworkState {
     const color = lcdColors();
     const x = dispModel ? 160 : 174;
@@ -38,18 +40,21 @@ export function displayLcdNetworkScreen(ctx: CanvasRenderingContext2D,
     }
 
     const data = store.getState().data;
+    const config = store.getState().config;
     const ssid = data.network.ssid;
     const rssi = data.network.sig;
     const ip = data.network.ip;
     const mac = data.network.mac;
-    const esp32Temp = data.esp32?.temp ?? 404;
+    const temp = (data.esp32?.temp ?? 40400) + (config.sensors.esp32?.t ?? 0);
+    const esp32Temp = Math.round(localTemp ? celsiusToFahrenheit(temp) : temp);
+    const units = localTemp ? '°F' : '°C';
     const fw = store.getState().data.fw;
 
     if(ssid !== state?.ssid) printText(ctx, sr, 64 + y, w, font, ssid.substring(0, 16), font, 'center', color.TEXT, color.GROUND);
     if(rssi !== state?.rssi) printText(ctx, sr, 94 + y, w, font, rssi + 'dBm', font, 'center', color.TEXT, color.GROUND);
     if(ip !== state?.ip) printText(ctx, sr, 124 + y, w, font, ip, font, 'center', color.TEXT, color.GROUND);
     if(mac !== state?.mac) printText(ctx, sr, 154 + y, w, font, mac, font, 'center', color.TEXT, color.GROUND);
-    if(esp32Temp !== state?.tempESP32) printText(ctx, sr, 184 + y, w, font, esp32Temp.toFixed() + '°C', font, 'center', color.TEXT, color.GROUND);
+    if(esp32Temp !== state?.tempESP32) printText(ctx, sr, 184 + y, w, font, (validateTemperature(temp) ? esp32Temp : '--') + units, font, 'center', color.TEXT, color.GROUND);
     if(fw !== state?.fw) printText(ctx, sr, 214 + y, w, font, fw, font, 'center', color.TEXT, color.GROUND);
 
     const prevState: iLcdNetworkState = {

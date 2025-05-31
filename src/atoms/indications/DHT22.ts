@@ -1,6 +1,7 @@
 import { iConfig } from "../../redux/configTypes";
 import { iData } from "../../redux/dataTypes";
 import { useSelector } from 'react-redux';
+import { TempLocale } from "./celsiusToFahrenheit";
 import * as vl from "../validateValues";
 import * as calculate from "../calculate";
 
@@ -12,7 +13,7 @@ export default function DHT22() {
 
     return {
         temp: vl.validateTemperature(data.dht22.temp) 
-            ? temp.toFixed(1) + '°C'
+            ? TempLocale(temp)
             : '--',
         hum: vl.validateHumidity(data.dht22.hum) 
             ? hum.toFixed(1) + '%'

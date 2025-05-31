@@ -83,6 +83,7 @@ export default function WSensors() {
                             data.wsensor?.temp.data[tempSensorNum][wsensorNum] ?? 0, 
                             (val: number) => dispatch(cf.wSensTempChange({val: val, sens: wsensorNum, num: tempSensorNum})), 
                             -10, 10, 0.1,
+                            config.units.temp, config.units.pres,
                             hideUnnecessary,
                             data.wsensor?.temp.name[tempSensorNum][wsensorNum] ?? ''
                         )}
@@ -94,6 +95,7 @@ export default function WSensors() {
                         data.wsensor?.hum.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensHumChange({val: val, num: wsensorNum})),
                         -10, 10, 0.1, 
+                        config.units.temp, config.units.pres,
                         hideUnnecessary,
                         data.wsensor?.hum.name[wsensorNum] ?? ''
                     )}
@@ -104,6 +106,7 @@ export default function WSensors() {
                         data.wsensor?.pres.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensPresChange({val: val, num: wsensorNum})),
                         -10, 10, 0.1, 
+                        config.units.temp, config.units.pres,
                         hideUnnecessary,
                         data.wsensor?.pres.name[wsensorNum] ?? ''
                     )}
@@ -114,6 +117,7 @@ export default function WSensors() {
                         data.wsensor?.light.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensLightChange({val: val, num: wsensorNum})),
                         -10, 10, 0.1, 
+                        config.units.temp, config.units.pres,
                         hideUnnecessary,
                         data.wsensor?.light.name[wsensorNum] ?? ''
                     )}
@@ -124,6 +128,7 @@ export default function WSensors() {
                         data.wsensor?.co2.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensCO2Change({val: val, num: wsensorNum})),
                         -10, 10, 0.1, 
+                        config.units.temp, config.units.pres,
                         hideUnnecessary,
                         data.wsensor?.co2.name[wsensorNum] ?? ''
                     )}
@@ -134,6 +139,7 @@ export default function WSensors() {
                         data.wsensor?.voltage.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensHighVoltChange({val: val, num: wsensorNum})),
                         -10, 10, 0.1, 
+                        config.units.temp, config.units.pres,
                         hideUnnecessary,
                         data.wsensor?.voltage.name[wsensorNum] ?? ''
                     )}
@@ -144,6 +150,7 @@ export default function WSensors() {
                         data.wsensor?.current.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensCurrentChange({val: val, num: wsensorNum})),
                         -1, 1, 0.001,
+                        config.units.temp, config.units.pres,
                         hideUnnecessary,
                         data.wsensor?.current.name[wsensorNum] ?? ''
                     )}
@@ -154,6 +161,7 @@ export default function WSensors() {
                         data.wsensor?.power.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensPowerChange({val: val, num: wsensorNum})),
                         -10, 10, 0.1,
+                        config.units.temp, config.units.pres,
                         hideUnnecessary,
                         data.wsensor?.power.name[wsensorNum] ?? ''
                     )}
@@ -164,6 +172,7 @@ export default function WSensors() {
                         data.wsensor?.energy.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensEnergyChange({val: val, num: wsensorNum})),
                         -10, 10, 0.1,
+                        config.units.temp, config.units.pres,
                         hideUnnecessary,
                         data.wsensor?.energy.name[wsensorNum] ?? ''
                     )}
@@ -174,6 +183,7 @@ export default function WSensors() {
                         data.wsensor?.freq.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensFreqChange({val: val, num: wsensorNum})),
                         -10, 10, 0.1,
+                        config.units.temp, config.units.pres,
                         hideUnnecessary,
                         data.wsensor?.power.name[wsensorNum] ?? ''
                     )}

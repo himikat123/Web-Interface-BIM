@@ -114,7 +114,9 @@
     "longitude": "Довгота",
     "detectCoordinatesAutomatically": "Визначити координати автоматично",
     "wind": "Вітер",
+    "localization": "Локалізація",
     "units": {
+        "measurement": "Одиниці виміру",
         "hpa": "гПа",
         "mm": "мм",
         "mps": "м/с",

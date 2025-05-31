@@ -8,9 +8,12 @@ import i18n from "../../i18n/main";
 import moment from 'moment';
 import { getLocale } from "../../atoms/getLocale";
 import lcdColors from "../../atoms/canvas/lcdColors";
+import { celsiusToFahrenheit } from "../../atoms/indications/celsiusToFahrenheit";
+import { hPaToMM } from "../../atoms/indications/hPaToMM";
+import { validateTemperature, validatePressure } from "../../atoms/validateValues";
 
-export default function displayLcdHourlyColumn(ctx: CanvasRenderingContext2D, 
-    dispModel: number, weather: iHourlyWeather | undefined, num: number, shift: number, type: string
+export default function displayLcdHourlyColumn(ctx: CanvasRenderingContext2D, dispModel: number, 
+    weather: iHourlyWeather | undefined, num: number, shift: number, type: string, localTemp: number, localPres: number
 ) {
     const config = store.getState().config;
     const color = lcdColors();
@@ -19,8 +22,12 @@ export default function displayLcdHourlyColumn(ctx: CanvasRenderingContext2D,
     const s = num + shift;
     const font = dispModel ? 9 : 11;
 
-    const temp = weather?.temp[s] !== undefined ? (weather?.temp[s].toFixed(1) + '°') : '--°';
-    printText(ctx, x + 2, y, 36, font + 1, temp, font + 1, 'center', color.TEMP, color.BG);
+    const tempUnits = localTemp ? '°F' : '°C';
+    const t = weather?.temp[s] !== undefined ? weather?.temp[s] : 40400;
+    const temp = validateTemperature(t)
+        ? String(Math.round(localTemp ? celsiusToFahrenheit(t) : t))
+        : '--';
+    printText(ctx, x + 2, y, 36, font + 1, temp + tempUnits, font + 1, 'center', color.TEMP, color.BG);
     y += 16;
 
     if(type === 'historyIn' || type === 'historyOut') {
@@ -30,9 +37,12 @@ export default function displayLcdHourlyColumn(ctx: CanvasRenderingContext2D,
     }
 
     if(type === 'hourly' || type === 'historyOut') {
-        const mm = i18n.t('units.mm');
-        const pres = weather?.pres[s] !== undefined ? (Math.round(weather.pres[s] * 0.75) + mm) : ('--' + mm);
-        printText(ctx, x + 2, y, 36, font, pres, font, 'center', color.PRES, color.BG);
+        const presUnits = localPres ? i18n.t('units.hpa').slice(0, -2) : i18n.t('units.mm');
+        const p = weather?.pres[s] !== undefined ? weather.pres[s] : 40400;
+        const pres = validatePressure(p)
+            ? String(Math.round(localPres ? p : hPaToMM(p)))
+            : '--';
+        printText(ctx, x + 2, y, 36, font, pres + presUnits, font, 'center', color.PRES, color.BG);
         y += 14;
     }
 

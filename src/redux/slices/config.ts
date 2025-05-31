@@ -86,6 +86,10 @@ export const configSlice = createSlice({
             }
         },
         lang: "en",
+        units: {
+            temp: 0,
+            pres: 0
+        },
         clock: {
             format: 0,
             ntp: "",
@@ -443,6 +447,8 @@ export const configSlice = createSlice({
         weatherCorrPres: (state, action) => { state.weather.corr.p = action.payload},
 
         languageSwitch: (state, action) => { state.lang = action.payload },
+        unitsTempChange: (state, action) => { state.units.temp = action.payload },
+        unitsPresChange: (state, action) => { state.units.pres = action.payload },
 
         clockFormatChange: (state, action) => { state.clock.format = action.payload },
         clockNtpChange: (state, action) => { state.clock.ntp = action.payload },
@@ -632,7 +638,7 @@ export const configSlice = createSlice({
 
 export const { 
     configStateChange, 
-    languageSwitch, 
+    languageSwitch, unitsTempChange, unitsPresChange,
     setConfigState, 
     usernameChange, passwordRequiredSwitch,
     netSsidChange, netPassChange, netTypeSwitch, netIpChange, netMaskChange, netGwChange, netDns1Change, netDns2Change,

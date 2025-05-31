@@ -1,5 +1,6 @@
 import { vaidateAbsHum, validateDewPoint } from "./validateValues";
 import i18n from "../i18n/main";
+import { TempLocale } from "./indications/celsiusToFahrenheit";
 
 /*
  * Calculate absolute humidity
@@ -40,5 +41,7 @@ export function dewPointVal(temp: number | undefined, hum: number | undefined): 
  */
 export function dewPoint(temp: number | undefined, hum: number | undefined): string {
     const dp = dewPointVal(temp, hum);
-    return validateDewPoint(dp, temp) ? (dp.toFixed(1) + '°C') : '--';
+    return validateDewPoint(dp, temp) 
+        ? TempLocale(dp) 
+        : '--';
 }

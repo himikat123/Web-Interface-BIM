@@ -10,8 +10,8 @@ import i18n from '../../i18n/main';
 import store from '../../redux/store';
 import moment from 'moment';
 
-export function displayLcdHistoryInScreen(ctx: CanvasRenderingContext2D, 
-    dispModel: number, state: iLcdHourlyState | undefined, shift: number
+export function displayLcdHistoryInScreen(ctx: CanvasRenderingContext2D, dispModel: number, 
+    state: iLcdHourlyState | undefined, shift: number, localTemp: number, localPres: number
 ): iLcdHourlyState {
     if(!state?.skeleton) {
         fillRect(ctx, 0, 0, ctx.canvas.width, ctx.canvas.height, '#000');
@@ -31,7 +31,7 @@ export function displayLcdHistoryInScreen(ctx: CanvasRenderingContext2D,
         }
         displayLcdHourlyCharts(ctx, dispModel, data, shift, 'historyIn');
         for(let i=0; i<8; i++) {
-            displayLcdHourlyColumn(ctx, dispModel, data, i, shift, 'historyIn');
+            displayLcdHourlyColumn(ctx, dispModel, data, i, shift, 'historyIn', localTemp, localPres);
         }
         lcdForwardButton(ctx, dispModel, shift < 16);
         lcdBackButton(ctx, dispModel, shift > 0);

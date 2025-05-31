@@ -114,7 +114,9 @@
     "longitude": "Дължина",
     "detectCoordinatesAutomatically": "Автоматично определяне на координатите",
     "wind": "Вятър",
+    "localization": "Локализация",
     "units": {
+        "measurement": "Мерни единици",
         "hpa": " hPa",
         "mm": "мм",
         "mps": "м/с",

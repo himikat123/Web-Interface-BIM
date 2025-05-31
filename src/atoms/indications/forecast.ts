@@ -3,6 +3,8 @@ import { iConfig } from "../../redux/configTypes";
 import { iData } from "../../redux/dataTypes";
 import * as vl from "../validateValues";
 import * as calculate from "../calculate";
+import { TempLocale } from "./celsiusToFahrenheit";
+import { PresLocale } from "./hPaToMM";
 import { useSelector } from 'react-redux';
 
 export default function Forecast() {
@@ -13,15 +15,14 @@ export default function Forecast() {
     const pres = data.weather.pres + config.weather.corr.p;
 
     return {
-        temp: vl.validateTemperature(temp) 
-            ? (temp.toFixed(1) + '°C') 
+        temp: vl.validateTemperature(data.weather.temp) 
+            ? TempLocale(temp) 
             : '--',
-        hum: vl.validateHumidity(hum) 
+        hum: vl.validateHumidity(data.weather.hum) 
             ? (hum.toFixed(1) + '%') 
             : '--',
-        pres: vl.validatePressure(pres) 
-            ? (pres.toFixed(1) + i18n.t('units.hpa') + ' / ' 
-                + (pres * 0.75).toFixed(1) + i18n.t('units.mm')) 
+        pres: vl.validatePressure(data.weather.pres) 
+            ? PresLocale(pres) 
             : '--',
         aHum: calculate.absoluteHum(temp, hum),
         dp: calculate.dewPoint(temp, hum)

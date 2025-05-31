@@ -3,8 +3,12 @@ import RangeInput from "./rangeInput";
 import i18n from "../i18n/main";
 import Indication from "./indication";
 import * as vl from "./validateValues";
+import { celsiusToFahrenheit } from "./indications/celsiusToFahrenheit";
+import { hPaToMM } from "./indications/hPaToMM";
 
-export default function sensorCorrection(color: boolean, dataType: string, val: number, lblType: string | React.ReactNode, lblData: number, onChange: any, min: number, max: number, step: number, hide?: boolean, lblName?: string) {
+export default function sensorCorrection(color: boolean, dataType: string, val: number, lblType: string | React.ReactNode, 
+    lblData: number, onChange: any, min: number, max: number, step: number, localTemp: number, localPres: number, hide?: boolean, lblName?: string
+) {
     const countSymbolsAfterComma = () => ((step.toString().includes('.')) ? (step.toString().split('.').pop()?.length) : (0));
 
     const round = () => {
@@ -12,11 +16,15 @@ export default function sensorCorrection(color: boolean, dataType: string, val: 
     }
 
     let units: string = '';
+    let unitsCalc: string = '';
     let labels: string[] = ['', ''];
     switch(dataType) {
         case 't': // Temperature
             units = "°C";
-            labels[0] = (vl.validateTemperature(lblData) ? round() : "--");
+            unitsCalc = localTemp ? "°F" : "°C";
+            labels[0] = (vl.validateTemperature(lblData) 
+                ? localTemp ? celsiusToFahrenheit(Math.round((lblData + val) * (1 / step)) / (1 / step)).toFixed(countSymbolsAfterComma()) : round() 
+                : "--");
             break;
         case 'h': // Humidity
             units = "%";
@@ -24,8 +32,10 @@ export default function sensorCorrection(color: boolean, dataType: string, val: 
             break;
         case 'p': // Pressure
             units = i18n.t('units.hpa');
-            labels[0] = (vl.validatePressure(lblData) ? round() : "--");
-            labels[1] = (vl.validatePressure(lblData) ? ` (~${(Math.round((lblData + val) * 7.5) / 10).toFixed(1)}${i18n.t('units.mm')})` : '');
+            unitsCalc = localPres ? i18n.t('units.hpa') : i18n.t('units.mm');
+            labels[0] = (vl.validatePressure(lblData)
+                ? localPres ? round() : hPaToMM(Math.round((lblData + val) * (1 / step)) / (1 / step)).toFixed(countSymbolsAfterComma())
+                : "--");
             break;
         case 'l': // Ambient light
             units = i18n.t('units.lux');
@@ -80,7 +90,7 @@ export default function sensorCorrection(color: boolean, dataType: string, val: 
             <div className="mt-4 sm:mt-8">
                 {lblType}: 
                 <Indication error={color} 
-                    value={labels[0] + units + labels[1] + (lblName ? labels[0] !== '--' ? (', ' + lblName) : '' : '')} 
+                    value={labels[0] + unitsCalc + labels[1] + (lblName ? labels[0] !== '--' ? (', ' + lblName) : '' : '')} 
                 />
             </div>} 
         min={min}

@@ -172,7 +172,7 @@ const data = (cookieCode) => {
             isDay: Math.round(random(0, 1)),
             temp: random(-30, 30),
             hum: random(90, 100),
-            pres: random(800, 850),
+            pres: random(850, 1060),
             wind: {
                 speed: random(1, 7),
                 dir: random(0, 360)

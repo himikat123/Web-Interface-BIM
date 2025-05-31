@@ -61,6 +61,10 @@ export interface iConfig {
             }
         },
         lang: string,
+        units: {
+            temp: number,
+            pres: number
+        },
         clock: {
             format: number,
             ntp: string,

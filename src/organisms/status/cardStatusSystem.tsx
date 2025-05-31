@@ -6,6 +6,7 @@ import device from '../../device';
 import { validateTemperature } from '../../atoms/validateValues';
 import { iConfig } from "../../redux/configTypes";
 import { iData } from '../../redux/dataTypes';
+import { celsiusToFahrenheit } from '../../atoms/indications/celsiusToFahrenheit';
 
 export default function CardStatusSystem() {
     const config = useSelector((state: iConfig) => state.config);
@@ -21,6 +22,11 @@ export default function CardStatusSystem() {
         case 2: hourFormat = 'H'; break;
         default: hourFormat = 'HH'; break;
     }
+    const esp32T = (data.esp32?.temp ?? 0) + (config.sensors.esp32?.t ?? 0);
+    const esp32Temp = validateTemperature(data.esp32?.temp ?? 40400) 
+        ? (config.units.temp ? celsiusToFahrenheit(esp32T) : esp32T).toFixed(1) 
+        : '--';
+    const units = config.units.temp ? '°F' : '°C';
 
     return <div className='text-center'>
         <h2 className='text-xl'>{i18n.t('system')}</h2>
@@ -34,12 +40,7 @@ export default function CardStatusSystem() {
         </div>
         {device() === 'WeatherMonitorBIM32' && <div className='mt-4'>
             <p>{i18n.t('esp32Temp')}</p>
-            <p className='text-blue-700 dark:text-blue-400'>
-                {validateTemperature(data.esp32?.temp ?? 0) 
-                    ? ((data.esp32?.temp ?? 0) + (config.sensors.esp32?.t ?? 0)).toFixed(1) 
-                    : '--'
-                }°C
-            </p>
+            <p className='text-blue-700 dark:text-blue-400'>{esp32Temp + units}</p>
         </div>}
         <div className='mt-4'>
             <p>{i18n.t('runtime')}</p>

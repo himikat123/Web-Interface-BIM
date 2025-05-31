@@ -1,7 +1,8 @@
-import i18n from "../../i18n/main";
 import { iConfig } from "../../redux/configTypes";
 import { iData } from "../../redux/dataTypes";
 import * as vl from "../validateValues";
+import { TempLocale } from "./celsiusToFahrenheit";
+import { PresLocale } from "./hPaToMM";
 import { useSelector } from 'react-redux';
 
 export default function BMP180() {
@@ -10,11 +11,10 @@ export default function BMP180() {
 
     return {
         temp: vl.validateTemperature(data.bmp180.temp) 
-            ? ((data.bmp180.temp + config.sensors.bmp180.t).toFixed(1) + '°C') 
+            ? TempLocale(data.bmp180.temp + config.sensors.bmp180.t) 
             : '--',
         pres: vl.validatePressure(data.bmp180.pres) 
-            ? ((data.bmp180.pres + config.sensors.bmp180.p).toFixed(2) + i18n.t('units.hpa') + ' / ' 
-                + ((data.bmp180.pres + config.sensors.bmp180.p) * 0.75).toFixed(1) + i18n.t('units.mm')) 
+            ? PresLocale(data.bmp180.pres + config.sensors.bmp180.p)
             : '--'
     }
 }

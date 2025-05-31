@@ -11,7 +11,7 @@ import store from '../../redux/store';
 import moment from 'moment';
 
 export function displayLcdHistoryOutScreen(ctx: CanvasRenderingContext2D, dispModel: number, 
-    state: iLcdHourlyState | undefined, shift: number
+    state: iLcdHourlyState | undefined, shift: number, localTemp: number, localPres: number
 ): iLcdHourlyState {
     if(!state?.skeleton) {
         fillRect(ctx, 0, 0, ctx.canvas.width, ctx.canvas.height, '#000');
@@ -32,7 +32,7 @@ export function displayLcdHistoryOutScreen(ctx: CanvasRenderingContext2D, dispMo
         }
         displayLcdHourlyCharts(ctx, dispModel, data, shift, 'historyOut');
         for(let i=0; i<8; i++) {
-            displayLcdHourlyColumn(ctx, dispModel, data, i, shift, 'historyOut');
+            displayLcdHourlyColumn(ctx, dispModel, data, i, shift, 'historyOut', localTemp, localPres);
         }
         lcdForwardButton(ctx, dispModel, shift < 16);
         lcdBackButton(ctx, dispModel, shift > 0);

@@ -114,7 +114,9 @@
     "longitude": "Longitud",
     "detectCoordinatesAutomatically": "Detectar coordenadas automaticamente",
     "wind": "Viento",
+    "localization": "Localización",
     "units": {
+        "measurement": "Unidades de medida",
         "hpa": "hPa",
         "mm": "mm",
         "mps": "m/s",

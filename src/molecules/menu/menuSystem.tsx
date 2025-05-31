@@ -27,7 +27,7 @@ export default function MenuSystem(props: iMenuItems) {
             current={props.current} 
             title={
                 <div className="flex items-center">
-                    {i18n.t('language')}
+                    {i18n.t('localization')}
                     <div className="w-[31px] h-[24px] border ms-4 lang">
                         {config.lang === 'en' && <FlagEN />}
                         {config.lang === 'de' && <FlagDE />}

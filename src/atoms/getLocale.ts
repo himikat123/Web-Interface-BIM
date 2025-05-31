@@ -8,7 +8,7 @@ import 'moment/locale/es';
 
 export function getLocale(): string {
     const config = store.getState().config;
-    const locale = config.lang === 'ua' ? 'uk' : config.lang;
+    const locale = config.lang === 'ua' ? 'uk' : config.lang === 'es' ? 'es-mx' : config.lang;
 
     return locale;
 }

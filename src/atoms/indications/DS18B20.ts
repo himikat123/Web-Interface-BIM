@@ -1,6 +1,7 @@
 import { iConfig } from "../../redux/configTypes";
 import { iData } from "../../redux/dataTypes";
 import * as vl from "../validateValues";
+import { TempLocale } from "./celsiusToFahrenheit";
 import { useSelector } from 'react-redux';
 
 export default function DS18B20() {
@@ -9,7 +10,7 @@ export default function DS18B20() {
 
     return {
         temp: vl.validateTemperature(data.ds18b20.temp) 
-            ? ((data.ds18b20.temp + config.sensors.ds18b20.t).toFixed(1) + '°C') 
+            ? TempLocale(data.ds18b20.temp + config.sensors.ds18b20.t)
             : '--'
     }
 }
