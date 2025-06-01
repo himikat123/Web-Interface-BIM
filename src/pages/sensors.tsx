@@ -1,4 +1,6 @@
 import { useState } from "react";
+import moment from "moment";
+import humanizeDuration from "humanize-duration";
 import ThreeColumns from "../templates/threeColumns";
 import { useSelector, useDispatch } from 'react-redux';
 import i18n from '../i18n/main';
@@ -26,6 +28,10 @@ export default function Sensors() {
     const dht22hum = data.dht22.hum + config.sensors.dht22.h;
     const sht21temp = data.sht21.temp + config.sensors.sht21.t;
     const sht21hum = data.sht21.hum + config.sensors.sht21.h;
+    const locale = config.lang === 'ua' ? 'uk' : config.lang;
+    const runtime = data.runtime > 86400
+        ? data.runtime - moment.unix(data.runtime).utc().seconds()
+        : data.runtime;
 
     let content = [];
 
@@ -278,6 +284,17 @@ export default function Sensors() {
                 -10, 10, 0.1,
                 config.units.temp, config.units.pres
             )}
+            <div className="text-center mt-8">
+                <p>{i18n.t('runtime')}:</p>
+                <p className='text-blue-700 dark:text-blue-400'>
+                    {humanizeDuration(runtime * 1000, {
+                        conjunction: ` ${i18n.t('and')} `,
+                        serialComma : false,
+                        language: locale, 
+                        units: ["y", "mo", "d", "h", "m", "s"]
+                    })}
+                </p>
+            </div>
         </>}
         className={!vl.validateTemperature(data.esp32?.temp ?? 0)
             ? 'invalid' + (hideUnnecessary ? ' hide' : '')
