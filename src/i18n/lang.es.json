@@ -114,6 +114,7 @@
     "longitude": "Longitud",
     "detectCoordinatesAutomatically": "Detectar coordenadas automáticamente",
     "wind": "Viento",
+    "localization": "Localización",
     "units": {
         "measurement": "Unidades de medida",
         "hpa": "hPa",
@@ -332,7 +333,7 @@
         "tip3": "Digite un número {min} a {max}",
         "tip4": "Use diferentes canales para almacenar el historial del clima y para enviar datos a thingspeak"
     },
-    "comfortable": "Confortable",
+    "comfortable": "Clima agradable",
     "tooHot": "Muy caliente",
     "tooCold": "Muy frío",
     "tooDry": "Muy seco",
