@@ -3,6 +3,7 @@ export default function segSymbCodes() {
         SYMB_DEGREE: 10,
         SYMB_A: 11,
         SYMB_C: 12,
+        SYMB_F: 17,
         SYMB_P: 13,
         SYMB_H: 14,
         SYMB_SPACE: 15,

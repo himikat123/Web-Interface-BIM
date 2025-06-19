@@ -41,5 +41,5 @@ export default function lcdGetTempIn(sequenceTemp: number) {
         case cs[9]: temp = (data.bme680?.temp ?? 0) + (config.sensors.bme680?.t ?? 0); break;
         default: ; break;
     }
-    return Math.round(temp);
+    return temp;
 }

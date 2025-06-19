@@ -19,16 +19,15 @@ export default function lcdShowPressure(ctx: CanvasRenderingContext2D, prevPres:
                 ? String(Math.round(pres))
                 : String(Math.round(hPaToMM(pres))) 
             : '--';
-        p += units;
-        const x = dispModel ? 250 : 286; 
+        p += units; 
         printText(
             ctx, 
-            x, 
-            (local && dispModel) ? 121 : 118, 
+            dispModel ? 250 : 286, 
+            121, 
             70, 
-            (local && dispModel) ? 16 : 20, 
+            (local && dispModel) ? 16 : (local ? 16 : 20), 
             p, 
-            (local && dispModel) ? 18 : 21, 
+            (local && dispModel) ? 18 : (local ? 18 : 21), 
             'center', 
             color, 
             bgColor
