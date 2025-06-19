@@ -29,8 +29,8 @@ export default function SensorTypeVoltage() {
     sensors.push(`DHT22 (${i18n.t('dewPoint')} ${DHT22().dp})`);
     sensors.push(`SHT21 (${i18n.t('absHumidity')} ${SHT21().aHum})`);
     sensors.push(`SHT21 (${i18n.t('dewPoint')} ${SHT21().dp})`);
-    sensors.push(`Weather (${i18n.t('absHumidity')} ${Weather().aHum})`);
-    sensors.push(`Weather (${i18n.t('dewPoint')} ${Weather().dp})`);
+    sensors.push(`${i18n.t('forecast')} (${i18n.t('absHumidity')} ${Weather().aHum})`);
+    sensors.push(`${i18n.t('forecast')} (${i18n.t('dewPoint')} ${Weather().dp})`);
 
     return <SelectSwitch label={i18n.t('dataSource.singular')}
         options={sensors}
