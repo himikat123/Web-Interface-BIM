@@ -79,3 +79,9 @@ select:-webkit-autofill {
         }
     }
 }
+
+@supports (-webkit-touch-callout: none) {
+  input[type="time"] {
+    width: unset;
+  }
+}
