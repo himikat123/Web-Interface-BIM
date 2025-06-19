@@ -105,8 +105,8 @@ export const configSlice = createSlice({
                     autoOff: [0, 0],
                     nightOff: {
                         need: [0, 0],
-                        from: [0, 0],
-                        to: [0, 0]
+                        from: ["00:00", "00:00"],
+                        to: ["00:00", "00:00"]
                     },
                     animation: {
                         type: [0, 0],

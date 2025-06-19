@@ -82,8 +82,8 @@ export interface iConfig {
             autoOff?: number[],
             nightOff?: {
                 need: number[],
-                from: number[],
-                to: number[]
+                from: string[],
+                to: string[]
             },
             brightness: {
                 day: number[] | number,

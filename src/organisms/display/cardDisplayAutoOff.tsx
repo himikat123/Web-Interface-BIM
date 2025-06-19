@@ -46,17 +46,17 @@ export default function CardDisplayAutoOff(props: iDisplay) {
             />
 
             <div className="mt-4">
-                <TimeInput value={('0' + String(config.display.nightOff ? config.display.nightOff.from[props.num] : 0)).slice(-2) + ':00'} 
-                    step={3600}
+                <TimeInput value={config.display.nightOff ? config.display.nightOff.from[props.num] : "00:00"} 
+                    step={60}
                     label={i18n.t('from')} 
-                    onChange={val => dispatch(cf.displayNightOffFromChange({num: props.num, val: Number(val.split(':')[0])}))} 
+                    onChange={val => dispatch(cf.displayNightOffFromChange({num: props.num, val: val}))} 
                 />
             </div>
             <div className="mt-4">
-                <TimeInput value={('0' + String(config.display.nightOff ? config.display.nightOff.to[props.num] : 0)).slice(-2) + ':00'} 
-                    step={3600}
+                <TimeInput value={config.display.nightOff ? config.display.nightOff.to[props.num] : '00:00'} 
+                    step={60}
                     label={i18n.t('to')} 
-                    onChange={val => dispatch(cf.displayNightOffToChange({num: props.num, val: Number(val.split(':')[0])}))} 
+                    onChange={val => dispatch(cf.displayNightOffToChange({num: props.num, val: val}))} 
                 />
             </div>
         </>} /> : <Card className="invisible lg:visible" content={<></>} />}
