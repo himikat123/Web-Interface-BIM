@@ -167,8 +167,8 @@ export interface iConfig {
             eq: number,
             hourly: number,
             hour: {
-                from: number,
-                to: number
+                from: string,
+                to: string
             }
         },
         sensors: {

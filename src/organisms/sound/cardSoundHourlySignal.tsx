@@ -20,18 +20,18 @@ export default function CardSoundHourlySignal() {
         />
 
         {config.sound?.hourly === 3 && <div className="mt-8 flex">
-            <TimeInput value={('0' + String(config.sound.hour.from)).slice(-2) + ':00'} 
-                step={3600}
+            <TimeInput value={config.sound.hour.from} 
+                step={60}
                 label={i18n.t('from')} 
-                onChange={val => dispatch(cf.soundHourFromChange(Number(val.split(':')[0])))} 
+                onChange={val => dispatch(cf.soundHourFromChange(val))} 
             />
 
             <div className="w-4" />
 
-            <TimeInput value={('0' + String(config.sound.hour.to)).slice(-2) + ':00'} 
-                step={3600}
+            <TimeInput value={config.sound.hour.to} 
+                step={60}
                 label={i18n.t('to')} 
-                onChange={val => dispatch(cf.soundHourToChange(Number(val.split(':')[0])))} 
+                onChange={val => dispatch(cf.soundHourToChange(val))} 
             />
         </div>}
     </>} />

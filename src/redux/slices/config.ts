@@ -216,8 +216,8 @@ export const configSlice = createSlice({
                     eq: 0,
                     hourly: 0,
                     hour: {
-                        from: 0,
-                        to: 0
+                        from: "",
+                        to: ""
                     }
                 }
             }
