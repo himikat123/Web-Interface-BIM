@@ -1,4 +1,3 @@
-import i18n from "../../i18n/main";
 import { iConfig } from "../../redux/configTypes";
 import { iData } from "../../redux/dataTypes";
 import * as vl from "../validateValues";

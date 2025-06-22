@@ -71,7 +71,8 @@ export default function DisplayViewLCD() {
         }
     }, [ctx, clockPointsState, model, dispModel, page, mainState, networkState, clockState, 
         clockType, calendarShift, calendarState, hourlyShift, hourlyState, alarmState, 
-        historyInShift, historyInState, historyOutShift, historyOutState
+        historyInShift, historyInState, historyOutShift, historyOutState,
+        config.units.pres, config.units.temp
     ]);
 
     useEffect(() => {
