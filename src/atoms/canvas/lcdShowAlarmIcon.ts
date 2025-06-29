@@ -13,8 +13,8 @@ export default function lcdShowAlarmIcon(ctx: CanvasRenderingContext2D, prevAlar
             const model = store.getState().config.display.model[0];
             const dispModel = (model === 0 || model === 1) ? 0 : 1;
             const x = dispModel ? 296 : 338;
-            if(alarmState) drawScaledImage(ctx, alarm(), x, 138, 24, 24);
-            else drawScaledImage(ctx, alarmOff(), x, 138, 24, 24);
+            if(alarmState) drawScaledImage(ctx, alarm(), x, 140, 21, 21);
+            else drawScaledImage(ctx, alarmOff(), x, 140, 21, 21);
         }
     }
 

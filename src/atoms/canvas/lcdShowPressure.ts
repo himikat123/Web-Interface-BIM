@@ -23,7 +23,7 @@ export default function lcdShowPressure(ctx: CanvasRenderingContext2D, prevPres:
         printText(
             ctx, 
             dispModel ? 250 : 286, 
-            121, 
+            120, 
             70, 
             (local && dispModel) ? 16 : (local ? 16 : 20), 
             p, 
