@@ -26,13 +26,15 @@ export default function WSensors() {
     const [hideUnnecessary, setHideUnnecessary] = useState<boolean>(true);
     const [isValid, setIsValid] = useState<boolean[]>([]);
 
-    function extraData(type: string, val: string, expired: boolean, name: string) {
+    function extraData(type: string, val: string, expired: boolean, name: string, valid: boolean) {
         const color = expired ? "text-red-500 dark:text-red-600" : "text-blue-700 dark:text-blue-400";
-        return <div className="mt-2 text-center">{type}
-            : <span className={"ms-1 " + color}>
-                {val}{name !== '--' ? (', ' + name) : ''}
-            </span>
-        </div>;
+        return valid 
+            ? <div className="mt-2 text-center">{type}: 
+                <span className={"ms-1 " + color}>
+                    {val}{name !== '--' ? (', ' + name) : ''}
+                </span>
+            </div>
+            : <div></div>;
     }
 
     function temp(wNum: number) {
@@ -192,13 +194,15 @@ export default function WSensors() {
                         i18n.t('absHumidity'),
                         calculate.absoluteHum(temp(wsensorNum), hum(wsensorNum)),
                         !vl.WsensorDataRelevance(wsensorNum),
-                        data.wsensor?.temp.name[0][wsensorNum] ?? ''
+                        data.wsensor?.temp.name[0][wsensorNum] ?? '',
+                        vl.vaidateAbsHum(calculate.absoluteHumVal(temp(wsensorNum), hum(wsensorNum)))
                     )}
                     {extraData(
                         i18n.t('dewPoint'), 
                         calculate.dewPoint(temp(wsensorNum), hum(wsensorNum)),
                         !vl.WsensorDataRelevance(wsensorNum),
-                        data.wsensor?.temp.name[0][wsensorNum] ?? ''
+                        data.wsensor?.temp.name[0][wsensorNum] ?? '',
+                        vl.validateDewPoint(calculate.dewPointVal(temp(wsensorNum), hum(wsensorNum)), temp(wsensorNum))
                     )}
                 </div>
 
