@@ -158,4 +158,4 @@ function App() {
 
 export default App;
 // TODO перевести write api key
-// TODO статус дисплея вкл. выключен
+// TODO статус дисплея вкл. выкл.
