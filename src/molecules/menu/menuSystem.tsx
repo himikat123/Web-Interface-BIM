@@ -22,6 +22,7 @@ export default function MenuSystem(props: iMenuItems) {
         mobile={props.mobile} 
         icon={<Gear />} 
         valid={true}
+        submenuOpen={props.submenuOpen}
     >
         <MenuSubItem link={"/language"} 
             current={props.current} 

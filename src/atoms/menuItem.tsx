@@ -17,6 +17,11 @@ export default function MenuItem(props: iMenuItem) {
         }, [ref]);
     }
 
+    function openSubmenu() {
+        setSubMenuOpen(!subMenuOpen);
+        props.submenuOpen?.(!subMenuOpen);
+    }
+
     const [subMenuOpen, setSubMenuOpen] = useState<boolean>(false);
     const wrapperRef = useRef<HTMLDivElement>(null);
     useOutsideAlerter(wrapperRef);
@@ -32,8 +37,8 @@ export default function MenuItem(props: iMenuItem) {
     });
 
     return <div ref={wrapperRef} className="relative">
-        <div onClick={() => setSubMenuOpen(!subMenuOpen)} title={props.title}>
-            <Link className={"hover:scale-110 transition text-text_dark " + highlight + (props.mobile ? mobile : desktop)} 
+        <div onClick={() => openSubmenu()} title={props.title}>
+            <Link className={"hover:scale-105 transition text-text_dark " + highlight + (props.mobile ? mobile : desktop)} 
               to={props.children ? '#' : props.link}
             >
                 <span className={props.valid ? "" : "error"}>{props.icon}</span>

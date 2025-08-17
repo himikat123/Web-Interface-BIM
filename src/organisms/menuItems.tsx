@@ -16,6 +16,10 @@ import MenuDataReceive from "../molecules/menu/menuDataReceive";
 import MenuSystem from '../molecules/menu/menuSystem';
 
 export default function MenuItems(props: iMenuItems) {
+    function systemSubmenuOpen(state: boolean) {
+        if(state) props.menuScrollDown?.();
+    }
+
     return <>
         <MenuStatus current={props.current} mobile={props.mobile} />
         <MenuNetwork current={props.current} mobile={props.mobile} />
@@ -30,6 +34,6 @@ export default function MenuItems(props: iMenuItems) {
         {device() === 'WeatherMonitorBIM32' && <MenuHistory current={props.current} mobile={props.mobile} />}
         <MenuDataSend current={props.current} mobile={props.mobile} />
         <MenuDataReceive current={props.current} mobile={props.mobile} />
-        <MenuSystem current={props.current} mobile={props.mobile} />
+        <MenuSystem current={props.current} mobile={props.mobile} submenuOpen={systemSubmenuOpen}/>
     </>
 }

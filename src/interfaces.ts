@@ -9,12 +9,15 @@ export interface iMenuItem {
     title: string,
     mobile: boolean,
     icon: React.ReactNode,
+    submenuOpen?(state: boolean): void,
     children?: React.ReactNode | undefined
 }
 
 export interface iMenuItems {
     current: string,
-    mobile: boolean
+    mobile: boolean,
+    submenuOpen?(state: boolean): void,
+    menuScrollDown?(): void
 }
 
 export interface iMenuUserItem {

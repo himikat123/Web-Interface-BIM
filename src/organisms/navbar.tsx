@@ -34,14 +34,24 @@ export default function Navbar() {
         }, [ref]);
     }
 
+    function scrollToBottom() {
+        if(menuRef.current) {
+            menuRef.current.scrollTo({
+                top: menuRef.current.scrollHeight,
+                behavior: "smooth"
+            });
+        }
+    }
+
     /* mobile menu state open/closed */
     const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+    const menuRef = useRef<HTMLDivElement | null>(null);
     const wrapperRef = useRef<HTMLDivElement>(null);
     useOutsideAlerter(wrapperRef);
 
     /* url pathname */
     const currentPath = window.location.hash.replace('#', '');
-    
+
     return <> 
         <nav ref={wrapperRef} className="bg-menu_light dark:bg-menu_dark navbar fixed z-40 w-full">
             <div className="mx-auto px-2 md:px-6 lg:px-8">
@@ -65,12 +75,13 @@ export default function Navbar() {
                 </div>
             </div>
 
-            <div className={"mobile-menu md:hidden" + (mobileMenuOpen ? "" : " hide")} 
+            <div className={"overflow-hidden mobile-menu md:hidden" + (mobileMenuOpen ? "" : " hide")} 
+                ref={menuRef}
                 id="mobile-menu"
-                style={{overflow: mobileMenuOpen ? "scroll" : "hidden"}}  
+                style={{overflowY: mobileMenuOpen ? "scroll" : "hidden"}}  
             >
                 <div className="space-y-1 px-2 pb-3 pt-2">
-                    <MenuItems current={currentPath} mobile={true} />
+                    <MenuItems current={currentPath} mobile={true} menuScrollDown={() => scrollToBottom()} />
                 </div>
             </div>
         </nav>
