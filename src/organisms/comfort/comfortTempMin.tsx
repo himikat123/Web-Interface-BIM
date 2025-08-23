@@ -21,16 +21,20 @@ export default function ComfortTempMin() {
         ? config.comfort.temp.min[1] 
         : tMin;
 
+    const units = config.units.temp ? '°F' : '°C';
+    const maxTemp = config.units.temp ? 200 : 100;
+    const maxHyst = config.units.temp ? 20 : 10;
+
     return <>
         {/* Min temperature */}
         <RangeInput label={i18n.t('tempMin')}
             value={tMin}
             min={-50}
-            max={100}
+            max={maxTemp}
             limitMin={-50}
             limitMax={tMax}
             step={0.1}
-            indication={`${tMin.toFixed(1)}°C`}
+            indication={`${tMin.toFixed(1)}${units}`}
             onChange={val => dispatch(cf.comfortTempMinChange({ num: 0, val: val }))}
             className="mt-4"
         />
@@ -40,11 +44,11 @@ export default function ComfortTempMin() {
             <RangeInput label={i18n.t('hysteresis')}
                 value={hisMin}
                 min={0}
-                max={10}
+                max={maxHyst}
                 limitMin={0}
-                limitMax={10}
+                limitMax={maxHyst}
                 step={0.1}
-                indication={`±${(hisMin / 2).toFixed(2)}°C`}
+                indication={`±${(hisMin / 2).toFixed(2)}${units}`}
                 onChange={val => dispatch(cf.comfortTempMinChange({ num: 1, val: val }))}
                 className="mt-4"
             />
@@ -52,8 +56,8 @@ export default function ComfortTempMin() {
             {/* Explication */}
             <div className="mt-4 select-none text-green-500 dark:text-green-200">
                 <div>{i18n.t('heater')}</div>
-                <div>{i18n.t('on')}: &lt; {(tMin - (hisMin / 2)).toFixed(2)}°C</div>
-                <div>{i18n.t('off')}: &gt; {(tMin + (hisMin / 2)).toFixed(2)}°C</div>
+                <div>{i18n.t('on')}: &lt; {(tMin - (hisMin / 2)).toFixed(2)}{units}</div>
+                <div>{i18n.t('off')}: &gt; {(tMin + (hisMin / 2)).toFixed(2)}{units}</div>
             </div>
         </>}
     </>

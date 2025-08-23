@@ -6,91 +6,96 @@ import * as vl from "./validateValues";
 import { celsiusToFahrenheit } from "./indications/celsiusToFahrenheit";
 import { hPaToMM } from "./indications/hPaToMM";
 
-export default function sensorCorrection(color: boolean, dataType: string, val: number, lblType: string | React.ReactNode, 
-    lblData: number, onChange: any, min: number, max: number, step: number, localTemp: number, localPres: number, hide?: boolean, lblName?: string
+export default function sensorCorrection(
+    color: boolean, dataType: string, corr: number, lblType: string | React.ReactNode, 
+    lblData: number, onChange: any, min: number, max: number, step: number, localTemp: number, 
+    localPres: number, hide?: boolean, lblName?: string
 ) {
-    const countSymbolsAfterComma = () => ((step.toString().includes('.')) ? (step.toString().split('.').pop()?.length) : (0));
+    const countSymbolsAfterComma = () => (
+        step.toString().includes('.') 
+            ? step.toString().split('.').pop()?.length
+            : 0
+    );
 
     const round = () => {
-        return (Math.round((lblData + val) * (1 / step)) / (1 / step)).toFixed(countSymbolsAfterComma());
+        return (Math.round((lblData + corr) * (1 / step)) / (1 / step)).toFixed(countSymbolsAfterComma());
+    }
+
+    const toFahrenheit = () => {
+        return (celsiusToFahrenheit(Math.round(lblData * (1 / step)) / (1 / step)) + corr).toFixed(countSymbolsAfterComma());
+    }
+
+    const toMM = () => {
+        return (hPaToMM(Math.round(lblData * (1 / step)) / (1 / step)) + corr).toFixed(countSymbolsAfterComma());
     }
 
     let units: string = '';
-    let unitsCalc: string = '';
-    let labels: string[] = ['', ''];
+    let val: string = '';
+
     switch(dataType) {
         case 't': // Temperature
-            units = "°C";
-            unitsCalc = localTemp ? "°F" : "°C";
-            labels[0] = (vl.validateTemperature(lblData) 
-                ? localTemp ? celsiusToFahrenheit(Math.round((lblData + val) * (1 / step)) / (1 / step)).toFixed(countSymbolsAfterComma()) : round() 
-                : "--");
+            units = localTemp ? "°F" : "°C";
+            val = (vl.validateTemperature(lblData) ? (localTemp ? toFahrenheit() : round()) : "--");
             break;
         case 'h': // Humidity
             units = "%";
-            labels[0] = (vl.validateHumidity(lblData) ? round() : "--");
+            val = (vl.validateHumidity(lblData) ? round() : "--");
             break;
         case 'p': // Pressure
-            units = i18n.t('units.hpa');
-            unitsCalc = localPres ? i18n.t('units.hpa') : i18n.t('units.mm');
-            labels[0] = (vl.validatePressure(lblData)
-                ? localPres ? round() : hPaToMM(Math.round((lblData + val) * (1 / step)) / (1 / step)).toFixed(countSymbolsAfterComma())
-                : "--");
+            units = localPres ? i18n.t('units.hpa') : i18n.t('units.mm');
+            val = (vl.validatePressure(lblData) ? (localPres ? round() : toMM()) : "--");
             break;
         case 'l': // Ambient light
             units = i18n.t('units.lux');
-            labels[0] = (vl.validateLight(lblData) ? round() : "--");
+            val = (vl.validateLight(lblData) ? round() : "--");
             break;
-
         case 'v': // Voltage
             units = i18n.t('units.v');
-            labels[0] = (vl.validateAnalogVoltage(lblData) ? round() : "--");
+            val = (vl.validateAnalogVoltage(lblData) ? round() : "--");
             break;
-
         case 'i': // Index for Air Quality
             units = '';
-            labels[0] = (vl.validateIaq(lblData) ? round() : "--");
+            val = (vl.validateIaq(lblData) ? round() : "--");
             break;
-
         case 'co2': // CO2
             units = 'ppm';
-            labels[0] = (vl.validateCO2(lblData) ? round() : "--");
+            val = (vl.validateCO2(lblData) ? round() : "--");
             break;
-
         case 'hv': // High voltage
             units = i18n.t('units.v');
-            labels[0] = (vl.validateHighVoltage(lblData) ? round() : "--");
+            val = (vl.validateHighVoltage(lblData) ? round() : "--");
             break;
-
         case 'cr': // Current
             units = i18n.t('units.a');
-            labels[0] = (vl.validateCurrent(lblData) ? round() : "--");
+            val = (vl.validateCurrent(lblData) ? round() : "--");
             break;
-
         case 'pw': // Power
             units = i18n.t('units.w');
-            labels[0] = (vl.validatePower(lblData) ? round() : "--");
+            val = (vl.validatePower(lblData) ? round() : "--");
             break;
-
         case 'eg': // Energy
             units = i18n.t('units.wh');
-            labels[0] = (vl.validateEnergy(lblData) ? round() : "--");
+            val = (vl.validateEnergy(lblData) ? round() : "--");
             break;
-
         case 'fr': // Frequency
             units = i18n.t('units.hz');
-            labels[0] = (vl.validateFrequency(lblData) ? round() : "--");
+            val = (vl.validateFrequency(lblData) ? round() : "--");
             break;
-
         default: ; break;
     }
 
-    return <RangeInput value={val}
+    return <RangeInput value={corr}
         label={
             <div className="mt-4 sm:mt-8">
                 {lblType}: 
                 <Indication error={color} 
-                    value={labels[0] + unitsCalc + labels[1] + (lblName ? labels[0] !== '--' ? (', ' + lblName) : '' : '')} 
+                    value={val + units + (
+                        lblName 
+                            ? (val !== '--' 
+                                ? (', ' + lblName) 
+                                : '') 
+                            : ''
+                    )} 
                 />
             </div>} 
         min={min}
@@ -98,8 +103,13 @@ export default function sensorCorrection(color: boolean, dataType: string, val: 
         limitMin={min}
         limitMax={max}
         step={step}
-        indication={(val > 0 ? ("+" + val.toFixed(countSymbolsAfterComma())) : val.toFixed(countSymbolsAfterComma())) + units}
+        indication={
+            (corr > 0 
+                ? ("+" + corr.toFixed(countSymbolsAfterComma())) 
+                : corr.toFixed(countSymbolsAfterComma())
+            ) + units
+        }
         onChange={onChange}
-        className={hide && labels[0] === '--' ? 'hide' : ''}
+        className={hide && (val === '--') ? 'hide' : ''}
     />
 }
