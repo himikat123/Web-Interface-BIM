@@ -81,7 +81,13 @@ select:-webkit-autofill {
 }
 
 @supports (-webkit-touch-callout: none) {
-  input[type="time"] {
-    width: unset;
-  }
+    input[type="time"],
+    input[type="datetime-local"] {
+        width: unset;
+    }
+}
+
+input[type="datetime-local"] {
+    -webkit-appearance: none;
+    appearance: none;
 }
