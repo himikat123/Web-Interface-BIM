@@ -115,7 +115,7 @@ function App() {
     }, [dispatch]);
 
     return (
-        <div className={"bg-page_light dark:bg-page_dark text-text_light dark:text-text_dark min-h-screen"}>
+        <div className={"bg-page_light dark:bg-page_dark text-text_light dark:text-text_dark min-h-dvh"}>
             {configState === 'error' ? <NoConfig /> :
                 dataState === 'error' ? <NoData /> :
             (configState === 'default' || dataState === 'default') && <Loading />}
@@ -163,3 +163,5 @@ export default App;
 // TODO датчик ветра
 // TODO батарейное питание
 // TODO отправлять в веб что пришло с беспров. датчиков, в сыром виде
+// TODO DHT22 ESP8266
+// TODO слишком влажно сухо в esp8266
