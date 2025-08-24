@@ -11,8 +11,8 @@ export default function lcdShowVoltageOrPercentage(ctx: CanvasRenderingContext2D
     if(v.val !== prevValue) {
         const model = store.getState().config.display.model[0];
         const dispModel = (model === 0 || model === 1) ? 0 : 1;
-        const x = dispModel ? 198 : 220;
-        const font = dispModel ? 14 : 11;
+        const x = dispModel ? 180 : 190;
+        const font = dispModel ? 12 : 11;
         const match = v.val.match(/[\d.]+/);
         const val = match ? parseFloat(match[0]) : -1;
         const dataValid = (
@@ -21,7 +21,7 @@ export default function lcdShowVoltageOrPercentage(ctx: CanvasRenderingContext2D
             vl.validatePercentage(val) ||
             vl.validateCO2(val)
         )
-        printText(ctx, x, 7, 58, 16, dataValid ? v.val : '--', font, 'center', v.type ? colorAir : color, bgColor);
+        printText(ctx, x, 7, 88, 16, dataValid ? v.val : '--', font, v.type === 'date' ? 'left' : 'center', v.type === 'air' ? colorAir : color, bgColor);
     }
 
     return v.val;

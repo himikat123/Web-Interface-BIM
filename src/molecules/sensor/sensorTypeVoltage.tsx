@@ -1,4 +1,5 @@
 import i18n from "../../i18n/main";
+import moment from "moment";
 import { useSelector, useDispatch } from 'react-redux';
 import device from "../../device";
 import SelectSwitch from "../../atoms/selectSwitch";
@@ -13,6 +14,7 @@ import Weather from "../../atoms/indications/forecast";
 export default function SensorTypeVoltage() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
+    const locale = config.lang === 'ua' ? 'uk' : config.lang;
 
     const sensors = [];
     sensors.push("--");
@@ -31,6 +33,7 @@ export default function SensorTypeVoltage() {
     sensors.push(`SHT21 (${i18n.t('dewPoint')} ${SHT21().dp})`);
     sensors.push(`${i18n.t('forecast')} (${i18n.t('absHumidity')} ${Weather().aHum})`);
     sensors.push(`${i18n.t('forecast')} (${i18n.t('dewPoint')} ${Weather().dp})`);
+    sensors.push(`${i18n.t('date')} (${moment().locale(locale).format('DD MMM YYYY')})`);
 
     return <SelectSwitch label={i18n.t('dataSource.singular')}
         options={sensors}

@@ -1,4 +1,5 @@
 import i18n from '../../i18n/main';
+import moment from 'moment';
 import store from '../../redux/store';
 import device from '../../device';
 import * as vl from "../validateValues";
@@ -8,7 +9,7 @@ import { celsiusToFahrenheit } from '../indications/celsiusToFahrenheit';
 
 interface iReturn {
     val: string,
-    type: number
+    type: string
 }
 
 function dPoint(val: number, locale: number) {
@@ -22,9 +23,10 @@ export default function lcdGetVoltage(localTemp: number): iReturn {
     const data = store.getState().data;
 
     let value = '';
-    let type = 0;
+    let type = '';
     const wsensNum = config.display.source.volt.wsensNum ?? 0;
     const thingNum = config.display.source.volt.thing;
+    const locale = config.lang === 'ua' ? 'uk' : config.lang;
 
     switch(config.display.source.volt.sens) {
         case (device() === 'WeatherMonitorBIM32' ? 1 : 101): // Wireless sensor
@@ -42,7 +44,7 @@ export default function lcdGetVoltage(localTemp: number): iReturn {
                     case 3: value = vl.validateCO2(data.wsensor?.co2.data[wsensNum] ?? 0) // CO2
                         ? Math.round(data.wsensor?.co2.data[wsensNum] ?? 0) + 'ppm'
                         : ''; 
-                        type = 1; break;
+                        type = 'air'; break;
                 };
             } 
             break;
@@ -65,7 +67,7 @@ export default function lcdGetVoltage(localTemp: number): iReturn {
             value = vl.validateIaq(data.bme680?.iaq ?? 0)
                 ? 'IAQ ' + Math.round(data.bme680?.iaq ?? 0)
                 : ''; 
-            type = 1; 
+            type = 'air'; 
             break; 
         case (device() === 'WeatherMonitorBIM32' ? 4 : 104): // BME680 Absolute humidity
             const bme680aHum = calculate.absoluteHumVal(data.bme680?.temp, data.bme680?.hum);
@@ -126,6 +128,13 @@ export default function lcdGetVoltage(localTemp: number): iReturn {
             value = vl.validateDewPoint(weatherdp, data.weather.temp)
                 ? dPoint(weatherdp, localTemp)
                 : '--';
+            break;
+        case (device() === 'WeatherMonitorBIM32' ? 14 : 10): // Date
+            value = moment().locale(locale).format('ll');
+            value = value.replaceAll(' de', '');
+            value = value.replace(/(?<!\d)\./g, '');
+            value = value.replace(/\s[гр]$/, '');
+            type = 'date';
             break;
         default: ; break;
     }

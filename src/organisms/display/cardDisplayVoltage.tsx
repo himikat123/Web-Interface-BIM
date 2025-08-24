@@ -15,7 +15,9 @@ export default function CardDisplayVoltage() {
     const config = useSelector((state: iConfig) => state.config);
 
     return <Card header={<div>
-        {device() === 'WeatherMonitorBIM32' ? (i18n.t('voltage') + ' / ' + i18n.t('air')) : i18n.t('batteryVoltage')}
+        {device() === 'WeatherMonitorBIM32' 
+            ? (i18n.t('voltage') + ' / ' + i18n.t('air') + ' / ' + i18n.t('date')) 
+            : i18n.t('batteryVoltage') + ' / ' + i18n.t('date')}
     </div>}
         content={<>
             {/* Sensor type */}
