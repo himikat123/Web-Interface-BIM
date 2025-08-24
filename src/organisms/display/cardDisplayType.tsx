@@ -24,7 +24,7 @@ export default function CardDisplayType(props: iDisplay) {
         //{num: 4, title: i18n.t('numitron')},
         //{num: 5, title: i18n.t('vfd')},
         //{num: 6, title: i18n.t('nixie')}
-        // TODO отображать IP, отправлять в веб что пришло с беспров. датчиков, в сыром виде
+        // TODO отправлять в веб что пришло с беспров. датчиков, в сыром виде
     ];
 
     const disableTypes = [
@@ -33,9 +33,10 @@ export default function CardDisplayType(props: iDisplay) {
     ];
 
     const lcd = [
-        { 'NX4832K035 / NX4827K043': 200 }, 
-        { 'NX4832T035': 140 },
-        { 'ILI9341': 100 }
+        { 'NX4832K035': 145 }, 
+        { 'NX4832T035': 145 },
+        { 'NX4827K043': 250 },
+        { 'ILI9341': 70 }
     ];
 
     const segment = [
