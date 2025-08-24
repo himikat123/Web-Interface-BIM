@@ -24,7 +24,6 @@ export default function CardDisplayType(props: iDisplay) {
         //{num: 4, title: i18n.t('numitron')},
         //{num: 5, title: i18n.t('vfd')},
         //{num: 6, title: i18n.t('nixie')}
-        // TODO отправлять в веб что пришло с беспров. датчиков, в сыром виде
     ];
 
     const disableTypes = [
