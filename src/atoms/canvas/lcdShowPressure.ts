@@ -5,14 +5,13 @@ import { validatePressure } from "../validateValues";
 import lcdGetPres from "../lcdGetData/lcdGetPres";
 import { hPaToMM } from '../indications/hPaToMM';
 
-export default function lcdShowPressure(ctx: CanvasRenderingContext2D, prevPres: number | undefined, 
-    color: string, bgColor: string, local: number
+export default function lcdShowPressure(
+    ctx: CanvasRenderingContext2D, dispModel: number,
+    prevPres: number | undefined, color: string, bgColor: string, local: number
 ): number {
     const pres = lcdGetPres();
 
     if(pres !== prevPres) {
-        const model = store.getState().config.display.model[0];
-        const dispModel = (model === 0 || model === 1) ? 0 : 1;
         const units = local ? i18n.t('units.hpa') : i18n.t('units.mm');
         let p = validatePressure(pres) 
             ? local 

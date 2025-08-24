@@ -2,12 +2,12 @@ import store from '../../redux/store';
 import { drawImage, fillRect } from "./primitives";
 import * as wind from "../img/wind";
 
-export default function lcdShowWindDirection(ctx: CanvasRenderingContext2D, prevDir: number | undefined, bgColor: string): number {
+export default function lcdShowWindDirection(
+    ctx: CanvasRenderingContext2D, dispModel: number, prevDir: number | undefined, bgColor: string
+): number {
     const dir = store.getState().data.weather.wind.dir;
     
     if(dir !== prevDir) {
-        const model = store.getState().config.display.model[0];
-        const dispModel = (model === 0 || model === 1) ? 0 : 1;
         const x = dispModel ? 133 : 166;
 
         if(dir >= 0 && dir < 360) {

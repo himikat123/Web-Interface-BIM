@@ -5,12 +5,12 @@ import { validateTemperature } from "../validateValues";
 import lcdGetTempIn from "../lcdGetData/lcdGetTempIn";
 import { lcdGetTempOut } from "../lcdGetData/lcdGetTemp";
 import { celsiusToFahrenheit } from '../indications/celsiusToFahrenheit';
+import { Numeric } from 'i18n-js';
 
-function showTemperature(ctx: CanvasRenderingContext2D, temp: number, 
+function showTemperature(
+    ctx: CanvasRenderingContext2D, dispModel: number, temp: number, 
     x: number, y: number, color: string, bgColor: string, local: number
 ) {
-    const model = store.getState().config.display.model[0];
-    const dispModel = (model === 0 || model === 1) ? 0 : 1;
     const w = dispModel ? 70 : 88;
     const h = dispModel ? 27 : 29;
     const font = dispModel ? 29 : 32;
@@ -20,29 +20,27 @@ function showTemperature(ctx: CanvasRenderingContext2D, temp: number,
     printText(ctx, x, y, w, 26, validateTemperature(temp) ? `${t}${units}` : `--${units}`, font, 'center', color, bgColor);
 }
 
-export function lcdShowTemperatureInside(ctx: CanvasRenderingContext2D, prevTemp: number | undefined, 
+export function lcdShowTemperatureInside(
+    ctx: CanvasRenderingContext2D, dispModel: number, prevTemp: number | undefined, 
     sequence: number | undefined, color: string, bgColor: string, local: number
 ): number {
     const temp = lcdGetTempIn(sequence ?? 0);
 
     if(temp !== prevTemp) {
-        const model = store.getState().config.display.model[0];
-        const dispModel = (model === 0 || model === 1) ? 0 : 1;
         const x = dispModel ? 173 : 186;
         const y = dispModel ? 53 : 51;
-        showTemperature(ctx, temp, x, y, color, bgColor, local);
+        showTemperature(ctx, dispModel, temp, x, y, color, bgColor, local);
     }
     return temp;
 }
 
-export function lcdShowTemperatureOutside(ctx: CanvasRenderingContext2D, prevTemp: number | undefined, 
+export function lcdShowTemperatureOutside(
+    ctx: CanvasRenderingContext2D, dispModel: number, prevTemp: number | undefined, 
     color: string, bgColor: string, local: number
 ): number {
     const temp = lcdGetTempOut();
 
     if(temp !== prevTemp) {
-        const model = store.getState().config.display.model[0];
-        const dispModel = (model === 0 || model === 1) ? 0 : 1;
         const xi = dispModel ? 62 : 72;
         const yi = dispModel ? 104 : 101;
         const xt = dispModel ? 71 : 78;
@@ -52,7 +50,7 @@ export function lcdShowTemperatureOutside(ctx: CanvasRenderingContext2D, prevTem
         let icon = temp_plus();
         if(temp < 0) icon = temp_minus();
         drawScaledImage(ctx, icon, xi, yi, w, h);
-        showTemperature(ctx, temp, xt, yt, color, bgColor, local);
+        showTemperature(ctx, dispModel, temp, xt, yt, color, bgColor, local);
     }
     return temp;
 }

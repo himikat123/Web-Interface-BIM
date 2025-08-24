@@ -15,7 +15,8 @@ function showTemperature(ctx: CanvasRenderingContext2D, temp: number, x: number,
     printText(ctx, x, y, w, 20, vl.validateTemperature(temp) ? `${t}${units}` : `--${units}`, font, 'center', color, bgColor);
 }
 
-export default function lcdShowForecast(ctx: CanvasRenderingContext2D, num: number, prevForecast: iPrevForecast | undefined, 
+export default function lcdShowForecast(
+    ctx: CanvasRenderingContext2D, dispModel: number, num: number, prevForecast: iPrevForecast | undefined, 
     color: string, colorTempMax: string, colorTempMin: string, bgColor: string, local: number
 ): iPrevForecast {
     const tMax = store.getState().data.weather.daily.tMax[num];
@@ -25,8 +26,6 @@ export default function lcdShowForecast(ctx: CanvasRenderingContext2D, num: numb
     const time = store.getState().data.time;
     const wd = getWeekday(time + (86400 * num));
     const units = i18n.t('units.mps');
-    const model = store.getState().config.display.model[0];
-    const dispModel = (model === 0 || model === 1) ? 0 : 1;
     const x = num * (dispModel === 0 ? 90 : 106);
     const imgShift = dispModel === 0 ? 1 : 7;
 

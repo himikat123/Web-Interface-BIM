@@ -4,7 +4,8 @@ import device from '../../device';
 import { printText, drawScaledImage } from "./primitives";
 import * as symbols from "../img/symbols";
 
-export default function lcdShowUpdTime(ctx: CanvasRenderingContext2D, 
+export default function lcdShowUpdTime(
+    ctx: CanvasRenderingContext2D, dispModel: number, 
     prevTime: number | undefined, color: string, bgColor: string
 ): number {
     const time = store.getState().data.weather.time;
@@ -19,8 +20,6 @@ export default function lcdShowUpdTime(ctx: CanvasRenderingContext2D,
     }
 
     if((device() === 'WeatherMonitorBIM32') ? (time !== prevTime) : (numIP !== prevTime)) {
-        const model = store.getState().config.display.model[0];
-        const dispModel = (model === 0 || model === 1) ? 0 : 1;
         const upd = time > 0
             ? moment.unix(time).utc().format((dispModel && device() === 'WeatherMonitorBIM32') 
                 ? `DD.MM.YYYY ${hourFormat}:mm` 

@@ -3,14 +3,12 @@ import { drawImage, drawScaledImage, fillRect } from "./primitives";
 import { bat_1, bat_2, bat_3, bat_4 } from '../img/bat';
 import lcdGetBatteryLevel from "../lcdGetData/lcdGetBatLevel";
 
-export default function lcdShowBatteryLevel(ctx: CanvasRenderingContext2D, prevLevel: number | undefined, bgColor: string): number {
+export default function lcdShowBatteryLevel(ctx: CanvasRenderingContext2D, dispModel: number, prevLevel: number | undefined, bgColor: string): number {
     const level = lcdGetBatteryLevel();
 
     if(level !== prevLevel) {
-        const model = store.getState().config.display.model[0];
-        const dispModel = (model === 0 || model === 1) ? 0 : 1;
-        const x1 = 258;
-        const x2 = 284;
+        const x1 = 258, x2 = 284;
+
         if(dispModel) {
             switch(level) {
                 case 1: drawImage(ctx, bat_1(), x1, 2); break;

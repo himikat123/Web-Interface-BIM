@@ -1,13 +1,12 @@
 import store from '../../redux/store';
 import { printText, printScrollText } from "./primitives";
 
-export default function lcdShowDescription(ctx: CanvasRenderingContext2D, 
+export default function lcdShowDescription(
+    ctx: CanvasRenderingContext2D, dispModel: number, 
     prevDescript: string | undefined, shift: number | undefined, 
     color: string, bgColor: string
 ): [string, number] {
     const description = store.getState().data.weather.descript;
-    const model = store.getState().config.display.model[0];
-    const dispModel = (model === 0 || model === 1) ? 0 : 1;
     ctx.font = '21px Ubuntu';
     const l = ctx.measureText(description).width ?? 0;
     const x = dispModel ? 0 : 82;

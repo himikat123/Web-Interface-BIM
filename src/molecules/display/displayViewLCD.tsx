@@ -17,7 +17,7 @@ import { iHourly } from '../../redux/hourlyTypes';
 export default function DisplayViewLCD() {
     const config = useSelector((state: iConfig) => state.config);
     const model = config.display.model[0];
-    const dispModel = (model === 0 || model === 1) ? 0 : 1;
+    const dispModel = (model === 0 || model === 1 || model === 2) ? 0 : 1;
 
     const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
     const [ctx, setCtx] = useState<CanvasRenderingContext2D | null | undefined>(null);

@@ -2,12 +2,11 @@ import store from '../../redux/store';
 import { printText, printScrollText } from "./primitives";
 import lcdGetComfort from "../lcdGetData/lcdGetComfort";
 
-export default function lcdShowComfort(ctx: CanvasRenderingContext2D, prevComfort: string | undefined, 
+export default function lcdShowComfort(
+    ctx: CanvasRenderingContext2D, dispModel: number, prevComfort: string | undefined, 
     shift: number | undefined, sequence: string | undefined, color: string, bgColor: string
 ): [string, number] {
     const comfort = lcdGetComfort(sequence ?? '');
-    const model = store.getState().config.display.model[0];
-    const dispModel = (model === 0 || model === 1) ? 0 : 1;
     const font = dispModel ? 14 : 18;
     ctx.font = `${font}px Ubuntu`;
     const l = Math.round(ctx.measureText(comfort).width ?? 0);
