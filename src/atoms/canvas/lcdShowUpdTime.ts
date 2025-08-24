@@ -34,7 +34,7 @@ export default function lcdShowUpdTime(
             if(w) drawScaledImage(ctx, symbols.upd(), c - w, 146, 12, 12);
         }
         else {
-            printText(ctx, x, 146, 146, 16, ip, 14, 'right', color, bgColor);
+            printText(ctx, x + 22, 146, 146, 16, ip, 14, 'right', color, bgColor);
         }
     }
 
