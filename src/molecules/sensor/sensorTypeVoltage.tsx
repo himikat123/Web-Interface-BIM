@@ -33,7 +33,11 @@ export default function SensorTypeVoltage() {
     sensors.push(`SHT21 (${i18n.t('dewPoint')} ${SHT21().dp})`);
     sensors.push(`${i18n.t('forecast')} (${i18n.t('absHumidity')} ${Weather().aHum})`);
     sensors.push(`${i18n.t('forecast')} (${i18n.t('dewPoint')} ${Weather().dp})`);
-    sensors.push(`${i18n.t('date')} (${moment().locale(locale).format('DD MMM YYYY')})`);
+    let date = moment().locale(locale).format('ll');
+    date = date.replaceAll(' de', '');
+    date = date.replace(/(?<!\d)\./g, '');
+    date = date.replace(/\s[гр]$/, '');
+    sensors.push(`${i18n.t('date')} (${date})`);
 
     return <SelectSwitch label={i18n.t('dataSource.singular')}
         options={sensors}
