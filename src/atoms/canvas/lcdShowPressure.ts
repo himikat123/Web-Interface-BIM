@@ -1,5 +1,4 @@
 import i18n from '../../i18n/main';
-import store from '../../redux/store';
 import { printText } from "./primitives";
 import { validatePressure } from "../validateValues";
 import lcdGetPres from "../lcdGetData/lcdGetPres";

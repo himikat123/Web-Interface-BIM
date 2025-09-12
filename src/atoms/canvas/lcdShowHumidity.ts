@@ -1,4 +1,3 @@
-import store from '../../redux/store';
 import { printText } from "./primitives";
 import { validateHumidity } from "../validateValues";
 import lcdGetHumIn from "../lcdGetData/lcdGetHumIn";

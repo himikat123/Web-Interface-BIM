@@ -86,6 +86,13 @@ export const configSlice = createSlice({
             }
         },
         lang: "en",
+        ...(device() === 'WeatherMonitorBIM'
+            ? {
+                sleep: 0,
+	            batK: 0
+            }
+            : {}
+        ),
         units: {
             temp: 0,
             pres: 0
@@ -447,6 +454,8 @@ export const configSlice = createSlice({
         weatherCorrPres: (state, action) => { state.weather.corr.p = action.payload},
 
         languageSwitch: (state, action) => { state.lang = action.payload },
+        sleepChange: (state, action) => { if('sleep' in state) state.sleep = action.payload },
+        batKChange: (state, action) => { if('batK' in state) state.batK = action.payload },
         unitsTempChange: (state, action) => { state.units.temp = action.payload },
         unitsPresChange: (state, action) => { state.units.pres = action.payload },
 
@@ -638,7 +647,8 @@ export const configSlice = createSlice({
 
 export const { 
     configStateChange, 
-    languageSwitch, unitsTempChange, unitsPresChange,
+    languageSwitch, sleepChange, batKChange,
+    unitsTempChange, unitsPresChange,
     setConfigState, 
     usernameChange, passwordRequiredSwitch,
     netSsidChange, netPassChange, netTypeSwitch, netIpChange, netMaskChange, netGwChange, netDns1Change, netDns2Change,

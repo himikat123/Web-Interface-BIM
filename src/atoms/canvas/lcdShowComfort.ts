@@ -1,4 +1,3 @@
-import store from '../../redux/store';
 import { printText, printScrollText } from "./primitives";
 import lcdGetComfort from "../lcdGetData/lcdGetComfort";
 

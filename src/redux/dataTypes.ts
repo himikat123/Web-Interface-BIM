@@ -4,6 +4,7 @@ export interface iData {
         updateData: boolean,
         dataFetching: boolean,
         logged: string,
+        adc?: number,
         fw: string,
         esp32?: {
             temp: number

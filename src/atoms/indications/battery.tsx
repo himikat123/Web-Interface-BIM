@@ -4,12 +4,12 @@ import { iConfig } from "../../redux/configTypes";
 import { iData } from "../../redux/dataTypes";
 import * as vl from "../validateValues";
 
-export const voltage = (adc: number, k: number) => adc / (300.0 - k);
+export const Voltage = (adc: number, k: number) => adc / (300.0 - k);
 
-export const percentage = (type: number, adc: number, k: number) => {
+export const Percentage = (type: number, adc: number, k: number) => {
     const umin = 3.75;
     const umax = type === 0 ? 4.5 : 3.9;
-    let percent = (voltage(adc, k) - umin) * 100.0 / (umax - umin); 
+    let percent = (Voltage(adc, k) - umin) * 100.0 / (umax - umin); 
     if(percent < 0) percent = 0;
     if(percent > 100) percent = 100;
     return percent;
@@ -21,7 +21,7 @@ export const BatVoltage = (num: number) => {
 
     if(vl.WsensorDataRelevance(num)) {
         if(vl.validateBatteryADC(data.wsensor?.bat[num] ?? 0))
-            return '(' + voltage(data.wsensor?.bat[num] ?? 0, (config.wsensor?.bat.k[num] ?? 0)).toFixed(2) + i18n.t('units.v') + ')';
+            return '(' + Voltage(data.wsensor?.bat[num] ?? 0, (config.wsensor?.bat.k[num] ?? 0)).toFixed(2) + i18n.t('units.v') + ')';
         else return '(--)';
     }
     else return `(${i18n.t('dataExpired')})`;
@@ -33,7 +33,7 @@ export const BatPercent = (num: number) => {
 
     if(vl.WsensorDataRelevance(num)) {
         if(vl.validateBatteryADC(data.wsensor?.bat[num] ?? 0)) {
-            return `(${percentage(config.wsensor?.bat.type[num] ?? 0, data.wsensor?.bat[num] ?? 0, config.wsensor?.bat.k[num] ?? 0).toFixed(2)}%)`;
+            return `(${Percentage(config.wsensor?.bat.type[num] ?? 0, data.wsensor?.bat[num] ?? 0, config.wsensor?.bat.k[num] ?? 0).toFixed(2)}%)`;
         }
         else return '(--)';
     }
@@ -46,7 +46,7 @@ export const BatLevel = (num: number) => {
     
     if(vl.WsensorDataRelevance(num)) {
         if(vl.validateBatteryADC(data.wsensor?.bat[num] ?? 0)) {
-            const percent = percentage(config.wsensor?.bat.type[num] ?? 0, data.wsensor?.bat[num] ?? 0, config.wsensor?.bat.k[num] ?? 0);
+            const percent = Percentage(config.wsensor?.bat.type[num] ?? 0, data.wsensor?.bat[num] ?? 0, config.wsensor?.bat.k[num] ?? 0);
             let level = Math.round(percent / 25);
             if(level < 1) level = 1;
             if(level > 4) level = 4;

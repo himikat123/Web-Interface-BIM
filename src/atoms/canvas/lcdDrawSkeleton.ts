@@ -1,4 +1,3 @@
-import store from '../../redux/store';
 import { fillRect, drawLine, drawRoundRect, drawImage, drawScaledImage } from "./primitives";
 import * as symb from '../img/symbols';
 

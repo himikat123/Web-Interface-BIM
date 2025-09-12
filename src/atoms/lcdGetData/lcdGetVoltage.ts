@@ -4,7 +4,7 @@ import store from '../../redux/store';
 import device from '../../device';
 import * as vl from "../validateValues";
 import * as calculate from '../calculate';
-import { voltage, percentage } from '../indications/battery';
+import { Voltage, Percentage } from '../indications/battery';
 import { celsiusToFahrenheit } from '../indications/celsiusToFahrenheit';
 
 interface iReturn {
@@ -33,10 +33,10 @@ export default function lcdGetVoltage(localTemp: number): iReturn {
             if(vl.WsensorDataRelevance(wsensNum)) {
                 switch(config.display.source.volt.volt) {
                     case 0: value = vl.validateBatteryADC(data.wsensor?.bat[wsensNum] ?? 0) // Battery voltage
-                        ? voltage(data.wsensor?.bat[wsensNum] ?? 0, config.wsensor?.bat.k[wsensNum] ?? 0).toFixed(2) + i18n.t('units.v')
+                        ? Voltage(data.wsensor?.bat[wsensNum] ?? 0, config.wsensor?.bat.k[wsensNum] ?? 0).toFixed(2) + i18n.t('units.v')
                         : ''; break;
                     case 1: value = vl.validateBatteryADC(data.wsensor?.bat[wsensNum] ?? 0) // Battery percentage
-                        ? Math.round(percentage(config.wsensor?.bat.type[wsensNum] ?? 0, data.wsensor?.bat[wsensNum] ?? 0, config.wsensor?.bat.k[wsensNum] ?? 0)) + '%'
+                        ? Math.round(Percentage(config.wsensor?.bat.type[wsensNum] ?? 0, data.wsensor?.bat[wsensNum] ?? 0, config.wsensor?.bat.k[wsensNum] ?? 0)) + '%'
                         : ''; break;
                     case 2: value = vl.validateHighVoltage(data.wsensor?.voltage.data[wsensNum] ?? 0) // High voltage
                         ? (data.wsensor?.voltage.data[wsensNum] ?? 0).toFixed(2) + i18n.t('units.v')

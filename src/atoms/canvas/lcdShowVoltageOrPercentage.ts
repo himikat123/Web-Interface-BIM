@@ -1,4 +1,3 @@
-import store from '../../redux/store';
 import { printText } from "./primitives";
 import lcdGetVoltage from "../lcdGetData/lcdGetVoltage";
 import * as vl from '../validateValues';

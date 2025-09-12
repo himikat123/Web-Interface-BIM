@@ -1,4 +1,3 @@
-import store from '../../redux/store';
 import { drawImage, drawScaledImage, fillRect } from "./primitives";
 import { bat_1, bat_2, bat_3, bat_4 } from '../img/bat';
 import lcdGetBatteryLevel from "../lcdGetData/lcdGetBatLevel";

@@ -61,6 +61,8 @@ export interface iConfig {
             }
         },
         lang: string,
+        sleep?: number,
+	    batK?: number,
         units: {
             temp: number,
             pres: number

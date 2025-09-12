@@ -1,57 +1,39 @@
-import React, { useState, useEffect } from "react";
-import OneColumn from "../templates/oneColumn";
-import { useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect } from "react";
 import i18n from '../i18n/main';
-import Card from "../atoms/card";
-import TextInput from "../atoms/textInput";
-import PasswordInput from "../atoms/passwordInput";
+import { useSelector, useDispatch } from 'react-redux';
+import ThreeColumns from "../templates/threeColumns";
 import { iConfig } from "../redux/configTypes";
-import { accesspointValidChange } from "../redux/slices/valid";
-import { acPointSsidChange, acPointPassChange } from "../redux/slices/config";
+import { sleepValidChange } from "../redux/slices/valid";
+import CardSleepOnOff from "../organisms/thingspeak/cardSleepOnOff";
+import CardSleepPeriod from "../organisms/thingspeak/cardSleepPeriod";
+import CardSleepVoltage from "../organisms/thingspeak/cardSleepVoltage";
 
-export default function Sleep() {
+export default function SendThingspeak() {
+    const dispatch = useDispatch();
+    const config = useSelector((state: iConfig) => state.config);
     const [isValid, setIsValid] = useState<boolean[]>([]);
 
     useEffect(() => {
-        dispatch(accesspointValidChange(!isValid.includes(false)));
+        dispatch(sleepValidChange(!isValid.includes(false)));
     });
 
-    const dispatch = useDispatch();
-    const config = useSelector((state: iConfig) => state.config);
-    
-    const content = <Card content={<>
-        <TextInput label={i18n.t('accessPointName')} 
-            value={config.accessPoint.ssid}
-            required
-            maxLength={32}
-            pattern={[/[^a-zA-Z0-9*() _.@$%]/g, false]}
-            tip={i18n.t('tips.tip2')}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(acPointSsidChange(e.target.value)) }
-            isValid={(valid: boolean) => {
-                let nv = isValid;
-                nv[0] = valid;
-                setIsValid(nv);
-            }}
-        />
+    const content = <>
+        {/* On/Off */}
+        <CardSleepOnOff />
 
-        <div className="my-8" />
+        {(config.sleep ?? 0) > 0 && <>
+            {/* Period */}
+            <CardSleepPeriod isValid={isValid}
+                setIsValid={setIsValid}
+            />
 
-        <PasswordInput label={i18n.t('password')}
-            value={config.accessPoint.pass}
-            pattern={[/[^a-zA-Z0-9*()_.@$%]/g, false]}
-            maxLength={32}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(acPointPassChange(e.target.value))}
-            tip={i18n.t('tips.tip1')}
-            isValid={(valid: boolean) => {
-                let nv = isValid;
-                nv[1] = valid;
-                setIsValid(nv);
-            }}
-        />
-    </>} />;
+            {/* Voltage */}
+            <CardSleepVoltage />
+        </>}
+    </>
 
-    return <OneColumn navbar={true}
-        header={[i18n.t('accessPoint')]} 
+    return <ThreeColumns navbar={true}
+        header={[i18n.t('sendToThingspeak')]} 
         content={[content]} 
         buttons={['save', 'reset']} 
     />

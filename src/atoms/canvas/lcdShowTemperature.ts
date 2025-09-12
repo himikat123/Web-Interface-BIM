@@ -1,11 +1,9 @@
-import store from '../../redux/store';
 import { printText, drawScaledImage, fillRect } from "./primitives";
 import { temp_minus, temp_plus } from "../img/symbols";
 import { validateTemperature } from "../validateValues";
 import lcdGetTempIn from "../lcdGetData/lcdGetTempIn";
 import { lcdGetTempOut } from "../lcdGetData/lcdGetTemp";
 import { celsiusToFahrenheit } from '../indications/celsiusToFahrenheit';
-import { Numeric } from 'i18n-js';
 
 function showTemperature(
     ctx: CanvasRenderingContext2D, dispModel: number, temp: number, 
