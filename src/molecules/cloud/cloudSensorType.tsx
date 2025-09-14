@@ -12,6 +12,7 @@ import BH1750 from "../../atoms/indications/BH1750";
 import Analog from "../../atoms/indications/analog";
 import ESP32 from "../../atoms/indications/ESP32";
 import BME680 from "../../atoms/indications/BME680";
+import * as bat from "../../atoms/indications/battery";
 import { iCloudSensorType } from "../../interfaces";
 
 export default function CloudSensorType(props: iCloudSensorType) {
@@ -24,6 +25,9 @@ export default function CloudSensorType(props: iCloudSensorType) {
     const r = i18n.t('runtime');
     const ah = i18n.t('absHumidity');
     const dp = i18n.t('dewPoint');
+    const bv = i18n.t('batteryVoltage');
+    const bp = i18n.t('batteryPercentage');
+    const bl = i18n.t('batteryLevel');
     
     const sensors = [];
     sensors.push([]); /* -- */
@@ -36,7 +40,10 @@ export default function CloudSensorType(props: iCloudSensorType) {
     sensors.push([`${t} (${DS18B20().temp})`]);
     sensors.push([`${l} (${MAX44009().light})`]);
     sensors.push([`${l} (${BH1750().light})`]);
-    if(device() === 'WeatherMonitorBIM') sensors.push([`${r} (${ESP32().runtime})`]);
+    if(device() === 'WeatherMonitorBIM') {
+        sensors.push([`${r} (${ESP32().runtime})`]);
+        sensors.push([`${bv} (${bat.BuiltInVoltage()})`, `${bp} (${bat.BuiltInPercentage()})`, `${bl} (${bat.BuiltInLevel()})`]);
+    }
     if(device() === 'WeatherMonitorBIM32') {
         sensors.push([`${a} (${Analog().volt})`]);
         sensors.push([`${t} (${ESP32().temp})`, `${r} (${ESP32().runtime})`]);

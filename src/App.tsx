@@ -157,7 +157,6 @@ function App() {
 }
 
 export default App;
-// TODO перевести write api key
 // TODO статус дисплея вкл. выкл.
 // TODO 2 канала thingspeak
 // TODO датчик ветра

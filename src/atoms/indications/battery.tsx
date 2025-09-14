@@ -15,10 +15,43 @@ export const Percentage = (type: number, adc: number, k: number) => {
     return percent;
 }
 
+export const Level = (prc: number) => {
+    let level = Math.round(prc / 25);
+    if(level < 1) level = 1;
+    if(level > 4) level = 4;
+    return `${level.toFixed()} ${i18n.t(`units.bar.${level === 1 ? 'singular' : 'plural'}`)}`;
+}
+
+export const BuiltInVoltage = () => {
+    const config = useSelector((state: iConfig) => state.config);
+    const data = useSelector((state: iData) => state.data);
+    if(vl.validateBatteryADC(data.adc ?? -1)) {
+        return (Math.round((Voltage(data.adc ?? 0, config.batK ?? 0)) * 1000) / 1000).toFixed(3) + i18n.t('units.v');
+    }
+    return '--';
+}
+
+export const BuiltInPercentage = () => {
+    const config = useSelector((state: iConfig) => state.config);
+    const data = useSelector((state: iData) => state.data);
+    if(vl.validateBatteryADC(data.adc ?? -1)) {
+        return Math.round(Percentage(1, data.adc ?? 0, config.batK ?? 0)) + "%";
+    }
+    return '--';
+}
+
+export const BuiltInLevel = () => {
+    const config = useSelector((state: iConfig) => state.config);
+    const data = useSelector((state: iData) => state.data);
+    if(vl.validateBatteryADC(data.adc ?? -1)) {
+        return Level(Percentage(1, data.adc ?? 0, config.batK ?? 0));
+    }
+    return '--';
+}
+
 export const BatVoltage = (num: number) => {
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
-
     if(vl.WsensorDataRelevance(num)) {
         if(vl.validateBatteryADC(data.wsensor?.bat[num] ?? 0))
             return '(' + Voltage(data.wsensor?.bat[num] ?? 0, (config.wsensor?.bat.k[num] ?? 0)).toFixed(2) + i18n.t('units.v') + ')';
@@ -30,7 +63,6 @@ export const BatVoltage = (num: number) => {
 export const BatPercent = (num: number) => {
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
-
     if(vl.WsensorDataRelevance(num)) {
         if(vl.validateBatteryADC(data.wsensor?.bat[num] ?? 0)) {
             return `(${Percentage(config.wsensor?.bat.type[num] ?? 0, data.wsensor?.bat[num] ?? 0, config.wsensor?.bat.k[num] ?? 0).toFixed(2)}%)`;
@@ -43,14 +75,9 @@ export const BatPercent = (num: number) => {
 export const BatLevel = (num: number) => {
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
-    
     if(vl.WsensorDataRelevance(num)) {
         if(vl.validateBatteryADC(data.wsensor?.bat[num] ?? 0)) {
-            const percent = Percentage(config.wsensor?.bat.type[num] ?? 0, data.wsensor?.bat[num] ?? 0, config.wsensor?.bat.k[num] ?? 0);
-            let level = Math.round(percent / 25);
-            if(level < 1) level = 1;
-            if(level > 4) level = 4;
-            return `(${level.toFixed()} ${i18n.t(`units.bar.${level === 1 ? 'singular' : 'plural'}`)})`;
+            return `(${Level(Percentage(config.wsensor?.bat.type[num] ?? 0, data.wsensor?.bat[num] ?? 0, config.wsensor?.bat.k[num] ?? 0))})`;
         }
         else return '(--)';
     }

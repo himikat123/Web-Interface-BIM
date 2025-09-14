@@ -11,7 +11,7 @@ export default function CardSleepPeriod(props: iCardThingSend) {
     const config = useSelector((state: iConfig) => state.config);
 
     return <Card content={
-        <NumberInput label={i18n.t('periodMinutes')}
+        <NumberInput label={i18n.t('goSleepInMinutes')}
             value={config.sleep ?? 0}
             min={1}
             max={999}

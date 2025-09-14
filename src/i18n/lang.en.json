@@ -32,6 +32,8 @@
         "plural": "Displays"
     },
     "sleep": "Sleep mode",
+    "useSleep": "Use sleep mode",
+    "goSleepInMinutes": "Go to sleep in (minutes)",
     "weatherForecast": "Weather forecast",
     "clock": "Clock",
     "alarm": "Alarm",    
@@ -310,6 +312,7 @@
     "sourceOfPower": "Source of power",
     "threeBatteries": "3 batteries (4.5v)",
     "liIonBattery": "Li-ion battery (3.7v)",
+    "battery": "Battery",
     "dataFrom": "Data from",
     "ago": "ago",
     "dataExpirationTime": "Data expiration time (minutes)",

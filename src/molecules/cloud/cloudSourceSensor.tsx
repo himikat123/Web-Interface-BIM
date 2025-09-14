@@ -15,10 +15,15 @@ export default function CloudSourceSensor(props: iCloudSensor) {
     sensors.push('DS18B20');
     sensors.push('MAX44009');
     sensors.push('BH1750');
-    if(device() === 'WeatherMonitorBIM') sensors.push('ESP8266');
-    if(device() === 'WeatherMonitorBIM32') sensors.push(i18n.t('analogInput'));
-    if(device() === 'WeatherMonitorBIM32') sensors.push('ESP32');
-    if(device() === 'WeatherMonitorBIM32') sensors.push('BME680');
+    if(device() === 'WeatherMonitorBIM') {
+        sensors.push('ESP8266');
+        sensors.push(i18n.t('battery'));
+    }
+    if(device() === 'WeatherMonitorBIM32') {
+        sensors.push(i18n.t('analogInput'));
+        sensors.push('ESP32');
+        sensors.push('BME680');
+    }
 
     return <SelectSwitch label={i18n.t('dataSource.singular')}
         options={sensors}

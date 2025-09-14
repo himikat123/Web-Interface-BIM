@@ -32,6 +32,8 @@
         "plural": "Дисплеи"
     },
     "sleep": "Режим на заспиване",
+    "useSleep": "Използвайте режим на заспиване",
+    "goSleepInMinutes": "Заспиване след (минути)",
     "weatherForecast": "Прогноза за времето",
     "clock": "Час",
     "alarm": "Будилник",
@@ -310,6 +312,7 @@
     "sourceOfPower": "Захранване",
     "threeBatteries": "3 батерия (4.5В)",
     "liIonBattery": "Li-ion батерия (3.7В)",
+    "battery": "Батерия",
     "dataFrom": "Данни от",
     "ago": "преди",
     "dataExpirationTime": "Дата на изтичане на данните (минути)",

@@ -21,8 +21,7 @@ export default function CardSleepVoltage() {
                 <Indication error={false} 
                     value={<>
                         {validateBatteryADC(data.adc ?? 0)
-                            ? (Math.round((bat.Voltage(data.adc ?? 0, config.batK ?? 0)) * 1000) / 1000).toFixed(3) + i18n.t('units.v') 
-                                + " (" + Math.round(bat.Percentage(1, data.adc ?? 0, config.batK ?? 0)) + "%)"
+                            ? bat.BuiltInVoltage() + " (" + bat.BuiltInPercentage() + ")"
                             : "--"
                         }
                     </>} 
@@ -32,7 +31,7 @@ export default function CardSleepVoltage() {
             max={250}
             limitMin={10}
             limitMax={250}
-            step={0.2}
+            step={0.1}
             indication={config.batK?.toFixed(1) ?? ''}
             onChange={val => dispatch(batKChange(val))}
         />

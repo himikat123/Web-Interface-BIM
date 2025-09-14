@@ -10,7 +10,7 @@ export default function CardSleepOnOff() {
     const config = useSelector((state: iConfig) => state.config);
 
     return <Card content={
-        <Toggle label={i18n.t('sendToThingspeak')}
+        <Toggle label={i18n.t('useSleep')}
             checked={(config.sleep ?? 0) > 0 ? 1 : 0}
             onChange={() => dispatch(cf.sleepChange((config.sleep ?? 0) > 0 ? 0 : 5))}
         />} 

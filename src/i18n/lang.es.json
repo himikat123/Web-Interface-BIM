@@ -32,6 +32,8 @@
         "plural": "Pantallas"
     },
     "sleep": "Modo Suspensión",
+    "useSleep": "Utilice el modo de suspensión",
+    "goSleepInMinutes": "Modo de suspensión en (minutos)",
     "weatherForecast": "Pronóstico del Clima",
     "clock": "Reloj",
     "alarm": "Alarma",    
@@ -310,6 +312,7 @@
     "sourceOfPower": "Fuente de Energía",
     "threeBatteries": "3 baterías (4.5v)",
     "liIonBattery": "Batería Li-ion (3.7v)",
+    "battery": "Batería",
     "dataFrom": "Datos de",
     "ago": "hace",
     "dataExpirationTime": "Tiempo para datos obsoletos (minutos)",

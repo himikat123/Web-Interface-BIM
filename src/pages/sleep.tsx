@@ -33,7 +33,7 @@ export default function SendThingspeak() {
     </>
 
     return <ThreeColumns navbar={true}
-        header={[i18n.t('sendToThingspeak')]} 
+        header={[i18n.t('sleep')]} 
         content={[content]} 
         buttons={['save', 'reset']} 
     />

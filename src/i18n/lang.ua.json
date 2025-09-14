@@ -32,6 +32,8 @@
         "plural": "Дисплеї"
     },
     "sleep": "Режим сну",
+    "useSleep": "Використовувати режим сну",
+    "goSleepInMinutes": "Іти в сон через (хвилин)",
     "weatherForecast": "Прогноз погоди",
     "clock": "Годинник",
     "alarm": "Будильник",
@@ -310,6 +312,7 @@
     "sourceOfPower": "Джерело живлення",
     "threeBatteries": "3 батареї (4.5В)",
     "liIonBattery": "Li-ion акумулятор (3.7В)",
+    "battery": "Акумулятор",
     "dataFrom": "Дані від",
     "ago": "назад",
     "dataExpirationTime": "Термін придатності даних (хвилин)",

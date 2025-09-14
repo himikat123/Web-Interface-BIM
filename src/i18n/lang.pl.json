@@ -32,6 +32,8 @@
         "plural": "Wyświetlacze"
     },
     "sleep": "Tryb uśpienia",
+    "useSleep": "Użyj trybu uśpienia",
+    "goSleepInMinutes": "Idź spać za (minuty)",
     "weatherForecast": "Prognoza pogody",
     "clock": "Zegar",
     "alarm": "Budzik",
@@ -310,6 +312,7 @@
     "sourceOfPower": "Źródło zasilania",
     "threeBatteries": "3 baterie (4,5 V)",
     "liIonBattery": "Bateria Li-ion (3,7 V)",
+    "battery": "Bateria",
     "dataFrom": "Dane od:",
     "ago": "temu",
     "dataExpirationTime": "Czas ważności danych (minuty)",
