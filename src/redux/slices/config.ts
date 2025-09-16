@@ -283,36 +283,20 @@ export const configSlice = createSlice({
         ...(device() === 'WeatherMonitorBIM32'
             ? {
                 wsensor: {
-                    temp: {
-                        corr: [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]
+                    temp: [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0]],
+                    hum: [0, 0],
+                    pres: [0, 0],
+                    wind: {
+                        speed: [0, 0],
+                        dir: [0, 0]
                     },
-                    hum: {
-                        corr: [0, 0]
-                    },
-                    pres: {
-                        corr: [0, 0]
-                    },
-                    light: {
-                        corr: [0, 0]
-                    },
-                    co2: {
-                        corr: [0, 0]
-                    },
-                    volt: {
-                        corr: [0, 0]
-                    },
-                    curr: {
-                        corr: [0, 0]
-                    },
-                    pow: {
-                        corr: [0, 0]
-                    },
-                    enrg: {
-                        corr: [0, 0]
-                    },
-                    freq: {
-                        corr: [0, 0]
-                    },
+                    light: [0, 0],
+                    co2: [0, 0],
+                    volt: [0, 0],
+                    curr: [0, 0],
+                    pow: [0, 0],
+                    enrg: [0, 0],
+                    freq: [0, 0],
                     bat: {
                         k: [0, 0],
                         type: [0, 0]
@@ -581,16 +565,18 @@ export const configSlice = createSlice({
         BH1750LightCorrChange: (state, action) => { state.sensors.bh1750.l = action.payload },
         analogCorrChange: (state, action) => { state.sensors.analog.v = action.payload },
 
-        wSensTempChange: (state, action) => { if(state.wsensor) state.wsensor.temp.corr[action.payload.sens][action.payload.num] = action.payload.val },
-        wSensHumChange: (state, action) => { if(state.wsensor) state.wsensor.hum.corr[action.payload.num] = action.payload.val },
-        wSensPresChange: (state, action) => { if(state.wsensor) state.wsensor.pres.corr[action.payload.num] = action.payload.val },
-        wSensLightChange: (state, action) => { if(state.wsensor) state.wsensor.light.corr[action.payload.num] = action.payload.val },
-        wSensCO2Change: (state, action) => { if(state.wsensor) state.wsensor.co2.corr[action.payload.num] = action.payload.val },
-        wSensHighVoltChange: (state, action) => { if(state.wsensor) state.wsensor.volt.corr[action.payload.num] = action.payload.val },
-        wSensCurrentChange: (state, action) => { if(state.wsensor) state.wsensor.curr.corr[action.payload.num] = action.payload.val },
-        wSensPowerChange: (state, action) => { if(state.wsensor) state.wsensor.pow.corr[action.payload.num] = action.payload.val },
-        wSensEnergyChange: (state, action) => { if(state.wsensor) state.wsensor.enrg.corr[action.payload.num] = action.payload.val },
-        wSensFreqChange: (state, action) => { if(state.wsensor) state.wsensor.freq.corr[action.payload.num] = action.payload.val },
+        wSensTempChange: (state, action) => { if(state.wsensor) state.wsensor.temp[action.payload.sens][action.payload.num] = action.payload.val },
+        wSensHumChange: (state, action) => { if(state.wsensor) state.wsensor.hum[action.payload.num] = action.payload.val },
+        wSensPresChange: (state, action) => { if(state.wsensor) state.wsensor.pres[action.payload.num] = action.payload.val },
+        wSensWindSpeedChange: (state, action) => { if(state.wsensor) state.wsensor.wind.speed[action.payload.num] = action.payload.val },
+        wSensWindDirChange: (state, action) => { if(state.wsensor) state.wsensor.wind.dir[action.payload.num] = action.payload.val },
+        wSensLightChange: (state, action) => { if(state.wsensor) state.wsensor.light[action.payload.num] = action.payload.val },
+        wSensCO2Change: (state, action) => { if(state.wsensor) state.wsensor.co2[action.payload.num] = action.payload.val },
+        wSensHighVoltChange: (state, action) => { if(state.wsensor) state.wsensor.volt[action.payload.num] = action.payload.val },
+        wSensCurrentChange: (state, action) => { if(state.wsensor) state.wsensor.curr[action.payload.num] = action.payload.val },
+        wSensPowerChange: (state, action) => { if(state.wsensor) state.wsensor.pow[action.payload.num] = action.payload.val },
+        wSensEnergyChange: (state, action) => { if(state.wsensor) state.wsensor.enrg[action.payload.num] = action.payload.val },
+        wSensFreqChange: (state, action) => { if(state.wsensor) state.wsensor.freq[action.payload.num] = action.payload.val },
         wSensBatKChange: (state, action) => { if(state.wsensor) state.wsensor.bat.k[action.payload.num] = action.payload.val },
         wSensBatTypeChange: (state, action) => { if(state.wsensor) state.wsensor.bat.type[action.payload.num] = action.payload.val },
         wSensExpireChange: (state, action) => { if(state.wsensor) state.wsensor.expire[action.payload.num] = Math.round(action.payload.val) },
@@ -657,7 +643,7 @@ export const {
     BME280TempCorrChange, BME280HumCorrChange, BME280PresCorrChange, BMP180TempCorrChange, BMP180PresCorrChange,
     SHT21TempCorrChange, SHT21HumCorrChange, DHT22TempCorrChange, DHT22HumCorrChange, DS18B20TempCorrChange,
     ESP32TempCorrChange, MAX44009LightCorrChange, BH1750LightCorrChange, analogCorrChange,
-    wSensTempChange, wSensHumChange, wSensPresChange, wSensLightChange, wSensCO2Change,
+    wSensTempChange, wSensHumChange, wSensPresChange, wSensWindSpeedChange, wSensWindDirChange, wSensLightChange, wSensCO2Change,
     wSensHighVoltChange, wSensCurrentChange, wSensPowerChange, wSensEnergyChange, wSensFreqChange,
     wSensBatKChange, wSensBatTypeChange, wSensExpireChange, wSensChannelChange,
     weatherAppIdChange, weatherCityChange, weatherCityIdChange, weatherLatChange, 

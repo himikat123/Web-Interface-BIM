@@ -74,6 +74,16 @@ export interface iData {
                 data: number[],
                 name: string[]
             },
+            wind: {
+                speed: {
+                    data: number[],
+                    name: string[]
+                },
+                dir: {
+                    data: number[],
+                    name: string[]
+                }
+            },
             light: {
                 data: number[],
                 name: string[]

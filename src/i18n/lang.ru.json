@@ -116,6 +116,18 @@
     "longitude": "Долгота",
     "detectCoordinatesAutomatically": "Определить координаты автоматически",
     "wind": "Ветер",
+    "windSpeed": "Скорость ветра",
+    "windDirection": "Направление ветра",
+    "windDirs": {
+        "N": "С",
+        "NE": "СВ",
+        "E": "В",
+        "SE": "ЮВ",
+        "S": "Ю",
+        "SW": "ЮЗ",
+        "W": "З",
+        "NW": "СЗ"
+    },
     "localization": "Локализация",
     "units": {
         "measurement": "Единицы измерения",

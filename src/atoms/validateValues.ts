@@ -22,7 +22,11 @@ export const validateDewPoint = (dp: number | undefined, temp: number | undefine
 }
 
 export const validateWindSpeed = (speed: number): boolean => {
-    return (speed >= 0 && speed <= 100)
+    return (speed >= 0 && speed <= 100);
+}
+
+export const validateWindDirection = (dir: number): boolean => {
+    return (dir >= 0 && dir < 360);
 }
 
 export const validateLight = (light: number): boolean => {

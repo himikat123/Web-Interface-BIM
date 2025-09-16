@@ -116,6 +116,18 @@
     "longitude": "Довгота",
     "detectCoordinatesAutomatically": "Визначити координати автоматично",
     "wind": "Вітер",
+    "windSpeed": "Швидкість вітру",
+    "windDirection": "Напрям вітру",
+    "windDir": {
+        "N": "Пн",
+        "NE": "ПнСх",
+        "E": "Сх",
+        "SE": "ПдСх",
+        "S": "Пд",
+        "SW": "ПдЗх",
+        "W": "Зх",
+        "NW": "ПнЗх"
+    },
     "localization": "Локалізація",
     "units": {
         "measurement": "Одиниці виміру",

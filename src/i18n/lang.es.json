@@ -116,6 +116,18 @@
     "longitude": "Longitud",
     "detectCoordinatesAutomatically": "Detectar coordenadas automáticamente",
     "wind": "Viento",
+    "windSpeed": "Velocidad del viento",
+    "windDirection": "Dirección del viento",
+    "windDirs": {
+        "N": "N",
+        "NE": "NE",
+        "E": "E",
+        "SE": "SE",
+        "S": "S",
+        "SW": "SO",
+        "W": "O",
+        "NW": "NO"
+    },
     "localization": "Localización",
     "units": {
         "measurement": "Unidades de medida",

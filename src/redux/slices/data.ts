@@ -95,6 +95,16 @@ export const dataSlice = createSlice({
                         data: [4040, 4040],
                         name: ['', '']
                     },
+                    wind: {
+                        speed: {
+                            data: [-1, -1],
+                            name: ['', '']
+                        },
+                        dir: {
+                            data: [-1, -1],
+                            name: ['', '']
+                        }
+                    },
                     light: {
                         data: [-1, -1],
                         name: ['', '']

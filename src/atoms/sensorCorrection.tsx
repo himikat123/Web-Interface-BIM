@@ -29,6 +29,12 @@ export default function sensorCorrection(
         return (hPaToMM(Math.round(lblData * (1 / step)) / (1 / step)) + corr).toFixed(countSymbolsAfterComma());
     }
 
+    const windDir = (deg: number) => {
+        const keys = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
+        const index = Math.round(deg / 45) % 8;
+        return i18n.t(`windDirs.${keys[index]}`);
+    }
+
     let units: string = '';
     let val: string = '';
 
@@ -44,6 +50,14 @@ export default function sensorCorrection(
         case 'p': // Pressure
             units = localPres ? i18n.t('units.hpa') : i18n.t('units.mm');
             val = (vl.validatePressure(lblData) ? (localPres ? round() : toMM()) : "--");
+            break;
+        case 'ws': // Wind speed
+            units = i18n.t('units.mps');
+            val = (vl.validateWindSpeed(lblData) ? round() : "--");
+            break;
+        case 'wd': // Wind direction
+            units = '';
+            val = (vl.validateWindDirection(lblData) ? `${windDir(lblData)} (${Math.round(lblData)}°)` : "--");
             break;
         case 'l': // Ambient light
             units = i18n.t('units.lux');
