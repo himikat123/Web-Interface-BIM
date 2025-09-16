@@ -92,7 +92,7 @@ export default function CardDisplayAnimation(props: iDisplay) {
                 />
             </div>
         </>} /> 
-        : (props.num === 0 && type === 1 && model === 2) 
+        : (props.num === 0 && type === 1 && model === 3) 
             ? <Card className="text-center" content={<>
                 <Button className="bg-green-600 hover:bg-green-700 text-text_dark"
                     label={i18n.t('calibrate')}
