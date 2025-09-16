@@ -305,7 +305,7 @@
     "humidityOut": "Влажност навън",
     "batterySymbol": "Символ на батерията",
     "batteryVoltage": "Напрежение на батерията",
-    "batteryPercentage": "Процент на батерията",
+    "batteryPercentage": "Процент заряд",
     "batteryLevel": "Ниво на батерията",
     "additionalDescription": "Допълнително описание",
     "comfortLevel": "Ниво на комфорт",

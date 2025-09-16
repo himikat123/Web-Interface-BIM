@@ -7,7 +7,12 @@ export const dataSlice = createSlice({
         dataState: 'default',
         updateData: true,
         dataFetching: false,
-
+        ...(device() === 'WeatherMonitorBIM'
+            ? {
+                adc: 0
+            }
+            : {}
+        ),
         state: "",
         fw: "",
         ...(device() === 'WeatherMonitorBIM32'

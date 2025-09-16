@@ -18,8 +18,15 @@ export default function SensorTypeVoltage() {
 
     const sensors = [];
     sensors.push("--");
+    if(device() === 'WeatherMonitorBIM') sensors.push(i18n.t('battery'));
     if(device() === 'WeatherMonitorBIM32') sensors.push(i18n.t('wirelessSensor.singular'));
     sensors.push('Thingspeak');
+    let date = moment().locale(locale).format('ll');
+    date = date.replaceAll(' de', '');
+    date = date.replace(/(?<!\d)\./g, '');
+    date = date.replace(/\s[гр]$/, '');
+    date = date.replace(/\p{L}{4,}/u, m => m.slice(0, 3));
+    sensors.push(`${i18n.t('date')} (${date})`);
     if(device() === 'WeatherMonitorBIM32') {
         sensors.push(`BME680 (${BME680().iaq})`);
         sensors.push(`BME680 (${i18n.t('absHumidity')} ${BME680().aHum})`);
@@ -33,11 +40,6 @@ export default function SensorTypeVoltage() {
     sensors.push(`SHT21 (${i18n.t('dewPoint')} ${SHT21().dp})`);
     sensors.push(`${i18n.t('forecast')} (${i18n.t('absHumidity')} ${Weather().aHum})`);
     sensors.push(`${i18n.t('forecast')} (${i18n.t('dewPoint')} ${Weather().dp})`);
-    let date = moment().locale(locale).format('ll');
-    date = date.replaceAll(' de', '');
-    date = date.replace(/(?<!\d)\./g, '');
-    date = date.replace(/\s[гр]$/, '');
-    sensors.push(`${i18n.t('date')} (${date})`);
 
     return <SelectSwitch label={i18n.t('dataSource.singular')}
         options={sensors}

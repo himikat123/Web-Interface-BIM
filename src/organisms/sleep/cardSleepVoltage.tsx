@@ -21,7 +21,8 @@ export default function CardSleepVoltage() {
                 <Indication error={false} 
                     value={<>
                         {validateBatteryADC(data.adc ?? 0)
-                            ? bat.BuiltInVoltage() + " (" + bat.BuiltInPercentage() + ")"
+                            ? bat.batVoltageStr(data.adc ?? 0, config.batK ?? 0) + " (" 
+                                + bat.batPercentStr(data.adc ?? 0, config.batK ?? 0) + ")"
                             : "--"
                         }
                     </>} 

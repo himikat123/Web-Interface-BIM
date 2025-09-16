@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import i18n from "../../i18n/main";
 import device from "../../device";
 import SelectSwitch from "../../atoms/selectSwitch";
@@ -14,8 +15,13 @@ import ESP32 from "../../atoms/indications/ESP32";
 import BME680 from "../../atoms/indications/BME680";
 import * as bat from "../../atoms/indications/battery";
 import { iCloudSensorType } from "../../interfaces";
+import { iConfig } from "../../redux/configTypes";
+import { iData } from "../../redux/dataTypes";
 
 export default function CloudSensorType(props: iCloudSensorType) {
+    const config = useSelector((state: iConfig) => state.config);
+    const data = useSelector((state: iData) => state.data);
+
     const t = i18n.t('temperature');
     const h = i18n.t('humidity');
     const p = i18n.t('pressure');
@@ -31,23 +37,59 @@ export default function CloudSensorType(props: iCloudSensorType) {
     
     const sensors = [];
     sensors.push([]); /* -- */
-    sensors.push([`${t} (${Forecast().temp})`, `${h} (${Forecast().hum})`, `${p} (${Forecast().pres})`, `${ah} (${Forecast().aHum})`, `${dp} (${Forecast().dp})`]);
+    sensors.push([
+        `${t} (${Forecast().temp})`, 
+        `${h} (${Forecast().hum})`, 
+        `${p} (${Forecast().pres})`, 
+        `${ah} (${Forecast().aHum})`, 
+        `${dp} (${Forecast().dp})`
+    ]);
     if(device() === 'WeatherMonitorBIM32') sensors.push([]); /* Wireless sensor */
-    sensors.push([`${t} (${BME280().temp})`, `${h} (${BME280().hum})`, `${p} (${BME280().pres})`, `${ah} (${BME280().aHum})`, `${dp} (${BME280().dp})`]);
-    sensors.push([`${t} (${BMP180().temp})`, `${p} (${BMP180().pres})`]);
-    sensors.push([`${t} (${SHT21().temp})`, `${h} (${SHT21().hum})`, `${ah} (${SHT21().aHum})`, `${dp} (${SHT21().dp})`]);
-    sensors.push([`${t} (${DHT22().temp})`, `${h} (${DHT22().hum})`, `${ah} (${DHT22().aHum})`, `${dp} (${DHT22().dp})`]);
+    sensors.push([
+        `${t} (${BME280().temp})`, 
+        `${h} (${BME280().hum})`, 
+        `${p} (${BME280().pres})`, 
+        `${ah} (${BME280().aHum})`, 
+        `${dp} (${BME280().dp})`
+    ]);
+    sensors.push([
+        `${t} (${BMP180().temp})`, 
+        `${p} (${BMP180().pres})`
+    ]);
+    sensors.push([
+        `${t} (${SHT21().temp})`, 
+        `${h} (${SHT21().hum})`, 
+        `${ah} (${SHT21().aHum})`, 
+        `${dp} (${SHT21().dp})`
+    ]);
+    sensors.push([
+        `${t} (${DHT22().temp})`, 
+        `${h} (${DHT22().hum})`, 
+        `${ah} (${DHT22().aHum})`, 
+        `${dp} (${DHT22().dp})`
+    ]);
     sensors.push([`${t} (${DS18B20().temp})`]);
     sensors.push([`${l} (${MAX44009().light})`]);
     sensors.push([`${l} (${BH1750().light})`]);
     if(device() === 'WeatherMonitorBIM') {
         sensors.push([`${r} (${ESP32().runtime})`]);
-        sensors.push([`${bv} (${bat.BuiltInVoltage()})`, `${bp} (${bat.BuiltInPercentage()})`, `${bl} (${bat.BuiltInLevel()})`]);
+        sensors.push([
+            `${bv} (${bat.batVoltageStr(data.adc ?? 0, config.batK ?? 0)})`, 
+            `${bp} (${bat.batPercentStr(data.adc ?? 0, config.batK ?? 0)})`, 
+            `${bl} (${bat.batLevelStr(data.adc ?? -1, config.batK ?? 0)})`
+        ]);
     }
     if(device() === 'WeatherMonitorBIM32') {
         sensors.push([`${a} (${Analog().volt})`]);
         sensors.push([`${t} (${ESP32().temp})`, `${r} (${ESP32().runtime})`]);
-        sensors.push([`${t} (${BME680().temp})`, `${h} (${BME680().hum})`, `${p} (${BME680().pres})`, `${i} (${BME680().iaq})`, `${ah} (${BME680().aHum})`, `${dp} (${BME680().dp})`]);
+        sensors.push([
+            `${t} (${BME680().temp})`, 
+            `${h} (${BME680().hum})`, 
+            `${p} (${BME680().pres})`, 
+            `${i} (${BME680().iaq})`, 
+            `${ah} (${BME680().aHum})`, 
+            `${dp} (${BME680().dp})`
+        ]);
     }
 
     return <>

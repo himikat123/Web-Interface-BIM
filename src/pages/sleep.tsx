@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import ThreeColumns from "../templates/threeColumns";
 import { iConfig } from "../redux/configTypes";
 import { sleepValidChange } from "../redux/slices/valid";
-import CardSleepOnOff from "../organisms/thingspeak/cardSleepOnOff";
-import CardSleepPeriod from "../organisms/thingspeak/cardSleepPeriod";
-import CardSleepVoltage from "../organisms/thingspeak/cardSleepVoltage";
+import CardSleepOnOff from "../organisms/sleep/cardSleepOnOff";
+import CardSleepPeriod from "../organisms/sleep/cardSleepPeriod";
+import CardSleepVoltage from "../organisms/sleep/cardSleepVoltage";
 
 export default function SendThingspeak() {
     const dispatch = useDispatch();

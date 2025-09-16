@@ -5,6 +5,7 @@ import Card from "../../atoms/card";
 import { iConfig } from "../../redux/configTypes";
 import * as cf from "../../redux/slices/config";
 import SensorTypeVoltage from "../../molecules/sensor/sensorTypeVoltage";
+import SensorTypeVoltPrc from "../../molecules/sensor/sensorTypeVoltPrc";
 import WsensorNumber from "../../molecules/wsensor/wsensorNumber";
 import WsensorType from "../../molecules/wsensor/wsensorVoltType";
 import ThingspeakField from "../../molecules/thingspeak/thingspeakFields";
@@ -23,6 +24,11 @@ export default function CardDisplayVoltage() {
             {/* Sensor type */}
             <SensorTypeVoltage />
 
+            {/* Voltage or Percentage for built in battery */}
+            {config.display.source.volt.sens === 1 && <div className="mt-8">
+                <SensorTypeVoltPrc />
+            </div>}
+
             {/* Wireless sensor number */}
             {config.display.source.volt.sens === (device() === 'WeatherMonitorBIM32' ? 1 : 400) && <div className="mt-8">
                 <WsensorNumber value={config.display.source.volt.wsensNum ?? 0} 
@@ -34,7 +40,7 @@ export default function CardDisplayVoltage() {
             </div>}
 
             {/* Thingspeak */}
-            {config.display.source.volt.sens === (device() === 'WeatherMonitorBIM32' ? 2 : 1) && <div className="mt-8">
+            {config.display.source.volt.sens === 2 && <div className="mt-8">
                 {device() === 'WeatherMonitorBIM32' && <ThingVoltType />}
                 <ThingspeakField value={config.display.source.volt.thing}
                     changeValue={val => dispatch(cf.displaySourceVoltThingChange(val))} 

@@ -305,7 +305,7 @@
     "humidityOut": "Humedad Exterior",
     "batterySymbol": "Símbolo Batería",
     "batteryVoltage": "Voltaje Batería",
-    "batteryPercentage": "Porcentaje Batería",
+    "batteryPercentage": "Porcentaje de carga",
     "batteryLevel": "Nivel Batería",
     "additionalDescription": "Descripción adicional",
     "comfortLevel": "Nivel de Comodidad",

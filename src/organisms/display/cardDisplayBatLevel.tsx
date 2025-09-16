@@ -1,9 +1,10 @@
 import i18n from "../../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import device from "../../device";
-import { BatLevel } from "../../atoms/indications/battery";
+import { batLevelWsensor } from "../../atoms/indications/battery";
 import Card from "../../atoms/card";
 import { iConfig } from "../../redux/configTypes";
+import { iData } from "../../redux/dataTypes";
 import * as cf from "../../redux/slices/config";
 import SensorTypeBatLevel from "../../molecules/sensor/sensorTypeBatLevel";
 import WsensorNumber from "../../molecules/wsensor/wsensorNumber";
@@ -12,7 +13,9 @@ import ThingspeakField from "../../molecules/thingspeak/thingspeakFields";
 export default function CardDisplayBatLevel() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
-    const indications = [BatLevel(0), BatLevel(1)];
+    const data = useSelector((state: iData) => state.data);
+    let indications = [];
+    for(let i=0; i<2; i++) indications.push(batLevelWsensor(i, data.wsensor?.bat[i] ?? 0, config.wsensor?.bat.type[i] ?? 0, config.wsensor?.bat.k[i] ?? 0));
 
     return <Card header={i18n.t('batteryLevel')}
         content={<>
@@ -28,7 +31,7 @@ export default function CardDisplayBatLevel() {
             </>}
 
             {/* Thingspeak */}
-            {config.display.source.bat.sens === (device() === 'WeatherMonitorBIM32' ? 2 : 1) && <>
+            {config.display.source.bat.sens === 2 && <>
                 <ThingspeakField value={config.display.source.bat.thing}
                     changeValue={val => dispatch(cf.displaySourceBatThingChange(val))} 
                 />
