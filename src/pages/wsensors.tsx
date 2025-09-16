@@ -38,11 +38,11 @@ export default function WSensors() {
     }
 
     function temp(wNum: number) {
-        return (data.wsensor?.temp?.data[0][wNum] ?? -4040) + (config.wsensor?.temp.corr[wNum][0] ?? 0);
+        return (data.wsensor?.temp?.data[0][wNum] ?? -4040) + (config.wsensor?.temp[wNum][0] ?? 0);
     }
 
     function hum(wNum: number) {
-        return (data.wsensor?.hum?.data[wNum] ?? -4040) + (config.wsensor?.hum.corr[wNum] ?? 0);
+        return (data.wsensor?.hum?.data[wNum] ?? -4040) + (config.wsensor?.hum[wNum] ?? 0);
     }
     
     useEffect(() => {
@@ -80,7 +80,7 @@ export default function WSensors() {
 
                     {[...Array(5)].map((x, tempSensorNum: number) => <div key={'t' + tempSensorNum}>
                         {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "t", 
-                            config.wsensor?.temp.corr[wsensorNum][tempSensorNum] ?? 0, 
+                            config.wsensor?.temp[wsensorNum][tempSensorNum] ?? 0, 
                             `${i18n.t('temperature')} ${tempSensorNum}`, 
                             data.wsensor?.temp.data[tempSensorNum][wsensorNum] ?? 0, 
                             (val: number) => dispatch(cf.wSensTempChange({val: val, sens: wsensorNum, num: tempSensorNum})), 
@@ -92,7 +92,7 @@ export default function WSensors() {
                     </div>)}
 
                     {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "h", 
-                        config.wsensor?.hum.corr[wsensorNum] ?? 0, 
+                        config.wsensor?.hum[wsensorNum] ?? 0, 
                         i18n.t('humidity'), 
                         data.wsensor?.hum.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensHumChange({val: val, num: wsensorNum})),
@@ -103,7 +103,7 @@ export default function WSensors() {
                     )}
 
                     {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "p", 
-                        config.wsensor?.pres.corr[wsensorNum] ?? 0, 
+                        config.wsensor?.pres[wsensorNum] ?? 0, 
                         i18n.t('pressure'), 
                         data.wsensor?.pres.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensPresChange({val: val, num: wsensorNum})),
@@ -113,8 +113,30 @@ export default function WSensors() {
                         data.wsensor?.pres.name[wsensorNum] ?? ''
                     )}
 
+                    {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "ws", 
+                        config.wsensor?.wind.speed[wsensorNum] ?? 0, 
+                        i18n.t('windSpeed'), 
+                        data.wsensor?.wind.speed.data[wsensorNum] ?? 0, 
+                        (val: number) => dispatch(cf.wSensWindSpeedChange({val: val, num: wsensorNum})),
+                        -10, 10, 0.1, 
+                        config.units.temp, config.units.pres,
+                        hideUnnecessary,
+                        data.wsensor?.wind.speed.name[wsensorNum] ?? ''
+                    )}
+
+                    {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "wd", 
+                        config.wsensor?.wind.dir[wsensorNum] ?? 0, 
+                        i18n.t('windDirection'), 
+                        data.wsensor?.wind.dir.data[wsensorNum] ?? 0, 
+                        (val: number) => dispatch(cf.wSensWindDirChange({val: val, num: wsensorNum})),
+                        -100, 100, 1, 
+                        config.units.temp, config.units.pres,
+                        hideUnnecessary,
+                        data.wsensor?.wind.dir.name[wsensorNum] ?? ''
+                    )}
+
                     {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "l", 
-                        config.wsensor?.light.corr[wsensorNum] ?? 0, 
+                        config.wsensor?.light[wsensorNum] ?? 0, 
                         i18n.t('ambientLight'), 
                         data.wsensor?.light.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensLightChange({val: val, num: wsensorNum})),
@@ -125,7 +147,7 @@ export default function WSensors() {
                     )}
 
                     {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "co2", 
-                        config.wsensor?.co2.corr[wsensorNum] ?? 0, 
+                        config.wsensor?.co2[wsensorNum] ?? 0, 
                         <span dangerouslySetInnerHTML={{ __html: i18n.t('CO2Level') }} />, 
                         data.wsensor?.co2.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensCO2Change({val: val, num: wsensorNum})),
@@ -136,7 +158,7 @@ export default function WSensors() {
                     )}
 
                     {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "hv", 
-                        config.wsensor?.volt.corr[wsensorNum] ?? 0, 
+                        config.wsensor?.volt[wsensorNum] ?? 0, 
                         i18n.t('voltage'), 
                         data.wsensor?.voltage.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensHighVoltChange({val: val, num: wsensorNum})),
@@ -147,7 +169,7 @@ export default function WSensors() {
                     )}
 
                     {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "cr", 
-                        config.wsensor?.curr.corr[wsensorNum] ?? 0, 
+                        config.wsensor?.curr[wsensorNum] ?? 0, 
                         i18n.t('current'), 
                         data.wsensor?.current.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensCurrentChange({val: val, num: wsensorNum})),
@@ -158,7 +180,7 @@ export default function WSensors() {
                     )}
 
                     {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "pw", 
-                        config.wsensor?.pow.corr[wsensorNum] ?? 0, 
+                        config.wsensor?.pow[wsensorNum] ?? 0, 
                         i18n.t('power'), 
                         data.wsensor?.power.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensPowerChange({val: val, num: wsensorNum})),
@@ -169,7 +191,7 @@ export default function WSensors() {
                     )}
 
                     {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "eg", 
-                        config.wsensor?.enrg.corr[wsensorNum] ?? 0, 
+                        config.wsensor?.enrg[wsensorNum] ?? 0, 
                         i18n.t('energy'), 
                         data.wsensor?.energy.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensEnergyChange({val: val, num: wsensorNum})),
@@ -180,7 +202,7 @@ export default function WSensors() {
                     )}
 
                     {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "fr", 
-                        config.wsensor?.freq.corr[wsensorNum] ?? 0, 
+                        config.wsensor?.freq[wsensorNum] ?? 0, 
                         i18n.t('frequency'), 
                         data.wsensor?.freq.data[wsensorNum] ?? 0, 
                         (val: number) => dispatch(cf.wSensFreqChange({val: val, num: wsensorNum})),

@@ -17,34 +17,34 @@ export default function Wsensor() {
         const sens: iWsensIndications = {
             temp: [],
             hum: vl.validateHumidity(data.wsensor?.hum.data[num] ?? 40400) 
-                ? (((data.wsensor?.hum.data[num] ?? 0) + (config.wsensor?.hum.corr[num] ?? 0)).toFixed(1) + '%') 
+                ? (((data.wsensor?.hum.data[num] ?? 0) + (config.wsensor?.hum[num] ?? 0)).toFixed(1) + '%') 
                 : '--',
             pres: vl.validatePressure(data.wsensor?.pres.data[num] ?? 40400) 
-                ? PresLocale((data.wsensor?.pres.data[num] ?? 0) + (config.wsensor?.pres.corr[num] ?? 0)) 
+                ? PresLocale((data.wsensor?.pres.data[num] ?? 0) + (config.wsensor?.pres[num] ?? 0)) 
                 : '--',
             volt: vl.validateHighVoltage(data.wsensor?.voltage.data[num] ?? 40400) 
-                ? (((data.wsensor?.voltage.data[num] ?? 0) + (config.wsensor?.volt.corr[num] ?? 0)).toFixed(1) + i18n.t('units.v')) 
+                ? (((data.wsensor?.voltage.data[num] ?? 0) + (config.wsensor?.volt[num] ?? 0)).toFixed(1) + i18n.t('units.v')) 
                 : '--',
             light: vl.validateLight(data.wsensor?.light.data[num] ?? -40400)
-                ? (((data.wsensor?.light.data[num] ?? 0) + (config.wsensor?.light.corr[num] ?? 0)).toFixed(1) + i18n.t('units.lux'))
+                ? (((data.wsensor?.light.data[num] ?? 0) + (config.wsensor?.light[num] ?? 0)).toFixed(1) + i18n.t('units.lux'))
                 : '--',
             hiVoltage: vl.validateHighVoltage(data.wsensor?.voltage.data[num] ?? 40400)
-                ? (((data.wsensor?.voltage.data[num] ?? 0) + (config.wsensor?.volt.corr[num] ?? 0)).toFixed(1) + i18n.t('units.v'))
+                ? (((data.wsensor?.voltage.data[num] ?? 0) + (config.wsensor?.volt[num] ?? 0)).toFixed(1) + i18n.t('units.v'))
                 : '--',
             current: vl.validateCurrent(data.wsensor?.current.data[num] ?? 40400)
-                ? (((data.wsensor?.current.data[num] ?? 0) + (config.wsensor?.curr.corr[num] ?? 0)).toFixed(2) + i18n.t('units.a'))
+                ? (((data.wsensor?.current.data[num] ?? 0) + (config.wsensor?.curr[num] ?? 0)).toFixed(2) + i18n.t('units.a'))
                 : '--',
             power: vl.validatePower(data.wsensor?.power.data[num] ?? 40400)
-                ? (((data.wsensor?.power.data[num] ?? 0) + (config.wsensor?.pow.corr[num] ?? 0)).toFixed(1) + i18n.t('units.w'))
+                ? (((data.wsensor?.power.data[num] ?? 0) + (config.wsensor?.pow[num] ?? 0)).toFixed(1) + i18n.t('units.w'))
                 : '--',
             energy: vl.validateEnergy(data.wsensor?.energy.data[num] ?? -40400)
-                ? (((data.wsensor?.energy.data[num] ?? 0) + (config.wsensor?.enrg.corr[num] ?? 0)).toFixed(1) + i18n.t('units.wh'))
+                ? (((data.wsensor?.energy.data[num] ?? 0) + (config.wsensor?.enrg[num] ?? 0)).toFixed(1) + i18n.t('units.wh'))
                 : '--',
             frequency: vl.validateFrequency(data.wsensor?.freq.data[num] ?? 40400)
-                ? (((data.wsensor?.freq.data[num] ?? 0) + (config.wsensor?.freq.corr[num] ?? 0)).toFixed(1) + i18n.t('units.hz'))
+                ? (((data.wsensor?.freq.data[num] ?? 0) + (config.wsensor?.freq[num] ?? 0)).toFixed(1) + i18n.t('units.hz'))
                 : '--',
             co2: vl.validateCO2(data.wsensor?.co2.data[num] ?? 40400) 
-                ? (((data.wsensor?.co2.data[num] ?? 0) + (config.wsensor?.co2.corr[num] ?? 0)).toFixed(1) + 'ppm') 
+                ? (((data.wsensor?.co2.data[num] ?? 0) + (config.wsensor?.co2[num] ?? 0)).toFixed(1) + 'ppm') 
                 : '--',
             ahum: calculate.absoluteHum(data.wsensor?.temp?.data[0][num], data.wsensor?.hum?.data[num]),
             dp: calculate.dewPoint(data.wsensor?.temp?.data[0][num], data.wsensor?.hum?.data[num])
@@ -53,7 +53,7 @@ export default function Wsensor() {
         for(let i=0; i<5; i++) {
             sens.temp.push(
                 vl.validateTemperature(data.wsensor?.temp.data[i][num] ?? 40400) 
-                    ? TempLocale((data.wsensor?.temp.data[i][num] ?? 0) + (config.wsensor?.temp.corr[num][i] ?? 0)) 
+                    ? TempLocale((data.wsensor?.temp.data[i][num] ?? 0) + (config.wsensor?.temp[num][i] ?? 0)) 
                     : '--'
             );
         }

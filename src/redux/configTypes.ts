@@ -214,36 +214,20 @@ export interface iConfig {
             }
         },
         wsensor?: {
-            temp: {
-                corr: number[][]
+            temp: number[][],
+            hum: number[],
+            pres: number[],
+            wind: {
+                speed: number[],
+                dir: number[]
             },
-            hum: {
-                corr: number[]
-            },
-            pres: {
-                corr: number[]
-            },
-            light: {
-                corr: number[]
-            },
-            co2: {
-                corr: number[]
-            },
-            volt: {
-                corr: number[]
-            },
-            curr: {
-                corr: number[]
-            },
-            pow: {
-                corr: number[]
-            },
-            enrg: {
-                corr: number[]
-            },
-            freq: {
-                corr: number[]
-            },
+            light: number[],
+            co2: number[],
+            volt: number[],
+            curr: number[],
+            pow: number[],
+            enrg: number[],
+            freq: number[],
             bat: {
                 k: number[],
                 type: number[]

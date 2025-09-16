@@ -15,25 +15,25 @@ export default function segWsensor(dispNum: number, slot: number, dispModel: str
 
     if(wsensType >= 0 && wsensType <= 4) {
         dispImg = temp(wsnsRelevant 
-            ? (data.wsensor?.temp.data[wsensType][wsensNum] ?? 0) + (config.wsensor?.temp.corr[wsensNum][wsensType] ?? 0) 
+            ? (data.wsensor?.temp.data[wsensType][wsensNum] ?? 0) + (config.wsensor?.temp[wsensNum][wsensType] ?? 0) 
             : 4040, dispModel
         );
     }
     if(wsensType === 5) {
         dispImg = hum(wsnsRelevant 
-            ? (data.wsensor?.hum.data[wsensNum] ?? 0) + (config.wsensor?.hum.corr[wsensNum] ?? 0)
+            ? (data.wsensor?.hum.data[wsensNum] ?? 0) + (config.wsensor?.hum[wsensNum] ?? 0)
             : 4040, dispModel
         );
     }
     if(wsensType === 6) {
         dispImg = pres(wsnsRelevant 
-            ? (data.wsensor?.pres.data[wsensNum] ?? 0) + (config.wsensor?.pres.corr[wsensNum] ?? 0) 
+            ? (data.wsensor?.pres.data[wsensNum] ?? 0) + (config.wsensor?.pres[wsensNum] ?? 0) 
             : 4040, dispModel
         );
     }
     if(wsensType === 7) {
         dispImg = co2(wsnsRelevant 
-            ? (data.wsensor?.co2.data[wsensNum] ?? 0) + (config.wsensor?.co2.corr[wsensNum] ?? 0) 
+            ? (data.wsensor?.co2.data[wsensNum] ?? 0) + (config.wsensor?.co2[wsensNum] ?? 0) 
             : 4040, dispModel
         );
     }

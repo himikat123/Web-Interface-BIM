@@ -27,7 +27,7 @@ export default function Comfort() {
             break; 
         case tcs[1]: // temperature from wireless sensor
             if(vl.WsensorDataRelevance(tWsensNum))
-                temp = (data.wsensor?.temp.data[tSens][tWsensNum] ?? 0) + (config.wsensor?.temp.corr[tWsensNum][tSens] ?? 0);
+                temp = (data.wsensor?.temp.data[tSens][tWsensNum] ?? 0) + (config.wsensor?.temp[tWsensNum][tSens] ?? 0);
             break;
         case tcs[2]: // temperature from thingspeak
             if(vl.ThingspeakDataRelevance())
@@ -62,7 +62,7 @@ export default function Comfort() {
             break; 
         case hcs[1]: // humidity from wireless sensor
             if(vl.WsensorDataRelevance(hWsensNum))
-                hum = (data.wsensor?.hum.data[hWsensNum] ?? 0) + (config.wsensor?.hum.corr[hWsensNum] ?? 0);
+                hum = (data.wsensor?.hum.data[hWsensNum] ?? 0) + (config.wsensor?.hum[hWsensNum] ?? 0);
             break;
         case hcs[2]: // humidity from thingspeak
             if(vl.ThingspeakDataRelevance())
@@ -134,7 +134,7 @@ export default function Comfort() {
         if(device() === 'WeatherMonitorBIM32') {
             if(vl.WsensorDataRelevance(config.comfort.co2.wsensNum)) {
                 const co2 = (data.wsensor?.co2.data[config.comfort.co2.wsensNum] ?? 0) 
-                    + (config.wsensor?.co2.corr[config.comfort.co2.wsensNum] ?? 0);
+                    + (config.wsensor?.co2[config.comfort.co2.wsensNum] ?? 0);
                 if(vl.validateCO2(co2)) {
                     let co2Level = i18n.t('cleanAir');
                     if(co2 > 800.0) co2Level = i18n.t('polutedAir');

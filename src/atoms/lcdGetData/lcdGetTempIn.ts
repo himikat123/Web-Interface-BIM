@@ -18,7 +18,7 @@ export default function lcdGetTempIn(sequenceTemp: number) {
         case cs[0]: temp = data.weather.temp + config.weather.corr.t; break;
         case cs[1]: if(vl.WsensorDataRelevance(wsensNum)) {
             temp = vl.validateTemperature(data.wsensor?.temp.data[wsensTempNum][wsensNum] ?? 0) 
-                ? (data.wsensor?.temp.data[wsensTempNum][wsensNum] ?? 0) + (config.wsensor?.temp.corr[wsensNum][wsensTempNum] ?? 0) 
+                ? (data.wsensor?.temp.data[wsensTempNum][wsensNum] ?? 0) + (config.wsensor?.temp[wsensNum][wsensTempNum] ?? 0) 
                 : 40400
         }; break;
         case cs[2]: if(vl.ThingspeakDataRelevance()) {

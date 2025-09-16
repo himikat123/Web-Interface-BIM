@@ -17,7 +17,7 @@ export default function lcdGetHumIn(sequenceHum: number) {
         case cs[0]: hum = data.weather.hum + config.weather.corr.h; break;
         case cs[1]: if(vl.WsensorDataRelevance(wsensNum)) {
             hum = vl.validateHumidity(data.wsensor?.hum.data[wsensNum] ?? 0) 
-                ? (data.wsensor?.hum.data[wsensNum] ?? 0) + (config.wsensor?.hum.corr[wsensNum] ?? 0) 
+                ? (data.wsensor?.hum.data[wsensNum] ?? 0) + (config.wsensor?.hum[wsensNum] ?? 0) 
                 : 40400
         }; break;
         case cs[2]: if(vl.ThingspeakDataRelevance()) {
