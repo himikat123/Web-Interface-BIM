@@ -17,6 +17,8 @@ export default function CloudWsensDataType(props: iCloudSensorType) {
             ...([...Array(5)].map((x, n) => `${i18n.t('temperature')} ${n} (${Wsensor()[i].temp[n]})`)),
             `${i18n.t('humidity')} (${Wsensor()[i].hum})`,
             `${i18n.t('pressure')} (${Wsensor()[i].pres})`,
+            `${i18n.t('windSpeed')} (${Wsensor()[i].windSpeed})`,
+            `${i18n.t('windDirection')} (${Wsensor()[i].windDir})`,
             `${i18n.t('ambientLight')} (${Wsensor()[i].light})`,
             `${i18n.t('voltage')} (${Wsensor()[i].hiVoltage})`,
             `${i18n.t('current')} (${Wsensor()[i].current})`,

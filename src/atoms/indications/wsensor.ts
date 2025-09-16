@@ -22,6 +22,12 @@ export default function Wsensor() {
             pres: vl.validatePressure(data.wsensor?.pres.data[num] ?? 40400) 
                 ? PresLocale((data.wsensor?.pres.data[num] ?? 0) + (config.wsensor?.pres[num] ?? 0)) 
                 : '--',
+            windSpeed: vl.validateWindSpeed(data.wsensor?.wind.speed.data[num] ?? -1)
+                ? (((data.wsensor?.wind.speed.data[num] ?? 0) + (config.wsensor?.wind.speed[num] ?? 0)).toFixed(1) + i18n.t('units.mps')) 
+                : '--',
+            windDir: vl.validateWindDirection(data.wsensor?.wind.dir.data[num] ?? -1)
+                ? (((data.wsensor?.wind.dir.data[num] ?? 0) + (config.wsensor?.wind.dir[num] ?? 0)).toFixed() + '°') 
+                : '--',
             volt: vl.validateHighVoltage(data.wsensor?.voltage.data[num] ?? 40400) 
                 ? (((data.wsensor?.voltage.data[num] ?? 0) + (config.wsensor?.volt[num] ?? 0)).toFixed(1) + i18n.t('units.v')) 
                 : '--',
@@ -64,6 +70,8 @@ export default function Wsensor() {
                 temp: [exp, exp, exp, exp, exp],
                 hum: exp,
                 pres: exp,
+                windSpeed: exp,
+                windDir: exp,
                 volt: exp,
                 light: exp,
                 hiVoltage: exp,
