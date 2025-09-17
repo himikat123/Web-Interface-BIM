@@ -15,7 +15,7 @@ export default function BME280() {
 
     return {
         temp: vl.validateTemperature(data.bme280.temp) 
-            ? TempLocale(temp)
+            ? TempLocale(temp, config.units.temp)
             : '--',
         hum: vl.validateHumidity(data.bme280.hum) 
             ? (hum.toFixed(1) + '%') 
@@ -24,6 +24,6 @@ export default function BME280() {
             ? PresLocale(pres) 
             : '--',
         aHum: calculate.absoluteHum(temp, hum),
-        dp: calculate.dewPoint(temp, hum)
+        dp: calculate.dewPoint(temp, hum, config.units.temp)
     }
 }

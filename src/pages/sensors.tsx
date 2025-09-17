@@ -51,7 +51,6 @@ export default function Sensors() {
                 i18n.t('temperature'), 
                 data.bme680?.temp ?? 0, 
                 (val: number) => dispatch(cf.BME680TempCorrChange(val)), 
-                -10, 10, 0.1,
                 config.units.temp, config.units.pres
             )}
             {sensorCorrection(false, "h", 
@@ -59,7 +58,6 @@ export default function Sensors() {
                 i18n.t('humidity'), 
                 data.bme680?.hum ?? 0, 
                 (val: number) => dispatch(cf.BME680HumCorrChange(val)), 
-                -10, 10, 0.1,
                 config.units.temp, config.units.pres
             )}
             {sensorCorrection(false, "p", 
@@ -67,7 +65,6 @@ export default function Sensors() {
                 i18n.t('pressure'), 
                 data.bme680?.pres ?? 0, 
                 (val: number) => dispatch(cf.BME680PresCorrChange(val)), 
-                -10, 10, 0.1,
                 config.units.temp, config.units.pres
             )}
             {sensorCorrection(false, "i", 
@@ -75,13 +72,12 @@ export default function Sensors() {
                 i18n.t('indexForAirQuality'), 
                 data.bme680?.iaq ?? 0, 
                 (val: number) => dispatch(cf.BME680IaqCorrChange(val)), 
-                -10, 10, 0.1,
                 config.units.temp, config.units.pres
             )}
             {extraData(i18n.t('sensorAccuracy'), vl.validateIaqArrc(data.bme680?.iaqAccr ?? 0) ? String(data.bme680?.iaqAccr) : '--')}
             <hr className="mt-6 mb-4" />
             {extraData(i18n.t('absHumidity'), calculate.absoluteHum(bme680temp, bme680hum))}
-            {extraData(i18n.t('dewPoint'), calculate.dewPoint(bme680temp, bme680hum))}
+            {extraData(i18n.t('dewPoint'), calculate.dewPoint(bme680temp, bme680hum, config.units.temp))}
         </>}
         className={!vl.validateTemperature(data.bme680?.temp ?? 0) && !vl.validateHumidity(data.bme680?.hum ?? 0) && !vl.validatePressure(data.bme680?.pres ?? 0) && !vl.validateIaq(data.bme680?.iaq ?? 0)
             ? 'invalid' + (hideUnnecessary ? ' hide' : '')
@@ -96,7 +92,6 @@ export default function Sensors() {
                 i18n.t('temperature'), 
                 data.bme280.temp, 
                 (val: number) => dispatch(cf.BME280TempCorrChange(val)), 
-                -10, 10, 0.1,
                 config.units.temp, config.units.pres
             )}
             {sensorCorrection(false, "h", 
@@ -104,7 +99,6 @@ export default function Sensors() {
                 i18n.t('humidity'), 
                 data.bme280.hum, 
                 (val: number) => dispatch(cf.BME280HumCorrChange(val)), 
-                -10, 10, 0.1,
                 config.units.temp, config.units.pres
             )}
             {sensorCorrection(false, "p", 
@@ -112,12 +106,11 @@ export default function Sensors() {
                 i18n.t('pressure'), 
                 data.bme280.pres, 
                 (val: number) => dispatch(cf.BME280PresCorrChange(val)), 
-                -10, 10, 0.1,
                 config.units.temp, config.units.pres
             )}
             <hr className="mt-6 mb-4" />
             {extraData(i18n.t('absHumidity'), calculate.absoluteHum(bme280temp, bme280hum))}
-            {extraData(i18n.t('dewPoint'), calculate.dewPoint(bme280temp, bme280hum))}
+            {extraData(i18n.t('dewPoint'), calculate.dewPoint(bme280temp, bme280hum, config.units.temp))}
         </>}
         className={!vl.validateTemperature(data.bme280.temp) && !vl.validateHumidity(data.bme280.hum) && !vl.validatePressure(data.bme280.pres)
             ? 'invalid' + (hideUnnecessary ? ' hide' : '')
@@ -132,7 +125,6 @@ export default function Sensors() {
                 i18n.t('temperature'), 
                 data.bmp180.temp, 
                 (val: number) => dispatch(cf.BMP180TempCorrChange(val)), 
-                -10, 10, 0.1,
                 config.units.temp, config.units.pres
             )}
             {sensorCorrection(false, "p", 
@@ -140,7 +132,6 @@ export default function Sensors() {
                 i18n.t('pressure'), 
                 data.bmp180.pres, 
                 (val: number) => dispatch(cf.BMP180PresCorrChange(val)), 
-                -10, 10, 0.1,
                 config.units.temp, config.units.pres
             )}
         </>}
@@ -157,7 +148,6 @@ export default function Sensors() {
                 i18n.t('temperature'), 
                 data.sht21.temp, 
                 (val: number) => dispatch(cf.SHT21TempCorrChange(val)), 
-                -10, 10, 0.1,
                 config.units.temp, config.units.pres
             )}
             {sensorCorrection(false, "h", 
@@ -165,12 +155,11 @@ export default function Sensors() {
                 i18n.t('humidity'), 
                 data.sht21.hum, 
                 (val: number) => dispatch(cf.SHT21HumCorrChange(val)), 
-                -10, 10, 0.1,
                 config.units.temp, config.units.pres
             )}
             <hr className="mt-6 mb-4" />
             {extraData(i18n.t('absHumidity'), calculate.absoluteHum(sht21temp, sht21hum))}
-            {extraData(i18n.t('dewPoint'), calculate.dewPoint(sht21temp, sht21hum))}
+            {extraData(i18n.t('dewPoint'), calculate.dewPoint(sht21temp, sht21hum, config.units.temp))}
         </>}
         className={!vl.validateTemperature(data.sht21.temp) && !vl.validateHumidity(data.sht21.hum)
             ? 'invalid' + (hideUnnecessary ? ' hide' : '')
@@ -185,7 +174,6 @@ export default function Sensors() {
                 i18n.t('temperature'), 
                 data.dht22.temp, 
                 (val: number) => dispatch(cf.DHT22TempCorrChange(val)), 
-                -10, 10, 0.1,
                 config.units.temp, config.units.pres
             )}
             {sensorCorrection(false, "h", 
@@ -193,12 +181,11 @@ export default function Sensors() {
                 i18n.t('humidity'), 
                 data.dht22.hum, 
                 (val: number) => dispatch(cf.DHT22HumCorrChange(val)), 
-                -10, 10, 0.1,
                 config.units.temp, config.units.pres
             )}
             <hr className="mt-6 mb-4" />
             {extraData(i18n.t('absHumidity'), calculate.absoluteHum(dht22temp, dht22hum))}
-            {extraData(i18n.t('dewPoint'), calculate.dewPoint(dht22temp, dht22hum))}
+            {extraData(i18n.t('dewPoint'), calculate.dewPoint(dht22temp, dht22hum, config.units.temp))}
         </>}
         className={!vl.validateTemperature(data.dht22.temp) && !vl.validateHumidity(data.dht22.hum)
             ? 'invalid' + (hideUnnecessary ? ' hide' : '')
@@ -213,7 +200,6 @@ export default function Sensors() {
                 i18n.t('ambientLight'), 
                 data.max44009.light, 
                 (val: number) => dispatch(cf.MAX44009LightCorrChange(val)), 
-                -10, 10, 0.1,
                 config.units.temp, config.units.pres
             )}
         </>}
@@ -230,7 +216,6 @@ export default function Sensors() {
                 i18n.t('ambientLight'), 
                 data.bh1750.light, 
                 (val: number) => dispatch(cf.BH1750LightCorrChange(val)), 
-                -10, 10, 0.1,
                 config.units.temp, config.units.pres
             )}
         </>}
@@ -247,7 +232,6 @@ export default function Sensors() {
                 i18n.t('temperature'), 
                 data.ds18b20.temp, 
                 (val: number) => dispatch(cf.DS18B20TempCorrChange(val)), 
-                -10, 10, 0.1,
                 config.units.temp, config.units.pres
             )}
         </>}
@@ -264,7 +248,6 @@ export default function Sensors() {
                 i18n.t('voltage'), 
                 data.analog.volt, 
                 (val: number) => dispatch(cf.analogCorrChange(val)), 
-                -10, 10, 0.01,
                 config.units.temp, config.units.pres
             )}
         </>}
@@ -281,7 +264,6 @@ export default function Sensors() {
                 i18n.t('temperature'), 
                 data.esp32?.temp ?? 0, 
                 (val: number) => dispatch(cf.ESP32TempCorrChange(val)), 
-                -10, 10, 0.1,
                 config.units.temp, config.units.pres
             )}
             <div className="text-center mt-8">

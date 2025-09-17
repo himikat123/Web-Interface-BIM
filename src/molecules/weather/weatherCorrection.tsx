@@ -28,7 +28,6 @@ export default function WeatherCorrection() {
             i18n.t('temperature'), 
             data.weather.temp, 
             (val: number) => dispatch(cf.weatherCorrTemp(val)), 
-            -10, 10, 0.1,
             config.units.temp, config.units.pres
         )}
         {sensorCorrection(false, "h", 
@@ -36,7 +35,6 @@ export default function WeatherCorrection() {
             i18n.t('humidity'), 
             data.weather.hum, 
             (val: number) => dispatch(cf.weatherCorrHum(val)), 
-            -10, 10, 0.1,
             config.units.temp, config.units.pres
         )}
         {sensorCorrection(false, "p", 
@@ -44,11 +42,10 @@ export default function WeatherCorrection() {
             i18n.t('pressure'), 
             data.weather.pres, 
             (val: number) => dispatch(cf.weatherCorrPres(val)), 
-            -20, 20, 0.1,
             config.units.temp, config.units.pres
         )}
         <hr className="mt-6 mb-4" />
         {extraData(i18n.t('absHumidity'), calculate.absoluteHum(temp, hum))}
-        {extraData(i18n.t('dewPoint'), calculate.dewPoint(temp, hum))}
+        {extraData(i18n.t('dewPoint'), calculate.dewPoint(temp, hum, config.units.temp))}
     </>
 }

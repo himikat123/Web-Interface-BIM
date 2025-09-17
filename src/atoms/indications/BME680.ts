@@ -16,7 +16,7 @@ export default function BME680() {
 
     return {
         temp: vl.validateTemperature(data.bme680?.temp ?? 40400) 
-            ? TempLocale(temp)
+            ? TempLocale(temp, config.units.temp)
             : '--',
         hum: vl.validateHumidity(data.bme680?.hum ?? 40400) 
             ? hum.toFixed(1) + '%'
@@ -28,6 +28,6 @@ export default function BME680() {
             ? 'IAQ ' + iaq.toFixed(1) 
             : '--',
         aHum: calculate.absoluteHum(temp, hum),
-        dp: calculate.dewPoint(temp, hum)
+        dp: calculate.dewPoint(temp, hum, config.units.temp)
     }
 }
