@@ -11,7 +11,7 @@ export default function BMP180() {
 
     return {
         temp: vl.validateTemperature(data.bmp180.temp) 
-            ? TempLocale(data.bmp180.temp + config.sensors.bmp180.t) 
+            ? TempLocale(data.bmp180.temp + config.sensors.bmp180.t, config.units.temp) 
             : '--',
         pres: vl.validatePressure(data.bmp180.pres) 
             ? PresLocale(data.bmp180.pres + config.sensors.bmp180.p)

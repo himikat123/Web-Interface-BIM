@@ -18,7 +18,7 @@ export default function Forecast() {
 
     return {
         temp: vl.validateTemperature(data.weather.temp) 
-            ? TempLocale(temp) 
+            ? TempLocale(temp, config.units.temp) 
             : '--',
         hum: vl.validateHumidity(data.weather.hum) 
             ? (hum.toFixed(1) + '%') 
@@ -36,6 +36,6 @@ export default function Forecast() {
             ? windDirStr(wind.dir)
             : '--',
         aHum: calculate.absoluteHum(temp, hum),
-        dp: calculate.dewPoint(temp, hum)
+        dp: calculate.dewPoint(temp, hum, config.units.temp)
     }
 }

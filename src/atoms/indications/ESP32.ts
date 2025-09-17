@@ -12,7 +12,7 @@ export default function ESP32() {
 
     return {
         temp: vl.validateTemperature(data.esp32?.temp ?? 40400) 
-            ? TempLocale((data.esp32?.temp ?? 0) + (config.sensors.esp32?.t ?? 0)) 
+            ? TempLocale((data.esp32?.temp ?? 0) + (config.sensors.esp32?.t ?? 0), config.units.temp) 
             : '--',
         runtime: humanizeDuration(data.runtime * 1000, {
             language: locale, 

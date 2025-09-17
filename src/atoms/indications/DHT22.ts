@@ -13,12 +13,12 @@ export default function DHT22() {
 
     return {
         temp: vl.validateTemperature(data.dht22.temp) 
-            ? TempLocale(temp)
+            ? TempLocale(temp, config.units.temp)
             : '--',
         hum: vl.validateHumidity(data.dht22.hum) 
             ? hum.toFixed(1) + '%'
             : '--',
         aHum: calculate.absoluteHum(temp, hum),
-        dp: calculate.dewPoint(temp, hum)
+        dp: calculate.dewPoint(temp, hum, config.units.temp)
     }
 }

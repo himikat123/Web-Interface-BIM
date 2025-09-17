@@ -57,13 +57,13 @@ export default function Wsensor() {
                 ? (((data.wsensor?.co2.data[num] ?? 0) + (config.wsensor?.co2[num] ?? 0)).toFixed(1) + 'ppm') 
                 : '--',
             ahum: calculate.absoluteHum(data.wsensor?.temp?.data[0][num], data.wsensor?.hum?.data[num]),
-            dp: calculate.dewPoint(data.wsensor?.temp?.data[0][num], data.wsensor?.hum?.data[num])
+            dp: calculate.dewPoint(data.wsensor?.temp?.data[0][num], data.wsensor?.hum?.data[num], config.units.temp)
         };
 
         for(let i=0; i<5; i++) {
             sens.temp.push(
                 vl.validateTemperature(data.wsensor?.temp.data[i][num] ?? 40400) 
-                    ? TempLocale((data.wsensor?.temp.data[i][num] ?? 0) + (config.wsensor?.temp[num][i] ?? 0)) 
+                    ? TempLocale((data.wsensor?.temp.data[i][num] ?? 0) + (config.wsensor?.temp[num][i] ?? 0), config.units.temp) 
                     : '--'
             );
         }

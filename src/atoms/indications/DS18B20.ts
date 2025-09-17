@@ -10,7 +10,7 @@ export default function DS18B20() {
 
     return {
         temp: vl.validateTemperature(data.ds18b20.temp) 
-            ? TempLocale(data.ds18b20.temp + config.sensors.ds18b20.t)
+            ? TempLocale(data.ds18b20.temp + config.sensors.ds18b20.t, config.units.temp)
             : '--'
     }
 }
