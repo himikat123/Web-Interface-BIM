@@ -141,6 +141,18 @@ export interface iConfig {
                     thing: number
                 },
                 descr: number,
+                wind?: {
+                    speed: {
+                        sens: number,
+                        wsensNum: number,
+                        thing: number
+                    },
+                    dir: {
+                        sens: number,
+                        wsensNum: number,
+                        thing: number
+                    }
+                },
                 sequence?: {
                     name: string[],
                     temp: number[],

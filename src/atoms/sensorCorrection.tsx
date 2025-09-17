@@ -1,7 +1,8 @@
 import React from "react";
-import RangeInput from "./rangeInput";
 import i18n from "../i18n/main";
+import RangeInput from "./rangeInput";
 import Indication from "./indication";
+import { windDirStr } from "./indications/windDirStr";
 import * as vl from "./validateValues";
 import { celsiusToFahrenheit } from "./indications/celsiusToFahrenheit";
 import { hPaToMM } from "./indications/hPaToMM";
@@ -29,12 +30,6 @@ export default function sensorCorrection(
         return (hPaToMM(Math.round(lblData * (1 / step)) / (1 / step)) + corr).toFixed(countSymbolsAfterComma());
     }
 
-    const windDir = (deg: number) => {
-        const keys = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
-        const index = Math.round(deg / 45) % 8;
-        return i18n.t(`windDirs.${keys[index]}`);
-    }
-
     let units: string = '';
     let val: string = '';
 
@@ -57,7 +52,7 @@ export default function sensorCorrection(
             break;
         case 'wd': // Wind direction
             units = '';
-            val = (vl.validateWindDirection(lblData) ? `${windDir(lblData)} (${Math.round(lblData)}°)` : "--");
+            val = (vl.validateWindDirection(lblData) ? `${windDirStr(lblData)} (${Math.round(lblData)}°)` : "--");
             break;
         case 'l': // Ambient light
             units = i18n.t('units.lux');

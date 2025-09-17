@@ -2,6 +2,7 @@ import i18n from "../../i18n/main";
 import { useSelector } from "react-redux";
 import SelectSwitch from "../../atoms/selectSwitch";
 import Wsensor from "../../atoms/indications/wsensor";
+import { windDirStr } from "../../atoms/indications/windDirStr";
 import { batVoltageWsensor, batPercentWsensor, batLevelWsensor } from "../../atoms/indications/battery";
 import { iCloudSensorType } from "../../interfaces";
 import { iConfig } from "../../redux/configTypes";
@@ -18,7 +19,7 @@ export default function CloudWsensDataType(props: iCloudSensorType) {
             `${i18n.t('humidity')} (${Wsensor()[i].hum})`,
             `${i18n.t('pressure')} (${Wsensor()[i].pres})`,
             `${i18n.t('windSpeed')} (${Wsensor()[i].windSpeed})`,
-            `${i18n.t('windDirection')} (${Wsensor()[i].windDir})`,
+            `${i18n.t('windDirection')} {${windDirStr(data.wsensor?.wind.dir.data[i] ?? -1)}} (${Wsensor()[i].windDir})`,
             `${i18n.t('ambientLight')} (${Wsensor()[i].light})`,
             `${i18n.t('voltage')} (${Wsensor()[i].hiVoltage})`,
             `${i18n.t('current')} (${Wsensor()[i].current})`,

@@ -1,10 +1,12 @@
-import { iConfig } from "../../redux/configTypes";
-import { iData } from "../../redux/dataTypes";
-import * as vl from "../validateValues";
-import * as calculate from "../calculate";
+import { useSelector } from 'react-redux';
+import i18n from "../../i18n/main";
 import { TempLocale } from "./celsiusToFahrenheit";
 import { PresLocale } from "./hPaToMM";
-import { useSelector } from 'react-redux';
+import { windDirStr } from './windDirStr';
+import * as vl from "../validateValues";
+import * as calculate from "../calculate";
+import { iConfig } from "../../redux/configTypes";
+import { iData } from "../../redux/dataTypes";
 
 export default function Forecast() {
     const config = useSelector((state: iConfig) => state.config);
@@ -12,6 +14,7 @@ export default function Forecast() {
     const temp = data.weather.temp + config.weather.corr.t;
     const hum = data.weather.hum + config.weather.corr.h;
     const pres = data.weather.pres + config.weather.corr.p;
+    const wind = data.weather.wind;
 
     return {
         temp: vl.validateTemperature(data.weather.temp) 
@@ -22,6 +25,15 @@ export default function Forecast() {
             : '--',
         pres: vl.validatePressure(data.weather.pres) 
             ? PresLocale(pres) 
+            : '--',
+        windSpeed: vl.validateWindSpeed(wind.speed)
+            ? wind.speed.toFixed(1) + i18n.t('units.mps')
+            : '--',
+        windDir: vl.validateWindDirection(wind.dir)
+            ? Math.round(wind.dir) + '°'
+            : '--',
+        windDirStr: vl.validateWindDirection(wind.dir)
+            ? windDirStr(wind.dir)
             : '--',
         aHum: calculate.absoluteHum(temp, hum),
         dp: calculate.dewPoint(temp, hum)

@@ -327,6 +327,7 @@ export interface iWsensIndications {
     pres: string,
     windSpeed: string,
     windDir: string,
+    windDirStr: string,
     volt: string,
     light: string,
     hiVoltage: string,

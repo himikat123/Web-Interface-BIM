@@ -25,6 +25,8 @@ export default function CloudSensorType(props: iCloudSensorType) {
     const t = i18n.t('temperature');
     const h = i18n.t('humidity');
     const p = i18n.t('pressure');
+    const ws = i18n.t('windSpeed');
+    const wd = i18n.t('windDirection');
     const i = i18n.t('indexForAirQuality');
     const l = i18n.t('ambientLight');
     const a = i18n.t('voltage');
@@ -41,6 +43,8 @@ export default function CloudSensorType(props: iCloudSensorType) {
         `${t} (${Forecast().temp})`, 
         `${h} (${Forecast().hum})`, 
         `${p} (${Forecast().pres})`, 
+        `${ws} (${Forecast().windSpeed})`,
+        `${wd} {${Forecast().windDirStr}} (${Forecast().windDir})`,
         `${ah} (${Forecast().aHum})`, 
         `${dp} (${Forecast().dp})`
     ]);

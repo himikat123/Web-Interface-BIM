@@ -140,6 +140,18 @@
                 "thing": 0
             },
             "descr": 0,
+            "wind": {
+                "speed": {
+                    "sens": 1,
+                    "wsensNum": 0,
+                    "thing": 0
+                },
+                "dir": {
+                    "sens": 1,
+                    "wsensNum": 0,
+                    "thing": 0
+                }
+            },
             "sequence": {
                 "name": ["", "", "", ""],
                 "temp": [0, 0, 0, 0],

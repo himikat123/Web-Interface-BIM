@@ -15,7 +15,10 @@ import CardDisplayTemperatureOut from "../organisms/display/cardDisplayTemperatu
 import CardDisplayHumidityOut from "../organisms/display/cardDisplayHumidityOut";
 import CardDisplayPressureOut from "../organisms/display/cardDisplayPressureOut";
 import CardDisplayComfort from "../organisms/display/cardDisplayComfort";
+import CardDisplayWindSpeed from "../organisms/display/cardDisplayWindSpeed";
+import CardDisplayWindDir from "../organisms/display/cardDisplayWindDir";
 import CardDisplayTimeSlot from "../organisms/display/cardDisplayTimeSlot";
+import Card from "../atoms/card";
 import { iConfig } from "../redux/configTypes";
 
 export default function Display1() {
@@ -75,6 +78,15 @@ export default function Display1() {
             {config.display.type && config.display.type[0] >= 2 && 
                 [...Array(4)].map((x, i) => <CardDisplayTimeSlot key={i} slot={i + 4} num={0} />)
             }
+        </>);
+
+        device() === 'WeatherMonitorBIM32' && rows.push(<>
+            {config.display.type && config.display.type[0] === 1 && <>
+                <CardDisplayWindSpeed />
+                <CardDisplayWindDir />
+                <Card className="hidden lg:block" content={<></>} />
+                <Card className="hidden lg:block" content={<></>} />
+            </>}
         </>);
     }
 

@@ -1,12 +1,13 @@
+import { useSelector } from 'react-redux';
 import i18n from "../../i18n/main";
+import { TempLocale } from "./celsiusToFahrenheit";
+import { PresLocale } from "./hPaToMM";
+import { windDirStr } from './windDirStr';
+import * as vl from "../validateValues";
+import * as calculate from "../calculate";
 import { iConfig } from "../../redux/configTypes";
 import { iData } from "../../redux/dataTypes";
 import { iWsensIndications } from "../../interfaces";
-import * as vl from "../validateValues";
-import * as calculate from "../calculate";
-import { TempLocale } from "./celsiusToFahrenheit";
-import { PresLocale } from "./hPaToMM";
-import { useSelector } from 'react-redux';
 
 export default function Wsensor() {
     const config = useSelector((state: iConfig) => state.config);
@@ -27,6 +28,9 @@ export default function Wsensor() {
                 : '--',
             windDir: vl.validateWindDirection(data.wsensor?.wind.dir.data[num] ?? -1)
                 ? (((data.wsensor?.wind.dir.data[num] ?? 0) + (config.wsensor?.wind.dir[num] ?? 0)).toFixed() + '°') 
+                : '--',
+            windDirStr: vl.validateWindDirection(data.wsensor?.wind.dir.data[num] ?? -1)
+                ? windDirStr((data.wsensor?.wind.dir.data[num] ?? 0) + (config.wsensor?.wind.dir[num] ?? 0)) 
                 : '--',
             volt: vl.validateHighVoltage(data.wsensor?.voltage.data[num] ?? 40400) 
                 ? (((data.wsensor?.voltage.data[num] ?? 0) + (config.wsensor?.volt[num] ?? 0)).toFixed(1) + i18n.t('units.v')) 
@@ -72,6 +76,7 @@ export default function Wsensor() {
                 pres: exp,
                 windSpeed: exp,
                 windDir: exp,
+                windDirStr: exp,
                 volt: exp,
                 light: exp,
                 hiVoltage: exp,

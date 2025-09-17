@@ -200,7 +200,19 @@ export const configSlice = createSlice({
                 },
                 descr: 0,
                 ...(device() === 'WeatherMonitorBIM32' 
-                    ? { 
+                    ? {
+                        wind: {
+                            speed: {
+                                sens: 1,
+                                wsensNum: 0,
+                                thing: 0
+                            },
+                            dir: {
+                                sens: 1,
+                                wsensNum: 0,
+                                thing: 0
+                            }
+                        }, 
                         sequence: {
                             name: ["", "", "", ""],
                             temp: [0, 0, 0, 0],
@@ -524,6 +536,12 @@ export const configSlice = createSlice({
         displaySourceBatWsensNumChange: (state, action) => { state.display.source.bat.wsensNum = action.payload },
         displaySourceBatThingChange: (state, action) => { state.display.source.bat.thing = action.payload },
         displaySourceDescrChange: (state, action) => { state.display.source.descr = action.payload },
+        displaySourceWindSpeedSensChange: (state, action) => { if(state.display.source.wind) state.display.source.wind.speed.sens = action.payload },
+        displaySourceWindSpeedWsensNumChange: (state, action) => { if(state.display.source.wind) state.display.source.wind.speed.wsensNum = action.payload },
+        displaySourceWindSpeedThingChange: (state, action) => { if(state.display.source.wind) state.display.source.wind.speed.thing = action.payload },
+        displaySourceWindDirSensChange: (state, action) => { if(state.display.source.wind) state.display.source.wind.dir.sens = action.payload },
+        displaySourceWindDirWsensNumChange: (state, action) => { if(state.display.source.wind) state.display.source.wind.dir.wsensNum = action.payload },
+        displaySourceWindDirThingChange: (state, action) => { if(state.display.source.wind) state.display.source.wind.dir.thing = action.payload },
         displaySourceSequenceNameChange: (state, action) => { if(state.display.source.sequence) state.display.source.sequence.name[action.payload.num] = action.payload.val },
         displaySourceSequenceTempChange: (state, action) => { if(state.display.source.sequence) state.display.source.sequence.temp[action.payload.num] = action.payload.val },
         displaySourceSequenceThngTempChange: (state, action) => { if(state.display.source.sequence) state.display.source.sequence.thngtemp[action.payload.num] = action.payload.val },
@@ -664,7 +682,9 @@ export const {
     displaySourceTempInThingChange, displaySourceHumInSensChange, displaySourceHumInWsensNumChange, 
     displaySourceHumInThingChange, displaySourceVoltSensChange, displaySourceVoltWsensNumChange, 
     displaySourceVoltVoltChange, displaySourceVoltThingChange, displaySourceBatSensChange, displaySourceBatWsensNumChange, 
-    displaySourceBatThingChange, displaySourceDescrChange, displaySourceSequenceDurChange, displaySourceSequenceTempChange, 
+    displaySourceBatThingChange, displaySourceDescrChange, displaySourceSequenceDurChange, displaySourceSequenceTempChange,
+    displaySourceWindSpeedSensChange, displaySourceWindSpeedWsensNumChange, displaySourceWindSpeedThingChange, 
+    displaySourceWindDirSensChange, displaySourceWindDirWsensNumChange, displaySourceWindDirThingChange, 
     displaySourceSequenceWsensTempChange, displaySourceSequenceThngTempChange, displaySourceSequenceNameChange, 
     displaySourceSequenceHumChange, displaySourceSequenceThngHumChange, displaySourceSequenceWsensHumChange,
     displaySourceVoltThingTypeChange, 

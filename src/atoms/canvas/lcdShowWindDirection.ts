@@ -1,11 +1,13 @@
 import store from '../../redux/store';
 import { drawImage, fillRect } from "./primitives";
+import device from '../../device';
+import lcdGetWindDir from '../lcdGetData/lcdGetWindDir';
 import * as wind from "../img/wind";
 
 export default function lcdShowWindDirection(
     ctx: CanvasRenderingContext2D, dispModel: number, prevDir: number | undefined, bgColor: string
 ): number {
-    const dir = store.getState().data.weather.wind.dir;
+    const dir = device() === 'WeatherMonitorBIM32' ? lcdGetWindDir() : store.getState().data.weather.wind.dir;
     
     if(dir !== prevDir) {
         const x = dispModel ? 133 : 166;
