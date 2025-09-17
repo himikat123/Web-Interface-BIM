@@ -22,7 +22,7 @@ export default function lcdGetTempIn(sequenceTemp: number) {
                 : 40400
         }; break;
         case cs[2]: if(vl.ThingspeakDataRelevance()) {
-            temp = vl.validateThingspeak(
+            temp = vl.validateTemperature(
                 data.thing?.data 
                     ? data.thing?.data[thingNum] 
                     : -40400

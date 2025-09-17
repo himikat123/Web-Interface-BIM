@@ -18,7 +18,7 @@ function lcdGetTemp(wsensNum: number, wsensTempNum: number, thingNum: number, so
                 : 40400
         }; break;
         case cs[2]: if(vl.ThingspeakDataRelevance()) {
-            temp = vl.validateThingspeak(
+            temp = vl.validateTemperature(
                 data.thing?.data 
                     ? data.thing?.data[thingNum] 
                     : -40400

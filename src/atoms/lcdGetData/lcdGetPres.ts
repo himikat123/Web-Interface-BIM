@@ -21,7 +21,7 @@ export default function lcdGetPres() {
                 : 40400
         }; break;
         case cs[2]: if(vl.ThingspeakDataRelevance()) {
-            pres = vl.validateThingspeak(
+            pres = vl.validatePressure(
                 data.thing?.data 
                     ? data.thing?.data[thingNum] 
                     : -40400

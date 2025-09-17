@@ -18,7 +18,7 @@ function lcdGetHum(wsensNum: number, thingNum: number, source: number) {
                 : 40400
         }; break;
         case cs[2]: if(vl.ThingspeakDataRelevance()) {
-            hum = vl.validateThingspeak(
+            hum = vl.validateHumidity(
                 data.thing?.data 
                     ? data.thing?.data[thingNum] 
                     : -40400
