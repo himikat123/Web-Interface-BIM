@@ -25,7 +25,7 @@ export default function CardDisplayVoltage() {
             <SensorTypeVoltage />
 
             {/* Voltage or Percentage for built in battery */}
-            {config.display.source.volt.sens === 1 && <div className="mt-8">
+            {device() === 'WeatherMonitorBIM' && config.display.source.volt.sens === 1 && <div className="mt-8">
                 <SensorTypeVoltPrc />
             </div>}
 
