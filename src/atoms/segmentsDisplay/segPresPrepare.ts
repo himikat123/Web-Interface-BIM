@@ -1,11 +1,11 @@
 import store from '../../redux/store';
 import segSymbCodes from './segSymbCodes';
-import { validatePressure } from '../validateValues';
-import { hPaToMM } from '../indications/hPaToMM';
+import { validatePressureHPA } from '../validateValues';
+import { hPaToMM } from '../indications/hPaMM';
 
 export default function pres(pres: number, dispLength: string) {
     const config = store.getState().config;
-    const valid = validatePressure(pres);
+    const valid = validatePressureHPA(pres);
     const space = segSymbCodes().SYMB_SPACE;
     const minus = segSymbCodes().SYMB_MINUS;
     const p = segSymbCodes().SYMB_P;

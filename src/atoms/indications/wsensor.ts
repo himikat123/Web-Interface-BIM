@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import i18n from "../../i18n/main";
 import { TempLocale } from "./celsiusToFahrenheit";
-import { PresLocale } from "./hPaToMM";
+import { PresLocale } from "./hPaMM";
 import { windDirStr } from './windDirStr';
 import * as vl from "../validateValues";
 import * as calculate from "../calculate";
@@ -20,7 +20,7 @@ export default function Wsensor() {
             hum: vl.validateHumidity(data.wsensor?.hum.data[num] ?? 40400) 
                 ? (((data.wsensor?.hum.data[num] ?? 0) + (config.wsensor?.hum[num] ?? 0)).toFixed(1) + '%') 
                 : '--',
-            pres: vl.validatePressure(data.wsensor?.pres.data[num] ?? 40400) 
+            pres: vl.validatePressureHPA(data.wsensor?.pres.data[num] ?? 40400) 
                 ? PresLocale((data.wsensor?.pres.data[num] ?? 0) + (config.wsensor?.pres[num] ?? 0)) 
                 : '--',
             windSpeed: vl.validateWindSpeed(data.wsensor?.wind.speed.data[num] ?? -1)

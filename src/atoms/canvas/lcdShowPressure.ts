@@ -1,8 +1,8 @@
 import i18n from '../../i18n/main';
 import { printText } from "./primitives";
-import { validatePressure } from "../validateValues";
+import * as vl from "../validateValues";
 import lcdGetPres from "../lcdGetData/lcdGetPres";
-import { hPaToMM } from '../indications/hPaToMM';
+import { hPaToMM, mmToHPA } from '../indications/hPaMM';
 
 export default function lcdShowPressure(
     ctx: CanvasRenderingContext2D, dispModel: number,
@@ -12,11 +12,15 @@ export default function lcdShowPressure(
 
     if(pres !== prevPres) {
         const units = local ? i18n.t('units.hpa') : i18n.t('units.mm');
-        let p = validatePressure(pres) 
+        let p = vl.validatePressureHPA(pres) 
             ? local 
                 ? String(Math.round(pres))
                 : String(Math.round(hPaToMM(pres))) 
-            : '--';
+            : vl.validatePressureMM(pres)
+                ? local
+                    ? String(Math.round(mmToHPA(pres)))
+                    : String(Math.round(pres))
+                : '--';
         p += units; 
         printText(
             ctx, 

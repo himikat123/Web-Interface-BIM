@@ -5,7 +5,7 @@ import Indication from "./indication";
 import { windDirStr } from "./indications/windDirStr";
 import * as vl from "./validateValues";
 import { celsiusToFahrenheit } from "./indications/celsiusToFahrenheit";
-import { hPaToMM } from "./indications/hPaToMM";
+import { hPaToMM } from "./indications/hPaMM";
 
 export default function sensorCorrection(
     color: boolean, dataType: string, corr: number, lblType: string | React.ReactNode, 
@@ -53,7 +53,7 @@ export default function sensorCorrection(
             break;
         case 'p': // Pressure
             units = localPres ? i18n.t('units.hpa') : i18n.t('units.mm');
-            val = (vl.validatePressure(lblData) ? (localPres ? round() : toMM()) : "--");
+            val = (vl.validatePressureHPA(lblData) ? (localPres ? round() : toMM()) : "--");
             min = -50;
             max = 50;
             step = 0.1;

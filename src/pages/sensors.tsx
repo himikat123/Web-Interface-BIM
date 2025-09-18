@@ -79,7 +79,7 @@ export default function Sensors() {
             {extraData(i18n.t('absHumidity'), calculate.absoluteHum(bme680temp, bme680hum))}
             {extraData(i18n.t('dewPoint'), calculate.dewPoint(bme680temp, bme680hum, config.units.temp))}
         </>}
-        className={!vl.validateTemperature(data.bme680?.temp ?? 0) && !vl.validateHumidity(data.bme680?.hum ?? 0) && !vl.validatePressure(data.bme680?.pres ?? 0) && !vl.validateIaq(data.bme680?.iaq ?? 0)
+        className={!vl.validateTemperature(data.bme680?.temp ?? 0) && !vl.validateHumidity(data.bme680?.hum ?? 0) && !vl.validatePressureHPA(data.bme680?.pres ?? 0) && !vl.validateIaq(data.bme680?.iaq ?? 0)
             ? 'invalid' + (hideUnnecessary ? ' hide' : '')
             : ''
         }
@@ -112,7 +112,7 @@ export default function Sensors() {
             {extraData(i18n.t('absHumidity'), calculate.absoluteHum(bme280temp, bme280hum))}
             {extraData(i18n.t('dewPoint'), calculate.dewPoint(bme280temp, bme280hum, config.units.temp))}
         </>}
-        className={!vl.validateTemperature(data.bme280.temp) && !vl.validateHumidity(data.bme280.hum) && !vl.validatePressure(data.bme280.pres)
+        className={!vl.validateTemperature(data.bme280.temp) && !vl.validateHumidity(data.bme280.hum) && !vl.validatePressureHPA(data.bme280.pres)
             ? 'invalid' + (hideUnnecessary ? ' hide' : '')
             : ''
         }
@@ -135,7 +135,7 @@ export default function Sensors() {
                 config.units.temp, config.units.pres
             )}
         </>}
-        className={!vl.validateTemperature(data.bmp180.temp) && !vl.validatePressure(data.bmp180.pres)
+        className={!vl.validateTemperature(data.bmp180.temp) && !vl.validatePressureHPA(data.bmp180.pres)
             ? 'invalid' + (hideUnnecessary ? ' hide' : '')
             : ''
         }

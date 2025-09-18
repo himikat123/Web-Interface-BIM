@@ -3,7 +3,11 @@ import { useSelector } from 'react-redux';
 import { iConfig } from '../../redux/configTypes';
 
 export function hPaToMM(h: number): number {
-    return h * 0.75;
+    return h / 1.33322;
+}
+
+export function mmToHPA(h: number): number {
+    return h * 1.33322;
 }
 
 export function PresLocale(p: number): string {

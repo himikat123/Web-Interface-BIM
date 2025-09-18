@@ -2,7 +2,7 @@ import { iConfig } from "../../redux/configTypes";
 import { iData } from "../../redux/dataTypes";
 import * as vl from "../validateValues";
 import { TempLocale } from "./celsiusToFahrenheit";
-import { PresLocale } from "./hPaToMM";
+import { PresLocale } from "./hPaMM";
 import { useSelector } from 'react-redux';
 
 export default function BMP180() {
@@ -13,7 +13,7 @@ export default function BMP180() {
         temp: vl.validateTemperature(data.bmp180.temp) 
             ? TempLocale(data.bmp180.temp + config.sensors.bmp180.t, config.units.temp) 
             : '--',
-        pres: vl.validatePressure(data.bmp180.pres) 
+        pres: vl.validatePressureHPA(data.bmp180.pres) 
             ? PresLocale(data.bmp180.pres + config.sensors.bmp180.p)
             : '--'
     }

@@ -9,8 +9,8 @@ import moment from 'moment';
 import { getLocale } from "../../atoms/getLocale";
 import lcdColors from "../../atoms/canvas/lcdColors";
 import { celsiusToFahrenheit } from "../../atoms/indications/celsiusToFahrenheit";
-import { hPaToMM } from "../../atoms/indications/hPaToMM";
-import { validateTemperature, validatePressure } from "../../atoms/validateValues";
+import { hPaToMM } from "../../atoms/indications/hPaMM";
+import { validateTemperature, validatePressureHPA } from "../../atoms/validateValues";
 
 export default function displayLcdHourlyColumn(ctx: CanvasRenderingContext2D, dispModel: number, 
     weather: iHourlyWeather | undefined, num: number, shift: number, type: string, localTemp: number, localPres: number
@@ -39,7 +39,7 @@ export default function displayLcdHourlyColumn(ctx: CanvasRenderingContext2D, di
     if(type === 'hourly' || type === 'historyOut') {
         const presUnits = localPres ? i18n.t('units.hpa').slice(0, -2) : i18n.t('units.mm');
         const p = weather?.pres[s] !== undefined ? weather.pres[s] : 40400;
-        const pres = validatePressure(p)
+        const pres = validatePressureHPA(p)
             ? String(Math.round(localPres ? p : hPaToMM(p)))
             : '--';
         printText(ctx, x + 2, y, 36, font, pres + presUnits, font, 'center', color.PRES, color.BG);

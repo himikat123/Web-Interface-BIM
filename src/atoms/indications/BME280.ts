@@ -3,7 +3,7 @@ import { iData } from "../../redux/dataTypes";
 import * as vl from "../validateValues";
 import * as calculate from "../calculate";
 import { TempLocale } from "./celsiusToFahrenheit";
-import { PresLocale } from "./hPaToMM";
+import { PresLocale } from "./hPaMM";
 import { useSelector } from 'react-redux';
 
 export default function BME280() {
@@ -20,7 +20,7 @@ export default function BME280() {
         hum: vl.validateHumidity(data.bme280.hum) 
             ? (hum.toFixed(1) + '%') 
             : '--',
-        pres: vl.validatePressure(data.bme280.pres) 
+        pres: vl.validatePressureHPA(data.bme280.pres) 
             ? PresLocale(pres) 
             : '--',
         aHum: calculate.absoluteHum(temp, hum),

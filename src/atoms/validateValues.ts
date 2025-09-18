@@ -9,8 +9,12 @@ export const validateHumidity = (hum: number): boolean => {
     return (hum >= 0 && hum <= 100); 
 }
 
-export const validatePressure = (pres: number): boolean => {
-    return (pres >= 800 && pres <= 1200); 
+export const validatePressureHPA = (pres: number): boolean => {
+    return (pres >= 870 && pres <= 1085); 
+}
+
+export const validatePressureMM = (pres: number): boolean => {
+    return (pres >= 650 && pres <= 815); 
 }
 
 export const vaidateAbsHum = (ah: number | undefined): boolean => {

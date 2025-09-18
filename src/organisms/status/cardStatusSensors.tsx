@@ -15,7 +15,7 @@ export default function CardStatusSensors() {
 
         {(vl.validateTemperature(parseFloat(BME280().temp)) 
           || vl.validateHumidity(parseFloat(BME280().hum)) 
-          || vl.validatePressure(parseFloat(BME280().pres))
+          || vl.validatePressureHPA(parseFloat(BME280().pres))
         ) && <div className='mt-4'>
             BME280: <span className="text-blue-700 dark:text-blue-400">
                 {BME280().temp}, {BME280().hum}, {BME280().pres}
@@ -23,7 +23,7 @@ export default function CardStatusSensors() {
         </div>}
 
         {(vl.validateTemperature(parseFloat(BMP180().temp)) 
-          || vl.validatePressure(parseFloat(BMP180().pres))
+          || vl.validatePressureHPA(parseFloat(BMP180().pres))
         ) && <div className='mt-4'>
             BMP180: <span className="text-blue-700 dark:text-blue-400">
                 {BMP180().temp}, {BMP180().pres}

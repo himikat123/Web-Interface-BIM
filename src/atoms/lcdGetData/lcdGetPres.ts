@@ -16,12 +16,12 @@ export default function lcdGetPres() {
     switch(config.display.source.presOut.sens) {
         case cs[0]: pres = data.weather.pres + config.weather.corr.p; break;
         case cs[1]: if(vl.WsensorDataRelevance(wsensNum)) {
-            pres = vl.validatePressure(data.wsensor?.pres.data[wsensNum] ?? 0) 
+            pres = vl.validatePressureHPA(data.wsensor?.pres.data[wsensNum] ?? 0) 
                 ? (data.wsensor?.pres.data[wsensNum] ?? 0) + (config.wsensor?.pres[wsensNum] ?? 0) 
                 : 40400
         }; break;
         case cs[2]: if(vl.ThingspeakDataRelevance()) {
-            pres = vl.validatePressure(
+            pres = vl.validatePressureHPA(
                 data.thing?.data 
                     ? data.thing?.data[thingNum] 
                     : -40400

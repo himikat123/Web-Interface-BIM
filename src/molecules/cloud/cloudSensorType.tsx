@@ -38,16 +38,21 @@ export default function CloudSensorType(props: iCloudSensorType) {
     const bl = i18n.t('batteryLevel');
     
     const sensors = [];
+    const row = [];
+
     sensors.push([]); /* -- */
-    sensors.push([
-        `${t} (${Forecast().temp})`, 
-        `${h} (${Forecast().hum})`, 
-        `${p} (${Forecast().pres})`, 
-        `${ws} (${Forecast().windSpeed})`,
-        `${wd} {${Forecast().windDirStr}} (${Forecast().windDir})`,
-        `${ah} (${Forecast().aHum})`, 
-        `${dp} (${Forecast().dp})`
-    ]);
+
+    row.push(`${t} (${Forecast().temp})`);
+    row.push(`${h} (${Forecast().hum})`);
+    row.push(`${p} (${Forecast().pres})`);
+    if(device() === 'WeatherMonitorBIM32') {
+        row.push(`${ws} (${Forecast().windSpeed})`);
+        row.push(`${wd} {${Forecast().windDirStr}} (${Forecast().windDir})`);
+    }
+    row.push(`${ah} (${Forecast().aHum})`);
+    row.push(`${dp} (${Forecast().dp})`);
+    sensors.push(row);
+
     if(device() === 'WeatherMonitorBIM32') sensors.push([]); /* Wireless sensor */
     sensors.push([
         `${t} (${BME280().temp})`, 
