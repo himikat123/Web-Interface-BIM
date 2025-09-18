@@ -47,6 +47,10 @@
 	"lang": "en",
 	"sleep": 0,
 	"batK": 128,
+	"units": {
+        "temp": 0,
+        "pres": 1
+    },
 	"clock": {
 		"format": 2,
 		"ntp": "time.nist.gov",
