@@ -5,6 +5,7 @@ export const configSlice = createSlice({
     name: 'config',
     initialState: {
         configState: 'default',
+        v: "",
         comfort: {
             temp: {
                 source: 0,

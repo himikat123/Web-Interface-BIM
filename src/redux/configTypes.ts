@@ -1,6 +1,7 @@
 export interface iConfig {
     config: {
         configState: string,
+        v: string,
         comfort: {
             temp: {
                 source: number,

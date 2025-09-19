@@ -1,26 +1,45 @@
 import { useRef, useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import i18n from '../i18n/main';
 import TwoColumns from "../templates/twoColumns";
 import Card from "../atoms/card";
 import Button from "../atoms/button";
 import hostUrl from "../atoms/hostUrl";
 import { ReactComponent as SpinnerSVG } from '../atoms/icons/spinner.svg';
+import { iConfig } from "../redux/configTypes";
 
 export default function Backup() {
+    const config = useSelector((state: iConfig) => state.config);
     const [saveButton, setSaveButton] = useState<string>('restore');
     const [saveColor, setSaveColor] = useState<string>('blue');
     const [filenameOK, setFilenameOK] = useState<boolean>(false);
+    const [fileVersOK, setFileVersOK] = useState<boolean>(false);
     const [file, setFile] = useState<string>('');
     const timeout = useRef<ReturnType<typeof setInterval> | null>(null);
     let fileReader: any;
 
     const handleFileRead = (e: any) => {
         const content: string = fileReader.result;
-        setFile(JSON.stringify(JSON.parse(content)));
+        try {
+            const fileJSON = JSON.parse(content);
+            if(fileJSON.v === config.v) {
+                setFileVersOK(true);
+                setFile(JSON.stringify(fileJSON));
+            }
+            else {
+                setFileVersOK(false);
+                alert("Incorrect version of JSON file");
+            }
+        }
+        catch(e) {
+            console.error(e);
+            setFileVersOK(false);
+            alert("Incorrect JSON structure");
+        }
     };
 
     const changedFile = (event: any) => {
-        setFilenameOK(event.target.files[0].name === 'config.json');
+        setFilenameOK(event.target.files[0].name.endsWith('.json'));
         fileReader = new FileReader();
         fileReader.onloadend = handleFileRead;
         fileReader.readAsText(event.target.files[0]);
@@ -113,12 +132,12 @@ export default function Backup() {
 
                 <div className="mt-10 flex justify-center">
                     <Button className={
-                            (filenameOK 
+                            ((filenameOK && fileVersOK) 
                                 ? `bg-${saveColor}-600 hover:bg-${saveColor}-700 text-text_dark` 
                                 : "bg-blue-200 dark:bg-blue-900 text-blue-100 dark:text-blue-600 cursor-not-allowed"
                             )
                         }
-                        disabled={!filenameOK}
+                        disabled={!filenameOK || !fileVersOK}
                         label={<div className="flex justify-center">
                             {i18n.t(saveButton)}
                             {saveButton === "saving" && <div className="ms-4 w-6 h-6"><SpinnerSVG /></div>}
