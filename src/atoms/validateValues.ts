@@ -98,5 +98,5 @@ export const WsensorDataRelevance = (num: number) => {
 export const ThingspeakDataRelevance = () => {
     const config = store.getState().config;
     const data = store.getState().data;
-    return !((data.time - data.thing.time > config.thingspeakReceive.expire * 60) && data.thing.time > 0);
+    return !(((data.time - data.thing.time) > (config.thingspeakReceive.expire * 60)) && data.thing.time > 0);
 }
