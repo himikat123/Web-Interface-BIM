@@ -1,6 +1,6 @@
 import TwoColumns from "../templates/twoColumns";
 import { useSelector, useDispatch } from 'react-redux';
-import { languageSwitch, unitsTempChange, unitsPresChange } from '../redux/slices/config';
+import { languageSwitch, unitsPresChange } from '../redux/slices/config';
 import SelectSwitch from "../atoms/selectSwitch";
 import i18n, { changeLanguage } from '../i18n/main';
 import Card from "../atoms/card";
@@ -16,7 +16,6 @@ import { iConfig } from "../redux/configTypes";
 
 export default function Language() {
     const language = useSelector((state: iConfig) => state.config.lang);
-    const unitsTemp = useSelector((state: iConfig) => state.config.units.temp);
     const unitsPres = useSelector((state: iConfig) => state.config.units.pres);
     const dispatch = useDispatch();
 
@@ -104,14 +103,6 @@ export default function Language() {
 
         <Card header={i18n.t('units.measurement')} 
             content={<>
-                <div>
-                    <SelectSwitch label={i18n.t('temperature')}
-                        options={['°C', '°F']}
-                        value={unitsTemp}
-                        onChange={val => dispatch(unitsTempChange(val))}
-                    />
-                </div>
-
                 <div className="mt-8">
                     <SelectSwitch label={i18n.t('pressure')}
                         options={[i18n.t('units.mm'), i18n.t('units.hpa')]}

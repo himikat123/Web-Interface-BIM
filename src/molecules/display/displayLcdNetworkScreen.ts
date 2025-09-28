@@ -4,11 +4,10 @@ import lcdCloseButton from '../../atoms/canvas/lcdCloseButton';
 import lcdColors from '../../atoms/canvas/lcdColors';
 import i18n from '../../i18n/main';
 import { iLcdNetworkState } from '../../interfaces';
-import { celsiusToFahrenheit } from '../../atoms/indications/celsiusToFahrenheit';
 import { validateTemperature } from '../../atoms/validateValues';
 
 export function displayLcdNetworkScreen(ctx: CanvasRenderingContext2D, 
-    dispModel: number, state: iLcdNetworkState | undefined, localTemp: number
+    dispModel: number, state: iLcdNetworkState | undefined
 ): iLcdNetworkState {
     const color = lcdColors();
     const x = dispModel ? 160 : 174;
@@ -46,8 +45,8 @@ export function displayLcdNetworkScreen(ctx: CanvasRenderingContext2D,
     const ip = data.network.ip;
     const mac = data.network.mac;
     const temp = (data.esp32?.temp ?? 40400) + (config.sensors.esp32?.t ?? 0);
-    const esp32Temp = Math.round(localTemp ? celsiusToFahrenheit(temp) : temp);
-    const units = localTemp ? '°F' : '°C';
+    const esp32Temp = Math.round(temp);
+    const units = '°C';
     const fw = store.getState().data.fw;
 
     if(ssid !== state?.ssid) printText(ctx, sr, 64 + y, w, font, ssid.substring(0, 16), font, 'center', color.TEXT, color.GROUND);

@@ -10,10 +10,10 @@ export function mmToHPA(h: number): number {
     return h * 1.33322;
 }
 
-export function PresLocale(p: number): string {
+export function PresLocale(p: number, corr: number): string {
     const config = useSelector((state: iConfig) => state.config);
     const pres = config.units.pres 
-        ? (p.toFixed(1) + i18n.t('units.hpa')) 
-        : (hPaToMM(p).toFixed(1) + i18n.t('units.mm'))
+        ? ((p + corr).toFixed(1) + i18n.t('units.hpa')) 
+        : ((hPaToMM(p) + corr).toFixed(1) + i18n.t('units.mm'))
     return pres;
 }

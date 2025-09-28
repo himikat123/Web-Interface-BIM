@@ -65,7 +65,6 @@ export interface iConfig {
         sleep?: number,
 	    batK?: number,
         units: {
-            temp: number,
             pres: number
         },
         clock: {

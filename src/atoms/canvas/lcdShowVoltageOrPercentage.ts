@@ -4,9 +4,9 @@ import * as vl from '../validateValues';
 
 export default function lcdShowVoltageOrPercentage(
     ctx: CanvasRenderingContext2D, dispModel: number, prevValue: string | undefined, 
-    color: string, colorAir: string, bgColor: string, localTemp: number
+    color: string, colorAir: string, bgColor: string
 ): string {
-    const v = lcdGetVoltage(localTemp);
+    const v = lcdGetVoltage();
 
     if(v.val !== prevValue) {
         const x = dispModel ? 180 : 190;

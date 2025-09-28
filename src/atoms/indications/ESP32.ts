@@ -1,9 +1,8 @@
+import { useSelector } from 'react-redux';
 import humanizeDuration from 'humanize-duration';
 import { iConfig } from "../../redux/configTypes";
 import { iData } from "../../redux/dataTypes";
 import * as vl from "../validateValues";
-import { TempLocale } from './celsiusToFahrenheit';
-import { useSelector } from 'react-redux';
 
 export default function ESP32() {
     const config = useSelector((state: iConfig) => state.config);
@@ -12,7 +11,7 @@ export default function ESP32() {
 
     return {
         temp: vl.validateTemperature(data.esp32?.temp ?? 40400) 
-            ? TempLocale((data.esp32?.temp ?? 0) + (config.sensors.esp32?.t ?? 0), config.units.temp) 
+            ? ((data.esp32?.temp ?? 0) + (config.sensors.esp32?.t ?? 0)).toFixed(1) + '°C' 
             : '--',
         runtime: humanizeDuration(data.runtime * 1000, {
             language: locale, 

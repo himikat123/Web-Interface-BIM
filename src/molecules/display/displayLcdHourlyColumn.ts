@@ -8,12 +8,12 @@ import i18n from "../../i18n/main";
 import moment from 'moment';
 import { getLocale } from "../../atoms/getLocale";
 import lcdColors from "../../atoms/canvas/lcdColors";
-import { celsiusToFahrenheit } from "../../atoms/indications/celsiusToFahrenheit";
 import { hPaToMM } from "../../atoms/indications/hPaMM";
 import { validateTemperature, validatePressureHPA } from "../../atoms/validateValues";
 
-export default function displayLcdHourlyColumn(ctx: CanvasRenderingContext2D, dispModel: number, 
-    weather: iHourlyWeather | undefined, num: number, shift: number, type: string, localTemp: number, localPres: number
+export default function displayLcdHourlyColumn(
+    ctx: CanvasRenderingContext2D, dispModel: number, 
+    weather: iHourlyWeather | undefined, num: number, shift: number, type: string, localPres: number
 ) {
     const config = store.getState().config;
     const color = lcdColors();
@@ -22,10 +22,10 @@ export default function displayLcdHourlyColumn(ctx: CanvasRenderingContext2D, di
     const s = num + shift;
     const font = dispModel ? 9 : 11;
 
-    const tempUnits = localTemp ? '°F' : '°C';
+    const tempUnits = '°C';
     const t = weather?.temp[s] !== undefined ? weather?.temp[s] : 40400;
     const temp = validateTemperature(t)
-        ? String(Math.round(localTemp ? celsiusToFahrenheit(t) : t))
+        ? String(Math.round(t))
         : '--';
     printText(ctx, x + 2, y, 36, font + 1, temp + tempUnits, font + 1, 'center', color.TEMP, color.BG);
     y += 16;

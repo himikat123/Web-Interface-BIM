@@ -22,7 +22,7 @@ import { iLcdMainState } from '../../interfaces';
 
 export function displayLcdMainScreen(
     ctx: CanvasRenderingContext2D, dispModel: number, 
-    state: iLcdMainState | undefined, points: boolean, localTemp: number, localPres: number
+    state: iLcdMainState | undefined, points: boolean, localPres: number
 ): iLcdMainState {
     const color = lcdColors();
 
@@ -36,12 +36,12 @@ export function displayLcdMainScreen(
         weekday: lcdShowWeekday(ctx, dispModel, state?.weekday, color.CLOCK, color.BG),
         ant: lcdShowAntenna(ctx, dispModel, state?.ant),
         bat: lcdShowBatteryLevel(ctx, dispModel, state?.bat, color.BG),
-        volt: lcdShowVoltageOrPercentage(ctx, dispModel, state?.volt, color.BATTERY, color.TEMP_MIN, color.BG, localTemp),
+        volt: lcdShowVoltageOrPercentage(ctx, dispModel, state?.volt, color.BATTERY, color.TEMP_MIN, color.BG),
         comfort: lcdShowComfort(ctx, dispModel, state?.comfort[0], state?.comfort[1], state?.sequence.descript, color.TEXT, color.BG),
         icon: lcdShowWeatherIcon(ctx, dispModel, state?.icon),
         descript: lcdShowDescription(ctx, dispModel, state?.descript[0], state?.descript[1], color.TEXT, color.BG),
-        tempIn: lcdShowTemperatureInside(ctx, dispModel, state?.tempIn, state?.sequence.temp, color.TEMP, color.BG, localTemp),
-        tempOut: lcdShowTemperatureOutside(ctx, dispModel, state?.tempOut, color.TEMP, color.BG, localTemp),
+        tempIn: lcdShowTemperatureInside(ctx, dispModel, state?.tempIn, state?.sequence.temp, color.TEMP, color.BG),
+        tempOut: lcdShowTemperatureOutside(ctx, dispModel, state?.tempOut, color.TEMP, color.BG),
         humIn: lcdShowHumidityInside(ctx, dispModel, state?.humIn, state?.sequence.hum, color.HUM, color.BG),
         humOut: lcdShowHumidityOutside(ctx, dispModel, state?.humOut, color.HUM, color.BG),
         presOut: lcdShowPressure(ctx, dispModel, state?.presOut, color.PRES, color.BG, localPres),
@@ -53,7 +53,7 @@ export function displayLcdMainScreen(
     };
 
     for(let i=0; i<(dispModel === 0 ? 4 : 3); i++) {
-        prevState.forecast = lcdShowForecast(ctx, dispModel, i, state?.forecast, color.TEXT, color.TEMP, color.TEMP_MIN, color.BG, localTemp);
+        prevState.forecast = lcdShowForecast(ctx, dispModel, i, state?.forecast, color.TEXT, color.TEMP, color.TEMP_MIN, color.BG);
     }
 
     return prevState;

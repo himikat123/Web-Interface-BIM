@@ -60,7 +60,6 @@
     },
     "lang": "en",
     "units": {
-        "temp": 0,
         "pres": 0
     },
     "clock": {

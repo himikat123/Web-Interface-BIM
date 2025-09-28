@@ -7,8 +7,9 @@ import displayLcdHourlyColumn from './displayLcdHourlyColumn';
 import displayLcdHourlyCharts from './displayLcdHourlyCharts';
 import { iLcdHourlyState } from '../../interfaces';
 
-export function displayLcdHourlyScreen(ctx: CanvasRenderingContext2D, dispModel: number, 
-    state: iLcdHourlyState | undefined, shift: number, localTemp: number, localPres: number
+export function displayLcdHourlyScreen(
+    ctx: CanvasRenderingContext2D, dispModel: number, 
+    state: iLcdHourlyState | undefined, shift: number, localPres: number
 ): iLcdHourlyState {
     if(!state?.skeleton) {
         fillRect(ctx, 0, 0, ctx.canvas.width, ctx.canvas.height, '#000');
@@ -20,7 +21,7 @@ export function displayLcdHourlyScreen(ctx: CanvasRenderingContext2D, dispModel:
     if(state?.weather !== weatherStr || state?.shift !== shift) {
         displayLcdHourlyCharts(ctx, dispModel, weather, shift, 'hourly');
         for(let i=0; i<8; i++) {
-            displayLcdHourlyColumn(ctx, dispModel, weather, i, shift, 'hourly', localTemp, localPres);
+            displayLcdHourlyColumn(ctx, dispModel, weather, i, shift, 'hourly', localPres);
         }
         lcdForwardButton(ctx, dispModel, shift < 32);
         lcdBackButton(ctx, dispModel, shift > 0);

@@ -1,6 +1,5 @@
 import { vaidateAbsHum, validateDewPoint } from "./validateValues";
 import i18n from "../i18n/main";
-import { TempLocale } from "./indications/celsiusToFahrenheit";
 import * as vl from "./validateValues";
 
 /*
@@ -45,9 +44,7 @@ export function dewPointVal(temp: number | undefined, hum: number | undefined): 
 /*
  * Calculate dew point
  */
-export function dewPoint(temp: number | undefined, hum: number | undefined, useFahrenheit: number): string {
+export function dewPoint(temp: number | undefined, hum: number | undefined): string {
     const dp = dewPointVal(temp, hum);
-    return validateDewPoint(dp, temp) 
-        ? TempLocale(dp, useFahrenheit)
-        : '--';
+    return validateDewPoint(dp, temp) ? `${dp.toFixed(1)}°C` : '--';
 }

@@ -1,18 +1,15 @@
-import store from '../../redux/store';
-import { celsiusToFahrenheit } from '../indications/celsiusToFahrenheit';
 import segSymbCodes from './segSymbCodes';
 import { validateTemperature } from '../validateValues';
 
 export default function temp(temp: number, dispLength: string) {
-    const config = store.getState().config;
     const valid = validateTemperature(temp);
-    const tmp = Math.round(config.units.temp ? celsiusToFahrenheit(temp) : temp);
+    const tmp = Math.round(temp);
     let th = Math.floor(Math.abs(tmp) / 10);
     const tl = Math.abs(tmp) % 10;
     const space = segSymbCodes().SYMB_SPACE;
     const minus = segSymbCodes().SYMB_MINUS;
     const degree = segSymbCodes().SYMB_DEGREE;
-    const c = config.units.temp ? segSymbCodes().SYMB_F : segSymbCodes().SYMB_C;
+    const c = segSymbCodes().SYMB_C;
     if(th === 0) th = space;
 
     const disp4Img = [

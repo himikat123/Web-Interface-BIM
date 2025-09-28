@@ -5,19 +5,18 @@ import * as icons from '../img/icons';
 import { iPrevForecast } from "../../interfaces";
 import * as vl from "../validateValues";
 import getWeekday from '../getWeekday';
-import { celsiusToFahrenheit } from '../indications/celsiusToFahrenheit';
 
 function showTemperature(ctx: CanvasRenderingContext2D, temp: number, x: number, 
-    y: number, w: number, font: number, color: string, bgColor: string, local: number
+    y: number, w: number, font: number, color: string, bgColor: string
 ) {
-    const t = Math.round(local ? celsiusToFahrenheit(temp) : temp);
-    const units = local ? '°F' : '°C';
+    const t = Math.round(temp);
+    const units = '°C';
     printText(ctx, x, y, w, 20, vl.validateTemperature(temp) ? `${t}${units}` : `--${units}`, font, 'center', color, bgColor);
 }
 
 export default function lcdShowForecast(
     ctx: CanvasRenderingContext2D, dispModel: number, num: number, prevForecast: iPrevForecast | undefined, 
-    color: string, colorTempMax: string, colorTempMin: string, bgColor: string, local: number
+    color: string, colorTempMax: string, colorTempMin: string, bgColor: string
 ): iPrevForecast {
     const tMax = store.getState().data.weather.daily.tMax[num];
     const tMin = store.getState().data.weather.daily.tMin[num];
@@ -54,12 +53,12 @@ export default function lcdShowForecast(
     
     /* Show max temperature */
     if(tMax !== prevForecast?.tMax[num]) {
-        showTemperature(ctx, Math.round(tMax), x + (dispModel ? 44 : 41), 183, dispModel ? 61 : 47, dispModel ? 21 : 17, colorTempMax, bgColor, local);
+        showTemperature(ctx, Math.round(tMax), x + (dispModel ? 44 : 41), 183, dispModel ? 61 : 47, dispModel ? 21 : 17, colorTempMax, bgColor);
     }
 
     /* Show min temperature */
     if(tMin !== prevForecast?.tMin[num]) {
-        showTemperature(ctx, Math.round(tMin), x + (dispModel ? 44 : 41), 203, dispModel ? 61 : 47, dispModel ? 21 : 17, colorTempMin, bgColor, local);
+        showTemperature(ctx, Math.round(tMin), x + (dispModel ? 44 : 41), 203, dispModel ? 61 : 47, dispModel ? 21 : 17, colorTempMin, bgColor);
     }
 
     /* Show wind speed */

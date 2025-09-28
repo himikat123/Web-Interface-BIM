@@ -70,7 +70,7 @@ const data = (cookieCode) => {
         ],
         
         bme280: {
-            temp: random(45, 50), // obviously correct values
+            temp: random(45, 45), // obviously correct values
             hum: random(90, 100),
             pres: random(1000, 1000)
         },
@@ -103,7 +103,7 @@ const data = (cookieCode) => {
             isDay: Math.round(random(0, 1)),
             temp: random(-30, 30),
             hum: random(90, 100),
-            pres: random(800, 850),
+            pres: random(950, 950),
             wind: {
                 speed: random(1, 7),
                 dir: random(0, 360)

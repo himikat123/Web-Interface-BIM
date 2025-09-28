@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
 import i18n from "../../i18n/main";
-import { TempLocale } from "./celsiusToFahrenheit";
 import { PresLocale } from "./hPaMM";
 import { windDirStr } from './windDirStr';
 import * as vl from "../validateValues";
@@ -13,18 +12,18 @@ export default function Forecast() {
     const data = useSelector((state: iData) => state.data);
     const temp = data.weather.temp + config.weather.corr.t;
     const hum = data.weather.hum + config.weather.corr.h;
-    const pres = data.weather.pres + config.weather.corr.p;
+    const pres = data.weather.pres;
     const wind = data.weather.wind;
 
     return {
         temp: vl.validateTemperature(data.weather.temp) 
-            ? TempLocale(temp, config.units.temp) 
+            ? temp.toFixed(1) + '°C' 
             : '--',
         hum: vl.validateHumidity(data.weather.hum) 
             ? (hum.toFixed(1) + '%') 
             : '--',
         pres: vl.validatePressureHPA(data.weather.pres) 
-            ? PresLocale(pres) 
+            ? PresLocale(pres, config.weather.corr.p) 
             : '--',
         windSpeed: vl.validateWindSpeed(wind.speed)
             ? wind.speed.toFixed(1) + i18n.t('units.mps')
@@ -36,6 +35,6 @@ export default function Forecast() {
             ? windDirStr(wind.dir)
             : '--',
         aHum: calculate.absoluteHum(temp, hum),
-        dp: calculate.dewPoint(temp, hum, config.units.temp)
+        dp: calculate.dewPoint(temp, hum)
     }
 }

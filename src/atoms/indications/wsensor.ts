@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
 import i18n from "../../i18n/main";
-import { TempLocale } from "./celsiusToFahrenheit";
 import { PresLocale } from "./hPaMM";
 import { windDirStr } from './windDirStr';
 import * as vl from "../validateValues";
@@ -21,7 +20,7 @@ export default function Wsensor() {
                 ? (((data.wsensor?.hum.data[num] ?? 0) + (config.wsensor?.hum[num] ?? 0)).toFixed(1) + '%') 
                 : '--',
             pres: vl.validatePressureHPA(data.wsensor?.pres.data[num] ?? 40400) 
-                ? PresLocale((data.wsensor?.pres.data[num] ?? 0) + (config.wsensor?.pres[num] ?? 0)) 
+                ? PresLocale(data.wsensor?.pres.data[num] ?? 0, config.wsensor?.pres[num] ?? 0) 
                 : '--',
             windSpeed: vl.validateWindSpeed(data.wsensor?.wind.speed.data[num] ?? -1)
                 ? (((data.wsensor?.wind.speed.data[num] ?? 0) + (config.wsensor?.wind.speed[num] ?? 0)).toFixed(1) + i18n.t('units.mps')) 
@@ -57,13 +56,13 @@ export default function Wsensor() {
                 ? (((data.wsensor?.co2.data[num] ?? 0) + (config.wsensor?.co2[num] ?? 0)).toFixed(1) + 'ppm') 
                 : '--',
             ahum: calculate.absoluteHum(data.wsensor?.temp?.data[0][num], data.wsensor?.hum?.data[num]),
-            dp: calculate.dewPoint(data.wsensor?.temp?.data[0][num], data.wsensor?.hum?.data[num], config.units.temp)
+            dp: calculate.dewPoint(data.wsensor?.temp?.data[0][num], data.wsensor?.hum?.data[num])
         };
 
         for(let i=0; i<5; i++) {
             sens.temp.push(
                 vl.validateTemperature(data.wsensor?.temp.data[i][num] ?? 40400) 
-                    ? TempLocale((data.wsensor?.temp.data[i][num] ?? 0) + (config.wsensor?.temp[num][i] ?? 0), config.units.temp) 
+                    ? (((data.wsensor?.temp.data[i][num] ?? 0) + (config.wsensor?.temp[num][i] ?? 0)).toFixed(1) + '°C') 
                     : '--'
             );
         }

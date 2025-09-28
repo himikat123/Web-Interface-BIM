@@ -4,13 +4,12 @@ import RangeInput from "./rangeInput";
 import Indication from "./indication";
 import { windDirStr } from "./indications/windDirStr";
 import * as vl from "./validateValues";
-import { celsiusToFahrenheit } from "./indications/celsiusToFahrenheit";
 import { hPaToMM } from "./indications/hPaMM";
 
 export default function sensorCorrection(
-    color: boolean, dataType: string, corr: number, lblType: string | React.ReactNode, 
-    lblData: number, onChange: any, localTemp: number, 
-    localPres: number, hide?: boolean, lblName?: string
+    color: boolean, dataType: string, corr: number, 
+    lblType: string | React.ReactNode, lblData: number, 
+    onChange: any, localPres: number, hide?: boolean, lblName?: string
 ) {
     let min = 0;
     let max = 1;
@@ -25,10 +24,6 @@ export default function sensorCorrection(
         return (Math.round((lblData + corr) * (1 / step)) / (1 / step)).toFixed(countSymbolsAfterComma());
     }
 
-    const toFahrenheit = () => {
-        return (celsiusToFahrenheit(Math.round(lblData * (1 / step)) / (1 / step)) + corr).toFixed(countSymbolsAfterComma());
-    }
-
     const toMM = () => {
         return (hPaToMM(Math.round(lblData * (1 / step)) / (1 / step)) + corr).toFixed(countSymbolsAfterComma());
     }
@@ -38,8 +33,8 @@ export default function sensorCorrection(
 
     switch(dataType) {
         case 't': // Temperature
-            units = localTemp ? "°F" : "°C";
-            val = (vl.validateTemperature(lblData) ? (localTemp ? toFahrenheit() : round()) : "--");
+            units = "°C";
+            val = (vl.validateTemperature(lblData) ? round() : "--");
             min = -20;
             max = 20;
             step = 0.1;

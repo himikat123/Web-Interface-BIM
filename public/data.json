@@ -1,301 +1,140 @@
 {
-   "state":"DEMO",
-   "fw":"v5.5",
-   "esp32":{
-      "temp":51.67
+   "state": "DEMO",
+   "fw": "v5.6",
+   "esp32": {
+      "temp": 51.67
    },
-   "runtime":2289,
-   "time":1748503960,
-   "network":{
-      "ssid":"budulai",
-      "ch":14,
-      "sig":-54,
-      "mac":"DE:AD:BE:EF:FE:ED",
-      "ip":"192.168.192.168",
-      "mask":"255.255.255.255",
-      "gw":"192.168.0.1",
-      "dns1":"7.7.7.7",
-      "dns2":"9.9.9.9"
+   "runtime": 2289,
+   "time": 1748503960,
+   "network": {
+      "ssid": "budulai",
+      "ch": 14,
+      "sig": -54,
+      "mac": "DE:AD:BE:EF:FE:ED",
+      "ip": "192.168.192.168",
+      "mask": "255.255.255.255",
+      "gw": "192.168.0.1",
+      "dns1": "7.7.7.7",
+      "dns2": "9.9.9.9"
    },
-   "ssids":[
-      [
-         "SosediSnizu",
-         44
-      ],
-      [
-         "virus.trojan",
-         70
-      ],
-      [
-         "Vodafno-777",
-         42
-      ],
-      [
-         "veryLongWirelessNetworkNameHere",
-         18
-      ],
-      [
-         "Tp-Link_6732",
-         94
-      ],
-      [
-         "Vodafone-987",
-         29
-      ],
-      [
-         "Megafon5",
-         65
-      ],
-      [
-         "Emgafno6",
-         81
-      ],
-      [
-         "My-WiFi",
-         95
-      ],
-      [
-         "Hotel za uglom",
-         51
-      ]
+   "ssids": [
+      ["SosediSnizu", 44],
+      ["virus.trojan", 70],
+      ["Vodafno-777", 42],
+      ["veryLongWirelessNetworkNameHere", 18],
+      ["Tp-Link_6732", 94],
+      ["Vodafone-987", 29],
+      ["Megafon5", 65],
+      ["Emgafno6", 81],
+      ["My-WiFi", 95],
+      ["Hotel za uglom", 51]
    ],
-   "bme680":{
-      "temp":22.15,
-      "hum":54.29,
-      "pres":941.11,
-      "iaq":168.43,
-      "iaqAccr":3
+   "bme680": {
+      "temp": 22.15,
+      "hum": 54.29,
+      "pres": 941.11,
+      "iaq": 168.43,
+      "iaqAccr": 3
    },
-   "bme280":{
-      "temp":452.77,
-      "hum":981.32,
-      "pres":8051.02
+   "bme280": {
+      "temp": 452.77,
+      "hum": 981.32,
+      "pres": 8051.02
    },
-   "bmp180":{
-      "temp":348.56,
-      "pres":8920.28
+   "bmp180": {
+      "temp": 348.56,
+      "pres": 8920.28
    },
-   "sht21":{
-      "temp":-117.77,
-      "hum":102.47
+   "sht21": {
+      "temp": -117.77,
+      "hum": 102.47
    },
-   "dht22":{
-      "temp":22.08,
-      "hum":44.95
+   "dht22": {
+      "temp": 22.08,
+      "hum": 44.95
    },
-   "ds18b20":{
-      "temp":184.64
+   "ds18b20": {
+      "temp": 184.64
    },
-   "max44009":{
-      "light":989.09
+   "max44009": {
+      "light": 989.09
    },
-   "bh1750":{
-      "light":-146.3
+   "bh1750": {
+      "light": -146.3
    },
-   "analog":{
-      "volt":1.79
+   "analog": {
+      "volt": 1.79
    },
-   "wsensor":{
-      "time":[
-         1717531924.5,
-         1716532251
-      ],
-      "temp":{
-         "data":[
-            [
-               -38.37,
-               7.56
-            ],
-            [
-               14.25,
-               742.79
-            ],
-            [
-               40.28,
-               499.21
-            ],
-            [
-               -13.86,
-               -677.67
-            ],
-            [
-               36.78,
-               960.19
-            ]
-         ],
-         "name":[
-            [
-               "BME280",
-               "SHT21"
-            ],
-            [
-               "DS18B20",
-               "DS18B20"
-            ],
-            [
-               "DS18B20",
-               "DS18B20"
-            ],
-            [
-               "DS18B20",
-               "DS18B20"
-            ],
-            [
-               "DS18B20",
-               "DS18B20"
-            ]
-         ]
+   "wsensor": {
+      "time": [1717531924.5, 1716532251],
+      "temp": {
+         "data": [[-38.37, 7.56], [14.25, 742.79], [40.28, 499.21], [-13.86, -677.67], [36.78, 960.19]],
+         "name": [["BME280", "SHT21"], ["DS18B20", "DS18B20"], ["DS18B20", "DS18B20"], ["DS18B20", "DS18B20"], ["DS18B20", "DS18B20"]]
       },
-      "hum":{
-         "data":[
-            93.23,
-            51.31
-         ],
-         "name":[
-            "BME280",
-            "SHT21"
-         ]
+      "hum": {
+         "data": [93.23, 51.31],
+         "name": ["BME280", "SHT21"]
       },
-      "pres":{
-         "data":[
-            921.09,
-            806.24
-         ],
-         "name":[
-            "BME280",
-            "BMP180"
-         ]
+      "pres": {
+         "data": [921.09, 956.24],
+         "name": ["BME280", "BMP180"]
       },
-      "light":{
-         "data":[
-            7.95,
-            12426.51
-         ],
-         "name":[
-            "MAX44009",
-            "BH1750"
-         ]
+      "light": {
+         "data": [7.95, 12426.51],
+         "name": ["MAX44009", "BH1750"]
       },
-      "co2":{
-         "data":[
-            429.08,
-            459.66
-         ],
-         "name":[
-            "Senseair S8",
-            "Senseair S8"
-         ]
+      "co2": {
+         "data": [429.08, 459.66],
+         "name": ["Senseair S8", "Senseair S8"]
       },
-      "voltage":{
-         "data":[
-            221.32,
-            2315.32
-         ],
-         "name":[
-            "PZEM-004t",
-            "PZEM-004t"
-         ]
+      "voltage": {
+         "data": [221.32, 2315.32],
+         "name": ["PZEM-004t", "PZEM-004t"]
       },
-      "current":{
-         "data":[
-            0.783,
-            1038.644
-         ],
-         "name":[
-            "PZEM-004t",
-            "PZEM-004t"
-         ]
+      "current": {
+         "data": [0.783, 1038.644],
+         "name": ["PZEM-004t", "PZEM-004t"]
       },
-      "power":{
-         "data":[
-            59.76,
-            -1211.22
-         ],
-         "name":[
-            "PZEM-004t",
-            "PZEM-004t"
-         ]
+      "power": {
+         "data": [59.76, -1211.22],
+         "name": ["PZEM-004t", "PZEM-004t"]
       },
-      "energy":{
-         "data":[
-            425.68,
-            -139.83
-         ],
-         "name":[
-            "PZEM-004t",
-            "PZEM-004t"
-         ]
+      "energy": {
+         "data": [425.68, -139.83],
+         "name": ["PZEM-004t", "PZEM-004t"]
       },
-      "freq":{
-         "data":[
-            51.26,
-            527.54
-         ],
-         "name":[
-            "PZEM-004t",
-            "PZEM-004t"
-         ]
+      "freq": {
+         "data": [51.26, 527.54],
+         "name": ["PZEM-004t", "PZEM-004t"]
       },
-      "bat":[
-         714.39,
-         789.48
-      ]
+      "bat": [714.39, 789.48]
    },
-   "weather":{
-      "icon":1,
-      "isDay":1,
-      "temp":8.95,
-      "hum":95.92,
-      "pres":804.42,
-      "wind":{
-         "speed":6.4,
-         "dir":344.48
+   "weather": {
+      "icon": 1,
+      "isDay": 1,
+      "temp": 8.95,
+      "hum": 95.92,
+      "pres": 1004.42,
+      "wind": {
+         "speed": 6.4,
+         "dir": 344.48
       },
-      "descript":"Regen rain дождь deszcz дощ",
-      "time":1717531613,
-      "daily":{
-         "tMax":[
-            5.41,
-            10.58,
-            -13.41,
-            -5.07
-         ],
-         "tMin":[
-            -8.09,
-            19.43,
-            11.12,
-            -2.09
-         ],
-         "wind":[
-            5.23,
-            2.15,
-            14.39,
-            2.7
-         ],
-         "icon":[
-            3,
-            1,
-            8,
-            6
-         ]
+      "descript": "Regen rain дождь deszcz дощ",
+      "time": 1717531613,
+      "daily": {
+         "tMax": [5.41, 10.58, -13.41, -5.07],
+         "tMin":[-8.09, 19.43, 11.12, -2.09],
+         "wind":[5.23, 2.15, 14.39, 2.7],
+         "icon":[3, 1, 8, 6]
       }
    },
-   "thing":{
-      "time":1717531635,
-      "data":[
-         -4.8,
-         56.54,
-         770.54,
-         4,
-         -40400,
-         99.8,
-         1360.89,
-         -11.23
-      ]
+   "thing": {
+      "time": 1717531635,
+      "data": [-4.8, 56.54, 770.54, 4, -40400, 99.8, 1360.89, -11.23]
    },
-   "fs":{
-      "total":1966080,
-      "free":950272,
-      "list":"/bme680.json:382,/config.json:13265,/defaultConfig.json:3795,/fonts/Ubuntu-14.vlw:40506,/fonts/Ubuntu-21.vlw:74914,/fonts/Ubuntu-29.vlw:54941,/icon48.png:19928,/img/ant/acpoint.jpg:11949,/img/ant/ant_0.jpg:9102,/img/ant/ant_1.jpg:7881,/img/ant/ant_2.jpg:8151,/img/ant/ant_3.jpg:8463,/img/ant/ant_4.jpg:8604,/img/bat/bat1.jpg:1153,/img/bat/bat2.jpg:1204,/img/bat/bat3.jpg:1282,/img/bat/bat4.jpg:1292,/img/digits/0.jpg:2440,/img/digits/1.jpg:1549,/img/digits/2.jpg:2212,/img/digits/3.jpg:2218,/img/digits/4.jpg:2023,/img/digits/5.jpg:2222,/img/digits/6.jpg:2341,/img/digits/7.jpg:1777,/img/digits/8.jpg:2463,/img/digits/9.jpg:2352,/img/icons/big/01_d.jpg:3052,/img/icons/big/01_n.jpg:2841,/img/icons/big/02_d.jpg:2714,/img/icons/big/02_n.jpg:2448,/img/icons/big/04.jpg:2181,/img/icons/big/09.jpg:3004,/img/icons/big/10.jpg:2786,/img/icons/big/11_d.jpg:2915,/img/icons/big/11_n.jpg:2768,/img/icons/big/13.jpg:3007,/img/icons/big/50.jpg:2423,/img/icons/big/loading.jpg:2647,/img/icons/small/01.jpg:2137,/img/icons/small/02.jpg:1925,/img/icons/small/04.jpg:1617,/img/icons/small/09.jpg:2014,/img/icons/small/10.jpg:1892,/img/icons/small/11.jpg:1990,/img/icons/small/13.jpg:1943,/img/icons/small/50.jpg:1683,/img/icons/small/loading.jpg:1591,/img/logo.jpg:58956,/img/symb/home.jpg:8984,/img/symb/hum.jpg:1246,/img/symb/pres.jpg:1459,/img/symb/temp+.jpg:1018,/img/symb/temp-.jpg:1024,/img/symb/wind.jpg:993,/img/wind/e.jpg:954,/img/wind/n.jpg:963,/img/wind/ne.jpg:975,/img/wind/nw.jpg:966,/img/wind/s.jpg:963,/img/wind/se.jpg:984,/img/wind/sw.jpg:975,/img/wind/w.jpg:952,/index.html.gz:363838,"
+   "fs": {
+      "total": 1966080,
+      "free": 950272,
+      "list": "/bme680.json:382,/config.json:13265,/defaultConfig.json:3795,/fonts/Ubuntu-14.vlw:40506,/fonts/Ubuntu-21.vlw:74914,/fonts/Ubuntu-29.vlw:54941,/icon48.png:19928,/img/ant/acpoint.jpg:11949,/img/ant/ant_0.jpg:9102,/img/ant/ant_1.jpg:7881,/img/ant/ant_2.jpg:8151,/img/ant/ant_3.jpg:8463,/img/ant/ant_4.jpg:8604,/img/bat/bat1.jpg:1153,/img/bat/bat2.jpg:1204,/img/bat/bat3.jpg:1282,/img/bat/bat4.jpg:1292,/img/digits/0.jpg:2440,/img/digits/1.jpg:1549,/img/digits/2.jpg:2212,/img/digits/3.jpg:2218,/img/digits/4.jpg:2023,/img/digits/5.jpg:2222,/img/digits/6.jpg:2341,/img/digits/7.jpg:1777,/img/digits/8.jpg:2463,/img/digits/9.jpg:2352,/img/icons/big/01_d.jpg:3052,/img/icons/big/01_n.jpg:2841,/img/icons/big/02_d.jpg:2714,/img/icons/big/02_n.jpg:2448,/img/icons/big/04.jpg:2181,/img/icons/big/09.jpg:3004,/img/icons/big/10.jpg:2786,/img/icons/big/11_d.jpg:2915,/img/icons/big/11_n.jpg:2768,/img/icons/big/13.jpg:3007,/img/icons/big/50.jpg:2423,/img/icons/big/loading.jpg:2647,/img/icons/small/01.jpg:2137,/img/icons/small/02.jpg:1925,/img/icons/small/04.jpg:1617,/img/icons/small/09.jpg:2014,/img/icons/small/10.jpg:1892,/img/icons/small/11.jpg:1990,/img/icons/small/13.jpg:1943,/img/icons/small/50.jpg:1683,/img/icons/small/loading.jpg:1591,/img/logo.jpg:58956,/img/symb/home.jpg:8984,/img/symb/hum.jpg:1246,/img/symb/pres.jpg:1459,/img/symb/temp+.jpg:1018,/img/symb/temp-.jpg:1024,/img/symb/wind.jpg:993,/img/wind/e.jpg:954,/img/wind/n.jpg:963,/img/wind/ne.jpg:975,/img/wind/nw.jpg:966,/img/wind/s.jpg:963,/img/wind/se.jpg:984,/img/wind/sw.jpg:975,/img/wind/w.jpg:952,/index.html.gz:363838,"
    }
 }

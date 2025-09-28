@@ -51,33 +51,33 @@ export default function Sensors() {
                 i18n.t('temperature'), 
                 data.bme680?.temp ?? 0, 
                 (val: number) => dispatch(cf.BME680TempCorrChange(val)), 
-                config.units.temp, config.units.pres
+                config.units.pres
             )}
             {sensorCorrection(false, "h", 
                 config.sensors.bme680?.h ?? 0, 
                 i18n.t('humidity'), 
                 data.bme680?.hum ?? 0, 
                 (val: number) => dispatch(cf.BME680HumCorrChange(val)), 
-                config.units.temp, config.units.pres
+                config.units.pres
             )}
             {sensorCorrection(false, "p", 
                 config.sensors.bme680?.p ?? 0, 
                 i18n.t('pressure'), 
                 data.bme680?.pres ?? 0, 
                 (val: number) => dispatch(cf.BME680PresCorrChange(val)), 
-                config.units.temp, config.units.pres
+                config.units.pres
             )}
             {sensorCorrection(false, "i", 
                 config.sensors.bme680?.i ?? 0,
                 i18n.t('indexForAirQuality'), 
                 data.bme680?.iaq ?? 0, 
                 (val: number) => dispatch(cf.BME680IaqCorrChange(val)), 
-                config.units.temp, config.units.pres
+                config.units.pres
             )}
             {extraData(i18n.t('sensorAccuracy'), vl.validateIaqArrc(data.bme680?.iaqAccr ?? 0) ? String(data.bme680?.iaqAccr) : '--')}
             <hr className="mt-6 mb-4" />
             {extraData(i18n.t('absHumidity'), calculate.absoluteHum(bme680temp, bme680hum))}
-            {extraData(i18n.t('dewPoint'), calculate.dewPoint(bme680temp, bme680hum, config.units.temp))}
+            {extraData(i18n.t('dewPoint'), calculate.dewPoint(bme680temp, bme680hum))}
         </>}
         className={!vl.validateTemperature(data.bme680?.temp ?? 0) && !vl.validateHumidity(data.bme680?.hum ?? 0) && !vl.validatePressureHPA(data.bme680?.pres ?? 0) && !vl.validateIaq(data.bme680?.iaq ?? 0)
             ? 'invalid' + (hideUnnecessary ? ' hide' : '')
@@ -92,25 +92,25 @@ export default function Sensors() {
                 i18n.t('temperature'), 
                 data.bme280.temp, 
                 (val: number) => dispatch(cf.BME280TempCorrChange(val)), 
-                config.units.temp, config.units.pres
+                config.units.pres
             )}
             {sensorCorrection(false, "h", 
                 config.sensors.bme280.h, 
                 i18n.t('humidity'), 
                 data.bme280.hum, 
                 (val: number) => dispatch(cf.BME280HumCorrChange(val)), 
-                config.units.temp, config.units.pres
+                config.units.pres
             )}
             {sensorCorrection(false, "p", 
                 config.sensors.bme280.p, 
                 i18n.t('pressure'), 
                 data.bme280.pres, 
                 (val: number) => dispatch(cf.BME280PresCorrChange(val)), 
-                config.units.temp, config.units.pres
+                config.units.pres
             )}
             <hr className="mt-6 mb-4" />
             {extraData(i18n.t('absHumidity'), calculate.absoluteHum(bme280temp, bme280hum))}
-            {extraData(i18n.t('dewPoint'), calculate.dewPoint(bme280temp, bme280hum, config.units.temp))}
+            {extraData(i18n.t('dewPoint'), calculate.dewPoint(bme280temp, bme280hum))}
         </>}
         className={!vl.validateTemperature(data.bme280.temp) && !vl.validateHumidity(data.bme280.hum) && !vl.validatePressureHPA(data.bme280.pres)
             ? 'invalid' + (hideUnnecessary ? ' hide' : '')
@@ -125,14 +125,14 @@ export default function Sensors() {
                 i18n.t('temperature'), 
                 data.bmp180.temp, 
                 (val: number) => dispatch(cf.BMP180TempCorrChange(val)), 
-                config.units.temp, config.units.pres
+                config.units.pres
             )}
             {sensorCorrection(false, "p", 
                 config.sensors.bmp180.p, 
                 i18n.t('pressure'), 
                 data.bmp180.pres, 
                 (val: number) => dispatch(cf.BMP180PresCorrChange(val)), 
-                config.units.temp, config.units.pres
+                config.units.pres
             )}
         </>}
         className={!vl.validateTemperature(data.bmp180.temp) && !vl.validatePressureHPA(data.bmp180.pres)
@@ -148,18 +148,18 @@ export default function Sensors() {
                 i18n.t('temperature'), 
                 data.sht21.temp, 
                 (val: number) => dispatch(cf.SHT21TempCorrChange(val)), 
-                config.units.temp, config.units.pres
+                config.units.pres
             )}
             {sensorCorrection(false, "h", 
                 config.sensors.sht21.h, 
                 i18n.t('humidity'), 
                 data.sht21.hum, 
                 (val: number) => dispatch(cf.SHT21HumCorrChange(val)), 
-                config.units.temp, config.units.pres
+                config.units.pres
             )}
             <hr className="mt-6 mb-4" />
             {extraData(i18n.t('absHumidity'), calculate.absoluteHum(sht21temp, sht21hum))}
-            {extraData(i18n.t('dewPoint'), calculate.dewPoint(sht21temp, sht21hum, config.units.temp))}
+            {extraData(i18n.t('dewPoint'), calculate.dewPoint(sht21temp, sht21hum))}
         </>}
         className={!vl.validateTemperature(data.sht21.temp) && !vl.validateHumidity(data.sht21.hum)
             ? 'invalid' + (hideUnnecessary ? ' hide' : '')
@@ -174,18 +174,18 @@ export default function Sensors() {
                 i18n.t('temperature'), 
                 data.dht22.temp, 
                 (val: number) => dispatch(cf.DHT22TempCorrChange(val)), 
-                config.units.temp, config.units.pres
+                config.units.pres
             )}
             {sensorCorrection(false, "h", 
                 config.sensors.dht22.h, 
                 i18n.t('humidity'), 
                 data.dht22.hum, 
                 (val: number) => dispatch(cf.DHT22HumCorrChange(val)), 
-                config.units.temp, config.units.pres
+                config.units.pres
             )}
             <hr className="mt-6 mb-4" />
             {extraData(i18n.t('absHumidity'), calculate.absoluteHum(dht22temp, dht22hum))}
-            {extraData(i18n.t('dewPoint'), calculate.dewPoint(dht22temp, dht22hum, config.units.temp))}
+            {extraData(i18n.t('dewPoint'), calculate.dewPoint(dht22temp, dht22hum))}
         </>}
         className={!vl.validateTemperature(data.dht22.temp) && !vl.validateHumidity(data.dht22.hum)
             ? 'invalid' + (hideUnnecessary ? ' hide' : '')
@@ -200,7 +200,7 @@ export default function Sensors() {
                 i18n.t('ambientLight'), 
                 data.max44009.light, 
                 (val: number) => dispatch(cf.MAX44009LightCorrChange(val)), 
-                config.units.temp, config.units.pres
+                config.units.pres
             )}
         </>}
         className={!vl.validateLight(data.max44009.light)
@@ -216,7 +216,7 @@ export default function Sensors() {
                 i18n.t('ambientLight'), 
                 data.bh1750.light, 
                 (val: number) => dispatch(cf.BH1750LightCorrChange(val)), 
-                config.units.temp, config.units.pres
+                config.units.pres
             )}
         </>}
         className={!vl.validateLight(data.bh1750.light)
@@ -232,7 +232,7 @@ export default function Sensors() {
                 i18n.t('temperature'), 
                 data.ds18b20.temp, 
                 (val: number) => dispatch(cf.DS18B20TempCorrChange(val)), 
-                config.units.temp, config.units.pres
+                config.units.pres
             )}
         </>}
         className={!vl.validateTemperature(data.ds18b20.temp)
@@ -248,7 +248,7 @@ export default function Sensors() {
                 i18n.t('voltage'), 
                 data.analog.volt, 
                 (val: number) => dispatch(cf.analogCorrChange(val)), 
-                config.units.temp, config.units.pres
+                config.units.pres
             )}
         </>}
         className={!vl.validateAnalogVoltage(data.analog.volt)
@@ -264,7 +264,7 @@ export default function Sensors() {
                 i18n.t('temperature'), 
                 data.esp32?.temp ?? 0, 
                 (val: number) => dispatch(cf.ESP32TempCorrChange(val)), 
-                config.units.temp, config.units.pres
+                config.units.pres
             )}
             <div className="text-center mt-8">
                 <p>{i18n.t('runtime')}:</p>

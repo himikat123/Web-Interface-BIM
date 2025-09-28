@@ -5,20 +5,8 @@ import device from '../../device';
 import * as vl from "../validateValues";
 import * as calculate from '../calculate';
 import * as bat from '../indications/battery';
-import { celsiusToFahrenheit } from '../indications/celsiusToFahrenheit';
 
-interface iReturn {
-    val: string,
-    type: string
-}
-
-function dPoint(val: number, locale: number) {
-    return locale 
-        ? String(celsiusToFahrenheit(val).toFixed(1)) + '°F'
-        : String(val.toFixed(1)) + '°C'
-}
-
-export default function lcdGetVoltage(localTemp: number): iReturn {
+export default function lcdGetVoltage() {
     const config = store.getState().config;
     const data = store.getState().data;
 
@@ -95,7 +83,7 @@ export default function lcdGetVoltage(localTemp: number): iReturn {
         case (device() === 'WeatherMonitorBIM32' ? 6 : 106): // BME680 Dew Point
             const bme680dp = calculate.dewPointVal(data.bme680?.temp, data.bme680?.hum);
             value = vl.validateDewPoint(bme680dp, data.bme680?.temp)
-                ? dPoint(bme680dp, localTemp)
+                ? String(bme680dp.toFixed(1)) + '°C'
                 : '--';
             break;
         case (device() === 'WeatherMonitorBIM32' ? 7 : 4): // BME280 Absolute humidity
@@ -107,7 +95,7 @@ export default function lcdGetVoltage(localTemp: number): iReturn {
         case (device() === 'WeatherMonitorBIM32' ? 8 : 5): // BME280 Dew Point
             const bme280dp = calculate.dewPointVal(data.bme280.temp, data.bme280.hum);
             value = vl.validateDewPoint(bme280dp, data.bme280.temp)
-                ? dPoint(bme280dp, localTemp)
+                ? String(bme280dp.toFixed(1)) + '°C'
                 : '--';
             break;
         case (device() === 'WeatherMonitorBIM32' ? 9 : 6): // DHT22 Absolute humidity
@@ -119,7 +107,7 @@ export default function lcdGetVoltage(localTemp: number): iReturn {
         case (device() === 'WeatherMonitorBIM32' ? 10 : 7): // DHT22 Dew Point
             const dht22dp = calculate.dewPointVal(data.dht22.temp, data.dht22.hum);
             value = vl.validateDewPoint(dht22dp, data.dht22.temp)
-                ? dPoint(dht22dp, localTemp)
+                ? String(dht22dp.toFixed(1)) + '°C'
                 : '--';
             break;
         case (device() === 'WeatherMonitorBIM32' ? 11 : 8): // SHT21 Absolute humidity
@@ -131,7 +119,7 @@ export default function lcdGetVoltage(localTemp: number): iReturn {
         case (device() === 'WeatherMonitorBIM32' ? 12 : 9): // SHT21 Dew Point
             const sht21dp = calculate.dewPointVal(data.sht21.temp, data.sht21.hum);
             value = vl.validateDewPoint(sht21dp, data.sht21.temp)
-                ? dPoint(sht21dp, localTemp)
+                ? String(sht21dp.toFixed(1)) + '°C'
                 : '--';
             break;
         case (device() === 'WeatherMonitorBIM32' ? 13 : 10): // Weather Absolute humidity
@@ -143,7 +131,7 @@ export default function lcdGetVoltage(localTemp: number): iReturn {
         case (device() === 'WeatherMonitorBIM32' ? 14 : 11): // Weather Dew Point
             const weatherdp = calculate.dewPointVal(data.weather.temp, data.weather.hum);
             value = vl.validateDewPoint(weatherdp, data.weather.temp)
-                ? dPoint(weatherdp, localTemp)
+                ? String(weatherdp.toFixed(1)) + '°C'
                 : '--';
             break;
         default: ; break;

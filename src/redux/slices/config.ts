@@ -95,7 +95,6 @@ export const configSlice = createSlice({
             : {}
         ),
         units: {
-            temp: 0,
             pres: 0
         },
         clock: {
@@ -453,7 +452,6 @@ export const configSlice = createSlice({
         languageSwitch: (state, action) => { state.lang = action.payload },
         sleepChange: (state, action) => { if('sleep' in state) state.sleep = action.payload },
         batKChange: (state, action) => { if('batK' in state) state.batK = action.payload },
-        unitsTempChange: (state, action) => { state.units.temp = action.payload },
         unitsPresChange: (state, action) => { state.units.pres = action.payload },
 
         clockFormatChange: (state, action) => { state.clock.format = action.payload },
@@ -653,7 +651,7 @@ export const configSlice = createSlice({
 export const { 
     configStateChange, 
     languageSwitch, sleepChange, batKChange,
-    unitsTempChange, unitsPresChange,
+    unitsPresChange,
     setConfigState, 
     usernameChange, passwordRequiredSwitch,
     netSsidChange, netPassChange, netTypeSwitch, netIpChange, netMaskChange, netGwChange, netDns1Change, netDns2Change,

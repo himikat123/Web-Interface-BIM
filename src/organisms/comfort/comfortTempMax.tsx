@@ -21,20 +21,16 @@ export default function ComfortTempMax() {
         ? config.comfort.temp.max[1] 
         : config.comfort.temp.max;
 
-    const units = config.units.temp ? '°F' : '°C';
-    const maxTemp = config.units.temp ? 200 : 100;
-    const maxHyst = config.units.temp ? 20 : 10;
-
     return <>
         {/* Max temperature */}
         <RangeInput label={i18n.t('tempMax')}
             value={tMax}
             min={-50}
-            max={maxTemp}
+            max={100}
             limitMin={tMin}
-            limitMax={maxTemp}
+            limitMax={100}
             step={0.1}
-            indication={`${tMax.toFixed(1)}${units}`}
+            indication={`${tMax.toFixed(1)}°C`}
             onChange={val => dispatch(cf.comfortTempMaxChange({ num: 0, val: val }))}
             className="mt-4"
         />
@@ -44,11 +40,11 @@ export default function ComfortTempMax() {
             <RangeInput label={i18n.t('hysteresis')}
                 value={hisMax}
                 min={0}
-                max={maxHyst}
+                max={10}
                 limitMin={0}
-                limitMax={maxHyst}
+                limitMax={10}
                 step={0.1}
-                indication={`±${(hisMax / 2).toFixed(2)}${units}`}
+                indication={`±${(hisMax / 2).toFixed(2)}°C`}
                 onChange={val => dispatch(cf.comfortTempMaxChange({ num: 1, val: val }))}
                 className="mt-4"
             />
@@ -56,8 +52,8 @@ export default function ComfortTempMax() {
             {/* Explication */}
             <div className="mt-4 select-none text-green-500 dark:text-green-200">
                 <div>{i18n.t('conditioner')}</div>
-                <div>{i18n.t('on')}: &gt; {(tMax + (hisMax / 2)).toFixed(2)}{units}</div>
-                <div>{i18n.t('off')}: &lt; {(tMax - (hisMax / 2)).toFixed(2)}{units}</div>
+                <div>{i18n.t('on')}: &gt; {(tMax + (hisMax / 2)).toFixed(2)}°C</div>
+                <div>{i18n.t('off')}: &lt; {(tMax - (hisMax / 2)).toFixed(2)}°C</div>
             </div>
         </>}
     </>
