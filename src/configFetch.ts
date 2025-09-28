@@ -11,7 +11,7 @@ export default function configFetch() {
     .then(res => {
         store.dispatch(configStateChange('ok'));
         store.dispatch(setConfigState(res.data));
-        if(device() === 'WeatherMonitorBIM') store.dispatch(displayModelChange({num: 0, val: 2}));
+        if(device() === 'WeatherMonitorBIM') store.dispatch(displayModelChange({num: 0, val: 3}));
         changeLanguage(res.data.lang);
         localStorage.setItem('lang', res.data.lang);
     })
