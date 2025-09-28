@@ -21,6 +21,7 @@ export function changeLanguage(lang: string) {
     url += `?lang=${lang}`;
     url += `&code=${localStorage.getItem('code') || '0'}`;
     fetch(url);
+    document.documentElement.setAttribute("lang", lang);
 }
 
 export default i18n;
