@@ -10,7 +10,10 @@ import { iData } from '../../redux/dataTypes';
 export default function CardStatusSystem() {
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
+
     const locale = config.lang === 'ua' ? 'uk' : config.lang;
+    moment.locale(locale);
+
     let hourFormat;
     switch(config.clock.format) {
         case 0: hourFormat = 'h'; break;
@@ -18,11 +21,11 @@ export default function CardStatusSystem() {
         case 2: hourFormat = 'H'; break;
         default: hourFormat = 'HH'; break;
     }
+
     const esp32T = (data.esp32?.temp ?? 0) + (config.sensors.esp32?.t ?? 0);
     const esp32Temp = validateTemperature(data.esp32?.temp ?? 40400) 
         ? esp32T.toFixed(1) 
         : '--';
-    const units = '°C';
 
     return <div className='text-center'>
         <h2 className='text-xl'>{i18n.t('system')}</h2>
@@ -36,7 +39,7 @@ export default function CardStatusSystem() {
         </div>
         {device() === 'WeatherMonitorBIM32' && <div className='mt-4'>
             <p>{i18n.t('esp32Temp')}</p>
-            <p className='text-blue-700 dark:text-blue-400'>{esp32Temp + units}</p>
+            <p className='text-blue-700 dark:text-blue-400'>{esp32Temp}°C</p>
         </div>}
         <div className='mt-4'>
             <p>{i18n.t('runtime')}</p>
@@ -53,7 +56,7 @@ export default function CardStatusSystem() {
         <div className='mt-4'>
             <p>{i18n.t('systemTimeAndDate')}</p>
             <p className='text-blue-700 dark:text-blue-400'>
-                {moment(data.time * 1000).utc().format(`${hourFormat}:mm:ss DD.MM.YYYY`)}
+                {moment(data.time * 1000).utc().format(`${hourFormat}:mm:ss | L`)}
             </p>
         </div>
 
