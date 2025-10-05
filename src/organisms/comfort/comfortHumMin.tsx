@@ -32,6 +32,7 @@ export default function ComfortHumMin() {
             step={0.1}
             indication={`${hMin.toFixed(1)}%`}
             onChange={val => dispatch(cf.comfortHumMinChange({ num: 0, val: val }))}
+            onRelese={() => {}}
             className="mt-4"
         />
 
@@ -46,6 +47,7 @@ export default function ComfortHumMin() {
                 step={0.1}
                 indication={`±${(hisMin / 2).toFixed(2)}%`}
                 onChange={val => dispatch(cf.comfortHumMinChange({ num: 1, val: val }))}
+                onRelese={() => {}}
                 className="mt-4"
             />
 

@@ -240,6 +240,7 @@ export default function WSensors() {
                         step={0.2}
                         indication={config.wsensor?.bat.k[wsensorNum].toFixed(1) ?? ''}
                         onChange={(val: number) => dispatch(cf.wSensBatKChange({val: val, num: wsensorNum}))}
+                        onRelese={() => {}}
                     />
 
                     <div className="my-8">

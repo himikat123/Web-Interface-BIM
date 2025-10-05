@@ -35,6 +35,7 @@ export default function CardSleepVoltage() {
             step={0.1}
             indication={config.batK?.toFixed(1) ?? ''}
             onChange={val => dispatch(batKChange(val))}
+            onRelese={() => {}}
         />
     } />
 }

@@ -17,5 +17,6 @@ export default function SequenceDuration() {
         step={1}
         indication={String(config.display.source.sequence?.dur ?? 0)}
         onChange={val => dispatch(cf.displaySourceSequenceDurChange(val))}
+        onRelese={() => {}}
     />
 }

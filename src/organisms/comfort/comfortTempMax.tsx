@@ -32,6 +32,7 @@ export default function ComfortTempMax() {
             step={0.1}
             indication={`${tMax.toFixed(1)}°C`}
             onChange={val => dispatch(cf.comfortTempMaxChange({ num: 0, val: val }))}
+            onRelese={() => {}}
             className="mt-4"
         />
 
@@ -46,6 +47,7 @@ export default function ComfortTempMax() {
                 step={0.1}
                 indication={`±${(hisMax / 2).toFixed(2)}°C`}
                 onChange={val => dispatch(cf.comfortTempMaxChange({ num: 1, val: val }))}
+                onRelese={() => {}}
                 className="mt-4"
             />
 

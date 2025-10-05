@@ -32,6 +32,7 @@ export default function ComfortTempMin() {
             step={0.1}
             indication={`${tMin.toFixed(1)}°C`}
             onChange={val => dispatch(cf.comfortTempMinChange({ num: 0, val: val }))}
+            onRelese={() => {}}
             className="mt-4"
         />
 
@@ -46,6 +47,7 @@ export default function ComfortTempMin() {
                 step={0.1}
                 indication={`±${(hisMin / 2).toFixed(2)}°C`}
                 onChange={val => dispatch(cf.comfortTempMinChange({ num: 1, val: val }))}
+                onRelese={() => {}}
                 className="mt-4"
             />
 

@@ -38,9 +38,9 @@ export default function CardDisplayAnimation(props: iDisplay) {
         fetch(url);
     }
 
-    const sendAnimationSpeed = (val: number) => {
+    const sendAnimationSpeed = () => {
         let url = `${hostUrl()}/esp/animation`;
-        url += `?speed=${val}`;
+        url += `?speed=${config.display.animation?.speed[props.num] ?? 10}`;
         url += `&num=${props.num}`;
         url += `&code=${localStorage.getItem('code') || '0'}`;
         fetch(url);
@@ -73,10 +73,8 @@ export default function CardDisplayAnimation(props: iDisplay) {
                 limitMax={30}
                 step={1}
                 indication={String(config.display.animation ? config.display.animation.speed[props.num] : 0)}
-                onChange={val => {
-                    dispatch(cf.displayAnimationSpeedChange({num: props.num, val: val}));
-                    sendAnimationSpeed(val);
-                }}
+                onChange={val => dispatch(cf.displayAnimationSpeedChange({num: props.num, val: val})) }
+                onRelese={() => sendAnimationSpeed()}
                 className="mt-4"
             />
 

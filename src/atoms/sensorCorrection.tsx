@@ -159,6 +159,7 @@ export default function sensorCorrection(
             ) + units
         }
         onChange={onChange}
+        onRelese={() => {}}
         className={hide && (val === '--') ? 'hide' : ''}
     />
 }

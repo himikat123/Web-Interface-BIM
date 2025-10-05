@@ -10,17 +10,17 @@ export default function BrightConstant(props: iDisplay) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
 
-    const sendBright = (bright: number) => {
+    const br = Array.isArray(config.display.brightness.day)
+        ? config.display.brightness.day[props.num]
+        : config.display.brightness.day;
+
+    const sendBright = () => {
         let url = `${hostUrl()}/esp/bright`;
-        url += `?bright=${String(bright)}`;
+        url += `?bright=${String(br)}`;
         url += `&num=${props.num}`;
         url += `&code=${localStorage.getItem('code') || '0'}`;
         fetch(url);
     }
-
-    const br = Array.isArray(config.display.brightness.day)
-        ? config.display.brightness.day[props.num]
-        : config.display.brightness.day;
 
     return <RangeInput value={br}
         label={i18n.t('brightness')}
@@ -30,10 +30,8 @@ export default function BrightConstant(props: iDisplay) {
         limitMax={100}
         step={1}
         indication={String(br)}
-        onChange={val => {
-            dispatch(cf.displayBrightDayChange({num: props.num, val: val}));
-            sendBright(val);
-        }}
+        onChange={val => dispatch(cf.displayBrightDayChange({num: props.num, val: val}))}
+        onRelese={() => sendBright()}
         className="mt-4"
     />
 }

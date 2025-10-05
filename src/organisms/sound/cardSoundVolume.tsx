@@ -10,9 +10,9 @@ export default function CardSoundVolume() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
 
-    const sendVolume = (vol: number) => {
+    const sendVolume = () => {
         let url = `${hostUrl()}/esp/volume`;
-        url += `?vol=${String(vol)}`;
+        url += `?vol=${String(config.sound?.vol ?? 15)}`;
         url += `&code=${localStorage.getItem('code') || '0'}`;
         fetch(url);
     }
@@ -25,9 +25,7 @@ export default function CardSoundVolume() {
         limitMax={30}
         step={1}
         indication={String(config.sound?.vol)}
-        onChange={val => {
-            dispatch(cf.soundVolChange(val));
-            sendVolume(val);
-        }}
+        onChange={val => dispatch(cf.soundVolChange(val)) }
+        onRelese={() => sendVolume()}
     />} />
 }

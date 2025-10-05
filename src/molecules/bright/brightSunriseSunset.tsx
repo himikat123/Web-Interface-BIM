@@ -1,3 +1,4 @@
+import { useState } from "react";
 import i18n from "../../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import hostUrl from "../../atoms/hostUrl";
@@ -7,12 +8,13 @@ import RangeInput from "../../atoms/rangeInput";
 import * as cf from "../../redux/slices/config";
 
 export default function BrightSunriseSunset(props: iDisplay) {
+    const [br, setBr] = useState(0);
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
 
-    const sendBright = (bright: number) => {
+    const sendBright = () => {
         let url = `${hostUrl()}/esp/bright`;
-        url += `?bright=${String(bright)}`;
+        url += `?bright=${String(br)}`;
         url += `&num=${props.num}`;
         url += `&code=${localStorage.getItem('code') || '0'}`;
         fetch(url);
@@ -36,9 +38,10 @@ export default function BrightSunriseSunset(props: iDisplay) {
             step={1}
             indication={String(brDay)}
             onChange={val => {
+                setBr(val);
                 dispatch(cf.displayBrightDayChange({num: props.num, val: val}));
-                sendBright(val);
             }}
+            onRelese={() => sendBright()}
             className="mt-4"
         />
 
@@ -51,9 +54,10 @@ export default function BrightSunriseSunset(props: iDisplay) {
             step={1}
             indication={String(brNight)}
             onChange={val => {
+                setBr(val);
                 dispatch(cf.displayBrightNightChange({num: props.num, val: val}));
-                sendBright(val);
             }}
+            onRelese={() => sendBright()}
             className="mt-4"
         />
     </>

@@ -8,46 +8,46 @@ import { iConfig } from "../../redux/configTypes";
 export default function DisplayBrightLimit(props: {num: number}) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
-    const brMin = config.display.brightness.min ? config.display.brightness.min[props.num] : 0;
-    const brMax = config.display.brightness.max ? config.display.brightness.max[props.num] : 0;
+    const brMin = Array.isArray(config.display.brightness.min)
+        ? config.display.brightness.min[props.num]
+        : config.display.brightness.min;
+    const brMax = Array.isArray(config.display.brightness.max)
+        ? config.display.brightness.max[props.num]
+        : config.display.brightness.max;
 
-    const sendLimits = (newVal: number, type: string) => {
+    const sendLimits = () => {
         let url = `${hostUrl()}/esp/brightLimit`;
-        url += `?min=${type === 'min' ? newVal : brMin}`;
-        url += `&max=${type === 'max' ? newVal : brMax}`;
+        url += `?min=${brMin}`;
+        url += `&max=${brMax}`;
         url += `&num=${props.num}`;
         url += `&code=${localStorage.getItem('code') || '0'}`;
         fetch(url);
     }
 
     return <>
-        <RangeInput value={brMax}
+        <RangeInput value={brMax ?? 0}
             label={i18n.t('maximumBrightnessLimit')}
             min={0}
             max={255}
-            limitMin={brMin}
+            limitMin={brMin ?? 0}
             limitMax={255}
             step={1}
             indication={String(brMax)}
-            onChange={val => {
-                dispatch(displayBrightMaxChange({num: props.num, val: val}));
-                sendLimits(val, 'max');
-            }}
+            onChange={val => dispatch(displayBrightMaxChange({num: props.num, val: val})) }
+            onRelese={() => sendLimits()}
             className="mt-2"
         />
 
-        <RangeInput value={brMin}
+        <RangeInput value={brMin ?? 0}
             label={i18n.t('minimumBrightnessLimit')}
             min={0}
             max={255}
             limitMin={0}
-            limitMax={brMax}
+            limitMax={brMax ?? 0}
             step={1}
             indication={String(brMin)}
-            onChange={val => {
-                dispatch(displayBrightMinChange({num: props.num, val: val}));
-                sendLimits(val, 'min');
-            }}
+            onChange={val => dispatch(displayBrightMinChange({num: props.num, val: val})) }
+            onRelese={() => sendLimits()}
             className="mt-4"
         />
     </>

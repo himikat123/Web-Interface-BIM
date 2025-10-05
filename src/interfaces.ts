@@ -169,7 +169,8 @@ export interface iRangeInput {
     step: number,
     limitMin: number,
     limitMax: number,
-    onChange(val: number): any,
+    onChange(val: number): void,
+    onRelese(): void,
     className?: string
 }
 

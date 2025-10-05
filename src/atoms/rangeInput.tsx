@@ -11,12 +11,14 @@ export default function RangeInput(props: iRangeInput) {
     const minus = () => {
         if(props.value > props.limitMin) {
             props.onChange(round(Number(props.value) - Number(props.step)));
+            props.onRelese();
         }
     }
 
     const plus = () => {
         if(props.value < props.limitMax) {
             props.onChange(round(Number(props.value) + Number(props.step)));
+            props.onRelese();
         }
     }
 
@@ -42,6 +44,8 @@ export default function RangeInput(props: iRangeInput) {
                 step={props.step}
                 value={props.value}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => props.onChange(Number(e.target.value))}
+                onMouseUp={() => props.onRelese()}
+                onTouchEnd={() => props.onRelese()}
             />
             <div className="h-2 bg-gray-300 dark:bg-gray-500" style={{width: `${max}%`}} />
             

@@ -46,9 +46,9 @@ export default function BrightSensor(props: iDisplay) {
         `BH1750 (${bh1750Data !== null ? (bh1750Data.toFixed(2) + i18n.t('units.lux')) : '--'})`
     ];
 
-    const sendSensitivity = (bright: number) => {
+    const sendSensitivity = () => {
         let url = `${hostUrl()}/esp/sensitivity`;
-        url += `?bright=${String(bright)}`;
+        url += `?bright=${String(sensitivity)}`;
         url += `&num=${props.num}`;
         url += `&code=${localStorage.getItem('code') || '0'}`
         fetch(url);
@@ -69,10 +69,8 @@ export default function BrightSensor(props: iDisplay) {
             limitMax={100}
             step={1}
             indication={String(sensitivity)}
-            onChange={val => {
-                dispatch(cf.displaySensitivityChange({num: props.num, val: val}));
-                sendSensitivity(val);
-            }}
+            onChange={val => dispatch(cf.displaySensitivityChange({num: props.num, val: val})) }
+            onRelese={() => sendSensitivity()}
             className="mt-2"
         />
         <div className="mt-4 text-end">
