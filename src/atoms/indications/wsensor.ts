@@ -7,7 +7,7 @@ import * as vl from "../validateValues";
 import * as calculate from "../calculate";
 import { iWsensIndications } from "../../interfaces";
 
-export default function wsensor(conf: iSensorWsensConfig | undefined, data: iSensorWsensData | undefined) {
+export default function wsensor(conf: iSensorWsensConfig | undefined, data: iSensorWsensData | undefined, units: number) {
     const exp = i18n.t('dataExpired');
 
     function wsensData(num: number) {
@@ -27,7 +27,7 @@ export default function wsensor(conf: iSensorWsensConfig | undefined, data: iSen
         const sens: iWsensIndications = {
             temp: [],
             hum: vl.validateHumidity(hum) ? (hum + (conf?.hum[num] ?? 0)).toFixed(1) + '%' : '--',
-            pres: vl.validatePressureHPA(pres) ? PresLocale(pres, conf?.pres[num] ?? 0) : '--',
+            pres: vl.validatePressureHPA(pres) ? PresLocale(pres, conf?.pres[num] ?? 0, units) : '--',
             windSpeed: vl.validateWindSpeed(wSpeed) ? (wSpeed + (conf?.wind.speed[num] ?? 0)).toFixed(1) + i18n.t('units.mps') : '--',
             windDir: vl.validateWindDirection(wDir) ? (wDir + (conf?.wind.dir[num] ?? 0)).toFixed() + '°' : '--',
             windDirStr: vl.validateWindDirection(wDir) ? windDirStr(wDir + (conf?.wind.dir[num] ?? 0)) : '--',

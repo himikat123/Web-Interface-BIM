@@ -11,7 +11,7 @@ export default function ComfortCo2Source() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
-    const wsens = wsensor(config.wsensor, data.wsensor);
+    const wsens = wsensor(config.wsensor, data.wsensor, config.units.pres);
     const indications = [`(${wsens[0].co2})`, `(${wsens[1].co2})`];
     const source = config.comfort.co2?.source ?? 0;
 

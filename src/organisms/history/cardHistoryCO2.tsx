@@ -13,7 +13,7 @@ export default function CardHistoryCo2(props: iCardHistory) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
-    const wsens = wsensor(config.wsensor, data.wsensor);
+    const wsens = wsensor(config.wsensor, data.wsensor, config.units.pres);
     const wsensorIndications = [`(${wsens[0].co2})`, `(${wsens[1].co2})`];
 
     return <Card content={<div className="thchart">

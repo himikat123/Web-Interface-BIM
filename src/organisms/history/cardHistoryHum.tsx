@@ -14,7 +14,7 @@ export default function CardHistoryHum(props: iCardHistory) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
-    const wsens = wsensor(config.wsensor, data.wsensor)
+    const wsens = wsensor(config.wsensor, data.wsensor, config.units.pres)
     const wsensorIndications = [`(${wsens[0].hum})`, `(${wsens[1].hum})`];
 
     return <Card content={<div className="thchart">

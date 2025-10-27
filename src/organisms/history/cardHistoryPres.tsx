@@ -14,7 +14,7 @@ export default function CardHistoryPres(props: iCardHistory) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
-    const wsens = Wsensor(config.wsensor, data.wsensor);
+    const wsens = Wsensor(config.wsensor, data.wsensor, config.units.pres);
     const wsensorIndications = [`(${wsens[0].pres})`, `(${wsens[1].pres})`];
 
     return <Card content={<div className="thchart">

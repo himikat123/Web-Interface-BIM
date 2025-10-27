@@ -13,7 +13,7 @@ export default function CardDisplayWindDir() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
-    const wsens = wsensor(config.wsensor, data.wsensor);
+    const wsens = wsensor(config.wsensor, data.wsensor, config.units.pres);
     const indications = [
         `{${wsens[0].windDirStr}} (${wsens[0].windDir})`, 
         `{${wsens[1].windDirStr}} (${wsens[1].windDir})`

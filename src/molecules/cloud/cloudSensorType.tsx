@@ -19,17 +19,17 @@ import { iData } from "../../redux/dataTypes";
 export default function CloudSensorType(props: iCloudSensorType) {
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
-    const bme280indications = tempHumPres(config.sensors.bme280, data.bme280);
-    const bmp180indications = tempPres(config.sensors.bmp180, data.bmp180);
+    const bme280indications = tempHumPres(config.sensors.bme280, data.bme280, config.units.pres);
+    const bmp180indications = tempPres(config.sensors.bmp180, data.bmp180, config.units.pres);
     const sht21indications = tempHum(config.sensors.sht21, data.sht21);
     const dht22indications = tempHum(config.sensors.dht22, data.dht22);
     const ds18b20indications = temp(config.sensors.ds18b20, data.ds18b20);
-    const bme680indications = tempHumPresIaq(config.sensors.bme680, data.bme680);
+    const bme680indications = tempHumPresIaq(config.sensors.bme680, data.bme680, config.units.pres);
     const max44009indications = light(config.sensors.max44009, data.max44009);
     const bh1750indications = light(config.sensors.bh1750, data.bh1750);
     const esp32indications = esp32(config.sensors.esp32, data.esp32, data.runtime, config.lang);
     const analogIndications = analog(config.sensors.analog, data.analog);
-    const weatherIndications = forecast(config.weather, data.weather);
+    const weatherIndications = forecast(config.weather, data.weather, config.units.pres);
 
     const t = i18n.t('temperature');
     const h = i18n.t('humidity');

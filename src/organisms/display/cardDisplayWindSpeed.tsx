@@ -13,7 +13,7 @@ export default function CardDisplayWindSpeed() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
-    const wsens = wsensor(config.wsensor, data.wsensor);
+    const wsens = wsensor(config.wsensor, data.wsensor, config.units.pres);
     const indications = [`(${wsens[0].windSpeed})`, `(${wsens[1].windSpeed})`];
 
     return <Card header={i18n.t('windSpeed')}

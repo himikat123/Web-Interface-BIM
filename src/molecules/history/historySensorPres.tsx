@@ -12,10 +12,10 @@ import tempHumPresIaq from "../../atoms/indications/tempHumPresIaq";
 export default function HistorySensorPres(props: iHistorySensor) {
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
-    const bme280indications = tempHumPres(config.sensors.bme280, data.bme280);
-    const bmp180indications = tempPres(config.sensors.bmp180, data.bmp180);
-    const bme680indications = tempHumPresIaq(config.sensors.bme680, data.bme680);
-    const weatherIndications = forecast(config.weather, data.weather);
+    const bme280indications = tempHumPres(config.sensors.bme280, data.bme280, config.units.pres);
+    const bmp180indications = tempPres(config.sensors.bmp180, data.bmp180, config.units.pres);
+    const bme680indications = tempHumPresIaq(config.sensors.bme680, data.bme680, config.units.pres);
+    const weatherIndications = forecast(config.weather, data.weather, config.units.pres);
 
     const sensors = [
         "--",

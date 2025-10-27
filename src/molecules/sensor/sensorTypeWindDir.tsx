@@ -14,7 +14,7 @@ export default function SensorTypeWindDir() {
 
     const sensors = [];
     sensors.push('--');
-    sensors.push(`${i18n.t('forecast')} {${windDirStr(data.weather.wind.dir)}} (${forecast(config.weather, data.weather).windDir})`);
+    sensors.push(`${i18n.t('forecast')} {${windDirStr(data.weather.wind.dir)}} (${forecast(config.weather, data.weather, config.units.pres).windDir})`);
     sensors.push(i18n.t('wirelessSensor.singular'));
     sensors.push('Thingspeak');
 

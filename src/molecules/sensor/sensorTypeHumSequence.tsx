@@ -14,11 +14,11 @@ export default function SensorTypeHumSequence(props: iSensorTypeSequence) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
-    const bme280indications = tempHumPres(config.sensors.bme280, data.bme280);
+    const bme280indications = tempHumPres(config.sensors.bme280, data.bme280, config.units.pres);
     const sht21indications = tempHum(config.sensors.sht21, data.sht21);
     const dht22indications = tempHum(config.sensors.dht22, data.dht22);
-    const bme680indications = tempHumPresIaq(config.sensors.bme680, data.bme680);
-    const weatherIndications = forecast(config.weather, data.weather);
+    const bme680indications = tempHumPresIaq(config.sensors.bme680, data.bme680, config.units.pres);
+    const weatherIndications = forecast(config.weather, data.weather, config.units.pres);
 
     const sensors = [
         '--', 

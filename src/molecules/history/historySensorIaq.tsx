@@ -8,7 +8,7 @@ import tempHumPresIaq from "../../atoms/indications/tempHumPresIaq";
 export default function HistorySensorIaq(props: iHistorySensor) {
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
-    const bme680indications = tempHumPresIaq(config.sensors.bme680, data.bme680);
+    const bme680indications = tempHumPresIaq(config.sensors.bme680, data.bme680, config.units.pres);
     const sensors = [
         "--",
         `BME680 (${bme680indications.iaq})`

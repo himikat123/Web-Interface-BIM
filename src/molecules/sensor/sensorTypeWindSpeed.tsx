@@ -13,7 +13,7 @@ export default function SensorTypeWindSpeed() {
 
     const sensors = [];
     sensors.push('--');
-    sensors.push(`${i18n.t('forecast')} (${forecast(config.weather, data.weather).windSpeed})`);
+    sensors.push(`${i18n.t('forecast')} (${forecast(config.weather, data.weather, config.units.pres).windSpeed})`);
     sensors.push(i18n.t('wirelessSensor.singular'));
     sensors.push('Thingspeak');
 

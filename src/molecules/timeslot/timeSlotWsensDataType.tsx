@@ -11,7 +11,7 @@ export default function TimeSlotWsensDataType(props: iDisplayTimeSlot) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
-    const wsens = wsensor(config.wsensor, data.wsensor);
+    const wsens = wsensor(config.wsensor, data.wsensor, config.units.pres);
 
     let wsensorTypes = [];
     for(let i=0; i<2; i++) {

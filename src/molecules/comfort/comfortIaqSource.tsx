@@ -10,7 +10,7 @@ export default function ComfortIaqSource() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
-    const bme680indications = tempHumPresIaq(config.sensors.bme680, data.bme680);
+    const bme680indications = tempHumPresIaq(config.sensors.bme680, data.bme680, config.units.pres);
 
     const sensors = [
         "--",

@@ -9,7 +9,7 @@ import { iData } from "../../redux/dataTypes";
 export default function WsensorTempNumber(props: iWsensTempNum) {
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
-    const wsens = wsensor(config.wsensor, data.wsensor);
+    const wsens = wsensor(config.wsensor, data.wsensor, config.units.pres);
     let wtemps: string[] = [];
     for(let i=0; i<5; i++) 
         wtemps.push(`${i18n.t('temperature')} ${i} (${wsens[props.wSensNum].temp[i]})`);
