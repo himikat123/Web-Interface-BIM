@@ -3,24 +3,30 @@ import { useSelector, useDispatch } from 'react-redux';
 import device from "../../device";
 import SelectSwitch from "../../atoms/selectSwitch";
 import { iConfig } from "../../redux/configTypes";
+import { iData } from "../../redux/dataTypes";
 import * as cf from "../../redux/slices/config";
-import Forecast from "../../atoms/indications/forecast";
-import BME280 from "../../atoms/indications/BME280";
-import BMP180 from "../../atoms/indications/BMP180";
-import BME680 from "../../atoms/indications/BME680";
+import forecast from "../../atoms/indications/forecast";
+import tempHumPres from "../../atoms/indications/tempHumPres";
+import tempPres from "../../atoms/indications/tempPres";
+import tempHumPresIaq from "../../atoms/indications/tempHumPresIaq";
 
 export default function SensorTypePresOut() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
+    const data = useSelector((state: iData) => state.data);
+    const bme280indications = tempHumPres(config.sensors.bme280, data.bme280);
+    const bmp180indications = tempPres(config.sensors.bmp180, data.bmp180);
+    const bme680indications = tempHumPresIaq(config.sensors.bme680, data.bme680);
+    const weatherIndications = forecast(config.weather, data.weather);
 
     const sensors = [];
     sensors.push('--');
-    sensors.push(`${i18n.t('forecast')} (${Forecast().pres})`);
+    sensors.push(`${i18n.t('forecast')} (${weatherIndications.pres})`);
     if(device() === 'WeatherMonitorBIM32') sensors.push(i18n.t('wirelessSensor.singular'));
     sensors.push('Thingspeak');
-    sensors.push(`BME280 (${BME280().pres})`);
-    sensors.push(`BMP180 (${BMP180().pres})`);
-    if(device() === 'WeatherMonitorBIM32') sensors.push(`BME680 (${BME680().pres})`);
+    sensors.push(`BME280 (${bme280indications.pres})`);
+    sensors.push(`BMP180 (${bmp180indications.pres})`);
+    if(device() === 'WeatherMonitorBIM32') sensors.push(`BME680 (${bme680indications.pres})`);
 
     return <SelectSwitch label={i18n.t('dataSource.singular')}
         options={sensors}

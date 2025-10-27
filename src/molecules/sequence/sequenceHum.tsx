@@ -1,19 +1,22 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { iConfig } from "../../redux/configTypes";
+import { iData } from "../../redux/dataTypes";
 import * as cf from "../../redux/slices/config";
 import SequenceDuration from "./sequenceDuration";
 import SensorTypeHumSequence from "../sensor/sensorTypeHumSequence";
 import WsensorNumber from "../wsensor/wsensorNumber";
 import ThingspeakField from "../thingspeak/thingspeakFields";
 import SequenceSlotName from "./sequenceSlotName";
-import Wsensor from "../../atoms/indications/wsensor";
+import wsensor from "../../atoms/indications/wsensor";
 
 export default function SequenceHum() {
     const [humWsensNum, setHumWsensNum] = useState<number>(0);
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
-    const indications = [`(${Wsensor()[0].hum})`, `(${Wsensor()[1].hum})`];
+    const data = useSelector((state: iData) => state.data);
+    const wsens = wsensor(config.wsensor, data.wsensor);
+    const indications = [`(${wsens[0].hum})`, `(${wsens[1].hum})`];
 
     return <div className="mt-8">
         <SequenceDuration />

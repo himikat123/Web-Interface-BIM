@@ -2,16 +2,19 @@ import i18n from "../../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../../atoms/card";
 import { iConfig } from "../../redux/configTypes";
+import { iData } from "../../redux/dataTypes";
 import * as cf from "../../redux/slices/config";
 import SensorTypeWindSpeed from "../../molecules/sensor/sensorTypeWindSpeed";
 import WsensorNumber from "../../molecules/wsensor/wsensorNumber";
 import ThingspeakField from "../../molecules/thingspeak/thingspeakFields";
-import Wsensor from "../../atoms/indications/wsensor";
+import wsensor from "../../atoms/indications/wsensor";
 
 export default function CardDisplayWindSpeed() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
-    const indications = [`(${Wsensor()[0].windSpeed})`, `(${Wsensor()[1].windSpeed})`];
+    const data = useSelector((state: iData) => state.data);
+    const wsens = wsensor(config.wsensor, data.wsensor);
+    const indications = [`(${wsens[0].windSpeed})`, `(${wsens[1].windSpeed})`];
 
     return <Card header={i18n.t('windSpeed')}
         content={<>

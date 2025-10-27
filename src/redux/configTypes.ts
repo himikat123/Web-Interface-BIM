@@ -1,3 +1,72 @@
+export interface iSensorAconfig {
+    v: number
+}
+
+export interface iSensorLconfig {
+    l: number
+}
+
+export interface iSensorTconfig {
+    t: number
+}
+
+export interface iSensorTPconfig {
+    t: number,
+    p: number
+}
+
+export interface iSensorTHconfig {
+    t: number,
+    h:number
+}
+
+export interface iSensorTHPconfig {
+    t: number,
+    h:number,
+    p: number
+}
+
+export interface iSensorTHPIconfig {
+    t: number,
+    h:number,
+    p: number,
+    i: number
+}
+
+export interface iSensorWeatherConfig {
+    appid: string[],
+    city: string,
+    cityid: number,
+    lat: number,
+    lon: number,
+    provider: number,
+    citysearch: number,
+    corr: iSensorTHPconfig
+}
+
+export interface iSensorWsensConfig {
+    temp: number[][],
+    hum: number[],
+    pres: number[],
+    wind: {
+        speed: number[],
+        dir: number[]
+    },
+    light: number[],
+    co2: number[],
+    volt: number[],
+    curr: number[],
+    pow: number[],
+    enrg: number[],
+    freq: number[],
+    bat: {
+        k: number[],
+        type: number[]
+    },
+    expire: number[],
+    channel: number
+}
+
 export interface iConfig {
     config: {
         configState: string,
@@ -47,20 +116,7 @@ export interface iConfig {
             ip: string,
             mask: string
         },
-        weather: {
-            appid: string[],
-            city: string,
-            cityid: number,
-            lat: number,
-            lon: number,
-            provider: number,
-            citysearch: number,
-            corr: {
-                t: number,
-                h: number,
-                p: number
-            }
-        },
+        weather: iSensorWeatherConfig,
         lang: string,
         sleep?: number,
 	    batK?: number,
@@ -186,67 +242,18 @@ export interface iConfig {
             }
         },
         sensors: {
-            bme680?: {
-                t: number,
-                h: number,
-                p: number,
-                i: number
-            },
-            bme280: {
-                t: number,
-                h: number,
-                p: number
-            },
-            bmp180: {
-                t: number,
-                p: number
-            },
-            sht21: {
-                t: number,
-                h: number
-            },
-            dht22: {
-                t: number,
-                h: number
-            },
-            ds18b20: {
-                t: number
-            },
-            esp32?: {
-                t: number
-            },
-            max44009: {
-                l: number
-            },
-            bh1750: {
-                l: number
-            },
-            analog: {
-                v: number
-            }
+            bme680?: iSensorTHPIconfig,
+            bme280: iSensorTHPconfig,
+            bmp180: iSensorTPconfig,
+            sht21: iSensorTHconfig,
+            dht22: iSensorTHconfig,
+            ds18b20: iSensorTconfig,
+            esp32?: iSensorTconfig,
+            max44009: iSensorLconfig,
+            bh1750: iSensorLconfig,
+            analog: iSensorAconfig
         },
-        wsensor?: {
-            temp: number[][],
-            hum: number[],
-            pres: number[],
-            wind: {
-                speed: number[],
-                dir: number[]
-            },
-            light: number[],
-            co2: number[],
-            volt: number[],
-            curr: number[],
-            pow: number[],
-            enrg: number[],
-            freq: number[],
-            bat: {
-                k: number[],
-                type: number[]
-            },
-            expire: number[],
-            channel: number
-        },
+        wsensor?: iSensorWsensConfig,
         thingspeakSend: {
             period: number,
             channelID: string,

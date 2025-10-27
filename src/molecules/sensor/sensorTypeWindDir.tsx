@@ -5,7 +5,7 @@ import { windDirStr } from "../../atoms/indications/windDirStr";
 import { iConfig } from "../../redux/configTypes";
 import { iData } from "../../redux/dataTypes";
 import * as cf from "../../redux/slices/config";
-import Forecast from "../../atoms/indications/forecast";
+import forecast from "../../atoms/indications/forecast";
 
 export default function SensorTypeWindDir() {
     const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export default function SensorTypeWindDir() {
 
     const sensors = [];
     sensors.push('--');
-    sensors.push(`${i18n.t('forecast')} {${windDirStr(data.weather.wind.dir)}} (${Forecast().windDir})`);
+    sensors.push(`${i18n.t('forecast')} {${windDirStr(data.weather.wind.dir)}} (${forecast(config.weather, data.weather).windDir})`);
     sensors.push(i18n.t('wirelessSensor.singular'));
     sensors.push('Thingspeak');
 

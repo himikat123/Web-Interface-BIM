@@ -1,11 +1,17 @@
+import { useSelector } from "react-redux";
 import SelectSwitch from "../../atoms/selectSwitch";
 import { iHistorySensor } from "../../interfaces";
-import BME680 from "../../atoms/indications/BME680";
+import { iConfig } from "../../redux/configTypes";
+import { iData } from "../../redux/dataTypes";
+import tempHumPresIaq from "../../atoms/indications/tempHumPresIaq";
 
 export default function HistorySensorIaq(props: iHistorySensor) {
+    const config = useSelector((state: iConfig) => state.config);
+    const data = useSelector((state: iData) => state.data);
+    const bme680indications = tempHumPresIaq(config.sensors.bme680, data.bme680);
     const sensors = [
         "--",
-        `BME680 (${BME680().iaq})`
+        `BME680 (${bme680indications.iaq})`
     ];
 
     return <div className="mt-8">

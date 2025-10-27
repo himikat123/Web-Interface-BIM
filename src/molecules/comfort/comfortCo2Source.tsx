@@ -2,14 +2,17 @@ import i18n from "../../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import SelectSwitch from "../../atoms/selectSwitch";
 import { iConfig } from "../../redux/configTypes";
+import { iData } from "../../redux/dataTypes";
 import * as cf from "../../redux/slices/config";
 import WsensorNumber from "./../wsensor/wsensorNumber";
-import Wsensor from "../../atoms/indications/wsensor";
+import wsensor from "../../atoms/indications/wsensor";
 
 export default function ComfortCo2Source() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
-    const indications = [`(${Wsensor()[0].co2})`, `(${Wsensor()[1].co2})`];
+    const data = useSelector((state: iData) => state.data);
+    const wsens = wsensor(config.wsensor, data.wsensor);
+    const indications = [`(${wsens[0].co2})`, `(${wsens[1].co2})`];
     const source = config.comfort.co2?.source ?? 0;
 
     const sensors = [

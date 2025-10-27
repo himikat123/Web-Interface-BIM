@@ -1,20 +1,30 @@
+import { useSelector } from "react-redux";
 import i18n from "../../i18n/main";
 import SelectSwitch from "../../atoms/selectSwitch";
+import { iConfig } from "../../redux/configTypes";
+import { iData } from "../../redux/dataTypes";
 import { iHistorySensor } from "../../interfaces";
-import Forecast from "../../atoms/indications/forecast";
-import BME280 from "../../atoms/indications/BME280";
-import BMP180 from "../../atoms/indications/BMP180";
-import BME680 from "../../atoms/indications/BME680";
+import forecast from "../../atoms/indications/forecast";
+import tempHumPres from "../../atoms/indications/tempHumPres";
+import tempPres from "../../atoms/indications/tempPres";
+import tempHumPresIaq from "../../atoms/indications/tempHumPresIaq";
 
 export default function HistorySensorPres(props: iHistorySensor) {
+    const config = useSelector((state: iConfig) => state.config);
+    const data = useSelector((state: iData) => state.data);
+    const bme280indications = tempHumPres(config.sensors.bme280, data.bme280);
+    const bmp180indications = tempPres(config.sensors.bmp180, data.bmp180);
+    const bme680indications = tempHumPresIaq(config.sensors.bme680, data.bme680);
+    const weatherIndications = forecast(config.weather, data.weather);
+
     const sensors = [
         "--",
-        `${i18n.t('forecast')} (${Forecast().pres})`,
+        `${i18n.t('forecast')} (${weatherIndications.pres})`,
         i18n.t('wirelessSensor.singular'),
         'Thingspeak',
-        `BME280 (${BME280().pres})`,
-        `BMP180 (${BMP180().pres})`,
-        `BME680 (${BME680().pres})`
+        `BME280 (${bme280indications.pres})`,
+        `BMP180 (${bmp180indications.pres})`,
+        `BME680 (${bme680indications.pres})`
     ];
 
     return <div className="mt-8">

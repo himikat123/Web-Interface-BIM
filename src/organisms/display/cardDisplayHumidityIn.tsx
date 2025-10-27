@@ -3,17 +3,20 @@ import { useSelector, useDispatch } from 'react-redux';
 import device from "../../device";
 import Card from "../../atoms/card";
 import { iConfig } from "../../redux/configTypes";
+import { iData } from "../../redux/dataTypes";
 import * as cf from "../../redux/slices/config";
 import SensorTypeHumIn from "../../molecules/sensor/sensorTypeHumIn";
 import WsensorNumber from "../../molecules/wsensor/wsensorNumber";
 import ThingspeakField from "../../molecules/thingspeak/thingspeakFields";
 import SequenceHum from "../../molecules/sequence/sequenceHum";
-import Wsensor from "../../atoms/indications/wsensor";
+import wsensor from "../../atoms/indications/wsensor";
 
 export default function CardDisplayHumidityIn() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
-    const indications = [`(${Wsensor()[0].hum})`, `(${Wsensor()[1].hum})`];
+    const data = useSelector((state: iData) => state.data);
+    const wsens = wsensor(config.wsensor, data.wsensor);
+    const indications = [`(${wsens[0].hum})`, `(${wsens[1].hum})`];
 
     return <Card header={i18n.t('humidityIn')}
         content={<>

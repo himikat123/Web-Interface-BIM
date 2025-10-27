@@ -1,3 +1,114 @@
+export interface iSensorAdata {
+    volt: number
+}
+
+export interface iSensorLdata {
+    light: number
+}
+
+export interface iSensorTdata {
+    temp: number
+}
+
+export interface iSensorTPdata {
+    temp: number,
+    pres: number
+}
+
+export interface iSensorTHdata {
+    temp: number,
+    hum: number
+}
+
+export interface iSensorTHPdata {
+    temp: number,
+    hum:number,
+    pres: number
+}
+
+export interface iSensorTHPIdata {
+    temp: number,
+    hum:number,
+    pres: number,
+    iaq: number,
+    iaqAccr: number
+}
+
+export interface iSensorWeatherData {
+    icon: number,
+    isDay: number,
+    temp: number,
+    hum: number,
+    pres: number,
+    wind: {
+        speed: number,
+        dir: number
+    },
+    descript: string,
+    time: number,
+    daily: {
+        tMax: [number],
+        tMin: [number],
+        wind: [number],
+        icon: [number],
+    }
+}
+
+export interface iSensorWsensData {
+    time: [number, number],
+    temp: {
+        data: number[][],
+        name: string[][]
+    },
+    hum: {
+        data: number[],
+        name: string[]
+    },
+    pres: {
+        data: number[],
+        name: string[]
+    },
+    wind: {
+        speed: {
+            data: number[],
+            name: string[]
+        },
+        dir: {
+            data: number[],
+            name: string[]
+        }
+    },
+    light: {
+        data: number[],
+        name: string[]
+    },
+    co2: {
+        data: number[],
+        name: string[]
+    },
+    voltage: {
+        data: number[],
+        name: string[]
+    },
+    current: {
+        data: number[],
+        name: string[]
+    },
+    power: {
+        data: number[],
+        name: string[]
+    },
+    energy: {
+        data: number[],
+        name: string[]
+    },
+    freq: {
+        data: number[],
+        name: string[]
+    },
+    bat: number[]
+}
+
 export interface iData {
     data: {
         dataState: string,
@@ -6,9 +117,7 @@ export interface iData {
         logged: string,
         adc?: number,
         fw: string,
-        esp32?: {
-            temp: number
-        },
+        esp32?: iSensorTdata,
         runtime: number,
         time: number,
         cyd?: number,
@@ -24,115 +133,17 @@ export interface iData {
             dns2: string
         },    
         ssids: [ [string, number] ],
-        bme680?: {
-            temp: number,
-            hum: number,
-            pres: number,
-            iaq: number,
-            iaqAccr: number
-        },
-        bme280: {
-            temp: number,
-            hum: number,
-            pres: number
-        },
-        bmp180: {
-            temp: number,
-            pres: number
-        },
-        sht21: {
-            temp: number,
-            hum: number
-        },
-        dht22: {
-            temp: number,
-            hum: number
-        },
-        ds18b20: {
-            temp: number
-        },
-        max44009: {
-            light: number
-        },
-        bh1750: {
-            light: number
-        },
-        analog: {
-            volt: number
-        },
-        wsensor?: {
-            time: [number, number],
-            temp: {
-                data: number[][],
-                name: string[][]
-            },
-            hum: {
-                data: number[],
-                name: string[]
-            },
-            pres: {
-                data: number[],
-                name: string[]
-            },
-            wind: {
-                speed: {
-                    data: number[],
-                    name: string[]
-                },
-                dir: {
-                    data: number[],
-                    name: string[]
-                }
-            },
-            light: {
-                data: number[],
-                name: string[]
-            },
-            co2: {
-                data: number[],
-                name: string[]
-            },
-            voltage: {
-                data: number[],
-                name: string[]
-            },
-            current: {
-                data: number[],
-                name: string[]
-            },
-            power: {
-                data: number[],
-                name: string[]
-            },
-            energy: {
-                data: number[],
-                name: string[]
-            },
-            freq: {
-                data: number[],
-                name: string[]
-            },
-            bat: number[]
-        },
-        weather: {
-            icon: number,
-            isDay: number,
-            temp: number,
-            hum: number,
-            pres: number,
-            wind: {
-                speed: number,
-                dir: number
-            },
-            descript: string,
-            time: number,
-            daily: {
-                tMax: [number],
-                tMin: [number],
-                wind: [number],
-                icon: [number],
-            }
-        },
+        bme680?: iSensorTHPIdata,
+        bme280: iSensorTHPdata,
+        bmp180: iSensorTPdata,
+        sht21: iSensorTHdata,
+        dht22: iSensorTHdata,
+        ds18b20: iSensorTdata,
+        max44009: iSensorLdata,
+        bh1750: iSensorLdata,
+        analog: iSensorAdata,
+        wsensor?: iSensorWsensData,
+        weather: iSensorWeatherData,
         thing: {
             time: number,
             data: number[]

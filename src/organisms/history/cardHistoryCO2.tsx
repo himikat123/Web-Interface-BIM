@@ -1,17 +1,20 @@
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../../atoms/card";
 import { iConfig } from "../../redux/configTypes";
+import { iData } from '../../redux/dataTypes';
 import * as cf from "../../redux/slices/config";
 import HistoryChart from "../../molecules/history/historyChart";
 import HistorySensorCo2 from "../../molecules/history/historySensorCo2";
 import WsensorNumber from "../../molecules/wsensor/wsensorNumber";
 import { iCardHistory } from "../../interfaces";
-import Wsensor from '../../atoms/indications/wsensor';
+import wsensor from '../../atoms/indications/wsensor';
 
 export default function CardHistoryCo2(props: iCardHistory) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
-    const wsensorIndications = [`(${Wsensor()[0].co2})`, `(${Wsensor()[1].co2})`];
+    const data = useSelector((state: iData) => state.data);
+    const wsens = wsensor(config.wsensor, data.wsensor);
+    const wsensorIndications = [`(${wsens[0].co2})`, `(${wsens[1].co2})`];
 
     return <Card content={<div className="thchart">
         {/* History Chart */}

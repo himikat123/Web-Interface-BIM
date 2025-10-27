@@ -6,19 +6,26 @@ import { iConfig } from "../../redux/configTypes";
 import { iData } from "../../redux/dataTypes";
 import * as cf from "../../redux/slices/config";
 import { iDisplayTimeSlot } from "../../interfaces";
-import Forecast from "../../atoms/indications/forecast";
-import BME280 from "../../atoms/indications/BME280";
-import BMP180 from "../../atoms/indications/BMP180";
-import SHT21 from "../../atoms/indications/SHT21";
-import DHT22 from "../../atoms/indications/DHT22";
-import DS18B20 from "../../atoms/indications/DS18B20";
+import forecast from "../../atoms/indications/forecast";
+import tempHumPres from "../../atoms/indications/tempHumPres";
+import tempPres from "../../atoms/indications/tempPres";
+import tempHum from "../../atoms/indications/tempHum";
+import temp from "../../atoms/indications/temp";
 import ESP32 from "../../atoms/indications/ESP32";
-import BME680 from "../../atoms/indications/BME680";
+import tempHumPresIaq from "../../atoms/indications/tempHumPresIaq";
 
 export default function TimeSlotSensorType(props: iDisplayTimeSlot) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const data = useSelector((state: iData) => state.data);
+    const bme280indications = tempHumPres(config.sensors.bme280, data.bme280);
+    const bmp180indications = tempPres(config.sensors.bmp180, data.bmp180);
+    const sht21indications = tempHum(config.sensors.sht21, data.sht21);
+    const dht22indications = tempHum(config.sensors.dht22, data.dht22);
+    const ds18b20indications = temp(config.sensors.ds18b20, data.ds18b20);
+    const bme680indications = tempHumPresIaq(config.sensors.bme680, data.bme680);
+    const forecastindications = forecast(config.weather, data.weather);
+
     const sensor = config.display.timeSlot ? config.display.timeSlot.sensor[props.slot][props.num] : 0;
     let hourFormat;
     switch(config.clock.format) {
@@ -42,40 +49,40 @@ export default function TimeSlotSensorType(props: iDisplayTimeSlot) {
             `${i18n.t('day')}, ${i18n.t('month')}, ${i18n.t('year')} (${moment.unix(data.time).utc().format('DD.MM.YYYY')})`
         ],
         /* BME280 */ [
-            `${i18n.t('temperature')} (${BME280().temp})`, 
-            `${i18n.t('humidity')} (${BME280().hum})`, 
-            `${i18n.t('pressure')} (${BME280().pres})`
+            `${i18n.t('temperature')} (${bme280indications.temp})`, 
+            `${i18n.t('humidity')} (${bme280indications.hum})`, 
+            `${i18n.t('pressure')} (${bme280indications.pres})`
         ],
         /* BMP180 */ [
-            `${i18n.t('temperature')} (${BMP180().temp})`, 
-            `${i18n.t('pressure')} (${BMP180().pres})`
+            `${i18n.t('temperature')} (${bmp180indications.temp})`, 
+            `${i18n.t('pressure')} (${bmp180indications.pres})`
         ],
         /* SHT21 */ [
-            `${i18n.t('temperature')} (${SHT21().temp})`, 
-            `${i18n.t('humidity')} (${SHT21().hum})`
+            `${i18n.t('temperature')} (${sht21indications.temp})`, 
+            `${i18n.t('humidity')} (${sht21indications.hum})`
         ],
         /* DHT22 */ [
-            `${i18n.t('temperature')} (${DHT22().temp})`, 
-            `${i18n.t('humidity')} (${DHT22().hum})`
+            `${i18n.t('temperature')} (${dht22indications.temp})`, 
+            `${i18n.t('humidity')} (${dht22indications.hum})`
         ],
         /* DS18B20 */ [
-            `${i18n.t('temperature')} (${DS18B20().temp})`
+            `${i18n.t('temperature')} (${ds18b20indications})`
         ],
         /* ESP32 */ [
-            `${i18n.t('temperature')} (${ESP32().temp})`
+            `${i18n.t('temperature')} (${ESP32(config.sensors.esp32, data.esp32, data.runtime, config.lang).temp})`
         ],
         /* Thingspeak */ [],
         /* Forecast */ [
-            `${i18n.t('temperature')} (${Forecast().temp})`, 
-            `${i18n.t('humidity')} (${Forecast().hum})`, 
-            `${i18n.t('pressure')} (${Forecast().pres})`
+            `${i18n.t('temperature')} (${forecastindications.temp})`, 
+            `${i18n.t('humidity')} (${forecastindications.hum})`, 
+            `${i18n.t('pressure')} (${forecastindications.pres})`
         ],
         /* Wireless Sensor */ [],
         /* BME680 */ [
-            `${i18n.t('temperature')} (${BME680().temp})`, 
-            `${i18n.t('humidity')} (${BME680().hum})`, 
-            `${i18n.t('pressure')} (${BME680().pres})`, 
-            `${i18n.t('indexForAirQuality')} (${BME680().iaq})`
+            `${i18n.t('temperature')} (${bme680indications.temp})`, 
+            `${i18n.t('humidity')} (${bme680indications.hum})`, 
+            `${i18n.t('pressure')} (${bme680indications.pres})`, 
+            `${i18n.t('indexForAirQuality')} (${bme680indications.iaq})`
         ]
     ];
 

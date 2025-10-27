@@ -1,69 +1,51 @@
-import { useSelector } from 'react-redux';
+import { iSensorWsensConfig } from "../../redux/configTypes";
+import { iSensorWsensData } from "../../redux/dataTypes";
 import i18n from "../../i18n/main";
 import { PresLocale } from "./hPaMM";
 import { windDirStr } from './windDirStr';
 import * as vl from "../validateValues";
 import * as calculate from "../calculate";
-import { iConfig } from "../../redux/configTypes";
-import { iData } from "../../redux/dataTypes";
 import { iWsensIndications } from "../../interfaces";
 
-export default function Wsensor() {
-    const config = useSelector((state: iConfig) => state.config);
-    const data = useSelector((state: iData) => state.data);
+export default function wsensor(conf: iSensorWsensConfig | undefined, data: iSensorWsensData | undefined) {
     const exp = i18n.t('dataExpired');
 
     function wsensData(num: number) {
+        const temp = data?.temp.data ?? [[-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1]];
+        const hum = data?.hum.data[num] ?? -1;
+        const pres = data?.pres.data[num] ?? -1;
+        const wSpeed = data?.wind.speed.data[num] ?? -1;
+        const wDir = data?.wind.dir.data[num] ?? -1;
+        const volt = data?.voltage.data[num] ?? -1;
+        const light = data?.light.data[num] ?? -1;
+        const current = data?.current.data[num] ?? -1;
+        const power = data?.power.data[num] ?? -1;
+        const energy = data?.energy.data[num] ?? -1;
+        const freq = data?.freq.data[num] ?? -1;
+        const co2 = data?.co2.data[num] ?? -1;
+
         const sens: iWsensIndications = {
             temp: [],
-            hum: vl.validateHumidity(data.wsensor?.hum.data[num] ?? 40400) 
-                ? (((data.wsensor?.hum.data[num] ?? 0) + (config.wsensor?.hum[num] ?? 0)).toFixed(1) + '%') 
-                : '--',
-            pres: vl.validatePressureHPA(data.wsensor?.pres.data[num] ?? 40400) 
-                ? PresLocale(data.wsensor?.pres.data[num] ?? 0, config.wsensor?.pres[num] ?? 0) 
-                : '--',
-            windSpeed: vl.validateWindSpeed(data.wsensor?.wind.speed.data[num] ?? -1)
-                ? (((data.wsensor?.wind.speed.data[num] ?? 0) + (config.wsensor?.wind.speed[num] ?? 0)).toFixed(1) + i18n.t('units.mps')) 
-                : '--',
-            windDir: vl.validateWindDirection(data.wsensor?.wind.dir.data[num] ?? -1)
-                ? (((data.wsensor?.wind.dir.data[num] ?? 0) + (config.wsensor?.wind.dir[num] ?? 0)).toFixed() + '°') 
-                : '--',
-            windDirStr: vl.validateWindDirection(data.wsensor?.wind.dir.data[num] ?? -1)
-                ? windDirStr((data.wsensor?.wind.dir.data[num] ?? 0) + (config.wsensor?.wind.dir[num] ?? 0)) 
-                : '--',
-            volt: vl.validateHighVoltage(data.wsensor?.voltage.data[num] ?? 40400) 
-                ? (((data.wsensor?.voltage.data[num] ?? 0) + (config.wsensor?.volt[num] ?? 0)).toFixed(1) + i18n.t('units.v')) 
-                : '--',
-            light: vl.validateLight(data.wsensor?.light.data[num] ?? -40400)
-                ? (((data.wsensor?.light.data[num] ?? 0) + (config.wsensor?.light[num] ?? 0)).toFixed(1) + i18n.t('units.lux'))
-                : '--',
-            hiVoltage: vl.validateHighVoltage(data.wsensor?.voltage.data[num] ?? 40400)
-                ? (((data.wsensor?.voltage.data[num] ?? 0) + (config.wsensor?.volt[num] ?? 0)).toFixed(1) + i18n.t('units.v'))
-                : '--',
-            current: vl.validateCurrent(data.wsensor?.current.data[num] ?? 40400)
-                ? (((data.wsensor?.current.data[num] ?? 0) + (config.wsensor?.curr[num] ?? 0)).toFixed(2) + i18n.t('units.a'))
-                : '--',
-            power: vl.validatePower(data.wsensor?.power.data[num] ?? 40400)
-                ? (((data.wsensor?.power.data[num] ?? 0) + (config.wsensor?.pow[num] ?? 0)).toFixed(1) + i18n.t('units.w'))
-                : '--',
-            energy: vl.validateEnergy(data.wsensor?.energy.data[num] ?? -40400)
-                ? (((data.wsensor?.energy.data[num] ?? 0) + (config.wsensor?.enrg[num] ?? 0)).toFixed(1) + i18n.t('units.wh'))
-                : '--',
-            frequency: vl.validateFrequency(data.wsensor?.freq.data[num] ?? 40400)
-                ? (((data.wsensor?.freq.data[num] ?? 0) + (config.wsensor?.freq[num] ?? 0)).toFixed(1) + i18n.t('units.hz'))
-                : '--',
-            co2: vl.validateCO2(data.wsensor?.co2.data[num] ?? 40400) 
-                ? (((data.wsensor?.co2.data[num] ?? 0) + (config.wsensor?.co2[num] ?? 0)).toFixed(1) + 'ppm') 
-                : '--',
-            ahum: calculate.absoluteHum(data.wsensor?.temp?.data[0][num], data.wsensor?.hum?.data[num]),
-            dp: calculate.dewPoint(data.wsensor?.temp?.data[0][num], data.wsensor?.hum?.data[num])
+            hum: vl.validateHumidity(hum) ? (hum + (conf?.hum[num] ?? 0)).toFixed(1) + '%' : '--',
+            pres: vl.validatePressureHPA(pres) ? PresLocale(pres, conf?.pres[num] ?? 0) : '--',
+            windSpeed: vl.validateWindSpeed(wSpeed) ? (wSpeed + (conf?.wind.speed[num] ?? 0)).toFixed(1) + i18n.t('units.mps') : '--',
+            windDir: vl.validateWindDirection(wDir) ? (wDir + (conf?.wind.dir[num] ?? 0)).toFixed() + '°' : '--',
+            windDirStr: vl.validateWindDirection(wDir) ? windDirStr(wDir + (conf?.wind.dir[num] ?? 0)) : '--',
+            volt: vl.validateHighVoltage(volt) ? (volt + (conf?.volt[num] ?? 0)).toFixed(1) + i18n.t('units.v') : '--',
+            light: vl.validateLight(light) ? (light + (conf?.light[num] ?? 0)).toFixed(1) + i18n.t('units.lux') : '--',
+            hiVoltage: vl.validateHighVoltage(volt) ? (volt + (conf?.volt[num] ?? 0)).toFixed(1) + i18n.t('units.v') : '--',
+            current: vl.validateCurrent(current) ? (current + (conf?.curr[num] ?? 0)).toFixed(2) + i18n.t('units.a') : '--',
+            power: vl.validatePower(power) ? (power + (conf?.pow[num] ?? 0)).toFixed(1) + i18n.t('units.w') : '--',
+            energy: vl.validateEnergy(energy) ? (energy + (conf?.enrg[num] ?? 0)).toFixed(1) + i18n.t('units.wh') : '--',
+            frequency: vl.validateFrequency(freq) ? (freq + (conf?.freq[num] ?? 0)).toFixed(1) + i18n.t('units.hz') : '--',
+            co2: vl.validateCO2(co2) ? (co2 + (conf?.co2[num] ?? 0)).toFixed(1) + 'ppm' : '--',
+            ahum: calculate.absoluteHum(temp[0][num], hum),
+            dp: calculate.dewPoint(temp[0][num], hum)
         };
 
         for(let i=0; i<5; i++) {
             sens.temp.push(
-                vl.validateTemperature(data.wsensor?.temp.data[i][num] ?? 40400) 
-                    ? (((data.wsensor?.temp.data[i][num] ?? 0) + (config.wsensor?.temp[num][i] ?? 0)).toFixed(1) + '°C') 
-                    : '--'
+                vl.validateTemperature(temp[i][num] ?? 40400) ? (temp[i][num] + (conf?.temp[num][i] ?? 0)).toFixed(1) + '°C' : '--'
             );
         }
 

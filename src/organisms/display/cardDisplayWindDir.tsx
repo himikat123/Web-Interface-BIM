@@ -4,16 +4,19 @@ import Card from "../../atoms/card";
 import SensorTypeWindDir from "../../molecules/sensor/sensorTypeWindDir";
 import WsensorNumber from "../../molecules/wsensor/wsensorNumber";
 import ThingspeakField from "../../molecules/thingspeak/thingspeakFields";
-import Wsensor from "../../atoms/indications/wsensor";
+import wsensor from "../../atoms/indications/wsensor";
 import { iConfig } from "../../redux/configTypes";
+import { iData } from "../../redux/dataTypes";
 import * as cf from "../../redux/slices/config";
 
 export default function CardDisplayWindDir() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
+    const data = useSelector((state: iData) => state.data);
+    const wsens = wsensor(config.wsensor, data.wsensor);
     const indications = [
-        `{${Wsensor()[0].windDirStr}} (${Wsensor()[0].windDir})`, 
-        `{${Wsensor()[1].windDirStr}} (${Wsensor()[1].windDir})`
+        `{${wsens[0].windDirStr}} (${wsens[0].windDir})`, 
+        `{${wsens[1].windDirStr}} (${wsens[1].windDir})`
     ];
 
     return <Card header={i18n.t('windDirection')}

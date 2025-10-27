@@ -3,16 +3,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import device from "../../device";
 import Card from "../../atoms/card";
 import { iConfig } from "../../redux/configTypes";
+import { iData } from "../../redux/dataTypes";
 import * as cf from "../../redux/slices/config";
 import SensorTypePresOut from "../../molecules/sensor/sensorTypePresOut";
 import WsensorNumber from "../../molecules/wsensor/wsensorNumber";
 import ThingspeakField from "../../molecules/thingspeak/thingspeakFields";
-import Wsensor from "../../atoms/indications/wsensor";
+import wsensor from "../../atoms/indications/wsensor";
 
 export default function CardDisplayPressureOut() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
-    const indications = [`(${Wsensor()[0].pres})`, `(${Wsensor()[1].pres})`];
+    const data = useSelector((state: iData) => state.data);
+    const wsens = wsensor(config.wsensor, data.wsensor);
+    const indications = [`(${wsens[0].pres})`, `(${wsens[1].pres})`];
 
     return <Card header={i18n.t('pressure')}
         content={<>
