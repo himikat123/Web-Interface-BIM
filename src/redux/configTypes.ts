@@ -1,311 +1,43 @@
-export interface iSensorAconfig {
-    v: number
-}
-
-export interface iSensorLconfig {
-    l: number
-}
-
-export interface iSensorTconfig {
-    t: number
-}
-
-export interface iSensorTPconfig {
-    t: number,
-    p: number
-}
-
-export interface iSensorTHconfig {
-    t: number,
-    h:number
-}
-
-export interface iSensorTHPconfig {
-    t: number,
-    h:number,
-    p: number
-}
-
-export interface iSensorTHPIconfig {
-    t: number,
-    h:number,
-    p: number,
-    i: number
-}
-
-export interface iSensorWeatherConfig {
-    appid: string[],
-    city: string,
-    cityid: number,
-    lat: number,
-    lon: number,
-    provider: number,
-    citysearch: number,
-    corr: iSensorTHPconfig
-}
-
-export interface iSensorWsensConfig {
-    temp: number[][],
-    hum: number[],
-    pres: number[],
-    wind: {
-        speed: number[],
-        dir: number[]
-    },
-    light: number[],
-    co2: number[],
-    volt: number[],
-    curr: number[],
-    pow: number[],
-    enrg: number[],
-    freq: number[],
-    bat: {
-        k: number[],
-        type: number[]
-    },
-    expire: number[],
-    channel: number
-}
+import { iSensors } from "./configTypes/sensors";
+import iSensorWeatherConfig from "./configTypes/weather";
+import iSensorWsensConfig from "./configTypes/wsensor";
+import iComfort from "./configTypes/comfort";
+import { iAccessPoint, iNetwork } from "./configTypes/network";
+import iClock from "./configTypes/clock";
+import iDisplay from "./configTypes/display";
+import iSound from "./configTypes/sound";
+import { iThingspeakSend, iThingspeakReceive } from "./configTypes/thingspeak";
+import iNarodmonSend from "./configTypes/narodmon";
+import iMqttSend from "./configTypes/mqtt";
+import iHistory from "./configTypes/history";
 
 export interface iConfig {
     config: {
         configState: string,
         v: string,
-        comfort: {
-            temp: {
-                source: number,
-                wsensNum?: number,
-                sens?: number,
-                thing: number,
-                min: number[] | number,
-                max: number[] | number,
-                sound?: number
-            },
-            hum: {
-                source: number,
-                wsensNum?: number,
-                thing: number,
-                min: number[] | number,
-                max: number[] | number,
-                sound?: number
-            },
-            iaq?: {
-                source: number,
-                sound: number
-            },
-            co2?: {
-                source: number,
-                wsensNum: number,
-                sound: number
-            }
-        },
-        network: {
-            ssid: string[],
-            pass: string[],
-            ip: string,
-            mask: string,
-            gw: string,
-            dns1: string,
-            dns2: string,
-            type: number
-        },
-        accessPoint: {
-            ssid: string,
-            pass: string,
-            chnl: number,
-            ip: string,
-            mask: string
-        },
+        comfort: iComfort,
+        network: iNetwork,
+        accessPoint: iAccessPoint,
         weather: iSensorWeatherConfig,
         lang: string,
         sleep?: number,
 	    batK?: number,
-        units: {
-            pres: number
-        },
-        clock: {
-            format: number,
-            ntp: string,
-            utc: number,
-            dlst: number,
-            ntp_period: number
-        },
-        display: {
-            type?: number[],
-            model: number[],
-            order?: number[][],
-            dayTime: string[] | string,
-            nightTime: string[] | string,
-            brightMethod: number[] | number,
-            autoOff?: number[],
-            nightOff?: {
-                need: number[],
-                from: string[],
-                to: string[]
-            },
-            brightness: {
-                day: number[] | number,
-                night: number[] | number,
-                min?: number[],
-                max?: number[]
-            },
-            lightSensor: number[] | number,
-            sensitivity: number[] | number,
-            animation?: {
-                type: number[],
-                speed: number[],
-                points: number[]
-            },
-            source: {
-                tempOut: {
-                    sens: number,
-                    wsensNum?: number,
-                    temp?: number,
-                    thing: number
-                },
-                humOut: {
-                    sens: number,
-                    wsensNum?: number,
-                    thing: number
-                },
-                presOut: {
-                    sens: number,
-                    wsensNum?: number,
-                    thing: number
-                },
-                tempIn: {
-                    sens: number,
-                    wsensNum?: number,
-                    temp?: number,
-                    thing: number
-                },
-                humIn: {
-                    sens: number,
-                    wsensNum?: number,
-                    thing: number
-                },
-                volt: {
-                    sens: number,
-                    wsensNum?: number,
-                    volt: number,
-                    thing: number,
-                    thingType: number
-                },
-                bat: {
-                    sens: number,
-                    wsensNum?: number,
-                    thing: number
-                },
-                descr: number,
-                wind?: {
-                    speed: {
-                        sens: number,
-                        wsensNum: number,
-                        thing: number
-                    },
-                    dir: {
-                        sens: number,
-                        wsensNum: number,
-                        thing: number
-                    }
-                },
-                sequence?: {
-                    name: string[],
-                    temp: number[],
-                    thngtemp: number[],
-                    wsenstemp: number[][],
-                    hum: number[],
-                    thnghum: number[],
-                    wsenshum: number[],
-                    dur: number
-                }
-            },
-            timeSlot?: {
-                period: number[][],
-                sensor: number[][],
-                data: number[][],
-                thing: number[][],
-                wsensor: {
-                    num: number[][],
-                    type: number[][]
-                },
-                color: string[][]
-            }
-        },
-        sound?: {
-            vol: number,
-            eq: number,
-            hourly: number,
-            hour: {
-                from: string,
-                to: string
-            }
-        },
-        sensors: {
-            bme680?: iSensorTHPIconfig,
-            bme280: iSensorTHPconfig,
-            bmp180: iSensorTPconfig,
-            sht21: iSensorTHconfig,
-            dht22: iSensorTHconfig,
-            ds18b20: iSensorTconfig,
-            esp32?: iSensorTconfig,
-            max44009: iSensorLconfig,
-            bh1750: iSensorLconfig,
-            analog: iSensorAconfig
-        },
+        clock: iClock,
+        display: iDisplay,
+        sound?: iSound,
+        sensors: iSensors,
         wsensor?: iSensorWsensConfig,
-        thingspeakSend: {
-            period: number,
-            channelID: string,
-            wrkey: string,
-            rdkey: string,
-            fields: number[],
-            types: number[],
-            wsensors?: number[],
-            wtypes?: number[]
-        },
-        thingspeakReceive: {
-            period: number,
-            channelID: string,
-            rdkey: string,
-            expire: number
-        },
-        narodmonSend: {
-            period: number,
-            lat: string,
-            lon: string,
-            name: string,
-            sensors: number[],
-            types: number[],
-            wsensors?: number[],
-            wtypes?: number[],
-            metrics: string[]
-        },
-        mqttSend?: {
-            period: number,
-            broker: string,
-            port: number,
-            user: string,
-            pass: string,
-            sensors: number[],
-            types: number[],
-            wsensors: number[],
-            wtypes: number[],
-            topics: string[]
-        },
-        history?: {
-            period: number,
-            channelID: string,
-            wrkey: string,
-            rdkey: string,
-            fields: number[],
-            wSensors: number[],
-            wTypes: number[],
-            tFields: number[]
-        },
+        thingspeakSend: iThingspeakSend,
+        thingspeakReceive: iThingspeakReceive,
+        narodmonSend: iNarodmonSend,
+        mqttSend?: iMqttSend,
+        history?: iHistory,
         account: {
             name: string,
             required: number
+        },
+        units: {
+            pres: number
         }
     }
 }
