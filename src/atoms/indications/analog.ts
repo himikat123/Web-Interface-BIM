@@ -1,5 +1,5 @@
-import { iSensorAconfig } from "../../redux/configTypes";
-import { iSensorAdata } from "../../redux/dataTypes";
+import type { iSensorAconfig } from "../../redux/configTypes/sensors";
+import type { iSensorAdata } from "../../redux/dataTypes";
 import i18n from "../../i18n/main";
 import * as vl from "../validateValues";
 

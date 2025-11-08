@@ -1,4 +1,4 @@
-export default interface iSensorWsensConfig {
+export interface iSensorWsensConfig {
     temp: number[][],
     hum: number[],
     pres: number[],

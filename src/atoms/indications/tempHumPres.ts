@@ -1,5 +1,5 @@
-import { iSensorTHPconfig } from "../../redux/configTypes";
-import { iSensorTHPdata } from "../../redux/dataTypes";
+import type { iSensorTHPconfig } from "../../redux/configTypes/sensors";
+import type { iSensorTHPdata } from "../../redux/dataTypes";
 import * as vl from "../validateValues";
 import * as calculate from "../calculate";
 import { PresLocale } from "./hPaMM";

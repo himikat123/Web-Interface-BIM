@@ -1,4 +1,4 @@
-export default interface iComfort {
+export interface iComfort {
     temp: {
         source: number,
         wsensNum?: number,

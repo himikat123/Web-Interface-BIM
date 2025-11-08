@@ -11,7 +11,7 @@ export default function CardDisplayComfort() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const names = config.display.source.sequence 
-        ? config.display.source.sequence.name.filter(name => name !== '').join(', ') 
+        ? config.display.source.sequence.name.filter((name: string) => name !== '').join(', ') 
         : '';
     
     const comforts = [];

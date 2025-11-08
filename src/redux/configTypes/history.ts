@@ -1,4 +1,4 @@
-export default interface iHistory {
+export interface iHistory {
     period: number,
     channelID: string,
     wrkey: string,

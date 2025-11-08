@@ -1,4 +1,4 @@
-export default interface iClock {
+export interface iClock {
     format: number,
     ntp: string,
     utc: number,

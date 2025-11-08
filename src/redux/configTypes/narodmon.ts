@@ -1,4 +1,4 @@
-export default interface iNarodmonSend {
+export interface iNarodmonSend {
     period: number,
     lat: string,
     lon: string,

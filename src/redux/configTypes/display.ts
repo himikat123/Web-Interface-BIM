@@ -1,4 +1,4 @@
-export default interface iDisplay {
+export interface iDisplay {
     type?: number[],
     model: number[],
     order?: number[][],

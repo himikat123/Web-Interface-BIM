@@ -1,4 +1,4 @@
-export default interface iMqttSend {
+export interface iMqttSend {
     period: number,
     broker: string,
     port: number,

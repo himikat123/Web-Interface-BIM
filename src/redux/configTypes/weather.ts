@@ -1,6 +1,6 @@
 import { iSensorTHPconfig } from "./sensors";
 
-export default interface iSensorWeatherConfig {
+export interface iSensorWeatherConfig {
     appid: string[],
     city: string,
     cityid: number,

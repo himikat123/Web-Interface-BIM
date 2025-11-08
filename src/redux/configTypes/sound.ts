@@ -1,4 +1,4 @@
-export default interface iSound {
+export interface iSound {
     vol: number,
     eq: number,
     hourly: number,
