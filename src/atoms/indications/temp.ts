@@ -1,5 +1,5 @@
 import type { iSensorTconfig } from "../../redux/configTypes/sensors";
-import type { iSensorTdata } from "../../redux/dataTypes";
+import type { iSensorTdata } from "../../redux/dataTypes/sensors";
 import * as vl from "../validateValues";
 
 export default function temp(conf: iSensorTconfig, data: iSensorTdata) {

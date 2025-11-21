@@ -1,113 +1,7 @@
-export interface iSensorAdata {
-    volt: number
-}
-
-export interface iSensorLdata {
-    light: number
-}
-
-export interface iSensorTdata {
-    temp: number
-}
-
-export interface iSensorTPdata {
-    temp: number,
-    pres: number
-}
-
-export interface iSensorTHdata {
-    temp: number,
-    hum: number
-}
-
-export interface iSensorTHPdata {
-    temp: number,
-    hum:number,
-    pres: number
-}
-
-export interface iSensorTHPIdata {
-    temp: number,
-    hum:number,
-    pres: number,
-    iaq: number,
-    iaqAccr: number
-}
-
-export interface iSensorWeatherData {
-    icon: number,
-    isDay: number,
-    temp: number,
-    hum: number,
-    pres: number,
-    wind: {
-        speed: number,
-        dir: number
-    },
-    descript: string,
-    time: number,
-    daily: {
-        tMax: [number],
-        tMin: [number],
-        wind: [number],
-        icon: [number],
-    }
-}
-
-export interface iSensorWsensData {
-    time: [number, number],
-    temp: {
-        data: number[][],
-        name: string[][]
-    },
-    hum: {
-        data: number[],
-        name: string[]
-    },
-    pres: {
-        data: number[],
-        name: string[]
-    },
-    wind: {
-        speed: {
-            data: number[],
-            name: string[]
-        },
-        dir: {
-            data: number[],
-            name: string[]
-        }
-    },
-    light: {
-        data: number[],
-        name: string[]
-    },
-    co2: {
-        data: number[],
-        name: string[]
-    },
-    voltage: {
-        data: number[],
-        name: string[]
-    },
-    current: {
-        data: number[],
-        name: string[]
-    },
-    power: {
-        data: number[],
-        name: string[]
-    },
-    energy: {
-        data: number[],
-        name: string[]
-    },
-    freq: {
-        data: number[],
-        name: string[]
-    },
-    bat: number[]
-}
+import type { iSensorAdata, iSensorLdata, iSensorTdata, iSensorTPdata, iSensorTHdata, iSensorTHPdata, iSensorTHPIdata } from './dataTypes/sensors';
+import type { iSensorWeatherData } from './dataTypes/weather';
+import type { iSensorWsensData } from './dataTypes/wsensor';
+import type { iNetwork } from './dataTypes/network';
 
 export interface iData {
     data: {
@@ -121,17 +15,7 @@ export interface iData {
         runtime: number,
         time: number,
         cyd?: number,
-        network: {
-            ssid: string,
-            ch: number,
-            sig: string,
-            mac: string,
-            ip: string,
-            mask: string,
-            gw: string,
-            dns1: string,
-            dns2: string
-        },    
+        network: iNetwork,
         ssids: [ [string, number] ],
         bme680?: iSensorTHPIdata,
         bme280: iSensorTHPdata,

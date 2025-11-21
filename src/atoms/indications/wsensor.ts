@@ -1,5 +1,5 @@
 import type { iSensorWsensConfig } from "../../redux/configTypes/wsensor";
-import type { iSensorWsensData } from "../../redux/dataTypes";
+import type { iSensorWsensData } from "../../redux/dataTypes/wsensor";
 import i18n from "../../i18n/main";
 import { PresLocale } from "./hPaMM";
 import { windDirStr } from './windDirStr';
