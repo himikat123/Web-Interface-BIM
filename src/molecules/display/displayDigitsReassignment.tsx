@@ -1,9 +1,13 @@
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { iConfig } from "../../redux/configTypes";
 import { displayOrderChange } from "../../redux/slices/config";
+import Button from "../../atoms/button";
 import i18n from "../../i18n/main";
+import hostUrl from "../../atoms/hostUrl";
 
 export default function DisplayDigitsReassignment(props: any) {
+    const [showOrder, setShowOrder] = useState<boolean>(false);
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const width = config.display.model[props.num] <= 1 ? 6 : 8;
@@ -11,6 +15,14 @@ export default function DisplayDigitsReassignment(props: any) {
     function orderChange(dig: number, val: number) {
         dispatch(displayOrderChange({num: props.num, dig: dig, val: val}));
     }
+
+    function sendShowCommand() {
+        setShowOrder(!showOrder);
+    }
+
+    useEffect(() => {
+        fetch(`${hostUrl()}/esp/showOrder?show=${Number(showOrder)}`);
+    }, [showOrder]);
 
     return <div className="mt-6">
         <h3 className="text-lg">{i18n.t('orderOfDigits')}</h3>
@@ -38,6 +50,12 @@ export default function DisplayDigitsReassignment(props: any) {
                     })}
                 </div>
             })}
+        </div>
+        <div className="text-center mt-2">
+            <Button className="bg-green-600 hover:bg-green-700 text-text_dark" 
+                onClick={() => sendShowCommand()} 
+                label={showOrder ? i18n.t('cancel') : i18n.t('showOrder')} 
+            />
         </div>
     </div>
 }

@@ -393,5 +393,6 @@
     "twoDigits": "2 цифры",
     "fourDigits": "4 цифры",
     "orderOfDigits": "Порядок разрядов",
+    "showOrder": "Отобразить порядок",
     "calibrate": "Калибровка тачскрина"
 }

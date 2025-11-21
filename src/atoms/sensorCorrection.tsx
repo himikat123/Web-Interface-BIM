@@ -61,11 +61,11 @@ export default function sensorCorrection(
             step = 0.1;
             break;
         case 'wd': // Wind direction
-            units = '';
-            val = (vl.validateWindDirection(lblData) ? `${windDirStr(lblData)} (${Math.round(lblData)}°)` : "--");
-            min = -100;
-            max = 100;
-            step = 1;
+            units = '°';
+            val = (vl.validateWindDirection(lblData) ? (`${windDirStr(lblData)} ${Math.round(lblData)}`) : "--");
+            min = 0;
+            max = 0;
+            step = 0;
             break;
         case 'l': // Ambient light
             units = i18n.t('units.lux');

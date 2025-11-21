@@ -393,5 +393,6 @@
     "twoDigits": "2 Ziffern",
     "fourDigits": "4 Ziffern",
     "orderOfDigits": "Reihenfolge der Ziffern",
+    "showOrder": "Reihenfolge anzeigen",
     "calibrate": "Touchscreen-Kalibrierung"
 }

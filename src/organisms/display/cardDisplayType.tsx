@@ -20,10 +20,10 @@ export default function CardDisplayType(props: iDisplay) {
         {num: 1, title: "LCD/TFT"},
         {num: 2, title: i18n.t('neopixel')},
         {num: 3, title: i18n.t('segment7')},
-        //{num: 7, title: i18n.t('matrix')},
         //{num: 4, title: i18n.t('numitron')},
         //{num: 5, title: i18n.t('vfd')},
-        //{num: 6, title: i18n.t('nixie')}
+        //{num: 6, title: i18n.t('nixie')},
+        //{num: 7, title: i18n.t('matrix')}
     ];
 
     const disableTypes = [

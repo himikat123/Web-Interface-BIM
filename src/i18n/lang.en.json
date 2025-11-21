@@ -393,5 +393,6 @@
     "twoDigits": "2 digits",
     "fourDigits": "4 digits",
     "orderOfDigits": "Order of digits",
+    "showOrder": "Show order",
     "calibrate": "Touchscreen calibration"
 }

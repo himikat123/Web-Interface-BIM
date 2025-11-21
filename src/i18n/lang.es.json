@@ -392,6 +392,7 @@
     "year": "año",
     "twoDigits": "2 dígitos",
     "fourDigits": "4 dígitos",
-    "orderOfDigits": "Orden de los dígitos",
+    "orderOfDigits": "Orden de dígitos",
+    "showOrder": "Mostrar orden",
     "calibrate": "Calibración Pantalla Táctil"
 }

@@ -273,6 +273,12 @@ app.get('/esp/calibrate', (req, res) => {
     res.send("OK");
 });
 
+app.get('/esp/showOrder', (req, res) => {
+    console.log('GET /esp/showOrder', req.query);
+    res.set('Access-Control-Allow-Origin', '*');
+    res.send("OK");
+});
+
 app.listen(80, () => {
     console.log('listening on port 80')
 });
