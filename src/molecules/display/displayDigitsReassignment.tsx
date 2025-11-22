@@ -6,7 +6,7 @@ import Button from "../../atoms/button";
 import i18n from "../../i18n/main";
 import hostUrl from "../../atoms/hostUrl";
 
-export default function DisplayDigitsReassignment(props: any) {
+export default function DisplayDigitsReassignment(props: {num: number}) {
     const [showOrder, setShowOrder] = useState<boolean>(false);
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
@@ -21,8 +21,8 @@ export default function DisplayDigitsReassignment(props: any) {
     }
 
     useEffect(() => {
-        fetch(`${hostUrl()}/esp/showOrder?show=${Number(showOrder)}`);
-    }, [showOrder]);
+        fetch(`${hostUrl()}/esp/showOrder?num=${props.num}&show=${Number(showOrder)}&order=${config.display.order?.[props.num].join(',')}`);
+    }, [showOrder, config.display.order, props.num]);
 
     return <div className="mt-6">
         <h3 className="text-lg">{i18n.t('orderOfDigits')}</h3>
