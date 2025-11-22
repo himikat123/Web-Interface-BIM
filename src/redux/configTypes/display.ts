@@ -1,6 +1,7 @@
 export interface iDisplay {
     type?: number[],
     model: number[],
+    cntLeds?: number[],
     order?: number[][],
     dayTime: string[] | string,
     nightTime: string[] | string,

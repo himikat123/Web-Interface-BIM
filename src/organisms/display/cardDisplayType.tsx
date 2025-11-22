@@ -16,14 +16,14 @@ export default function CardDisplayType(props: iDisplay) {
     const data = useSelector((state: iData) => state.data)
 
     const types = [
-        {num: 0, title: "--"},
-        {num: 1, title: "LCD/TFT"},
-        {num: 2, title: i18n.t('neopixel')},
-        {num: 3, title: i18n.t('segment7')},
-        //{num: 4, title: i18n.t('numitron')},
-        //{num: 5, title: i18n.t('vfd')},
-        //{num: 6, title: i18n.t('nixie')},
-        //{num: 7, title: i18n.t('matrix')}
+        { num: 0, title: "--" },
+        { num: 1, title: "LCD/TFT" },
+        { num: 2, title: i18n.t('neopixel') },
+        { num: 3, title: i18n.t('segment7') },
+        //{ num: 4, title: i18n.t('numitron') },
+        //{ num: 5, title: i18n.t('vfd') },
+        //{ num: 6, title: i18n.t('nixie') },
+        //{ num: 7, title: i18n.t('matrix') }
     ];
 
     const disableTypes = [
@@ -53,15 +53,17 @@ export default function CardDisplayType(props: iDisplay) {
     ];
 
     const neopixel = [
-        { [`WS2812b (4${i18n.t('digits')}, 1 ${i18n.t('ledPerSegment')})`]: 1800 },
-        { [`WS2812b (4${i18n.t('digits')}, 2 ${i18n.t('ledsPerSegment')})`]: 3480 },
-        { [`WS2812b (4${i18n.t('digits')}, 3 ${i18n.t('ledsPerSegment')})`]: 5160 },
-        { [`WS2812b (6${i18n.t('digits')}, 1 ${i18n.t('ledPerSegment')})`]: 2760 },
-        { [`WS2812b (6${i18n.t('digits')}, 2 ${i18n.t('ledsPerSegment')})`]: 5280 },
-        { [`WS2812b (6${i18n.t('digits')}, 3 ${i18n.t('ledsPerSegment')})`]: 7800 },
-        //{ [`WS2812b (8${i18n.t('digits')}, 1 ${i18n.t('ledPerSegment')})`]: 3720 },
-        //{ [`WS2812b (8${i18n.t('digits')}, 2 ${i18n.t('ledsPerSegment')})`]: 7080 },
-        //{ [`WS2812b (8${i18n.t('digits')}, 3 ${i18n.t('ledsPerSegment')})`]: 10440 }
+        { [`WS2812b (4 ${i18n.t('digits')})`]: 1500 },
+        { [`WS2812b (6 ${i18n.t('digits')})`]: 2300 },
+        { [`SK9822 (4 ${i18n.t('digits')})`]: 1500 },
+        { [`SK9822 (6 ${i18n.t('digits')})`]: 2300 },
+        { [`SK9822 (8 ${i18n.t('digits')})`]: 3100 }
+    ];
+
+    const leds = [
+        { num: 0, title: `1 ${i18n.t('ledPerSegment')}` },
+        { num: 1, title: `2 ${i18n.t('ledsPerSegment')}` },
+        { num: 2, title: `3 ${i18n.t('ledsPerSegment')}` },
     ];
 
     const vfd = [
@@ -151,6 +153,14 @@ export default function CardDisplayType(props: iDisplay) {
             />
         </div>}
 
+        {config.display.type && config.display.type[props.num] === 2 && <div className="mt-8">
+            <SelectSwitch label={i18n.t('displayModel')}
+                options={leds}
+                value={config.display.cntLeds ? config.display.cntLeds[props.num] : 0}
+                onChange={val => dispatch(cf.displayCntLedsChange({num: props.num, val: val}))}
+            />
+        </div>}
+
         {config.display.type && config.display.type[props.num] > 0 && <>
             {config.display.type[props.num] <= 2 && <DisplayBrightLimit num={props.num} />}
 
@@ -159,10 +169,10 @@ export default function CardDisplayType(props: iDisplay) {
                 <Indication error={false} 
                     value={String(
                         config.display.type[props.num] === 2 
-                            ? (Math.round(consums[config.display.model[props.num]] 
+                            ? (Math.round((consums[config.display.model[props.num]] * (config.display.cntLeds ? (config.display.cntLeds[props.num] + 1) : 1)) 
                                 * (config.display.brightness.max ? config.display.brightness.max[props.num] : 1) 
                                 / 255
-                            ) + 1)
+                            ))
                             : consums[config.display.model[props.num]]
                     ) + i18n.t('units.ma')} 
                 />
