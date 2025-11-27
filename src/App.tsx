@@ -78,6 +78,7 @@ function App() {
     
     useEffect(() => {
         let dataFetchInterval: NodeJS.Timeout;
+        const prod = dataState !== 'DEMO' && window.location.port !== "3000";
 
         async function fetchData() {
             const nav = await dataFetch(path);
@@ -90,24 +91,24 @@ function App() {
         }
 
         if(configState === 'ok' && alarmsState === 'ok') {
-            dataFetchInterval = setInterval(() => {
+            if(!prod) dataFetchInterval = setInterval(() => {
                 dispatch(updateDataChange(true));
             }, 5000);
 
             if(updateData && !dataFetching) {
-                if(path !== '/default') {
-                    if(path === '/filesystem') {
-                        if(!stopDataFetching) fetchData();
-                    }
-                    else fetchData();
-                }
+                //if(path !== '/default') {
+                //    if(path === '/filesystem') {
+                //        if(!stopDataFetching) fetchData();
+                //    }
+                /*    else*/ fetchData();
+                //}
             }
         }
 
         return () => clearInterval(dataFetchInterval);
     }, [
-        configState, alarmsState, dispatch, dataFetching, updateData, path, 
-        navigate, stopDataFetching, history.updated, hourly.updated, apMode
+        configState, alarmsState, dispatch, dataFetching, updateData, path, navigate, 
+        stopDataFetching, history.updated, hourly.updated, apMode, dataState
     ]);
 
     useEffect(() => {
@@ -157,6 +158,7 @@ function App() {
 }
 
 export default App;
+// TODO выкидывать на стр логин от любого ajax запроса
 // TODO статус дисплея вкл. выкл.
 // TODO 2 канала thingspeak
 // TODO +датчик ветра

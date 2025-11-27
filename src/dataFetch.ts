@@ -3,7 +3,7 @@ import { displayModelChange, displayTypeChange } from "./redux/slices/config";
 import { dataFetchingChange, dataStateChange, setDataState, updateDataChange } from "./redux/slices/data";
 import store from "./redux/store";
 import hostUrl from "./atoms/hostUrl";
-
+import { initWebSocket } from "./wsClient";
 
 export default async function dataFetch(path: string): Promise<string> {
     let navigate = '';
@@ -11,6 +11,7 @@ export default async function dataFetch(path: string): Promise<string> {
     try {
         store.dispatch(dataFetchingChange(true));
         const res = await axios(`${hostUrl()}/data.json?code=${localStorage.getItem('code') || '0'}`);
+        if(res.data.state !== 'DEMO' && window.location.port !== "3000") initWebSocket();
         
         store.dispatch(dataStateChange('ok'));
         store.dispatch(dataFetchingChange(false));
