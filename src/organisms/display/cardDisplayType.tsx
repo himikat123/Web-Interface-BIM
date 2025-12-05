@@ -18,7 +18,7 @@ export default function CardDisplayType(props: iDisplay) {
     const types = [
         { num: 0, title: "--" },
         { num: 1, title: "LCD/TFT" },
-        { num: 2, title: i18n.t('neopixel') },
+        { num: 2, title: i18n.t('pixelLEDs') },
         { num: 3, title: i18n.t('segment7') },
         //{ num: 4, title: i18n.t('numitron') },
         //{ num: 5, title: i18n.t('vfd') },
@@ -52,7 +52,7 @@ export default function CardDisplayType(props: iDisplay) {
         { [`8${i18n.t('tubes')}`]: 1280 }
     ];
 
-    const neopixel = [
+    const pixelLEDs = [
         { [`WS2812b (4 ${i18n.t('digits')})`]: 1500 },
         { [`WS2812b (6 ${i18n.t('digits')})`]: 2300 },
         { [`SK9822 (4 ${i18n.t('digits')})`]: 1500 },
@@ -91,8 +91,8 @@ export default function CardDisplayType(props: iDisplay) {
             consums = lcd.map(d => Object.values(d)[0]);
             break;
         case 2: 
-            models = neopixel.map(d => Object.keys(d)[0]);
-            consums = neopixel.map(d => Object.values(d)[0]);
+            models = pixelLEDs.map(d => Object.keys(d)[0]);
+            consums = pixelLEDs.map(d => Object.values(d)[0]);
             break;
         case 3: 
             models = segment.map(d => Object.keys(d)[0]);

@@ -88,7 +88,7 @@ export default function TimeSlotSensorType(props: iDisplayTimeSlot) {
 
     const disabled = [
         [ /* clock */ [], [],
-            [ // type: Neopixel
+            [ // type: Pixel LEDs
                 [0, 1, 1, 1, 1], [0, 1, 1, 1, 1], [0, 1, 1, 1, 1], [0, 0, 1, 1, 1], [0, 0, 1, 1, 1], [0, 0, 1, 1, 1]
             ],
             [ // type: 7 Segment
@@ -108,7 +108,7 @@ export default function TimeSlotSensorType(props: iDisplayTimeSlot) {
             ]
         ],
         [ /* date */ [], [],
-            [ // type: Neopixel
+            [ // type: Pixel LEDs
                 [0, 1, 1], [0, 1, 1], [0, 1, 1], [0, 0, 1], [0, 0, 1], [0, 0, 1]
             ],
             [ // type: 7 Segment

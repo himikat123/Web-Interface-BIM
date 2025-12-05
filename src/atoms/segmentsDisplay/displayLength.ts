@@ -7,7 +7,7 @@ export default function displayLength(dispNum: number, leng = 1) {
     const length = [4, 6, 8];
     let lg = 0;
 
-    if(dType === 2) // Neopixel 
+    if(dType === 2) // Pixel LEDs
         lg = dModel < 3 ? 0 : 1;
     if(dType === 3) // 7 Segment 
         lg = (dModel === 0 || dModel === 2) ? 0 : (dModel === 1 || dModel === 3) ? 1 : 2;
