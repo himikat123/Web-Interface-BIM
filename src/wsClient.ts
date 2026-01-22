@@ -1,8 +1,13 @@
-import store from "./redux/store"; 
-import { setDataState } from "./redux/slices/data"; 
+import store from "./redux/store";
+import { setDataState, dataStateChange } from "./redux/slices/data";
 
-let ws: WebSocket | null = null; 
-let reconnectTimer: any = null;
+let reconnectAttempts = 0;
+const MAX_RECONNECT_ATTEMPTS = 3;
+let ws: WebSocket | null = null;
+let reconnectTimer: any;
+let heartbeatTimer: ReturnType<typeof setTimeout> | null = null;
+
+const HEARTBEAT_TIMEOUT = 5000;
 
 export function initWebSocket() {
     try {
@@ -14,21 +19,34 @@ export function initWebSocket() {
 
         ws.onopen = () => {
             console.log("WS connected");
+            reconnectAttempts = 0;
             if(reconnectTimer) clearTimeout(reconnectTimer);
+            store.dispatch(dataStateChange('ok'));
+            startHeartbeat();
         };
 
         ws.onmessage = (evt) => {
+            resetHeartbeat();
             try {
                 const json = JSON.parse(evt.data);
                 store.dispatch(setDataState(json));
-                console.log("message received: ", json);
+                console.log("message received:", json);
+                setTimeout(() => sendLocalCode(), 0);
+                if((json.state === 'LOGIN') && (window.location.pathname !== '/login') && !window.location.hash.includes('#/login')) {
+                    window.location.href = '/#/login';
+                }
             } 
-            catch (e) { console.error("WS bad JSON:", e); }
+            catch (e) {
+                console.error("WS bad JSON:", e, evt.data);
+            }
         };
 
         ws.onclose = () => {
             console.log("WS disconnected");
             ws = null;
+            clearHeartbeat();
+            reconnectAttempts++;
+            if(reconnectAttempts >= MAX_RECONNECT_ATTEMPTS) store.dispatch(dataStateChange('error'));
             reconnectTimer = setTimeout(initWebSocket, 3000);
         };
 
@@ -40,5 +58,33 @@ export function initWebSocket() {
     catch (err) {
         console.error("WS init failed:", err);
         reconnectTimer = setTimeout(initWebSocket, 3000);
+        store.dispatch(dataStateChange('error'));
     }
+}
+
+function startHeartbeat() {
+    resetHeartbeat();
+}
+
+function resetHeartbeat() {
+    if(heartbeatTimer) clearTimeout(heartbeatTimer);
+    heartbeatTimer = setTimeout(() => {
+        console.warn("No WS data for 5s → force close");
+        ws?.close();
+    }, HEARTBEAT_TIMEOUT);
+}
+
+function clearHeartbeat() {
+    if(heartbeatTimer) clearTimeout(heartbeatTimer);
+    heartbeatTimer = null;
+}
+
+function sendLocalCode() {
+    if(!ws || ws.readyState !== WebSocket.OPEN) return;
+
+    const code = localStorage.getItem('code');
+    if(!code) return;
+
+    ws.send(code);
+    console.log("WS code sent:", code);
 }
