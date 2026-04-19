@@ -56,7 +56,12 @@ export default function CardStatusSystem() {
         <div className='mt-4'>
             <p>{i18n.t('systemTimeAndDate')}</p>
             <p className='text-blue-700 dark:text-blue-400'>
-                {moment(data.time * 1000).utc().format(`🕐 ${hourFormat}:mm:ss 🗓 L`)}
+                <div>
+                    {moment(data.time * 1000).utc().format(`🕐 ${hourFormat}:mm:ss`)}
+                </div>
+                <div>
+                    {moment(data.time * 1000).utc().format(`🗓 L`)}
+                </div>
             </p>
         </div>
 
