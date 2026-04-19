@@ -18,8 +18,8 @@ export default function Status() {
     
     useEffect(() => {
         const versionFile = device() === 'WeatherMonitorBIM32'
-            ? "https://raw.githubusercontent.com/himikat123/Weather-monitor-BIM32/master/BIM32_Arduino/src/globals.hpp"
-            : "https://raw.githubusercontent.com/himikat123/Weather-Monitor-BIM/master/BIM_Arduino/globals.hpp"
+            ? `https://raw.githubusercontent.com/himikat123/Weather-monitor-BIM32/master/BIM32_Arduino/src/globals.hpp?random=${Math.random()}`
+            : `https://raw.githubusercontent.com/himikat123/Weather-Monitor-BIM/master/BIM_Arduino/globals.hpp?random=${Math.random()}`
         fetch(versionFile)
         .then(response => response.text())
         .then(text => {
