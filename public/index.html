@@ -20,9 +20,13 @@
         <title>Web Interface BIM</title>
         <style>
             body { margin: 0; }
-            #status { position: fixed; top: 10px; left: 10px; }
-            .load { width: 100%; height: 100dvh; display: flex; align-items: center; }
-            .loader {width: 10px; height: 10px; border-radius: 50%; display: block; margin:15px auto; position: relative; color: #FFF; left: -100px; box-sizing: border-box; animation: shadowRolling 2s linear infinite; }
+            :is(html.dark) { background: #111837; color: #F3F4F6; }
+            .status { display: flex; justify-content: center; align-items: center; width: 100%; height: 100dvh; }
+            .box { width: 36rem; background-color: #F0F5FF; border: 2px solid; border-color: #005C9A; border-radius: 0.5rem; padding: 1em; margin: 1em; }
+            :is(html.dark) .box { background-color: #000525; border-color: #1E3A8A; }
+            #status { font-size: 1.25rem; line-height: 1.75rem; text-align: center; }
+            .load { display: flex; justify-content: center; height: 6rem; }
+            .loader { width: 10px; height: 10px; border-radius: 50%; display: block; margin: 15px auto; position: relative; color: #FFF; left: -100px; box-sizing: border-box; animation: shadowRolling 2s linear infinite; }
             @keyframes shadowRolling {
                 0% {box-shadow: 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);}
                 12% {box-shadow: 100px 0 gray, 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);}
@@ -34,18 +38,20 @@
                 87% {box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 130px 0 white;}
                 100% {box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0);}
             }
-            :is(html.dark) { background: #111837; color: #F3F4F6; }
         </style>
     </head>
     <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
         <div id="root">
-            <div id="status">Loading HTML...</div>
-            <div class="load">
-                <span class="loader"></span>
+            <div class="status">
+                <div class="box">
+                    <h1 id="status">Loading HTML...</h1>
+                    <div class="load">
+                        <span class="loader"></span>
+                    </div>
+                </div>
             </div>
         </div>
-
         <script>
             (function sequentialLoad() {
                 const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
