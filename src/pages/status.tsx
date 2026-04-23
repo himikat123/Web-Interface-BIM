@@ -9,6 +9,7 @@ import CardStatusSensors from '../organisms/status/cardStatusSensors';
 import CardStatusSystem from '../organisms/status/cardStatusSystem';
 import CardStatusNetwork from '../organisms/status/cardStatusNetwork';
 import { iData } from '../redux/dataTypes';
+import * as D from '../molecules/display/displayTypes';
 
 export default function Status() {
     const data = useSelector((state: iData) => state.data);
@@ -41,8 +42,8 @@ export default function Status() {
     }, [gitFW, data.fw]);
 
     const content = <>
-        <Card content={<CardStatusDisplay num={0} />} />
-        {device() === 'WeatherMonitorBIM32' && <Card content={<CardStatusDisplay num={1} />} />}
+        <Card content={<CardStatusDisplay num={D.DISPLAY1} />} />
+        {device() === 'WeatherMonitorBIM32' && <Card content={<CardStatusDisplay num={D.DISPLAY2} />} />}
         {device() === 'WeatherMonitorBIM' && <Card content={<CardStatusSensors />} />}
         <Card content={<CardStatusSystem />} />
         <Card content={<CardStatusNetwork />} />

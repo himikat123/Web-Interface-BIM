@@ -7,6 +7,7 @@ import { iDisplay } from '../../interfaces';
 import DisplayViewLCD from '../../molecules/display/displayViewLCD';
 import DisplayView7segment from '../../molecules/display/displayView7segment';
 import DisplayView7SegmentTubes from '../../molecules/display/DisplayView7SegmentTubes';
+import * as D from '../../molecules/display/displayTypes';
 
 export default function CardStatusDisplay(props: iDisplay) {
     const config = useSelector((state: iConfig) => state.config);
@@ -26,22 +27,22 @@ export default function CardStatusDisplay(props: iDisplay) {
     
     function displayView() {
         switch(props.num) {
-            case 0: { /* Display 1 */
+            case D.DISPLAY1: { /* Display 1 */
                 switch(config.display.type ? config.display.type[props.num] : 0) {
-                    case 1: return <DisplayViewLCD />;
-                    case 2: return <DisplayView7segment num={0} />;
-                    case 3: return <DisplayView7segment num={0} />;
-                    case 4: return <DisplayView7SegmentTubes num={0} type="numitron" />;
-                    case 5: return <DisplayView7SegmentTubes num={0} type="vfd" />;
+                    case D.LCD: return <DisplayViewLCD />;
+                    case D.PIXEL: return <DisplayView7segment num={D.DISPLAY1} />;
+                    case D.SEGMENT: return <DisplayView7segment num={D.DISPLAY1} />;
+                    case D.NUMITRON: return <DisplayView7SegmentTubes num={D.DISPLAY1} type="numitron" />;
+                    case D.VFD: return <DisplayView7SegmentTubes num={D.DISPLAY1} type="vfd" />;
                     default: return <></>;
                 }
             }
-            case 1: { /* Display 2 */
+            case D.DISPLAY2: { /* Display 2 */
                 switch(config.display.type ? config.display.type[props.num] : 0) {
-                    case 2: return <DisplayView7segment num={1} />;
-                    case 3: return <DisplayView7segment num={1} />;
-                    case 4: return <DisplayView7SegmentTubes num={1} type="numitron" />;
-                    case 5: return <DisplayView7SegmentTubes num={1} type="vfd" />;
+                    case D.PIXEL: return <DisplayView7segment num={D.DISPLAY2} />;
+                    case D.SEGMENT: return <DisplayView7segment num={D.DISPLAY2} />;
+                    case D.NUMITRON: return <DisplayView7SegmentTubes num={D.DISPLAY2} type="numitron" />;
+                    case D.VFD: return <DisplayView7SegmentTubes num={D.DISPLAY2} type="vfd" />;
                     default: return <></>;
                 }
             }
