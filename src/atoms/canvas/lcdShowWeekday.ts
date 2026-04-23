@@ -10,7 +10,7 @@ export default function lcdShowWeekday(
 
     if(weekDay !== prevWeekDay) {
         if(weekDay.length === 2) 
-            printText(ctx, 146, dispModel ? 6 : 2, 40, 20, weekDay, dispModel ? 21 : 34, 'left', color, bgColor);
+            printText(ctx, 146, dispModel ? 6 : 2, 40, 20, weekDay, dispModel ? 21 : 30, 'left', color, bgColor);
     }
 
     return weekDay;
