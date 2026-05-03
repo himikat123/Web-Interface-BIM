@@ -5,13 +5,14 @@ import * as icons from '../img/icons';
 import { iPrevForecast } from "../../interfaces";
 import * as vl from "../validateValues";
 import getWeekday from '../getWeekday';
+import * as D from '../../molecules/display/displayTypes';
 
 function showTemperature(ctx: CanvasRenderingContext2D, temp: number, x: number, 
-    y: number, w: number, font: number, color: string, bgColor: string
+    y: number, w: number, h: number, font: number, color: string, bgColor: string
 ) {
     const t = Math.round(temp);
     const units = '°C';
-    printText(ctx, x, y, w, 20, vl.validateTemperature(temp) ? `${t}${units}` : `--${units}`, font, 'center', color, bgColor);
+    printText(ctx, x, y, w, h, vl.validateTemperature(temp) ? `${t}${units}` : `--${units}`, font, 'center', color, bgColor);
 }
 
 export default function lcdShowForecast(
@@ -25,13 +26,30 @@ export default function lcdShowForecast(
     const time = store.getState().data.time;
     const wd = getWeekday(time + (86400 * num));
     const units = i18n.t('units.mps');
-    const x = num * (dispModel === 0 ? 90 : 106);
-    const imgShift = dispModel === 0 ? 1 : 7;
+
+    let ix = num * 120 + 3, iy = 247, iw = 48, // NX4832K(T)035 
+        wx = num * 120 + 12, wy = 225, ww = 45, wh = 25, wf = 24,
+        tx = num * 120 + 55, ty1 = 238, ty2 = 270, tw = 63, th = 32, tf = 24, 
+        sx = num * 120 + 25, sy = 295, sw = 70, sh = 23, sf = 22;
+    switch(dispModel) {
+        case D.NX4827K043:
+            ix = num * 96 + 4; iy = 208; iw = 40; 
+            wx = num * 96 + 25; wy = 185; ww = 45; wh = 24; wf = 24;
+            tx = num * 96 + 46; ty1 = 212; ty2 = 230; tw = 48; th = 20; tf = 16; 
+            sx = num * 96 + 24; sy = 252; sw = 50; sh = 16; sf = 16;
+            break;
+        case D.ILI9341: 
+            ix = num * 106 + 7; iy = 183; iw = 40; 
+            wx = num * 106 + 33; wy = 168; ww = 40; wh = 16; wf = 14;
+            tx = num * 106 + 49; ty1 = 183; ty2 = 203; tw = 56; th = 20; tf = 21; 
+            sx = num * 106 + 31; sy = 224; sw = 44; sh = 14; sf = 14;
+            break;
+    }
 
     /* Show icon */
     if(icon !== prevForecast?.icon[num]) {
         let wIcon = icons.w_01_d();
-        switch(icon) { // png 40x40px
+        switch(icon) {
             case 1: wIcon = icons.w_01_d(); break;
             case 2: wIcon = icons.w_02_d(); break;
             case 3: wIcon = icons.w_04(); break;
@@ -42,30 +60,30 @@ export default function lcdShowForecast(
             case 8: wIcon = icons.w_50(); break;
             default: wIcon = icons.w_loading(); break;
         }
-        drawScaledImage(ctx, wIcon, x + imgShift, 183, 40, 40);
+        drawScaledImage(ctx, wIcon, ix, iy, iw, iw);
     }
     
     /* Show weekday */
     if(wd !== prevForecast?.wd[num]) {
         if(wd.length === 2) 
-            printText(ctx, x + (dispModel ? 33 : 3), 168, 40, 16, wd, dispModel ? 14 : 18, 'center', color, bgColor);
+            printText(ctx, wx, wy, ww, wh, wd, wf, 'center', color, bgColor);
     }
     
     /* Show max temperature */
     if(tMax !== prevForecast?.tMax[num]) {
-        showTemperature(ctx, Math.round(tMax), x + (dispModel ? 44 : 41), 183, dispModel ? 61 : 47, dispModel ? 21 : 17, colorTempMax, bgColor);
+        showTemperature(ctx, Math.round(tMax), tx, ty1, tw, th, tf, colorTempMax, bgColor);
     }
 
     /* Show min temperature */
     if(tMin !== prevForecast?.tMin[num]) {
-        showTemperature(ctx, Math.round(tMin), x + (dispModel ? 44 : 41), 203, dispModel ? 61 : 47, dispModel ? 21 : 17, colorTempMin, bgColor);
+        showTemperature(ctx, Math.round(tMin), tx, ty2, tw, th, tf, colorTempMin, bgColor);
     }
 
     /* Show wind speed */
     if(wind !== prevForecast?.wSpeed[num]) {
         let w = vl.validateWindSpeed(wind) ? String(Math.round(wind)) : '--';
         w += units;
-        printText(ctx, x + (dispModel ? 31 : 22), 224, 44, 15, w, 14, 'center', color, bgColor);
+        printText(ctx, sx, sy, sw, sh, w, sf, 'center', color, bgColor);
     }
 
     const dummyForecast = {

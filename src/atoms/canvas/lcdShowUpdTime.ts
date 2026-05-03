@@ -3,6 +3,7 @@ import moment from "moment";
 import device from '../../device';
 import { printText, drawScaledImage } from "./primitives";
 import * as symbols from "../img/symbols";
+import * as D from '../../molecules/display/displayTypes';
 
 export default function lcdShowUpdTime(
     ctx: CanvasRenderingContext2D, dispModel: number, 
@@ -12,7 +13,7 @@ export default function lcdShowUpdTime(
     const ip = store.getState().data.network.ip;
     const numIP = (!/^\d+\.\d+\.\d+\.\d+$/.test(ip)) ? 0 : Number(ip.split('.').map(Number).join(''));
     let hourFormat;
-    switch(store.getState().config.clock.format) {
+    switch(store.getState().config?.clock.format) {
         case 0: hourFormat = 'h'; break;
         case 1: hourFormat = 'hh'; break;
         case 2: hourFormat = 'H'; break;
@@ -25,16 +26,19 @@ export default function lcdShowUpdTime(
                 ? `DD.MM.YYYY ${hourFormat}:mm` 
                 : `DD.MM.YYYY ${hourFormat}:mm:ss`)
             : '';
-        const x = dispModel ? (device() === 'WeatherMonitorBIM32' ? 140 : 173) : 188;
-        const c = dispModel ? (device() === 'WeatherMonitorBIM32' ? 270 : 303) : 320;
 
         if(device() === 'WeatherMonitorBIM32') {
-            printText(ctx, x, 146, 146, 16, upd, 14, 'right', color, bgColor);
-            const w = ctx.measureText(upd).width;
-            if(w) drawScaledImage(ctx, symbols.upd(), c - w, 146, 12, 12);
+            let x = 255, y = 200, w = 180, h = 18, f = 16, c = 420; // NX4832K(T)035
+            switch(dispModel) {
+                case D.NX4827K043: x = 252; y = 162; w = 180; h = 18; f = 16; c = 418; break;
+                case D.ILI9341: x = 140; y = 146; w = 146; h = 16; f = 14; c = 270; break;
+            }
+            printText(ctx, x, y, w, h, upd, f, 'right', color, bgColor);
+            const wd = ctx.measureText(upd).width;
+            if(wd) drawScaledImage(ctx, symbols.upd(), c - wd, y, 12, 12);
         }
-        else {
-            printText(ctx, x, 146, 146, 16, ip, 14, 'right', color, bgColor);
+        else if(device() === 'WeatherMonitorBIM') {
+            printText(ctx, 173, 146, 146, 16, ip, 14, 'right', color, bgColor);
         }
     }
 

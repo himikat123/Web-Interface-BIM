@@ -2,100 +2,80 @@ import * as D from './displayTypes';
 
 export function wifiAntennaOrCloseButton(model: number) {
     switch(model) {
-        case D.NX4832K035:
-        case D.NX4832T035: return { x: 320, y: 36 };
-        case D.NX4827K043: return { x: 320, y: 36 };
-        case D.ILI9341: return { x: 284, y: 25 };
-        default: return { x: 0, y: 0 };
+        case D.NX4827K043: return { x: 432, y: 48 };
+        case D.ILI9341: return { x: 290, y: 32 };
+        default: /* NX4832K(T)035 */ return { x: 432, y: 48 };
     }
 }
 
 export function clockMain(model: number) {
     switch(model) {
-        case D.NX4832K035:
-        case D.NX4832T035: return { x: 140, y: 80 };
-        case D.NX4827K043: return { x: 140, y: 80 };
-        case D.ILI9341: return { x: 140, y: 80 };
-        default: return { x: 0, y: 0 };
+        case D.NX4827K043: return { x: 206, y: 86 };
+        case D.ILI9341: return { x: 144, y: 78 };
+        default: /* NX4832K(T)035 */ return { x: 206, y: 102 };
     }
 }
 
 export function clockType(model: number) {
     switch(model) {
-        case D.NX4832K035:
-        case D.NX4832T035: return { y1: 55, y2: 185 };
-        case D.NX4827K043: return { y1: 55, y2: 185 };
+        case D.NX4827K043: return { y1: 60, y2: 230 };
         case D.ILI9341: return { y1: 55, y2: 185 };
-        default: return { y1: 0, y2: 0 };
+        default: /* NX4832K(T)035 */ return { y1: 88, y2: 260 };
     }
 }
 
 export function calendar(model: number) {
     switch(model) {
-        case D.NX4832K035:
-        case D.NX4832T035: return { x1: 145, x2: 180, x3: 40, x4: 300, y1: 33, y2: 36, y3: 180 };
-        case D.NX4827K043: return { x1: 145, x2: 180, x3: 40, x4: 300, y1: 33, y2: 36, y3: 180 };
-        case D.ILI9341: return { x1: 145, x2: 180, x3: 40, x4: 250, y1: 33, y2: 36, y3: 180 };
-        default: return { x1: 0, x2: 0, x3: 0, x4: 0, y1: 0, y2: 0, y3: 0 };
+        case D.NX4827K043: return { x1: 208, x2: 272, x3: 48, x4: 432, y1: 42, y2: 52, y3: 232 };
+        case D.ILI9341: return { x1: 146, x2: 210, x3: 30, x4: 290, y1: 20, y2: 38, y3: 200 };
+        default: return { x1: 208, x2: 272, x3: 48, x4: 432, y1: 48, y2: 60, y3: 270 };
     }
 }
 
 export function backButton(model: number) {
     switch(model) {
-        case D.NX4832K035:
-        case D.NX4832T035: return { x: 32, y1: 100, y2: 136 };
-        case D.NX4827K043: return { x: 32, y1: 100, y2: 136 };
-        case D.ILI9341: return { x: 32, y1: 100, y2: 136 };
-        default: return { x: 0, y1: 0, y2: 0 };
+        case D.NX4827K043: return { x: 37, y1: 120, y2: 152 };
+        case D.ILI9341: return { x: 24, y1: 106, y2: 130 };
+        default: /* NX4832K(T)035 */ return { x: 37, y1: 144, y2: 176 };
     }
 }
 
 export function forwardButton(model: number) {
     switch(model) {
-        case D.NX4832K035:
-        case D.NX4832T035: return { x: 320, y1: 100, y2: 136 };
-        case D.NX4827K043: return { x: 320, y1: 100, y2: 136 };
-        case D.ILI9341: return { x: 286, y1: 100, y2: 136 };
-        default: return { x: 0, y1: 0, y2: 0 };
+        case D.NX4827K043: return { x: 445, y1: 120, y2: 152 };
+        case D.ILI9341: return { x: 295, y1: 106, y2: 130 };
+        default: /* NX4832K(T)035 */ return { x: 445, y1: 144, y2: 176 };
     }
 }
 
 export function hourlyForecast(model: number) {
     switch(model) {
-        case D.NX4832K035:
-        case D.NX4832T035: return { y: 162, day1: 90, day2: 176, day3: 264, day4: 362 };
-        case D.NX4827K043: return { y: 162, day1: 90, day2: 176, day3: 264, day4: 300 };
-        case D.ILI9341: return { y: 162, day1: 106, day2: 208, day3: 320, day4: 330 };
-        default: return { y: 0, day1: 0, day2: 0, day3: 0, day4: 0 };
+        case D.NX4827K043: return { y: 182, day1: 96, day2: 192, day3: 288, day4: 384 };
+        case D.ILI9341: return { y: 165, day1: 106, day2: 212, day3: 320, day4: 999 };
+        default: /* NX4832K(T)035 */ return { y: 222, day1: 120, day2: 240, day3: 360, day4: 999 };
     }
 }
 
 export function historyIn(model: number) {
     switch(model) {
-        case D.NX4832K035:
-        case D.NX4832T035: return { x: 145, y1: 33, y2: 80 };
-        case D.NX4827K043: return { x: 145, y1: 33, y2: 80 };
+        case D.NX4827K043: return { x: 209, y1: 44, y2: 92 };
         case D.ILI9341: return { x: 145, y1: 33, y2: 80 };
-        default: return { x: 0, y1: 0, y2: 0 };
+        default: /* NX4832K(T)035 */ return { x: 209, y1: 55, y2: 107 };
     }
 }
 
 export function historyOut(model: number) {
     switch(model) {
-        case D.NX4832K035:
-        case D.NX4832T035: return { x: 320, y1: 81, y2: 160 };
-        case D.NX4827K043: return { x: 320, y1: 81, y2: 160 };
+        case D.NX4827K043: return { x: 440, y1: 92, y2: 180 };
         case D.ILI9341: return { x: 284, y1: 81, y2: 160 };
-        default: return { x: 0, y1: 0, y2: 0 };
+        default: /* NX4832K(T)035 */ return { x: 440, y1: 105, y2: 222 };
     }
 }
 
 export function alarm(model: number) {
     switch(model) {
-        case D.NX4832K035:
-        case D.NX4832T035: return { x: 328, y1: 130, y2: 162 };
-        case D.NX4827K043: return { x: 328, y1: 130, y2: 162 };
+        case D.NX4827K043: return { x: 448, y1: 153, y2: 180 };
         case D.ILI9341: return { x: 284, y1: 130, y2: 162 };
-        default: return { x: 0, y1: 0, y2: 0 };
+        default: return /* NX4832K(T)035 */ { x: 443, y1: 190, y2: 222 };
     }
 }

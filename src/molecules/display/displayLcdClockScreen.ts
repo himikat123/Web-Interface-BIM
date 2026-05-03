@@ -5,7 +5,9 @@ import lcdCloseButton from '../../atoms/canvas/lcdCloseButton';
 import moment from 'moment';
 import { getLocale } from '../../atoms/getLocale';
 import lcdColors from '../../atoms/canvas/lcdColors';
-import { iLcdClockState } from '../../interfaces';
+import type { iLcdClockState } from '../../interfaces';
+import * as D from './displayTypes';
+import lcdSegmentFont from '../../atoms/canvas/lcdSegmentFont';
 
 export function displayLcdClockScreen(ctx: CanvasRenderingContext2D, 
     model: number, dispModel: number, state: iLcdClockState | undefined, clockType: string
@@ -26,6 +28,9 @@ export function displayLcdClockScreen(ctx: CanvasRenderingContext2D,
     }
 
     const hour = moment().format(hourFormat);
+    const hr = +moment().format(hourFormat);
+    const mn = moment().minute();
+    const sc = moment().second();
     const minute = moment().minute();
     const second = moment().second();
     const dt = new Date();
@@ -43,42 +48,73 @@ export function displayLcdClockScreen(ctx: CanvasRenderingContext2D,
 
     if(points !== state?.points) {
         if(clockType === 'big') { // Big clock
-            const font = dispModel ? 140 : 160;
-            const w = dispModel ? 160 : 181;
-            const x = dispModel ? 178 : 200;
-            const y = dispModel ? 68 : 64;
-            const p = dispModel ? 6 : 8;
-            printSegment(ctx, 4, y, w, font, hour.toString().padStart(2, ' '), font, color.CLOCK, color.BG);
-            fillCircle(ctx, dispModel ? 160 : 182, 100, p + (points ? 0 : 1), points ? color.CLOCK : color.BG);
-            fillCircle(ctx, dispModel ? 158 : 177, 150, p + (points ? 0 : 1), points ? color.CLOCK : color.BG);
-            printSegment(ctx, x, y, w, font, minute.toString().padStart(2, '0'), font, color.CLOCK, color.BG);
+            let x1 = 22, x2 = 272, xp1 = 243, xp2 = 238, y = 88, s = 30, // NX4832K(T)035
+                yp1 = 134, yp2 = 202, r = 8, w = 220, f = 212;
+            switch(dispModel) {
+                case D.NX4827K043: 
+                    x1 = 22; x2 = 272; xp1 = 245; xp2 = 240; y = 60; s = 30;
+                    yp1 = 114; yp2 = 172; r = 8; w = 220; f = 212; 
+                    break;
+                case D.ILI9341: 
+                    x1 = 10; x2 = 178; xp1 = 160; xp2 = 158; y = 68; s = 19;
+                    yp1 = 100; yp2 = 150; r = 6; w = 160; f = 140; 
+                    break;
+            }
+            fillRect(ctx, 0, y, ctx.canvas.width, f, color.BG);
+            lcdSegmentFont(ctx, x1, y, Math.floor(hr / 10), color.CLOCK, s);
+            lcdSegmentFont(ctx, x1 + w / 2.3, y, Math.floor(hr % 10), color.CLOCK, s);
+            fillCircle(ctx, xp1, yp1, r + (points ? 0 : 1), points ? color.CLOCK : color.BG);
+            fillCircle(ctx, xp2, yp2, r + (points ? 0 : 1), points ? color.CLOCK : color.BG);
+            lcdSegmentFont(ctx, x2, y, Math.floor(mn / 10), color.CLOCK, s);
+            lcdSegmentFont(ctx, x2 + w / 2.3, y, Math.floor(mn % 10), color.CLOCK, s);
         }
         if(clockType === 'small') { // Small clock
-            const font = dispModel ? 96 : 110;
-            const w = dispModel ? 106 : 120;
-            const x1 = dispModel ? 113 : 127;
-            const x2 = dispModel ? 222 : 250;
-            const y = dispModel ? 82 : 74;
-            const p = dispModel ? 4 : 5;
-            printSegment(ctx, 4, y, w, font, hour.toString().padStart(2, ' '), font, color.CLOCK, color.BG);
-            fillCircle(ctx, dispModel ? 107 : 121, 100, p, color.CLOCK);
-            fillCircle(ctx, dispModel ? 105 : 119, 134, p, color.CLOCK);
-            printSegment(ctx, x1, y, w, font, minute.toString().padStart(2, '0'), font, color.CLOCK, color.BG);
-            fillCircle(ctx, dispModel ? 216 : 244, 100, p, color.CLOCK);
-            fillCircle(ctx, dispModel ? 214 : 242, 134, p, color.CLOCK);
-            printSegment(ctx, x2, y, w, font, second.toString().padStart(2, '0'), font, color.CLOCK, color.BG);
+            let x1 = 12, x2 = 177, x3 = 340, xp1 = 158, xp2 = 156, xp3 = 322, // NX4832K(T)035
+                xp4 = 320, y = 104, s = 20, yp1 = 140, yp2 = 179, r = 4, w = 152, f = 144;
+            switch(dispModel) {
+                case D.NX4827K043: 
+                    x1 = 12; x2 = 177; x3 = 340; xp1 = 158; xp2 = 156; xp3 = 322; 
+                    xp4 = 320; y = 88; s = 20; yp1 = 124; yp2 = 163; r = 4; w = 152; f = 144; 
+                    break;
+                case D.ILI9341: 
+                    x1 = 11; x2 = 114; x3 = 226; xp1 = 107; xp2 = 105; xp3 = 216; 
+                    xp4 = 214; y = 78; s = 14; yp1 = 100; yp2 = 134; r = 4; w = 106; f = 96; 
+                    break;
+            }
+            fillRect(ctx, 0, y, ctx.canvas.width, f, color.BG);
+            lcdSegmentFont(ctx, x1, y, Math.floor(hr / 10), color.CLOCK, s);
+            lcdSegmentFont(ctx, x1 + w / 2.3, y, Math.floor(hr % 10), color.CLOCK, s);
+            fillCircle(ctx, xp1, yp1, r, color.CLOCK);
+            fillCircle(ctx, xp2, yp2, r, color.CLOCK);
+            lcdSegmentFont(ctx, x2, y, Math.floor(mn / 10), color.CLOCK, s);
+            lcdSegmentFont(ctx, x2 + w / 2.3, y, Math.floor(mn % 10), color.CLOCK, s);
+            fillCircle(ctx, xp3, yp1, r, color.CLOCK);
+            fillCircle(ctx, xp4, yp2, r, color.CLOCK);
+            lcdSegmentFont(ctx, x3, y, Math.floor(sc / 10), color.CLOCK, s);
+            lcdSegmentFont(ctx, x3 + w / 2.3, y, Math.floor(sc % 10), color.CLOCK, s);
         }
         if(clockType === 'analog') { // Analog clock
-            drawScaledImage(ctx, symb.clockFace(), dispModel ? 40 : 61, 0, 240, 240);
+            drawScaledImage(ctx, symb.clockFace(), ctx.canvas.width / 2 - ctx.canvas.height / 2, 0, ctx.canvas.height, ctx.canvas.height);
+            let lh = 100, lm = 130, ls = 155; // NX4832K(T)035
+            switch(dispModel) {
+                case D.NX4827K043: lh = 80; lm = 110; ls = 128; break;
+                case D.ILI9341: lh = 70; lm = 100; ls = 110; break;
+            }
+
             setTimeout(() => {
-                drawHand(ctx, 70, +hour * 30 + minute / 2, 4, color.ARROW1, dispModel);
-                drawHand(ctx, 100, minute * 6 + second / 10, 2, color.ARROW1, dispModel);
-                if(model !== 1) drawHand(ctx, 110, second * 6, 1, color.ARROW2, dispModel);
+                drawHand(ctx, lh, +hour * 30 + minute / 2, 4, color.ARROW1);
+                drawHand(ctx, lm, minute * 6 + second / 10, 2, color.ARROW1);
+                drawHand(ctx, ls, second * 6, 1, color.ARROW2);
             }, 1);
         }
         else { // Weekday and date
-            printText(ctx, dispModel ? 30 : 36, 8, dispModel ? 260 : 290, 30, weekday, 29, 'center', color.WEEKDAY, color.BG);
-            printText(ctx, 0, 200, dispModel ? 319 : 361, 30, date, 29, 'center', color.DATE, color.BG);
+            let x1 = 48, y1 = 10, y2 = 270, w1 = 384, h = 49, f = 48; // NX4832K(T)035
+            switch(dispModel) {
+                case D.NX4827K043: x1 = 48; y1 = 12; y2 = 232; w1 = 384; h = 40; f = 40; break;
+                case D.ILI9341: x1 = 30; y1 = 8; y2 = 200; w1 = 260; h = 30; f = 29; break;
+            }
+            printText(ctx, x1, y1, w1, h, weekday, f, 'center', color.WEEKDAY, color.BG);
+            printText(ctx, 0, y2, ctx.canvas.width, h, date, f, 'center', color.DATE, color.BG);
         }
     }
 
@@ -91,9 +127,9 @@ export function displayLcdClockScreen(ctx: CanvasRenderingContext2D,
     return prevState;
 }
 
-function drawHand(ctx: CanvasRenderingContext2D, length: number, angle: number, width: number, color: string, dispModel: number) {
-    var centerX = dispModel ? 160 : 181;
-    var centerY = 240 / 2;
+function drawHand(ctx: CanvasRenderingContext2D, length: number, angle: number, width: number, color: string) {
+    var centerX = ctx.canvas.width / 2;
+    var centerY = ctx.canvas.height / 2;
     ctx.strokeStyle = color;
     ctx.lineWidth = width;
     ctx.save();

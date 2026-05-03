@@ -1,30 +1,24 @@
 import { drawImage, drawScaledImage, fillRect } from "./primitives";
 import { bat_1, bat_2, bat_3, bat_4 } from '../img/bat';
 import lcdGetBatteryLevel from "../lcdGetData/lcdGetBatLevel";
+import * as D from "../../molecules/display/displayTypes";
 
 export default function lcdShowBatteryLevel(ctx: CanvasRenderingContext2D, dispModel: number, prevLevel: number | undefined, bgColor: string): number {
     const level = lcdGetBatteryLevel();
 
     if(level !== prevLevel) {
-        const x1 = 258, x2 = 284;
-
-        if(dispModel) {
-            switch(level) {
-                case 1: drawImage(ctx, bat_1(), x1, 2); break;
-                case 2: drawImage(ctx, bat_2(), x1, 2); break;
-                case 3: drawImage(ctx, bat_3(), x1, 2); break;
-                case 4: drawImage(ctx, bat_4(), x1, 2); break;
-                default: fillRect(ctx, x1, 2, 32, 21, bgColor);
-            }
+        let x = 377, y = 1, w = 48, h = 32; // NX4832K(T)035
+        switch(dispModel) {
+            case D.NX4827K043: x = 377; y = 1; w = 48; h = 22; break;
+            case D.ILI9341: x = 258; y = 2; w = 32; h = 21; break;
         }
-        else {
-            switch(level) {
-                case 1: drawScaledImage(ctx, bat_1(), x2, 0, 37, 24); break;
-                case 2: drawScaledImage(ctx, bat_2(), x2, 0, 37, 24); break;
-                case 3: drawScaledImage(ctx, bat_3(), x2, 0, 37, 24); break;
-                case 4: drawScaledImage(ctx, bat_4(), x2, 0, 37, 24); break;
-                default: fillRect(ctx, x2, 2, 32, 21, bgColor);
-            }
+
+        switch(level) {
+            case 1: drawScaledImage(ctx, bat_1(), x, y, w, h); break;
+            case 2: drawScaledImage(ctx, bat_2(), x, y, w, h); break;
+            case 3: drawScaledImage(ctx, bat_3(), x, y, w, h); break;
+            case 4: drawScaledImage(ctx, bat_4(), x, y, w, h); break;
+            default: fillRect(ctx, x, y, w, h, bgColor);
         }
     }
     return level;

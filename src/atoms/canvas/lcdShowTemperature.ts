@@ -3,18 +3,16 @@ import { temp_minus, temp_plus } from "../img/symbols";
 import { validateTemperature } from "../validateValues";
 import lcdGetTempIn from "../lcdGetData/lcdGetTempIn";
 import { lcdGetTempOut } from "../lcdGetData/lcdGetTemp";
+import * as D from "../../molecules/display/displayTypes";
 
 function showTemperature(
-    ctx: CanvasRenderingContext2D, dispModel: number, temp: number, 
-    x: number, y: number, color: string, bgColor: string
+    ctx: CanvasRenderingContext2D, temp: number, x: number, y: number, 
+    w: number, h: number, f: number, color: string, bgColor: string
 ) {
-    const w = dispModel ? 70 : 88;
-    const h = dispModel ? 27 : 29;
-    const font = dispModel ? 29 : 32;
     const t = Math.round(temp);
     const units = '°C';
     fillRect(ctx, x, y - 1, w, h, bgColor);
-    printText(ctx, x, y, w, 26, validateTemperature(temp) ? `${t}${units}` : `--${units}`, font, 'center', color, bgColor);
+    printText(ctx, x, y, w, 26, validateTemperature(temp) ? `${t}${units}` : `--${units}`, f, 'center', color, bgColor);
 }
 
 export function lcdShowTemperatureInside(
@@ -24,9 +22,12 @@ export function lcdShowTemperatureInside(
     const temp = lcdGetTempIn(sequence ?? 0);
 
     if(temp !== prevTemp) {
-        const x = dispModel ? 173 : 186;
-        const y = dispModel ? 53 : 51;
-        showTemperature(ctx, dispModel, temp, x, y, color, bgColor);
+        let x = 258, y = 68, w = 101, h = 38, f = 44; // NX4832K(T)035
+        switch(dispModel) {
+            case D.NX4827K043: x = 252; y = 54; w = 101; h = 36; f = 40; break;
+            case D.ILI9341: x = 173; y = 53; w = 70; h = 26; f = 29; break;
+        }
+        showTemperature(ctx, temp, x, y, w, h, f, color, bgColor);
     }
     return temp;
 }
@@ -38,16 +39,15 @@ export function lcdShowTemperatureOutside(
     const temp = lcdGetTempOut();
 
     if(temp !== prevTemp) {
-        const xi = dispModel ? 62 : 72;
-        const yi = dispModel ? 104 : 101;
-        const xt = dispModel ? 71 : 78;
-        const yt = dispModel ? 113 : 110;
-        const w = dispModel ? 9 : 10;
-        const h = dispModel ? 33 : 38;
-        let icon = temp_plus();
-        if(temp < 0) icon = temp_minus();
-        drawScaledImage(ctx, icon, xi, yi, w, h);
-        showTemperature(ctx, dispModel, temp, xt, yt, color, bgColor);
+        let x = 112, y = 154, w = 107, h = 44, f = 44, xi = 99, yi = 140, wi = 13, hi = 48; // NX4832K(T)035
+        switch(dispModel) {
+            case D.NX4827K043: x = 106; y = 122; w = 106; h = 36; f = 40; xi = 84; yi = 112; wi = 13; hi = 40; break;
+            case D.ILI9341: x = 71; y = 113; w = 70; h = 26; f = 29; xi = 61; yi = 104; wi = 9; hi = 33; break;
+        }
+
+        let icon = (temp < 0 ? temp_minus() : temp_plus());
+        drawScaledImage(ctx, icon, xi, yi, wi, hi);
+        showTemperature(ctx, temp, x, y, w, h, f, color, bgColor);
     }
     return temp;
 }

@@ -1,8 +1,9 @@
 import store from '../../redux/store';
-import { drawImage, fillRect } from "./primitives";
+import { drawScaledImage, fillRect } from "./primitives";
 import device from '../../device';
 import lcdGetWindDir from '../lcdGetData/lcdGetWindDir';
 import * as wind from "../img/wind";
+import * as D from '../../molecules/display/displayTypes';
 
 export default function lcdShowWindDirection(
     ctx: CanvasRenderingContext2D, dispModel: number, prevDir: number | undefined, bgColor: string
@@ -10,7 +11,11 @@ export default function lcdShowWindDirection(
     const dir = device() === 'WeatherMonitorBIM32' ? lcdGetWindDir() : store.getState().data.weather.wind.dir;
     
     if(dir !== prevDir) {
-        const x = dispModel ? 133 : 166;
+        let x = 232, y = 195, w = 24; // NX4832K(T)035
+        switch(dispModel) {
+            case D.NX4827K043: x = 216; y = 157; w = 24; break;
+            case D.ILI9341: x = 133; y = 143; w = 16; break;
+        }
 
         if(dir >= 0 && dir < 360) {
             let img = wind.north();
@@ -22,9 +27,9 @@ export default function lcdShowWindDirection(
             else if(dir >= 202 && dir < 247) img = wind.south_west();
             else if(dir >= 247 && dir < 292) img = wind.west();
             else if(dir >= 292 && dir < 338) img = wind.north_west();
-            drawImage(ctx, img, x, 143);
+            drawScaledImage(ctx, img, x, y, w, w);
         }
-        else fillRect(ctx, x, 143, 16, 16, bgColor);
+        else fillRect(ctx, x, y, w, w, bgColor);
     }
 
     return dir;

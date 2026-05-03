@@ -1,15 +1,19 @@
 import store from '../../redux/store';
 import { drawScaledImage } from "./primitives";
 import * as icons from '../img/icons';
+import * as D from '../../molecules/display/displayTypes';
 
 export default function lcdShowWeatherIcon(ctx: CanvasRenderingContext2D, dispModel: number, prevIcon: number | undefined): number {
     const icon = store.getState().data.weather.icon;
     const isDay = store.getState().data.weather.isDay;
 
     if(prevIcon !== (icon * 100 + isDay)) {
-        const y = dispModel ? 104 : 88;
-        const size = dispModel ? 60 : 70;
-        let wIcon = icons.w_01_d();
+        let wIcon;
+        let y = 116, w = 96; // NX4832K(T)035
+        switch(dispModel) {
+            case D.NX4827K043: y = 94; w = 80; break;
+            case D.ILI9341: y = 104; w = 60; break;
+        }
 
         switch(icon) {
             case 1: wIcon = isDay ? icons.w_01_d() : icons.w_01_n(); break;
@@ -22,7 +26,7 @@ export default function lcdShowWeatherIcon(ctx: CanvasRenderingContext2D, dispMo
             case 8: wIcon = icons.w_50(); break;
             default: wIcon = icons.w_loading(); break;
         }
-        drawScaledImage(ctx, wIcon, 0, y, size, size);
+        drawScaledImage(ctx, wIcon, 0, y, w, w);
     }
     return icon * 100 + isDay;
 }

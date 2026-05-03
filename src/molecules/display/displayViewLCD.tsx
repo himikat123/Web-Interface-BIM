@@ -143,9 +143,9 @@ export default function DisplayViewLCD() {
             const clockTypeCoords = coords.clockType(model);
             if(y > clockTypeCoords.y1 && y < clockTypeCoords.y2 && page === 'clock') {
                 switch(clockType) {
-                    case 'small': setClockType(model === 2 ? 'big' : 'analog'); break;
+                    case 'small': setClockType(model === D.NX4832T035 ? 'big' : 'analog'); break;
                     case 'analog': setClockType('big'); break;
-                    default: setClockType(model === 1 ? 'analog' : 'small'); break;
+                    case 'big': setClockType('small'); break;
                 }
             }
 
@@ -214,7 +214,8 @@ export default function DisplayViewLCD() {
                 if(x < hourlyCoords.day1) setHourlyShift(0);
                 if(x > hourlyCoords.day1 && x < hourlyCoords.day2) setHourlyShift(dayLinks[0]);
                 if(x > hourlyCoords.day2 && x < hourlyCoords.day3) setHourlyShift(dayLinks[1]);
-                if(x > hourlyCoords.day3) setHourlyShift(dayLinks[2]);
+                if(x > hourlyCoords.day3 && x < hourlyCoords.day4) setHourlyShift(dayLinks[2]);
+                if(x > hourlyCoords.day4) setHourlyShift(dayLinks[3]);
                 setPage('hourly');
             }
 
@@ -244,14 +245,14 @@ export default function DisplayViewLCD() {
     return <div className='w-fit mx-auto mt-4 p-2 bg-gray-400 dark:bg-gray-600'>
         {/* NX4832K035 & NX4832T035 */}
         {(model === D.NX4832K035 || model === D.NX4832T035) && 
-            <canvas width="362" height="241" ref={dispNX4832x035} onClick={handleClick} style={{
-                margin: 0, padding: 0, width: '100%', maxWidth: '362px', maxHeight: '241px', border: '4px solid black'
+            <canvas width="480" height="320" ref={dispNX4832x035} onClick={handleClick} style={{
+                margin: 0, padding: 0, width: '100%', maxWidth: '480px', maxHeight: '320px', border: '4px solid black'
             }}
         />}
         {/* NX4827K043 */}
         {model === D.NX4827K043 && 
-            <canvas width="427" height="241" ref={dispNX4827K043} onClick={handleClick} style={{
-                margin: 0, padding: 0, width: '100%', maxWidth: '427px', maxHeight: '241px', border: '4px solid black'
+            <canvas width="480" height="270" ref={dispNX4827K043} onClick={handleClick} style={{
+                margin: 0, padding: 0, width: '100%', maxWidth: '480px', maxHeight: '270px', border: '4px solid black'
             }}
         />}
         {/* ILI9341 */}

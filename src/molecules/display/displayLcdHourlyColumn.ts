@@ -10,6 +10,7 @@ import { getLocale } from "../../atoms/getLocale";
 import lcdColors from "../../atoms/canvas/lcdColors";
 import { hPaToMM } from "../../atoms/indications/hPaMM";
 import { validateTemperature, validatePressureHPA } from "../../atoms/validateValues";
+import * as D from "./displayTypes";
 
 export default function displayLcdHourlyColumn(
     ctx: CanvasRenderingContext2D, dispModel: number, 
@@ -17,23 +18,35 @@ export default function displayLcdHourlyColumn(
 ) {
     const config = store.getState().config;
     const color = lcdColors();
-    const x = num * (dispModel ? 32 : 36) + (dispModel ? 30 : 38);
-    let y = 86;
     const s = num + shift;
-    const font = dispModel ? 9 : 11;
+    let c = 48, x = 42, y1 = 110, y2 = 20, y3 = 22, y4 = 48, y5 = 23, 
+        y6 = 18, w = 50, iw = 40, f1 = 16, f2 = 14, f3 = 24, f4 = 14;
+    switch(dispModel) {
+        case D.NX4827K043: 
+            c = 48; x = 42; y1 = 90; y2 = 16; y3 = 16; y4 = 40; y5 = 24; 
+            y6 = 16; w = 50; iw = 40; f1 = 16; f2 = 12; f3 = 24; f4 = 14;
+            break;
+        case D.ILI9341: 
+            c = 32; x = 30; y1 = 86; y2 = 16; y3 = 14; y4 = 40; y5 = 20; 
+            y6 = 14; w = 36; iw = 30; f1 = 11; f2 = 9; f3 = 14; f4 = 9;
+            break;
+    }
+    const gap = (type === 'historyIn' || type === 'historyOut') ? 4 : 0;
+    let y = y1 + gap;
+    x = c * num + x;
 
     const tempUnits = '°C';
     const t = weather?.temp[s] !== undefined ? weather?.temp[s] : 40400;
     const temp = validateTemperature(t)
         ? String(Math.round(t))
         : '--';
-    printText(ctx, x + 2, y, 36, font + 1, temp + tempUnits, font + 1, 'center', color.TEMP, color.BG);
-    y += 16;
+    printText(ctx, x, y, w, f1, temp + tempUnits, f1, 'center', color.TEMP, color.BG);
+    y += y2 + gap;
 
     if(type === 'historyIn' || type === 'historyOut') {
         const hum = weather?.hum[s] !== undefined ? (Math.round(weather?.hum[s]) + '%') : '--%';
-        printText(ctx, x + 2, y, 36, font, hum, font + 1, 'center', color.HUM, color.BG);
-        y += 14;
+        printText(ctx, x, y, w, f1, hum, f1 + 1, 'center', color.HUM, color.BG);
+        y += y3 + gap;
     }
 
     if(type === 'hourly' || type === 'historyOut') {
@@ -42,12 +55,11 @@ export default function displayLcdHourlyColumn(
         const pres = validatePressureHPA(p)
             ? String(Math.round(localPres ? p : hPaToMM(p)))
             : '--';
-        printText(ctx, x + 2, y, 36, font, pres + presUnits, font, 'center', color.PRES, color.BG);
-        y += 14;
+        printText(ctx, x, y, w, f2, pres + presUnits, f2, 'center', color.PRES, color.BG);
+        y += y3 + gap;
     }
 
     if(type === 'hourly') {
-        y -= 4;
         let wIcon = '';
         switch(weather?.icon[s]) {
             case 1: wIcon = icons.w_01_d(); break;
@@ -61,20 +73,19 @@ export default function displayLcdHourlyColumn(
             case 50: wIcon = icons.w_50(); break;
             default: wIcon = icons.w_loading(); break;
         }
-        const size = dispModel ? 30 : 36;
-        drawScaledImage(ctx, wIcon, x, y, size, size);
-        y += 40;
+        drawScaledImage(ctx, wIcon, x, y, iw, iw);
+        y += y4 + gap;
 
         let wd = moment.unix(weather?.date[s] ?? 0).locale(getLocale()).format('dd');
         wd = wd.charAt(0).toUpperCase() + wd.slice(1);
-        printText(ctx, x + 2, y, 36, 18, wd, 18, 'center', color.TEXT, color.BG);
-        y += 20;
+        printText(ctx, x, y, w, f3, wd, f3, 'center', color.TEXT, color.BG);
+        y += y5 + gap;
     }
 
     const dt = moment.unix(weather?.date[s] ?? 0).format('DD');
     const mo = moment.unix(weather?.date[s] ?? 0).locale(getLocale()).format('MMM').substring(0, 3);
-    printText(ctx, x + 2, y, 36, font, dt + mo, font, 'center', color.TEXT, color.BG);
-    y += 14;
+    printText(ctx, x, y, w, f4, dt + mo, f4, 'center', color.TEXT, color.BG);
+    y += y6 + gap;
 
     let hourFormat;
     switch(config.clock.format) {
@@ -84,16 +95,17 @@ export default function displayLcdHourlyColumn(
         default: hourFormat = 'HH'; break;
     }
     const tm = moment.unix(weather?.date[s] ?? 0).format(`${hourFormat}:mm`);
-    printText(ctx, x + 2, y, 36, font, tm, font, 'center', color.TEXT, color.BG);
-    y += 14;
+    printText(ctx, x, y, w, f4, tm, f4, 'center', color.TEXT, color.BG);
+    y += y6 + gap;
 
     if(type === 'hourly') {
         const ms = i18n.t('units.mps');
         const ws = weather?.windSpeed[s] !== undefined ? (Math.round(weather.windSpeed[s]) + ms) : ('--' + ms);
-        printText(ctx, x + 2, y, 36, font, ws, font, 'center', color.TEXT, color.BG);
-        y += 14;
+        printText(ctx, x, y, w, f4, ws, f4, 'center', color.TEXT, color.BG);
+        y += y6 + gap;
 
         const dir = weather?.windDir[s] !== undefined ? weather?.windDir[s] : 0;
+        const wx = x + w / 2 - f4 / 2;
         if(dir >= 0 && dir <= 360) {
             let img = wind.north();
             if((dir >= 338 && dir <= 360) || (dir >= 0 && dir < 22)) img = wind.north();
@@ -104,15 +116,16 @@ export default function displayLcdHourlyColumn(
             else if(dir >= 202 && dir < 247) img = wind.south_west();
             else if(dir >= 247 && dir < 292) img = wind.west();
             else if(dir >= 292 && dir < 338) img = wind.north_west();
-            drawScaledImage(ctx, img, x + 12, y, 12, 12);
+            drawScaledImage(ctx, img, wx, y, f4, f4);
         }
-        else fillRect(ctx, x + 12, y, 12, 12, color.BG);
-        y += 14;
+        else fillRect(ctx, wx, y, f4, f4, color.BG);
+        y += y6 + gap;
 
-        drawScaledImage(ctx, symb.hum(), x + (dispModel ? 4 : 0), y, 8, 10);
+
+        drawScaledImage(ctx, symb.hum(), x + 2, y, f4 * 0.8, f4);
         let pr = weather?.prec[s] ? weather.prec[s].toString() : '0';
         if(config.weather.provider === 0) pr += (pr === '0' ? i18n.t('units.mm') : '');
         if(config.weather.provider === 2) pr += '%';
-        printText(ctx, x + 8, y + 2, 28, font, pr, font, 'center', color.TEXT, color.BG);
+        printText(ctx, x + f4, y + 1, w - f4 * 1.5, f4, pr, f4, 'center', color.TEXT, color.BG);
     }
 }

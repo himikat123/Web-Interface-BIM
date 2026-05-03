@@ -182,18 +182,18 @@ const data = (cookieCode) => {
             isDay: Math.round(random(0, 1)),
             temp: random(-30, 30),
             hum: random(90, 100),
-            pres: random(850, 1060),
+            pres: random(950, 1060),
             wind: {
-                speed: random(1, 7),
+                speed: random(1, 17),
                 dir: random(0, 360)
             },
             descript: "Regen rain дождь deszcz дощ",
             time: Math.floor(date - random(600, 660)), // 10 - 11 minutes ago
             daily: {
-                tMax: [random(-25, 25), random(-25, 25), random(-25, 25), random(-25, 25)],
-                tMin: [random(-25, 25), random(-25, 25), random(-25, 25), random(-25, 25)],
-                wind: [random(0, 15), random(0, 15), random(0, 15), random(0, 15)],
-                icon: [mainIcons[Math.round(random(0, 9))], mainIcons[Math.round(random(0, 9))], mainIcons[Math.round(random(0, 9))], mainIcons[Math.round(random(0, 9))]],
+                tMax: [random(-25, 25), random(-25, 25), random(-25, 25), random(-25, 25), random(-25, 25)],
+                tMin: [random(-25, 25), random(-25, 25), random(-25, 25), random(-25, 25), random(-25, 25)],
+                wind: [random(0, 15), random(0, 15), random(0, 15), random(0, 15), random(0, 15)],
+                icon: [mainIcons[Math.round(random(0, 9))], mainIcons[Math.round(random(0, 9))], mainIcons[Math.round(random(0, 9))], mainIcons[Math.round(random(0, 9))], mainIcons[Math.round(random(0, 9))]],
             }
         },
         thing: {

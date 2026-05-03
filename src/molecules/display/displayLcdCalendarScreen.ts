@@ -5,21 +5,25 @@ import lcdBackButton from '../../atoms/canvas/lcdBackButton';
 import moment from 'moment';
 import { getLocale } from '../../atoms/getLocale';
 import lcdColors from '../../atoms/canvas/lcdColors';
-import { iLcdCalendarState } from '../../interfaces';
+import type { iLcdCalendarState } from '../../interfaces';
+import * as D from './displayTypes';
 
 export function displayLcdCalendarScreen(ctx: CanvasRenderingContext2D, 
     dispModel: number, state: iLcdCalendarState | undefined, shift: number
 ): iLcdCalendarState {
-    const font = 20;
+    let font = 32, xm = 50, ym = 8, wm = 380, y = 44, cx = 52, cy = 40, cw = 54, ch = 30, h = 78; // NX4832K(T)035
+    switch(dispModel) {
+        case D.NX4827K043: font = 28; xm = 50; ym = 8; wm = 380; y = 46; cx = 52; cy = 30; cw = 54; ch = 26; h = 78; break;
+        case D.ILI9341: font = 20; xm = 30; ym = 8; wm = 260; y = 40; cx = 36; cy = 28; cw = 32; ch = 30; h = 64; break;
+    }
     const color = lcdColors();
 
     if(!state?.skeleton) {
         fillRect(ctx, 0, 0, ctx.canvas.width, ctx.canvas.height, color.BG);
-        const x = dispModel ? 36 : 40;
         for(let i=0; i<7; i++) {
             let wd = moment(i, 'e').locale(getLocale()).startOf('week').isoWeekday(i + 1).format('dd');
             wd = wd.charAt(0).toUpperCase() + wd.slice(1);
-            printText(ctx, i * x + x, 40, 36, 26, wd, font, 'center', i < 6 ? color.WEEKDAY : color.WEEKEND, color.BG);
+            printText(ctx, i * cx + cx, y, cw, ch, wd, font, 'center', i < 6 ? color.WEEKDAY : color.WEEKEND, color.BG);
         }
         lcdCloseButton(ctx, dispModel);
         lcdForwardButton(ctx, dispModel, true);
@@ -35,13 +39,9 @@ export function displayLcdCalendarScreen(ctx: CanvasRenderingContext2D,
     if(state?.shift !== shift || state?.date !== date) {
         let month = moment().locale(getLocale()).add(shift, 'month').format('MMMM YYYY');
         month = month.charAt(0).toUpperCase() + month.slice(1);
-        printText(ctx, dispModel ? 30 : 36, 8, dispModel ? 260 : 290, font, month, font, 'center', color.MONTH, color.BG);
+        printText(ctx, xm, ym, wm, font, month, font, 'center', color.MONTH, color.BG);
 
         let day = 1;
-        const cx = dispModel ? 36 : 40;
-        const cy = 28;
-        const cw = dispModel ? 32 : 36;
-        const ch = font + font / 2;
         let clndRun = false;
 
         for(let w=0; w<6; w++) {
@@ -54,10 +54,10 @@ export function displayLcdCalendarScreen(ctx: CanvasRenderingContext2D,
                 if(firstWeekday === d) clndRun = true;
                 if(day > daysInMonth) clndRun = false;
                 if(clndRun) {
-                    printText(ctx, d * cx + cx, w * cy + 64, cw, ch, day.toString(), font, 'center', tdColor, bgColor, true);
+                    printText(ctx, d * cx + cx, w * cy + h, cw, ch, day.toString(), font, 'center', tdColor, bgColor, true);
                     day++;
                 }
-                else printText(ctx, d * cx + cx, w * cy + 64, cw, ch, '  ', font, 'center', color.TEXT, color.BG);
+                else printText(ctx, d * cx + cx, w * cy + h, cw, ch, '  ', font, 'center', color.TEXT, color.BG);
             }
         }
     }

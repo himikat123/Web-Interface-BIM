@@ -1,23 +1,27 @@
 import { printText, printScrollText } from "./primitives";
 import lcdGetComfort from "../lcdGetData/lcdGetComfort";
+import * as D from "../../molecules/display/displayTypes";
 
 export default function lcdShowComfort(
     ctx: CanvasRenderingContext2D, dispModel: number, prevComfort: string | undefined, 
     shift: number | undefined, sequence: string | undefined, color: string, bgColor: string
 ): [string, number] {
+    const NEXTION = (dispModel === D.NX4832K035 || dispModel === D.NX4832T035 || dispModel === D.NX4827K043);
     const comfort = lcdGetComfort(sequence ?? '');
-    const font = dispModel ? 14 : 18;
-    ctx.font = `${font}px Ubuntu`;
-    const l = Math.round(ctx.measureText(comfort).width ?? 0);
-    const x = dispModel ? 145 : 196;
-    const y = dispModel ? 29 : 27;
-    const w = dispModel ? 175 : 130;
 
-    if(l > w && dispModel === 0) {
-        shift = printScrollText(ctx, x, y, w, 18, l, shift ?? 0, comfort, font, color, bgColor);
+    let x = 280, y = 34, w = 151, h = 24, f = 24; // NX4832K(T)035
+    switch(dispModel) {
+        case D.NX4827K043: x = 280; y = 25; w = 151; h = 24; f = 24; break;
+        case D.ILI9341: x = 145; y = 28; w = 174; h = 16; f = 14; break;
+    }
+    ctx.font = `${f}px Ubuntu`;
+    const l = Math.round(ctx.measureText(comfort).width ?? 0);
+
+    if(l > w && NEXTION) {
+        shift = printScrollText(ctx, x, y, w, h, l, shift ?? 0, comfort, f, color, bgColor);
     }
     else if(comfort !== prevComfort) {
-        printText(ctx, x, y, w, 18, comfort, font, 'center', color, bgColor);
+        printText(ctx, x, y, w, h, comfort, f, 'center', color, bgColor, true);
     }
 
     return [

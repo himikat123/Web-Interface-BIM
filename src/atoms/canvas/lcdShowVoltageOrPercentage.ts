@@ -1,6 +1,7 @@
 import { printText } from "./primitives";
 import lcdGetVoltage from "../lcdGetData/lcdGetVoltage";
 import * as vl from '../validateValues';
+import * as D from "../../molecules/display/displayTypes";
 
 export default function lcdShowVoltageOrPercentage(
     ctx: CanvasRenderingContext2D, dispModel: number, prevValue: string | undefined, 
@@ -9,8 +10,12 @@ export default function lcdShowVoltageOrPercentage(
     const v = lcdGetVoltage();
 
     if(v.val !== prevValue) {
-        const x = dispModel ? 180 : 190;
-        const font = dispModel ? 12 : 11;
+        let x = 272, y = 1, w = 104, h = 32, f = 16; // NX4832K(T)035
+        switch(dispModel) {
+            case D.NX4827K043: x = 272; y = 6; w = 104; h = 18; f = 16; break;
+            case D.ILI9341: x = 178; y = 10; w = 78; h = 14; f = 14; break;
+        }
+
         const match = v.val.match(/[\d.]+/);
         const val = match ? parseFloat(match[0]) : -1;
         const dataValid = (
@@ -19,7 +24,7 @@ export default function lcdShowVoltageOrPercentage(
             vl.validatePercentage(val) ||
             vl.validateCO2(val)
         )
-        printText(ctx, x, 7, 88, 16, dataValid ? v.val : '--', font, v.type === 'date' ? 'left' : 'center', v.type === 'air' ? colorAir : color, bgColor);
+        printText(ctx, x, y, w, h, dataValid ? v.val : '--', f, v.type === 'date' ? 'left' : 'center', v.type === 'air' ? colorAir : color, bgColor, true);
     }
 
     return v.val;
