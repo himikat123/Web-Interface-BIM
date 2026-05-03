@@ -28,7 +28,7 @@ export default function lcdGetVoltage() {
                             ? Math.round(bat.batPercent(config.wsensor?.bat.type[wsensNum] ?? 0, data.wsensor?.bat[wsensNum] ?? 0, config.wsensor?.bat.k[wsensNum] ?? 0)) + '%'
                             : ''; break;
                         case 2: value = vl.validateHighVoltage(data.wsensor?.voltage.data[wsensNum] ?? 0) // High voltage
-                            ? (data.wsensor?.voltage.data[wsensNum] ?? 0).toFixed(2) + i18n.t('units.v')
+                            ? (data.wsensor?.voltage.data[wsensNum] ?? 0).toFixed(1) + i18n.t('units.v')
                             : ''; break;
                         case 3: value = vl.validateCO2(data.wsensor?.co2.data[wsensNum] ?? 0) // CO2
                             ? Math.round(data.wsensor?.co2.data[wsensNum] ?? 0) + 'ppm'
