@@ -9,8 +9,9 @@ import type { iLcdClockState } from '../../interfaces';
 import * as D from './displayTypes';
 import lcdSegmentFont from '../../atoms/canvas/lcdSegmentFont';
 
-export function displayLcdClockScreen(ctx: CanvasRenderingContext2D, 
-    model: number, dispModel: number, state: iLcdClockState | undefined, clockType: string
+export function displayLcdClockScreen(
+    ctx: CanvasRenderingContext2D, dispModel: number, 
+    state: iLcdClockState | undefined, clockType: string
 ): iLcdClockState {
     const color = lcdColors();
 
@@ -28,9 +29,7 @@ export function displayLcdClockScreen(ctx: CanvasRenderingContext2D,
     }
 
     const hour = moment().format(hourFormat);
-    const hr = +moment().format(hourFormat);
-    const mn = moment().minute();
-    const sc = moment().second();
+    const leadZero = hourFormat === 'hh' || hourFormat === 'HH' || Math.floor(+hour / 10) > 0;
     const minute = moment().minute();
     const second = moment().second();
     const dt = new Date();
@@ -52,21 +51,21 @@ export function displayLcdClockScreen(ctx: CanvasRenderingContext2D,
                 yp1 = 134, yp2 = 202, r = 8, w = 220, f = 212;
             switch(dispModel) {
                 case D.NX4827K043: 
-                    x1 = 22; x2 = 272; xp1 = 245; xp2 = 240; y = 60; s = 30;
+                    x1 = 22; x2 = 272; xp1 = 242; xp2 = 237; y = 60; s = 30;
                     yp1 = 114; yp2 = 172; r = 8; w = 220; f = 212; 
                     break;
                 case D.ILI9341: 
-                    x1 = 10; x2 = 178; xp1 = 160; xp2 = 158; y = 68; s = 19;
-                    yp1 = 100; yp2 = 150; r = 6; w = 160; f = 140; 
+                    x1 = 10; x2 = 178; xp1 = 158; xp2 = 155; y = 68; s = 19;
+                    yp1 = 100; yp2 = 140; r = 6; w = 160; f = 140; 
                     break;
             }
             fillRect(ctx, 0, y, ctx.canvas.width, f, color.BG);
-            lcdSegmentFont(ctx, x1, y, Math.floor(hr / 10), color.CLOCK, s);
-            lcdSegmentFont(ctx, x1 + w / 2.3, y, Math.floor(hr % 10), color.CLOCK, s);
+            if(leadZero) lcdSegmentFont(ctx, x1, y, Math.floor(+hour / 10), color.CLOCK, s);
+            lcdSegmentFont(ctx, x1 + w / 2.3, y, Math.floor(+hour % 10), color.CLOCK, s);
             fillCircle(ctx, xp1, yp1, r + (points ? 0 : 1), points ? color.CLOCK : color.BG);
             fillCircle(ctx, xp2, yp2, r + (points ? 0 : 1), points ? color.CLOCK : color.BG);
-            lcdSegmentFont(ctx, x2, y, Math.floor(mn / 10), color.CLOCK, s);
-            lcdSegmentFont(ctx, x2 + w / 2.3, y, Math.floor(mn % 10), color.CLOCK, s);
+            lcdSegmentFont(ctx, x2, y, Math.floor(minute / 10), color.CLOCK, s);
+            lcdSegmentFont(ctx, x2 + w / 2.3, y, Math.floor(minute % 10), color.CLOCK, s);
         }
         if(clockType === 'small') { // Small clock
             let x1 = 12, x2 = 177, x3 = 340, xp1 = 158, xp2 = 156, xp3 = 322, // NX4832K(T)035
@@ -82,16 +81,16 @@ export function displayLcdClockScreen(ctx: CanvasRenderingContext2D,
                     break;
             }
             fillRect(ctx, 0, y, ctx.canvas.width, f, color.BG);
-            lcdSegmentFont(ctx, x1, y, Math.floor(hr / 10), color.CLOCK, s);
-            lcdSegmentFont(ctx, x1 + w / 2.3, y, Math.floor(hr % 10), color.CLOCK, s);
+            if(leadZero) lcdSegmentFont(ctx, x1, y, Math.floor(+hour / 10), color.CLOCK, s);
+            lcdSegmentFont(ctx, x1 + w / 2.3, y, Math.floor(+hour % 10), color.CLOCK, s);
             fillCircle(ctx, xp1, yp1, r, color.CLOCK);
             fillCircle(ctx, xp2, yp2, r, color.CLOCK);
-            lcdSegmentFont(ctx, x2, y, Math.floor(mn / 10), color.CLOCK, s);
-            lcdSegmentFont(ctx, x2 + w / 2.3, y, Math.floor(mn % 10), color.CLOCK, s);
+            lcdSegmentFont(ctx, x2, y, Math.floor(minute / 10), color.CLOCK, s);
+            lcdSegmentFont(ctx, x2 + w / 2.3, y, Math.floor(minute % 10), color.CLOCK, s);
             fillCircle(ctx, xp3, yp1, r, color.CLOCK);
             fillCircle(ctx, xp4, yp2, r, color.CLOCK);
-            lcdSegmentFont(ctx, x3, y, Math.floor(sc / 10), color.CLOCK, s);
-            lcdSegmentFont(ctx, x3 + w / 2.3, y, Math.floor(sc % 10), color.CLOCK, s);
+            lcdSegmentFont(ctx, x3, y, Math.floor(second / 10), color.CLOCK, s);
+            lcdSegmentFont(ctx, x3 + w / 2.3, y, Math.floor(second % 10), color.CLOCK, s);
         }
         if(clockType === 'analog') { // Analog clock
             drawScaledImage(ctx, symb.clockFace(), ctx.canvas.width / 2 - ctx.canvas.height / 2, 0, ctx.canvas.height, ctx.canvas.height);

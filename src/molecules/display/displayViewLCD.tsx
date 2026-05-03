@@ -53,7 +53,7 @@ export default function DisplayViewLCD() {
                 setNetworkState(displayLcdNetworkScreen(ctx, model, networkState));
             }
             if(page === 'clock') {
-                setClockState(displayLcdClockScreen(ctx, model, model, clockState, clockType));
+                setClockState(displayLcdClockScreen(ctx, model, clockState, clockType));
             }
             if(page === 'calendar') {
                 setCalendarState(displayLcdCalendarScreen(ctx, model, calendarState, calendarShift));
