@@ -1,7 +1,7 @@
 import { line, drawLine, fillRect } from "../../atoms/canvas/primitives";
 import lcdColors from "../../atoms/canvas/lcdColors";
 import { iHourlyWeather } from "../../interfaces";
-import * as D from "./displayTypes";
+import * as D from "../../atoms/constants/displayTypes";
 
 export default function displayLcdHourlyCharts(ctx: CanvasRenderingContext2D, 
     dispModel: number, weather: iHourlyWeather | undefined, shift: number, type: string

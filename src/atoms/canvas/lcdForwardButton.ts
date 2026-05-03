@@ -1,6 +1,6 @@
 import { drawScaledImage, fillRect } from "./primitives";
 import { rightArrow } from "../img/symbols";
-import * as D from "../../molecules/display/displayTypes";
+import * as D from "../constants/displayTypes";
 
 export default function lcdForwardButton(ctx: CanvasRenderingContext2D, dispModel: number, show: boolean) {
     let x = 445, y = 144, size = 32; // NX4832K(T)035

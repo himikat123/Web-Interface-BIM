@@ -6,7 +6,7 @@ import i18n from '../../i18n/main';
 import moment from 'moment';
 import { getLocale } from '../../atoms/getLocale';
 import lcdColors from '../../atoms/canvas/lcdColors';
-import * as D from './displayTypes';
+import * as D from '../../atoms/constants/displayTypes';
 
 export function displayLcdAlarmScreen(ctx: CanvasRenderingContext2D, 
     dispModel: number, state: iAlarmScreen | undefined

@@ -1,6 +1,6 @@
 import { printText, printScrollText } from "./primitives";
 import lcdGetComfort from "../lcdGetData/lcdGetComfort";
-import * as D from "../../molecules/display/displayTypes";
+import * as D from "../constants/displayTypes";
 
 export default function lcdShowComfort(
     ctx: CanvasRenderingContext2D, dispModel: number, prevComfort: string | undefined, 

@@ -1,5 +1,5 @@
 import { fillCircle } from "./primitives";
-import * as D from "../../molecules/display/displayTypes";
+import * as D from "../constants/displayTypes";
 
 export default function lcdShowClockPoints(ctx: CanvasRenderingContext2D, color: string, dispModel: number) {
     let x = 103, y1 = 36, y2 = 70, r = 5; // NX4832K(T)035

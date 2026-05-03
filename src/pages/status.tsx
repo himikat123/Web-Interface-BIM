@@ -9,7 +9,7 @@ import CardStatusSensors from '../organisms/status/cardStatusSensors';
 import CardStatusSystem from '../organisms/status/cardStatusSystem';
 import CardStatusNetwork from '../organisms/status/cardStatusNetwork';
 import { iData } from '../redux/dataTypes';
-import * as D from '../molecules/display/displayTypes';
+import * as D from '../atoms/constants/displayTypes';
 
 export default function Status() {
     const data = useSelector((state: iData) => state.data);

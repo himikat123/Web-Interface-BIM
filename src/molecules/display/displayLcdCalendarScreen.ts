@@ -6,7 +6,7 @@ import moment from 'moment';
 import { getLocale } from '../../atoms/getLocale';
 import lcdColors from '../../atoms/canvas/lcdColors';
 import type { iLcdCalendarState } from '../../interfaces';
-import * as D from './displayTypes';
+import * as D from '../../atoms/constants/displayTypes';
 
 export function displayLcdCalendarScreen(ctx: CanvasRenderingContext2D, 
     dispModel: number, state: iLcdCalendarState | undefined, shift: number

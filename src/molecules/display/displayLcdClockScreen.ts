@@ -6,7 +6,7 @@ import moment from 'moment';
 import { getLocale } from '../../atoms/getLocale';
 import lcdColors from '../../atoms/canvas/lcdColors';
 import type { iLcdClockState } from '../../interfaces';
-import * as D from './displayTypes';
+import * as D from '../../atoms/constants/displayTypes';
 import lcdSegmentFont from '../../atoms/canvas/lcdSegmentFont';
 
 export function displayLcdClockScreen(

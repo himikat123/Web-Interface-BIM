@@ -18,7 +18,7 @@ import lcdShowForecast from '../../atoms/canvas/lcdShowForecast';
 import lcdShowVoltageOrPercentage from '../../atoms/canvas/lcdShowVoltageOrPercentage';
 import lcdGetSequence from '../../atoms/lcdGetData/lcdGetSequence';
 import lcdColors from '../../atoms/canvas/lcdColors';
-import * as D from './displayTypes';
+import * as D from '../../atoms/constants/displayTypes';
 import type { iLcdMainState } from '../../interfaces';
 
 export function displayLcdMainScreen(

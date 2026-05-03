@@ -2,7 +2,7 @@ import moment from "moment";
 import store from '../../redux/store';
 import { drawScaledImage, fillRect } from "./primitives";
 import * as digit from '../img/digits';
-import * as D from "../../molecules/display/displayTypes";
+import * as D from "../constants/displayTypes";
 
 function showDigit(ctx: CanvasRenderingContext2D, w: number, h: number, dig: number, x: number, y: number, bgColor: string) {
     switch(dig) {

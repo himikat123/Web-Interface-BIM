@@ -3,7 +3,7 @@ import { printText, fillRect } from "./primitives";
 import * as vl from "../validateValues";
 import lcdGetPres from "../lcdGetData/lcdGetPres";
 import { hPaToMM, mmToHPA } from '../indications/hPaMM';
-import * as D from '../../molecules/display/displayTypes';
+import * as D from '../constants/displayTypes';
 import lcdColors from './lcdColors';
 
 export default function lcdShowPressure(

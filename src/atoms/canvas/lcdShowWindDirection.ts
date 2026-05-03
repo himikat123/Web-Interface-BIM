@@ -3,7 +3,7 @@ import { drawScaledImage, fillRect } from "./primitives";
 import device from '../../device';
 import lcdGetWindDir from '../lcdGetData/lcdGetWindDir';
 import * as wind from "../img/wind";
-import * as D from '../../molecules/display/displayTypes';
+import * as D from '../constants/displayTypes';
 
 export default function lcdShowWindDirection(
     ctx: CanvasRenderingContext2D, dispModel: number, prevDir: number | undefined, bgColor: string

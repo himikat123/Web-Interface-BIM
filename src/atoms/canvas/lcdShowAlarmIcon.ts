@@ -2,7 +2,7 @@ import store from '../../redux/store';
 import device from '../../device';
 import { drawScaledImage } from "./primitives";
 import { alarm, alarmOff } from '../img/symbols';
-import * as D from '../../molecules/display/displayTypes';
+import * as D from '../constants/displayTypes';
 
 export default function lcdShowAlarmIcon(
     ctx: CanvasRenderingContext2D, dispModel: number, prevAlarmState: boolean | undefined

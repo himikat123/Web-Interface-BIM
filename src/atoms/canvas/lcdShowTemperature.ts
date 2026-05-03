@@ -3,7 +3,7 @@ import { temp_minus, temp_plus } from "../img/symbols";
 import { validateTemperature } from "../validateValues";
 import lcdGetTempIn from "../lcdGetData/lcdGetTempIn";
 import { lcdGetTempOut } from "../lcdGetData/lcdGetTemp";
-import * as D from "../../molecules/display/displayTypes";
+import * as D from "../constants/displayTypes";
 
 function showTemperature(
     ctx: CanvasRenderingContext2D, temp: number, x: number, y: number, 

@@ -13,7 +13,7 @@ import { displayLcdAlarmScreen } from './displayLcdAlarmScreen';
 import * as types from '../../interfaces';
 import { iConfig } from "../../redux/configTypes";
 import { iHourly } from '../../redux/hourlyTypes';
-import * as D from '../../molecules/display/displayTypes';
+import * as D from '../../atoms/constants/displayTypes';
 import * as coords from './touchscreenCoordinates';
 
 export default function DisplayViewLCD() {

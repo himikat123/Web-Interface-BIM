@@ -1,7 +1,7 @@
 import { printText } from "./primitives";
 import lcdGetVoltage from "../lcdGetData/lcdGetVoltage";
 import * as vl from '../validateValues';
-import * as D from "../../molecules/display/displayTypes";
+import * as D from "../constants/displayTypes";
 
 export default function lcdShowVoltageOrPercentage(
     ctx: CanvasRenderingContext2D, dispModel: number, prevValue: string | undefined, 

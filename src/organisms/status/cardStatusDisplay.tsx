@@ -7,7 +7,7 @@ import { iDisplay } from '../../interfaces';
 import DisplayViewLCD from '../../molecules/display/displayViewLCD';
 import DisplayView7segment from '../../molecules/display/displayView7segment';
 import DisplayView7SegmentTubes from '../../molecules/display/DisplayView7SegmentTubes';
-import * as D from '../../molecules/display/displayTypes';
+import * as D from '../../atoms/constants/displayTypes';
 
 export default function CardStatusDisplay(props: iDisplay) {
     const config = useSelector((state: iConfig) => state.config);

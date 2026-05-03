@@ -3,7 +3,7 @@ import moment from "moment";
 import device from '../../device';
 import { printText, drawScaledImage } from "./primitives";
 import * as symbols from "../img/symbols";
-import * as D from '../../molecules/display/displayTypes';
+import * as D from '../constants/displayTypes';
 
 export default function lcdShowUpdTime(
     ctx: CanvasRenderingContext2D, dispModel: number, 

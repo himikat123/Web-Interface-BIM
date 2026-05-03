@@ -2,7 +2,7 @@ import { printText } from "./primitives";
 import { validateHumidity } from "../validateValues";
 import lcdGetHumIn from "../lcdGetData/lcdGetHumIn";
 import { lcdGetHumOut } from "../lcdGetData/lcdGetHum";
-import * as D from "../../molecules/display/displayTypes";
+import * as D from "../constants/displayTypes";
 
 function showHumidity(
     ctx: CanvasRenderingContext2D, hum: number, x: number, y: number, 

@@ -1,5 +1,5 @@
 import { drawLine, printText } from "../../atoms/canvas/primitives";
-import * as D from "./displayTypes";
+import * as D from "../../atoms/constants/displayTypes";
 
 export function displayLcdHistoryTitle(ctx: CanvasRenderingContext2D, title: string, dispModel: number) {
     let x = 91, y1 = 243, y2 = 273, y3 = 252, w = 295, h = 31, f = 16; // NX4832K(T)035

@@ -4,7 +4,7 @@ import device from '../../device';
 import lcdGetWindSpeed from '../lcdGetData/lcdGetWindSpeed';
 import { printText } from "./primitives";
 import { validateWindSpeed } from "../validateValues";
-import * as D from '../../molecules/display/displayTypes';
+import * as D from '../constants/displayTypes';
 
 export default function lcdShowWindSpeed(
     ctx: CanvasRenderingContext2D, dispModel: number, 

@@ -10,7 +10,7 @@ import { getLocale } from "../../atoms/getLocale";
 import lcdColors from "../../atoms/canvas/lcdColors";
 import { hPaToMM } from "../../atoms/indications/hPaMM";
 import { validateTemperature, validatePressureHPA } from "../../atoms/validateValues";
-import * as D from "./displayTypes";
+import * as D from "../../atoms/constants/displayTypes";
 
 export default function displayLcdHourlyColumn(
     ctx: CanvasRenderingContext2D, dispModel: number, 

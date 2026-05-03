@@ -5,7 +5,7 @@ import * as icons from '../img/icons';
 import { iPrevForecast } from "../../interfaces";
 import * as vl from "../validateValues";
 import getWeekday from '../getWeekday';
-import * as D from '../../molecules/display/displayTypes';
+import * as D from '../constants/displayTypes';
 
 function showTemperature(ctx: CanvasRenderingContext2D, temp: number, x: number, 
     y: number, w: number, h: number, font: number, color: string, bgColor: string

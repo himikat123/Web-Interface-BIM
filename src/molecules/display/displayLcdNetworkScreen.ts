@@ -5,7 +5,7 @@ import lcdColors from '../../atoms/canvas/lcdColors';
 import i18n from '../../i18n/main';
 import { iLcdNetworkState } from '../../interfaces';
 import { validateTemperature } from '../../atoms/validateValues';
-import * as D from './displayTypes';
+import * as D from '../../atoms/constants/displayTypes';
 
 export function displayLcdNetworkScreen(ctx: CanvasRenderingContext2D, 
     dispModel: number, state: iLcdNetworkState | undefined

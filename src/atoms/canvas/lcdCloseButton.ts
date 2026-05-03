@@ -1,6 +1,6 @@
 import { drawScaledImage } from "./primitives";
 import { close } from "../img/symbols";
-import * as D from "../../molecules/display/displayTypes";
+import * as D from "../constants/displayTypes";
 
 export default function lcdCloseButton(ctx: CanvasRenderingContext2D, dispModel: number) {
     let x = 432, y = 1, size = 48; // NX4832K(T)035

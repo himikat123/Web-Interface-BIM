@@ -1,6 +1,6 @@
 import { drawScaledImage, fillRect } from "./primitives";
 import { leftArrow } from "../img/symbols";
-import * as D from "../../molecules/display/displayTypes";
+import * as D from "../constants/displayTypes";
 
 export default function lcdBackButton(ctx: CanvasRenderingContext2D, dispModel: number, show: boolean) {
     let x = 3, y = 144, size = 32; // NX4832K(T)035

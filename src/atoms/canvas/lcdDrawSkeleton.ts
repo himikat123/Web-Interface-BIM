@@ -1,6 +1,6 @@
 import { fillRect, drawLine, drawRoundRect, drawImage, drawScaledImage } from "./primitives";
 import * as symb from '../img/symbols';
-import * as D from "../../molecules/display/displayTypes";
+import * as D from "../constants/displayTypes";
 
 export default function lcdDrawSkeleton(
     ctx: CanvasRenderingContext2D | null | undefined, dispModel:number, frameColor: string, bgColor: string

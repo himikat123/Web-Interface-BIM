@@ -1,0 +1,12 @@
+export const DISPLAY_TIME = 0;
+export const DISPLAY_DATE = 1;
+export const DISPLAY_BME280 = 2;
+export const DISPLAY_BMP180 = 3;
+export const DISPLAY_SHT21 = 4;
+export const DISPLAY_DHT22 = 5;
+export const DISPLAY_DS18B20 = 6;
+export const DISPLAY_ESP32 = 7;
+export const DISPLAY_THINGSPEAK = 8;
+export const DISPLAY_FORECAST = 9;
+export const DISPLAY_RADIO_SENSOR = 10;
+export const DISPLAY_BME680 = 11;
