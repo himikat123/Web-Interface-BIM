@@ -21,18 +21,18 @@ export default function segGetData(dispNum: number, slot: number, pointsState: b
     const dispLength = displayLength(dispNum) + '-dig';
 
     switch(config.display.timeSlot ? config.display.timeSlot.sensor[slot][dispNum] : 0) {
-        case 0: clockpoints = true; dispImg = clock(sens, dispLength, pointsState, dispNum); break;
-        case 1: dispImg = cdate(sens, dispLength); break;
-        case 2: dispImg = segBME280(dispNum, slot, dispLength); break;
-        case 3: dispImg = segBMP180(dispNum, slot, dispLength); break;
-        case 4: dispImg = segSHT21(dispNum, slot, dispLength); break;
-        case 5: dispImg = segDHT22(dispNum, slot, dispLength); break;
+        case 0: clockpoints = true; dispImg = clock(sens, dispLength, pointsState, dispNum, config); break;
+        case 1: dispImg = cdate(sens, dispLength, dispNum, config, data); break;
+        case 2: dispImg = segBME280(dispNum, slot, dispLength, config, data); break;
+        case 3: dispImg = segBMP180(dispNum, slot, dispLength, config, data); break;
+        case 4: dispImg = segSHT21(dispNum, slot, dispLength, config, data); break;
+        case 5: dispImg = segDHT22(dispNum, slot, dispLength, config, data); break;
         case 6: dispImg = temp(data.ds18b20.temp + config.sensors.ds18b20.t, dispLength); break;
         case 7: dispImg = temp((data.esp32?.temp ?? 0) + (config.sensors.esp32?.t ?? 0), dispLength); break;
-        case 8: dispImg = segThingspeak(dispNum, slot, dispLength); break;
-        case 9: dispImg = segWeather(dispNum, slot, dispLength); break;
-        case 10: dispImg = segWsensor(dispNum, slot, dispLength); break;
-        case 11: dispImg = segBME680(dispNum, slot, dispLength); break;
+        case 8: dispImg = segThingspeak(dispNum, slot, dispLength, config, data); break;
+        case 9: dispImg = segWeather(dispNum, slot, dispLength, config, data); break;
+        case 10: dispImg = segWsensor(dispNum, slot, dispLength, config, data); break;
+        case 11: dispImg = segBME680(dispNum, slot, dispLength, config, data); break;
         default: ; break;
     }
 

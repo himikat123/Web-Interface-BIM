@@ -13,6 +13,7 @@ import tempHum from "../../atoms/indications/tempHum";
 import temp from "../../atoms/indications/temp";
 import ESP32 from "../../atoms/indications/ESP32";
 import tempHumPresIaq from "../../atoms/indications/tempHumPresIaq";
+import * as S from "../../atoms/constants/sensorTypes";
 
 export default function TimeSlotSensorType(props: iDisplayTimeSlot) {
     const dispatch = useDispatch();
@@ -89,7 +90,7 @@ export default function TimeSlotSensorType(props: iDisplayTimeSlot) {
     const disabled = [
         [ /* clock */ [], [],
             [ // type: Pixel LEDs
-                [0, 1, 1, 1, 1], [0, 1, 1, 1, 1], [0, 1, 1, 1, 1], [0, 0, 1, 1, 1], [0, 0, 1, 1, 1], [0, 0, 1, 1, 1]
+                [0, 1, 1, 1, 1], [0, 0, 0, 1, 1], [0, 1, 1, 1, 1], [0, 0, 0, 1, 1], [0, 0, 0, 0, 0]
             ],
             [ // type: 7 Segment
                 [0, 1, 1, 1, 1], [0, 0, 0, 1, 1], [0, 1, 1, 1, 1], [0, 0, 0, 1, 1], [0, 0, 0, 0, 0]
@@ -109,7 +110,7 @@ export default function TimeSlotSensorType(props: iDisplayTimeSlot) {
         ],
         [ /* date */ [], [],
             [ // type: Pixel LEDs
-                [0, 1, 1], [0, 1, 1], [0, 1, 1], [0, 0, 1], [0, 0, 1], [0, 0, 1]
+                [0, 1, 1], [0, 0, 1], [0, 1, 1], [0, 0, 1], [0, 0, 0]
             ],
             [ // type: 7 Segment
                 [0, 1, 1], [0, 0, 1], [0, 1, 1], [0, 0, 1], [0, 0, 0]
@@ -135,7 +136,7 @@ export default function TimeSlotSensorType(props: iDisplayTimeSlot) {
                 options={types[sensor]}
                 value={config.display.timeSlot ? config.display.timeSlot.data[props.slot][props.num] : 0}
                 onChange={val => dispatch(cf.displayTimeslotDataChange({slot: props.slot, num: props.num, val: val}))}
-                disabled={sensor < 2
+                disabled={(sensor === S.DISPLAY_TIME || sensor === S.DISPLAY_DATE)
                     ? disabled[sensor][config.display.type ? config.display.type[props.num] : 0][config.display.model[props.num]]
                     : []
                 }

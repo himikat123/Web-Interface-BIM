@@ -3,16 +3,16 @@ import { useSelector } from 'react-redux';
 import slotTick from '../../atoms/slotTick';
 import SegDoubleDigit from '../../atoms/canvas/segDoubleDigit';
 import displayLength from '../../atoms/segmentsDisplay/displayLength';
-import { iSegState } from '../../interfaces';
-import { iConfig } from "../../redux/configTypes";
+import type { iSegState } from '../../interfaces';
+import type { iConfig } from "../../redux/configTypes";
+import * as D from '../../atoms/constants/displayTypes';
 
 export default function DisplayView7segment(props: {num: number}) {
     const config = useSelector((state: iConfig) => state.config);
     const dType = config.display.type ? config.display.type[props.num] : 0;
     const dModel = config.display.model[props.num];
-    const colorsTM1637 = ['#0F0', '#0F0', '#0F0', '#0F0', '#0F0', '#0F0', '#0F0', '#0F0'];
-    const colorsMAX7219 = ['#F00', '#F00', '#F00', '#F00', '#F00', '#F00', '#F00', '#F00'];
-
+    const colorsTM1637 = Array(8).fill('#0F0');
+    const colorsMAX7219 = Array(8).fill('#F00');
     const [state, setState] = useState<iSegState>({
         segments: [0, 0, 0, 0, 0, 0, 0, 0],
         colors: ['', '', '', '', '', '', '', ''],
@@ -34,33 +34,34 @@ export default function DisplayView7segment(props: {num: number}) {
         return () => clearInterval(int);
     }, [props.num, state]);
 
-    const bottomDots = dType === 3 && dModel > 0;
+    const bottomDots = dType === D.SEGMENT && dModel > D.TM1637_4;
     const dispLength = displayLength(props.num);
+    const colors = dType === D.PIXEL ? state.colors : dModel < D.MAX7219_4 ? colorsTM1637 : colorsMAX7219;
 
     return <div className='h-full flex items-center'> 
         <div className='w-full mx-auto mt-4 p-2 bg-gray-400 dark:bg-gray-600 max-w-fit'>
             <div className='bg-black flex p-1.5 ps-[8px]'>
                 <SegDoubleDigit shift={0}
                     segments={state.segments}
-                    colors={dType === 2 ? state.colors : dModel < 2 ? colorsTM1637 : colorsMAX7219}
+                    colors={colors}
                     withDoubleDots={true}
                     bottomDots={bottomDots}
                 />
                 <SegDoubleDigit shift={2}
                     segments={state.segments}
-                    colors={dType === 2 ? state.colors : dModel < 2 ? colorsTM1637 : colorsMAX7219}
-                    withDoubleDots={dType === 2 ? dModel > 2 : dModel === 1}
+                    colors={colors}
+                    withDoubleDots={dType === D.PIXEL && dispLength > 4}
                     bottomDots={bottomDots}
                 />
                 {dispLength > 4 && <SegDoubleDigit shift={4}
                     segments={state.segments}
-                    colors={dType === 2 ? state.colors : dModel < 2 ? colorsTM1637 : colorsMAX7219}
-                    withDoubleDots={false}
+                    colors={colors}
+                    withDoubleDots={dType === D.PIXEL && dispLength > 6}
                     bottomDots={bottomDots}
                 />}
                 {dispLength > 6 && <SegDoubleDigit shift={6}
                     segments={state.segments}
-                    colors={dType === 2 ? state.colors : dModel < 2 ? colorsTM1637 : colorsMAX7219}
+                    colors={colors}
                     withDoubleDots={false}
                     bottomDots={bottomDots}
                 />}
