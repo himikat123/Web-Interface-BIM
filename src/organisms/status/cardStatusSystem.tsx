@@ -55,14 +55,14 @@ export default function CardStatusSystem() {
         </div>
         <div className='mt-4'>
             <p>{i18n.t('systemTimeAndDate')}</p>
-            <p className='text-blue-700 dark:text-blue-400'>
+            <div className='text-blue-700 dark:text-blue-400'>
                 <div>
                     {moment(data.time * 1000).utc().format(`🕐 ${hourFormat}:mm:ss`)}
                 </div>
                 <div>
                     {moment(data.time * 1000).utc().format(`🗓 L`)}
                 </div>
-            </p>
+            </div>
         </div>
 
         {device() === 'WeatherMonitorBIM' && <div className='mt-4'>
