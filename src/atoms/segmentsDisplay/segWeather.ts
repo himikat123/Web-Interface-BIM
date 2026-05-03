@@ -1,11 +1,8 @@
-import store from '../../redux/store';
 import temp from './segTempPrepare';
 import hum from './segHumPrepare';
 import pres from './segPresPrepare';
 
-export default function segWeather(dispNum: number, slot: number, dispModel: string): number[] {
-    const config = store.getState().config;
-    const data = store.getState().data;
+export default function segWeather(dispNum: number, slot: number, dispModel: string, config: any, data: any): number[] {
     let dispImg = [0, 0, 0, 0, 0, 0, 0, 0];
     const type = config.display.timeSlot ? config.display.timeSlot.data[slot][dispNum] : 0;
   

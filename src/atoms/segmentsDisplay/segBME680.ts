@@ -4,9 +4,7 @@ import hum from './segHumPrepare';
 import pres from './segPresPrepare';
 import iaq from './segIaqPrepare';
 
-export default function segBME680(dispNum: number, slot: number, dispModel: string): number[] {
-    const config = store.getState().config;
-    const data = store.getState().data;
+export default function segBME680(dispNum: number, slot: number, dispModel: string, config: any, data: any): number[] {
     let dispImg = [0, 0, 0, 0, 0, 0, 0, 0];
     const type = config.display.timeSlot ? config.display.timeSlot.data[slot][dispNum] : 0;
   

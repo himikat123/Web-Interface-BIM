@@ -1,13 +1,10 @@
-import store from '../../redux/store';
 import temp from './segTempPrepare';
 import hum from './segHumPrepare';
 import pres from './segPresPrepare';
 import co2 from './segCo2Prepare';
 import { WsensorDataRelevance } from '../validateValues';
 
-export default function segWsensor(dispNum: number, slot: number, dispModel: string): number[] {
-    const config = store.getState().config;
-    const data = store.getState().data;
+export default function segWsensor(dispNum: number, slot: number, dispModel: string, config: any, data: any): number[] {
     let dispImg = [0, 0, 0, 0, 0, 0, 0, 0];
     const wsensNum = config.display.timeSlot ? config.display.timeSlot.wsensor.num[slot][dispNum] : 0;
     const wsensType = config.display.timeSlot ? config.display.timeSlot.wsensor.type[slot][dispNum] : 0;
