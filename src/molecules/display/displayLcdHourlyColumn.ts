@@ -83,7 +83,8 @@ export default function displayLcdHourlyColumn(
     }
 
     const dt = moment.unix(weather?.date[s] ?? 0).format('DD');
-    const mo = moment.unix(weather?.date[s] ?? 0).locale(getLocale()).format('MMM').substring(0, 3);
+    const mo = moment.unix(weather?.date[s] ?? 0).locale(getLocale()).format('D MMM').split(' ')[1].substring(0, 3);
+
     printText(ctx, x, y, w, f4, dt + mo, f4, 'center', color.TEXT, color.BG);
     y += y6 + gap;
 

@@ -41,7 +41,13 @@ export function displayLcdClockScreen(
         if(monthName.length > 7) date = `${dd.date()} de ${dd.format('MMM')} de ${dd.year()}`;
         else date = dd.format('LL');
     } 
-    else date = dd.format('LL');
+    else if(getLocale() === 'ru' || getLocale() === 'uk') {
+        date = dd.format('D MMMM YYYY'); 
+    }
+    else {
+        date = dd.format('LL');
+    }
+
     const wd = moment().locale(getLocale()).format('dddd');
     const weekday = wd.charAt(0).toUpperCase() + wd.slice(1);
 
