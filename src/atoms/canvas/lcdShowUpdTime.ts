@@ -22,9 +22,9 @@ export default function lcdShowUpdTime(
 
     if((device() === 'WeatherMonitorBIM32') ? (time !== prevTime) : (numIP !== prevTime)) {
         const upd = time > 0
-            ? moment.unix(time).utc().format((dispModel && device() === 'WeatherMonitorBIM32') 
-                ? `DD.MM.YYYY ${hourFormat}:mm` 
-                : `DD.MM.YYYY ${hourFormat}:mm:ss`)
+            ? moment.unix(time).utc().format((dispModel <= D.NX4827K043 && device() === 'WeatherMonitorBIM32') 
+                ? `DD.MM.YYYY ${hourFormat}:mm:ss` 
+                : `DD.MM.YYYY ${hourFormat}:mm`)
             : '';
 
         if(device() === 'WeatherMonitorBIM32') {
@@ -44,3 +44,8 @@ export default function lcdShowUpdTime(
 
     return (device() === 'WeatherMonitorBIM32') ? time : numIP;
 }
+
+
+// TODO в истории и почасовом вместо гпа только г 
+// нет данных истории и почасовых после логина
+//при выборе bme680 в качестве датчика йак вместо напряжения батарейки указать что это IAQ
