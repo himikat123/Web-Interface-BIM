@@ -215,6 +215,7 @@
     "resetToFactory": "Възстановяване на фабричните настройки",
     "ledPerSegment": "светодиод на сегмент",
     "ledsPerSegment": "светодиода на сегмент",
+    "useSacrificialLED": "Използвайте жертвен светодиод",
     "bySunriseAndSunset": "По изгрев и залез",
     "byLightSensor": "Чрез сензор за светлина",
     "byTime": "По време",

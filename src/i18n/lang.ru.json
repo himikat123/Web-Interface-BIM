@@ -215,6 +215,7 @@
     "resetToFactory": "Сброс на заводские настройки",
     "ledPerSegment": "светодиод на сегмент",
     "ledsPerSegment": "светодиода на сегмент",
+    "useSacrificialLED": "Использовать жертвенный светодиод",
     "bySunriseAndSunset": "По восходу и закату",
     "byLightSensor": "По датчику освещенности",
     "byTime": "По времени",

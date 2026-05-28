@@ -215,6 +215,7 @@
     "resetToFactory": "Resetuj do ustawień fabrycznych",
     "ledPerSegment": "LED na segment",
     "ledsPerSegment": "LED na segmentach",
+    "useSacrificialLED": "Użyj diody LED o wysokiej wartości",
     "bySunriseAndSunset": "Według wschodu i zachodu słońca",
     "byLightSensor": "Według czujnika światła",
     "byTime": "Według czasu",

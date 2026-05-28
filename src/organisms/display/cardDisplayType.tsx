@@ -2,6 +2,7 @@ import i18n from "../../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../../atoms/card";
 import SelectSwitch from "../../atoms/selectSwitch";
+import Toggle from "../../atoms/toggle";
 import DisplayBrightLimit from "../../molecules/display/displayBrightLimit";
 import DisplayDigitsReassignment from "../../molecules/display/displayDigitsReassignment";
 import { iConfig } from "../../redux/configTypes";
@@ -162,6 +163,11 @@ export default function CardDisplayType(props: iDisplay) {
         </div>}
 
         {config.display.type && config.display.type[props.num] > 0 && <>
+            <Toggle label={i18n.t('useSacrificialLED')}
+                checked={config.display.sLed[props.num]}
+                onChange={() => dispatch(cf.displaySLedChange(config.display.sLed[props.num] ? 0 : 1))}
+            />
+
             {config.display.type[props.num] <= 2 && <DisplayBrightLimit num={props.num} />}
 
             <div className="mt-4 text-xs">

@@ -215,6 +215,7 @@
     "resetToFactory": "Reiniciar a ajustes de fábrica",
     "ledPerSegment": "LED por segmento",
     "ledsPerSegment": "LEDs por segmento",
+    "useSacrificialLED": "Utilice un LED de sacrificio",
     "bySunriseAndSunset": "al amanecer y anochecer",
     "byLightSensor": "Por sensor de luz",
     "byTime": "Por hora",
