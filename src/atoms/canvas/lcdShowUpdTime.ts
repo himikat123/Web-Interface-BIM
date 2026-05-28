@@ -44,8 +44,3 @@ export default function lcdShowUpdTime(
 
     return (device() === 'WeatherMonitorBIM32') ? time : numIP;
 }
-
-
-// TODO в истории и почасовом вместо гпа только г 
-// нет данных истории и почасовых после логина
-//при выборе bme680 в качестве датчика йак вместо напряжения батарейки указать что это IAQ
