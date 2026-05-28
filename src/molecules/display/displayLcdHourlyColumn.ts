@@ -20,7 +20,7 @@ export default function displayLcdHourlyColumn(
     const color = lcdColors();
     const s = num + shift;
     let c = 48, x = 42, y1 = 110, y2 = 20, y3 = 22, y4 = 48, y5 = 23, 
-        y6 = 18, w = 50, iw = 40, f1 = 16, f2 = 14, f3 = 24, f4 = 14;
+        y6 = 18, w = 50, iw = 40, f1 = 16, f2 = 12, f3 = 24, f4 = 14;
     switch(dispModel) {
         case D.NX4827K043: 
             c = 48; x = 42; y1 = 90; y2 = 16; y3 = 16; y4 = 40; y5 = 24; 
@@ -28,7 +28,7 @@ export default function displayLcdHourlyColumn(
             break;
         case D.ILI9341: 
             c = 32; x = 30; y1 = 86; y2 = 16; y3 = 14; y4 = 40; y5 = 20; 
-            y6 = 14; w = 36; iw = 30; f1 = 11; f2 = 9; f3 = 14; f4 = 9;
+            y6 = 14; w = 36; iw = 30; f1 = 11; f2 = 8; f3 = 14; f4 = 9;
             break;
     }
     const gap = (type === 'historyIn' || type === 'historyOut') ? 4 : 0;
@@ -50,7 +50,7 @@ export default function displayLcdHourlyColumn(
     }
 
     if(type === 'hourly' || type === 'historyOut') {
-        const presUnits = localPres ? i18n.t('units.hpa').slice(0, -2) : i18n.t('units.mm');
+        const presUnits = localPres ? i18n.t('units.hpa') : i18n.t('units.mm');
         const p = weather?.pres[s] !== undefined ? weather.pres[s] : 40400;
         const pres = validatePressureHPA(p)
             ? String(Math.round(localPres ? p : hPaToMM(p)))

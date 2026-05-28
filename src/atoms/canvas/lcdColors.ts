@@ -17,7 +17,7 @@ export default function lcdColors() {
         DATE: '#F88000',
         GRID: '#484C48',
         TEMP: '#F8FC00',
-        PRES: '#F800F8',
+        PRES: '#FA50FA',
         PREC: '#00FCF8',
         HUM: '#00FCF8',
         TEMP_MIN: '#F80',
