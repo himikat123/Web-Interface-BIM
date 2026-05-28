@@ -34,7 +34,7 @@ export default function SensorTypeVoltage() {
     date = date.replace(/\p{L}{4,}/u, m => m.slice(0, 3));
     sensors.push(`${i18n.t('date')} (${date})`);
     if(device() === 'WeatherMonitorBIM32') {
-        sensors.push(`BME680 (${bme680indications.iaq})`);
+        sensors.push(`BME680 (IAQ ${bme680indications.iaq})`);
         sensors.push(`BME680 (${i18n.t('absHumidity')} ${bme680indications.aHum})`);
         sensors.push(`BME680 (${i18n.t('dewPoint')} ${bme680indications.dp})`);
     }
