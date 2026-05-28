@@ -155,7 +155,7 @@ export default function CardDisplayType(props: iDisplay) {
         </div>}
 
         {config.display.type && config.display.type[props.num] === 2 && <div className="mt-8">
-            <SelectSwitch label={i18n.t('displayModel')}
+            <SelectSwitch label={i18n.t('numberOfLEDs')}
                 options={leds}
                 value={config.display.cntLeds ? config.display.cntLeds[props.num] : 0}
                 onChange={val => dispatch(cf.displayCntLedsChange({num: props.num, val: val}))}
@@ -163,10 +163,15 @@ export default function CardDisplayType(props: iDisplay) {
         </div>}
 
         {config.display.type && config.display.type[props.num] > 0 && <>
-            <Toggle label={i18n.t('useSacrificialLED')}
-                checked={config.display.sLed[props.num]}
-                onChange={() => dispatch(cf.displaySLedChange(config.display.sLed[props.num] ? 0 : 1))}
-            />
+            {config.display.type[props.num] === 2 && <div className="mt-8"> 
+                <Toggle label={i18n.t('useSacrificialLED')}
+                    checked={config.display.sLed ? config.display.sLed[props.num] : 0}
+                    onChange={() => dispatch(cf.displaySLedChange({
+                        num: props.num, 
+                        val: config.display.sLed ? config.display.sLed[props.num] ? 0 : 1 : 0
+                    }))}
+                />
+            </div>}
 
             {config.display.type[props.num] <= 2 && <DisplayBrightLimit num={props.num} />}
 
