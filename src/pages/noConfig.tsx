@@ -6,7 +6,7 @@ import { Warning } from '@phosphor-icons/react';
 export default function NoConfig() {
     changeLanguage(localStorage.lang);
 
-    return <div className="flex justify-center items-center w-full h-screen">
+    return <div className="flex justify-center items-center w-full h-dvh">
         <div className="border-2 border-menu_light dark:border-menu_dark bg-card_light dark:bg-card_dark rounded-lg p-4 m-4 max-w-xl w-full">
             <h1 className="text-xl text-center mb-8">{i18n.t('configError')}</h1>
             <div className="flex flex-col justify-center items-center">
