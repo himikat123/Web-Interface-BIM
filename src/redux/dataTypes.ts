@@ -15,6 +15,7 @@ export interface iData {
         runtime: number,
         time: number,
         cyd?: number,
+        dispState?: number[],
         network: iNetwork,
         ssids: [ [string, number] ],
         bme680?: iSensorTHPIdata,

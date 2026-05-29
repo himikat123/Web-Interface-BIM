@@ -540,7 +540,8 @@ export interface iSegDoubleDigit {
     segments: number[],
     colors: string[],
     withDoubleDots: boolean,
-    bottomDots: boolean
+    bottomDots: boolean,
+    isDisplayOn: boolean
 }
 
 export interface iNumitron {

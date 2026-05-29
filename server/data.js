@@ -47,6 +47,7 @@ const data = (cookieCode) => {
         runtime: Math.round(random(3, 3000)),
         time: date,
         //cyd: 1,
+        dispState: [1, 0],
         network: {
             ssid: "budulai",
             ch: 14,

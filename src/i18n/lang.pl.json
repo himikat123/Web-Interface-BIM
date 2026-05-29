@@ -31,6 +31,7 @@
         "singular": "Wyświetlacz",
         "plural": "Wyświetlacze"
     },
+    "isOff": "wyłączony",
     "sleep": "Tryb uśpienia",
     "useSleep": "Użyj trybu uśpienia",
     "goSleepInMinutes": "Idź spać za (minuty)",

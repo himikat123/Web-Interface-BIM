@@ -7,7 +7,7 @@ import type { iSegState } from '../../interfaces';
 import type { iConfig } from "../../redux/configTypes";
 import * as D from '../../atoms/constants/displayTypes';
 
-export default function DisplayView7segment(props: {num: number}) {
+export default function DisplayView7segment(props: {num: number, isDisplayOn: boolean}) {
     const config = useSelector((state: iConfig) => state.config);
     const dType = config.display.type ? config.display.type[props.num] : 0;
     const dModel = config.display.model[props.num];
@@ -46,24 +46,28 @@ export default function DisplayView7segment(props: {num: number}) {
                     colors={colors}
                     withDoubleDots={true}
                     bottomDots={bottomDots}
+                    isDisplayOn={props.isDisplayOn}
                 />
                 <SegDoubleDigit shift={2}
                     segments={state.segments}
                     colors={colors}
                     withDoubleDots={dType === D.PIXEL && dispLength > 4}
                     bottomDots={bottomDots}
+                    isDisplayOn={props.isDisplayOn}
                 />
                 {dispLength > 4 && <SegDoubleDigit shift={4}
                     segments={state.segments}
                     colors={colors}
                     withDoubleDots={dType === D.PIXEL && dispLength > 6}
                     bottomDots={bottomDots}
+                    isDisplayOn={props.isDisplayOn}
                 />}
                 {dispLength > 6 && <SegDoubleDigit shift={6}
                     segments={state.segments}
                     colors={colors}
                     withDoubleDots={false}
                     bottomDots={bottomDots}
+                    isDisplayOn={props.isDisplayOn}
                 />}
             </div>
         </div>

@@ -7,6 +7,7 @@ import TimeInput from "../../atoms/timeInput";
 import Button from "../../atoms/button";
 import Toggle from "../../atoms/toggle";
 import { iConfig } from "../../redux/configTypes";
+import { iData } from "../../redux/dataTypes";
 import { iDisplay } from "../../interfaces";
 import { display1ValidChange } from "../../redux/slices/valid";
 import * as cf from "../../redux/slices/config";
@@ -14,6 +15,7 @@ import * as cf from "../../redux/slices/config";
 export default function CardDisplayAutoOff(props: iDisplay) {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
+    const data = useSelector((state: iData) => state.data);
 
     return <>
         {(config.display.type ? (config.display.type[props.num] > 0) : 0) ? <Card content={<>
@@ -34,6 +36,10 @@ export default function CardDisplayAutoOff(props: iDisplay) {
                     onClick={() => fetch(`${hostUrl()}/esp/dispToggle?num=${props.num}&code=${localStorage.getItem('code') || '0'}`)}
                 />
             </div>
+            {(data.dispState && !data.dispState[props.num]) 
+                ? <div className="text-center text-red-500">{i18n.t('display.singular') + ' ' + i18n.t('isOff')}</div> 
+                : ''
+            }
 
             <hr className="mt-4 mb-12 border-menu_light dark:border-menu_dark" />
 

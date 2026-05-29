@@ -31,6 +31,7 @@
         "singular": "Pantalla",
         "plural": "Pantallas"
     },
+    "isOff": "apagada",
     "sleep": "Modo de suspensión",
     "useSleep": "Usar modo de suspensión",
     "goSleepInMinutes": "Suspender después de (minutos)",
