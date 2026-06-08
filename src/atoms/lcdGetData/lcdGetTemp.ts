@@ -1,10 +1,9 @@
-import store from '../../redux/store';
 import device from '../../device';
 import * as vl from "../validateValues";
+import { iConf } from '../../redux/configTypes';
+import { iDat } from '../../redux/dataTypes';
 
-function lcdGetTemp(wsensNum: number, wsensTempNum: number, thingNum: number, source: number) {
-    const config = store.getState().config;
-    const data = store.getState().data;
+function lcdGetTemp(wsensNum: number, wsensTempNum: number, thingNum: number, source: number, config: iConf, data: iDat): number {
     let temp = 40400.0;
     const cs = device() === 'WeatherMonitorBIM' 
         ? [1, -1, 2, 3, 4, 5, 6, 7, -2] 
@@ -39,20 +38,18 @@ function lcdGetTemp(wsensNum: number, wsensTempNum: number, thingNum: number, so
     return Math.round(temp);
 }
 
-export function lcdGetTempOut(): number {
-    const config = store.getState().config;
+export function lcdGetTempOut(config: iConf, data: iDat): number {
     const wsensNum = config.display.source.tempOut.wsensNum ?? 0;
     const wsensTempNum = config.display.source.tempOut.temp ?? 0;
     const thingNum = config.display.source.tempOut.thing;
     const source = config.display.source.tempOut.sens;
-    return lcdGetTemp(wsensNum, wsensTempNum, thingNum, source);
+    return lcdGetTemp(wsensNum, wsensTempNum, thingNum, source, config, data);
 }
 
-export function lcdGetTempSequence(slot: number): number {
-    const config = store.getState().config;
+export function lcdGetTempSequence(slot: number, config: iConf, data: iDat): number {
     const wsensNum = config.display.source.sequence?.wsenstemp[slot][0] ?? 0;
     const wsensTempNum = config.display.source.sequence?.wsenstemp[slot][1] ?? 0;
     const thingNum = config.display.source.sequence?.thngtemp[slot] ?? 0;
     const source = config.display.source.sequence?.temp[slot] ?? 0;
-    return lcdGetTemp(wsensNum, wsensTempNum, thingNum, source);
+    return lcdGetTemp(wsensNum, wsensTempNum, thingNum, source, config, data);
 }

@@ -3,6 +3,8 @@ import { validateHumidity } from "../validateValues";
 import lcdGetHumIn from "../lcdGetData/lcdGetHumIn";
 import { lcdGetHumOut } from "../lcdGetData/lcdGetHum";
 import * as D from "../constants/displayTypes";
+import { iConf } from '../../redux/configTypes';
+import { iDat } from "../../redux/dataTypes";
 
 function showHumidity(
     ctx: CanvasRenderingContext2D, hum: number, x: number, y: number, 
@@ -13,9 +15,9 @@ function showHumidity(
 
 export function lcdShowHumidityInside(
     ctx: CanvasRenderingContext2D, dispModel: number, prevHum: number | undefined, 
-    sequence: number | undefined, color: string, bgColor: string
+    sequence: number | undefined, color: string, bgColor: string, config: iConf, data: iDat
 ): number {
-    const hum = lcdGetHumIn(sequence ?? 0);
+    const hum = lcdGetHumIn(sequence ?? 0, config, data);
     if(hum !== prevHum) {
         let x = 398, y = 76, w = 77, h = 30, f = 30; // NX4832K(T)035
         switch(dispModel) {
@@ -28,10 +30,10 @@ export function lcdShowHumidityInside(
 }
 
 export function lcdShowHumidityOutside(
-    ctx: CanvasRenderingContext2D, dispModel: number, 
-    prevHum: number | undefined, color: string, bgColor: string
+    ctx: CanvasRenderingContext2D, dispModel: number, prevHum: number | undefined, 
+    color: string, bgColor: string, config: iConf, data: iDat
 ): number {
-    const hum = lcdGetHumOut();
+    const hum = lcdGetHumOut(config, data);
     if(hum !== prevHum) {
         let x = 260, y = 163, w = 60, h = 30, f = 30; // NX4832K(T)035
         switch(dispModel) {

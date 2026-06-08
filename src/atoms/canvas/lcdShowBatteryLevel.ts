@@ -1,10 +1,15 @@
-import { drawImage, drawScaledImage, fillRect } from "./primitives";
+import { drawScaledImage, fillRect } from "./primitives";
 import { bat_1, bat_2, bat_3, bat_4 } from '../img/bat';
 import lcdGetBatteryLevel from "../lcdGetData/lcdGetBatLevel";
 import * as D from "../constants/displayTypes";
+import { iConf } from "../../redux/configTypes";
+import { iDat } from "../../redux/dataTypes";
 
-export default function lcdShowBatteryLevel(ctx: CanvasRenderingContext2D, dispModel: number, prevLevel: number | undefined, bgColor: string): number {
-    const level = lcdGetBatteryLevel();
+export default function lcdShowBatteryLevel(
+    ctx: CanvasRenderingContext2D, dispModel: number, prevLevel: number | undefined, 
+    bgColor: string, config: iConf, data: iDat
+): number {
+    const level = lcdGetBatteryLevel(config, data);
 
     if(level !== prevLevel) {
         let x = 377, y = 1, w = 48, h = 32; // NX4832K(T)035

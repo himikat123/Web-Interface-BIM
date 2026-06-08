@@ -12,12 +12,16 @@ import { displayLcdHistoryOutScreen } from './displayLcdHistoryOutScreen';
 import { displayLcdAlarmScreen } from './displayLcdAlarmScreen';
 import * as types from '../../interfaces';
 import { iConfig } from "../../redux/configTypes";
+import { iData } from '../../redux/dataTypes';
 import { iHourly } from '../../redux/hourlyTypes';
 import * as D from '../../atoms/constants/displayTypes';
 import * as coords from './touchscreenCoordinates';
+import { iAlarms } from '../../redux/alarmTypes';
 
 export default function DisplayViewLCD() {
     const config = useSelector((state: iConfig) => state.config);
+    const data = useSelector((state: iData) => state.data);
+    const alarms = useSelector((state: iAlarms) => state.alarm);
     const model = config.display.model[D.DISPLAY1];
 
     const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
@@ -47,7 +51,7 @@ export default function DisplayViewLCD() {
     const draw = useCallback(() => {
         if(ctx) { // Display pages switch
             if(page === 'main') {
-                setMainState(displayLcdMainScreen(ctx, model, mainState, clockPointsState, config.units.pres));
+                setMainState(displayLcdMainScreen(ctx, model, mainState, clockPointsState, config, data, alarms));
             }
             if(page === 'network') {
                 setNetworkState(displayLcdNetworkScreen(ctx, model, networkState));

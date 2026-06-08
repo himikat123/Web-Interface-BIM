@@ -1,10 +1,9 @@
-import store from '../../redux/store';
 import device from '../../device';
 import * as vl from "../validateValues";
+import { iConf } from '../../redux/configTypes';
+import { iDat } from '../../redux/dataTypes';
 
-function lcdGetHum(wsensNum: number, thingNum: number, source: number) {
-    const config = store.getState().config;
-    const data = store.getState().data;
+function lcdGetHum(wsensNum: number, thingNum: number, source: number, config: iConf, data: iDat): number {
     let hum = 40400.0;
     let cs = device() === 'WeatherMonitorBIM' 
         ? [1, -1, 2, 3, 4, 5, -2] 
@@ -37,18 +36,16 @@ function lcdGetHum(wsensNum: number, thingNum: number, source: number) {
     return Math.round(hum);
 }
 
-export function lcdGetHumOut() {
-    const config = store.getState().config;
+export function lcdGetHumOut(config: iConf, data: iDat) {
     const wsensNum = config.display.source.humOut.wsensNum ?? 0;
     const thingNum = config.display.source.humOut.thing;
     const source = config.display.source.humOut.sens;
-    return lcdGetHum(wsensNum, thingNum, source);
+    return lcdGetHum(wsensNum, thingNum, source, config, data);
 }
 
-export function lcdGetHumSequence(slot: number) {
-    const config = store.getState().config;
+export function lcdGetHumSequence(slot: number, config: iConf, data: iDat) {
     const wsensNum = config.display.source.sequence?.wsenshum[slot] ?? 0;
     const thingNum = config.display.source.sequence?.thnghum[slot] ?? 0;
     const source = config.display.source.sequence?.hum[slot] ?? 0;
-    return lcdGetHum(wsensNum, thingNum, source);
+    return lcdGetHum(wsensNum, thingNum, source, config, data);
 }

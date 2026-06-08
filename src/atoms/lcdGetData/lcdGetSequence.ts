@@ -1,10 +1,10 @@
-import store from '../../redux/store';
 import { iSequence } from "../../interfaces";
 import { lcdGetTempSequence } from './lcdGetTemp';
 import { lcdGetHumSequence } from './lcdGetHum';
+import { iConf } from '../../redux/configTypes';
+import { iDat } from "../../redux/dataTypes";
 
-export default function lcdGetSequence(prevSequence: iSequence | undefined): iSequence {
-    const config = store.getState().config;
+export default function lcdGetSequence(prevSequence: iSequence | undefined, config: iConf, data: iDat): iSequence {
     const sequence: iSequence = {
         descript: prevSequence?.descript ?? '',
         temp: prevSequence?.temp ?? 0,
@@ -23,8 +23,8 @@ export default function lcdGetSequence(prevSequence: iSequence | undefined): iSe
             else i = 4;
         }
         sequence.counter = 0;
-        sequence.temp = lcdGetTempSequence(sequence.slot);
-        sequence.hum = lcdGetHumSequence(sequence.slot);
+        sequence.temp = lcdGetTempSequence(sequence.slot, config, data);
+        sequence.hum = lcdGetHumSequence(sequence.slot, config, data);
         sequence.descript = config.display.source.sequence?.name[sequence.slot] ?? '';
         if(sequence.slot < 3) sequence.slot++;
         else sequence.slot = 0;

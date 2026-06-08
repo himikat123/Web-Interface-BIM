@@ -1,8 +1,9 @@
 import moment from "moment";
-import store from '../../redux/store';
 import { drawScaledImage, fillRect } from "./primitives";
 import * as digit from '../img/digits';
 import * as D from "../constants/displayTypes";
+import { iConf } from '../../redux/configTypes';
+import { iDat } from '../../redux/dataTypes';
 
 function showDigit(ctx: CanvasRenderingContext2D, w: number, h: number, dig: number, x: number, y: number, bgColor: string) {
     switch(dig) {
@@ -20,9 +21,12 @@ function showDigit(ctx: CanvasRenderingContext2D, w: number, h: number, dig: num
     }
 }
 
-export default function lcdShowTime(ctx: CanvasRenderingContext2D, dispModel: number, prevTime: number | undefined, bgColor: string): number {
-    const time = store.getState().data.time;
-    const format = store.getState().config.clock.format;
+export default function lcdShowTime(
+    ctx: CanvasRenderingContext2D, dispModel: number, prevTime: number | undefined, 
+    bgColor: string, config: iConf, data: iDat
+): number {
+    const time = data.time;
+    const format = config.clock.format;
 
     if(time !== prevTime) {
         const hr = +moment.unix(time).utc().format(format > 1 ? 'H' : 'h');

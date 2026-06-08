@@ -1,16 +1,17 @@
 import i18n from '../../i18n/main';
-import store from '../../redux/store';
 import device from '../../device';
 import lcdGetWindSpeed from '../lcdGetData/lcdGetWindSpeed';
 import { printText } from "./primitives";
 import { validateWindSpeed } from "../validateValues";
 import * as D from '../constants/displayTypes';
+import { iConf } from '../../redux/configTypes';
+import { iDat } from '../../redux/dataTypes';
 
 export default function lcdShowWindSpeed(
-    ctx: CanvasRenderingContext2D, dispModel: number, 
-    prevSpeed: number | undefined, color: string, bgColor: string
+    ctx: CanvasRenderingContext2D, dispModel: number, prevSpeed: number | undefined, 
+    color: string, bgColor: string, config: iConf, data: iDat
 ): number {
-    const speed = device() === 'WeatherMonitorBIM32' ? lcdGetWindSpeed() : store.getState().data.weather.wind.speed;
+    const speed = device() === 'WeatherMonitorBIM32' ? lcdGetWindSpeed(config, data) : data.weather.wind.speed;
 
     if(speed !== prevSpeed) {
         const units = i18n.t('units.mps');

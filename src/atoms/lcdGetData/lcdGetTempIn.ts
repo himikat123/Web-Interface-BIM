@@ -1,11 +1,9 @@
 import device from '../../device';
-import store from '../../redux/store';
 import * as vl from "../validateValues";
+import { iConf } from '../../redux/configTypes';
+import { iDat } from '../../redux/dataTypes';
 
-export default function lcdGetTempIn(sequenceTemp: number) {
-    const config = store.getState().config;
-    const data = store.getState().data;
-
+export default function lcdGetTempIn(sequenceTemp: number, config: iConf, data: iDat): number {
     let temp = 40400.0;
     const wsensNum = config.display.source.tempIn.wsensNum ?? 0;
     const wsensTempNum = config.display.source.tempIn.temp ?? 0;

@@ -1,11 +1,9 @@
-import store from '../../redux/store';
 import device from '../../device';
 import * as vl from "../validateValues";
+import { iConf } from '../../redux/configTypes';
+import { iDat } from '../../redux/dataTypes';
 
-export default function lcdGetHumIn(sequenceHum: number) {
-    const config = store.getState().config;
-    const data = store.getState().data;
-
+export default function lcdGetHumIn(sequenceHum: number, config: iConf, data: iDat): number {
     let hum = 40400.0;
     const wsensNum = config.display.source.humIn.wsensNum ?? 0;
     const thingNum = config.display.source.humIn.thing;

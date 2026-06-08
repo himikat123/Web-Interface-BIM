@@ -1,11 +1,13 @@
-export interface iAlarms {
+export interface iAlrms {
+    alarmState: string,
     alarm: {
-        alarmState: string,
-        alarm: {
-            time: number[][],
-            weekdays: number[][],
-            states: number[],
-            melodies: number[]
-        }
+        time: number[][],
+        weekdays: number[][],
+        states: number[],
+        melodies: number[]
     }
+}
+
+export interface iAlarms {
+    alarm: iAlrms
 }

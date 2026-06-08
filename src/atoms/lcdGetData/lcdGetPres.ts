@@ -1,11 +1,9 @@
-import store from '../../redux/store';
 import device from '../../device';
 import * as vl from "../validateValues";
+import { iConf } from '../../redux/configTypes';
+import { iDat } from '../../redux/dataTypes';
 
-export default function lcdGetPres() {
-    const config = store.getState().config;
-    const data = store.getState().data;
-
+export default function lcdGetPres(config: iConf, data: iDat): number {
     let pres = 40400.0;
     const wsensNum = config.display.source.presOut.wsensNum ?? 0;
     const thingNum = config.display.source.presOut.thing;

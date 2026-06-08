@@ -1,19 +1,20 @@
-import store from '../../redux/store';
 import moment from "moment";
 import device from '../../device';
 import { printText, drawScaledImage } from "./primitives";
 import * as symbols from "../img/symbols";
 import * as D from '../constants/displayTypes';
+import { iConf } from '../../redux/configTypes';
+import { iDat } from '../../redux/dataTypes';
 
 export default function lcdShowUpdTime(
-    ctx: CanvasRenderingContext2D, dispModel: number, 
-    prevTime: number | undefined, color: string, bgColor: string
+    ctx: CanvasRenderingContext2D, dispModel: number, prevTime: number | undefined, 
+    color: string, bgColor: string, config: iConf, data: iDat
 ): number {
-    const time = store.getState().data.weather.time;
-    const ip = store.getState().data.network.ip;
+    const time = data.weather.time;
+    const ip = data.network.ip;
     const numIP = (!/^\d+\.\d+\.\d+\.\d+$/.test(ip)) ? 0 : Number(ip.split('.').map(Number).join(''));
     let hourFormat;
-    switch(store.getState().config?.clock.format) {
+    switch(config?.clock.format) {
         case 0: hourFormat = 'h'; break;
         case 1: hourFormat = 'hh'; break;
         case 2: hourFormat = 'H'; break;

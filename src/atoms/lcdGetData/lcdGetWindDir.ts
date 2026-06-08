@@ -1,9 +1,8 @@
-import store from '../../redux/store';
 import * as vl from "../validateValues";
+import { iConf } from '../../redux/configTypes';
+import { iDat } from '../../redux/dataTypes';
 
-export default function lcdGetWindDir() {
-    const config = store.getState().config;
-    const data = store.getState().data;
+export default function lcdGetWindDir(config: iConf, data: iDat): number {
     const source = config.display.source.wind?.dir.sens ?? 0;
     const wsensNum = config.display.source.wind?.dir.wsensNum ?? 0;
     const wsensData = data.wsensor?.wind.dir.data[wsensNum] ?? 0;

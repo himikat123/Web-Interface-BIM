@@ -217,7 +217,7 @@
     "ledPerSegment": "LED per segment",
     "ledsPerSegment": "LEDs per segment",
     "useSacrificialLED": "Use a sacrificial LED",
-        "bySunriseAndSunset": "By sunrise and sunset",
+    "bySunriseAndSunset": "By sunrise and sunset",
     "byLightSensor": "By light sensor",
     "byTime": "By time",
     "constantBrightness": "Constant brightness",

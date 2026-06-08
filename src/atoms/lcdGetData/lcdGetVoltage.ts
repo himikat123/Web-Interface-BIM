@@ -1,15 +1,13 @@
 import i18n from '../../i18n/main';
 import moment from 'moment';
-import store from '../../redux/store';
 import device from '../../device';
 import * as vl from "../validateValues";
 import * as calculate from '../calculate';
 import * as bat from '../indications/battery';
+import { iConf } from "../../redux/configTypes";
+import { iDat } from '../../redux/dataTypes';
 
-export default function lcdGetVoltage() {
-    const config = store.getState().config;
-    const data = store.getState().data;
-
+export default function lcdGetVoltage(config: iConf, data: iDat) {
     let value = '';
     let type = '';
     const wsensNum = config.display.source.volt.wsensNum ?? 0;

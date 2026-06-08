@@ -1,12 +1,10 @@
-import store from '../../redux/store';
 import * as vl from "../validateValues";
 import device from '../../device';
 import { batLevel, batPercent } from '../indications/battery';
+import { iConf } from '../../redux/configTypes';
+import { iDat } from '../../redux/dataTypes';
 
-export default function lcdGetBatteryLevel() {
-    const config = store.getState().config;
-    const data = store.getState().data;
-
+export default function lcdGetBatteryLevel(config: iConf, data: iDat) {
     let level = -1;
     if(config.display.source.bat.sens === 1) {
         if(device() === 'WeatherMonitorBIM32') { // Wsensor

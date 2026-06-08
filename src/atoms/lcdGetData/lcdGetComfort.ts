@@ -1,12 +1,11 @@
 import i18n from '../../i18n/main';
-import store from '../../redux/store';
 import comfortTempRating from '../../molecules/comfort/comfortTempRating';
 import comfortHumRating from '../../molecules/comfort/comfortHumRating';
 import comfortCo2Rating from '../../molecules/comfort/comfortCo2Rating';
 import comfortIaqRating from '../../molecules/comfort/comfortIaqRating';
+import { iConf } from '../../redux/configTypes';
 
-export default function lcdGetComfort(sequence: string): string {
-    const config = store.getState().config;
+export default function lcdGetComfort(sequence: string, config: iConf): string {
     let descr = '--';
 
     if(config.display.source.descr === 1) { // Comfort

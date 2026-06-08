@@ -1,11 +1,11 @@
 import i18n from '../../i18n/main';
-import store from '../../redux/store';
 import { printText, drawScaledImage } from "./primitives";
 import * as icons from '../img/icons';
 import { iPrevForecast } from "../../interfaces";
 import * as vl from "../validateValues";
 import getWeekday from '../getWeekday';
 import * as D from '../constants/displayTypes';
+import { iDat } from '../../redux/dataTypes';
 
 function showTemperature(ctx: CanvasRenderingContext2D, temp: number, x: number, 
     y: number, w: number, h: number, font: number, color: string, bgColor: string
@@ -17,13 +17,13 @@ function showTemperature(ctx: CanvasRenderingContext2D, temp: number, x: number,
 
 export default function lcdShowForecast(
     ctx: CanvasRenderingContext2D, dispModel: number, num: number, prevForecast: iPrevForecast | undefined, 
-    color: string, colorTempMax: string, colorTempMin: string, bgColor: string
+    color: string, colorTempMax: string, colorTempMin: string, bgColor: string, data: iDat
 ): iPrevForecast {
-    const tMax = store.getState().data.weather.daily.tMax[num];
-    const tMin = store.getState().data.weather.daily.tMin[num];
-    const wind = store.getState().data.weather.daily.wind[num];
-    const icon = store.getState().data.weather.daily.icon[num];
-    const time = store.getState().data.time;
+    const tMax = data.weather.daily.tMax[num];
+    const tMin = data.weather.daily.tMin[num];
+    const wind = data.weather.daily.wind[num];
+    const icon = data.weather.daily.icon[num];
+    const time = data.time;
     const wd = getWeekday(time + (86400 * num));
     const units = i18n.t('units.mps');
 

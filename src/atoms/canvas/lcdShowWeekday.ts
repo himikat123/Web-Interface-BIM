@@ -1,13 +1,13 @@
-import store from '../../redux/store';
 import { printText } from "./primitives";
 import getWeekday from '../getWeekday';
 import * as D from '../constants/displayTypes';
+import { iDat } from '../../redux/dataTypes';
 
 export default function lcdShowWeekday(
-    ctx: CanvasRenderingContext2D, dispModel: number,
-    prevWeekDay: string | undefined, color: string, bgColor: string
+    ctx: CanvasRenderingContext2D, dispModel: number, prevWeekDay: string | undefined, 
+    color: string, bgColor: string, data: iDat
 ): string {
-    const weekDay = getWeekday(store.getState().data.time);
+    const weekDay = getWeekday(data.time);
 
     if(weekDay !== prevWeekDay) {
         if(weekDay.length === 2) {

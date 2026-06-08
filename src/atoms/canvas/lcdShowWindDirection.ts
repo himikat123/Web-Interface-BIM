@@ -4,11 +4,14 @@ import device from '../../device';
 import lcdGetWindDir from '../lcdGetData/lcdGetWindDir';
 import * as wind from "../img/wind";
 import * as D from '../constants/displayTypes';
+import { iConf } from '../../redux/configTypes';
+import { iDat } from '../../redux/dataTypes';
 
 export default function lcdShowWindDirection(
-    ctx: CanvasRenderingContext2D, dispModel: number, prevDir: number | undefined, bgColor: string
+    ctx: CanvasRenderingContext2D, dispModel: number, prevDir: number | undefined, 
+    bgColor: string, config: iConf, data: iDat
 ): number {
-    const dir = device() === 'WeatherMonitorBIM32' ? lcdGetWindDir() : store.getState().data.weather.wind.dir;
+    const dir = device() === 'WeatherMonitorBIM32' ? lcdGetWindDir(config, data) : data.weather.wind.dir;
     
     if(dir !== prevDir) {
         let x = 232, y = 195, w = 24; // NX4832K(T)035

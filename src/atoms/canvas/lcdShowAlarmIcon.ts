@@ -1,13 +1,13 @@
-import store from '../../redux/store';
 import device from '../../device';
 import { drawScaledImage } from "./primitives";
 import { alarm, alarmOff } from '../img/symbols';
 import * as D from '../constants/displayTypes';
+import { iAlrms } from '../../redux/alarmTypes';
 
 export default function lcdShowAlarmIcon(
-    ctx: CanvasRenderingContext2D, dispModel: number, prevAlarmState: boolean | undefined
+    ctx: CanvasRenderingContext2D, dispModel: number, prevAlarmState: boolean | undefined, alarms: iAlrms
 ): boolean {
-    const alarmStates = store.getState().alarm.alarm.states;
+    const alarmStates = alarms.alarm.states;
     let alarmState = 0;
     if(device() === 'WeatherMonitorBIM32') {
         alarmStates.map(state => alarmState += state);

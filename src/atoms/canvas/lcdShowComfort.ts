@@ -1,13 +1,14 @@
 import { printText, printScrollText } from "./primitives";
 import lcdGetComfort from "../lcdGetData/lcdGetComfort";
 import * as D from "../constants/displayTypes";
+import { iConf } from '../../redux/configTypes';
 
 export default function lcdShowComfort(
-    ctx: CanvasRenderingContext2D, dispModel: number, prevComfort: string | undefined, 
-    shift: number | undefined, sequence: string | undefined, color: string, bgColor: string
+    ctx: CanvasRenderingContext2D, dispModel: number, prevComfort: string | undefined, shift: number | undefined, 
+    sequence: string | undefined, color: string, bgColor: string, config: iConf
 ): [string, number] {
     const NEXTION = (dispModel === D.NX4832K035 || dispModel === D.NX4832T035 || dispModel === D.NX4827K043);
-    const comfort = lcdGetComfort(sequence ?? '');
+    const comfort = lcdGetComfort(sequence ?? '', config);
 
     let x = 280, y = 34, w = 151, h = 24, f = 24; // NX4832K(T)035
     switch(dispModel) {

@@ -1,14 +1,14 @@
-import store from '../../redux/store';
 import { printText, printScrollText } from "./primitives";
 import * as D from '../constants/displayTypes';
+import { iDat } from '../../redux/dataTypes';
 
 export default function lcdShowDescription(
     ctx: CanvasRenderingContext2D, dispModel: number, 
     prevDescript: string | undefined, shift: number | undefined, 
-    color: string, bgColor: string
+    color: string, bgColor: string, data: iDat
 ): [string, number] {
     const NEXTION = (dispModel === D.NX4832K035 || dispModel === D.NX4832T035 || dispModel === D.NX4827K043);
-    const description = store.getState().data.weather.descript;
+    const description = data.weather.descript;
 
     let x = 97, y = 110, w = 383, h = 32, f = 32; // NX4832K(T)035
     switch(dispModel) {

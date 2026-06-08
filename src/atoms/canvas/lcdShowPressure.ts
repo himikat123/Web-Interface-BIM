@@ -5,12 +5,14 @@ import lcdGetPres from "../lcdGetData/lcdGetPres";
 import { hPaToMM, mmToHPA } from '../indications/hPaMM';
 import * as D from '../constants/displayTypes';
 import lcdColors from './lcdColors';
+import { iConf } from '../../redux/configTypes';
+import { iDat } from '../../redux/dataTypes';
 
 export default function lcdShowPressure(
-    ctx: CanvasRenderingContext2D, dispModel: number,
-    prevPres: number | undefined, color: string, bgColor: string, local: number
+    ctx: CanvasRenderingContext2D, dispModel: number, prevPres: number | undefined, 
+    color: string, bgColor: string, local: number, config: iConf, data: iDat
 ): number {
-    const pres = lcdGetPres();
+    const pres = lcdGetPres(config, data);
     const bg = lcdColors().BG;
     const NEXTION = (dispModel === D.NX4832K035 || dispModel === D.NX4832T035 || dispModel === D.NX4827K043);
 

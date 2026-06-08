@@ -25,7 +25,7 @@ export default function CardStatusDisplay(props: iDisplay) {
                     {i18n.t('display.singular')}
                 </Link>
             }
-            {!isDisplayOn[num - 1] && <span className="text-red-500">
+            {!isDisplayOn[num - 1] && <span className="text-red-500 text-xl">
                 {` [${i18n.t('isOff')}]`}
             </span>}
         </div>

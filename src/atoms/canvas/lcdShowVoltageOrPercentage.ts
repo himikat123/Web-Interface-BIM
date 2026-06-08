@@ -2,12 +2,14 @@ import { printText } from "./primitives";
 import lcdGetVoltage from "../lcdGetData/lcdGetVoltage";
 import * as vl from '../validateValues';
 import * as D from "../constants/displayTypes";
+import { iConf } from "../../redux/configTypes";
+import { iDat } from "../../redux/dataTypes";
 
 export default function lcdShowVoltageOrPercentage(
     ctx: CanvasRenderingContext2D, dispModel: number, prevValue: string | undefined, 
-    color: string, colorAir: string, bgColor: string
+    color: string, colorAir: string, bgColor: string, config: iConf, data: iDat
 ): string {
-    const v = lcdGetVoltage();
+    const v = lcdGetVoltage(config, data);
 
     if(v.val !== prevValue) {
         let x = 272, y = 1, w = 104, h = 32, f = 16; // NX4832K(T)035

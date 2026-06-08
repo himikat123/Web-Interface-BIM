@@ -1,11 +1,14 @@
-import store from '../../redux/store';
 import { drawScaledImage } from "./primitives";
 import * as icons from '../img/icons';
 import * as D from '../constants/displayTypes';
+import { iDat } from '../../redux/dataTypes';
 
-export default function lcdShowWeatherIcon(ctx: CanvasRenderingContext2D, dispModel: number, prevIcon: number | undefined): number {
-    const icon = store.getState().data.weather.icon;
-    const isDay = store.getState().data.weather.isDay;
+export default function lcdShowWeatherIcon(
+    ctx: CanvasRenderingContext2D, dispModel: number, 
+    prevIcon: number | undefined, data: iDat
+): number {
+    const icon = data.weather.icon;
+    const isDay = data.weather.isDay;
 
     if(prevIcon !== (icon * 100 + isDay)) {
         let wIcon;

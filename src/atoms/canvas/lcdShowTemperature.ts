@@ -4,6 +4,8 @@ import { validateTemperature } from "../validateValues";
 import lcdGetTempIn from "../lcdGetData/lcdGetTempIn";
 import { lcdGetTempOut } from "../lcdGetData/lcdGetTemp";
 import * as D from "../constants/displayTypes";
+import { iConf } from '../../redux/configTypes';
+import { iDat } from "../../redux/dataTypes";
 
 function showTemperature(
     ctx: CanvasRenderingContext2D, temp: number, x: number, y: number, 
@@ -17,9 +19,9 @@ function showTemperature(
 
 export function lcdShowTemperatureInside(
     ctx: CanvasRenderingContext2D, dispModel: number, prevTemp: number | undefined, 
-    sequence: number | undefined, color: string, bgColor: string
+    sequence: number | undefined, color: string, bgColor: string, config: iConf, data: iDat
 ): number {
-    const temp = lcdGetTempIn(sequence ?? 0);
+    const temp = lcdGetTempIn(sequence ?? 0, config, data);
 
     if(temp !== prevTemp) {
         let x = 258, y = 68, w = 101, h = 38, f = 44; // NX4832K(T)035
@@ -33,10 +35,10 @@ export function lcdShowTemperatureInside(
 }
 
 export function lcdShowTemperatureOutside(
-    ctx: CanvasRenderingContext2D, dispModel: number, 
-    prevTemp: number | undefined, color: string, bgColor: string
+    ctx: CanvasRenderingContext2D, dispModel: number, prevTemp: number | undefined, 
+    color: string, bgColor: string, config: iConf, data: iDat
 ): number {
-    const temp = lcdGetTempOut();
+    const temp = lcdGetTempOut(config, data);
 
     if(temp !== prevTemp) {
         let x = 112, y = 154, w = 107, h = 44, f = 44, xi = 99, yi = 140, wi = 13, hi = 48; // NX4832K(T)035

@@ -11,33 +11,35 @@ import type { iNarodmonSend } from "./configTypes/narodmon";
 import type { iMqttSend } from "./configTypes/mqtt";
 import type { iHistory } from "./configTypes/history";
 
-export interface iConfig {
-    config: {
-        configState: string,
-        v: string,
-        comfort: iComfort,
-        network: iNetwork,
-        accessPoint: iAccessPoint,
-        weather: iSensorWeatherConfig,
-        lang: string,
-        sleep?: number,
-	    batK?: number,
-        clock: iClock,
-        display: iDisplay,
-        sound?: iSound,
-        sensors: iSensors,
-        wsensor?: iSensorWsensConfig,
-        thingspeakSend: iThingspeakSend,
-        thingspeakReceive: iThingspeakReceive,
-        narodmonSend: iNarodmonSend,
-        mqttSend?: iMqttSend,
-        history?: iHistory,
-        account: {
-            name: string,
-            required: number
-        },
-        units: {
-            pres: number
-        }
+export interface iConf {
+    configState: string,
+    v: string,
+    comfort: iComfort,
+    network: iNetwork,
+    accessPoint: iAccessPoint,
+    weather: iSensorWeatherConfig,
+    lang: string,
+    sleep?: number,
+    batK?: number,
+    clock: iClock,
+    display: iDisplay,
+    sound?: iSound,
+    sensors: iSensors,
+    wsensor?: iSensorWsensConfig,
+    thingspeakSend: iThingspeakSend,
+    thingspeakReceive: iThingspeakReceive,
+    narodmonSend: iNarodmonSend,
+    mqttSend?: iMqttSend,
+    history?: iHistory,
+    account: {
+        name: string,
+        required: number
+    },
+    units: {
+        pres: number
     }
+}
+
+export interface iConfig {
+    config: iConf
 }
