@@ -1,5 +1,5 @@
 import React from 'react';
-import { iDateTimeInput } from '../interfaces';
+import type { iDateTimeInput } from '../interfaces';
 
 export default function DateTimeInput(props: iDateTimeInput) {
     return <div className="group relative h-14 w-full rounded-md border focus-within:border-primary focus-within:ring-2 border-menu_light dark:border-menu_dark">

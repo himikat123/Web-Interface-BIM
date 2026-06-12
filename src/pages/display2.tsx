@@ -6,7 +6,7 @@ import CardDisplayBrightness from "../organisms/display/cardDisplayBrightness";
 import CardDisplayAutoOff from "../organisms/display/cardDisplayAutoOff";
 import CardDisplayAnimation from "../organisms/display/cardDisplayAnimation";
 import CardDisplayTimeSlot from "../organisms/display/cardDisplayTimeSlot";
-import { iConfig } from "../redux/configTypes";
+import type { iConfig } from "../redux/configTypes";
 
 export default function Display2() {
     const config = useSelector((state: iConfig) => state.config);

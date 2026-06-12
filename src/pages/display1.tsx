@@ -19,7 +19,7 @@ import CardDisplayWindSpeed from "../organisms/display/cardDisplayWindSpeed";
 import CardDisplayWindDir from "../organisms/display/cardDisplayWindDir";
 import CardDisplayTimeSlot from "../organisms/display/cardDisplayTimeSlot";
 import Card from "../atoms/card";
-import { iConfig } from "../redux/configTypes";
+import type { iConfig } from "../redux/configTypes";
 
 export default function Display1() {
     const config = useSelector((state: iConfig) => state.config);

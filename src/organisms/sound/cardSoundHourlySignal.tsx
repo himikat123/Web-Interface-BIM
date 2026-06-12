@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Card from "../../atoms/card";
 import SelectSwitch from "../../atoms/selectSwitch";
 import TimeInput from "../../atoms/timeInput";
-import { iConfig } from "../../redux/configTypes";
+import type { iConfig } from "../../redux/configTypes";
 import * as cf from "../../redux/slices/config";
 
 export default function CardSoundHourlySignal() {

@@ -1,7 +1,7 @@
 import i18n from '../i18n/main';
 import { useSelector } from 'react-redux';
 import FourColumns from "../templates/fourColumns";
-import { iConfig } from "../redux/configTypes";
+import type { iConfig } from "../redux/configTypes";
 import CardSendMqttOnOff from '../organisms/mqtt/cardSendMqttOnOff';
 import CardSendMqttPeriod from '../organisms/mqtt/cardSendMqttPeriod';
 import CardSendMqttBroker from '../organisms/mqtt/cardSendMqttBroker';

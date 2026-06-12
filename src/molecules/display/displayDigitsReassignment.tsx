@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { iConfig } from "../../redux/configTypes";
+import type { iConfig } from "../../redux/configTypes";
 import { displayOrderChange } from "../../redux/slices/config";
 import Button from "../../atoms/button";
 import i18n from "../../i18n/main";

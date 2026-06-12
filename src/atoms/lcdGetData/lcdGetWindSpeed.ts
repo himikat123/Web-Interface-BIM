@@ -1,6 +1,6 @@
 import * as vl from "../validateValues";
-import { iConf } from '../../redux/configTypes';
-import { iDat } from '../../redux/dataTypes';
+import type { iConf } from '../../redux/configTypes';
+import type { iDat } from '../../redux/dataTypes';
 
 export default function lcdGetWindSpeed(config: iConf, data: iDat): number {
     const source = config.display.source.wind?.speed.sens ?? 0;

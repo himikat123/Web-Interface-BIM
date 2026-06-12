@@ -1,9 +1,9 @@
 import i18n from '../../i18n/main';
 import { useSelector, useDispatch } from 'react-redux';
 import NumberInput from "../../atoms/numberInput";
-import { iConfig } from "../../redux/configTypes";
+import type { iConfig } from "../../redux/configTypes";
 import * as cf from "../../redux/slices/config";
-import { iThingReceiveValid } from '../../interfaces';
+import type { iThingReceiveValid } from '../../interfaces';
 
 export default function ThingReceiveExpire(props: iThingReceiveValid) {
     const dispatch = useDispatch();

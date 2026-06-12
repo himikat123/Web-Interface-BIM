@@ -12,7 +12,7 @@ import { ReactComponent as FlagPL } from '../atoms/icons/flagPL.svg';
 import { ReactComponent as FlagUA } from '../atoms/icons/flagUA.svg';
 import { ReactComponent as FlagBG } from '../atoms/icons/flagBG.svg';
 import { ReactComponent as FlagES } from '../atoms/icons/flagES.svg';
-import { iConfig } from "../redux/configTypes";
+import type { iConfig } from "../redux/configTypes";
 
 export default function Language() {
     const language = useSelector((state: iConfig) => state.config.lang);

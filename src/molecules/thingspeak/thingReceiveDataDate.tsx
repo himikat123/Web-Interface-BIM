@@ -2,8 +2,8 @@ import i18n from '../../i18n/main';
 import Moment from 'react-moment';
 import { getLocale } from '../../atoms/getLocale';
 import { useSelector } from 'react-redux';
-import { iConfig } from "../../redux/configTypes";
-import { iData } from "../../redux/dataTypes";
+import type { iConfig } from "../../redux/configTypes";
+import type { iData } from "../../redux/dataTypes";
 import * as vl from "../../atoms/validateValues";
 
 export default function ThingReceiveDataDate() {

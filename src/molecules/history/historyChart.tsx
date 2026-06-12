@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
-import { iConfig } from "../../redux/configTypes";
-import { iHistoryChart } from "../../interfaces";
+import type { iConfig } from "../../redux/configTypes";
+import type { iHistoryChart } from "../../interfaces";
 
 export default function HistoryChart(props: iHistoryChart) {
     const [chartWidth, setChartWidth] = useState<number>(100);

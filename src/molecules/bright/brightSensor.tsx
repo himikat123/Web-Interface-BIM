@@ -4,9 +4,9 @@ import hostUrl from "../../atoms/hostUrl";
 import SelectSwitch from "../../atoms/selectSwitch";
 import RangeInput from "../../atoms/rangeInput";
 import Indication from "../../atoms/indication";
-import { iConfig } from "../../redux/configTypes";
-import { iData } from "../../redux/dataTypes";
-import { iDisplay } from "../../interfaces";
+import type { iConfig } from "../../redux/configTypes";
+import type { iData } from "../../redux/dataTypes";
+import type { iDisplay } from "../../interfaces";
 import * as cf from "../../redux/slices/config";
 import * as vl from "../../atoms/validateValues";
 

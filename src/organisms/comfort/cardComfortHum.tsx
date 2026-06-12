@@ -8,7 +8,7 @@ import ComfortHumSound from "../../molecules/comfort/comfortHumSound";
 import ComfortHumMax from "./comfortHumMax";
 import ComfortHumMin from "./comfortHumMin";
 import Indication from "../../atoms/indication";
-import { iConfig } from "../../redux/configTypes";
+import type { iConfig } from "../../redux/configTypes";
 import "./cardComfort.scss";
 
 export default function CardComfortHum() {

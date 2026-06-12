@@ -1,7 +1,7 @@
 import i18n from '../i18n/main';
 import { useSelector } from 'react-redux';
 import FourColumns from "../templates/fourColumns";
-import { iConfig } from "../redux/configTypes";
+import type { iConfig } from "../redux/configTypes";
 import CardSendNarodmonOnOffPeriod from '../organisms/narodmon/cardSendNarodmonOnOffPeriod';
 import CardNarodmonApiKey from '../organisms/narodmon/cardNarodmonApiKey';
 import CardNarodmonMac from '../organisms/narodmon/cardNarodmonMac';

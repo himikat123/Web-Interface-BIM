@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { displayBrightMaxChange, displayBrightMinChange } from "../../redux/slices/config";
 import hostUrl from "../../atoms/hostUrl";
 import RangeInput from "../../atoms/rangeInput";
-import { iConfig } from "../../redux/configTypes";
+import type { iConfig } from "../../redux/configTypes";
 
 export default function DisplayBrightLimit(props: {num: number}) {
     const dispatch = useDispatch();

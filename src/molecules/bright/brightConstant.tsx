@@ -1,8 +1,8 @@
 import i18n from "../../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import hostUrl from "../../atoms/hostUrl";
-import { iConfig } from "../../redux/configTypes";
-import { iDisplay } from "../../interfaces";
+import type { iConfig } from "../../redux/configTypes";
+import type { iDisplay } from "../../interfaces";
 import RangeInput from "../../atoms/rangeInput";
 import * as cf from "../../redux/slices/config";
 

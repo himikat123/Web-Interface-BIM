@@ -2,7 +2,7 @@ import i18n from '../../i18n/main';
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../../atoms/card";
 import NumberInput from "../../atoms/numberInput";
-import { iConfig } from "../../redux/configTypes";
+import type { iConfig } from "../../redux/configTypes";
 import { sendMqttValidChange } from "../../redux/slices/valid";
 import * as cf from "../../redux/slices/config";
 

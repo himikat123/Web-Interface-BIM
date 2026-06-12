@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Card from "../../atoms/card";
 import TextInput from "../../atoms/textInput";
 import PasswordInput from '../../atoms/passwordInput';
-import { iConfig } from "../../redux/configTypes";
+import type { iConfig } from "../../redux/configTypes";
 import * as cf from "../../redux/slices/config";
 
 export default function CardSendMqttUser() {

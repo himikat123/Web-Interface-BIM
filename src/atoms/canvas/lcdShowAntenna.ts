@@ -1,7 +1,7 @@
 import { drawScaledImage } from "./primitives";
 import { ant_1, ant_2, ant_3, ant_4, ant_AP } from '../img/ant';
 import * as D from '../constants/displayTypes';
-import { iDat } from '../../redux/dataTypes';
+import type { iDat } from '../../redux/dataTypes';
 
 export default function lcdShowAntenna(
     ctx: CanvasRenderingContext2D, dispModel: number, 

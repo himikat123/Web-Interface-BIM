@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 import i18n from "../../i18n/main";
 import SelectSwitch from "../../atoms/selectSwitch";
-import { iHistorySensor } from "../../interfaces";
-import { iConfig } from "../../redux/configTypes";
-import { iData } from "../../redux/dataTypes";
+import type { iHistorySensor } from "../../interfaces";
+import type { iConfig } from "../../redux/configTypes";
+import type { iData } from "../../redux/dataTypes";
 import forecast from "../../atoms/indications/forecast";
 import tempHumPres from "../../atoms/indications/tempHumPres";
 import tempPres from "../../atoms/indications/tempPres";

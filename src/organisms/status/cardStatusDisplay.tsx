@@ -2,13 +2,13 @@ import { Link } from 'react-router-dom';
 import i18n from '../../i18n/main';
 import { useSelector } from 'react-redux';
 import device from '../../device';
-import { iConfig } from "../../redux/configTypes";
-import { iDisplay } from '../../interfaces';
+import type { iConfig } from "../../redux/configTypes";
+import type { iDisplay } from '../../interfaces';
 import DisplayViewLCD from '../../molecules/display/displayViewLCD';
 import DisplayView7segment from '../../molecules/display/displayView7segment';
 import DisplayView7SegmentTubes from '../../molecules/display/DisplayView7SegmentTubes';
 import * as D from '../../atoms/constants/displayTypes';
-import { iData } from '../../redux/dataTypes';
+import type { iData } from '../../redux/dataTypes';
 
 export default function CardStatusDisplay(props: iDisplay) {
     const config = useSelector((state: iConfig) => state.config);

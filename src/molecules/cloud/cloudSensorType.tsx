@@ -12,9 +12,9 @@ import analog from "../../atoms/indications/analog";
 import esp32 from "../../atoms/indications/ESP32";
 import tempHumPresIaq from "../../atoms/indications/tempHumPresIaq";
 import * as bat from "../../atoms/indications/battery";
-import { iCloudSensorType } from "../../interfaces";
-import { iConfig } from "../../redux/configTypes";
-import { iData } from "../../redux/dataTypes";
+import type { iCloudSensorType } from "../../interfaces";
+import type { iConfig } from "../../redux/configTypes";
+import type { iData } from "../../redux/dataTypes";
 
 export default function CloudSensorType(props: iCloudSensorType) {
     const config = useSelector((state: iConfig) => state.config);

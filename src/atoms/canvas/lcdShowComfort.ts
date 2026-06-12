@@ -1,7 +1,7 @@
 import { printText, printScrollText } from "./primitives";
 import lcdGetComfort from "../lcdGetData/lcdGetComfort";
 import * as D from "../constants/displayTypes";
-import { iConf } from '../../redux/configTypes';
+import type { iConf } from '../../redux/configTypes';
 
 export default function lcdShowComfort(
     ctx: CanvasRenderingContext2D, dispModel: number, prevComfort: string | undefined, shift: number | undefined, 

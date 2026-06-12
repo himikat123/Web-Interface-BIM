@@ -4,8 +4,8 @@ import lcdGetWindSpeed from '../lcdGetData/lcdGetWindSpeed';
 import { printText } from "./primitives";
 import { validateWindSpeed } from "../validateValues";
 import * as D from '../constants/displayTypes';
-import { iConf } from '../../redux/configTypes';
-import { iDat } from '../../redux/dataTypes';
+import type { iConf } from '../../redux/configTypes';
+import type { iDat } from '../../redux/dataTypes';
 
 export default function lcdShowWindSpeed(
     ctx: CanvasRenderingContext2D, dispModel: number, prevSpeed: number | undefined, 

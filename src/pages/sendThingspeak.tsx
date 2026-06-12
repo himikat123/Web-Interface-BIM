@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import i18n from '../i18n/main';
 import { useSelector, useDispatch } from 'react-redux';
 import FourColumns from "../templates/fourColumns";
-import { iConfig } from "../redux/configTypes";
+import type { iConfig } from "../redux/configTypes";
 import { sendThingspeakValidChange } from "../redux/slices/valid";
 import CardThingSendOnOff from "../organisms/thingspeak/cardThingSendOnOff";
 import CardThingSendPeriod from "../organisms/thingspeak/cardThingSendPeriod";

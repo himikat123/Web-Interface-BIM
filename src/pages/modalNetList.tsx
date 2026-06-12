@@ -5,8 +5,8 @@ import hostUrl from '../atoms/hostUrl';
 import device from '../device';
 import axios from 'axios';
 import i18n from "../i18n/main";
-import { iData } from "../redux/dataTypes";
-import { iModalNetList } from "../interfaces";
+import type { iData } from "../redux/dataTypes";
+import type { iModalNetList } from "../interfaces";
 import { ReactComponent as SpinnerSVG } from '../atoms/icons/spinner.svg';
 
 export default function ModalNetList(props: iModalNetList) {

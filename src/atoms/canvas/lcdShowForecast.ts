@@ -5,7 +5,7 @@ import { iPrevForecast } from "../../interfaces";
 import * as vl from "../validateValues";
 import getWeekday from '../getWeekday';
 import * as D from '../constants/displayTypes';
-import { iDat } from '../../redux/dataTypes';
+import type { iDat } from '../../redux/dataTypes';
 
 function showTemperature(ctx: CanvasRenderingContext2D, temp: number, x: number, 
     y: number, w: number, h: number, font: number, color: string, bgColor: string

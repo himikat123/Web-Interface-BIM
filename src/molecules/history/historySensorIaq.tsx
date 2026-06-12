@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 import SelectSwitch from "../../atoms/selectSwitch";
-import { iHistorySensor } from "../../interfaces";
-import { iConfig } from "../../redux/configTypes";
-import { iData } from "../../redux/dataTypes";
+import type { iHistorySensor } from "../../interfaces";
+import type { iConfig } from "../../redux/configTypes";
+import type { iData } from "../../redux/dataTypes";
 import tempHumPresIaq from "../../atoms/indications/tempHumPresIaq";
 
 export default function HistorySensorIaq(props: iHistorySensor) {

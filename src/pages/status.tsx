@@ -8,7 +8,7 @@ import CardStatusDisplay from '../organisms/status/cardStatusDisplay';
 import CardStatusSensors from '../organisms/status/cardStatusSensors';
 import CardStatusSystem from '../organisms/status/cardStatusSystem';
 import CardStatusNetwork from '../organisms/status/cardStatusNetwork';
-import { iData } from '../redux/dataTypes';
+import type { iData } from '../redux/dataTypes';
 import * as D from '../atoms/constants/displayTypes';
 
 export default function Status() {

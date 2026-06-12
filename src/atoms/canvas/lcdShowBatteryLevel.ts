@@ -2,8 +2,8 @@ import { drawScaledImage, fillRect } from "./primitives";
 import { bat_1, bat_2, bat_3, bat_4 } from '../img/bat';
 import lcdGetBatteryLevel from "../lcdGetData/lcdGetBatLevel";
 import * as D from "../constants/displayTypes";
-import { iConf } from "../../redux/configTypes";
-import { iDat } from "../../redux/dataTypes";
+import type { iConf } from "../../redux/configTypes";
+import type { iDat } from "../../redux/dataTypes";
 
 export default function lcdShowBatteryLevel(
     ctx: CanvasRenderingContext2D, dispModel: number, prevLevel: number | undefined, 

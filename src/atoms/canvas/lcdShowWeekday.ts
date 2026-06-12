@@ -1,7 +1,7 @@
 import { printText } from "./primitives";
 import getWeekday from '../getWeekday';
 import * as D from '../constants/displayTypes';
-import { iDat } from '../../redux/dataTypes';
+import type { iDat } from '../../redux/dataTypes';
 
 export default function lcdShowWeekday(
     ctx: CanvasRenderingContext2D, dispModel: number, prevWeekDay: string | undefined, 

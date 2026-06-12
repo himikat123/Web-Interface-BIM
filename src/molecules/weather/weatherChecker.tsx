@@ -4,8 +4,8 @@ import i18n from '../../i18n/main';
 import Button from "../../atoms/button";
 import { ReactComponent as SpinnerSVG } from '../../atoms/icons/spinner.svg';
 import { ReactComponent as ArrowWindSVG } from '../../atoms/icons/arrowWind.svg';
-import { iConfig } from "../../redux/configTypes";
-import { iWeather } from "../../interfaces";
+import type { iConfig } from "../../redux/configTypes";
+import type { iWeather } from "../../interfaces";
 import "./weatherChecker.scss";
 
 export default function WeatherChecker() {

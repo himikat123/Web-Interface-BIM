@@ -8,7 +8,7 @@ import TextInput from "../atoms/textInput";
 import NumberInput from "../atoms/numberInput";
 import WeatherCorrection from "../molecules/weather/weatherCorrection";
 import WeatherChecker from "../molecules/weather/weatherChecker";
-import { iConfig } from "../redux/configTypes";
+import type { iConfig } from "../redux/configTypes";
 import * as cf from "../redux/slices/config";
 import device from "../device";
 import { useEffect, useState } from "react";

@@ -6,7 +6,7 @@ import comfortIaqRating from "../../molecules/comfort/comfortIaqRating";
 import ComfortIaqSound from "../../molecules/comfort/comfortIaqSound";
 import ComfortAirExplicationsTable from "../../molecules/comfort/comfortAirExplicationTable";
 import Indication from "../../atoms/indication";
-import { iConfig } from "../../redux/configTypes";
+import type { iConfig } from "../../redux/configTypes";
 import "./cardComfort.scss";
 
 export default function CardComfortAirQuality() {

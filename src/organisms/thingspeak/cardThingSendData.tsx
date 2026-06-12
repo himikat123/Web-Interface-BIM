@@ -1,8 +1,8 @@
 import i18n from "../../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../../atoms/card";
-import { iConfig } from "../../redux/configTypes";
-import { iCardSend } from "../../interfaces";
+import type { iConfig } from "../../redux/configTypes";
+import type { iCardSend } from "../../interfaces";
 import * as cf from "../../redux/slices/config";
 import CloudSourceSensor from "../../molecules/cloud/cloudSourceSensor";
 import CloudSensorType from "../../molecules/cloud/cloudSensorType";

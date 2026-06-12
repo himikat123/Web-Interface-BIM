@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import hostUrl from "../../atoms/hostUrl";
 import ColorInput from "../../atoms/colorInput";
 import * as cf from "../../redux/slices/config";
-import { iConfig } from "../../redux/configTypes";
-import { iDisplayTimeSlot } from "../../interfaces"; 
+import type { iConfig } from "../../redux/configTypes";
+import type { iDisplayTimeSlot } from "../../interfaces"; 
 
 export default function TimeSlotColor(props: iDisplayTimeSlot) {
     const dispatch = useDispatch();

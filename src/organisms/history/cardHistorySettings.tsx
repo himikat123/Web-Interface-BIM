@@ -5,7 +5,7 @@ import Card from "../../atoms/card";
 import SelectSwitch from "../../atoms/selectSwitch";
 import NumberInput from "../../atoms/numberInput";
 import TextInput from "../../atoms/textInput";
-import { iConfig } from "../../redux/configTypes";
+import type { iConfig } from "../../redux/configTypes";
 import { historyValidChange } from "../../redux/slices/valid";
 import * as cf from "../../redux/slices/config";
 

@@ -1,13 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../../atoms/card";
-import { iConfig } from "../../redux/configTypes";
-import { iData } from '../../redux/dataTypes';
+import type { iConfig } from "../../redux/configTypes";
+import type { iData } from '../../redux/dataTypes';
 import * as cf from "../../redux/slices/config";
 import HistoryChart from "../../molecules/history/historyChart";
 import HistorySensorPres from "../../molecules/history/historySensorPres";
 import WsensorNumber from "../../molecules/wsensor/wsensorNumber";
 import ThingspeakFields from "../../molecules/thingspeak/thingspeakFields";
-import { iCardHistory } from "../../interfaces";
+import type { iCardHistory } from "../../interfaces";
 import Wsensor from '../../atoms/indications/wsensor';
 
 export default function CardHistoryPres(props: iCardHistory) {

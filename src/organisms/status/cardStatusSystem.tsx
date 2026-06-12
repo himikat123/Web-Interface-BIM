@@ -4,8 +4,8 @@ import i18n from '../../i18n/main';
 import { useSelector } from 'react-redux';
 import device from '../../device';
 import { validateTemperature } from '../../atoms/validateValues';
-import { iConfig } from "../../redux/configTypes";
-import { iData } from '../../redux/dataTypes';
+import type { iConfig } from "../../redux/configTypes";
+import type { iData } from '../../redux/dataTypes';
 
 export default function CardStatusSystem() {
     const config = useSelector((state: iConfig) => state.config);

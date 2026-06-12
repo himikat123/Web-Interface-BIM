@@ -8,8 +8,8 @@ import NetworkInput from "../atoms/networkInput";
 import PasswordInput from "../atoms/passwordInput";
 import SelectSwitch from "../atoms/selectSwitch";
 import ModalNetList from "./modalNetList";
-import { iConfig } from "../redux/configTypes";
-import { iData } from "../redux/dataTypes";
+import type { iConfig } from "../redux/configTypes";
+import type { iData } from "../redux/dataTypes";
 import { connectValidChange } from "../redux/slices/valid";
 import * as cf from "../redux/slices/config";
 

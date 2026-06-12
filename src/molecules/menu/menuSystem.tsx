@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { iMenuItems } from "../../interfaces";
-import { iConfig } from "../../redux/configTypes";
+import type { iConfig } from "../../redux/configTypes";
 import MenuItem from "../../atoms/menuItem";
 import MenuSubItem from "../../atoms/menuSubItem";
 import i18n from '../../i18n/main';

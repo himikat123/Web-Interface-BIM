@@ -1,7 +1,7 @@
 import { drawScaledImage } from "./primitives";
 import * as icons from '../img/icons';
 import * as D from '../constants/displayTypes';
-import { iDat } from '../../redux/dataTypes';
+import type { iDat } from '../../redux/dataTypes';
 
 export default function lcdShowWeatherIcon(
     ctx: CanvasRenderingContext2D, dispModel: number, 

@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import i18n from '../i18n/main';
 import device from '../device';
-import { iConfig } from "../redux/configTypes";
-import { iData } from "../redux/dataTypes";
+import type { iConfig } from "../redux/configTypes";
+import type { iData } from "../redux/dataTypes";
 import * as vl from "./validateValues";
 
 export default function Comfort() {

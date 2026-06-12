@@ -3,8 +3,8 @@ import i18n from "../../i18n/main";
 import SelectSwitch from "../../atoms/selectSwitch";
 import { iWsensTempNum } from "../../interfaces";
 import wsensor from "../../atoms/indications/wsensor";
-import { iConfig } from "../../redux/configTypes";
-import { iData } from "../../redux/dataTypes";
+import type { iConfig } from "../../redux/configTypes";
+import type { iData } from "../../redux/dataTypes";
 
 export default function WsensorTempNumber(props: iWsensTempNum) {
     const config = useSelector((state: iConfig) => state.config);

@@ -11,12 +11,12 @@ import { displayLcdHistoryInScreen } from './displayLcdHistoryInScreen';
 import { displayLcdHistoryOutScreen } from './displayLcdHistoryOutScreen';
 import { displayLcdAlarmScreen } from './displayLcdAlarmScreen';
 import * as types from '../../interfaces';
-import { iConfig } from "../../redux/configTypes";
-import { iData } from '../../redux/dataTypes';
-import { iHourly } from '../../redux/hourlyTypes';
+import type { iConfig } from "../../redux/configTypes";
+import type { iData } from '../../redux/dataTypes';
+import type { iHourly } from '../../redux/hourlyTypes';
 import * as D from '../../atoms/constants/displayTypes';
 import * as coords from './touchscreenCoordinates';
-import { iAlarms } from '../../redux/alarmTypes';
+import type { iAlarms } from '../../redux/alarmTypes';
 
 export default function DisplayViewLCD() {
     const config = useSelector((state: iConfig) => state.config);

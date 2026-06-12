@@ -1,9 +1,9 @@
 import i18n from "../../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import SelectSwitch from "../../atoms/selectSwitch";
-import { iConfig } from "../../redux/configTypes";
-import { iData } from "../../redux/dataTypes";
-import { iDisplayTimeSlot } from "../../interfaces";
+import type { iConfig } from "../../redux/configTypes";
+import type { iData } from "../../redux/dataTypes";
+import type { iDisplayTimeSlot } from "../../interfaces";
 import * as cf from "../../redux/slices/config";
 import wsensor from "../../atoms/indications/wsensor";
 

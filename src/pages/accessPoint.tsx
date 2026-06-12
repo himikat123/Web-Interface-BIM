@@ -5,7 +5,7 @@ import i18n from '../i18n/main';
 import Card from "../atoms/card";
 import TextInput from "../atoms/textInput";
 import PasswordInput from "../atoms/passwordInput";
-import { iConfig } from "../redux/configTypes";
+import type { iConfig } from "../redux/configTypes";
 import { accesspointValidChange } from "../redux/slices/valid";
 import { acPointSsidChange, acPointPassChange } from "../redux/slices/config";
 

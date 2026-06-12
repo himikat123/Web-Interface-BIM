@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import i18n from '../i18n/main';
 import { useSelector, useDispatch } from 'react-redux';
 import ThreeColumns from "../templates/threeColumns";
-import { iConfig } from "../redux/configTypes";
+import type { iConfig } from "../redux/configTypes";
 import { sleepValidChange } from "../redux/slices/valid";
 import CardSleepOnOff from "../organisms/sleep/cardSleepOnOff";
 import CardSleepPeriod from "../organisms/sleep/cardSleepPeriod";

@@ -1,12 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../../atoms/card";
-import { iConfig } from "../../redux/configTypes";
-import { iData } from '../../redux/dataTypes';
+import type { iConfig } from "../../redux/configTypes";
+import type { iData } from '../../redux/dataTypes';
 import * as cf from "../../redux/slices/config";
 import HistoryChart from "../../molecules/history/historyChart";
 import HistorySensorCo2 from "../../molecules/history/historySensorCo2";
 import WsensorNumber from "../../molecules/wsensor/wsensorNumber";
-import { iCardHistory } from "../../interfaces";
+import type { iCardHistory } from "../../interfaces";
 import wsensor from '../../atoms/indications/wsensor';
 
 export default function CardHistoryCo2(props: iCardHistory) {

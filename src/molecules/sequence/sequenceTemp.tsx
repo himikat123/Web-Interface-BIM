@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { iConfig } from "../../redux/configTypes";
+import type { iConfig } from "../../redux/configTypes";
 import * as cf from "../../redux/slices/config";
 import SequenceDuration from "./sequenceDuration";
 import SensorTypeTempSequence from "../sensor/sensorTypeTempSequence";

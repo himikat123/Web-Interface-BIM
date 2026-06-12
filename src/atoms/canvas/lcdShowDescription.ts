@@ -1,6 +1,6 @@
 import { printText, printScrollText } from "./primitives";
 import * as D from '../constants/displayTypes';
-import { iDat } from '../../redux/dataTypes';
+import type { iDat } from '../../redux/dataTypes';
 
 export default function lcdShowDescription(
     ctx: CanvasRenderingContext2D, dispModel: number, 

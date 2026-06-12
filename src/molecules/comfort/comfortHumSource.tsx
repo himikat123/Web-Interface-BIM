@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import device from '../../device';
-import { iConfig } from "../../redux/configTypes";
-import { iData } from '../../redux/dataTypes';
+import type { iConfig } from "../../redux/configTypes";
+import type { iData } from '../../redux/dataTypes';
 import * as cf from "../../redux/slices/config";
 import ComfortHumSensorType from "./comfortHumSensorType";
 import WsensorNumber from "../wsensor/wsensorNumber";

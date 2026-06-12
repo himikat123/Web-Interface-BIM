@@ -1,8 +1,8 @@
 import i18n from "../../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import SelectSwitch from "../../atoms/selectSwitch";
-import { iConfig } from "../../redux/configTypes";
-import { iData } from "../../redux/dataTypes";
+import type { iConfig } from "../../redux/configTypes";
+import type { iData } from "../../redux/dataTypes";
 import * as cf from "../../redux/slices/config";
 import forecast from "../../atoms/indications/forecast";
 import tempHumPres from "../../atoms/indications/tempHumPres";

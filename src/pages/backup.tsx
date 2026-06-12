@@ -6,7 +6,7 @@ import Card from "../atoms/card";
 import Button from "../atoms/button";
 import hostUrl from "../atoms/hostUrl";
 import { ReactComponent as SpinnerSVG } from '../atoms/icons/spinner.svg';
-import { iConfig } from "../redux/configTypes";
+import type { iConfig } from "../redux/configTypes";
 
 export default function Backup() {
     const config = useSelector((state: iConfig) => state.config);

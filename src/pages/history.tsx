@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import CardHistorySettings from "../organisms/history/cardHistorySettings";
 import CardsHistorySensor from "../organisms/history/cardsHistorySensor";
 import TwoColumns from "../templates/twoColumns";
-import { iConfig } from "../redux/configTypes";
+import type { iConfig } from "../redux/configTypes";
 
 export default function History() {
     const config = useSelector((state: iConfig) => state.config);

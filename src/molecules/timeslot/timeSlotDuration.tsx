@@ -2,9 +2,9 @@ import i18n from "../../i18n/main";
 import { useSelector, useDispatch } from 'react-redux';
 import { display1ValidChange } from "../../redux/slices/valid";
 import NumberInput from "../../atoms/numberInput";
-import { iConfig } from "../../redux/configTypes";
+import type { iConfig } from "../../redux/configTypes";
 import * as cf from "../../redux/slices/config";
-import { iDisplayTimeSlot } from "../../interfaces"; 
+import type { iDisplayTimeSlot } from "../../interfaces"; 
 
 export default function TimeSlotDuration(props: iDisplayTimeSlot) {
     const dispatch = useDispatch();

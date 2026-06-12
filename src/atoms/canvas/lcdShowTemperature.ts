@@ -4,8 +4,8 @@ import { validateTemperature } from "../validateValues";
 import lcdGetTempIn from "../lcdGetData/lcdGetTempIn";
 import { lcdGetTempOut } from "../lcdGetData/lcdGetTemp";
 import * as D from "../constants/displayTypes";
-import { iConf } from '../../redux/configTypes';
-import { iDat } from "../../redux/dataTypes";
+import type { iConf } from '../../redux/configTypes';
+import type { iDat } from "../../redux/dataTypes";
 
 function showTemperature(
     ctx: CanvasRenderingContext2D, temp: number, x: number, y: number, 

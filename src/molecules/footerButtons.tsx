@@ -4,10 +4,10 @@ import i18n from '../i18n/main';
 import Button from "../atoms/button";
 import ModalRestart from "../pages/modalRestart";
 import hostUrl from "../atoms/hostUrl";
-import { iFooterButtons } from "../interfaces";
-import { iValid } from "../redux/validTypes";
-import { iConfig } from "../redux/configTypes";
-import { iAlarms } from "../redux/alarmTypes";
+import type { iFooterButtons } from "../interfaces";
+import type { iValid } from "../redux/validTypes";
+import type { iConfig } from "../redux/configTypes";
+import type { iAlarms } from "../redux/alarmTypes";
 import { ReactComponent as SpinnerSVG } from '../atoms/icons/spinner.svg';
 
 export default function FooterButtons(props: iFooterButtons) {

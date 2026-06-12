@@ -4,8 +4,8 @@ import device from '../../device';
 import lcdGetWindDir from '../lcdGetData/lcdGetWindDir';
 import * as wind from "../img/wind";
 import * as D from '../constants/displayTypes';
-import { iConf } from '../../redux/configTypes';
-import { iDat } from '../../redux/dataTypes';
+import type { iConf } from '../../redux/configTypes';
+import type { iDat } from '../../redux/dataTypes';
 
 export default function lcdShowWindDirection(
     ctx: CanvasRenderingContext2D, dispModel: number, prevDir: number | undefined, 

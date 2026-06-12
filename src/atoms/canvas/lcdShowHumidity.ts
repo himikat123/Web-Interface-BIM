@@ -3,8 +3,8 @@ import { validateHumidity } from "../validateValues";
 import lcdGetHumIn from "../lcdGetData/lcdGetHumIn";
 import { lcdGetHumOut } from "../lcdGetData/lcdGetHum";
 import * as D from "../constants/displayTypes";
-import { iConf } from '../../redux/configTypes';
-import { iDat } from "../../redux/dataTypes";
+import type { iConf } from '../../redux/configTypes';
+import type { iDat } from "../../redux/dataTypes";
 
 function showHumidity(
     ctx: CanvasRenderingContext2D, hum: number, x: number, y: number, 

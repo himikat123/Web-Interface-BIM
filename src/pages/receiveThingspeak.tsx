@@ -1,7 +1,7 @@
 import i18n from '../i18n/main';
 import { useSelector } from 'react-redux';
 import TwoColumns from "../templates/twoColumns";
-import { iConfig } from "../redux/configTypes";
+import type { iConfig } from "../redux/configTypes";
 import CardThingReceiveOnOff from "../organisms/thingspeak/cardThingReceiveOnOff";
 import CardThingReceivePeriodExpire from "../organisms/thingspeak/cardThingReceivePeriodExpire";
 import CardThingReceiveCHID from "../organisms/thingspeak/cardThingReceiveCHID";

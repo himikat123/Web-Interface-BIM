@@ -7,7 +7,7 @@ import i18n from '../i18n/main';
 import Card from "../atoms/card";
 import TextInput from "../atoms/textInput";
 import Toggle from "../atoms/toggle";
-import { iConfig } from '../redux/configTypes';
+import type { iConfig } from '../redux/configTypes';
 
 export default function Username() {
     const username = useSelector((state: iConfig) => state.config.account.name);

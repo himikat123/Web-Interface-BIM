@@ -1,10 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../../atoms/card";
-import { iConfig } from "../../redux/configTypes";
+import type { iConfig } from "../../redux/configTypes";
 import * as cf from "../../redux/slices/config";
 import HistoryChart from "../../molecules/history/historyChart";
 import HistorySensorIaq from "../../molecules/history/historySensorIaq";
-import { iCardHistory } from "../../interfaces";
+import type { iCardHistory } from "../../interfaces";
 
 export default function CardHistoryIaq(props: iCardHistory) {
     const dispatch = useDispatch();

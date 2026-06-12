@@ -7,8 +7,8 @@ import BrightSunriseSunset from "../../molecules/bright/brightSunriseSunset";
 import BrightSensor from "../../molecules/bright/brightSensor";
 import BrightTime from "../../molecules/bright/brightTime";
 import BrightConstant from "../../molecules/bright/brightConstant";
-import { iConfig } from "../../redux/configTypes";
-import { iDisplay } from "../../interfaces";
+import type { iConfig } from "../../redux/configTypes";
+import type { iDisplay } from "../../interfaces";
 import * as cf from "../../redux/slices/config";
 
 export default function CardDisplayBrightness(props: iDisplay) {

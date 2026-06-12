@@ -1,6 +1,6 @@
 import i18n from '../../i18n/main';
 import { useSelector } from 'react-redux';
-import { iData } from '../../redux/dataTypes';
+import type { iData } from '../../redux/dataTypes';
 
 export default function CardStatusNetwork() {
     const data = useSelector((state: iData) => state.data);

@@ -1,8 +1,8 @@
 import i18n from "../../i18n/main";
 import { useSelector } from 'react-redux';
 import SelectSwitch from "../../atoms/selectSwitch";
-import { iData } from "../../redux/dataTypes";
-import { iSelectSensor } from "../../interfaces";
+import type { iData } from "../../redux/dataTypes";
+import type { iSelectSensor } from "../../interfaces";
 import * as vl from "../../atoms/validateValues";
 
 export default function ThingspeakFields(props: iSelectSensor) {

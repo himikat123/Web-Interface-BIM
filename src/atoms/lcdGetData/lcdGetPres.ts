@@ -1,7 +1,7 @@
 import device from '../../device';
 import * as vl from "../validateValues";
-import { iConf } from '../../redux/configTypes';
-import { iDat } from '../../redux/dataTypes';
+import type { iConf } from '../../redux/configTypes';
+import type { iDat } from '../../redux/dataTypes';
 
 export default function lcdGetPres(config: iConf, data: iDat): number {
     let pres = 40400.0;

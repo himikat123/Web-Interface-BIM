@@ -5,8 +5,8 @@ import lcdGetPres from "../lcdGetData/lcdGetPres";
 import { hPaToMM, mmToHPA } from '../indications/hPaMM';
 import * as D from '../constants/displayTypes';
 import lcdColors from './lcdColors';
-import { iConf } from '../../redux/configTypes';
-import { iDat } from '../../redux/dataTypes';
+import type { iConf } from '../../redux/configTypes';
+import type { iDat } from '../../redux/dataTypes';
 
 export default function lcdShowPressure(
     ctx: CanvasRenderingContext2D, dispModel: number, prevPres: number | undefined, 

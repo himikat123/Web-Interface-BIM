@@ -21,9 +21,9 @@ import lcdColors from '../../atoms/canvas/lcdColors';
 import { fillRect } from '../../atoms/canvas/primitives';
 import * as D from '../../atoms/constants/displayTypes';
 import type { iLcdMainState } from '../../interfaces';
-import { iConf } from '../../redux/configTypes';
-import { iDat } from '../../redux/dataTypes';
-import { iAlrms } from '../../redux/alarmTypes';
+import type { iConf } from '../../redux/configTypes';
+import type { iDat } from '../../redux/dataTypes';
+import type { iAlrms } from '../../redux/alarmTypes';
 
 export function displayLcdMainScreen(
     ctx: CanvasRenderingContext2D, dispModel: number, state: iLcdMainState | undefined, 

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Card from "../../atoms/card";
 import Toggle from "../../atoms/toggle";
 import NumberInput from "../../atoms/numberInput";
-import { iConfig } from "../../redux/configTypes";
+import type { iConfig } from "../../redux/configTypes";
 import { sendNarodmonValidChange } from "../../redux/slices/valid";
 import * as cf from "../../redux/slices/config";
 

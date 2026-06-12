@@ -2,8 +2,8 @@ import i18n from '../../i18n/main';
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../../atoms/card";
 import TextInput from "../../atoms/textInput";
-import { iConfig } from "../../redux/configTypes";
-import { iCardThingSend } from "../../interfaces";
+import type { iConfig } from "../../redux/configTypes";
+import type { iCardThingSend } from "../../interfaces";
 import * as cf from "../../redux/slices/config";
 
 

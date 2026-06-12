@@ -4,9 +4,9 @@ import SelectSwitch from "../../atoms/selectSwitch";
 import wsensor from "../../atoms/indications/wsensor";
 import { windDirStr } from "../../atoms/indications/windDirStr";
 import { batVoltageWsensor, batPercentWsensor, batLevelWsensor } from "../../atoms/indications/battery";
-import { iCloudSensorType } from "../../interfaces";
-import { iConfig } from "../../redux/configTypes";
-import { iData } from "../../redux/dataTypes";
+import type { iCloudSensorType } from "../../interfaces";
+import type { iConfig } from "../../redux/configTypes";
+import type { iData } from "../../redux/dataTypes";
 
 export default function CloudWsensDataType(props: iCloudSensorType) {
     const config = useSelector((state: iConfig) => state.config);

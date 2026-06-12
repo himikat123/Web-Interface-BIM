@@ -6,9 +6,9 @@ import NumberInput from "../../atoms/numberInput";
 import TimeInput from "../../atoms/timeInput";
 import Button from "../../atoms/button";
 import Toggle from "../../atoms/toggle";
-import { iConfig } from "../../redux/configTypes";
-import { iData } from "../../redux/dataTypes";
-import { iDisplay } from "../../interfaces";
+import type { iConfig } from "../../redux/configTypes";
+import type { iData } from "../../redux/dataTypes";
+import type { iDisplay } from "../../interfaces";
 import { display1ValidChange } from "../../redux/slices/valid";
 import * as cf from "../../redux/slices/config";
 

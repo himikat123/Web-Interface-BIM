@@ -5,10 +5,12 @@ import SegDoubleDigit from '../../atoms/canvas/segDoubleDigit';
 import displayLength from '../../atoms/segmentsDisplay/displayLength';
 import type { iSegState } from '../../interfaces';
 import type { iConfig } from "../../redux/configTypes";
+import type { iData } from '../../redux/dataTypes';
 import * as D from '../../atoms/constants/displayTypes';
 
 export default function DisplayView7segment(props: {num: number, isDisplayOn: boolean}) {
     const config = useSelector((state: iConfig) => state.config);
+    const data = useSelector((state: iData) => state.data);
     const dType = config.display.type ? config.display.type[props.num] : 0;
     const dModel = config.display.model[props.num];
     const colorsTM1637 = Array(8).fill('#0F0');

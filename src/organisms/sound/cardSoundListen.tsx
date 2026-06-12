@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import humanizeDuration from 'humanize-duration';
 import i18n from '../../i18n/main';
 import hostUrl from "../../atoms/hostUrl";
-import { iConfig } from "../../redux/configTypes";
+import type { iConfig } from "../../redux/configTypes";
 import Card from "../../atoms/card";
 import SelectSwitch from "../../atoms/selectSwitch";
 import ButtonPlay from '../../atoms/buttonPlay';

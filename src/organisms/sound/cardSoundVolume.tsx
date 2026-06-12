@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import hostUrl from "../../atoms/hostUrl";
 import Card from "../../atoms/card";
 import RangeInput from "../../atoms/rangeInput";
-import { iConfig } from "../../redux/configTypes";
+import type { iConfig } from "../../redux/configTypes";
 import * as cf from "../../redux/slices/config";
 
 export default function CardSoundVolume() {

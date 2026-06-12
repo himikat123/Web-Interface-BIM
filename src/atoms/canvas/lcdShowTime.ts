@@ -2,8 +2,8 @@ import moment from "moment";
 import { drawScaledImage, fillRect } from "./primitives";
 import * as digit from '../img/digits';
 import * as D from "../constants/displayTypes";
-import { iConf } from '../../redux/configTypes';
-import { iDat } from '../../redux/dataTypes';
+import type { iConf } from '../../redux/configTypes';
+import type { iDat } from '../../redux/dataTypes';
 
 function showDigit(ctx: CanvasRenderingContext2D, w: number, h: number, dig: number, x: number, y: number, bgColor: string) {
     switch(dig) {

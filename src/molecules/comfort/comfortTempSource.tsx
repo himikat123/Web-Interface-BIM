@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import device from '../../device';
-import { iConfig } from "../../redux/configTypes";
+import type { iConfig } from "../../redux/configTypes";
 import * as cf from "../../redux/slices/config";
 import ComfortTempSensorType from "./comfortTempSensorType";
 import WsensorNumber from "../wsensor/wsensorNumber";

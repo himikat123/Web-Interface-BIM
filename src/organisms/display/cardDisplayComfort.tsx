@@ -4,7 +4,7 @@ import device from "../../device";
 import Card from "../../atoms/card";
 import SelectSwitch from "../../atoms/selectSwitch";
 import Comfort from "../../atoms/comfort";
-import { iConfig } from "../../redux/configTypes";
+import type { iConfig } from "../../redux/configTypes";
 import * as cf from "../../redux/slices/config";
 
 export default function CardDisplayComfort() {

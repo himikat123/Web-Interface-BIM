@@ -6,7 +6,7 @@ import Card from "../../atoms/card";
 import TextInput from "../../atoms/textInput";
 import NumberInput from "../../atoms/numberInput";
 import Indication from "../../atoms/indication";
-import { iConfig } from "../../redux/configTypes";
+import type { iConfig } from "../../redux/configTypes";
 import * as cf from "../../redux/slices/config";
 import { clockValidChange } from "../../redux/slices/valid";
 

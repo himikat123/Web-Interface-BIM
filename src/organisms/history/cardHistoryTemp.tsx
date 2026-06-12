@@ -1,13 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "../../atoms/card";
-import { iConfig } from "../../redux/configTypes";
+import type { iConfig } from "../../redux/configTypes";
 import * as cf from "../../redux/slices/config";
 import HistoryChart from "../../molecules/history/historyChart";
 import HistorySensorTemp from "../../molecules/history/historySensorTemp";
 import WsensorNumber from "../../molecules/wsensor/wsensorNumber";
 import WsensorTempNumber from "../../molecules/wsensor/wsensorTempNumber";
 import ThingspeakFields from "../../molecules/thingspeak/thingspeakFields";
-import { iCardHistory } from "../../interfaces";
+import type { iCardHistory } from "../../interfaces";
 
 export default function CardHistoryTemp(props: iCardHistory) {
     const dispatch = useDispatch();

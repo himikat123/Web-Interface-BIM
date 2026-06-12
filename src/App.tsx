@@ -31,16 +31,16 @@ import Username from './pages/username';
 import Password from './pages/password';
 import Login from './pages/login';
 import hostUrl from './atoms/hostUrl';
-import { iConfig } from './redux/configTypes';
-import { iAlarms } from './redux/alarmTypes';
-import { iData } from './redux/dataTypes';
+import type { iConfig } from './redux/configTypes';
+import type { iAlarms } from './redux/alarmTypes';
+import type { iData } from './redux/dataTypes';
 import { updateDataChange } from './redux/slices/data';
 import configFetch from './configFetch';
 import dataFetch from './dataFetch';
 import { historyFetch } from './historyFetch';
 import { hourlyFetch } from './hourlyFetch';
-import { iHistory } from './redux/historyTypes';
-import { iHourly } from './redux/hourlyTypes';
+import type { iHistory } from './redux/historyTypes';
+import type { iHourly } from './redux/hourlyTypes';
 import moment from 'moment';
 
 function App() {

@@ -5,8 +5,8 @@ import SensorTypeWindDir from "../../molecules/sensor/sensorTypeWindDir";
 import WsensorNumber from "../../molecules/wsensor/wsensorNumber";
 import ThingspeakField from "../../molecules/thingspeak/thingspeakFields";
 import wsensor from "../../atoms/indications/wsensor";
-import { iConfig } from "../../redux/configTypes";
-import { iData } from "../../redux/dataTypes";
+import type { iConfig } from "../../redux/configTypes";
+import type { iData } from "../../redux/dataTypes";
 import * as cf from "../../redux/slices/config";
 
 export default function CardDisplayWindDir() {
