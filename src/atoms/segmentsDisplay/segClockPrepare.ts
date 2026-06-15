@@ -1,25 +1,36 @@
-import moment from 'moment';
 import segSymbCodes from './segSymbCodes';
 import * as D from '../constants/displayTypes';
+import { iConf } from '../../redux/configTypes';
+import { iDat } from '../../redux/dataTypes';
 
-export default function clock(sens: number, dispLength: string, pointsState: boolean, dispNum: number, config: any): number[] {
+export default function clock(
+    sens: number, dispLength: string, pointsState: boolean, dispNum: number, config: iConf, data: iDat, millisec: number
+): number[] {
+    let date = new Date();
+    let isDemo = true;
+    if(data.dataState !== 'DEMO' && window.location.port !== "3000") {
+        date = new Date(data.time * 1000);
+        isDemo = false;
+    }
+
     const SPACE = segSymbCodes().SYMB_SPACE;
     const DASH = segSymbCodes().SYMB_MINUS;
     const DOT = 100;
     const dispType = config.display.type ? config.display.type[dispNum] : 0;
     const model = config.display.model[dispNum];
-    const hr = +moment().format(config.clock.format > 1 ? 'H' : 'h');
+    const is24Hour = config.clock.format > 1;
+    const hr = is24Hour ? date.getHours() : (date.getHours() % 12 || 12);
     const hrH = Math.floor((config.clock.format % 2 === 0 && hr < 10) ? SPACE : hr / 10);
     const hrL = hr % 10;
-    const mn = moment().minutes();
+    const mn = date.getMinutes();
     const mnH = Math.floor(mn / 10);
     const mnL = mn % 10;
-    const sc = moment().seconds();
+    const sc = date.getSeconds();
     const scH = Math.floor(sc / 10);
     const scL = sc % 10;
-    const ms = moment().millisecond();
-    const msH = Math.floor(ms / 100);
-    const msL = Math.floor(ms % 100 / 10);
+    const ms = isDemo ? (date.getMilliseconds() / 10) : millisec;
+    const msH = Math.floor(ms / 10);
+    const msL = Math.floor(ms % 10);
 
     function pendulumPattern(millis: number, max: number): number {
         const phase = (millis % 2000) / (2000 / (2 * max));

@@ -1,4 +1,3 @@
-import store from '../../redux/store';
 import clock from './segClockPrepare';
 import cdate from './segDatePrepare';
 import temp from './segTempPrepare';
@@ -11,17 +10,17 @@ import segThingspeak from './segThingspeak';
 import segWeather from './segWeather';
 import segWsensor from './segWsensor';
 import displayLength from './displayLength';
+import { iConf } from '../../redux/configTypes';
+import { iDat } from '../../redux/dataTypes';
 
-export default function segGetData(dispNum: number, slot: number, pointsState: boolean)  {
-    const config = store.getState().config;
-    const data = store.getState().data;
+export default function segGetData(dispNum: number, slot: number, pointsState: boolean, config: iConf, data: iDat, millisec: number)  {
     let dispImg = [0, 0, 0, 0, 0, 0, 0, 0];
     let clockpoints = false;
     const sens = config.display.timeSlot ? config.display.timeSlot.data[slot][dispNum] : 0;
     const dispLength = displayLength(dispNum) + '-dig';
 
     switch(config.display.timeSlot ? config.display.timeSlot.sensor[slot][dispNum] : 0) {
-        case 0: clockpoints = true; dispImg = clock(sens, dispLength, pointsState, dispNum, config); break;
+        case 0: clockpoints = true; dispImg = clock(sens, dispLength, pointsState, dispNum, config, data, millisec); break;
         case 1: dispImg = cdate(sens, dispLength, dispNum, config, data); break;
         case 2: dispImg = segBME280(dispNum, slot, dispLength, config, data); break;
         case 3: dispImg = segBMP180(dispNum, slot, dispLength, config, data); break;

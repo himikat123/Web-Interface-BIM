@@ -1,10 +1,9 @@
-import store from '../redux/store';
 import { iSegState } from "../interfaces";
 import segAnimations from './segmentsDisplay/segAnimations';
+import type { iConf } from '../redux/configTypes';
+import type { iDat } from '../redux/dataTypes';
 
-export default function slotTick(dispNum: number, state: iSegState): iSegState {
-    const config = store.getState().config;
-
+export default function slotTick(dispNum: number, state: iSegState, config: iConf, data: iDat, millisec: number): iSegState {
     /* Slot switch */
     const millis = Date.now();
     const period = config.display.timeSlot ? config.display.timeSlot.period[state.slot][dispNum] : 0;
@@ -29,7 +28,7 @@ export default function slotTick(dispNum: number, state: iSegState): iSegState {
         state.prevSlotMillis = millis;
     }
 
-    const segData = segAnimations(dispNum, state);
+    const segData = segAnimations(dispNum, state, config, data, millisec);
     const date = new Date();
 
     return {

@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import slotTick from '../../atoms/slotTick';
 import displayLength from '../../atoms/segmentsDisplay/displayLength';
 import Numitron from '../../atoms/canvas/numitron';
 import VFD from '../../atoms/canvas/vfd';
-import { iSegState } from '../../interfaces';
+import type { iSegState } from '../../interfaces';
+import type { iConfig } from '../../redux/configTypes';
+import type { iData } from '../../redux/dataTypes';
 
 export default function DisplayView7SegmentTubes(props: {num: number, type: string}) {
+    const config = useSelector((state: iConfig) => state.config);
+    const data = useSelector((state: iData) => state.data);
+
     const [state, setState] = useState<iSegState>({
         segments: [0, 0, 0, 0, 0, 0, 0, 0],
         colors: ['', '', '', '', '', '', '', ''],
@@ -18,11 +24,18 @@ export default function DisplayView7SegmentTubes(props: {num: number, type: stri
         animMillis: 0,
         animSlot: 0
     });
+    const [lastSecond, setLastSecond] = useState(0);
+    const [millisec, setMillisec] = useState(0);
     
     useEffect(() => {
         const int = setInterval(() => {
-            const st = slotTick(props.num, state);
+            const st = slotTick(props.num, state, config, data, millisec);
             if(JSON.stringify(st) !== JSON.stringify(state)) setState(st);
+            if(millisec < 99) setMillisec(millisec + 1);
+            if(lastSecond != data.time) {
+                setLastSecond(data.time);
+                setMillisec(0);
+            }
         }, 10);
         return () => clearInterval(int);
     }, [props.num, state]);

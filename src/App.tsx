@@ -93,7 +93,7 @@ function App() {
         if(configState === 'ok' && alarmsState === 'ok') {
             if(!prod) dataFetchInterval = setInterval(() => {
                 dispatch(updateDataChange(true));
-            }, 5000);
+            }, 1000);
 
             if(updateData && !dataFetching) {
                 //if(path !== '/default') {

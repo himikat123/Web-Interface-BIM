@@ -27,11 +27,18 @@ export default function DisplayView7segment(props: {num: number, isDisplayOn: bo
         animMillis: 0,
         animSlot: 0
     });
+    const [lastSecond, setLastSecond] = useState(0);
+    const [millisec, setMillisec] = useState(0);
     
     useEffect(() => {
         const int = setInterval(() => {
-            const st = slotTick(props.num, state);
+            const st = slotTick(props.num, state, config, data, millisec);
             if(JSON.stringify(st) !== JSON.stringify(state)) setState(st);
+            if(millisec < 99) setMillisec(millisec + 1);
+            if(lastSecond != data.time) {
+                setLastSecond(data.time);
+                setMillisec(0);
+            }
         }, 10);
         return () => clearInterval(int);
     }, [props.num, state]);

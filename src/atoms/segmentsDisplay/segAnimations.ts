@@ -1,14 +1,14 @@
-import store from '../../redux/store';
 import segGetData from "./segGetData";
 import segSymbCodes from './segSymbCodes';
 import { frames, shifts } from './segAnimationsShifts';
 import displayLength from './displayLength';
-import { iSegState } from '../../interfaces';
+import type { iSegState } from '../../interfaces';
+import type { iConf } from '../../redux/configTypes';
+import type { iDat } from '../../redux/dataTypes';
  
-export default function segAnimations(dispNum: number, state: iSegState) {
-    const config = store.getState().config;
-    const segData = segGetData(dispNum, state.slot, state.points);
-    const segPrevData = segGetData(dispNum, state.prevSlot, state.points);
+export default function segAnimations(dispNum: number, state: iSegState, config: iConf, data: iDat, millisec: number) {
+    const segData = segGetData(dispNum, state.slot, state.points, config, data, millisec);
+    const segPrevData = segGetData(dispNum, state.prevSlot, state.points, config, data, millisec);
     const color = config.display.timeSlot ? config.display.timeSlot.color[state.slot][dispNum] : '';
     const prevColor = config.display.timeSlot ? config.display.timeSlot.color[state.prevSlot][dispNum] : '';
     let dispImg = [0, 0, 0, 0, 0, 0, 0, 0];
