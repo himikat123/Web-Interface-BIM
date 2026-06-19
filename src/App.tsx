@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
+import i18n from './i18n/main';
 import Loading from './pages/loading';
 import NoConfig from './pages/noConfig';
 import NoData from './pages/noData';
@@ -48,7 +49,8 @@ function App() {
     const config = useSelector((conf: iConfig) => conf.config);
     const configState = config.configState;
     const alarmsState = useSelector((stateAlarm: iAlarms) => stateAlarm.alarm.alarmState);
-    const dataState = useSelector((stateData: iData) => stateData.data.dataState);
+    const data = useSelector((dat: iData) => dat.data);
+    const dataState = data.dataState;
     const dataFetching = useSelector((stateData: iData) => stateData.data.dataFetching);
     const updateData = useSelector((stateData: iData) => stateData.data.updateData);
     const ipAddress = useSelector((stateData: iData) => stateData.data.network.ip);
@@ -154,6 +156,14 @@ function App() {
                     stopDataFetching={val => setStopDataFetching(val)} 
                 /> } />
             </Routes>}
+
+            {!data.wsConnected && <>
+                <div className="fixed bottom-4 left-4 px-4 py-2 border-2 border-red-500 rounded-md bg-red-100">
+                    <span className="animate-pulse text-red-500">
+                        {i18n.t('networkError')}
+                    </span>
+                </div>
+            </>}
         </div>
     );
 }

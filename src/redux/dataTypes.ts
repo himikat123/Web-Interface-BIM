@@ -8,6 +8,7 @@ import type { iNetwork } from './dataTypes/network';
 
 export interface iDat {
     dataState: string,
+    wsConnected: boolean,
     updateData: boolean,
     dataFetching: boolean,
     logged: string,

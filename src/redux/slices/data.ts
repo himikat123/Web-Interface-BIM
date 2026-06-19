@@ -5,6 +5,7 @@ export const dataSlice = createSlice({
     name: 'data',
     initialState: {
         dataState: 'default',
+        wsConnected: true,
         updateData: true,
         dataFetching: false,
         ...(device() === 'WeatherMonitorBIM'
@@ -170,6 +171,7 @@ export const dataSlice = createSlice({
     },
     reducers: {
         dataStateChange: (state, action) => { state.dataState = action.payload },
+        wsConnectedChange: (state, action) => { state.wsConnected = action.payload },
         setDataState: (state, action) => { Object.assign(state, action.payload) },
         updateDataChange: (state, action) => { state.updateData = action.payload },
         dataFetchingChange: (state, action) => { state.dataFetching = action.payload }
@@ -178,6 +180,7 @@ export const dataSlice = createSlice({
 
 export const { 
     dataStateChange,
+    wsConnectedChange,
     setDataState,
     updateDataChange,
     dataFetchingChange,

@@ -1,5 +1,5 @@
 import store from "./redux/store";
-import { setDataState, dataStateChange } from "./redux/slices/data";
+import { setDataState, dataStateChange, wsConnectedChange } from "./redux/slices/data";
 
 let reconnectAttempts = 0;
 const MAX_RECONNECT_ATTEMPTS = 3;
@@ -23,6 +23,7 @@ export function initWebSocket() {
             if(reconnectTimer) clearTimeout(reconnectTimer);
             store.dispatch(dataStateChange('ok'));
             startHeartbeat();
+            store.dispatch(wsConnectedChange(true));
         };
 
         ws.onmessage = (evt) => {
@@ -48,6 +49,7 @@ export function initWebSocket() {
             reconnectAttempts++;
             if(reconnectAttempts >= MAX_RECONNECT_ATTEMPTS) store.dispatch(dataStateChange('error'));
             reconnectTimer = setTimeout(initWebSocket, 3000);
+            store.dispatch(wsConnectedChange(false));
         };
 
         ws.onerror = () => {
@@ -59,6 +61,7 @@ export function initWebSocket() {
         console.error("WS init failed:", err);
         reconnectTimer = setTimeout(initWebSocket, 3000);
         store.dispatch(dataStateChange('error'));
+        store.dispatch(wsConnectedChange(false));
     }
 }
 
