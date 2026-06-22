@@ -157,7 +157,21 @@ export const dataSlice = createSlice({
                 tMin: [404, 404, 404, 404],
                 wind: [-1, -1, -1, -1],
                 icon: [-1, -1, -1, -1]
-            }
+            },
+            ...(device() === 'WeatherMonitorBIM32'
+                ? {
+                    hourly: {
+                        date: [-1, -1, -1, -1],
+                        icon: [-1, -1, -1, -1],
+                        temp: [4040, 4040, 4040, 4040],
+                        pres: [4040, 4040, 4040, 4040],
+                        windSpeed: [-1, -1, -1, -1],
+                        windDir: [-1, -1, -1, -1],
+                        prec: [4040, 4040, 4040, 4040]
+                    }
+                }
+                : {}
+            )
         },
         thing: {
             time: 0,

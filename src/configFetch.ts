@@ -7,7 +7,7 @@ import { configStateChange, setConfigState, displayModelChange } from "./redux/s
 import { alarmsStateChange, setAlarmState } from "./redux/slices/alarm";
 
 export default function configFetch() {
-    axios(`${hostUrl()}/config.json?code=${localStorage.getItem('code') || '0'}`)
+    axios(`${window.location.origin}/config.json?code=${localStorage.getItem('code') || '0'}`)
     .then(res => {
         store.dispatch(configStateChange('ok'));
         store.dispatch(setConfigState(res.data));

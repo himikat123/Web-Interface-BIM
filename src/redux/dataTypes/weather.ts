@@ -15,5 +15,14 @@ export interface iSensorWeatherData {
         tMin: [number],
         wind: [number],
         icon: [number],
+    },
+    hourly?: {
+        date: [number],
+        icon: [number],
+        temp: [number],
+        pres: [number],
+        windSpeed: [number],
+        windDir: [number],
+        prec: [number]
     }
 }

@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
+const createArray = (length, callback) => Array.from({ length }, callback);
+
 const random = (min, max) => { 
     max *= 1000000;
     min *= 1000000;
@@ -38,7 +40,7 @@ const data = (cookieCode) => {
     const codeFile = path.join(__dirname, '..', 'public', 'code.txt');
     const code = fs.readFileSync(codeFile, 'utf8');
 
-    obj = {
+    const obj = {
         state: cookieCode === code ? "OK" : "LOGIN",
         fw: "v300.4",
         esp32: {
@@ -179,7 +181,7 @@ const data = (cookieCode) => {
             bat: [random(700, 850), random(750, 800)]
         },
         weather: {
-            icon: mainIcons[Math.round(random(0, 9))],
+            icon: mainIcons[Math.round(random(0, 8))],
             isDay: Math.round(random(0, 1)),
             temp: random(-30, 30),
             hum: random(90, 100),
@@ -191,10 +193,19 @@ const data = (cookieCode) => {
             descript: "Regen rain дождь deszcz дощ",
             time: Math.floor(date - random(600, 660)), // 10 - 11 minutes ago
             daily: {
-                tMax: [random(-25, 25), random(-25, 25), random(-25, 25), random(-25, 25), random(-25, 25)],
-                tMin: [random(-25, 25), random(-25, 25), random(-25, 25), random(-25, 25), random(-25, 25)],
-                wind: [random(0, 15), random(0, 15), random(0, 15), random(0, 15), random(0, 15)],
-                icon: [mainIcons[Math.round(random(0, 9))], mainIcons[Math.round(random(0, 9))], mainIcons[Math.round(random(0, 9))], mainIcons[Math.round(random(0, 9))], mainIcons[Math.round(random(0, 9))]],
+                tMax: createArray(5, () => random(-25, 25)),
+                tMin: createArray(5, () => random(-25, 25)),
+                wind: createArray(5, () => random(0, 15)),
+                icon: createArray(5, () => mainIcons[Math.round(random(0, 8))]),
+            },
+            hourly: {
+                date: createArray(40, (_, i) => Math.floor(date + (i * 10800))),
+                icon: createArray(40, () => mainIcons[Math.round(random(0, 8))]),
+                temp: createArray(40, () => random(-25, 25)),
+                pres: createArray(40, () => random(950, 1060)),
+                windSpeed: createArray(40, () => random(1, 17)),
+                windDir: createArray(40, () => random(0, 360)),
+                prec: createArray(40, () => random(0, 100))
             }
         },
         thing: {
