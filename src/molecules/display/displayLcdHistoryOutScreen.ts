@@ -31,9 +31,9 @@ export function displayLcdHistoryOutScreen(
             date: dates, temp: temps, hum: hums, pres: press,
             icon: [], windSpeed: [], windDir: [], prec: []
         }
-        displayLcdHourlyCharts(ctx, dispModel, data, shift, 'historyOut');
+        //displayLcdHourlyCharts(ctx, dispModel, data, shift, 'historyOut');
         for(let i=0; i<8; i++) {
-            displayLcdHourlyColumn(ctx, dispModel, data, i, shift, 'historyOut', localPres);
+            //displayLcdHourlyColumn(ctx, dispModel, data, i, shift, 'historyOut', localPres);
         }
         lcdForwardButton(ctx, dispModel, shift < 16);
         lcdBackButton(ctx, dispModel, shift > 0);

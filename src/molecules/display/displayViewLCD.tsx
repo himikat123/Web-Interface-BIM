@@ -46,7 +46,7 @@ export default function DisplayViewLCD() {
     const dispNX4832x035 = useRef<HTMLCanvasElement>(null);
     const dispNX4827K043 = useRef<HTMLCanvasElement>(null);
     const dispILI9341 = useRef<HTMLCanvasElement>(null);
-    const hourly = useSelector((state: iHourly) => state.hourly);
+    const hourly = data.weather.hourly;
 
     const draw = useCallback(() => {
         if(ctx) { // Display pages switch
@@ -63,7 +63,7 @@ export default function DisplayViewLCD() {
                 setCalendarState(displayLcdCalendarScreen(ctx, model, calendarState, calendarShift));
             }
             if(page === 'hourly') {
-                setHourlyState(displayLcdHourlyScreen(ctx, model, hourlyState, hourlyShift, config.units.pres));
+                setHourlyState(displayLcdHourlyScreen(ctx, model, hourlyState, hourlyShift, config.units.pres, data));
             }
             if(page === 'historyIn') {
                 setHistoryInState(displayLcdHistoryInScreen(ctx, model, historyInState, historyInShift, config.units.pres));
@@ -211,7 +211,7 @@ export default function DisplayViewLCD() {
                 setHourlyState(undefined);
                 let dayLinks = [];
                 for(let i=0; i<40; i++) {
-                    if(moment.unix(hourly.date[i] ?? 0).hour() === 0) {
+                    if(moment.unix(hourly?.date[i] ?? 0).hour() === 0) {
                         if(i !== 0) dayLinks.push(i);
                     }
                 }

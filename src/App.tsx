@@ -39,9 +39,7 @@ import { updateDataChange } from './redux/slices/data';
 import configFetch from './configFetch';
 import dataFetch from './dataFetch';
 import { historyFetch } from './historyFetch';
-import { hourlyFetch } from './hourlyFetch';
 import type { iHistory } from './redux/historyTypes';
-import type { iHourly } from './redux/hourlyTypes';
 import moment from 'moment';
 
 function App() {
@@ -62,7 +60,6 @@ function App() {
     const path = location.pathname;
     const navigate = useNavigate();
     const history = useSelector((state: iHistory) => state.history);
-    const hourly = useSelector((state: iHourly) => state.hourly);
     const apMode = window.location.origin.toString().includes('192.168.4.1');
 
     useEffect(() => {
@@ -89,7 +86,6 @@ function App() {
 
             if((path !== '/login') && (config.display.type && config.display.type[0] === 1)) {
                 if(moment().unix() - history.updated > 600) historyFetch(apMode);
-                if(moment().unix() - hourly.updated > 600) hourlyFetch(apMode);
             }
         }
 
@@ -98,20 +94,13 @@ function App() {
                 dispatch(updateDataChange(true));
             }, 1000);
 
-            if(updateData && !dataFetching) {
-                //if(path !== '/default') {
-                //    if(path === '/filesystem') {
-                //        if(!stopDataFetching) fetchData();
-                //    }
-                /*    else*/ fetchData();
-                //}
-            }
+            if(updateData && !dataFetching) fetchData();
         }
 
         return () => clearInterval(dataFetchInterval);
     }, [
         configState, alarmsState, dispatch, dataFetching, updateData, path, navigate, 
-        stopDataFetching, history.updated, hourly.updated, apMode, dataState
+        stopDataFetching, history.updated, apMode, dataState
     ]);
 
     useEffect(() => {

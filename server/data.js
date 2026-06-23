@@ -205,7 +205,7 @@ const data = (cookieCode) => {
                 pres: createArray(40, () => random(950, 1060)),
                 windSpeed: createArray(40, () => random(1, 17)),
                 windDir: createArray(40, () => random(0, 360)),
-                prec: createArray(40, () => random(0, 100))
+                prec: createArray(40, () => Math.round(random(0, 100)))
             }
         },
         thing: {

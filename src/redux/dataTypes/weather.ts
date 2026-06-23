@@ -23,6 +23,7 @@ export interface iSensorWeatherData {
         pres: [number],
         windSpeed: [number],
         windDir: [number],
-        prec: [number]
+        prec: [number],
+        hum?: [number]
     }
 }
