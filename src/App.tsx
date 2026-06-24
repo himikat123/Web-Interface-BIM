@@ -38,7 +38,6 @@ import type { iData } from './redux/dataTypes';
 import { updateDataChange } from './redux/slices/data';
 import configFetch from './configFetch';
 import dataFetch from './dataFetch';
-import type { iHistory } from './redux/historyTypes';
 
 function App() {
     const dispatch = useDispatch();
@@ -57,7 +56,6 @@ function App() {
     const location = useLocation();
     const path = location.pathname;
     const navigate = useNavigate();
-    const history = useSelector((state: iHistory) => state.history);
     const apMode = window.location.origin.toString().includes('192.168.4.1');
 
     useEffect(() => {
@@ -94,7 +92,7 @@ function App() {
         return () => clearInterval(dataFetchInterval);
     }, [
         configState, alarmsState, dispatch, dataFetching, updateData, path, navigate, 
-        stopDataFetching, history.updated, apMode, dataState
+        stopDataFetching, apMode, dataState
     ]);
 
     useEffect(() => {
