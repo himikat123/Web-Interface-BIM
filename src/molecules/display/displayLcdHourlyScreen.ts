@@ -6,10 +6,11 @@ import displayLcdHourlyColumn from './displayLcdHourlyColumn';
 import displayLcdHourlyCharts from './displayLcdHourlyCharts';
 import type { iLcdHourlyState } from '../../interfaces';
 import type { iDat } from '../../redux/dataTypes';
+import type { iConf } from '../../redux/configTypes';
 
 export function displayLcdHourlyScreen(
     ctx: CanvasRenderingContext2D, dispModel: number, state: iLcdHourlyState | undefined, 
-    shift: number, localPres: number, data: iDat
+    shift: number, localPres: number, data: iDat, config: iConf
 ): iLcdHourlyState {
     if(!state?.skeleton) {
         fillRect(ctx, 0, 0, ctx.canvas.width, ctx.canvas.height, '#000');
@@ -19,9 +20,16 @@ export function displayLcdHourlyScreen(
     const weather = data.weather;
     const weatherStr = JSON.stringify(weather);
     if(state?.weather !== weatherStr || state?.shift !== shift) {
-        displayLcdHourlyCharts(ctx, dispModel, weather, shift, 'hourly');
+        displayLcdHourlyCharts(
+            ctx, dispModel, weather.hourly?.temp, weather.hourly?.pres,
+            weather.hourly?.prec, weather.hourly?.hum, shift, 'hourly'
+        );
         for(let i=0; i<8; i++) {
-            displayLcdHourlyColumn(ctx, dispModel, weather, i, shift, 'hourly', localPres);
+            displayLcdHourlyColumn(
+                ctx, dispModel, weather.hourly?.temp, weather.hourly?.hum, weather.hourly?.pres, 
+                weather.hourly?.icon, weather.hourly?.date, weather.hourly?.windSpeed, 
+                weather.hourly?.windDir, weather.hourly?.prec, i, shift, 'hourly', localPres, config
+            );
         }
         lcdForwardButton(ctx, dispModel, shift < 32);
         lcdBackButton(ctx, dispModel, shift > 0);

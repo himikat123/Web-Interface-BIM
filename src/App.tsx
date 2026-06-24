@@ -38,9 +38,7 @@ import type { iData } from './redux/dataTypes';
 import { updateDataChange } from './redux/slices/data';
 import configFetch from './configFetch';
 import dataFetch from './dataFetch';
-import { historyFetch } from './historyFetch';
 import type { iHistory } from './redux/historyTypes';
-import moment from 'moment';
 
 function App() {
     const dispatch = useDispatch();
@@ -83,10 +81,6 @@ function App() {
         async function fetchData() {
             const nav = await dataFetch(path);
             if(nav) navigate(nav);
-
-            if((path !== '/login') && (config.display.type && config.display.type[0] === 1)) {
-                if(moment().unix() - history.updated > 600) historyFetch(apMode);
-            }
         }
 
         if(configState === 'ok' && alarmsState === 'ok') {

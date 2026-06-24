@@ -1,6 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import device from '../../device';
 
+const createHistoryMatrix = () => 
+    Array.from({ length: 8 }, (_, index) => 
+        Array(24).fill(index === 7 ? 0 : -40400)
+    );
+
 export const dataSlice = createSlice({
     name: 'data',
     initialState: {
@@ -175,7 +180,8 @@ export const dataSlice = createSlice({
         },
         thing: {
             time: 0,
-            data: [-40400, -40400, -40400, -40400, -40400, -40400, -40400, -40400]
+            data: Array(8).fill(-40400),
+            ...(device() === 'WeatherMonitorBIM32' && { history: createHistoryMatrix() })
         },
         fs: { 
             total: -1,

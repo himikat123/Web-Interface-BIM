@@ -5,14 +5,14 @@ import lcdForwardButton from '../../atoms/canvas/lcdForwardButton';
 import lcdBackButton from '../../atoms/canvas/lcdBackButton';
 import displayLcdHourlyColumn from './displayLcdHourlyColumn';
 import displayLcdHourlyCharts from './displayLcdHourlyCharts';
-import { iLcdHourlyState, iHourlyWeather } from '../../interfaces';
+import type { iLcdHourlyState } from '../../interfaces';
 import i18n from '../../i18n/main';
-import store from '../../redux/store';
-import moment from 'moment';
+import type { iDat } from '../../redux/dataTypes';
+import type { iConf } from '../../redux/configTypes';
 
 export function displayLcdHistoryOutScreen(
-    ctx: CanvasRenderingContext2D, dispModel: number, 
-    state: iLcdHourlyState | undefined, shift: number, localPres: number
+    ctx: CanvasRenderingContext2D, dispModel: number, state: iLcdHourlyState | undefined, 
+    shift: number, localPres: number, data: iDat, config: iConf
 ): iLcdHourlyState {
     if(!state?.skeleton) {
         fillRect(ctx, 0, 0, ctx.canvas.width, ctx.canvas.height, '#000');
@@ -20,20 +20,17 @@ export function displayLcdHistoryOutScreen(
         displayLcdHistoryTitle(ctx, i18n.t('outdoorHistory'), dispModel);
     }
 
-    const weather = store.getState().history;
-    const weatherStr = JSON.stringify(weather);
-    if(state?.weather !== JSON.stringify(weather) || state?.shift !== shift) {
-        const dates = weather.feeds.map(feed => moment(feed.created_at).unix());
-        const temps = weather.feeds.map(feed => parseFloat(feed.field1));
-        const hums = weather.feeds.map(feed => parseFloat(feed.field2)); 
-        const press = weather.feeds.map(feed => parseFloat(feed.field3));
-        const data: iHourlyWeather = {
-            date: dates, temp: temps, hum: hums, pres: press,
-            icon: [], windSpeed: [], windDir: [], prec: []
-        }
-        //displayLcdHourlyCharts(ctx, dispModel, data, shift, 'historyOut');
+    const history = data.thing.history;
+    const weatherStr = JSON.stringify(history);
+    if((state?.weather !== JSON.stringify(history) || state?.shift !== shift) && history) {
+        const dates = history[7];
+        const temps = history[0];
+        const hums = history[1];
+        const press = history[2];
+
+        displayLcdHourlyCharts(ctx, dispModel, temps, press, [], hums, shift, 'historyIn');
         for(let i=0; i<8; i++) {
-            //displayLcdHourlyColumn(ctx, dispModel, data, i, shift, 'historyOut', localPres);
+            displayLcdHourlyColumn(ctx, dispModel, temps, hums, press, [], dates, [], [], [], i, shift, 'historyIn', localPres, config);
         }
         lcdForwardButton(ctx, dispModel, shift < 16);
         lcdBackButton(ctx, dispModel, shift > 0);

@@ -34,7 +34,8 @@ export interface iDat {
     weather: iSensorWeatherData,
     thing: {
         time: number,
-        data: number[]
+        data: number[],
+        history?: number[][]
     },
     fs: { 
         total: number,

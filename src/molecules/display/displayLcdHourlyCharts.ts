@@ -1,10 +1,10 @@
 import { line, drawLine, fillRect } from "../../atoms/canvas/primitives";
 import lcdColors from "../../atoms/canvas/lcdColors";
 import * as D from "../../atoms/constants/displayTypes";
-import { iSensorWeatherData } from "../../redux/dataTypes/weather";
 
 export default function displayLcdHourlyCharts(ctx: CanvasRenderingContext2D, 
-    dispModel: number, weather: iSensorWeatherData | undefined, shift: number, type: string
+    dispModel: number, temps: number[] | undefined, press: number[] | undefined,
+    precs: number[] | undefined, hums: number[] | undefined, shift: number, type: string
 ) {
     const color = lcdColors();
 
@@ -28,10 +28,10 @@ export default function displayLcdHourlyCharts(ctx: CanvasRenderingContext2D,
         let ch = [];
 
         for(let i=0; i<8; i++) {
-            if(cht === 0) ch[i] = weather?.hourly?.temp[i + shift] ?? 0;
-            if(cht === 1) ch[i] = weather?.hourly?.pres[i + shift] ?? 0;
-            if(cht === 2) ch[i] = weather?.hourly?.prec[i + shift] ?? 0;
-            if(cht === 3) ch[i] = (weather?.hourly?.hum && weather?.hourly?.hum[i + shift]) ?? 0;
+            if(cht === 0) ch[i] = temps === undefined ? 0 : temps[i + shift] ?? 0;
+            if(cht === 1) ch[i] = press === undefined ? 0 : press[i + shift] ?? 0;
+            if(cht === 2) ch[i] = precs === undefined ? 0 : precs[i + shift] ?? 0;
+            if(cht === 3) ch[i] = hums === undefined ? 0 : hums[i + shift] ?? 0;
         }
         for(let i=0; i<8; i++) {
             if(ch[i] < chartMin) chartMin = ch[i];

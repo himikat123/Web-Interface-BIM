@@ -63,13 +63,13 @@ export default function DisplayViewLCD() {
                 setCalendarState(displayLcdCalendarScreen(ctx, model, calendarState, calendarShift));
             }
             if(page === 'hourly') {
-                setHourlyState(displayLcdHourlyScreen(ctx, model, hourlyState, hourlyShift, config.units.pres, data));
+                setHourlyState(displayLcdHourlyScreen(ctx, model, hourlyState, hourlyShift, config.units.pres, data, config));
             }
             if(page === 'historyIn') {
-                setHistoryInState(displayLcdHistoryInScreen(ctx, model, historyInState, historyInShift, config.units.pres));
+                setHistoryInState(displayLcdHistoryInScreen(ctx, model, historyInState, historyInShift, config.units.pres, data, config));
             }
             if(page === 'historyOut') {
-                setHistoryOutState(displayLcdHistoryOutScreen(ctx, model, historyOutState, historyOutShift, config.units.pres));
+                setHistoryOutState(displayLcdHistoryOutScreen(ctx, model, historyOutState, historyOutShift, config.units.pres, data, config));
             }
             if(page === 'alarm') {
                 setAlarmState(displayLcdAlarmScreen(ctx, model, alarmState));

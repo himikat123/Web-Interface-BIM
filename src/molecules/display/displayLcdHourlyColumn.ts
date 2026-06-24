@@ -1,4 +1,3 @@
-import store from "../../redux/store";
 import { drawScaledImage, printText, fillRect } from "../../atoms/canvas/primitives";
 import * as icons from "../../atoms/img/icons";
 import * as wind from "../../atoms/img/wind";
@@ -10,13 +9,15 @@ import lcdColors from "../../atoms/canvas/lcdColors";
 import { hPaToMM } from "../../atoms/indications/hPaMM";
 import { validateTemperature, validatePressureHPA } from "../../atoms/validateValues";
 import * as D from "../../atoms/constants/displayTypes";
-import { iSensorWeatherData } from "../../redux/dataTypes/weather";
+import type { iConf } from "../../redux/configTypes";
 
 export default function displayLcdHourlyColumn(
-    ctx: CanvasRenderingContext2D, dispModel: number, weather: iSensorWeatherData, 
-    num: number, shift: number, type: string, localPres: number
+    ctx: CanvasRenderingContext2D, dispModel: number, temps: number[] | undefined, 
+    hums: number[] | undefined, press: number[] | undefined, icns: number[] | undefined,
+    dates: number[] | undefined, wSpeeds: number[] | undefined, wDirs: number[] | undefined,
+    precs: number[] | undefined, num: number, shift: number, type: string, localPres: number, config: iConf
 ) {
-    const config = store.getState().config;
+    dates = dates === undefined ? Array(24).fill(0) : dates;
     const color = lcdColors();
     const s = num + shift;
     let c = 48, x = 42, y1 = 110, y2 = 20, y3 = 22, y4 = 48, y5 = 23, 
@@ -36,7 +37,7 @@ export default function displayLcdHourlyColumn(
     x = c * num + x;
 
     const tempUnits = '°C';
-    const t = weather?.hourly?.temp[s] !== undefined ? weather?.hourly?.temp[s] : 40400;
+    const t = temps?.[s] ?? 40400;
     const temp = validateTemperature(t)
         ? String(Math.round(t))
         : '--';
@@ -44,16 +45,14 @@ export default function displayLcdHourlyColumn(
     y += y2 + gap;
 
     if(type === 'historyIn' || type === 'historyOut') {
-        const hum = (weather?.hourly?.hum && weather?.hourly?.hum[s] !== undefined) 
-            ? (Math.round(weather?.hourly?.hum[s]) + '%') 
-            : '--%';
+        const hum = hums ? (Math.round(hums[s]) + '%') : '--%';
         printText(ctx, x, y, w, f1, hum, f1 + 1, 'center', color.HUM, color.BG);
         y += y3 + gap;
     }
 
     if(type === 'hourly' || type === 'historyOut') {
         const presUnits = localPres ? i18n.t('units.hpa') : i18n.t('units.mm');
-        const p = weather?.hourly?.pres[s] !== undefined ? weather.hourly?.pres[s] : 40400;
+        const p = press?.[s] ?? 40400;
         const pres = validatePressureHPA(p)
             ? String(Math.round(localPres ? p : hPaToMM(p)))
             : '--';
@@ -63,29 +62,32 @@ export default function displayLcdHourlyColumn(
 
     if(type === 'hourly') {
         let wIcon = '';
-        switch(weather?.hourly?.icon[s]) {
-            case 1: wIcon = icons.w_01_d(); break;
-            case 2: wIcon = icons.w_02_d(); break;
-            case 3: wIcon = icons.w_02_d(); break;
-            case 4: wIcon = icons.w_04(); break;
-            case 9: wIcon = icons.w_09(); break;
-            case 10: wIcon = icons.w_10(); break;
-            case 11: wIcon = icons.w_11_d(); break;
-            case 13: wIcon = icons.w_13(); break;
-            case 50: wIcon = icons.w_50(); break;
-            default: wIcon = icons.w_loading(); break;
+        if(icns) {
+            switch(icns[s]) {
+                case 1: wIcon = icons.w_01_d(); break;
+                case 2: wIcon = icons.w_02_d(); break;
+                case 3: wIcon = icons.w_02_d(); break;
+                case 4: wIcon = icons.w_04(); break;
+                case 9: wIcon = icons.w_09(); break;
+                case 10: wIcon = icons.w_10(); break;
+                case 11: wIcon = icons.w_11_d(); break;
+                case 13: wIcon = icons.w_13(); break;
+                case 50: wIcon = icons.w_50(); break;
+                default: wIcon = icons.w_loading(); break;
+            }
         }
+        else wIcon = icons.w_loading();
         drawScaledImage(ctx, wIcon, x, y, iw, iw);
         y += y4 + gap;
 
-        let wd = moment.unix(weather?.hourly?.date[s] ?? 0).locale(getLocale()).format('dd');
+        let wd = moment.unix(dates[s] ?? 0).locale(getLocale()).format('dd');
         wd = wd.charAt(0).toUpperCase() + wd.slice(1);
         printText(ctx, x, y, w, f3, wd, f3, 'center', color.TEXT, color.BG);
         y += y5 + gap;
     }
 
-    const dt = moment.unix(weather?.hourly?.date[s] ?? 0).format('DD');
-    const mo = moment.unix(weather?.hourly?.date[s] ?? 0).locale(getLocale()).format('D MMM').split(' ')[1].substring(0, 3);
+    const dt = moment.unix(dates[s] ?? 0).format('DD');
+    const mo = moment.unix(dates[s] ?? 0).locale(getLocale()).format('D MMM').split(' ')[1].substring(0, 3);
 
     printText(ctx, x, y, w, f4, dt + mo, f4, 'center', color.TEXT, color.BG);
     y += y6 + gap;
@@ -97,17 +99,17 @@ export default function displayLcdHourlyColumn(
         case 2: hourFormat = 'H'; break;
         default: hourFormat = 'HH'; break;
     }
-    const tm = moment.unix(weather?.hourly?.date[s] ?? 0).format(`${hourFormat}:mm`);
+    const tm = moment.unix(dates[s] ?? 0).format(`${hourFormat}:mm`);
     printText(ctx, x, y, w, f4, tm, f4, 'center', color.TEXT, color.BG);
     y += y6 + gap;
 
     if(type === 'hourly') {
         const ms = i18n.t('units.mps');
-        const ws = weather?.hourly?.windSpeed[s] !== undefined ? (Math.round(weather.hourly?.windSpeed[s]) + ms) : ('--' + ms);
+        const ws = wSpeeds ? (Math.round(wSpeeds[s]) + ms) : ('--' + ms);
         printText(ctx, x, y, w, f4, ws, f4, 'center', color.TEXT, color.BG);
         y += y6 + gap;
 
-        const dir = weather?.hourly?.windDir[s] !== undefined ? weather?.hourly?.windDir[s] : 0;
+        const dir = wDirs?.[s] ?? 0;
         const wx = x + w / 2 - f4 / 2;
         if(dir >= 0 && dir <= 360) {
             let img = wind.north();
@@ -125,7 +127,7 @@ export default function displayLcdHourlyColumn(
         y += y6 + gap;
 
         drawScaledImage(ctx, symb.hum(), x + 2, y, f4 * 0.8, f4);
-        let pr = weather?.hourly?.prec[s] ? weather.hourly?.prec[s].toString() : '0';
+        let pr = precs?.[s]?.toString() ?? '0';
         if(config.weather.provider === 0) pr += (pr === '0' ? i18n.t('units.mm') : '');
         if(config.weather.provider === 2) pr += '%';
         printText(ctx, x + f4, y + 1, w - f4 * 1.5, f4, pr, f4, 'center', color.TEXT, color.BG);
