@@ -148,16 +148,16 @@ const data = (cookieCode) => {
                 name: ["BME280", "SHT21"]
             },
             pres: {
-                data: [random(800, 1000), random(800, 1000)],
+                data: [random(900, 1000), random(900, 1000)],
                 name: ["BME280", "BMP180"]
             },
             wind: {
                 speed: {
-                    data: [random(0, 10), random(0, 20)],
+                    data: [random(0, 10), -1],
                     name: ['RS485', 'RS485']
                 },
                 dir: {
-                    data: [random(0, 359), random(0, 359)],
+                    data: [random(0, 359), -1],
                     name: ['RS485', 'RS485']
                 }
             },

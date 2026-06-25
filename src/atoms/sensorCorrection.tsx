@@ -28,6 +28,11 @@ export default function sensorCorrection(
         return (hPaToMM(Math.round(lblData * (1 / step)) / (1 / step)) + corr).toFixed(countSymbolsAfterComma());
     }
 
+    const windDir = () => {
+        const wdir = ((lblData + corr) % 360 + 360) % 360;
+        return `${windDirStr(wdir)} ${Math.round(wdir)}`;
+    }
+
     let units: string = '';
     let val: string = '';
 
@@ -62,10 +67,10 @@ export default function sensorCorrection(
             break;
         case 'wd': // Wind direction
             units = '°';
-            val = (vl.validateWindDirection(lblData) ? (`${windDirStr(lblData)} ${Math.round(lblData)}`) : "--");
-            min = 0;
-            max = 0;
-            step = 0;
+            val = (vl.validateWindDirection(lblData) ? windDir() : "--");
+            min = -180;
+            max = 180;
+            step = 1;
             break;
         case 'l': // Ambient light
             units = i18n.t('units.lux');

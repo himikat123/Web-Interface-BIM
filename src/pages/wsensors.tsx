@@ -78,7 +78,7 @@ export default function WSensors() {
                         />
                     </div>
 
-                    {[...Array(5)].map((x, tempSensorNum: number) => <div key={'t' + tempSensorNum}>
+                    {[...Array(5)].map((_, tempSensorNum: number) => <div key={'t' + tempSensorNum}>
                         {sensorCorrection(!vl.WsensorDataRelevance(wsensorNum), "t", 
                             config.wsensor?.temp[wsensorNum][tempSensorNum] ?? 0, 
                             `${i18n.t('temperature')} ${tempSensorNum}`, 
