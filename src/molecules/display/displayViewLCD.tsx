@@ -211,7 +211,7 @@ export default function DisplayViewLCD() {
                 setHourlyState(undefined);
                 let dayLinks = [];
                 for(let i=0; i<40; i++) {
-                    if(moment.unix(hourly?.date[i] ?? 0).hour() === 0) {
+                    if(moment.unix(hourly?.date[i] ?? 0).utc().hour() === 0) {
                         if(i !== 0) dayLinks.push(i);
                     }
                 }
@@ -219,7 +219,7 @@ export default function DisplayViewLCD() {
                 if(x > hourlyCoords.day1 && x < hourlyCoords.day2) setHourlyShift(dayLinks[0]);
                 if(x > hourlyCoords.day2 && x < hourlyCoords.day3) setHourlyShift(dayLinks[1]);
                 if(x > hourlyCoords.day3 && x < hourlyCoords.day4) setHourlyShift(dayLinks[2]);
-                if(x > hourlyCoords.day4) setHourlyShift(dayLinks[3]);
+                if(x > hourlyCoords.day4) setHourlyShift(dayLinks[3]); console.log(dayLinks)
                 setPage('hourly');
             }
 

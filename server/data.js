@@ -42,6 +42,12 @@ const startTimestamp = Math.floor(Date.now() / 1000) - (23 * 3600);
 const data = (cookieCode) => {
     const dt = new Date();
     const date = Math.floor(dt / 1000) - dt.getTimezoneOffset() * 60;
+    
+    const utcHours = dt.getUTCHours();
+    const targetHours = utcHours - (utcHours % 3);
+    dt.setUTCHours(targetHours, 0, 0, 0);
+    const baseDateSec = Math.floor(dt.getTime() / 1000);
+
     const codeFile = path.join(__dirname, '..', 'public', 'code.txt');
     const code = fs.readFileSync(codeFile, 'utf8');
 
@@ -204,7 +210,7 @@ const data = (cookieCode) => {
                 icon: createArray(5, () => mainIcons[Math.round(random(0, 8))]),
             },
             hourly: {
-                date: createArray(40, (_, i) => Math.floor(date + (i * 10800))),
+                date: createArray(40, (_, i) => baseDateSec + (i * 10800)),
                 icon: createArray(40, () => mainIcons[Math.round(random(0, 8))]),
                 temp: createArray(40, () => random(-25, 25)),
                 pres: createArray(40, () => random(950, 1060)),
