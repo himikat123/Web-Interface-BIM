@@ -80,14 +80,14 @@ export default function displayLcdHourlyColumn(
         drawScaledImage(ctx, wIcon, x, y, iw, iw);
         y += y4 + gap;
 
-        let wd = moment.unix(dates[s] ?? 0).locale(getLocale()).format('dd');
+        let wd = moment.unix(dates[s] ?? 0).utc().locale(getLocale()).format('dd');
         wd = wd.charAt(0).toUpperCase() + wd.slice(1);
         printText(ctx, x, y, w, f3, wd, f3, 'center', color.TEXT, color.BG);
         y += y5 + gap;
     }
 
-    const dt = moment.unix(dates[s] ?? 0).format('DD');
-    const mo = moment.unix(dates[s] ?? 0).locale(getLocale()).format('D MMM').split(' ')[1].substring(0, 3);
+    const dt = moment.unix(dates[s] ?? 0).utc().format('DD');
+    const mo = moment.unix(dates[s] ?? 0).utc().locale(getLocale()).format('D MMM').split(' ')[1].substring(0, 3);
 
     printText(ctx, x, y, w, f4, dt + mo, f4, 'center', color.TEXT, color.BG);
     y += y6 + gap;
@@ -99,7 +99,7 @@ export default function displayLcdHourlyColumn(
         case 2: hourFormat = 'H'; break;
         default: hourFormat = 'HH'; break;
     }
-    const tm = moment.unix(dates[s] ?? 0).format(`${hourFormat}:mm`);
+    const tm = moment.unix(dates[s] ?? 0).utc().format(`${hourFormat}:mm`);
     printText(ctx, x, y, w, f4, tm, f4, 'center', color.TEXT, color.BG);
     y += y6 + gap;
 
