@@ -14,7 +14,7 @@ export default function lcdGetWindDir(config: iConf, data: iDat): number {
         case 1: val = data.weather.wind.dir; break;
         case 2: if(vl.WsensorDataRelevance(wsensNum)) {
             val = vl.validateWindDirection(wsensData) 
-                ? (wsensData + (config.wsensor?.wind.dir[wsensNum] ?? 0)) 
+                ? (((wsensData + (config.wsensor?.wind.dir[wsensNum] ?? 0)) % 360 + 360) % 360)
                 : -1
         }; break;
         case 3: if(vl.ThingspeakDataRelevance()) {
