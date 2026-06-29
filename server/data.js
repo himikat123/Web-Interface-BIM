@@ -221,11 +221,20 @@ const data = (cookieCode) => {
         },
         thing: {
             time: Math.floor(date - random(600, 660)), // 10 - 11 minutes ago
-            data: [random(-5, -4), random(56, 59), random(800, 1100), Math.round(random(2, 4)), -40400.0, random(99, 102), random(1359, 1362), random(-12, -10)],
+            data: [
+                random(-5, -4), 
+                random(56, 59), 
+                random(870, 1085), 
+                Math.round(random(2, 4)), 
+                -40400.0, 
+                random(99, 102), 
+                random(1359, 1362), 
+                random(-12, -10)
+            ],
             history: [
                 randomRow(-25, 40),
                 randomRow(0, 100),
-                randomRow(800, 1100),
+                randomRow(870, 1085),
                 randomRow(-25, 40),
                 randomRow(0, 100),
                 randomRow(20, 200),

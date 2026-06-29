@@ -28,9 +28,9 @@ export function displayLcdHistoryOutScreen(
         const hums = history[1];
         const press = history[2];
 
-        displayLcdHourlyCharts(ctx, dispModel, temps, press, [], hums, shift, 'historyIn');
+        displayLcdHourlyCharts(ctx, dispModel, temps, press, [], hums, shift, 'historyOut');
         for(let i=0; i<8; i++) {
-            displayLcdHourlyColumn(ctx, dispModel, temps, hums, press, [], dates, [], [], [], i, shift, 'historyIn', localPres, config);
+            displayLcdHourlyColumn(ctx, dispModel, temps, hums, press, [], dates, [], [], [], i, shift, 'historyOut', localPres, config);
         }
         lcdForwardButton(ctx, dispModel, shift < 16);
         lcdBackButton(ctx, dispModel, shift > 0);
