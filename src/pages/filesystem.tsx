@@ -1,12 +1,12 @@
 import { useEffect, useState, useCallback, useRef } from "react";
-import { useSelector } from 'react-redux';
+import { useSelector, shallowEqual  } from 'react-redux';
 import i18n from "../i18n/main";
 import axios from "axios";
 import hostUrl from "../atoms/hostUrl";
 import OneColumn from "../templates/oneColumn";
 import Card from "../atoms/card";
 import Button from "../atoms/button";
-import ModalFileViewer from "./modalFileViewer";
+import { ModalFileViewer } from "./modalFileViewer";
 import type { iData } from "../redux/dataTypes";
 import type { iFile, iFilelist } from "../interfaces";
 import { CheckCircle, XCircle } from "@phosphor-icons/react";
@@ -17,18 +17,24 @@ import { ReactComponent as ImageSVG } from '../atoms/icons/image.svg';
 import { ReactComponent as RubickSVG } from '../atoms/icons/rubick.svg';
 
 export default function Filesystem(props: {stopDataFetching(val: boolean): void, dataFetching: boolean}) {
-    const data = useSelector((state: iData) => state.data);
+    const fs = useSelector((state: iData) => {
+        return {
+            list: state.data.fs.list,
+            free: state.data.fs.free,
+            total: state.data.fs.total
+        };
+    }, shallowEqual);
     const [filelist, setFilelist] = useState<iFilelist>([]);
     const [selected, setSelected] = useState<string>('.');
     const [path, setPath] = useState<string>('/');
     const [upFilename, setUpFilename] = useState<string>('');
     const [fileViewer, setFileViewer] = useState<boolean>(false);
     const [percentage, setPercentage] = useState<string>('');
-    const [isDir, setIsDir] = useState<boolean>(true);
     const [renaming, setRenaming] = useState<string>('');
     const [newName, setNewName] = useState<string>('');
     const [disableUploadBtn, setDisableUploadBtn] = useState<boolean>(true);
     const inputFile = useRef<HTMLInputElement>(null);
+    const stateRef = useRef({ filelist, selected, fileViewer, renaming });
 
     const style1 = 'pt-1 px-1 flex items-center justify-between cursor-pointer ';
     const style2 = 'bg-blue-200 dark:bg-cyan-950';
@@ -47,14 +53,12 @@ export default function Filesystem(props: {stopDataFetching(val: boolean): void,
     }, [path]);
 
     const openBtn = () => {
-        if(selected === '.') fileOpen({name: '.', type: 'dir'});
-        if(selected === '..') fileOpen({name: '..', type: 'dir'});
-        filelist.forEach(file => {
-            if(file.name === selected) {
-                fileOpen(file);
-            }
-        });
-    }
+        if(selected === '.') return fileOpen({ name: '.', type: 'dir' });
+        if(selected === '..') return fileOpen({ name: '..', type: 'dir' });
+
+        const targetFile = filelist.find(file => file.name === selected);
+        if(targetFile) fileOpen(targetFile);
+    };
 
     const downloadBtn = () => {
         document.getElementById(path + selected)?.click();
@@ -62,9 +66,11 @@ export default function Filesystem(props: {stopDataFetching(val: boolean): void,
 
     const rename = useCallback(() => {
         if(renaming !== newName) {
-            filelist.forEach(file => {
-                if(file.name === newName) alert(i18n.t('FileAlreadyExists').replace('XXX', newName));
-            });
+            const fileExists = filelist.some(file => file.name === newName);
+            if(fileExists) {
+                alert(i18n.t('FileAlreadyExists').replace('XXX', newName));
+                return;
+            }
 
             axios({ 
                 method: 'post',
@@ -76,36 +82,52 @@ export default function Filesystem(props: {stopDataFetching(val: boolean): void,
     }, [filelist, newName, renaming, path]);
 
     const renameBtn = useCallback(() => {
-        filelist.forEach(file => {
-            if(file.name === selected && file.type === 'file') {
-                setRenaming(file.name);
-                setNewName(file.name);
-            }
-        });
+        const targetFile = filelist.find(file => file.name === selected && file.type === 'file');
+        if(targetFile) {
+            setRenaming(targetFile.name);
+            setNewName(targetFile.name);
+        }
     }, [filelist, selected]);
 
     const deleteBtn = useCallback(() => {
-        filelist.forEach(file => {
-            if(file.name === selected && file.type === 'file') {
-                if(window.confirm(i18n.t('confirmDeletionOfTheFile').replace('XXX', path + selected))) {
-                    axios({
-                        method: 'post',
-                        url: `${hostUrl()}/esp/delete`,
-                        data: `file=${path + selected}&code=${localStorage.getItem('code') || '0'}`
-                    });
-                }
+        const targetFile = filelist.find(file => file.name === selected && file.type === 'file');
+        if(targetFile) {
+            if(window.confirm(i18n.t('confirmDeletionOfTheFile').replace('XXX', path + selected))) {
+                axios({
+                    method: 'post',
+                    url: `${hostUrl()}/esp/delete`,
+                    data: `file=${path + selected}&code=${localStorage.getItem('code') || '0'}`
+                });
             }
-        });
+        }
     }, [filelist, path, selected]);
 
-    const closeModal = () => {
+    const closeModal = useCallback(() => {
         document.querySelector('body')?.classList.remove('modal-open');
         setFileViewer(false);
-    }
+    }, []);
 
-    const handleUserKeyPress = useCallback((event: KeyboardEvent) => {
-        if(event.key === 'ArrowUp' && !fileViewer) {
-            if(selected === '..' || selected === '') setSelected('.');
+
+    useEffect(() => {
+        stateRef.current = { filelist, selected, fileViewer, renaming };
+    });
+
+    const handleUserKeyPress = (event: KeyboardEvent) => {
+        const { filelist, selected, fileViewer, renaming } = stateRef.current;
+
+        if(fileViewer) {
+            if(event.key === 'Backspace' || event.key === 'Escape') {
+                closeModal();
+            }
+            return;
+        }
+
+        if(event.key === 'ArrowUp') {
+            event.preventDefault();
+            if(selected === '..' || selected === '') {
+                setSelected('.');
+                return;
+            }
             let prev = '';
             filelist.forEach(file => {
                 if(file.name === selected) {
@@ -116,10 +138,18 @@ export default function Filesystem(props: {stopDataFetching(val: boolean): void,
             });
         }
 
-        if(event.key === 'ArrowDown' && !fileViewer) {
-            if(selected === '.' || selected === '') setSelected('..');
-            if(selected === '..') setSelected(filelist[0].name);
+        if(event.key === 'ArrowDown') {
+            event.preventDefault();
+            if(selected === '.' || selected === '') {
+                setSelected('..');
+                return;
+            }
+            if(selected === '..') {
+                setSelected(filelist[0].name);
+                return;
+            }
             let next = '';
+
             filelist.slice().reverse().forEach(file => {
                 if(file.name === selected) {
                     if(next) setSelected(next);
@@ -128,35 +158,39 @@ export default function Filesystem(props: {stopDataFetching(val: boolean): void,
             });
         }
 
-        if(event.key === 'Enter' && !fileViewer) {
-            if(renaming) rename();
+        if(event.key === 'Enter') {
+            if(renaming) {
+                rename();
+            }
             else {
-                if(selected === '.') fileOpen({name: '.', type: 'dir'});
-                if(selected === '..') fileOpen({name: '..', type: 'dir'})
-                filelist.forEach(file => {
-                    if(file.name === selected) fileOpen(file);
-                });
+                if(selected === '.') fileOpen({ name: '.', type: 'dir' });
+                else if(selected === '..') fileOpen({ name: '..', type: 'dir' });
+                else {
+                    const currentFile = filelist.find(file => file.name === selected);
+                    if(currentFile) fileOpen(currentFile);
+                }
             }
         }
 
         if(event.key === 'Backspace' || event.key === 'Escape') {
             if(renaming) {
                 if(event.key === 'Escape') setRenaming('');
-            }
-            else {
-                if(fileViewer) closeModal();
-                else fileOpen({name: '..', type: 'dir'});
-            }
+            } 
+            else fileOpen({ name: '..', type: 'dir' });
         }
 
-        if(event.key === 'F2' && !fileViewer) {
-            renameBtn();
-        }
+        if(event.key === 'F2') renameBtn();
 
-        if(event.key === 'Delete' && !fileViewer) {
-            deleteBtn();
-        }
-    }, [filelist, selected, fileViewer, renaming, fileOpen, rename, renameBtn, deleteBtn]);
+        if(event.key === 'Delete') deleteBtn();
+    };
+
+
+    useEffect(() => {
+        window.addEventListener("keydown", handleUserKeyPress);
+        return () => {
+            window.removeEventListener("keydown", handleUserKeyPress);
+        };
+    }, []);
 
     const upload = async() => {
         let formData = new FormData();
@@ -191,66 +225,69 @@ export default function Filesystem(props: {stopDataFetching(val: boolean): void,
     }
 
     useEffect(() => {
-        let list: iFilelist = [];
-        let flist = data.fs.list.split(',').map(file => {
-            return {
-                name: file.split(':')[0],
-                size: file.split(':')[1]
-            }
-        })
+        if(!fs?.list) return;
 
-        flist.forEach(file => {
-            let name = file.name.replace(new RegExp(`^${path}`), '');
-            if(file.name.includes(path)) {
-                if(name.includes('/') && !name.startsWith('/')) {
-                    let found = false;
-                    list.forEach(fl => {
-                        if(fl.name === name.split('/')[0]) found ||= true; 
-                    });
-                    if(!found) list.push({
-                        name: name.split('/')[0],
-                        type: 'dir'
+        const list: iFilelist = [];
+        const addedDirs = new Set<string>();
+        const files = fs.list.split(',');
+
+        files.forEach(fileStr => {
+            if(!fileStr) return;
+
+            const [fileName, fileSize] = fileStr.split(':');
+
+            if(fileName.startsWith(path)) {
+                const relativeName = fileName.slice(path.length);
+                const slashIndex = relativeName.indexOf('/');
+
+                if(slashIndex !== -1) {
+                    const dirName = relativeName.slice(0, slashIndex);
+
+                    if(!addedDirs.has(dirName)) {
+                        addedDirs.add(dirName);
+                        list.push({
+                            name: dirName,
+                            type: 'dir'
+                        });
+                    }
+                }
+                else if (relativeName) {
+                    list.push({
+                        name: relativeName,
+                        size: Number(fileSize) || 0,
+                        type: 'file'
                     });
                 }
-                else list.push({
-                    name: name,
-                    size: Number(file.size),
-                    type: 'file'
-                });
             }
-            return null;
         });
 
-        setFilelist(list.sort((a, b) => a.type > b.type ? 1 : -1));
-    }, [data, path]);
+        setFilelist(list.sort((a, b) => (a.type > b.type ? 1 : -1)));
+    }, [fs, path]);
 
     useEffect(() => {
         window.addEventListener("keydown", handleUserKeyPress);
         return () => {
             window.removeEventListener("keydown", handleUserKeyPress);
         };
-    }, [handleUserKeyPress]);
-
-    useEffect(() => {
-        filelist.forEach((file: iFile) => {
-            if(file.name === selected) setIsDir(file.type === 'dir');
-        });
-    }, [selected, filelist]);
+    }, []);
 
     useEffect(() => {
         setRenaming('');
     }, [selected]);
 
     useEffect(() => {
-        props.stopDataFetching(fileViewer && selected.endsWith('.json'));
-    }, [fileViewer, selected, props]);
+        if(fileViewer && selected.endsWith('.json')) {
+            props.stopDataFetching(true);
+            return;
+        }
 
-    useEffect(() => {
         if(upFilename) {
             props.stopDataFetching(true);
             if(!props.dataFetching) setDisableUploadBtn(false);
         }
-    }, [upFilename, props])
+    }, [fileViewer, selected, upFilename, props.dataFetching]);
+
+    const isDir = selected === '.' || selected === '..' || filelist.find(f => f.name === selected)?.type === 'dir';
 
     const content = <Card content={<>
         {fileViewer && <ModalFileViewer path={path}
@@ -317,7 +354,7 @@ export default function Filesystem(props: {stopDataFetching(val: boolean): void,
         <div className="mt-4 border max-w-2xl mx-auto">
             {/* Filesystem info section */}
             <div className="text-end me-1 my-1">
-                {i18n.numberToHumanSize(data.fs.free)} {i18n.t('freeOf')} {i18n.numberToHumanSize(data.fs.total)}
+                {i18n.numberToHumanSize(fs.free)} {i18n.t('freeOf')} {i18n.numberToHumanSize(fs.total)}
             </div>
             <div className="p-1 border border-gray-300 bg-gray-50 dark:bg-gray-700">
                 {path}

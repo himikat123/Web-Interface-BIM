@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState, useMemo, useCallback } from "react"; // Добавили useCallback
 import { JsonView, darkStyles, defaultStyles } from 'react-json-view-lite';
 import Modal from "../templates/modal";
 import i18n from "../i18n/main";
@@ -14,20 +14,33 @@ export function IsJsonString(str: string): boolean {
     return true;
 }
 
-export default function ModalFileViewer(props: iModalFileViewer) {
+export const ModalFileViewer = React.memo(function ModalFileViewer(props: iModalFileViewer) {
     const [fileContent, setFileContent] = useState<string>('');
     const [imgLoaded, setImgLoaded] = useState<boolean>(false);
-    const theme = window.document.documentElement.classList[0] === 'dark' ? darkStyles : defaultStyles;
+    const theme = useMemo(() => {
+        return window.document.documentElement.classList.contains('dark') ? darkStyles : defaultStyles;
+    }, []);
 
     useEffect(() => {
-        if(!props.selected.endsWith('png') && !props.selected.endsWith('jpg')) {
+        if (!props.selected.endsWith('png') && !props.selected.endsWith('jpg')) {
             fetch(`${props.path}${props.selected}?code=${localStorage.getItem('code') || '0'}`)
-            .then(res => res.text())
-            .then((result: string) => {
-                setFileContent(result)
-            });
+                .then(res => res.text())
+                .then((result: string) => {
+                    setFileContent(result);
+                });
         }
     }, [props.path, props.selected]);
+
+    const parsedJson = useMemo(() => {
+        if (props.selected.endsWith('.json') && fileContent && IsJsonString(fileContent)) {
+            return JSON.parse(fileContent);
+        }
+        return null;
+    }, [fileContent, props.selected]);
+
+    const handleShouldExpandNode = useCallback((level: number) => {
+        return level === 0;
+    }, []);
 
     return <Modal header={props.selected}
         confirmBtn={() => {}}
@@ -45,14 +58,15 @@ export default function ModalFileViewer(props: iModalFileViewer) {
                 </div>
                 : (props.selected.endsWith('.json')) 
                     ? <div className="w-full">
-                        {fileContent && IsJsonString(fileContent)
-                            ? <JsonView data={JSON.parse(fileContent)} 
-                                  shouldExpandNode={level => level === 0} 
+                        {parsedJson 
+                            ? <JsonView 
+                                  data={parsedJson} 
+                                  shouldExpandNode={handleShouldExpandNode} // <-- Используем стабильную функцию
                                   style={theme} 
-                              /> 
+                            /> 
                             : <div className="flex justify-center items-center h-24">
                                   <StepsAnimation />
-                              </div>
+                            </div>
                         }    
                     </div>
                     : (props.selected.endsWith('.html') || props.selected.endsWith('.html.gz')) 
@@ -69,4 +83,4 @@ export default function ModalFileViewer(props: iModalFileViewer) {
         </>}
         labelCancel={i18n.t('close')}
     />
-}
+});
