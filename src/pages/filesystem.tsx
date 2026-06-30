@@ -10,6 +10,7 @@ import { ModalFileViewer } from "./modalFileViewer";
 import type { iData } from "../redux/dataTypes";
 import type { iFile, iFilelist } from "../interfaces";
 import { CheckCircle, XCircle } from "@phosphor-icons/react";
+import StepsAnimation from "../atoms/stepsAnimation";
 import { ReactComponent as FolderSVG } from '../atoms/icons/folder.svg';
 import { ReactComponent as HtmlSVG } from '../atoms/icons/html.svg';
 import { ReactComponent as JsonSVG } from '../atoms/icons/json.svg';
@@ -33,8 +34,9 @@ export default function Filesystem(props: {stopDataFetching(val: boolean): void,
     const [renaming, setRenaming] = useState<string>('');
     const [newName, setNewName] = useState<string>('');
     const [disableUploadBtn, setDisableUploadBtn] = useState<boolean>(true);
+    const [isOperating, setIsOperating] = useState<boolean>(false);
     const inputFile = useRef<HTMLInputElement>(null);
-    const stateRef = useRef({ filelist, selected, fileViewer, renaming });
+    const stateRef = useRef({ filelist, selected, fileViewer, renaming, isOperating });
 
     const style1 = 'pt-1 px-1 flex items-center justify-between cursor-pointer ';
     const style2 = 'bg-blue-200 dark:bg-cyan-950';
@@ -72,6 +74,8 @@ export default function Filesystem(props: {stopDataFetching(val: boolean): void,
                 return;
             }
 
+            setIsOperating(true);
+
             axios({ 
                 method: 'post',
                 url: `${hostUrl()}/esp/rename`,
@@ -93,6 +97,9 @@ export default function Filesystem(props: {stopDataFetching(val: boolean): void,
         const targetFile = filelist.find(file => file.name === selected && file.type === 'file');
         if(targetFile) {
             if(window.confirm(i18n.t('confirmDeletionOfTheFile').replace('XXX', path + selected))) {
+
+                setIsOperating(true);
+
                 axios({
                     method: 'post',
                     url: `${hostUrl()}/esp/delete`,
@@ -107,13 +114,14 @@ export default function Filesystem(props: {stopDataFetching(val: boolean): void,
         setFileViewer(false);
     }, []);
 
-
     useEffect(() => {
-        stateRef.current = { filelist, selected, fileViewer, renaming };
+        stateRef.current = { filelist, selected, fileViewer, renaming, isOperating };
     });
 
     const handleUserKeyPress = (event: KeyboardEvent) => {
         const { filelist, selected, fileViewer, renaming } = stateRef.current;
+
+        if(fileViewer || isOperating) return;
 
         if(fileViewer) {
             if(event.key === 'Backspace' || event.key === 'Escape') {
@@ -205,6 +213,7 @@ export default function Filesystem(props: {stopDataFetching(val: boolean): void,
             const percentage = Math.round((100 * event.loaded) / event.total);
             setPercentage(String(percentage) + '%');
             if(percentage === 100) {
+                setIsOperating(true);
                 setUpFilename('');
                 setDisableUploadBtn(true);
                 if(inputFile.current) inputFile.current.value = '';
@@ -226,6 +235,8 @@ export default function Filesystem(props: {stopDataFetching(val: boolean): void,
 
     useEffect(() => {
         if(!fs?.list) return;
+
+        setIsOperating(false); 
 
         const list: iFilelist = [];
         const addedDirs = new Set<string>();
@@ -366,7 +377,13 @@ export default function Filesystem(props: {stopDataFetching(val: boolean): void,
                 <div>{i18n.t('size')}</div>
             </div>
 
-            <div className="select-none">
+            <div className="select-none relative min-h-[200px]">
+                {isOperating && <>
+                    <div className="absolute inset-0 flex justify-center items-center bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm z-10">
+                        <StepsAnimation />
+                    </div>
+                </>}
+
                 <div onClick={() => setSelected('.')}
                     onDoubleClick={() => fileOpen({name: '.', type: 'dir'})}
                     className={style1 + (selected === "." ? style2 : style3)}
