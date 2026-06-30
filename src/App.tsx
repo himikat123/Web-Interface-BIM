@@ -104,46 +104,48 @@ function App() {
             {configState === 'error' ? <NoConfig /> :
                 dataState === 'error' ? <NoData /> :
             (configState === 'default' || dataState === 'default') && <Loading />}
-            
-            {configState === 'ok' && dataState === 'ok' && <Routes>
-                <Route path={'/'}               element={ <Status /> } />
-                <Route path={'/connect'}        element={ <Connect /> } />
-                <Route path={'/accesspoint'}    element={ <AccessPoint /> } />
-                <Route path={'/sensors'}        element={ <Sensors /> } />
-                <Route path={'/wsensors'}       element={ <WSensors /> } />
-                <Route path={'/weather'}        element={ <Weather /> } />
-                <Route path={'/clock'}          element={ <Clock /> } />
-                <Route path={'/alarm'}          element={ <Alarm /> } />
-                <Route path={'/display'}        element={ <Display1 /> } />
-                <Route path={'/display1'}       element={ <Display1 /> } />
-                <Route path={'/display2'}       element={ <Display2 /> } />
-                <Route path={'/sleep'}          element={ <Sleep /> } />
-                <Route path={'/sound'}          element={ <Sound /> } />
-                <Route path={'/comfort'}        element={ <Comfort /> } />
-                <Route path={'/history'}        element={ <History /> } />
-                <Route path={'/receive'}        element={ <ReceiveThingspeak /> } />
-                <Route path={'/sendthingspeak'} element={ <SendThingspeak /> } />
-                <Route path={'/sendnarodmon'}   element={ <SendNarodmon /> } />
-                <Route path={'/sendmqtt'}       element={ <SendMqtt /> } />
-                <Route path={'/language'}       element={ <Language /> } />
-                <Route path={'/backup'}         element={ <Backup /> } />
-                <Route path={'/default'}        element={ <Default /> } /> 
-                <Route path={'/username'}       element={ <Username /> } />
-                <Route path={'/userpass'}       element={ <Password /> } />
-                <Route path={'/login'}          element={ <Login />} />
-                <Route path={'/*'}              element={ <PageNotFound /> } />
-                <Route path={'/filesystem'}     element={ <Filesystem
-                    dataFetching={dataFetching} 
-                    stopDataFetching={val => setStopDataFetching(val)} 
-                /> } />
-            </Routes>}
 
-            {!data.wsConnected && <>
-                <div className="fixed bottom-4 left-4 px-4 py-2 border-2 border-red-500 rounded-md bg-red-100">
-                    <span className="animate-pulse text-red-500">
-                        {i18n.t('networkError')}
-                    </span>
-                </div>
+            {configState === 'ok' && dataState === 'ok' && <>
+                <Routes>
+                    <Route path={'/'}               element={ <Status /> } />
+                    <Route path={'/connect'}        element={ <Connect /> } />
+                    <Route path={'/accesspoint'}    element={ <AccessPoint /> } />
+                    <Route path={'/sensors'}        element={ <Sensors /> } />
+                    <Route path={'/wsensors'}       element={ <WSensors /> } />
+                    <Route path={'/weather'}        element={ <Weather /> } />
+                    <Route path={'/clock'}          element={ <Clock /> } />
+                    <Route path={'/alarm'}          element={ <Alarm /> } />
+                    <Route path={'/display'}        element={ <Display1 /> } />
+                    <Route path={'/display1'}       element={ <Display1 /> } />
+                    <Route path={'/display2'}       element={ <Display2 /> } />
+                    <Route path={'/sleep'}          element={ <Sleep /> } />
+                    <Route path={'/sound'}          element={ <Sound /> } />
+                    <Route path={'/comfort'}        element={ <Comfort /> } />
+                    <Route path={'/history'}        element={ <History /> } />
+                    <Route path={'/receive'}        element={ <ReceiveThingspeak /> } />
+                    <Route path={'/sendthingspeak'} element={ <SendThingspeak /> } />
+                    <Route path={'/sendnarodmon'}   element={ <SendNarodmon /> } />
+                    <Route path={'/sendmqtt'}       element={ <SendMqtt /> } />
+                    <Route path={'/language'}       element={ <Language /> } />
+                    <Route path={'/backup'}         element={ <Backup /> } />
+                    <Route path={'/default'}        element={ <Default /> } /> 
+                    <Route path={'/username'}       element={ <Username /> } />
+                    <Route path={'/userpass'}       element={ <Password /> } />
+                    <Route path={'/login'}          element={ <Login />} />
+                    <Route path={'/*'}              element={ <PageNotFound /> } />
+                    <Route path={'/filesystem'}     element={ <Filesystem
+                        dataFetching={dataFetching} 
+                        stopDataFetching={val => setStopDataFetching(val)} 
+                    /> } />
+                </Routes>
+
+                {!data.wsConnected && <>
+                    <div className="fixed bottom-4 left-4 px-4 py-2 border-2 border-red-500 rounded-md bg-red-100">
+                        <span className="animate-pulse text-red-500">
+                            {i18n.t('networkError')}
+                        </span>
+                    </div>
+                </>}
             </>}
         </div>
     );
