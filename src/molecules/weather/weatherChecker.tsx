@@ -8,6 +8,17 @@ import type { iConfig } from "../../redux/configTypes";
 import type { iWeather } from "../../interfaces";
 import "./weatherChecker.scss";
 
+interface IПGismeteoData {
+  name: string;
+  countryName: string;
+  t: number;
+  hum: number;
+  p: number;
+  ws: number;
+  wd: number;
+  descr: string;
+}
+
 export default function WeatherChecker() {
     const [weatherColor, setWeatherColor] = useState<string>('text-blue-700 dark:text-blue-400');
     const [loading, setLoading] = useState<boolean>(false);
@@ -77,66 +88,118 @@ export default function WeatherChecker() {
             current += '&current=temperature_2m,relative_humidity_2m,pressure_msl,wind_speed_10m,wind_direction_10m,weather_code';
             current += '&wind_speed_unit=ms&timeformat=unixtime&timezone=auto';
         }
+
+        // from gismeteo.ru
+        if(config.weather.provider === 3) {
+            current = 'https://services.gismeteo.net/inform-service/inf_chrome/forecast/?lang=ru&city=';
+            current += String(config.weather.cityid);
+        }
         console.log(current);
-        fetch(current)
-        .then(response => response.json())
-        .then((json: iWeather) => {
-            setLoading(false);
-            try {
-                // get data from openweathermap.org
-                if(config.weather.provider === 0) {
-                    setWeatherColor('text-blue-700 dark:text-blue-400');
-                    setTemp(String(json.main.temp) + "°C");
-                    setHum(String(json.main.humidity) + "%");
-                    setPres(String(Math.round(json.main.pressure * 0.75)) + i18n.t('units.mm'));
-                    setWind(String(json.wind.speed) + i18n.t('units.mps'));
-                    setWindDir(json.wind.deg);
-                    setDescript(json.weather[0].description);
-                    setCity(json.name + ', ' + json.sys.country);
-                    setLat(String(json.coord.lat));
-                    setLon(String(json.coord.lon));
+
+        if(config.weather.provider <= 2) {
+            fetch(current)
+            .then(response => response.json())
+            .then((json: iWeather) => {
+                setLoading(false);
+                try {
+                    // get data from openweathermap.org
+                    if(config.weather.provider === 0) {
+                        setWeatherColor('text-blue-700 dark:text-blue-400');
+                        setTemp(String(json.main.temp) + "°C");
+                        setHum(String(json.main.humidity) + "%");
+                        setPres(String(Math.round(json.main.pressure * 0.75)) + i18n.t('units.mm'));
+                        setWind(String(json.wind.speed) + i18n.t('units.mps'));
+                        setWindDir(json.wind.deg);
+                        setDescript(json.weather[0].description);
+                        setCity(json.name + ', ' + json.sys.country);
+                        setLat(String(json.coord.lat));
+                        setLon(String(json.coord.lon));
+                    }
+                    // get data from weatherbit.io
+                    if(config.weather.provider === 1) {
+                        setWeatherColor('text-blue-700 dark:text-blue-400');
+                        setTemp(String(json.data[0].temp) + "°C");
+                        setHum(String(Math.round(json.data[0].rh)) + "%");
+                        setPres(String(Math.round(json.data[0].pres * 0.75)) + i18n.t('units.mm'));
+                        setWind((json.data[0].wind_spd).toFixed(1) + i18n.t('units.mps'));
+                        setWindDir(json.data[0].wind_dir);
+                        setDescript(json.data[0].weather.description);
+                        setCity(json.data[0].city_name + ', ' + json.data[0].country_code);
+                        setLat(String(json.data[0].lat));
+                        setLon(String(json.data[0].lon));
+                    }
+                    // get data from open-meteo.com
+                    if(config.weather.provider === 2) {
+                        setWeatherColor('text-blue-700 dark:text-blue-400');
+                        setTemp(String(json.current.temperature_2m) + "°C");
+                        setHum(String(Math.round(json.current.relative_humidity_2m)) + "%");
+                        setPres(String(Math.round(json.current.pressure_msl * 0.75)) + i18n.t('units.mm'));
+                        setWind((json.current.wind_speed_10m).toFixed(1) + i18n.t('units.mps'));
+                        setWindDir(json.current.wind_direction_10m);
+                        setDescript(openMeteoCode(json.current.weather_code));
+                        setCity(json.timezone);
+                        setLat(String(json.latitude));
+                        setLon(String(json.longitude));
+                    }
                 }
-                // get data from weatherbit.io
-                if(config.weather.provider === 1) {
-                    setWeatherColor('text-blue-700 dark:text-blue-400');
-                    setTemp(String(json.data[0].temp) + "°C");
-                    setHum(String(Math.round(json.data[0].rh)) + "%");
-                    setPres(String(Math.round(json.data[0].pres * 0.75)) + i18n.t('units.mm'));
-                    setWind((json.data[0].wind_spd).toFixed(1) + i18n.t('units.mps'));
-                    setWindDir(json.data[0].wind_dir);
-                    setDescript(json.data[0].weather.description);
-                    setCity(json.data[0].city_name + ', ' + json.data[0].country_code);
-                    setLat(String(json.data[0].lat));
-                    setLon(String(json.data[0].lon));
+                catch(e) {
+                    setWeatherColor('text-red-700 dark:text-red-400');
+                    setTemp('--');
+                    setHum('--');
+                    setPres('--');
+                    setWind('--');
+                    setWindDir(404);
+                    setDescript(i18n.t('weatherCheckError'));
+                    setCity('--');
+                    setLat('--');
+                    setLon('--');
                 }
-                // get data from open-meteo.com
-                if(config.weather.provider === 2) {
+            })
+            .catch(err => console.error(err));
+        }
+        else {
+            fetch(current)
+            .then((response: Response): Promise<string> => response.text())
+            .then(xmlString => {
+                setLoading(false);
+                try {
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(xmlString, "text/xml");
+
+                    const locationNode = xmlDoc.getElementsByTagName("location")[0];
+                    const valuesNode = xmlDoc.getElementsByTagName("values")[0];
+
+                    if(!locationNode || !valuesNode) throw new Error("Неверная структура XML");
+
                     setWeatherColor('text-blue-700 dark:text-blue-400');
-                    setTemp(String(json.current.temperature_2m) + "°C");
-                    setHum(String(Math.round(json.current.relative_humidity_2m)) + "%");
-                    setPres(String(Math.round(json.current.pressure_msl * 0.75)) + i18n.t('units.mm'));
-                    setWind((json.current.wind_speed_10m).toFixed(1) + i18n.t('units.mps'));
-                    setWindDir(json.current.wind_direction_10m);
-                    setDescript(openMeteoCode(json.current.weather_code));
-                    setCity(json.timezone);
-                    setLat(String(json.latitude));
-                    setLon(String(json.longitude));
+                    setTemp((valuesNode.getAttribute("t") || '--') + "°C");
+                    setHum((valuesNode.getAttribute("hum") || '--') + "%");
+                    setPres(String(Math.round(Number(valuesNode.getAttribute("p") || '0'))) + i18n.t('units.mm'));
+                    setWind(Number(valuesNode.getAttribute("ws") || '0').toFixed(1) + i18n.t('units.mps'));
+                    const WIND_DEGREES = [0, 0, 45, 90, 135, 180, 225, 270, 315];
+                    const wdCode = Number(valuesNode.getAttribute("wd") || 0);
+                    setWindDir(WIND_DEGREES[wdCode] ?? 0);
+                    setDescript(valuesNode.getAttribute("descr") || "");
+                    setCity(locationNode.getAttribute("name") || "");
+                    setLat(locationNode.getAttribute("lat") || "");
+                    setLon(locationNode.getAttribute("lng") || "");
                 }
-            }
-            catch(e) {
-                setWeatherColor('text-red-700 dark:text-red-400');
-                setTemp('--');
-                setHum('--');
-                setPres('--');
-                setWind('--');
-                setWindDir(404);
-                setDescript(i18n.t('weatherCheckError'));
-                setCity('--');
-                setLat('--');
-                setLon('--');
-            }
-        })
-        .catch(err => console.error(err));
+                catch (error) {
+                    console.error("Ошибка парсинга XML:", error);
+                    setWeatherColor('text-red-700 dark:text-red-400');
+                    setTemp('--');
+                    setHum('--');
+                    setPres('--');
+                    setWind('--');
+                    setWindDir(404);
+                    setDescript(i18n.t('weatherCheckError'));
+                    setCity('--');
+                    setLat('--');
+                    setLon('--');
+                }
+            });
+
+        }
     }
 
     return <>

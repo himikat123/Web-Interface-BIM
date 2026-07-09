@@ -17,11 +17,17 @@ export default function Weather() {
     const dispatch = useDispatch();
     const config = useSelector((state: iConfig) => state.config);
     const [disabled, setDisabled] = useState([false, false, false]);
-    const providers = ['openweathermap.org', 'weatherbit.io', 'open-meteo.com'];
-    const providersDisabled = device() === 'WeatherMonitorBIM' ? [1, 0, 0] : [0, 0, 0];
+    const providers = ['openweathermap.org', 'weatherbit.io', 'open-meteo.com', 'gismeteo.ru'];
+    const providersDisabled = device() === 'WeatherMonitorBIM' ? [1, 0, 0, 0] : [0, 0, 0, 0];
 
     useEffect(() => {
-        setDisabled([config.weather.provider > 1, config.weather.provider > 0, false]);
+        switch(config.weather.provider) {
+            case 0: setDisabled([false, false, false]); dispatch(cf.weatherCitySearchChange(0)); break;
+            case 1: setDisabled([false, true, false]); dispatch(cf.weatherCitySearchChange(0)); break;
+            case 2: setDisabled([true, true, false]); dispatch(cf.weatherCitySearchChange(2)); break;
+            case 3: setDisabled([true, false, true]); dispatch(cf.weatherCitySearchChange(1)); break;
+            default: setDisabled([true, true, true]); dispatch(cf.weatherCitySearchChange(0)); break;
+        }
     }, [config.weather.provider]);
 
     const content = <>
