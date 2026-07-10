@@ -112,7 +112,7 @@
     "cityName": "City name",
     "city": "City",
     "cityIdNumber": "City ID",
-    "cityIdSearchProgram": "City ID search program",
+    "cityIdSearchProgram": "Find city ID",
     "latitude": "Latitude",
     "longitude": "Longitude",
     "detectCoordinatesAutomatically": "Detect coordinates automatically",

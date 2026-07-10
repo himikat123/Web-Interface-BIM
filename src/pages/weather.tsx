@@ -81,7 +81,7 @@ export default function Weather() {
                 />
 
                 <div className="my-8" />
-                <div className="text-center">
+                {config.weather.provider === 0 && <div className="text-center">
                     <Button className="bg-green-600 hover:bg-green-700 text-text_dark"
                         label={i18n.t('cityIdSearchProgram')}
                         onClick={() => window.open(
@@ -90,7 +90,7 @@ export default function Weather() {
                             "noreferrer"
                         )}
                     />
-                </div>
+                </div>}
             </div>}
 
             {config.weather.citysearch === 2 && <div className="my-8">

@@ -112,7 +112,7 @@
     "cityName": "Име на града",
     "city": "Град",
     "cityIdNumber": "ID на града",
-    "cityIdSearchProgram": "Програма за търсене на ID на града",
+    "cityIdSearchProgram": "Намерете ID на града",
     "latitude": "Географска ширина",
     "longitude": "Географска дължина",
     "detectCoordinatesAutomatically": "Автоматично определяне на координатите",

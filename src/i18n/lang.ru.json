@@ -112,7 +112,7 @@
     "cityName": "Название города",
     "city": "Город",
     "cityIdNumber": "ID номер города",
-    "cityIdSearchProgram": "Программа поиска ID номера города",
+    "cityIdSearchProgram": "Найти ID города",
     "latitude": "Широта",
     "longitude": "Долгота",
     "detectCoordinatesAutomatically": "Определить координаты автоматически",

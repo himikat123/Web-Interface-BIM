@@ -198,7 +198,6 @@ export default function WeatherChecker() {
                     setLon('--');
                 }
             });
-
         }
     }
 
@@ -229,9 +228,9 @@ export default function WeatherChecker() {
                 </tr>
                 <tr>
                     <td className="text-end">
-                        {config.weather.provider < 2 
-                            ? i18n.t('city')
-                            : i18n.t('timezone')
+                        {config.weather.provider === 2 
+                            ? i18n.t('timezone')
+                            : i18n.t('city')
                         }:
                     </td>
                     <td className={"ps-4 " + weatherColor}>{city}</td>  

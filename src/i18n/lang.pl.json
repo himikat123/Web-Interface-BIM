@@ -112,7 +112,7 @@
     "cityName": "Nazwa miasta",
     "city": "Miasto",
     "cityIdNumber": "Numer identyfikacyjny miasta",
-    "cityIdSearchProgram": "Program wyszukiwania numeru identyfikacyjnego miasta",
+    "cityIdSearchProgram": "Znajdź ID miasta",
     "latitude": "Szerokość geograficzna",
     "longitude": "Długość geograficzna",
     "detectCoordinatesAutomatically": "Automatyczne wykrywanie współrzędnych",
