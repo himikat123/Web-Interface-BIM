@@ -45,7 +45,7 @@ const data = (cookieCode) => {
     
     const utcHours = dt.getUTCHours();
     const targetHours = utcHours - (utcHours % 3);
-    dt.setUTCHours(targetHours, 0, 0, 0);
+    dt.setUTCHours(targetHours /*0*/, 0, 0, 0);
     const baseDateSec = Math.floor(dt.getTime() / 1000);
 
     const codeFile = path.join(__dirname, '..', 'public', 'code.txt');
@@ -210,13 +210,13 @@ const data = (cookieCode) => {
                 icon: createArray(5, () => mainIcons[Math.round(random(0, 8))]),
             },
             hourly: {
-                date: createArray(40, (_, i) => baseDateSec + (i * 10800)),
-                icon: createArray(40, () => mainIcons[Math.round(random(0, 8))]),
-                temp: createArray(40, () => random(-25, 25)),
-                pres: createArray(40, () => random(950, 1060)),
-                windSpeed: createArray(40, () => random(1, 17)),
-                windDir: createArray(40, () => random(0, 360)),
-                prec: createArray(40, () => Math.round(random(0, 100)))
+                date: createArray(40 /*16*/, (_, i) => baseDateSec + (i * 10800)),
+                icon: createArray(40 /*16*/, () => mainIcons[Math.round(random(0, 8))]),
+                temp: createArray(40 /*16*/, () => random(-25, 25)),
+                pres: createArray(40 /*16*/, () => random(950, 1060)),
+                windSpeed: createArray(40 /*16*/, () => random(1, 17)),
+                windDir: createArray(40 /*16*/, () => random(0, 360)),
+                prec: createArray(40 /*16*/, () => Math.round(random(0, 100)) / 10)
             }
         },
         thing: {

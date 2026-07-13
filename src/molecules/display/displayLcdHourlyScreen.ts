@@ -31,7 +31,7 @@ export function displayLcdHourlyScreen(
                 weather.hourly?.windDir, weather.hourly?.prec, i, shift, 'hourly', localPres, config
             );
         }
-        lcdForwardButton(ctx, dispModel, shift < 32);
+        lcdForwardButton(ctx, dispModel, shift < (config.weather.provider === 3 ? 8 : 32));
         lcdBackButton(ctx, dispModel, shift > 0);
     }
 

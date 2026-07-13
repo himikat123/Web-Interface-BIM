@@ -21,7 +21,7 @@ export default function displayLcdHourlyColumn(
     const color = lcdColors();
     const s = num + shift;
     let c = 48, x = 42, y1 = 110, y2 = 20, y3 = 22, y4 = 48, y5 = 23, 
-        y6 = 18, w = 50, iw = 40, f1 = 16, f2 = 12, f3 = 24, f4 = 14;
+        y6 = 18, w = 50, iw = 40, f1 = 16, f2 = 12, f3 = 24, f4 = 13;
     switch(dispModel) {
         case D.NX4827K043: 
             c = 48; x = 42; y1 = 90; y2 = 16; y3 = 16; y4 = 40; y5 = 24; 
@@ -128,8 +128,8 @@ export default function displayLcdHourlyColumn(
 
         drawScaledImage(ctx, symb.hum(), x + 2, y, f4 * 0.8, f4);
         let pr = precs?.[s]?.toString() ?? '0';
-        if(config.weather.provider === 0) pr += (pr === '0' ? i18n.t('units.mm') : '');
         if(config.weather.provider === 2) pr += '%';
+        else pr += (pr === '0' ? i18n.t('units.mm') : '');
         printText(ctx, x + f4, y + 1, w - f4 * 1.5, f4, pr, f4, 'center', color.TEXT, color.BG);
     }
 }

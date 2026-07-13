@@ -190,7 +190,8 @@ export default function DisplayViewLCD() {
                 if(page === 'calendar') setCalendarShift(calendarShift + 1);
                 if(page === 'hourly') {
                     let shift = hourlyShift + 4;
-                    if(shift > 32) shift = 32;
+                    const shiftMax = config.weather.provider === 3 ? 8 : 32;
+                    if(shift > shiftMax) shift = shiftMax;
                     setHourlyShift(shift);      
                 }
                 if(page === 'historyIn') {
@@ -209,18 +210,29 @@ export default function DisplayViewLCD() {
             const hourlyCoords = coords.hourlyForecast(model);
             if(y > hourlyCoords.y && page === 'main' && model !== D.NX4832T035 && config.weather.provider !== 1) {
                 setHourlyState(undefined);
+                let pageChange = false;
                 let dayLinks = [];
                 for(let i=0; i<40; i++) {
                     if(moment.unix(hourly?.date[i] ?? 0).utc().hour() === 0) {
                         if(i !== 0) dayLinks.push(i);
                     }
                 }
-                if(x < hourlyCoords.day1) setHourlyShift(0);
-                if(x > hourlyCoords.day1 && x < hourlyCoords.day2) setHourlyShift(dayLinks[0]);
-                if(x > hourlyCoords.day2 && x < hourlyCoords.day3) setHourlyShift(dayLinks[1]);
-                if(x > hourlyCoords.day3 && x < hourlyCoords.day4) setHourlyShift(dayLinks[2]);
-                if(x > hourlyCoords.day4) setHourlyShift(dayLinks[3]); console.log(dayLinks)
-                setPage('hourly');
+                if(x < hourlyCoords.day1) {
+                    setHourlyShift(0);
+                    pageChange = true;
+                }
+                if(x > hourlyCoords.day1 && x < hourlyCoords.day2) {
+                    setHourlyShift(dayLinks[0]);
+                    pageChange = true;
+                }
+                if(config.weather.provider !== 3) {
+                    if(x > hourlyCoords.day2 && x < hourlyCoords.day3) setHourlyShift(dayLinks[1]);
+                    if(x > hourlyCoords.day3 && x < hourlyCoords.day4) setHourlyShift(dayLinks[2]);
+                    if(x > hourlyCoords.day4) setHourlyShift(dayLinks[3]);
+                    pageChange = true;
+                } 
+                //console.log(dayLinks)
+                if(pageChange) setPage('hourly');
             }
 
             /* history inside */
