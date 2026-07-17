@@ -17,7 +17,7 @@ export default function lcdShowWindSpeed(
         const units = i18n.t('units.mps');
         let x = 162, y = 195, w = 69, h = 24, f = 24; // NX4832K(T)035
         switch(dispModel) {
-            case D.NX4827K043: x = 150; y = 156; w = 69; h = 24; f = 22; break;
+            case D.NX4827K043: x = 150; y = 157; w = 69; h = 24; f = 20; break;
             case D.ILI9341: x = 93; y = 146; w = 40; h = 16; f = 14; break;
         }
 

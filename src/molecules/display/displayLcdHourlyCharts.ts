@@ -10,7 +10,7 @@ export default function displayLcdHourlyCharts(ctx: CanvasRenderingContext2D,
 
     let x = 48, gw = 37, gh = 10, gm = 10, step = 48, offset = 8; // NX4832K(T)035
     switch(dispModel) {
-        case D.NX4827K043: x = 56; gw = 37; gh = 9; gm = 10; step = 48; offset = 12; break;
+        case D.NX4827K043: x = 52; gw = 38; gh = type === 'hourly' ? 9 : 11; gm = 10; step = 48; offset = 14; break;
         case D.ILI9341: x = 42; gw = 31; gh = 10; gm = 8; step = 32; offset = 8; break;
     }
 

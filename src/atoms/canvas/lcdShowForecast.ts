@@ -34,9 +34,9 @@ export default function lcdShowForecast(
     switch(dispModel) {
         case D.NX4827K043:
             ix = num * 96 + 4; iy = 208; iw = 40; 
-            wx = num * 96 + 25; wy = 185; ww = 45; wh = 24; wf = 24;
-            tx = num * 96 + 46; ty1 = 212; ty2 = 230; tw = 48; th = 20; tf = 16; 
-            sx = num * 96 + 24; sy = 252; sw = 50; sh = 16; sf = 16;
+            wx = num * 96 + 25; wy = 185; ww = 45; wh = 24; wf = 22;
+            tx = num * 96 + 46; ty1 = 212; ty2 = 230; tw = 48; th = 20; tf = 14; 
+            sx = num * 96 + 24; sy = 252; sw = 50; sh = 16; sf = 14;
             break;
         case D.ILI9341: 
             ix = num * 106 + 7; iy = 183; iw = 40; 

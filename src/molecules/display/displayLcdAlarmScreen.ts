@@ -17,7 +17,7 @@ export function displayLcdAlarmScreen(ctx: CanvasRenderingContext2D,
         cb1 = 30, wy = 68, wx1 = 4, wx2 = 42, wx3 = 80, cb2 = 10, wg = 14, cs1 = 6, cs2 = 16; 
     switch(dispModel) {
         case D.NX4827K043: 
-            xs = 10; ws = 420; bs = 105; nxs = 11; nys = 5; tys = 22; wys = 74; f1 = 16; f2 = 24; 
+            xs = 10; ws = 420; bs = 105; nxs = 11; nys = 5; tys = 22; wys = 74; f1 = 14; f2 = 22; 
             cb1 = 30; wy = 56; wx1 = 4; wx2 = 42; wx3 = 80; cb2 = 10; wg = 14; cs1 = 6; cs2 = 16;
             break;
         case D.ILI9341: 

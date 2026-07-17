@@ -13,7 +13,7 @@ export default function lcdShowWeekday(
         if(weekDay.length === 2) {
             let x = 208, y = 0, w = 64, h = 48, f = 44; // NX4832K(T)035
             switch(dispModel) {
-                case D.NX4827K043: x = 208; y = 0; w = 64; h = 42; f = 40; break;
+                case D.NX4827K043: x = 208; y = 4; w = 64; h = 36; f = 34; break;
                 case D.ILI9341: x = 146; y = 6; w = 40; h = 20; f = 21; break;
             } 
             printText(ctx, x, y, w, h, weekDay, f, 'left', color, bgColor);

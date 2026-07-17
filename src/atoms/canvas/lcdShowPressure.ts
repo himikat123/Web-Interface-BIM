@@ -32,7 +32,7 @@ export default function lcdShowPressure(
 
         let x = 373, y = u1000 ? 163 : 171, w = 103, h = 27, f = u1000 ? 32 : 24;
         switch(dispModel) {
-            case D.NX4827K043: x = 375; y = u1000 ? 127 : 133; w = 106; h = 26; f = u1000 ? 32 : 24; break;
+            case D.NX4827K043: x = 375; y = u1000 ? 129 : 133; w = 106; h = 26; f = u1000 ? 27 : 24; break;
             case D.ILI9341: x = 250; y = 122; w = 70; h = 16; f = 18; break;
         }
 

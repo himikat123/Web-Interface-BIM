@@ -26,7 +26,7 @@ export function lcdShowTemperatureInside(
     if(temp !== prevTemp) {
         let x = 258, y = 68, w = 101, h = 38, f = 42; // NX4832K(T)035
         switch(dispModel) {
-            case D.NX4827K043: x = 252; y = 54; w = 101; h = 36; f = 38; break;
+            case D.NX4827K043: x = 252; y = 57; w = 101; h = 34; f = 34; break;
             case D.ILI9341: x = 173; y = 53; w = 70; h = 26; f = 29; break;
         }
         showTemperature(ctx, temp, x, y, w, h, f, color, bgColor);
@@ -43,7 +43,7 @@ export function lcdShowTemperatureOutside(
     if(temp !== prevTemp) {
         let x = 112, y = 154, w = 107, h = 44, f = 42, xi = 99, yi = 140, wi = 13, hi = 48; // NX4832K(T)035
         switch(dispModel) {
-            case D.NX4827K043: x = 106; y = 122; w = 106; h = 36; f = 38; xi = 84; yi = 112; wi = 13; hi = 40; break;
+            case D.NX4827K043: x = 106; y = 124; w = 106; h = 34; f = 34; xi = 84; yi = 112; wi = 13; hi = 40; break;
             case D.ILI9341: x = 71; y = 113; w = 70; h = 26; f = 29; xi = 61; yi = 104; wi = 9; hi = 33; break;
         }
 

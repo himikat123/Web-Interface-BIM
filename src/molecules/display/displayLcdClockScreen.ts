@@ -115,7 +115,7 @@ export function displayLcdClockScreen(
         else { // Weekday and date
             let x1 = 48, y1 = 10, y2 = 270, w1 = 384, h = 49, f = 48; // NX4832K(T)035
             switch(dispModel) {
-                case D.NX4827K043: x1 = 48; y1 = 12; y2 = 232; w1 = 384; h = 40; f = 40; break;
+                case D.NX4827K043: x1 = 48; y1 = 2; y2 = 238; w1 = 384; h = 40; f = 36; break;
                 case D.ILI9341: x1 = 30; y1 = 8; y2 = 200; w1 = 260; h = 30; f = 29; break;
             }
             printText(ctx, x1, y1, w1, h, weekday, f, 'center', color.WEEKDAY, color.BG);

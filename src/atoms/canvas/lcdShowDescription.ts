@@ -12,7 +12,7 @@ export default function lcdShowDescription(
 
     let x = 97, y = 110, w = 383, h = 32, f = 32; // NX4832K(T)035
     switch(dispModel) {
-        case D.NX4827K043: x = 97; y = 93; w = 383; h = 25; f = 24; break;
+        case D.NX4827K043: x = 97; y = 93; w = 383; h = 22; f = 20; break;
         case D.ILI9341: x = 0; y = 84; w = 319; h = 20; f = 21; break;
     }
 

@@ -31,7 +31,7 @@ export default function lcdShowUpdTime(
         if(device() === 'WeatherMonitorBIM32') {
             let x = 255, y = 200, w = 180, h = 18, f = 16, c = 420; // NX4832K(T)035
             switch(dispModel) {
-                case D.NX4827K043: x = 252; y = 162; w = 180; h = 18; f = 16; c = 418; break;
+                case D.NX4827K043: x = 252; y = 162; w = 180; h = 18; f = 14; c = 418; break;
                 case D.ILI9341: x = 140; y = 146; w = 146; h = 16; f = 14; c = 270; break;
             }
             printText(ctx, x, y, w, h, upd, f, 'right', color, bgColor);

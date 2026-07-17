@@ -21,7 +21,7 @@ export function lcdShowHumidityInside(
     if(hum !== prevHum) {
         let x = 398, y = 76, w = 77, h = 30, f = 30; // NX4832K(T)035
         switch(dispModel) {
-            case D.NX4827K043: x = 385; y = 58; w = 80; h = 30; f = 32; break;
+            case D.NX4827K043: x = 385; y = 63; w = 80; h = 26; f = 27; break;
             case D.ILI9341: x = 264; y = 58; w = 58; h = 20; f = 21; break;
         }
         showHumidity(ctx, hum, x, y, w, h, f, color, bgColor);
@@ -37,7 +37,7 @@ export function lcdShowHumidityOutside(
     if(hum !== prevHum) {
         let x = 260, y = 163, w = 60, h = 30, f = 30; // NX4832K(T)035
         switch(dispModel) {
-            case D.NX4827K043: x = 250; y = 125; w = 80; h = 32; f = 32; break;
+            case D.NX4827K043: x = 250; y = 129; w = 80; h = 26; f = 27; break;
             case D.ILI9341: x = 164; y = 119; w = 58; h = 20; f = 21; break;
         }
         showHumidity(ctx, hum, x, y, w, h, f, color, bgColor, dispModel === D.NX4832K035 || dispModel === D.NX4832T035);

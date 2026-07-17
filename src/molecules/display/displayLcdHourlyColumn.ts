@@ -20,19 +20,19 @@ export default function displayLcdHourlyColumn(
     dates = dates === undefined ? Array(24).fill(0) : dates;
     const color = lcdColors();
     const s = num + shift;
-    let c = 48, x = 42, y1 = 110, y2 = 20, y3 = 22, y4 = 48, y5 = 23, 
-        y6 = 18, w = 50, iw = 40, f1 = 16, f2 = 12, f3 = 24, f4 = 13;
+    let c = 48, x = 42, y1 = 110, y2 = 20, y3 = 22, y4 = 48, y5 = 23, y6 = 18, 
+        yi = 0, w = 50, iw = 40, f1 = 16, f2 = 12, f3 = 24, f4 = 13, wi = 13;
     switch(dispModel) {
         case D.NX4827K043: 
-            c = 48; x = 42; y1 = 90; y2 = 16; y3 = 16; y4 = 40; y5 = 24; 
-            y6 = 16; w = 50; iw = 40; f1 = 16; f2 = 12; f3 = 24; f4 = 14;
+            c = 48; x = 42; y1 = type === 'hourly' ? 90 : 110; y2 = 16; y3 = 16; y4 = 46; y5 = 24; 
+            y6 = 16; yi = -3; w = 50; iw = 40; f1 = 14; f2 = 12; f3 = 22; f4 = 11; wi = 16;
             break;
         case D.ILI9341: 
             c = 32; x = 30; y1 = 86; y2 = 16; y3 = 14; y4 = 40; y5 = 20; 
-            y6 = 14; w = 36; iw = 30; f1 = 11; f2 = 8; f3 = 14; f4 = 9;
+            y6 = 14; yi = 0; w = 36; iw = 30; f1 = 11; f2 = 8; f3 = 14; f4 = 9; wi = 9;
             break;
     }
-    const gap = (type === 'historyIn' || type === 'historyOut') ? 4 : 0;
+    const gap = (type === 'historyIn' || type === 'historyOut') ? 8 : 0;
     let y = y1 + gap;
     x = c * num + x;
 
@@ -100,13 +100,13 @@ export default function displayLcdHourlyColumn(
         default: hourFormat = 'HH'; break;
     }
     const tm = moment.unix(dates[s] ?? 0).utc().format(`${hourFormat}:mm`);
-    printText(ctx, x, y, w, f4, tm, f4, 'center', color.TEXT, color.BG);
+    printText(ctx, x, y, w, f1, tm, f1, 'center', color.TEXT, color.BG);
     y += y6 + gap;
 
     if(type === 'hourly') {
         const ms = i18n.t('units.mps');
         const ws = wSpeeds ? (Math.round(wSpeeds[s]) + ms) : ('--' + ms);
-        printText(ctx, x, y, w, f4, ws, f4, 'center', color.TEXT, color.BG);
+        printText(ctx, x, y, w, f1, ws, f1, 'center', color.TEXT, color.BG);
         y += y6 + gap;
 
         const dir = wDirs?.[s] ?? 0;
@@ -121,15 +121,15 @@ export default function displayLcdHourlyColumn(
             else if(dir >= 202 && dir < 247) img = wind.south_west();
             else if(dir >= 247 && dir < 292) img = wind.west();
             else if(dir >= 292 && dir < 338) img = wind.north_west();
-            drawScaledImage(ctx, img, wx, y, f4, f4);
+            drawScaledImage(ctx, img, wx, y + yi, wi, wi);
         }
-        else fillRect(ctx, wx, y, f4, f4, color.BG);
+        else fillRect(ctx, wx, y + yi, wi, wi, color.BG);
         y += y6 + gap;
 
-        drawScaledImage(ctx, symb.hum(), x + 2, y, f4 * 0.8, f4);
+        drawScaledImage(ctx, symb.hum(), x + 2, y + yi, wi * 0.7, wi);
         let pr = precs?.[s]?.toString() ?? '0';
         if(config.weather.provider === 2) pr += '%';
         else pr += (pr === '0' ? i18n.t('units.mm') : '');
-        printText(ctx, x + f4, y + 1, w - f4 * 1.5, f4, pr, f4, 'center', color.TEXT, color.BG);
+        printText(ctx, x + f4, y + 1, w - f4 * 1.5, f4, pr, f4, 'center', color.HUM, color.BG);
     }
 }
