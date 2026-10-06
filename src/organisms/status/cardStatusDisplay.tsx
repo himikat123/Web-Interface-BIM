@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import i18n from '../../i18n/main';
 import { useSelector } from 'react-redux';
 import device from '../../device';
+import hostUrl from '../../atoms/hostUrl';
 import type { iConfig } from "../../redux/configTypes";
 import type { iDisplay } from '../../interfaces';
 import DisplayViewLCD from '../../molecules/display/displayViewLCD';
@@ -25,7 +26,9 @@ export default function CardStatusDisplay(props: iDisplay) {
                     {i18n.t('display.singular')}
                 </Link>
             }
-            {!isDisplayOn[num - 1] && <span className="text-red-500 text-xl">
+            {!isDisplayOn[num - 1] && <span className="text-red-500 text-xl cursor-pointer"
+                onClick={() => fetch(`${hostUrl()}/esp/dispToggle?num=${props.num}&code=${localStorage.getItem('code') || '0'}`)}
+            >
                 {` [${i18n.t('isOff')}]`}
             </span>}
         </div>
