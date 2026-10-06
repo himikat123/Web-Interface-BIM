@@ -20,7 +20,7 @@ export default function lcdShowWeatherIcon(
 
         switch(icon) {
             case 1: wIcon = isDay ? icons.w_01_d() : icons.w_01_n(); break;
-            case 2: wIcon = isDay ? icons.w_02_d() : icons.w_02_n(); break;
+            case 2: case 3: wIcon = isDay ? icons.w_02_d() : icons.w_02_n(); break;
             case 4: wIcon = icons.w_04(); break;
             case 9: wIcon = icons.w_09(); break;
             case 10: wIcon = icons.w_10(); break;
