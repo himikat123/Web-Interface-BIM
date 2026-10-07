@@ -35,13 +35,13 @@ export default function DisplayView7segment(props: {num: number}) {
             const st = slotTick(props.num, state, config, data, millisec);
             if(JSON.stringify(st) !== JSON.stringify(state)) setState(st);
             if(millisec < 99) setMillisec(millisec + 1);
-            if(lastSecond != data.time) {
+            if(lastSecond !== data.time) {
                 setLastSecond(data.time);
                 setMillisec(0);
             }
         }, 10);
         return () => clearInterval(int);
-    }, [props.num, state]);
+    }, [props.num, state, config, data, millisec, lastSecond]);
 
     const bottomDots = dType === D.SEGMENT && dModel > D.TM1637_4;
     const dispLength = displayLength(props.num);

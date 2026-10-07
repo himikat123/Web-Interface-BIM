@@ -1,4 +1,3 @@
-import store from '../../redux/store';
 import temp from './segTempPrepare';
 import hum from './segHumPrepare';
 import pres from './segPresPrepare';

@@ -18,7 +18,6 @@ import lcdShowForecast from '../../atoms/canvas/lcdShowForecast';
 import lcdShowVoltageOrPercentage from '../../atoms/canvas/lcdShowVoltageOrPercentage';
 import lcdGetSequence from '../../atoms/lcdGetData/lcdGetSequence';
 import lcdColors from '../../atoms/canvas/lcdColors';
-import { fillRect } from '../../atoms/canvas/primitives';
 import * as D from '../../atoms/constants/displayTypes';
 import type { iLcdMainState } from '../../interfaces';
 import type { iConf } from '../../redux/configTypes';

@@ -8,17 +8,6 @@ import type { iConfig } from "../../redux/configTypes";
 import type { iWeather } from "../../interfaces";
 import "./weatherChecker.scss";
 
-interface IПGismeteoData {
-  name: string;
-  countryName: string;
-  t: number;
-  hum: number;
-  p: number;
-  ws: number;
-  wd: number;
-  descr: string;
-}
-
 export default function WeatherChecker() {
     const [weatherColor, setWeatherColor] = useState<string>('text-blue-700 dark:text-blue-400');
     const [loading, setLoading] = useState<boolean>(false);

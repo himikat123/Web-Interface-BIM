@@ -1,4 +1,3 @@
-import store from '../../redux/store';
 import { drawScaledImage, fillRect } from "./primitives";
 import device from '../../device';
 import lcdGetWindDir from '../lcdGetData/lcdGetWindDir';

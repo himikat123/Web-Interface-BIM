@@ -13,7 +13,6 @@ import { displayLcdAlarmScreen } from './displayLcdAlarmScreen';
 import * as types from '../../interfaces';
 import type { iConfig } from "../../redux/configTypes";
 import type { iData } from '../../redux/dataTypes';
-import type { iHourly } from '../../redux/hourlyTypes';
 import * as D from '../../atoms/constants/displayTypes';
 import * as coords from './touchscreenCoordinates';
 import type { iAlarms } from '../../redux/alarmTypes';
@@ -77,7 +76,7 @@ export default function DisplayViewLCD() {
         }
     }, [ctx, clockPointsState, model, page, mainState, networkState, clockState, 
         clockType, calendarShift, calendarState, hourlyShift, hourlyState, alarmState, 
-        historyInShift, historyInState, historyOutShift, historyOutState, config.units.pres
+        historyInShift, historyInState, historyOutShift, historyOutState, config, data, alarms
     ]);
 
     useEffect(() => {

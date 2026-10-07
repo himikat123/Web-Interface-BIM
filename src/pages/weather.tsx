@@ -28,7 +28,7 @@ export default function Weather() {
             case 3: setDisabled([true, false, true]); dispatch(cf.weatherCitySearchChange(1)); break;
             default: setDisabled([true, true, true]); dispatch(cf.weatherCitySearchChange(0)); break;
         }
-    }, [config.weather.provider]);
+    }, [config.weather.provider, dispatch]);
 
     const content = <>
         <Card content={<>

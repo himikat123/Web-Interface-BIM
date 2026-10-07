@@ -1,5 +1,5 @@
 import store from '../../redux/store';
-import { printText, printSegment, fillRect, fillCircle, drawScaledImage } from '../../atoms/canvas/primitives';
+import { printText, fillRect, fillCircle, drawScaledImage } from '../../atoms/canvas/primitives';
 import * as symb from '../../atoms/img/symbols';
 import lcdCloseButton from '../../atoms/canvas/lcdCloseButton';
 import moment from 'moment';
