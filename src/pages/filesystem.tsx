@@ -118,7 +118,7 @@ export default function Filesystem(props: {stopDataFetching(val: boolean): void,
         stateRef.current = { filelist, selected, fileViewer, renaming, isOperating };
     });
 
-    const handleUserKeyPress = (event: KeyboardEvent) => {
+    const handleUserKeyPress = useCallback((event: KeyboardEvent) => {
         const { filelist, selected, fileViewer, renaming } = stateRef.current;
 
         if(fileViewer || isOperating) return;
@@ -190,15 +190,14 @@ export default function Filesystem(props: {stopDataFetching(val: boolean): void,
         if(event.key === 'F2') renameBtn();
 
         if(event.key === 'Delete') deleteBtn();
-    };
-
+    }, [closeModal, deleteBtn, fileOpen, isOperating, rename, renameBtn]);
 
     useEffect(() => {
         window.addEventListener("keydown", handleUserKeyPress);
         return () => {
             window.removeEventListener("keydown", handleUserKeyPress);
         };
-    }, []);
+    }, [handleUserKeyPress]);
 
     const upload = async() => {
         let formData = new FormData();
@@ -276,27 +275,23 @@ export default function Filesystem(props: {stopDataFetching(val: boolean): void,
     }, [fs, path]);
 
     useEffect(() => {
-        window.addEventListener("keydown", handleUserKeyPress);
-        return () => {
-            window.removeEventListener("keydown", handleUserKeyPress);
-        };
-    }, []);
-
-    useEffect(() => {
         setRenaming('');
     }, [selected]);
 
+    const { stopDataFetching, dataFetching } = props;
+
     useEffect(() => {
         if(fileViewer && selected.endsWith('.json')) {
-            props.stopDataFetching(true);
+            stopDataFetching(true);
             return;
         }
 
         if(upFilename) {
-            props.stopDataFetching(true);
-            if(!props.dataFetching) setDisableUploadBtn(false);
+            stopDataFetching(true);
+            if(!dataFetching) setDisableUploadBtn(false);
         }
-    }, [fileViewer, selected, upFilename, props.dataFetching]);
+    }, [fileViewer, selected, upFilename, dataFetching, stopDataFetching]); 
+
 
     const isDir = selected === '.' || selected === '..' || filelist.find(f => f.name === selected)?.type === 'dir';
 
