@@ -21,7 +21,7 @@ export default function ThingReceiveDataDate() {
         )}>
             {(data.thing?.time && data.thing.time > 0) ? <>
             {}
-                <Moment unix format="HH:mm:ss DD.MM.YYYY">
+                <Moment unix format="DD.MM.YYYY HH:mm:ss">
                     {data.thing.time + new Date().getTimezoneOffset() * 60}
                 </Moment> (
                     {(config.lang === 'de' || config.lang === 'bg') && i18n.t('ago') + ' '}
