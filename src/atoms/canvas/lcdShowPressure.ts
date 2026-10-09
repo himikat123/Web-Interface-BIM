@@ -30,10 +30,10 @@ export default function lcdShowPressure(
         const prs = (p ? String(Math.round(p)) : '--') + units;
         const u1000 = (p ?? 0) < 1000;
 
-        let x = 373, y = u1000 ? 163 : 171, w = 103, h = 27, f = u1000 ? 32 : 24;
+        let x = 373, y = u1000 ? 163 : 168, w = 103, h = u1000 ? 28 : 22, f = u1000 ? 30 : 24;
         switch(dispModel) {
-            case D.NX4827K043: x = 375; y = u1000 ? 129 : 133; w = 106; h = 26; f = u1000 ? 27 : 24; break;
-            case D.ILI9341: x = 250; y = 122; w = 70; h = 16; f = 18; break;
+            case D.NX4827K043: x = 375; y = u1000 ? 129 : 132; w = 106; h = u1000 ? 25 : 22; f = u1000 ? 27 : 24; break;
+            case D.ILI9341: x = 250; y = 122; w = 70; h = 16; f = 17; break;
         }
 
         if(NEXTION && (p ?? 0) >= 1000) fillRect(ctx, x, y - 8, w, 8, bg);
